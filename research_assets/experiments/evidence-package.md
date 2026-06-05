@@ -4,9 +4,9 @@
 
 This package defines an evidence-gated empirical protocol for physically grounded
 metamorphic-relation testing of MeshGraphNets-family cylinder-flow surrogates. It is a
-protocol and asset-readiness package plus two strictly-scoped real-SUT pilots (node
-permutation, mirror-y OOD-stress); it is not a full Results package and reports no rate,
-reliability, or baseline outcome.
+protocol and asset-readiness package plus three strictly-scoped real-SUT pilots (node
+permutation, mirror-y OOD-stress, divergence/conservation diagnostic); it is not a full
+Results package and reports no rate, reliability, accuracy, or baseline outcome.
 
 ## Evidence Inventory
 
@@ -15,6 +15,7 @@ reliability, or baseline outcome.
 | `research_assets/runs/node_permutation_fixture_verdict.json` | observed | Fixture-level asset plumbing only; SUT execution is `not-run`. |
 | `research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json` (+ raw `.npy` outputs, manifest) | observed | One-SUT/one-MR/one-case pilot: real MeshGraphNets cylinder-flow inference under node permutation; relative L2 = 0.0 (tol 1e-6), verdict pass. No rate or reliability claim. |
 | `research_assets/runs/mirror-y-ood-stress-pilot/raw/{metric_ledger,precondition_report}.json` (+ raw `.npy`, manifest) | observed | One-SUT/one-MR/two-frame OOD-stress pilot: exact mirror-y is out-of-relation-domain on the real mesh (rubric decision from measured geometry); approximate probe shows mirror-y violation 0.691/0.749 rel L2 (frames 0/4), ~3.6-3.8x the same-space mapping-error floor. No violation rate or reliability claim. |
+| `research_assets/runs/conservation-diagnostic-pilot/raw/{metric_ledger,conservation_report}.json` (+ raw `.npy`, manifest) | observed | One-SUT/one-MR/two-frame conservation diagnostic: absolute divergence-free relation stays deferred (reference divergence ~0.037 nondim, uncalibratable); reference-relative diagnostic passes (pred/reference divergence ratio 1.0025/1.0044). No absolute-conservation or rate claim. |
 | `research_assets/experiments/experiment-ledger.yml` (`precondition_check`) | observed | 2026-06-05 environmental check: required `METBENCH_MGN_*` vars unset; the three METBENCH-planned SUTs stay blocked. |
 | `research_assets/rubric/domain_validity_rubric.json` | qualified | Design-time rubric coverage; not a proof and not runtime evidence. |
 | Real Echowve SUT run | blocked | Missing dataset root, model repository, checkpoint, command, and outputs. |
@@ -32,6 +33,7 @@ reliability, or baseline outcome.
 | `C4-rubric-decision-coverage` | qualified | May describe design-time decision coverage with limitations. | Cannot substitute for runtime evidence. |
 | `C5-precondition-check` | observed | May describe the 2026-06-05 fail-closed precondition gate. | Cannot describe any SUT verdict or unblocked run. |
 | `C6-mirror-y-ood-stress` | observed (pilot) | May describe the rubric's out-of-relation-domain decision and the approximate mirror-y OOD-stress violation. | May appear in Results only as an explicitly scoped, approximate OOD-stress pilot; not as a violation rate or general failure claim. |
+| `C7-conservation-diagnostic` | observed (pilot) | May describe the deferred absolute relation and the reference-relative conservation diagnostic pass. | May appear in Results only as a scoped reference-relative diagnostic; not as absolute conservation, a rate, or a reliability claim. |
 | Seeded-fault effectiveness | speculative | Future-work only. | Cannot be written as Results. |
 
 ## Methods-Ready Statements
@@ -69,9 +71,25 @@ reliability, or baseline outcome.
   violation in a genuinely trained, converged surrogate. Artifacts under
   `research_assets/runs/mirror-y-ood-stress-pilot/`.
 
+## Conservation Diagnostic Pilot (scoped, evidence-gated)
+
+- A P1 discrete divergence operator gives a non-negligible divergence even for the
+  ground-truth field on this coarse mesh (dimensionless reference divergence ≈ `0.037`,
+  raw RMS ≈ `2.08`), so an absolute `div ≈ 0` tolerance is not calibratable. The absolute
+  mass-conservation relation therefore stays **deferred** — the pilot is itself the
+  evidence for that deferral.
+- As a reference-relative diagnostic (flag a regression only if the surrogate's divergence
+  exceeds the reference field's by > 50%), the surrogate's predicted next-state divergence
+  stayed within ~0.4% of the reference on two eval frames (ratio `1.0025` / `1.0044`):
+  **pass** on both. Artifacts under `research_assets/runs/conservation-diagnostic-pilot/`.
+- Evidence-gating takeaway: the rubric refuses an uncalibratable absolute tolerance instead
+  of fabricating one, and the calibrated diagnostic shows the surrogate does not degrade
+  conservation relative to the data.
+
 ## Statements Not Supported
 
 - A pass/fail rate, violation rate, or model-reliability conclusion (the pilots are single/few cases).
+- Absolute mass conservation (the divergence-free relation is deferred; only a reference-relative diagnostic was run).
 - More than one SUT has been evaluated; mirror-y is asserted only as an approximate OOD-stress probe, not an exact relation for this mesh.
 - The protocol improves accuracy or is superior to any baseline.
 - Seeded-fault detection effectiveness has been measured.

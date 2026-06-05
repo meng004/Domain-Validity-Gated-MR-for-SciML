@@ -1,0 +1,95 @@
+{
+  "ledger_id": "real-sut-conservation-diagnostic-metric-ledger",
+  "evidence_level": "real-sut-single-mr-conservation-diagnostic-pilot",
+  "schema_version": "0.1.0",
+  "sut_repo": "/home/user/Minimum-MR-SubSet",
+  "sut_commit": "8c0b7ef3605fd9452884d701e2a191a2b14a5a35",
+  "checkpoint_path": "research_assets/runs/real-sut-node-permutation-pilot/sut/checkpoint.pt",
+  "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+  "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+  "diagnostic": "reference-relative discrete-divergence regression flag",
+  "required_raw_outputs": [
+    "predicted_next_velocity",
+    "reference_next_velocity",
+    "cell_divergence_pred",
+    "cell_divergence_reference"
+  ],
+  "report": {
+    "characteristic_length": 0.0187822361506945,
+    "absolute_relation_decision": "deferred-uncalibrated-absolute-tolerance",
+    "absolute_divergence_tol": 1e-06,
+    "mean_reference_nondim_divergence": 0.037169127474664804,
+    "regression_threshold": 1.5,
+    "operator": "P1 constant-per-cell divergence, area-weighted RMS"
+  },
+  "claim_limitations": "Pilot evidence: one real SUT, a few eval frames. The absolute divergence-free relation stays deferred (its absolute tolerance is not calibratable: the reference field's discrete divergence is non-negligible on this mesh). This is a reference-relative diagnostic only; it asserts no absolute conservation, no violation rate, no reliability, accuracy, or baseline result.",
+  "raw_outputs": {
+    "predicted_next_velocity_f0": "research_assets/runs/conservation-diagnostic-pilot/raw/predicted_next_velocity_f0.npy",
+    "predicted_next_velocity": "research_assets/runs/conservation-diagnostic-pilot/raw/predicted_next_velocity.npy",
+    "reference_next_velocity_f0": "research_assets/runs/conservation-diagnostic-pilot/raw/reference_next_velocity_f0.npy",
+    "reference_next_velocity": "research_assets/runs/conservation-diagnostic-pilot/raw/reference_next_velocity.npy",
+    "cell_divergence_pred_f0": "research_assets/runs/conservation-diagnostic-pilot/raw/cell_divergence_pred_f0.npy",
+    "cell_divergence_pred": "research_assets/runs/conservation-diagnostic-pilot/raw/cell_divergence_pred.npy",
+    "cell_divergence_reference_f0": "research_assets/runs/conservation-diagnostic-pilot/raw/cell_divergence_reference_f0.npy",
+    "cell_divergence_reference": "research_assets/runs/conservation-diagnostic-pilot/raw/cell_divergence_reference.npy",
+    "predicted_next_velocity_f4": "research_assets/runs/conservation-diagnostic-pilot/raw/predicted_next_velocity_f4.npy",
+    "reference_next_velocity_f4": "research_assets/runs/conservation-diagnostic-pilot/raw/reference_next_velocity_f4.npy",
+    "cell_divergence_pred_f4": "research_assets/runs/conservation-diagnostic-pilot/raw/cell_divergence_pred_f4.npy",
+    "cell_divergence_reference_f4": "research_assets/runs/conservation-diagnostic-pilot/raw/cell_divergence_reference_f4.npy"
+  },
+  "entries": [
+    {
+      "run_id": "real-sut-conservation-diagnostic-pilot-001",
+      "sut_id": "cylinder_flow_meshgraphnet",
+      "mr_id": "mgn-discrete-divergence-boundedness",
+      "source_case_id": "source_case-frame0",
+      "follow_up_case_id": "source_case-frame0-predicted-next-state",
+      "metric_name": "divergence_pred_over_reference_ratio",
+      "metric_value": 1.0025474076367318,
+      "tolerance": {
+        "assertion": "less_or_equal",
+        "threshold": 1.5,
+        "basis": "reference-relative conservation-regression flag (pred/reference RMS divergence)"
+      },
+      "verdict": "pass",
+      "evidence_artifact": "research_assets/runs/conservation-diagnostic-pilot/raw/predicted_next_velocity_f0.npy",
+      "frame": 0,
+      "divergence_pred_rms": 2.0900646556891735,
+      "divergence_reference_rms": 2.0847539375878554,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "divergence_pred_nondim": 0.0377350933306861,
+      "divergence_reference_nondim": 0.03763921091735467
+    },
+    {
+      "run_id": "real-sut-conservation-diagnostic-pilot-001",
+      "sut_id": "cylinder_flow_meshgraphnet",
+      "mr_id": "mgn-discrete-divergence-boundedness",
+      "source_case_id": "source_case-frame4",
+      "follow_up_case_id": "source_case-frame4-predicted-next-state",
+      "metric_name": "divergence_pred_over_reference_ratio",
+      "metric_value": 1.004362348028668,
+      "tolerance": {
+        "assertion": "less_or_equal",
+        "threshold": 1.5,
+        "basis": "reference-relative conservation-regression flag (pred/reference RMS divergence)"
+      },
+      "verdict": "pass",
+      "evidence_artifact": "research_assets/runs/conservation-diagnostic-pilot/raw/predicted_next_velocity_f4.npy",
+      "frame": 4,
+      "divergence_pred_rms": 2.0520513895859347,
+      "divergence_reference_rms": 2.043138508341774,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "divergence_pred_nondim": 0.03685913803436183,
+      "divergence_reference_nondim": 0.03669904403197494
+    }
+  ],
+  "generated_at": "2026-06-05T09:47:18Z",
+  "frames": [
+    0,
+    4
+  ],
+  "num_nodes": 1923,
+  "num_cells": 3612,
+  "device": "cpu",
+  "framework_version": "torch 2.12.0+cpu"
+}

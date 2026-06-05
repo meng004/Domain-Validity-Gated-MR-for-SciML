@@ -122,6 +122,50 @@ runs:
       reflection. It does not establish a violation rate, model reliability, baseline
       superiority, or seeded-fault detection.
 
+  - run_id: "real-sut-conservation-diagnostic-pilot-001"
+    status: "observed"
+    sut_execution: "run"
+    evidence_level: "real-sut-single-mr-conservation-diagnostic-pilot"
+    subject: "MeshGraphNets cylinder-flow surrogate (Minimum-MR-SubSet repo, read-only)"
+    sut_repo: "/home/user/Minimum-MR-SubSet"
+    sut_repo_provenance: "meng004/Minimum-MR-SubSet merged PR #103 (cylinder-flow MGN runtime witness)"
+    sut_commit: "8c0b7ef3605fd9452884d701e2a191a2b14a5a35"
+    checkpoint_sha256: "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9"
+    manifest: "research_assets/runs/conservation-diagnostic-pilot/manifest.yml"
+    mr_card: "research_assets/mr_cards/discrete_divergence_boundedness.json"
+    metric_ledger: "research_assets/runs/conservation-diagnostic-pilot/raw/metric_ledger.json"
+    conservation_report: "research_assets/runs/conservation-diagnostic-pilot/raw/conservation_report.json"
+    raw_output_dir: "research_assets/runs/conservation-diagnostic-pilot/raw"
+    raw_outputs:
+      - "research_assets/runs/conservation-diagnostic-pilot/raw/predicted_next_velocity.npy"
+      - "research_assets/runs/conservation-diagnostic-pilot/raw/reference_next_velocity.npy"
+      - "research_assets/runs/conservation-diagnostic-pilot/raw/cell_divergence_pred.npy"
+      - "research_assets/runs/conservation-diagnostic-pilot/raw/cell_divergence_reference.npy"
+    stdout_log: "research_assets/runs/conservation-diagnostic-pilot/raw/stdout.log"
+    stderr_log: "research_assets/runs/conservation-diagnostic-pilot/raw/stderr.log"
+    command: "python3 -B tools/run_conservation_diagnostic.py --manifest research_assets/runs/conservation-diagnostic-pilot/manifest.yml --frames 0,4"
+    exit_code: 0
+    relation_metric: "divergence_pred_over_reference_ratio"
+    absolute_relation_status: "deferred-uncalibrated-absolute-tolerance"
+    diagnostic_verdict: "pass"
+    divergence_ratio_frame0: 1.0025
+    divergence_ratio_frame4: 1.0044
+    reference_nondim_divergence_mean: 0.0372
+    output_summary:
+      primary: null
+      allowed_observation: >
+        A P1 discrete divergence operator gives a non-negligible divergence even for the
+        ground-truth field (dimensionless reference divergence ~0.037), so an absolute
+        divergence-free tolerance is not calibratable and the absolute relation stays
+        deferred. As a reference-relative diagnostic, the surrogate's predicted next-state
+        divergence stays within ~0.4% of the reference field's on two eval frames
+        (ratio 1.0025 and 1.0044, regression threshold 1.5): verdict pass on both.
+    claim_limit: >
+      Pilot diagnostic evidence: one SUT, one MR, two eval frames. The absolute mass-
+      conservation relation remains deferred; this is reference-relative only and
+      establishes no absolute conservation, conservation rate, reliability, accuracy, or
+      baseline result.
+
   - run_id: "real-sut-echowve-blocked"
     status: "blocked"
     sut_execution: "not-run"

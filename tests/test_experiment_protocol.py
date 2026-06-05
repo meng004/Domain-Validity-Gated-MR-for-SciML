@@ -7,32 +7,39 @@ import unittest
 
 
 def _write_real_run_fixture(
-    root: Path, checkpoint_sha256: str, *, raw_outputs: bool = True
+    root: Path,
+    checkpoint_sha256: str,
+    *,
+    raw_outputs: bool = True,
+    raw_output_names: list | None = None,
+    required_raw_outputs: list | None = None,
 ) -> Path:
     """Materialize a temp real-SUT run (manifest + artifacts) under ``root`` and
     return the manifest path. ``checkpoint_sha256`` is written verbatim into the
     manifest so callers can exercise both the matching and mismatching cases.
     When ``raw_outputs`` is False the run keeps a metric ledger but omits the
-    source/follow-up/mapped raw output files, exercising the fail-closed gate."""
+    source/follow-up/mapped raw output files, exercising the fail-closed gate.
+    ``raw_output_names`` overrides which raw outputs are written and listed;
+    ``required_raw_outputs`` is recorded in the ledger so the gate can honour a
+    run-declared essential-output set."""
     run_dir = root / "research_assets" / "runs" / "r"
     (run_dir / "raw").mkdir(parents=True)
     (run_dir / "sut").mkdir()
     (run_dir / "sut" / "checkpoint.pt").write_bytes(b"trained-weights")
     (run_dir / "case.npz").write_bytes(b"source-case")
 
-    raw_names = ["source_output", "follow_up_output", "mapped_output"]
+    raw_names = raw_output_names or ["source_output", "follow_up_output", "mapped_output"]
+    ledger_json: dict = {"raw_outputs": {}}
     if raw_outputs:
         for name in raw_names:
             (run_dir / "raw" / f"{name}.npy").write_bytes(b"x")
-        ledger = {
-            "raw_outputs": {
-                name: f"research_assets/runs/r/raw/{name}.npy" for name in raw_names
-            }
+        ledger_json["raw_outputs"] = {
+            name: f"research_assets/runs/r/raw/{name}.npy" for name in raw_names
         }
-    else:
-        ledger = {"raw_outputs": {}}
+    if required_raw_outputs is not None:
+        ledger_json["required_raw_outputs"] = required_raw_outputs
     (run_dir / "raw" / "metric_ledger.json").write_text(
-        json.dumps(ledger), encoding="utf-8"
+        json.dumps(ledger_json), encoding="utf-8"
     )
     manifest = run_dir / "manifest.yml"
     manifest.write_text(
@@ -250,6 +257,36 @@ class ExperimentProtocolTests(unittest.TestCase):
             errors = validator.validate_real_sut_preconditions(root, env={})
             messages = " ".join(error["message"] for error in errors)
             self.assertIn("raw output file does not exist", messages)
+
+    def test_real_sut_run_passes_with_declared_required_raw_outputs(self):
+        validator = load_validator()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            real_sha = hashlib.sha256(b"trained-weights").hexdigest()
+            names = ["predicted_next_velocity", "reference_next_velocity"]
+            # A diagnostic-style run with its own essential-output set and no
+            # source/follow-up/mapped trio must still verify.
+            _write_real_run_fixture(
+                root, checkpoint_sha256=real_sha,
+                raw_output_names=names, required_raw_outputs=names,
+            )
+            errors = validator.validate_real_sut_preconditions(root, env={})
+            self.assertEqual(errors, [], errors)
+
+    def test_real_sut_run_rejected_when_declared_required_output_missing(self):
+        validator = load_validator()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            real_sha = hashlib.sha256(b"trained-weights").hexdigest()
+            # Declares an essential output that was never written.
+            _write_real_run_fixture(
+                root, checkpoint_sha256=real_sha,
+                raw_output_names=["predicted_next_velocity"],
+                required_raw_outputs=["predicted_next_velocity", "reference_next_velocity"],
+            )
+            errors = validator.validate_real_sut_preconditions(root, env={})
+            messages = " ".join(error["message"] for error in errors)
+            self.assertIn("reference_next_velocity", messages)
 
     def test_run_manifest_example_declares_all_required_fields(self):
         validator = load_validator()
