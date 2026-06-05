@@ -1,0 +1,11 @@
+precondition_decision=out-of-relation-domain exact_relation_verdict=out-of-relation-domain
+  frame=0 mirror_y_relative_l2_error=6.914e-01 floor=1.943e-01 V/floor=3.56 ood_stress_verdict=fail
+  frame=1 mirror_y_relative_l2_error=6.863e-01 floor=2.081e-01 V/floor=3.30 ood_stress_verdict=fail
+  frame=2 mirror_y_relative_l2_error=7.364e-01 floor=2.194e-01 V/floor=3.36 ood_stress_verdict=fail
+  frame=3 mirror_y_relative_l2_error=7.493e-01 floor=2.479e-01 V/floor=3.02 ood_stress_verdict=fail
+  frame=4 mirror_y_relative_l2_error=7.494e-01 floor=1.952e-01 V/floor=3.84 ood_stress_verdict=fail
+  frame=5 mirror_y_relative_l2_error=7.335e-01 floor=1.727e-01 V/floor=4.25 ood_stress_verdict=fail
+  frame=6 mirror_y_relative_l2_error=7.255e-01 floor=1.308e-01 V/floor=5.55 ood_stress_verdict=fail
+  frame=7 mirror_y_relative_l2_error=7.371e-01 floor=1.502e-01 V/floor=4.91 ood_stress_verdict=fail
+  frame=8 mirror_y_relative_l2_error=7.596e-01 floor=1.865e-01 V/floor=4.07 ood_stress_verdict=fail
+  frame=9 mirror_y_relative_l2_error=7.835e-01 floor=1.883e-01 V/floor=4.16 ood_stress_verdict=fail

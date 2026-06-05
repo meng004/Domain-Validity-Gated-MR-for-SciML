@@ -2,7 +2,7 @@
 
 > Manuscript draft for IST regular track.  
 > Draft status: v0.3 evidence-gated full draft scaffold, 2026-06-05.  
-> Results remain blocked until executable MR artifacts and experiment ledgers exist.
+> Full cross-SUT results remain blocked; only strictly scoped within-SUT pilot evidence on one MeshGraphNets checkpoint is reported (Section 5.1).
 
 ## Target and Scope
 
@@ -28,7 +28,7 @@ We propose a domain-validity rubric for screening candidate MRs, an MR-card and 
 
 ### Results
 
-BLOCKED. Empirical findings will be drafted only after executable MR cards, SUT configurations, run logs, and experiment ledgers are available. This draft makes no claims about pass rates, fault-detection rates, comparative performance, localization accuracy, or SUT reliability.
+Full results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.1): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this mesh — failed on all recorded eval frames; and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. This draft makes no claims about cross-SUT pass rates, fault-detection rates, comparative performance, localization accuracy, model accuracy, or SUT reliability.
 
 ### Conclusion
 
@@ -301,24 +301,55 @@ Third-party code, datasets, and model checkpoints will be used according to thei
 
 ## 5. Results
 
-BLOCKED until experiments exist.
+Full cross-SUT, comparative, and fault-detection results remain **blocked** (see
+5.2). This section reports only strictly scoped, within-SUT pilot evidence whose
+artifacts are committed and validated.
 
-This section must not contain:
+### 5.1 Within-SUT pilot evidence (single SUT, single checkpoint)
 
-- pass/fail rates;
-- comparative superiority claims;
-- fault-detection rates;
-- localization accuracy;
-- runtime or performance claims;
-- claims that one SUT is more reliable than another.
+All pilots run on one real trained MeshGraphNets cylinder-flow surrogate
+(read-only `Minimum-MR-SubSet`, checkpoint sha256 `cf281f85…`). They exercise
+three different rubric outcomes and are scoped accordingly; raw outputs, manifests,
+and metric ledgers are committed under `research_assets/runs/`.
 
-Permitted placeholders:
+- **Representation MR (correctness sanity check).** Node-permutation equivariance
+  holds to machine precision (relative L2 = 0.0 at tolerance 1e-6). This is a
+  structural property of message-passing and is reported only as a pipeline
+  sanity check, not as model capability.
+- **Geometric MR (out-of-relation-domain, approximate OOD-stress frame rate).**
+  The rubric classifies exact mirror-y equivariance as out-of-relation-domain for
+  this mesh (the reflection is non-bijective, the worst reflected-node mismatch is
+  about one mesh edge length, and the cylinder is off-centre by 7.2 mm), and
+  downgrades it to an approximate nearest-neighbour OOD-stress probe scored by the
+  predeclared MR-card metric against a same-space mapping-error floor. Within the
+  same SUT and checkpoint, the approximate mirror-y OOD-stress probe failed on
+  **10 of 10 recorded eval frames** (median relative L2 0.737, each violation about
+  3–5.5× its mapping-error floor); every recorded frame is kept in the denominator
+  and none was skipped or inconclusive. This is a bounded within-SUT frame-level
+  rate under an approximate reflection — not an exact mirror-symmetry result, not a
+  reliability or accuracy claim, not a baseline comparison, not a multi-SUT rate,
+  and not a geometry-independent violation rate.
+- **Continuity MR (deferred absolute relation, reference-relative diagnostic).** A
+  P1 discrete-divergence operator yields a non-negligible divergence even for the
+  ground-truth field on this coarse mesh (dimensionless reference divergence ≈
+  0.037), so an absolute divergence-free tolerance is not calibratable and the
+  absolute mass-conservation relation stays deferred. As a reference-relative
+  diagnostic, the surrogate's predicted next-state divergence stays within ~0.4–0.8%
+  of the reference on the recorded eval frames (interior-only ratio confirms this is
+  not a boundary-imposition artefact). This asserts no absolute conservation.
 
-- table shells for MR cards;
-- planned result tables;
-- artifact requirements;
-- analysis templates;
-- expected interpretation rules.
+These pilots illustrate the direction of the paper's argument — that accuracy
+alone does not bound whether a surrogate respects physical structure, and that an
+evidence-gated rubric will refuse or downgrade a relation rather than fabricate a
+verdict. They are pilot-scale and do not by themselves prove the general claim.
+
+### 5.2 Still blocked
+
+The following remain blocked and must not be written as results: cross-SUT or
+geometry-independent pass/fail rates; comparative superiority over any baseline;
+fault-detection rates; localization accuracy; runtime or performance claims; and
+any claim that one SUT is more reliable than another. The three METBENCH-planned
+SUTs and the baseline comparison stay blocked pending their artifacts.
 
 ## 6. Discussion
 

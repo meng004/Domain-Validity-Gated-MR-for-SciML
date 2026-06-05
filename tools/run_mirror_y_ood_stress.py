@@ -93,6 +93,36 @@ def mirror_y_probe(
 # --------------------------------------------------------------------------- #
 # metric ledger (fail-closed)
 # --------------------------------------------------------------------------- #
+def aggregate_violation_rate(entries: list[dict]) -> dict[str, object]:
+    """Aggregate per-frame OOD-stress verdicts into a within-SUT frame rate.
+
+    Every recorded frame stays in the denominator: ``inconclusive`` and any
+    non-fail verdict are counted and reported separately, never silently dropped.
+    """
+    import statistics
+
+    n = len(entries)
+    verdicts = [e.get("verdict") for e in entries]
+    counts: dict[str, int] = {}
+    for v in verdicts:
+        counts[v] = counts.get(v, 0) + 1
+    n_fail = counts.get("fail", 0)
+    values = [float(e["metric_value"]) for e in entries if "metric_value" in e]
+    ratios = [float(e["violation_over_floor"]) for e in entries if "violation_over_floor" in e]
+    return {
+        "n_frames": n,
+        "verdict_counts": counts,
+        "n_fail": n_fail,
+        "n_pass": counts.get("pass", 0),
+        "n_inconclusive": counts.get("inconclusive", 0),
+        "violation_rate": (n_fail / n) if n else float("nan"),
+        "median_violation": float(statistics.median(values)) if values else float("nan"),
+        "median_violation_over_floor": float(statistics.median(ratios)) if ratios else float("nan"),
+        "frames": [e.get("frame") for e in entries],
+        "denominator_note": "all recorded frames are counted; inconclusive/out-of-relation-domain frames remain in the denominator",
+    }
+
+
 def build_entry(
     *,
     fields: dict[str, str],
@@ -291,6 +321,7 @@ def run_from_manifest(manifest_path: Path, *, frames: list[int] | None = None) -
         fields=fields, entries=entries, raw_output_paths=raw_outputs,
         precondition_decision=precondition_decision, repo_root=repo_root,
         precondition_report=precondition_report)
+    ledger["rate_summary"] = aggregate_violation_rate(entries)
     ledger["generated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     ledger["frames"] = frames
     ledger["num_nodes"] = int(traj.num_nodes)

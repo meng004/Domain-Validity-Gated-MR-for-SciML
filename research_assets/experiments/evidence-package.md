@@ -14,7 +14,7 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
 |---|---|---|
 | `research_assets/runs/node_permutation_fixture_verdict.json` | observed | Fixture-level asset plumbing only; SUT execution is `not-run`. |
 | `research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json` (+ raw `.npy` outputs, manifest) | observed | One-SUT/one-MR/one-case pilot: real MeshGraphNets cylinder-flow inference under node permutation; relative L2 = 0.0 (tol 1e-6), verdict pass. No rate or reliability claim. |
-| `research_assets/runs/mirror-y-ood-stress-pilot/raw/{metric_ledger,precondition_report}.json` (+ raw `.npy`, manifest) | observed | One-SUT/one-MR/two-frame OOD-stress pilot: exact mirror-y is out-of-relation-domain on the real mesh (rubric decision from measured geometry); approximate probe shows mirror-y violation 0.691/0.749 rel L2 (frames 0/4), ~3.6-3.8x the same-space mapping-error floor. No violation rate or reliability claim. |
+| `research_assets/runs/mirror-y-rate-upgrade/raw/metric_ledger.json` (+ raw `.npy`, manifest; geometry in mirror-y-ood-stress-pilot) | observed | One-SUT/one-MR within-SUT frame rate: exact mirror-y is out-of-relation-domain on the real mesh; the approximate OOD-stress probe failed on 10/10 eval frames (0-9), median rel L2 0.737, ~3-5.5x the same-space mapping-error floor. Bounded within-SUT frame rate only; no reliability/accuracy/baseline/multi-SUT/geometry-independent claim. |
 | `research_assets/runs/conservation-diagnostic-pilot/raw/{metric_ledger,conservation_report}.json` (+ raw `.npy`, manifest) | observed | One-SUT/one-MR/two-frame conservation diagnostic: absolute divergence-free relation stays deferred (reference divergence ~0.037 nondim, uncalibratable); reference-relative diagnostic passes (pred/reference divergence ratio 1.0025/1.0044). No absolute-conservation or rate claim. |
 | `research_assets/experiments/experiment-ledger.yml` (`precondition_check`) | observed | 2026-06-05 environmental check: required `METBENCH_MGN_*` vars unset; the three METBENCH-planned SUTs stay blocked. |
 | `research_assets/rubric/domain_validity_rubric.json` | qualified | Design-time rubric coverage; not a proof and not runtime evidence. |
@@ -32,7 +32,7 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
 | `C3-baseline-comparison` | blocked | May describe baseline protocol commitments. | Cannot be written as Results. |
 | `C4-rubric-decision-coverage` | qualified | May describe design-time decision coverage with limitations. | Cannot substitute for runtime evidence. |
 | `C5-precondition-check` | observed | May describe the 2026-06-05 fail-closed precondition gate. | Cannot describe any SUT verdict or unblocked run. |
-| `C6-mirror-y-ood-stress` | observed (pilot) | May describe the rubric's out-of-relation-domain decision and the approximate mirror-y OOD-stress violation. | May appear in Results only as an explicitly scoped, approximate OOD-stress pilot; not as a violation rate or general failure claim. |
+| `C6-mirror-y-ood-stress` | observed | May describe the out-of-relation-domain decision and the bounded within-SUT frame-level OOD-stress rate (10/10 eval frames). | May appear in Results only as a scoped within-SUT, approximate-reflection frame rate; not as a geometry-independent/cross-SUT rate, reliability, or general failure claim. |
 | `C7-conservation-diagnostic` | observed (pilot) | May describe the deferred absolute relation and the reference-relative conservation diagnostic pass. | May appear in Results only as a scoped reference-relative diagnostic; not as absolute conservation, a rate, or a reliability claim. |
 | Seeded-fault effectiveness | speculative | Future-work only. | Cannot be written as Results. |
 
@@ -54,7 +54,7 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
   under `research_assets/runs/real-sut-node-permutation-pilot/`.
 - This is pilot evidence for one SUT, one MR, one source case only.
 
-## Mirror-y OOD-stress Pilot (scoped, evidence-gated)
+## Mirror-y OOD-stress within-SUT frame rate (scoped, evidence-gated)
 
 - On the real eval mesh the rubric classified the **exact** mirror-y relation as
   `out-of-relation-domain` from measured geometry: reflection about the channel
@@ -63,13 +63,16 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
   is off-centre by `-7.2 mm`. The relation was therefore downgraded to an approximate
   OOD-stress probe (`retained-ood-stress`).
 - Under that probe (scored by the MR card formula: un-mirror the follow-up, normalise by
-  the source norm) the SUT's mirror-y equivariance residual was `0.691` and `0.749`
-  relative L2 on eval frames 0 and 4 — about `3.6-3.8x` the same-space mapping-error floor
-  (`0.194`, `0.195`) — classifying as a violation (`fail`) on both frames.
+  the source norm), within the same SUT and checkpoint, the approximate mirror-y OOD-stress
+  probe failed on **10 of 10 recorded eval frames** (0-9): median relative L2 `0.737`, each
+  violation about `3-5.5x` the same-space mapping-error floor; 0 pass, 0 inconclusive, with
+  every recorded frame kept in the denominator. Frame-level rate run under
+  `research_assets/runs/mirror-y-rate-upgrade/`; the two-frame pilot and the geometry
+  precondition report remain under `research_assets/runs/mirror-y-ood-stress-pilot/`.
 - Evidence-gating takeaway: the method refuses to treat mirror-y as a clean MR where the
-  geometry does not support it, yet the downgraded probe still surfaces a large symmetry
-  violation in a genuinely trained, converged surrogate. Artifacts under
-  `research_assets/runs/mirror-y-ood-stress-pilot/`.
+  geometry does not support it, yet the downgraded probe surfaces a large symmetry violation
+  on every recorded eval frame of a genuinely trained, converged surrogate. This is a bounded
+  within-SUT frame rate, not a geometry-independent or cross-SUT rate.
 
 ## Conservation Diagnostic Pilot (scoped, evidence-gated)
 
@@ -98,7 +101,7 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
 
 ## Next Experiments
 
-1. Extend the node-permutation and mirror-y pilots to multiple source cases/seeds (and a mirror-symmetric mesh) to report a rate rather than a few-case pilot.
+1. Extend beyond a single eval trajectory: a mirror-symmetric mesh (to test the exact mirror-y relation), additional trajectories/SUTs, and CIs before any cross-SUT or geometry-independent rate.
 2. Record `METBENCH_MGN_DATA_ROOT`, `METBENCH_MGN_REPO`, and `METBENCH_MGN_CHECKPOINT` for the other planned SUTs.
 3. Add the exact command, environment, and seed manifest before any run (now enforced by the manifest contract).
 4. Preserve raw source and follow-up SUT outputs and a relation-level metric ledger (now enforced by the runner).
