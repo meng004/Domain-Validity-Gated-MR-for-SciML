@@ -1,35 +1,28 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import re
+import sys
 from pathlib import Path
+
+# Shared run-manifest contract (single source of truth). The tools/ directory
+# has no package init, so make it importable regardless of how this file is
+# loaded (CLI, import, or importlib spec).
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from manifest_contract import (  # noqa: E402
+    MANIFEST_REQUIRED_FIELDS,
+    REQUIRED_RAW_OUTPUTS,
+    missing_manifest_fields,
+    parse_flat_manifest,
+)
 
 
 REAL_SUT_REQUIRED_ENV = [
     "METBENCH_MGN_DATA_ROOT",
     "METBENCH_MGN_REPO",
     "METBENCH_MGN_CHECKPOINT",
-]
-
-
-# Fields a run manifest must record before a real-SUT run can be trusted.
-MANIFEST_REQUIRED_FIELDS = [
-    "run_id",
-    "sut_id",
-    "sut_repo",
-    "sut_commit",
-    "checkpoint_path",
-    "checkpoint_sha256",
-    "dataset_root",
-    "source_case_path",
-    "mr_id",
-    "command",
-    "raw_output_dir",
-    "seed",
-    "device",
-    "python_version",
-    "framework_version",
 ]
 
 
@@ -123,23 +116,6 @@ def yaml_scalar(item: list[str], key: str) -> str | None:
     return None
 
 
-def parse_flat_manifest(text: str) -> dict[str, str]:
-    """Parse a flat ``key: value`` manifest into a dict.
-
-    Comments and blank lines are ignored. Values are stripped of surrounding
-    quotes. Nested structures are not supported on purpose: the run manifest is
-    deliberately flat so it is trivially auditable.
-    """
-    fields: dict[str, str] = {}
-    for raw_line in text.splitlines():
-        line = raw_line.split("#", 1)[0] if raw_line.lstrip().startswith("#") else raw_line
-        match = re.match(r"^([A-Za-z0-9_]+):\s*(.*?)\s*$", line)
-        if match:
-            key, value = match.group(1), match.group(2).strip().strip('"').strip("'")
-            fields[key] = value
-    return fields
-
-
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -159,12 +135,10 @@ def validate_run_manifest(path: Path) -> list[dict[str, str]]:
     if errors:
         return errors
     fields = parse_flat_manifest(text)
-    for required in MANIFEST_REQUIRED_FIELDS:
-        value = fields.get(required, "")
-        if not value:
-            errors.append(
-                error("run_manifest", Path(path), f"missing manifest field: {required}")
-            )
+    for required in missing_manifest_fields(fields):
+        errors.append(
+            error("run_manifest", Path(path), f"missing manifest field: {required}")
+        )
     return errors
 
 
@@ -214,14 +188,48 @@ def verify_manifest_artifacts(root: Path, manifest_path: Path) -> list[dict[str,
                       f"{field} does not exist: {fields[field]}")
             )
 
-    metric_ledger = root / fields["raw_output_dir"] / "metric_ledger.json"
-    if not metric_ledger.exists():
+    ledger_path = root / fields["raw_output_dir"] / "metric_ledger.json"
+    if not ledger_path.exists():
         # Allow the ledger to sit beside the manifest as well.
         alt = manifest_path.parent / "metric_ledger.json"
-        if not alt.exists():
+        ledger_path = alt if alt.exists() else None
+    if ledger_path is None:
+        errors.append(
+            error("real_sut_preconditions", manifest_path,
+                  "metric ledger missing: expected metric_ledger.json next to raw outputs")
+        )
+        return errors
+
+    # A verdict is only trustworthy when its raw outputs exist: cross-check the
+    # ledger's recorded raw_outputs against disk so an empty run directory plus a
+    # hand-written ledger cannot pass the gate.
+    try:
+        ledger_data = json.loads(ledger_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, ValueError, OSError) as exc:
+        errors.append(
+            error("real_sut_preconditions", ledger_path,
+                  f"metric ledger is not valid JSON: {exc}")
+        )
+        return errors
+    raw_outputs = ledger_data.get("raw_outputs")
+    if not isinstance(raw_outputs, dict):
+        errors.append(
+            error("real_sut_preconditions", ledger_path,
+                  "metric ledger missing raw_outputs mapping")
+        )
+        return errors
+    for name in REQUIRED_RAW_OUTPUTS:
+        rel = raw_outputs.get(name)
+        if not rel:
             errors.append(
-                error("real_sut_preconditions", manifest_path,
-                      "metric ledger missing: expected metric_ledger.json next to raw outputs")
+                error("real_sut_preconditions", ledger_path,
+                      f"metric ledger missing required raw output: {name}")
+            )
+            continue
+        if not (root / rel).exists():
+            errors.append(
+                error("real_sut_preconditions", ledger_path,
+                      f"raw output file does not exist: {rel}")
             )
     return errors
 

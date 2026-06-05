@@ -25,7 +25,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -33,60 +32,19 @@ from typing import Callable
 
 import numpy as np
 
-
-MANIFEST_REQUIRED_FIELDS = [
-    "run_id",
-    "sut_id",
-    "sut_repo",
-    "sut_commit",
-    "checkpoint_path",
-    "checkpoint_sha256",
-    "dataset_root",
-    "source_case_path",
-    "mr_id",
-    "command",
-    "raw_output_dir",
-    "seed",
-    "device",
-    "python_version",
-    "framework_version",
-]
-
-METRIC_LEDGER_FIELDS = [
-    "run_id",
-    "sut_id",
-    "mr_id",
-    "source_case_id",
-    "follow_up_case_id",
-    "metric_name",
-    "metric_value",
-    "tolerance",
-    "verdict",
-    "evidence_artifact",
-]
-
-
-# --------------------------------------------------------------------------- #
-# manifest parsing (flat key: value, deliberately auditable)
-# --------------------------------------------------------------------------- #
-def parse_flat_manifest(text: str) -> dict[str, str]:
-    fields: dict[str, str] = {}
-    for raw_line in text.splitlines():
-        if raw_line.lstrip().startswith("#"):
-            continue
-        match = re.match(r"^([A-Za-z0-9_]+):\s*(.*?)\s*$", raw_line)
-        if match:
-            key, value = match.group(1), match.group(2).strip().strip('"').strip("'")
-            fields[key] = value
-    return fields
+# Shared run-manifest contract (single source of truth). The tools/ directory
+# has no package init, so make it importable regardless of how this file is
+# loaded (CLI, import, or importlib spec).
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from manifest_contract import (  # noqa: E402
+    METRIC_LEDGER_FIELDS,
+    missing_manifest_fields,
+    parse_flat_manifest,
+)
 
 
 def load_manifest(path: Path) -> dict[str, str]:
     return parse_flat_manifest(Path(path).read_text(encoding="utf-8"))
-
-
-def missing_manifest_fields(fields: dict[str, str]) -> list[str]:
-    return [name for name in MANIFEST_REQUIRED_FIELDS if not fields.get(name)]
 
 
 # --------------------------------------------------------------------------- #
@@ -242,7 +200,9 @@ def run_from_manifest(manifest_path: Path, *, frame: int = 0) -> dict[str, objec
     if missing:
         raise ValueError(f"manifest missing required fields: {missing}")
 
-    repo_root = manifest_path.resolve().parents[3]  # tools/.. = repo root chain
+    # Repo root is this runner's own location (tools/..), so artifact paths
+    # resolve correctly no matter where the manifest file lives.
+    repo_root = Path(__file__).resolve().parents[1]
 
     # Resolve artifacts relative to the asset repo root.
     def _resolve(rel: str) -> Path:

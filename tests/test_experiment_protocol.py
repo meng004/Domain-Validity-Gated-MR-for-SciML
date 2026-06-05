@@ -1,20 +1,39 @@
 from pathlib import Path
 import hashlib
 import importlib.util
+import json
 import tempfile
 import unittest
 
 
-def _write_real_run_fixture(root: Path, checkpoint_sha256: str) -> Path:
+def _write_real_run_fixture(
+    root: Path, checkpoint_sha256: str, *, raw_outputs: bool = True
+) -> Path:
     """Materialize a temp real-SUT run (manifest + artifacts) under ``root`` and
     return the manifest path. ``checkpoint_sha256`` is written verbatim into the
-    manifest so callers can exercise both the matching and mismatching cases."""
+    manifest so callers can exercise both the matching and mismatching cases.
+    When ``raw_outputs`` is False the run keeps a metric ledger but omits the
+    source/follow-up/mapped raw output files, exercising the fail-closed gate."""
     run_dir = root / "research_assets" / "runs" / "r"
     (run_dir / "raw").mkdir(parents=True)
     (run_dir / "sut").mkdir()
     (run_dir / "sut" / "checkpoint.pt").write_bytes(b"trained-weights")
-    (run_dir / "raw" / "metric_ledger.json").write_text("{}", encoding="utf-8")
     (run_dir / "case.npz").write_bytes(b"source-case")
+
+    raw_names = ["source_output", "follow_up_output", "mapped_output"]
+    if raw_outputs:
+        for name in raw_names:
+            (run_dir / "raw" / f"{name}.npy").write_bytes(b"x")
+        ledger = {
+            "raw_outputs": {
+                name: f"research_assets/runs/r/raw/{name}.npy" for name in raw_names
+            }
+        }
+    else:
+        ledger = {"raw_outputs": {}}
+    (run_dir / "raw" / "metric_ledger.json").write_text(
+        json.dumps(ledger), encoding="utf-8"
+    )
     manifest = run_dir / "manifest.yml"
     manifest.write_text(
         "\n".join(
@@ -203,6 +222,18 @@ class ExperimentProtocolTests(unittest.TestCase):
             # A verified manifest unblocks the run even with env unset.
             errors = validator.validate_real_sut_preconditions(root, env={})
             self.assertEqual(errors, [], errors)
+
+    def test_real_sut_observed_run_rejected_when_raw_outputs_absent(self):
+        validator = load_validator()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            real_sha = hashlib.sha256(b"trained-weights").hexdigest()
+            # Checkpoint hash matches, but the metric ledger lists no raw outputs
+            # and none exist on disk: the gate must not admit a verdict.
+            _write_real_run_fixture(root, checkpoint_sha256=real_sha, raw_outputs=False)
+            errors = validator.validate_real_sut_preconditions(root, env={})
+            messages = " ".join(error["message"] for error in errors)
+            self.assertIn("raw output", messages)
 
     def test_run_manifest_example_declares_all_required_fields(self):
         validator = load_validator()
