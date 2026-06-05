@@ -70,26 +70,34 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
   `research_assets/runs/mirror-y-rate-upgrade/`; the two-frame pilot and the geometry
   precondition report remain under `research_assets/runs/mirror-y-ood-stress-pilot/`.
 - Evidence-gating takeaway: the method refuses to treat mirror-y as a clean MR where the
-  geometry does not support it, yet the downgraded probe surfaces a large symmetry violation
-  on every recorded eval frame of a genuinely trained, converged surrogate. This is a bounded
-  within-SUT frame rate, not a geometry-independent or cross-SUT rate.
+  geometry does not support it, yet the downgraded probe surfaces a probe-level failure on
+  every recorded frame. The frames are consecutive frames of one trajectory (not independent
+  observations) and the mapping-error floor is a heuristic lower bound, so the failure cannot
+  be cleanly partitioned among geometry, the approximate map, and the model; the defensible
+  statement is that mirror-y equivariance does not hold for this SUT on this mesh under the
+  predeclared probe. This is a bounded within-SUT outcome, not a geometry-independent or
+  cross-SUT rate.
 
 ## Conservation Diagnostic Pilot (scoped, evidence-gated)
 
 - A P1 discrete divergence operator gives a non-negligible divergence even for the
-  ground-truth field on this coarse mesh (dimensionless reference divergence ≈ `0.037`,
-  raw RMS ≈ `2.08`), so an absolute `div ≈ 0` tolerance is not calibratable. The absolute
-  mass-conservation relation therefore stays **deferred** — the pilot is itself the
-  evidence for that deferral.
-- As a reference-relative diagnostic (flag a regression only if the surrogate's divergence
-  exceeds the reference field's by > 50%), the surrogate's predicted next-state divergence
-  stayed within ~0.4-0.8% of the reference on two eval frames (all-cell ratio `1.0025` /
-  `1.0044`; interior-only ratio over 3183/3612 cells `1.0042` / `1.0075`, which rules out a
-  boundary-imposition artefact): **pass** on both. Artifacts under
-  `research_assets/runs/conservation-diagnostic-pilot/`.
+  ground-truth field on this coarse mesh (mesh-normalised reference divergence ≈ `0.037`,
+  dimensional RMS ≈ `2.08`), so an absolute `div ≈ 0` tolerance is not calibratable. The
+  nonzero reference divergence is a discrete-space mismatch (the solver enforces
+  incompressibility in its own discrete norm, not the node-collocated P1 norm), not a solver
+  error. The absolute mass-conservation relation therefore stays **deferred** — the pilot is
+  itself the evidence for that deferral.
+- As a reference-relative diagnostic (conservative threshold: flag a regression only if the
+  surrogate's divergence exceeds the reference field's by > 50%), the surrogate's predicted
+  next-state divergence stayed within ~0.4-0.8% of the reference on two eval frames (all-cell
+  ratio `1.0025` / `1.0044`; interior-only ratio over 3183/3612 cells `1.0042` / `1.0075`,
+  which rules out a boundary-imposition artefact): **pass** on both. This pass is consistent
+  with the surrogate simply being accurate on in-distribution frames and is not independent
+  evidence of conservation beyond rollout accuracy; it calibrates the deferred absolute
+  relation. Artifacts under `research_assets/runs/conservation-diagnostic-pilot/`.
 - Evidence-gating takeaway: the rubric refuses an uncalibratable absolute tolerance instead
-  of fabricating one, and the calibrated diagnostic shows the surrogate does not degrade
-  conservation relative to the data.
+  of fabricating one; the reference-relative diagnostic is a calibration step whose pass is
+  consistent with in-distribution accuracy, not independent evidence of conservation.
 
 ## Statements Not Supported
 

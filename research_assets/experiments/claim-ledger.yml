@@ -96,12 +96,15 @@ claims:
       reflected-node mismatch about one mesh edge length; cylinder off-centre by -7.2 mm)
       and downgraded it to an approximate OOD-stress probe. Within the same SUT and
       checkpoint, scored by the predeclared MR card formula, the approximate mirror-y
-      OOD-stress probe failed on 10 of 10 recorded eval frames (0-9), each violation
-      standing about 3-5.5x above its same-space mapping-error floor (median relative L2
-      0.737, median ratio 3.96); no frame was skipped, out-of-relation-domain at the probe
-      level, or inconclusive. This shows a genuinely trained, converged surrogate can still
-      substantially violate a physically-motivated reflection symmetry across every recorded
-      eval frame of this trajectory.
+      OOD-stress probe failed on 10 of 10 recorded eval frames (0-9), each per-frame ratio
+      to its same-space mapping-error floor in the range 3.0-5.5x (median relative L2
+      0.737, median ratio 3.96); no frame was skipped or inconclusive. The frames are
+      consecutive frames of one trajectory and are not independent observations. The
+      mapping-error floor is a heuristic lower bound (not a clean additive decomposition),
+      so the probe-level failure cannot be cleanly partitioned among the off-centre-cylinder
+      geometry, the approximate reflection map, and the model's own non-equivariance; the
+      defensible statement is that mirror-y equivariance does not hold for this SUT on this
+      mesh under the predeclared probe.
     wording_forbidden:
       - "The SUT fails mirror-y in general."
       - "A geometry-independent, cross-SUT, or reliability-implying mirror-y violation rate."
@@ -120,15 +123,19 @@ claims:
       - "research_assets/runs/conservation-diagnostic-pilot/raw/reference_next_velocity.npy"
     wording_allowed: >
       A P1 discrete divergence operator yields a non-negligible divergence even for the
-      ground-truth field on this coarse mesh (dimensionless reference divergence ~0.037),
-      so an absolute divergence-free tolerance is not calibratable and the absolute mass-
-      conservation relation remains deferred. As a reference-relative diagnostic, the
-      surrogate's predicted next-state discrete divergence stayed within ~0.4-0.8% of the
-      ground-truth field's on two eval frames (all-cell ratio 1.0025 and 1.0044; interior-
-      only ratio over 3183/3612 cells 1.0042 and 1.0075, regression threshold 1.5): pass on
-      both. The interior-only ratio rules out a boundary-imposition artefact, so the
-      surrogate does not degrade mass conservation relative to the data representation on
-      these frames.
+      ground-truth field on this coarse mesh (mesh-normalised reference divergence ~0.037;
+      dimensional RMS ~2.08), so an absolute divergence-free tolerance is not calibratable
+      and the absolute mass-conservation relation remains deferred. The nonzero reference
+      divergence is a discrete-space mismatch (the solver enforces incompressibility in its
+      own discrete norm, not the node-collocated P1 norm), not a solver error. As a
+      reference-relative diagnostic, the surrogate's predicted next-state discrete divergence
+      stayed within ~0.4-0.8% of the ground-truth field's on two eval frames (all-cell ratio
+      1.0025 and 1.0044; interior-only ratio over 3183/3612 cells 1.0042 and 1.0075,
+      conservative regression threshold 1.5): pass on both. The interior-only ratio rules
+      out a boundary-imposition artefact. This pass is consistent with the surrogate simply
+      being accurate on in-distribution frames (the ratio is bounded near 1.0 whenever the
+      prediction is close to the reference) and is not independent evidence of conservation
+      beyond rollout accuracy; its role is to calibrate the deferred absolute relation.
     wording_forbidden:
       - "The surrogate is divergence-free or conserves mass exactly."
       - "Absolute mass conservation has been verified."
