@@ -76,6 +76,52 @@ runs:
       Pilot evidence only: one SUT, one MR, one source case. It does not establish a
       pass/fail rate, model reliability, baseline superiority, or seeded-fault detection.
 
+  - run_id: "real-sut-mirror-y-ood-stress-pilot-001"
+    status: "observed"
+    sut_execution: "run"
+    evidence_level: "real-sut-single-mr-ood-stress-pilot"
+    subject: "MeshGraphNets cylinder-flow surrogate (Minimum-MR-SubSet repo, read-only)"
+    sut_repo: "/home/user/Minimum-MR-SubSet"
+    sut_repo_provenance: "meng004/Minimum-MR-SubSet merged PR #103 (cylinder-flow MGN runtime witness)"
+    sut_commit: "8c0b7ef3605fd9452884d701e2a191a2b14a5a35"
+    checkpoint_sha256: "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9"
+    manifest: "research_assets/runs/mirror-y-ood-stress-pilot/manifest.yml"
+    mr_card: "research_assets/mr_cards/mirror_y_equivariance.json"
+    metric_ledger: "research_assets/runs/mirror-y-ood-stress-pilot/raw/metric_ledger.json"
+    precondition_report: "research_assets/runs/mirror-y-ood-stress-pilot/raw/precondition_report.json"
+    raw_output_dir: "research_assets/runs/mirror-y-ood-stress-pilot/raw"
+    raw_outputs:
+      - "research_assets/runs/mirror-y-ood-stress-pilot/raw/source_output.npy"
+      - "research_assets/runs/mirror-y-ood-stress-pilot/raw/follow_up_output.npy"
+      - "research_assets/runs/mirror-y-ood-stress-pilot/raw/mapped_output.npy"
+    stdout_log: "research_assets/runs/mirror-y-ood-stress-pilot/raw/stdout.log"
+    stderr_log: "research_assets/runs/mirror-y-ood-stress-pilot/raw/stderr.log"
+    command: "python3 -B tools/run_mirror_y_ood_stress.py --manifest research_assets/runs/mirror-y-ood-stress-pilot/manifest.yml --frames 0,4"
+    exit_code: 0
+    mirror_axis: 0.205
+    relation_metric: "mirror_y_relative_l2_error"
+    relation_verdict_exact: "out-of-relation-domain"
+    rubric_decision: "retained-ood-stress"
+    ood_stress_verdict: "fail"
+    mirror_equivariance_violation_rel_l2_frame0: 0.6914
+    mirror_equivariance_violation_rel_l2_frame4: 0.7494
+    mapping_error_floor_frame0: 0.1943
+    mapping_error_floor_frame4: 0.1952
+    output_summary:
+      primary: null
+      allowed_observation: >
+        On the real eval mesh the exact mirror-y relation is out-of-relation-domain
+        (reflection is non-bijective; worst reflected-node mismatch about one mesh edge
+        length; cylinder off-centre by -7.2 mm), so the rubric downgrades it to an
+        approximate OOD-stress probe. Using the MR card formula (un-mirror the follow-up,
+        normalise by the source norm), on two eval frames (0 and 4) the SUT's mirror-y
+        equivariance residual is 0.691 and 0.749 relative L2, about 3.6-3.8x the
+        same-space mapping-error floor (0.194, 0.195); both frames classify as a violation (fail).
+    claim_limit: >
+      Pilot OOD-stress evidence: one SUT, one MR, two eval frames, under an approximate
+      reflection. It does not establish a violation rate, model reliability, baseline
+      superiority, or seeded-fault detection.
+
   - run_id: "real-sut-echowve-blocked"
     status: "blocked"
     sut_execution: "not-run"

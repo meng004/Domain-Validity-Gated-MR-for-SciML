@@ -34,6 +34,12 @@ jobs:
       - name: Unit tests (real-SUT runner contract)
         run: python3 -B -m unittest tests/test_real_sut_runner_contract.py
 
+      - name: Unit tests (mirror-y rubric + runner contract)
+        run: >-
+          python3 -B -m unittest
+          tests/test_mirror_y_rubric.py
+          tests/test_mirror_y_runner_contract.py
+
       - name: Validate research assets
         run: python3 -B tools/validate_research_assets.py
 

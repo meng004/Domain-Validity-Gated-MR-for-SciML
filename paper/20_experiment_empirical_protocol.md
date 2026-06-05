@@ -101,6 +101,12 @@ Blocked claims 不能写成 Results。它们只能出现在 method/protocol、li
 - 结果：relative L2 = 0.0（容差 1e-6），verdict pass。命令、raw outputs、metric ledger、manifest 均保存在 `research_assets/runs/real-sut-node-permutation-pilot/`，exit code 0。
 - 限定：这是一个 SUT、一条 MR、一个 source case 的 pilot evidence，不构成 pass/fail rate、violation rate、model reliability、baseline 优劣或 seeded-fault 检测结论。
 
+已完成的 mirror-y OOD-stress pilot（同一 SUT，少量 frame；展示 rubric 的证据门控）：
+
+- 在真实 eval 网格上，rubric 依据实测几何把**精确** mirror-y 等变判为 `out-of-relation-domain`：关于通道中线的反射不是双射、最大反射错位（`1.93e-2`）约为一个网格中位边长（`1.88e-2`）、节点类型匹配率 `0.977`、圆柱偏心 `-7.2 mm`。据此降级为近似 OOD-stress 探针（`retained-ood-stress`）。
+- 在该探针下（按 MR card 公式:逆镜像 follow-up 后与 source 比、以 source 范数归一），frame 0 与 4 的 mirror-y 等变残差为 `0.691` 与 `0.749` 相对 L2，约为同空间映射误差地板（`0.194`、`0.195`）的 `3.6-3.8` 倍，两帧均判为违背（`fail`）。证据见 `research_assets/runs/mirror-y-ood-stress-pilot/`。
+- 限定：一个 SUT、一条 MR、两帧、近似反射下的 OOD-stress pilot；不构成 violation rate、reliability、baseline 或 seeded-fault 结论。
+
 当前 blocked 项包括：
 
 - Real Echowve SUT verdicts: missing `METBENCH_MGN_DATA_ROOT`, `METBENCH_MGN_REPO`, `METBENCH_MGN_CHECKPOINT`, exact command, and raw outputs.
@@ -112,3 +118,14 @@ Blocked claims 不能写成 Results。它们只能出现在 method/protocol、li
 前置条件检查记录（可写入 Method/Protocol，不可写入 Results）：2026-06-05 检查 `METBENCH_MGN_DATA_ROOT`、`METBENCH_MGN_REPO`、`METBENCH_MGN_CHECKPOINT` 均为 UNSET，因此上述真实 SUT run 全部维持 blocked。该记录是环境观测，不构成任何 SUT 推理或 verdict 证据，详见 `research_assets/experiments/experiment-ledger.yml` 的 `precondition_check` 与 claim ledger `C5-precondition-check`。
 
 这些 blocked claims 不能写成 Results；只能作为实验协议、证据门槛和后续实验计划来呈现。
+
+## 8. Results pilot 小节（可写入 Results，须保留限定语）
+
+本小节给出两个严格限定的 real-SUT pilot。它们是 pilot 量级的证据,只能**示意**本文论点的方向,不能当作其完整证明:仅看 accuracy 未必能给 SciML 使用者一个行为信心边界,而证据门控的物理 MR 有可能暴露 accuracy 看不见的失效。
+
+- **Pilot 1（结构性 MR，作为正确性 sanity check）：** node permutation 等变性在真实 SUT 上 relative L2 = 0.0（容差 1e-6），verdict pass。这是消息传递 GNN 的结构性属性,只作为 pipeline 正确性检查,不构成模型能力或精度证据。
+- **Pilot 2（物理 OOD-stress MR，本小节主结果）：** 同一 SUT、同一 checkpoint。rubric 先依据实测几何把精确 mirror-y 判为 out-of-relation-domain 并降级为近似 OOD-stress 探针；在该探针下（按 MR card 公式计分）模型的 mirror-y 等变残差达 0.69-0.75 相对 L2（两帧），约为同空间映射误差地板的 3.6-3.8 倍,判为违背。该 checkpoint 是真实训练收敛的代理（训练 loss 1.62 → 0.022,见 SUT 仓库 checkpoint manifest 的 provenance,本文未独立测其精度）。
+
+对比解读:结构性 MR 通过、物理 MR 违背,二者并存与"低训练误差未必意味着模型尊重问题对称结构"这一方向一致。方法论意义在于 rubric 是**证据门控**的——它没有盲目断言 mirror-y 成立,而是用实测几何把它降级并明确标注近似性,因此报告的违背带有可核验的边界（映射误差地板）。
+
+限定边界（不可越界写成 Results）:以上为单 SUT、单条物理 MR、少量 frame、近似反射下的 pilot;不构成 violation rate、模型可靠性、模型精度、多 SUT 泛化或 baseline 优劣结论,也不单独证明上述论点。完整结论仍需扩展到镜像对称网格、多帧/多 seed 与多 SUT,相关项见第 7 节 blocked 列表。
