@@ -1,0 +1,25 @@
+# Real-SUT run manifest: mirror-y OOD-stress MR probe.
+#
+# One SUT, one MR (mirror-y), a few eval frames. The SUT is the same real trained
+# MeshGraphNet cylinder-flow surrogate as the node-permutation pilot (read-only
+# Minimum-MR-SubSet, merged PR #103); the checkpoint and source case are shared
+# by sha256 with that pilot rather than re-vendored.
+record_type: "real-sut-run"
+
+run_id: "real-sut-mirror-y-ood-stress-pilot-001"
+sut_id: "cylinder_flow_meshgraphnet"
+sut_repo: "/home/user/Minimum-MR-SubSet"
+sut_commit: "8c0b7ef3605fd9452884d701e2a191a2b14a5a35"
+checkpoint_path: "research_assets/runs/real-sut-node-permutation-pilot/sut/checkpoint.pt"
+checkpoint_sha256: "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9"
+dataset_root: "/home/user/Minimum-MR-SubSet/data/raw/cylinder_flow_deepmind"
+source_case_path: "research_assets/runs/real-sut-node-permutation-pilot/source_case.npz"
+mr_id: "mgn-mirror-y-equivariance"
+command: "python3 -B tools/run_mirror_y_ood_stress.py --manifest research_assets/runs/mirror-y-ood-stress-pilot/manifest.yml --frames 0,4"
+raw_output_dir: "research_assets/runs/mirror-y-ood-stress-pilot/raw"
+seed: "20260605"
+device: "cpu"
+python_version: "3.11.15"
+framework_version: "torch 2.12.0+cpu"
+mirror_axis: "0.205"
+ratio_threshold: "2.0"

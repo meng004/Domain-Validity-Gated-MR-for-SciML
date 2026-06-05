@@ -1,0 +1,92 @@
+{
+  "ledger_id": "real-sut-mirror-y-ood-stress-metric-ledger",
+  "evidence_level": "real-sut-single-mr-ood-stress-pilot",
+  "schema_version": "0.1.0",
+  "sut_repo": "/home/user/Minimum-MR-SubSet",
+  "sut_commit": "8c0b7ef3605fd9452884d701e2a191a2b14a5a35",
+  "checkpoint_path": "research_assets/runs/real-sut-node-permutation-pilot/sut/checkpoint.pt",
+  "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+  "exact_relation_verdict": "out-of-relation-domain",
+  "precondition_decision": "out-of-relation-domain",
+  "rubric_downgrade": "retained-ood-stress",
+  "precondition_report": {
+    "axis": 0.205,
+    "num_nodes": 1923,
+    "max_nn_dist": 0.019303899832939817,
+    "mean_nn_dist": 0.004019755580403748,
+    "median_edge_length": 0.0187822361506945,
+    "max_nn_over_edge": 1.0277743117518001,
+    "bijection": false,
+    "type_match_rate": 0.9771190847633905,
+    "cylinder": {
+      "center": [
+        0.4105819749335448,
+        0.19775427070756754
+      ],
+      "mean_radius": 0.04559386536236668,
+      "offset_from_axis": -0.007245729292432446,
+      "interior_wall_nodes": 24
+    },
+    "precondition_decision": "out-of-relation-domain",
+    "rubric_downgrade": "retained-ood-stress",
+    "ratio_threshold": 2.0,
+    "axis_source": "channel centerline (geometric mid of y-extent)"
+  },
+  "claim_limitations": "Pilot evidence: one real SUT, one metamorphic relation (mirror-y), a few eval frames. The exact mirror relation is out-of-relation-domain for this mesh (measured non-mirror-symmetric geometry); the reported violation is an approximate OOD-stress probe relative to its mapping-error floor. It is not a violation rate, reliability, or baseline claim.",
+  "raw_outputs": {
+    "source_output": "research_assets/runs/mirror-y-ood-stress-pilot/raw/source_output.npy",
+    "follow_up_output": "research_assets/runs/mirror-y-ood-stress-pilot/raw/follow_up_output.npy",
+    "mapped_output": "research_assets/runs/mirror-y-ood-stress-pilot/raw/mapped_output.npy"
+  },
+  "entries": [
+    {
+      "run_id": "real-sut-mirror-y-ood-stress-pilot-001",
+      "sut_id": "cylinder_flow_meshgraphnet",
+      "mr_id": "mgn-mirror-y-equivariance",
+      "source_case_id": "source_case-frame0",
+      "follow_up_case_id": "source_case-frame0-mirror-y",
+      "metric_name": "mirror_y_relative_l2_error",
+      "metric_value": 0.6833658196328486,
+      "tolerance": {
+        "assertion": "less_or_equal",
+        "threshold": 1e-06,
+        "source": "theory/蜕变测试实验方案.md"
+      },
+      "verdict": "fail",
+      "evidence_artifact": "research_assets/runs/mirror-y-ood-stress-pilot/raw/source_output_f0.npy",
+      "frame": 0,
+      "mapping_error_floor": 0.15045771637314878,
+      "violation_over_floor": 4.54191274535923,
+      "exact_relation_verdict": "out-of-relation-domain"
+    },
+    {
+      "run_id": "real-sut-mirror-y-ood-stress-pilot-001",
+      "sut_id": "cylinder_flow_meshgraphnet",
+      "mr_id": "mgn-mirror-y-equivariance",
+      "source_case_id": "source_case-frame4",
+      "follow_up_case_id": "source_case-frame4-mirror-y",
+      "metric_name": "mirror_y_relative_l2_error",
+      "metric_value": 0.734476676162325,
+      "tolerance": {
+        "assertion": "less_or_equal",
+        "threshold": 1e-06,
+        "source": "theory/蜕变测试实验方案.md"
+      },
+      "verdict": "fail",
+      "evidence_artifact": "research_assets/runs/mirror-y-ood-stress-pilot/raw/source_output_f4.npy",
+      "frame": 4,
+      "mapping_error_floor": 0.14937461856923803,
+      "violation_over_floor": 4.917011224513225,
+      "exact_relation_verdict": "out-of-relation-domain"
+    }
+  ],
+  "generated_at": "2026-06-05T08:36:34Z",
+  "frames": [
+    0,
+    4
+  ],
+  "num_nodes": 1923,
+  "num_edges": 11070,
+  "device": "cpu",
+  "framework_version": "torch 2.12.0+cpu"
+}

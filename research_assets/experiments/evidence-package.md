@@ -3,8 +3,10 @@
 ## Scope
 
 This package defines an evidence-gated empirical protocol for physically grounded
-metamorphic-relation testing of MeshGraphNets-family cylinder-flow surrogates.
-It is a protocol and asset-readiness package, not a Results package.
+metamorphic-relation testing of MeshGraphNets-family cylinder-flow surrogates. It is a
+protocol and asset-readiness package plus two strictly-scoped real-SUT pilots (node
+permutation, mirror-y OOD-stress); it is not a full Results package and reports no rate,
+reliability, or baseline outcome.
 
 ## Evidence Inventory
 
@@ -12,6 +14,7 @@ It is a protocol and asset-readiness package, not a Results package.
 |---|---|---|
 | `research_assets/runs/node_permutation_fixture_verdict.json` | observed | Fixture-level asset plumbing only; SUT execution is `not-run`. |
 | `research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json` (+ raw `.npy` outputs, manifest) | observed | One-SUT/one-MR/one-case pilot: real MeshGraphNets cylinder-flow inference under node permutation; relative L2 = 0.0 (tol 1e-6), verdict pass. No rate or reliability claim. |
+| `research_assets/runs/mirror-y-ood-stress-pilot/raw/{metric_ledger,precondition_report}.json` (+ raw `.npy`, manifest) | observed | One-SUT/one-MR/two-frame OOD-stress pilot: exact mirror-y is out-of-relation-domain on the real mesh (rubric decision from measured geometry); approximate probe shows mirror-y violation 0.683/0.735 rel L2 (frames 0/4), ~4.5-4.9x the mapping-error floor. No violation rate or reliability claim. |
 | `research_assets/experiments/experiment-ledger.yml` (`precondition_check`) | observed | 2026-06-05 environmental check: required `METBENCH_MGN_*` vars unset; the three METBENCH-planned SUTs stay blocked. |
 | `research_assets/rubric/domain_validity_rubric.json` | qualified | Design-time rubric coverage; not a proof and not runtime evidence. |
 | Real Echowve SUT run | blocked | Missing dataset root, model repository, checkpoint, command, and outputs. |
@@ -28,6 +31,7 @@ It is a protocol and asset-readiness package, not a Results package.
 | `C3-baseline-comparison` | blocked | May describe baseline protocol commitments. | Cannot be written as Results. |
 | `C4-rubric-decision-coverage` | qualified | May describe design-time decision coverage with limitations. | Cannot substitute for runtime evidence. |
 | `C5-precondition-check` | observed | May describe the 2026-06-05 fail-closed precondition gate. | Cannot describe any SUT verdict or unblocked run. |
+| `C6-mirror-y-ood-stress` | observed (pilot) | May describe the rubric's out-of-relation-domain decision and the approximate mirror-y OOD-stress violation. | May appear in Results only as an explicitly scoped, approximate OOD-stress pilot; not as a violation rate or general failure claim. |
 | Seeded-fault effectiveness | speculative | Future-work only. | Cannot be written as Results. |
 
 ## Methods-Ready Statements
@@ -48,16 +52,32 @@ It is a protocol and asset-readiness package, not a Results package.
   under `research_assets/runs/real-sut-node-permutation-pilot/`.
 - This is pilot evidence for one SUT, one MR, one source case only.
 
+## Mirror-y OOD-stress Pilot (scoped, evidence-gated)
+
+- On the real eval mesh the rubric classified the **exact** mirror-y relation as
+  `out-of-relation-domain` from measured geometry: reflection about the channel
+  centerline is non-bijective, the worst reflected-node mismatch (`1.93e-2`) is about
+  one median mesh edge length (`1.88e-2`), node-type match is `0.977`, and the cylinder
+  is off-centre by `-7.2 mm`. The relation was therefore downgraded to an approximate
+  OOD-stress probe (`retained-ood-stress`).
+- Under that probe the SUT's mirror-y equivariance residual was `0.683` and `0.735`
+  relative L2 on eval frames 0 and 4 — about `4.5-4.9x` the mapping-error floor
+  (`0.150`, `0.149`) — classifying as a violation (`fail`) on both frames.
+- Evidence-gating takeaway: the method refuses to treat mirror-y as a clean MR where the
+  geometry does not support it, yet the downgraded probe still surfaces a large symmetry
+  violation in a surrogate with good one-step accuracy — i.e. accuracy alone does not
+  bound this behaviour. Artifacts under `research_assets/runs/mirror-y-ood-stress-pilot/`.
+
 ## Statements Not Supported
 
-- A pass/fail rate, violation rate, or model-reliability conclusion (the pilot is a single case).
-- More than one SUT, MR, or source case has been evaluated.
+- A pass/fail rate, violation rate, or model-reliability conclusion (the pilots are single/few cases).
+- More than one SUT has been evaluated; mirror-y is asserted only as an approximate OOD-stress probe, not an exact relation for this mesh.
 - The protocol improves accuracy or is superior to any baseline.
 - Seeded-fault detection effectiveness has been measured.
 
 ## Next Experiments
 
-1. Extend the node-permutation pilot to multiple source cases and seeds to report a rate.
+1. Extend the node-permutation and mirror-y pilots to multiple source cases/seeds (and a mirror-symmetric mesh) to report a rate rather than a few-case pilot.
 2. Record `METBENCH_MGN_DATA_ROOT`, `METBENCH_MGN_REPO`, and `METBENCH_MGN_CHECKPOINT` for the other planned SUTs.
 3. Add the exact command, environment, and seed manifest before any run (now enforced by the manifest contract).
 4. Preserve raw source and follow-up SUT outputs and a relation-level metric ledger (now enforced by the runner).
