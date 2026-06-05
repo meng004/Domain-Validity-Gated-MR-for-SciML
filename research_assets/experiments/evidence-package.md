@@ -14,7 +14,7 @@ reliability, or baseline outcome.
 |---|---|---|
 | `research_assets/runs/node_permutation_fixture_verdict.json` | observed | Fixture-level asset plumbing only; SUT execution is `not-run`. |
 | `research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json` (+ raw `.npy` outputs, manifest) | observed | One-SUT/one-MR/one-case pilot: real MeshGraphNets cylinder-flow inference under node permutation; relative L2 = 0.0 (tol 1e-6), verdict pass. No rate or reliability claim. |
-| `research_assets/runs/mirror-y-ood-stress-pilot/raw/{metric_ledger,precondition_report}.json` (+ raw `.npy`, manifest) | observed | One-SUT/one-MR/two-frame OOD-stress pilot: exact mirror-y is out-of-relation-domain on the real mesh (rubric decision from measured geometry); approximate probe shows mirror-y violation 0.683/0.735 rel L2 (frames 0/4), ~4.5-4.9x the mapping-error floor. No violation rate or reliability claim. |
+| `research_assets/runs/mirror-y-ood-stress-pilot/raw/{metric_ledger,precondition_report}.json` (+ raw `.npy`, manifest) | observed | One-SUT/one-MR/two-frame OOD-stress pilot: exact mirror-y is out-of-relation-domain on the real mesh (rubric decision from measured geometry); approximate probe shows mirror-y violation 0.691/0.749 rel L2 (frames 0/4), ~3.6-3.8x the same-space mapping-error floor. No violation rate or reliability claim. |
 | `research_assets/experiments/experiment-ledger.yml` (`precondition_check`) | observed | 2026-06-05 environmental check: required `METBENCH_MGN_*` vars unset; the three METBENCH-planned SUTs stay blocked. |
 | `research_assets/rubric/domain_validity_rubric.json` | qualified | Design-time rubric coverage; not a proof and not runtime evidence. |
 | Real Echowve SUT run | blocked | Missing dataset root, model repository, checkpoint, command, and outputs. |
@@ -60,13 +60,14 @@ reliability, or baseline outcome.
   one median mesh edge length (`1.88e-2`), node-type match is `0.977`, and the cylinder
   is off-centre by `-7.2 mm`. The relation was therefore downgraded to an approximate
   OOD-stress probe (`retained-ood-stress`).
-- Under that probe the SUT's mirror-y equivariance residual was `0.683` and `0.735`
-  relative L2 on eval frames 0 and 4 — about `4.5-4.9x` the mapping-error floor
-  (`0.150`, `0.149`) — classifying as a violation (`fail`) on both frames.
+- Under that probe (scored by the MR card formula: un-mirror the follow-up, normalise by
+  the source norm) the SUT's mirror-y equivariance residual was `0.691` and `0.749`
+  relative L2 on eval frames 0 and 4 — about `3.6-3.8x` the same-space mapping-error floor
+  (`0.194`, `0.195`) — classifying as a violation (`fail`) on both frames.
 - Evidence-gating takeaway: the method refuses to treat mirror-y as a clean MR where the
   geometry does not support it, yet the downgraded probe still surfaces a large symmetry
-  violation in a surrogate with good one-step accuracy — i.e. accuracy alone does not
-  bound this behaviour. Artifacts under `research_assets/runs/mirror-y-ood-stress-pilot/`.
+  violation in a genuinely trained, converged surrogate. Artifacts under
+  `research_assets/runs/mirror-y-ood-stress-pilot/`.
 
 ## Statements Not Supported
 

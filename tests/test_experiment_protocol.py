@@ -235,6 +235,22 @@ class ExperimentProtocolTests(unittest.TestCase):
             messages = " ".join(error["message"] for error in errors)
             self.assertIn("raw output", messages)
 
+    def test_real_sut_observed_run_rejected_when_listed_raw_output_missing(self):
+        validator = load_validator()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            real_sha = hashlib.sha256(b"trained-weights").hexdigest()
+            _write_real_run_fixture(root, checkpoint_sha256=real_sha)
+            # Add an extra raw output the ledger claims but that does not exist on
+            # disk (e.g. a second frame whose file was never written).
+            ledger_path = root / "research_assets" / "runs" / "r" / "raw" / "metric_ledger.json"
+            data = json.loads(ledger_path.read_text())
+            data["raw_outputs"]["source_output_f4"] = "research_assets/runs/r/raw/source_output_f4.npy"
+            ledger_path.write_text(json.dumps(data), encoding="utf-8")
+            errors = validator.validate_real_sut_preconditions(root, env={})
+            messages = " ".join(error["message"] for error in errors)
+            self.assertIn("raw output file does not exist", messages)
+
     def test_run_manifest_example_declares_all_required_fields(self):
         validator = load_validator()
         errors = validator.validate_repo(ROOT)

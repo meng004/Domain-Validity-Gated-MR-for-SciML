@@ -94,16 +94,16 @@ claims:
       For the real eval mesh the rubric classified the exact mirror-y equivariance relation
       as out-of-relation-domain from measured geometry (reflection non-bijective; worst
       reflected-node mismatch about one mesh edge length; cylinder off-centre by -7.2 mm)
-      and downgraded it to an approximate OOD-stress probe. Under that probe the SUT's
-      mirror-y equivariance residual was 0.683 and 0.735 relative L2 on eval frames 0 and 4,
-      about 4.5-4.9x the mapping-error floor, i.e. a violation well above the approximation
-      noise. This shows a surrogate with good one-step accuracy can still substantially
-      violate a physically-motivated reflection symmetry.
+      and downgraded it to an approximate OOD-stress probe. Under that probe, scored by the
+      MR card formula, the SUT's mirror-y equivariance residual was 0.691 and 0.749 relative
+      L2 on eval frames 0 and 4, about 3.6-3.8x the same-space mapping-error floor, i.e. a
+      violation well above the approximation noise. This shows a genuinely trained, converged
+      surrogate can still substantially violate a physically-motivated reflection symmetry.
     wording_forbidden:
       - "The SUT fails mirror-y in general."
       - "A mirror-y violation rate has been measured."
       - "Mirror-y is a valid exact relation for this mesh."
-      - "The model is unreliable, or any baseline comparison result."
+      - "The model is unreliable, or any baseline comparison or accuracy result."
     blocked_reason: null
 
 speculative_claims:

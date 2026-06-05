@@ -67,17 +67,20 @@ def mirror_y_probe(
     SUT-dependent piece; the caller injects it.
     """
     v_field = np.asarray(v_field)
-    source_output = np.asarray(predict(v_field))            # f(s)
+    source_output = np.asarray(predict(v_field))            # y0 = f(s)
     mirrored_input = mirror_velocity_field(v_field, pi)
-    follow_up_output = np.asarray(predict(mirrored_input))  # f(mirror(s))
-    mapped_output = mirror_prediction(source_output, pi)    # mirror(f(s))
-
-    violation = relative_l2(follow_up_output, mapped_output)
-    # Mapping-error floor: the approximate reflection applied twice should be the
-    # identity; its residual on the actual field bounds the error attributable to
-    # the imperfect correspondence rather than to the model.
-    field_round_trip = mirror_velocity_field(mirror_velocity_field(v_field, pi), pi)
-    mapping_error_floor = relative_l2(field_round_trip, v_field)
+    follow_up_output = np.asarray(predict(mirrored_input))  # y_mirror = f(mirror(s))
+    # Un-mirror the follow-up and compare to the source, exactly as the MR card
+    # formula specifies: norm(unmirror_y(y_mirror) - y0) / norm(y0). This mirrors
+    # the node-permutation pattern (restored follow-up vs source).
+    mapped_output = mirror_prediction(follow_up_output, pi)  # unmirror(y_mirror)
+    violation = relative_l2(mapped_output, source_output)    # denominator = norm(y0)
+    # Mapping-error floor, in the SAME (output) space as the violation: the
+    # approximate reflection applied twice to the source prediction should be the
+    # identity, so its residual bounds the error attributable to the imperfect
+    # correspondence rather than to the model.
+    source_round_trip = mirror_prediction(mirror_prediction(source_output, pi), pi)
+    mapping_error_floor = relative_l2(source_round_trip, source_output)
     return {
         "source_output": source_output,
         "follow_up_output": follow_up_output,
@@ -254,15 +257,17 @@ def run_from_manifest(manifest_path: Path, *, frames: list[int] | None = None) -
     np.save(raw_dir / "reflection_map.npy", pi)
 
     entries: list[dict] = []
-    canonical: dict[str, Path] = {}
+    raw_outputs: dict[str, Path] = {}
     for idx, frame in enumerate(frames):
         result = mirror_y_probe(predict, traj.velocity[frame], pi)
         suffix = f"_f{frame}"
         for name in ("source_output", "follow_up_output", "mapped_output"):
-            np.save(raw_dir / f"{name}{suffix}.npy", result[name])
+            per_frame = raw_dir / f"{name}{suffix}.npy"
+            np.save(per_frame, result[name])
+            raw_outputs[f"{name}{suffix}"] = per_frame  # every frame is gate-checked
             if idx == 0:  # canonical (gate-compatible) names from the first frame
                 np.save(raw_dir / f"{name}.npy", result[name])
-                canonical[name] = raw_dir / f"{name}.npy"
+                raw_outputs[name] = raw_dir / f"{name}.npy"
         verdict = rubric.classify_ood_stress_verdict(
             result["violation"], result["mapping_error_floor"],
             tolerance=float(tolerance["threshold"]), ratio_threshold=ratio_threshold)
@@ -283,7 +288,7 @@ def run_from_manifest(manifest_path: Path, *, frames: list[int] | None = None) -
         json.dumps(precondition_report, indent=2) + "\n", encoding="utf-8")
 
     ledger = build_mirror_metric_ledger(
-        fields=fields, entries=entries, raw_output_paths=canonical,
+        fields=fields, entries=entries, raw_output_paths=raw_outputs,
         precondition_decision=precondition_decision, repo_root=repo_root,
         precondition_report=precondition_report)
     ledger["generated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

@@ -219,14 +219,15 @@ def verify_manifest_artifacts(root: Path, manifest_path: Path) -> list[dict[str,
         )
         return errors
     for name in REQUIRED_RAW_OUTPUTS:
-        rel = raw_outputs.get(name)
-        if not rel:
+        if not raw_outputs.get(name):
             errors.append(
                 error("real_sut_preconditions", ledger_path,
                       f"metric ledger missing required raw output: {name}")
             )
-            continue
-        if not (root / rel).exists():
+    # Every raw output the ledger claims must exist on disk, so a multi-frame run
+    # cannot record entries whose backing files were never written.
+    for name, rel in raw_outputs.items():
+        if rel and not (root / rel).exists():
             errors.append(
                 error("real_sut_preconditions", ledger_path,
                       f"raw output file does not exist: {rel}")

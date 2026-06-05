@@ -38,31 +38,39 @@ clean MR on a geometry that does not support it.
 
 ## OOD-stress probe procedure
 
-For each frame: predict `f(s)`; build the mirrored input via the nearest-
-neighbour reflection correspondence `pi` (`v_y -> -v_y`, reflect node values);
-predict `f(mirror(s))`; form `mirror(f(s))`; score relative L2 between
-`f(mirror(s))` (follow-up) and `mirror(f(s))` (mapped). The **mapping-error
-floor** is the residual of applying the approximate reflection twice (which
-would be the identity for a perfect correspondence), bounding the error
-attributable to `pi` rather than to the model.
+For each frame, following the MR card formula
+`norm(unmirror_y(y_mirror) - y0) / norm(y0)`:
+
+- `source_output` `y0 = f(s)`;
+- build the mirrored input via the nearest-neighbour reflection correspondence
+  `pi` (`v_y -> -v_y`, reflect node values), and predict
+  `follow_up_output = f(mirror(s))` `= y_mirror`;
+- `mapped_output = unmirror(y_mirror)` (apply the reflection to the follow-up);
+- violation `V = norm(mapped_output - source_output) / norm(source_output)`.
+
+The **mapping-error floor** is computed in the same (output) space: applying the
+reflection twice to the source prediction would be the identity for a perfect
+correspondence, so `norm(mirror(mirror(y0)) - y0) / norm(y0)` bounds the error
+attributable to the imperfect `pi` rather than to the model.
 
 ## Result (approximate OOD-stress)
 
 | frame | mirror_y_relative_l2_error (V) | mapping-error floor | V / floor | OOD-stress verdict |
 |---|---|---|---|---|
-| 0 | 0.6834 | 0.1505 | 4.54 | fail |
-| 4 | 0.7345 | 0.1494 | 4.92 | fail |
+| 0 | 0.6914 | 0.1943 | 3.56 | fail |
+| 4 | 0.7494 | 0.1952 | 3.84 | fail |
 
-The model's mirror-y equivariance residual (~0.68–0.73 relative L2) stands
-~4.5–4.9× above the mapping-error floor, so the violation is the model's, not an
+The model's mirror-y equivariance residual (~0.69–0.75 relative L2) stands
+~3.6–3.8× above the mapping-error floor, so the violation is the model's, not an
 artefact of the approximate correspondence. Independent re-check confirmed
-`mapped == mirror(source)` and `follow_up != mapped` (max abs diff ≈ 4.0).
+`mapped == unmirror(follow_up)` and `mapped != source` (max abs diff ≈ 4.0).
 
 ## Honesty boundary
 
 Pilot evidence for one SUT, one MR, two eval frames, under an **approximate**
 reflection (the exact relation being out-of-relation-domain). It does not assert
 a violation rate, model reliability, baseline superiority, or seeded-fault
-detection. It supports only the qualitative point that a surrogate with good
-one-step accuracy can still substantially violate a physically-motivated
-reflection symmetry — i.e. accuracy alone does not bound that behaviour.
+detection, and it does not measure the model's accuracy. It supports only the
+qualitative point that a genuinely trained, converged surrogate (training loss
+1.62 -> 0.022 per the SUT repo's checkpoint manifest) can still substantially
+violate a physically-motivated reflection symmetry.

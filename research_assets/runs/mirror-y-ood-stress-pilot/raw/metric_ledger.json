@@ -34,9 +34,15 @@
   },
   "claim_limitations": "Pilot evidence: one real SUT, one metamorphic relation (mirror-y), a few eval frames. The exact mirror relation is out-of-relation-domain for this mesh (measured non-mirror-symmetric geometry); the reported violation is an approximate OOD-stress probe relative to its mapping-error floor. It is not a violation rate, reliability, or baseline claim.",
   "raw_outputs": {
+    "source_output_f0": "research_assets/runs/mirror-y-ood-stress-pilot/raw/source_output_f0.npy",
     "source_output": "research_assets/runs/mirror-y-ood-stress-pilot/raw/source_output.npy",
+    "follow_up_output_f0": "research_assets/runs/mirror-y-ood-stress-pilot/raw/follow_up_output_f0.npy",
     "follow_up_output": "research_assets/runs/mirror-y-ood-stress-pilot/raw/follow_up_output.npy",
-    "mapped_output": "research_assets/runs/mirror-y-ood-stress-pilot/raw/mapped_output.npy"
+    "mapped_output_f0": "research_assets/runs/mirror-y-ood-stress-pilot/raw/mapped_output_f0.npy",
+    "mapped_output": "research_assets/runs/mirror-y-ood-stress-pilot/raw/mapped_output.npy",
+    "source_output_f4": "research_assets/runs/mirror-y-ood-stress-pilot/raw/source_output_f4.npy",
+    "follow_up_output_f4": "research_assets/runs/mirror-y-ood-stress-pilot/raw/follow_up_output_f4.npy",
+    "mapped_output_f4": "research_assets/runs/mirror-y-ood-stress-pilot/raw/mapped_output_f4.npy"
   },
   "entries": [
     {
@@ -46,7 +52,7 @@
       "source_case_id": "source_case-frame0",
       "follow_up_case_id": "source_case-frame0-mirror-y",
       "metric_name": "mirror_y_relative_l2_error",
-      "metric_value": 0.6833658196328486,
+      "metric_value": 0.6913759038776945,
       "tolerance": {
         "assertion": "less_or_equal",
         "threshold": 1e-06,
@@ -55,8 +61,8 @@
       "verdict": "fail",
       "evidence_artifact": "research_assets/runs/mirror-y-ood-stress-pilot/raw/source_output_f0.npy",
       "frame": 0,
-      "mapping_error_floor": 0.15045771637314878,
-      "violation_over_floor": 4.54191274535923,
+      "mapping_error_floor": 0.1942919646869918,
+      "violation_over_floor": 3.558437967270107,
       "exact_relation_verdict": "out-of-relation-domain"
     },
     {
@@ -66,7 +72,7 @@
       "source_case_id": "source_case-frame4",
       "follow_up_case_id": "source_case-frame4-mirror-y",
       "metric_name": "mirror_y_relative_l2_error",
-      "metric_value": 0.734476676162325,
+      "metric_value": 0.7493719699474907,
       "tolerance": {
         "assertion": "less_or_equal",
         "threshold": 1e-06,
@@ -75,12 +81,12 @@
       "verdict": "fail",
       "evidence_artifact": "research_assets/runs/mirror-y-ood-stress-pilot/raw/source_output_f4.npy",
       "frame": 4,
-      "mapping_error_floor": 0.14937461856923803,
-      "violation_over_floor": 4.917011224513225,
+      "mapping_error_floor": 0.1951808105108684,
+      "violation_over_floor": 3.8393731842084073,
       "exact_relation_verdict": "out-of-relation-domain"
     }
   ],
-  "generated_at": "2026-06-05T08:36:34Z",
+  "generated_at": "2026-06-05T08:55:15Z",
   "frames": [
     0,
     4

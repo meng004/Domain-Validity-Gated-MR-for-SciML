@@ -103,19 +103,20 @@ runs:
     relation_verdict_exact: "out-of-relation-domain"
     rubric_decision: "retained-ood-stress"
     ood_stress_verdict: "fail"
-    mirror_equivariance_violation_rel_l2_frame0: 0.6834
-    mirror_equivariance_violation_rel_l2_frame4: 0.7345
-    mapping_error_floor_frame0: 0.1505
-    mapping_error_floor_frame4: 0.1494
+    mirror_equivariance_violation_rel_l2_frame0: 0.6914
+    mirror_equivariance_violation_rel_l2_frame4: 0.7494
+    mapping_error_floor_frame0: 0.1943
+    mapping_error_floor_frame4: 0.1952
     output_summary:
       primary: null
       allowed_observation: >
         On the real eval mesh the exact mirror-y relation is out-of-relation-domain
         (reflection is non-bijective; worst reflected-node mismatch about one mesh edge
         length; cylinder off-centre by -7.2 mm), so the rubric downgrades it to an
-        approximate OOD-stress probe. On two eval frames (0 and 4) the SUT's mirror-y
-        equivariance residual is 0.683 and 0.735 relative L2, about 4.5-4.9x the
-        mapping-error floor (0.150, 0.149); both frames classify as a violation (fail).
+        approximate OOD-stress probe. Using the MR card formula (un-mirror the follow-up,
+        normalise by the source norm), on two eval frames (0 and 4) the SUT's mirror-y
+        equivariance residual is 0.691 and 0.749 relative L2, about 3.6-3.8x the
+        same-space mapping-error floor (0.194, 0.195); both frames classify as a violation (fail).
     claim_limit: >
       Pilot OOD-stress evidence: one SUT, one MR, two eval frames, under an approximate
       reflection. It does not establish a violation rate, model reliability, baseline

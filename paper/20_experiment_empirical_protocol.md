@@ -104,7 +104,7 @@ Blocked claims 不能写成 Results。它们只能出现在 method/protocol、li
 已完成的 mirror-y OOD-stress pilot（同一 SUT，少量 frame；展示 rubric 的证据门控）：
 
 - 在真实 eval 网格上，rubric 依据实测几何把**精确** mirror-y 等变判为 `out-of-relation-domain`：关于通道中线的反射不是双射、最大反射错位（`1.93e-2`）约为一个网格中位边长（`1.88e-2`）、节点类型匹配率 `0.977`、圆柱偏心 `-7.2 mm`。据此降级为近似 OOD-stress 探针（`retained-ood-stress`）。
-- 在该探针下，frame 0 与 4 的 mirror-y 等变残差为 `0.683` 与 `0.735` 相对 L2，约为映射误差地板（`0.150`、`0.149`）的 `4.5-4.9` 倍，两帧均判为违背（`fail`）。证据见 `research_assets/runs/mirror-y-ood-stress-pilot/`。
+- 在该探针下（按 MR card 公式:逆镜像 follow-up 后与 source 比、以 source 范数归一），frame 0 与 4 的 mirror-y 等变残差为 `0.691` 与 `0.749` 相对 L2，约为同空间映射误差地板（`0.194`、`0.195`）的 `3.6-3.8` 倍，两帧均判为违背（`fail`）。证据见 `research_assets/runs/mirror-y-ood-stress-pilot/`。
 - 限定：一个 SUT、一条 MR、两帧、近似反射下的 OOD-stress pilot；不构成 violation rate、reliability、baseline 或 seeded-fault 结论。
 
 当前 blocked 项包括：
@@ -121,11 +121,11 @@ Blocked claims 不能写成 Results。它们只能出现在 method/protocol、li
 
 ## 8. Results pilot 小节（可写入 Results，须保留限定语）
 
-本小节给出两个严格限定的 real-SUT pilot，二者对比正是本文的核心论点支撑：**仅看 accuracy 不足以给 SciML 使用者一个行为信心边界，证据门控的物理 MR 能暴露 accuracy 看不见的失效。**
+本小节给出两个严格限定的 real-SUT pilot。它们是 pilot 量级的证据,只能**示意**本文论点的方向,不能当作其完整证明:仅看 accuracy 未必能给 SciML 使用者一个行为信心边界,而证据门控的物理 MR 有可能暴露 accuracy 看不见的失效。
 
-- **Pilot 1（结构性 MR，作为正确性基线）：** node permutation 等变性在真实 SUT 上 relative L2 = 0.0（容差 1e-6），verdict pass。这是消息传递 GNN 的结构性属性,作为 pipeline 正确性的 sanity check 而非模型能力证据。
-- **Pilot 2（物理 OOD-stress MR，论文主结果）：** 同一 SUT、同一 checkpoint。rubric 先依据实测几何把精确 mirror-y 判为 out-of-relation-domain 并降级为近似 OOD-stress 探针；在该探针下模型的 mirror-y 等变残差达 0.68-0.73 相对 L2（两帧），约为映射误差地板的 4.5-4.9 倍，判为违背。该模型在 PR #103 中报告的单步精度优于 persistence（skill 1.31x），但仍显著违背一个物理上自然的反射对称。
+- **Pilot 1（结构性 MR，作为正确性 sanity check）：** node permutation 等变性在真实 SUT 上 relative L2 = 0.0（容差 1e-6），verdict pass。这是消息传递 GNN 的结构性属性,只作为 pipeline 正确性检查,不构成模型能力或精度证据。
+- **Pilot 2（物理 OOD-stress MR，本小节主结果）：** 同一 SUT、同一 checkpoint。rubric 先依据实测几何把精确 mirror-y 判为 out-of-relation-domain 并降级为近似 OOD-stress 探针；在该探针下（按 MR card 公式计分）模型的 mirror-y 等变残差达 0.69-0.75 相对 L2（两帧），约为同空间映射误差地板的 3.6-3.8 倍,判为违背。该 checkpoint 是真实训练收敛的代理（训练 loss 1.62 → 0.022,见 SUT 仓库 checkpoint manifest 的 provenance,本文未独立测其精度）。
 
-对比解读：结构性 MR 通过、物理 MR 违背,二者并存说明"低单步误差"并不能保证模型尊重问题的对称结构。方法论意义在于 rubric 是**证据门控**的——它没有盲目断言 mirror-y 成立,而是用实测几何把它降级并明确标注近似性,因此报告的违背带有可核验的边界（映射误差地板）。
+对比解读:结构性 MR 通过、物理 MR 违背,二者并存与"低训练误差未必意味着模型尊重问题对称结构"这一方向一致。方法论意义在于 rubric 是**证据门控**的——它没有盲目断言 mirror-y 成立,而是用实测几何把它降级并明确标注近似性,因此报告的违背带有可核验的边界（映射误差地板）。
 
-限定边界（不可越界写成 Results）：以上为单 SUT、单条物理 MR、少量 frame、近似反射下的 pilot；不构成 violation rate、模型可靠性、多 SUT 泛化或 baseline 优劣结论。完整结论仍需扩展到镜像对称网格、多帧/多 seed 与多 SUT，相关项见第 7 节 blocked 列表。
+限定边界（不可越界写成 Results）:以上为单 SUT、单条物理 MR、少量 frame、近似反射下的 pilot;不构成 violation rate、模型可靠性、模型精度、多 SUT 泛化或 baseline 优劣结论,也不单独证明上述论点。完整结论仍需扩展到镜像对称网格、多帧/多 seed 与多 SUT,相关项见第 7 节 blocked 列表。
