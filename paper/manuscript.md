@@ -1,8 +1,8 @@
 # Domain-Validity-Gated Metamorphic Relation Identification and Executable Test Assets for Scientific Machine Learning
 
 > Manuscript draft for IST regular track.  
-> Draft status: v0.3 evidence-gated full draft scaffold, 2026-06-05.  
-> Full cross-SUT results remain blocked; only strictly scoped within-SUT pilot evidence on one MeshGraphNets checkpoint is reported (Section 5.1).
+> Draft status: v0.4 evidence-gated draft with a realized single-SUT case study, 2026-06-05.  
+> One MeshGraphNets surrogate is realized end-to-end (Section 5); cross-SUT rates and baseline comparisons remain future work. The bibliography is still being verified (Section 9).
 
 ## Target and Scope
 
@@ -32,7 +32,7 @@ Full results remain blocked pending cross-SUT artifacts. Only strictly scoped, w
 
 ### Conclusion
 
-At the planning stage, the intended contribution is a validity-aware bridge from candidate MR ideas to auditable SciML test assets. The paper positions MRs as a complement to rollout accuracy, residuals, uncertainty estimates, and equivariance errors: these diagnostics can become executable oracle-free relations only when paired with valid transformations, explicit preconditions, exclusion rules, and auditable verdict records.
+The contribution is a validity-aware bridge from candidate MR ideas to auditable SciML test assets, demonstrated end-to-end on one real trained MeshGraphNets cylinder-flow surrogate. On that single SUT the workflow produces all four rubric outcomes and three executed relation-level verdicts (a representation-MR pass, an out-of-relation-domain symmetry relation whose downgraded OOD-stress probe is violated on every recorded frame, and a deferred conservation relation with a passing reference-relative diagnostic). The paper positions MRs as a complement to rollout accuracy, residuals, uncertainty estimates, and equivariance errors: these diagnostics become executable oracle-free relations only when paired with valid transformations, explicit preconditions, exclusion rules, and auditable verdict records. Cross-SUT rates and baseline comparisons remain future work.
 
 ## Keywords
 
@@ -80,7 +80,7 @@ Second, we define an MR-card and executable-asset workflow that converts retaine
 
 Third, we define a relation-level verdict and ledger scheme. Each retained MR records a source-case schema, follow-up transformation, output mapping, metric, tolerance rule, exclusion rule, and verdict interpretation. This converts physical diagnostics such as residuals, conservation errors, and equivariance errors into auditable oracle-free tests only when their transformation and validity conditions are explicit.
 
-Fourth, we design a MeshGraphNets-family cylinder-flow case study to exercise the workflow on concrete SciML SUTs. The evaluation will compare retained MRs with expert MR design, generic MR-generation scope contrasts, LLM-assisted candidate generation, and rollout-accuracy baselines. This contribution will be stated as a result only after experiment artifacts exist.
+Fourth, we exercise the workflow in a MeshGraphNets-family cylinder-flow case study. We realize it end-to-end on one real trained surrogate, where the rubric produces all four screening outcomes and three relations are executed with recorded relation-level verdicts and committed artifacts (Section 5). The planned comparison of retained MRs with expert MR design, generic MR-generation scope contrasts, LLM-assisted candidate generation, and rollout-accuracy baselines, and the extension to additional surrogates, remain future work; we do not state cross-SUT or comparative results.
 
 ## 2. Background and Related Work
 
@@ -104,7 +104,7 @@ However, SciML MRs cannot be treated as generic input perturbations. In image-ba
 
 Prior work on scientific software testing has shown that MRs can be elicited from monotonicity, conservation-like behavior, scaling relations, simulation assumptions, and domain-specific expectations. Work on simulation validation similarly treats multi-run relations as pseudo-oracles when direct validation data are limited or unavailable. These studies establish that MR thinking is practical for scientific and simulation software, not merely for toy functions.
 
-Other work has explored automated or semi-automated MR identification. For example, research on ocean system models shows that data-driven search can discover candidate transformations in complex physical software. CPS testing work shows that design assumptions can be encoded as MRs and then used to generate new test traces. These ideas are important for the present paper because they show that MR sources can include system assumptions, model structure, and physical design knowledge.
+Other work has explored automated or semi-automated MR identification. For example, research on ocean system models shows that data-driven search can discover candidate transformations in complex physical software. Mandrioli et al. [1] show, for cyber-physical systems, that design assumptions can be encoded as metamorphic relations and combined with genetic programming to generate new test traces. These ideas are important for the present paper because they show that MR sources can include system assumptions, model structure, and physical design knowledge. Our setting differs in that the validity of a candidate relation for a mesh-based neural PDE surrogate depends on geometry, boundary labels, discretization, and numerical tolerance, which is exactly what the domain-validity rubric is designed to screen.
 
 The gap is that candidate identification is not enough for SciML. A candidate relation must also state when it is supposed to hold. Without a domain-of-validity record, a failed test may mean several different things: the relation was invalid under the chosen boundary conditions, the transformation left the physical regime, the tolerance was not numerically justified, or the SUT violated a relation it should have preserved. This paper makes that distinction explicit.
 
@@ -181,6 +181,27 @@ The rubric outputs one of four screening decisions:
 - rejected as invalid or underspecified;
 - deferred pending missing evidence, such as a discrete operator or threshold.
 
+Table 1 shows the four screening decisions instantiated on the four cylinder-flow
+candidates used in this study. The same candidate set later supplies the executed
+relations in Section 5, so the rubric outcome and the runtime evidence can be read
+together.
+
+**Table 1. Rubric screening decisions for four cylinder-flow MR candidates.**
+
+| Candidate | Source category | Decisive rubric criterion | Decision |
+|---|---|---|---|
+| Node-permutation equivariance | Mesh/graph representation | Reindexing preserves geometry and boundary labels; transformation and inverse mapping fully specified | retained (executable MR) |
+| Mirror-y equivariance | Geometric/symmetry | Boundary-condition compatibility fails on the measured mesh (off-centre cylinder, non-mirror-symmetric geometry) | retained as OOD stress relation, not physics-preserving |
+| Discrete divergence boundedness | Physical equation (continuity) | Metric/tolerance not calibratable: reference field already has non-negligible discrete divergence on a coarse mesh | deferred pending a calibrated operator/tolerance |
+| Viscous time reversal | Physical equation (temporal) | Physical basis fails: viscous cylinder flow is dissipative and not time-reversal invariant | rejected as invalid |
+
+The decisions are not symmetric in cost. Rejection and deferral remove candidates
+that would otherwise inflate an apparently rigorous suite, and the OOD-stress
+downgrade keeps a useful stress probe while preventing it from being reported as a
+physics-preserving equivalence. Each decision is recorded with its evidence
+references in a candidate ledger so that another reviewer can audit why a relation
+was retained, downgraded, deferred, or rejected.
+
 ### 3.4 MR Card and Executable Asset Format
 
 A retained MR is represented as an MR card. The card records:
@@ -232,6 +253,16 @@ The planned study uses three MeshGraphNets-family implementations or configurati
 3. DeepMind TF1 MeshGraphNets, or an equivalent third MeshGraphNets-family implementation or configuration if runtime feasibility requires substitution.
 
 For each SUT, the experiment ledger will record repository URL, commit, checkpoint, dataset, mesh format, input fields, output fields, rollout horizon, random seeds, environment, and known runtime limitations. Because these SUTs share a task and architecture family, the study will be framed as a same-family stress test, not as evidence for all neural fluid surrogates.
+
+At the time of writing, one configuration in this family has been realized
+end-to-end and supplies the executed verdicts in Section 5: a pure-PyTorch
+MeshGraphNet (encode–process–decode, 176k parameters) trained on the official
+DeepMind `cylinder_flow` benchmark and evaluated on a held-out test trajectory.
+Its repository commit, checkpoint sha256, dataset slice hashes, exact commands, and
+raw outputs are recorded so that every reported number is auditable. The echowve and
+PhysicsNeMo implementations remain blocked pending their dataset, checkpoint,
+command, and output artifacts; we therefore report single-SUT evidence and treat
+cross-implementation results as future work rather than as current findings.
 
 ### 4.2 Planned MR Classes
 
@@ -338,10 +369,24 @@ and metric ledgers are committed under `research_assets/runs/`.
   of the reference on the recorded eval frames (interior-only ratio confirms this is
   not a boundary-imposition artefact). This asserts no absolute conservation.
 
+Table 2 summarizes the three executed relations. All numbers are computed from
+committed raw outputs and metric ledgers (Section 5.3) and were independently
+recomputed during review.
+
+**Table 2. Executed relation-level verdicts on one MeshGraphNets cylinder-flow surrogate.**
+
+| Relation | Rubric outcome | Metric | Value (eval frames) | Verdict |
+|---|---|---|---|---|
+| Node-permutation equivariance | retained MR | relative L2 vs source (tol 1e-6) | 0.0 | pass |
+| Mirror-y equivariance | retained OOD stress (exact relation out-of-relation-domain) | approximate-reflection relative L2 vs same-space mapping-error floor | median 0.737, 3–5.5× floor; fail on 10/10 frames | fail (within-SUT frame rate) |
+| Discrete divergence boundedness | deferred (absolute); reference-relative diagnostic | predicted/reference RMS divergence ratio (flag > 1.5) | 1.0025–1.0075 (interior-only 1.0042–1.0075) | pass (diagnostic); absolute relation deferred |
+
 These pilots illustrate the direction of the paper's argument — that accuracy
 alone does not bound whether a surrogate respects physical structure, and that an
 evidence-gated rubric will refuse or downgrade a relation rather than fabricate a
-verdict. They are pilot-scale and do not by themselves prove the general claim.
+verdict. They are pilot-scale, restricted to one SUT, one checkpoint, and one eval
+trajectory under approximate transformations, and do not by themselves prove the
+general claim.
 
 ### 5.2 Still blocked
 
@@ -351,11 +396,29 @@ fault-detection rates; localization accuracy; runtime or performance claims; and
 any claim that one SUT is more reliable than another. The three METBENCH-planned
 SUTs and the baseline comparison stay blocked pending their artifacts.
 
+### 5.3 Reproducibility package
+
+Each executed relation ships as a self-contained, auditable bundle rather than as a
+narrative number. For the realized SUT the package contains: the domain-validity
+rubric and candidate ledger that record the four screening decisions; an MR card per
+relation with its metric, tolerance, and exclusion rules; a flat run manifest that
+records the SUT repository commit, the checkpoint sha256, the dataset slice, the
+exact command, the random seed, and the device and framework versions; the runner
+that executes the transformation and metric; the raw source, follow-up, and mapped
+outputs (committed as arrays); a relation-level metric ledger with the per-frame
+verdict, metric value, mapping-error floor, and rubric decision; and the run stdout
+and exit code. A fail-closed validator refuses to admit a relation-level verdict
+unless the manifest's checkpoint hash and every raw output it lists verify on disk,
+and a continuous-integration job re-runs the validators and unit tests on every
+change. This is the concrete sense in which the workflow is "auditable": each number
+in Tables 1 and 2 can be regenerated from the committed artifacts and is checked by
+the same gate that produced it.
+
 ## 6. Discussion
 
 ### 6.1 Expected Interpretation
 
-The expected value of the study is not that every MR will find a new fault beyond rollout accuracy. Rather, the value is that retained MRs provide relation-level evidence under explicit transformations. If a violation is observed, the MR card and verdict rule should help determine whether the issue is a model inconsistency, a relation-domain boundary, a numerical tolerance problem, or an inconclusive case.
+The value of the study is not that every MR will find a new fault beyond rollout accuracy. Rather, it is that retained MRs provide relation-level evidence under explicit transformations, and that the rubric records why a candidate is retained, downgraded, deferred, or rejected. The single-SUT case study illustrates this concretely: the same surrogate yields a representation-level pass, a symmetry relation that the rubric refuses to treat as exact and whose downgraded probe is violated on every recorded frame, and a conservation relation the rubric defers because an absolute tolerance is not calibratable on the mesh. When a violation is observed, the MR card and verdict rule help determine whether the issue is a model inconsistency, a relation-domain boundary, a numerical-tolerance problem, or an inconclusive case.
 
 ### 6.2 Boundary of Claims
 
@@ -383,15 +446,39 @@ If the empirical study succeeds, it will show how SciML testing can move from im
 
 ## 8. Conclusion
 
-This draft does not provide a final conclusion because empirical evidence is not yet available. The intended conclusion, if supported by artifacts, is that domain-validity-gated MR identification can provide an auditable oracle-free testing workflow for MeshGraphNets-family cylinder-flow surrogates. The central claim will remain methodological: physically meaningful SciML MRs require explicit validity conditions, executable assets, and relation-level verdicts.
+This paper's conclusion is methodological and is supported, at pilot scale, by a single-SUT case study: domain-validity-gated MR identification provides an auditable oracle-free testing workflow for MeshGraphNets-family cylinder-flow surrogates. On one real trained surrogate the rubric produced all four screening outcomes and three executed relation-level verdicts with committed, independently recomputable artifacts. The central claim is that physically meaningful SciML MRs require explicit validity conditions, executable assets, and relation-level verdicts; the evidence here demonstrates the workflow rather than establishing cross-SUT rates, baseline comparisons, or reliability conclusions, which remain future work.
 
 ## References
 
-Reference verification is ongoing. Planned reference groups:
+The bibliography is being assembled under a source-verification policy: an item is
+cited here only when its bibliographic identity is confirmed against a publisher,
+proceedings, arXiv, or Crossref-grade record. Items still at partial or unverified
+status are listed separately as leads and are intentionally not yet cited in the
+running text, to avoid attaching claims to unconfirmed records. Completing this
+bibliography is the main remaining step before submission.
 
-- foundational MT and the oracle problem;
-- MT for ML and scientific software;
-- MT for physical-field or fluid-velocity predictors;
-- SciML V&V, residuals, UQ, and failure modes;
-- MeshGraphNets and mesh-based neural simulation;
-- NOETHER and the scientific-computing MR classification model.
+### Verified
+
+[1] C. Mandrioli, S. Y. Shin, D. Bianculli, and L. Briand. "Testing CPS With Design
+Assumptions-Based Metamorphic Relations and Genetic Programming." *IEEE Transactions
+on Software Engineering*, vol. 51, no. 6, pp. 1666–1684, 2025. DOI:
+10.1109/TSE.2025.3563121.
+
+### Leads pending verification (not yet cited)
+
+These works are tracked in the project reference ledger and are relevant to the
+related-work discussion, but are held at partial or unverified status pending a
+trusted record and corrected metadata:
+
+- physics-based metamorphic / mutation testing for learned fluid-velocity and
+  physical-field predictors (closest-work leads; status partial/unverified);
+- automated MR identification for ocean system models (methodological precedent;
+  status partial);
+- a NOETHER-style framework for metamorphic pattern discovery from operator algebras
+  (candidate-organization source; arXiv-only, metadata inconsistent);
+- residual/error-guided hybrid ML–solver trust-region frameworks (context for
+  runtime trust switching; status partial).
+
+Foundational metamorphic-testing and oracle-problem references, MeshGraphNets and
+mesh-based neural simulation references, and SciML V&V / UQ / failure-mode references
+will be added once each item clears the same verification bar.
