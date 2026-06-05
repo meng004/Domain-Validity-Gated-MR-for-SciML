@@ -1,0 +1,59 @@
+ledger_id: "mgn-cylinder-flow-claim-ledger-v0.1"
+evidence_policy: "fail-closed"
+
+claims:
+  - claim_id: "C1-fixture-asset-path"
+    status: "observed"
+    evidence:
+      - "research_assets/runs/node_permutation_fixture_verdict.json"
+      - "research_assets/fixtures/node_permutation_case.json"
+    wording_allowed: >
+      The current package includes an executable fixture-level node-permutation asset path
+      and records its transformation-metric ledger.
+    wording_forbidden:
+      - "The MeshGraphNets SUT has been evaluated."
+      - "The MR has empirical SUT pass/fail evidence."
+    blocked_reason: null
+
+  - claim_id: "C2-real-sut-verdicts"
+    status: "blocked"
+    evidence: []
+    wording_allowed: >
+      Real MeshGraphNets SUT verdicts are planned but blocked until dataset, repository,
+      checkpoint, command, and output artifacts are recorded.
+    wording_forbidden:
+      - "Real MeshGraphNets inference has been run."
+      - "The SUT satisfies or violates the MR."
+    blocked_reason: "Missing METBENCH_MGN_DATA_ROOT, METBENCH_MGN_REPO, METBENCH_MGN_CHECKPOINT, exact command, and raw outputs."
+
+  - claim_id: "C3-baseline-comparison"
+    status: "blocked"
+    evidence: []
+    wording_allowed: >
+      Baselines are protocol commitments: Manual expert MR design, Generic automatic MR generation
+      scope contrast, LLM-generated candidate MRs, and Pure rollout accuracy.
+    wording_forbidden:
+      - "The proposed protocol outperforms any baseline."
+      - "Baseline comparison results are available."
+    blocked_reason: "No matched baseline run artifacts, scoring ledgers, or comparable outputs exist."
+
+  - claim_id: "C4-rubric-decision-coverage"
+    status: "qualified"
+    evidence:
+      - "research_assets/rubric/domain_validity_rubric.json"
+      - "research_assets/mr_cards/node_permutation_equivariance.json"
+      - "research_assets/mr_cards/mirror_y_equivariance.json"
+      - "research_assets/mr_cards/discrete_divergence_boundedness.json"
+    wording_allowed: >
+      The asset package contains design-time MR cards and a domain-validity rubric that make
+      evidence boundaries explicit.
+    wording_forbidden:
+      - "The rubric proves physical validity."
+      - "Design-time review is an empirical SUT result."
+    blocked_reason: "Runtime evidence remains separate from design-time rubric coverage."
+
+speculative_claims:
+  - claim: "Seeded-fault detection effectiveness"
+    status: "speculative"
+    wording_allowed: "May be listed only as a future experiment."
+    blocked_reason: "No seeded-fault subjects, commands, or outputs exist."

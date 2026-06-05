@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.example/mgn-cylinder-flow/verdict-ledger.schema.json",
+  "title": "MeshGraphNets cylinder-flow MR verdict ledger",
+  "type": "object",
+  "required": [
+    "ledger_id",
+    "evidence_level",
+    "schema_version",
+    "claim_limitations",
+    "entries"
+  ],
+  "properties": {
+    "ledger_id": {
+      "type": "string"
+    },
+    "evidence_level": {
+      "enum": [
+        "runtime-verdict-ledger",
+        "schema-example-no-runs",
+        "fixture-transform-metric-only"
+      ]
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "claim_limitations": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "run_id",
+          "mr_id",
+          "source_case_id",
+          "follow_up_case_id",
+          "verdict",
+          "metric",
+          "tolerance",
+          "evidence_artifact"
+        ],
+        "properties": {
+          "run_id": {
+            "type": "string"
+          },
+          "mr_id": {
+            "type": "string"
+          },
+          "source_case_id": {
+            "type": "string"
+          },
+          "follow_up_case_id": {
+            "type": "string"
+          },
+          "verdict": {
+            "enum": [
+              "pass",
+              "fail",
+              "skip",
+              "out-of-relation-domain",
+              "numerical-tolerance-issue",
+              "inconclusive"
+            ]
+          },
+          "metric": {
+            "type": "object"
+          },
+          "tolerance": {
+            "type": "object"
+          },
+          "evidence_artifact": {
+            "type": "string"
+          },
+          "execution_profile": {
+            "enum": ["fixture-transform-metric-only", "sut-runtime"]
+          },
+          "sut_execution": {
+            "enum": ["not-run", "run", "blocked"]
+          },
+          "transformed_graph": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

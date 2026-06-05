@@ -1,0 +1,64 @@
+{
+  "ledger_id": "node-permutation-fixture-verdict-ledger",
+  "evidence_level": "fixture-transform-metric-only",
+  "schema_version": "0.2.0",
+  "claim_limitations": "This ledger records a fixture-level asset execution path. It does not report MeshGraphNets inference, SUT reliability, violation rates, or empirical pass/fail rates.",
+  "entries": [
+    {
+      "run_id": "fixture-node-permutation-run-001",
+      "mr_id": "mgn-node-permutation-equivariance",
+      "source_case_id": "fixture-node-permutation-001",
+      "follow_up_case_id": "fixture-node-permutation-001-permuted",
+      "execution_profile": "fixture-transform-metric-only",
+      "sut_execution": "not-run",
+      "verdict": "pass",
+      "metric": {
+        "name": "permutation_relative_l2_error",
+        "value": 0.0
+      },
+      "tolerance": {
+        "assertion": "less_or_equal",
+        "threshold": 1e-06,
+        "source": "theory/MeshGraphNets圆柱绕流MetBench_MR资产编制与验证说明.md"
+      },
+      "evidence_artifact": "research_assets/fixtures/node_permutation_case.json",
+      "transformed_graph": {
+        "x": [
+          [
+            3.0,
+            1.0
+          ],
+          [
+            1.0,
+            0.0
+          ],
+          [
+            2.0,
+            0.0
+          ]
+        ],
+        "pos": [
+          [
+            0.5,
+            1.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ],
+        "face": [
+          [
+            1,
+            2,
+            0
+          ]
+        ]
+      }
+    }
+  ]
+}

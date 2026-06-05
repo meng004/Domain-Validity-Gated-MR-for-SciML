@@ -1,0 +1,62 @@
+ledger_id: "mgn-cylinder-flow-experiment-ledger-v0.1"
+evidence_policy: "fail-closed"
+keep_failed_runs: true
+claim_limitations: >
+  This ledger separates fixture-level asset plumbing from real MeshGraphNets SUT execution.
+  It does not record real SUT verdicts, empirical rates, model reliability, seeded-fault
+  detection, or baseline comparison results.
+
+runs:
+  - run_id: "fixture-node-permutation-run-001"
+    status: "observed-fixture-only"
+    sut_execution: "not-run"
+    evidence_level: "fixture-transform-metric-only"
+    observed_artifact: "research_assets/runs/node_permutation_fixture_verdict.json"
+    fixture_input: "research_assets/fixtures/node_permutation_case.json"
+    mr_card: "research_assets/mr_cards/node_permutation_equivariance.json"
+    output_summary:
+      primary: null
+      allowed_observation: "The fixture asset path and transformation-metric ledger exist."
+    claim_limit: "May support asset-plumbing existence only; cannot be written as real SUT Results."
+
+  - run_id: "real-sut-echowve-blocked"
+    status: "blocked"
+    sut_execution: "not-run"
+    subject: "Echowve MeshGraphNets cylinder-flow implementation"
+    missing_prerequisites:
+      - "METBENCH_MGN_DATA_ROOT"
+      - "METBENCH_MGN_REPO"
+      - "METBENCH_MGN_CHECKPOINT"
+      - "exact command"
+      - "raw output artifact path"
+    output_summary:
+      primary: null
+    blocked_reason: "No dataset root, model repository, checkpoint, executable command, or output artifact is recorded."
+
+  - run_id: "real-sut-physicsnemo-blocked"
+    status: "blocked"
+    sut_execution: "not-run"
+    subject: "PhysicsNeMo MeshGraphNets-family cylinder-flow implementation"
+    missing_prerequisites:
+      - "METBENCH_MGN_DATA_ROOT"
+      - "METBENCH_MGN_REPO"
+      - "METBENCH_MGN_CHECKPOINT"
+      - "exact command"
+      - "raw output artifact path"
+    output_summary:
+      primary: null
+    blocked_reason: "No dataset root, model repository, checkpoint, executable command, or output artifact is recorded."
+
+  - run_id: "real-sut-third-implementation-blocked"
+    status: "blocked"
+    sut_execution: "not-run"
+    subject: "Third independent MeshGraphNets-family implementation"
+    missing_prerequisites:
+      - "METBENCH_MGN_DATA_ROOT"
+      - "METBENCH_MGN_REPO"
+      - "METBENCH_MGN_CHECKPOINT"
+      - "exact command"
+      - "raw output artifact path"
+    output_summary:
+      primary: null
+    blocked_reason: "No dataset root, model repository, checkpoint, executable command, or output artifact is recorded."

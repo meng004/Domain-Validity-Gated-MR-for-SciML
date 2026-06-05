@@ -1,0 +1,7 @@
+{
+  "ledger_id": "mgn-cylinder-flow-verdict-ledger-example",
+  "evidence_level": "schema-example-no-runs",
+  "schema_version": "0.1.0",
+  "claim_limitations": "This is a schema-shape example with no run entries. It does not report SUT execution, pass/fail outcomes, violation rates, or reliability conclusions.",
+  "entries": []
+}

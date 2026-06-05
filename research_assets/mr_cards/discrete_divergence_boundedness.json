@@ -1,0 +1,75 @@
+{
+  "mr_id": "mgn-discrete-divergence-boundedness",
+  "title": "Discrete divergence boundedness for incompressible cylinder-flow outputs",
+  "status": "design-time-deferred",
+  "evidence_level": "design-time-candidate",
+  "source_case_schema": {
+    "dataset": {
+      "root": "${METBENCH_MGN_DATA_ROOT}",
+      "split": "tiny",
+      "sample_index": "integer",
+      "rollout_steps": 1
+    },
+    "model": {
+      "repo_root": "${METBENCH_MGN_REPO}",
+      "checkpoint": "${METBENCH_MGN_CHECKPOINT}",
+      "device": "cpu",
+      "deterministic": true
+    },
+    "graph_fields": [
+      "pos",
+      "face",
+      "y"
+    ]
+  },
+  "follow_up_transformation": {
+    "kind": "identity_with_constraint_measurement",
+    "parameters": {
+      "constraint": "incompressible continuity",
+      "operator": "discrete divergence over mesh cells"
+    },
+    "synchronized_fields": [
+      "pos",
+      "face",
+      "y"
+    ]
+  },
+  "transformation_preconditions": [
+    "The output velocity field and mesh connectivity are available.",
+    "A concrete discrete divergence operator and boundary treatment are declared.",
+    "The tolerance is calibrated against numerical discretization error or trusted reference behavior."
+  ],
+  "boundary_condition_compatibility": {
+    "status": "deferred",
+    "reason": "The current asset has not fixed the discrete operator, boundary weights, or tolerance calibration needed for a retained MR verdict."
+  },
+  "output_mapping": {
+    "kind": "identity",
+    "description": "Evaluate the divergence statistic on the predicted velocity field."
+  },
+  "metric": {
+    "name": "area_weighted_discrete_divergence",
+    "formula": "sum(area_c * abs(div_c)) / sum(area_c)"
+  },
+  "tolerance": {
+    "assertion": "blocked_until_calibrated",
+    "threshold": null,
+    "source": "theory/蜕变测试实验方案.md"
+  },
+  "exclusion_rules": [
+    "Defer verdicts when the discrete divergence operator is not fixed.",
+    "Do not classify a high divergence value as a model fault without calibrated tolerance.",
+    "Treat this as a diagnostic candidate until boundary treatment is specified."
+  ],
+  "allowed_verdicts": [
+    "skip",
+    "out-of-relation-domain",
+    "inconclusive"
+  ],
+  "verdict_interpretation": {
+    "skip": "Required operator, boundary treatment, or runtime artifact is unavailable.",
+    "out-of-relation-domain": "The source case is outside the incompressible-flow assumptions represented by the card.",
+    "inconclusive": "The diagnostic value cannot be interpreted as a retained MR verdict."
+  },
+  "claim_limitations": "This is a deferred candidate card. Divergence is treated as an incompressible continuity or mass-conservation constraint, not as a Noether-derived conservation law, and no SUT verdict is claimed."
+}

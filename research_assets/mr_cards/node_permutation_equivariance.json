@@ -1,0 +1,73 @@
+{
+  "mr_id": "mgn-node-permutation-equivariance",
+  "title": "Node permutation equivariance for MeshGraphNets cylinder-flow graphs",
+  "status": "design-time-retained",
+  "evidence_level": "design-time-asset",
+  "source_case_schema": {
+    "dataset": {
+      "root": "${METBENCH_MGN_DATA_ROOT}",
+      "split": "tiny",
+      "sample_index": "integer",
+      "rollout_steps": 1
+    },
+    "model": {
+      "repo_root": "${METBENCH_MGN_REPO}",
+      "checkpoint": "${METBENCH_MGN_CHECKPOINT}",
+      "device": "cpu",
+      "deterministic": true
+    },
+    "graph_fields": ["x", "pos", "y", "face"]
+  },
+  "follow_up_transformation": {
+    "kind": "node_permutation",
+    "parameters": {
+      "permutation": "bijection over node indices",
+      "inverse_permutation": "inverse bijection used to restore output order"
+    },
+    "synchronized_fields": ["x", "pos", "y", "face"]
+  },
+  "transformation_preconditions": [
+    "The graph uses node-indexed tensors for x, pos, and y.",
+    "The face/cell connectivity is expressed by node indices and is updated by the same permutation.",
+    "The model inference path is deterministic for the source and follow-up executions."
+  ],
+  "boundary_condition_compatibility": {
+    "status": "compatible-by-reindexing",
+    "reason": "Node types, coordinates, targets, and face connectivity are reindexed together; physical geometry and boundary categories are not changed."
+  },
+  "output_mapping": {
+    "kind": "inverse_node_permutation",
+    "description": "Apply inverse_permutation to the follow-up output before comparing it with the source output."
+  },
+  "metric": {
+    "name": "permutation_relative_l2_error",
+    "formula": "norm(inverse_permute(y_perm) - y0) / norm(y0)"
+  },
+  "tolerance": {
+    "assertion": "less_or_equal",
+    "threshold": 0.000001,
+    "source": "theory/MeshGraphNets圆柱绕流MetBench_MR资产编制与验证说明.md"
+  },
+  "exclusion_rules": [
+    "Exclude cases where graph fields required by the permutation are absent.",
+    "Exclude cases where the node permutation is not a bijection.",
+    "Exclude nondeterministic runtime configurations from verdict generation."
+  ],
+  "allowed_verdicts": [
+    "pass",
+    "fail",
+    "skip",
+    "out-of-relation-domain",
+    "numerical-tolerance-issue",
+    "inconclusive"
+  ],
+  "verdict_interpretation": {
+    "pass": "The observed run satisfied the design-time relation under the declared tolerance.",
+    "fail": "The observed run exceeded the declared tolerance and requires investigation.",
+    "skip": "The run was not executed because prerequisites were absent or disabled.",
+    "out-of-relation-domain": "The source case did not satisfy the relation preconditions.",
+    "numerical-tolerance-issue": "The result was dominated by numeric or determinism uncertainty.",
+    "inconclusive": "The run did not provide enough evidence for pass/fail classification."
+  },
+  "claim_limitations": "This card is a design-time MR asset. It does not report SUT execution, pass/fail status, violation rates, or reliability conclusions."
+}

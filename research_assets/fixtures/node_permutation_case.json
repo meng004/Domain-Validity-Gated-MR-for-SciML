@@ -1,0 +1,12 @@
+{
+  "case_id": "fixture-node-permutation-001",
+  "mr_id": "mgn-node-permutation-equivariance",
+  "x": [[1.0, 0.0], [2.0, 0.0], [3.0, 1.0]],
+  "pos": [[0.0, 0.0], [1.0, 0.0], [0.5, 1.0]],
+  "y_source": [[0.10, 0.20], [0.30, 0.40], [0.50, 0.60]],
+  "face": [[0, 1, 2]],
+  "permutation": [2, 0, 1],
+  "inverse_permutation": [1, 2, 0],
+  "y_follow_up_permuted": [[0.50, 0.60], [0.10, 0.20], [0.30, 0.40]],
+  "claim_limitations": "This fixture checks transformation and metric plumbing only. It does not run MeshGraphNets inference."
+}
