@@ -1,0 +1,65 @@
+# Experiment Evidence Package
+
+## Scope
+
+This package defines an evidence-gated empirical protocol for physically grounded
+metamorphic-relation testing of MeshGraphNets-family cylinder-flow surrogates.
+It is a protocol and asset-readiness package, not a Results package.
+
+## Evidence Inventory
+
+| Artifact | Status | Evidence Limit |
+|---|---|---|
+| `research_assets/runs/node_permutation_fixture_verdict.json` | observed | Fixture-level asset plumbing only; SUT execution is `not-run`. |
+| `research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json` (+ raw `.npy` outputs, manifest) | observed | One-SUT/one-MR/one-case pilot: real MeshGraphNets cylinder-flow inference under node permutation; relative L2 = 0.0 (tol 1e-6), verdict pass. No rate or reliability claim. |
+| `research_assets/experiments/experiment-ledger.yml` (`precondition_check`) | observed | 2026-06-05 environmental check: required `METBENCH_MGN_*` vars unset; the three METBENCH-planned SUTs stay blocked. |
+| `research_assets/rubric/domain_validity_rubric.json` | qualified | Design-time rubric coverage; not a proof and not runtime evidence. |
+| Real Echowve SUT run | blocked | Missing dataset root, model repository, checkpoint, command, and outputs. |
+| Real PhysicsNeMo SUT run | blocked | Missing dataset root, model repository, checkpoint, command, and outputs. |
+| Third implementation SUT run | blocked | Missing dataset root, model repository, checkpoint, command, and outputs. |
+| Baseline comparison | blocked | Missing matched run artifacts and scoring ledgers. |
+
+## Claim Gate Table
+
+| Claim | Status | Manuscript Use | Results Use |
+|---|---|---|---|
+| `C1-fixture-asset-path` | observed | May describe executable fixture-level asset path. | Cannot describe real SUT behavior. |
+| `C2-real-sut-verdicts` | observed (pilot) | May describe the single-SUT/single-MR/single-case node-permutation pilot pass. | May appear in Results only as an explicitly scoped pilot; not as a rate, reliability, or general claim. |
+| `C3-baseline-comparison` | blocked | May describe baseline protocol commitments. | Cannot be written as Results. |
+| `C4-rubric-decision-coverage` | qualified | May describe design-time decision coverage with limitations. | Cannot substitute for runtime evidence. |
+| `C5-precondition-check` | observed | May describe the 2026-06-05 fail-closed precondition gate. | Cannot describe any SUT verdict or unblocked run. |
+| Seeded-fault effectiveness | speculative | Future-work only. | Cannot be written as Results. |
+
+## Methods-Ready Statements
+
+- The study evaluates relation-level verdict coverage and evidence completeness.
+- The current protocol records baselines as commitments rather than outcomes.
+- Missing real-SUT prerequisites fail closed and keep empirical claims blocked.
+- The fail-closed precondition gate is enforced in code (`tools/validate_experiment_protocol.py:validate_real_sut_preconditions`), not only described in prose.
+- Fixture-level observations are limited to asset plumbing and transformation metrics.
+
+## Single Real-SUT Pilot (scoped)
+
+- One real trained MeshGraphNets cylinder-flow surrogate (read-only `Minimum-MR-SubSet`,
+  PR #103, checkpoint sha256 `cf281f85...b04a9`) was executed on one eval-split source
+  case (frame 0; 1923 nodes, 11070 edges) under the node permutation equivariance MR.
+- The inverse-mapped follow-up output equalled the source output: relative L2 = 0.0
+  (tolerance 1e-6), verdict pass. Raw outputs, manifest, and metric ledger are committed
+  under `research_assets/runs/real-sut-node-permutation-pilot/`.
+- This is pilot evidence for one SUT, one MR, one source case only.
+
+## Statements Not Supported
+
+- A pass/fail rate, violation rate, or model-reliability conclusion (the pilot is a single case).
+- More than one SUT, MR, or source case has been evaluated.
+- The protocol improves accuracy or is superior to any baseline.
+- Seeded-fault detection effectiveness has been measured.
+
+## Next Experiments
+
+1. Extend the node-permutation pilot to multiple source cases and seeds to report a rate.
+2. Record `METBENCH_MGN_DATA_ROOT`, `METBENCH_MGN_REPO`, and `METBENCH_MGN_CHECKPOINT` for the other planned SUTs.
+3. Add the exact command, environment, and seed manifest before any run (now enforced by the manifest contract).
+4. Preserve raw source and follow-up SUT outputs and a relation-level metric ledger (now enforced by the runner).
+5. Update the claim ledger only after the corresponding artifacts exist and the artifact gate verifies them.
+6. Repeat the same evidence bundle for each baseline before making any comparison.

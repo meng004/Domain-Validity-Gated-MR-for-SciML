@@ -1,0 +1,41 @@
+name: validate-research-assets
+
+# Fail-closed gate: every push and pull request must pass the asset validators
+# and the test suites before changes can be trusted in the repository. The
+# checks below need only Python + numpy; the real-SUT runner's torch dependency
+# is exercised offline, while the committed run artifacts (checkpoint, raw
+# outputs, metric ledger) let the artifact gate verify on a clean checkout.
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependencies
+        run: python3 -m pip install --upgrade "numpy>=1.26"
+
+      - name: Unit tests (research assets + executable MR + experiment protocol)
+        run: >-
+          python3 -B -m unittest
+          tests/test_research_assets.py
+          tests/test_executable_mr_assets.py
+          tests/test_experiment_protocol.py
+
+      - name: Unit tests (real-SUT runner contract)
+        run: python3 -B -m unittest tests/test_real_sut_runner_contract.py
+
+      - name: Validate research assets
+        run: python3 -B tools/validate_research_assets.py
+
+      - name: Validate experiment protocol (artifact precondition gate)
+        run: python3 -B tools/validate_experiment_protocol.py

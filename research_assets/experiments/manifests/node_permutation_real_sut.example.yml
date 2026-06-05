@@ -1,0 +1,24 @@
+# Example run manifest for a real-SUT node-permutation metamorphic-relation run.
+#
+# THIS IS A TEMPLATE, NOT A RESULT. Placeholder values below describe the shape
+# of a manifest the runner (tools/run_real_sut_mr.py) consumes. It records no
+# verdict, no metric value, and no SUT output. A real run materializes its own
+# manifest next to its raw outputs (see
+# research_assets/runs/real-sut-node-permutation-pilot/manifest.yml).
+record_type: "example-template"
+
+run_id: "<unique-run-id>"
+sut_id: "<system-under-test identifier>"
+sut_repo: "<path or URL of the SUT source repository, read-only>"
+sut_commit: "<git commit SHA of the SUT repository>"
+checkpoint_path: "<path to the model checkpoint consumed by the run>"
+checkpoint_sha256: "<sha256 of the checkpoint file>"
+dataset_root: "<path to the dataset root used to draw the source case>"
+source_case_path: "<path to the source graph/case artifact the MR transforms>"
+mr_id: "<metamorphic-relation card id, e.g. mgn-node-permutation-equivariance>"
+command: "<exact executable command, runnable in this environment>"
+raw_output_dir: "<directory where source/follow-up/mapped raw outputs are saved>"
+seed: "<integer random seed used to draw the permutation>"
+device: "<cpu or cuda>"
+python_version: "<python interpreter version>"
+framework_version: "<inference framework version, e.g. torch x.y.z>"

@@ -1,0 +1,127 @@
+score_task_id: "mgn-cylinder-flow-mr-empirical-protocol-v0.1"
+study_type: "software-testing"
+research_question: >
+  How can physically grounded metamorphic relations for MeshGraphNets-family cylinder-flow
+  surrogates be evaluated as a software-testing protocol without an oracle and without
+  overstating fixture-level evidence as real SUT evidence?
+
+subject_systems:
+  scope: "MeshGraphNets-family cylinder-flow"
+  current_status: "real SUT execution blocked until dataset, model repository, checkpoint, command, and output artifacts exist"
+  planned_subjects:
+    - name: "Echowve MeshGraphNets cylinder-flow implementation"
+      run_id: "real-sut-echowve-blocked"
+      status: "blocked"
+    - name: "PhysicsNeMo MeshGraphNets-family cylinder-flow implementation"
+      run_id: "real-sut-physicsnemo-blocked"
+      status: "blocked"
+    - name: "Third independent MeshGraphNets-family implementation"
+      run_id: "real-sut-third-implementation-blocked"
+      status: "blocked"
+
+metamorphic_relation_set:
+  included_assets:
+    - "research_assets/mr_cards/node_permutation_equivariance.json"
+    - "research_assets/mr_cards/mirror_y_equivariance.json"
+    - "research_assets/mr_cards/discrete_divergence_boundedness.json"
+  fixture_evidence:
+    - "research_assets/runs/node_permutation_fixture_verdict.json"
+  claim_limit: "Fixture evidence validates asset plumbing only; it is not MeshGraphNets inference."
+
+interventions:
+  - "Apply MR-specific source-to-follow-up transformations under declared preconditions."
+  - "Run SUT inference only after blocked prerequisites are replaced by concrete paths."
+  - "Score verdicts using relation-specific metrics and tolerances recorded with each MR."
+
+metrics:
+  primary: "relation-level verdict coverage and evidence completeness"
+  secondary:
+    - "artifact completeness for dataset, repository, checkpoint, command, and output"
+    - "precondition traceability from MR card to run ledger"
+    - "blocked-run transparency"
+    - "reproducibility bundle completeness"
+
+baselines:
+  - name: "Manual expert MR design"
+    status: "protocol-commitment"
+    claim_limit: "No superiority claim before matched run artifacts exist"
+  - name: "Generic automatic MR generation scope contrast"
+    status: "protocol-commitment"
+    claim_limit: "Scope contrast only until comparable candidate generation artifacts exist"
+  - name: "LLM-generated candidate MRs"
+    status: "protocol-commitment"
+    claim_limit: "No effectiveness claim before matched review and run artifacts exist"
+  - name: "Pure rollout accuracy"
+    status: "protocol-commitment"
+    claim_limit: "Diagnostic baseline only; not a substitute for relation-level verdicts"
+
+inputs_required_for_real_sut_runs:
+  dataset_root_env: "METBENCH_MGN_DATA_ROOT"
+  model_repo_env: "METBENCH_MGN_REPO"
+  checkpoint_env: "METBENCH_MGN_CHECKPOINT"
+  command_record: "exact executable command with arguments and environment"
+  output_artifacts: "raw predictions, transformed predictions, metric logs, and verdict ledger"
+
+run_manifest_contract:
+  required_env:
+    - "METBENCH_MGN_DATA_ROOT"
+    - "METBENCH_MGN_REPO"
+    - "METBENCH_MGN_CHECKPOINT"
+  command_template: "python3 tools/run_real_sut_mr.py --manifest <run-manifest.yml>"
+  seed_capture: "record random seed, deterministic flags, device, Python version, framework version, and git commit"
+  source_case_path: "path to source graph/case artifact used by the MR"
+  follow_up_case_path: "path to transformed follow-up graph/case artifact"
+  raw_output_paths:
+    - "source prediction artifact"
+    - "follow-up prediction artifact"
+    - "restored/mapped follow-up output artifact"
+  metric_ledger_fields:
+    - "run_id"
+    - "sut_id"
+    - "mr_id"
+    - "source_case_id"
+    - "follow_up_case_id"
+    - "metric_name"
+    - "metric_value"
+    - "tolerance"
+    - "verdict"
+    - "evidence_artifact"
+  claim_upgrade_rule: "Upgrade from blocked only when manifest, raw outputs, metric ledger, and claim ledger evidence all exist and validate."
+
+baseline_scoring_contract:
+  comparable_dimensions:
+    - "candidate_mr_count"
+    - "validity_rubric_decision"
+    - "executable_verdict_coverage"
+    - "evidence_completeness"
+    - "review_effort"
+  manual_expert_mr_design: "Compare expert-proposed candidates against the same rubric and executable-asset requirements; this is an elicitation baseline, not the proposed rubric workflow."
+  generic_automatic_mr_generation_scope_contrast: "Record generated candidate count, rejected/deferred/retained decisions, and evidence completeness."
+  llm_generated_candidate_mrs: "Record prompt, model/version, temperature, candidate list, rubric decisions, and review effort."
+  pure_rollout_accuracy: "Record rollout metric artifacts separately; compare diagnostic coverage only after matched SUT outputs exist."
+
+outputs:
+  primary: null
+  planned:
+    - "per-run command manifest"
+    - "raw SUT outputs"
+    - "relation-level metric ledger"
+    - "claim-ledger update with observed or qualified status only when evidence exists"
+
+reproducibility_controls:
+  keep_failed_runs: true
+  preserve_raw_outputs: true
+  record_environment: true
+  record_random_seeds: true
+  fail_closed_on_missing_artifacts: true
+
+stop_condition: >
+  Stop and keep the claim blocked when any required dataset, repository, checkpoint, command,
+  or output artifact is missing.
+
+forbidden_generalizations:
+  - "No real MeshGraphNets SUT inference claim before complete run artifacts exist"
+  - "No empirical pass/fail rate claim before real SUT verdict ledgers exist"
+  - "No model reliability claim before repeated real SUT runs exist"
+  - "No seeded-fault detection claim before seeded-fault artifacts exist"
+  - "No baseline superiority claim before matched run artifacts exist"

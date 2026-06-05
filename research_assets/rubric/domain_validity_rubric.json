@@ -1,0 +1,21 @@
+{
+  "rubric_id": "sciml-domain-validity-rubric-v0.2",
+  "evidence_level": "design-time-rubric",
+  "dimensions": [
+    "physical_basis",
+    "boundary_condition_compatibility",
+    "transformation_preconditions",
+    "output_mapping",
+    "metric_and_tolerance",
+    "failure_interpretability",
+    "sut_runtime_requirements"
+  ],
+  "allowed_decisions": [
+    "retained-design-time",
+    "retained-ood-stress",
+    "deferred",
+    "downgraded-to-diagnostic",
+    "rejected-design-time"
+  ],
+  "claim_limitations": "The rubric records explicit expert judgment and evidence boundaries. It is not an automatic proof of physical validity, does not report MeshGraphNets SUT execution, and does not turn design-time assets into empirical results."
+}

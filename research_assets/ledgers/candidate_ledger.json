@@ -1,0 +1,124 @@
+{
+  "ledger_id": "mgn-cylinder-flow-candidate-ledger",
+  "evidence_level": "design-time-ledger",
+  "claim_limitations": "This ledger records design-time MR candidate decisions only. It does not contain SUT execution, empirical pass/fail outcomes, violation rates, or comparative performance claims.",
+  "entries": [
+    {
+      "candidate_id": "cand-mgn-node-permutation-equivariance",
+      "mr_id": "mgn-node-permutation-equivariance",
+      "title": "Node permutation equivariance",
+      "decision": "retained-design-time",
+      "rubric_decision": "retained-design-time",
+      "decision_basis": "Retained as a representation-level MR because node relabeling should preserve the graph computation when x, pos, y, and face are permuted consistently and outputs are inverse-permuted before comparison.",
+      "rubric_reasons": [
+        "Physical geometry and boundary categories are preserved by reindexing rather than altered.",
+        "The follow-up transformation, inverse output mapping, metric, and tolerance are explicitly specified in the MR card.",
+        "The current evidence is design-time plus fixture-level asset plumbing, not a real SUT verdict."
+      ],
+      "evidence_reference": [
+        {
+          "path": "research_assets/mr_cards/node_permutation_equivariance.json",
+          "fields": ["mr_id", "follow_up_transformation", "metric", "tolerance"]
+        },
+        {
+          "path": "theory/MeshGraphNets圆柱绕流MetBench_MR资产编制与验证说明.md",
+          "local_markers": [
+            "mgn-node-permutation-equivariance",
+            "node_permutation",
+            "permutation_relative_l2_error",
+            "<= 1e-6"
+          ]
+        }
+      ],
+      "claim_limitations": "The retained decision means the MR is structurally specified for future execution. It does not assert that any MeshGraphNets implementation passes or fails the relation."
+    },
+    {
+      "candidate_id": "cand-mgn-mirror-y-equivariance",
+      "mr_id": "mgn-mirror-y-equivariance",
+      "title": "Mirror-y equivariance",
+      "decision": "retained-ood-stress",
+      "rubric_decision": "retained-ood-stress",
+      "decision_basis": "Retained as an OOD-stress relation because y-reflection has a clear geometry/vector mapping only under mirror-compatible domains, boundary labels, and velocity-component conventions.",
+      "rubric_reasons": [
+        "The physical basis is conditional on mirror-compatible geometry and boundary labels.",
+        "The output mapping is explicit for vector velocity fields: u remains unchanged and v changes sign.",
+        "Because these preconditions may move cases outside the nominal training distribution, the relation is retained as OOD stress rather than ordinary design-time evidence."
+      ],
+      "evidence_reference": [
+        {
+          "path": "research_assets/mr_cards/mirror_y_equivariance.json",
+          "fields": [
+            "mr_id",
+            "follow_up_transformation",
+            "boundary_condition_compatibility",
+            "claim_limitations"
+          ]
+        }
+      ],
+      "claim_limitations": "The retained OOD-stress decision does not assert that mirror-y is valid for every cylinder-flow encoding and does not report any MeshGraphNets execution result."
+    },
+    {
+      "candidate_id": "cand-mgn-discrete-divergence-boundedness",
+      "mr_id": "mgn-discrete-divergence-boundedness",
+      "title": "Discrete divergence boundedness",
+      "decision": "deferred",
+      "rubric_decision": "deferred",
+      "decision_basis": "Deferred because the candidate needs a fixed discrete divergence operator, boundary treatment, and calibrated tolerance before it can support retained MR verdicts.",
+      "rubric_reasons": [
+        "The physical basis is continuity or mass conservation for incompressible flow, not an automatic Noether-derived MR.",
+        "The metric and tolerance are not calibrated enough to interpret pass/fail outcomes.",
+        "The candidate can remain a diagnostic direction, but the ledger must not turn it into a retained SUT relation yet."
+      ],
+      "evidence_reference": [
+        {
+          "path": "research_assets/mr_cards/discrete_divergence_boundedness.json",
+          "fields": [
+            "mr_id",
+            "boundary_condition_compatibility",
+            "tolerance",
+            "claim_limitations"
+          ]
+        },
+        {
+          "path": "paper/02_paper_configuration.md",
+          "local_markers": [
+            "Divergence is treated as an incompressible continuity / mass-conservation constraint",
+            "No claim may state that Noether's theorem derives the divergence-free condition"
+          ]
+        }
+      ],
+      "claim_limitations": "The deferred decision keeps divergence/conservation out of retained pass/fail claims until operator, boundary, and tolerance evidence exist."
+    },
+    {
+      "candidate_id": "cand-viscous-time-reversal",
+      "mr_id": "cand-viscous-time-reversal",
+      "title": "Viscous time reversal",
+      "decision": "rejected-design-time",
+      "rubric_decision": "rejected-design-time",
+      "decision_basis": "Rejected as a retained MR for viscous cylinder flow because local physics review records dissipative, non-time-reversal-invariant dynamics in the intended test sense.",
+      "rubric_reasons": [
+        "The physical basis fails for the target viscous cylinder-flow regime.",
+        "The local manuscript configuration explicitly excludes time reversal for viscous cylinder flow.",
+        "The local v2.1 interrogation identifies time reversal as physically invalid here and uses the exclusion as a validity-rubric example."
+      ],
+      "evidence_reference": [
+        {
+          "path": "paper/02_paper_configuration.md",
+          "local_markers": [
+            "Time reversal is explicitly excluded for viscous cylinder flow",
+            "dynamics are dissipative and not time-reversal invariant"
+          ]
+        },
+        {
+          "path": "paper/07_v21_interrogation.md",
+          "local_markers": [
+            "时间反演 block 映射",
+            "粘性破坏时间反演对称",
+            "显式声明排除 time-reversal MR"
+          ]
+        }
+      ],
+      "claim_limitations": "This rejection is a design-time domain-validity decision. It is not an empirical failure result from a real SUT run."
+    }
+  ]
+}

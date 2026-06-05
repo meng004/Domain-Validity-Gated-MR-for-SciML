@@ -1,0 +1,85 @@
+ledger_id: "mgn-cylinder-flow-claim-ledger-v0.1"
+evidence_policy: "fail-closed"
+
+claims:
+  - claim_id: "C1-fixture-asset-path"
+    status: "observed"
+    evidence:
+      - "research_assets/runs/node_permutation_fixture_verdict.json"
+      - "research_assets/fixtures/node_permutation_case.json"
+    wording_allowed: >
+      The current package includes an executable fixture-level node-permutation asset path
+      and records its transformation-metric ledger.
+    wording_forbidden:
+      - "The MeshGraphNets SUT has been evaluated."
+      - "The MR has empirical SUT pass/fail evidence."
+    blocked_reason: null
+
+  - claim_id: "C2-real-sut-verdicts"
+    status: "observed"
+    scope: "one-SUT / one-MR / single-source-case pilot"
+    evidence:
+      - "research_assets/runs/real-sut-node-permutation-pilot/manifest.yml"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/source_output.npy"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/follow_up_output.npy"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/mapped_output.npy"
+    wording_allowed: >
+      As a single-SUT, single-MR pilot, one real trained MeshGraphNets cylinder-flow
+      surrogate (from the read-only Minimum-MR-SubSet repository, checkpoint sha256
+      cf281f85...b04a9) was executed on one eval-split source case under the node
+      permutation equivariance metamorphic relation. The inverse-mapped follow-up output
+      equalled the source output (relative L2 = 0.0, tolerance 1e-6), giving a pass
+      verdict for that one case.
+    wording_forbidden:
+      - "The SUT passes the MR in general."
+      - "A pass/fail rate or violation rate has been measured."
+      - "Model reliability has been established."
+      - "More than one SUT, MR, or source case has been evaluated."
+    blocked_reason: null
+
+  - claim_id: "C3-baseline-comparison"
+    status: "blocked"
+    evidence: []
+    wording_allowed: >
+      Baselines are protocol commitments: Manual expert MR design, Generic automatic MR generation
+      scope contrast, LLM-generated candidate MRs, and Pure rollout accuracy.
+    wording_forbidden:
+      - "The proposed protocol outperforms any baseline."
+      - "Baseline comparison results are available."
+    blocked_reason: "No matched baseline run artifacts, scoring ledgers, or comparable outputs exist."
+
+  - claim_id: "C4-rubric-decision-coverage"
+    status: "qualified"
+    evidence:
+      - "research_assets/rubric/domain_validity_rubric.json"
+      - "research_assets/mr_cards/node_permutation_equivariance.json"
+      - "research_assets/mr_cards/mirror_y_equivariance.json"
+      - "research_assets/mr_cards/discrete_divergence_boundedness.json"
+    wording_allowed: >
+      The asset package contains design-time MR cards and a domain-validity rubric that make
+      evidence boundaries explicit.
+    wording_forbidden:
+      - "The rubric proves physical validity."
+      - "Design-time review is an empirical SUT result."
+    blocked_reason: "Runtime evidence remains separate from design-time rubric coverage."
+
+  - claim_id: "C5-precondition-check"
+    status: "observed"
+    evidence:
+      - "research_assets/experiments/experiment-ledger.yml"
+      - "tools/validate_experiment_protocol.py"
+    wording_allowed: >
+      On 2026-06-05 the required real-SUT environment variables (METBENCH_MGN_DATA_ROOT,
+      METBENCH_MGN_REPO, METBENCH_MGN_CHECKPOINT) were verified unset, and a fail-closed
+      validator gate keeps all real MeshGraphNets SUT runs blocked.
+    wording_forbidden:
+      - "The MeshGraphNets SUT was executed and produced verdicts."
+      - "Real SUT inference is unblocked."
+    blocked_reason: null
+
+speculative_claims:
+  - claim: "Seeded-fault detection effectiveness"
+    status: "speculative"
+    wording_allowed: "May be listed only as a future experiment."
+    blocked_reason: "No seeded-fault subjects, commands, or outputs exist."
