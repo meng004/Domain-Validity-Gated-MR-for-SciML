@@ -106,6 +106,33 @@ claims:
       - "The model is unreliable, or any baseline comparison or accuracy result."
     blocked_reason: null
 
+  - claim_id: "C7-conservation-diagnostic"
+    status: "observed"
+    scope: "one-SUT / one-MR (discrete divergence) / two-eval-frame reference-relative diagnostic"
+    evidence:
+      - "research_assets/runs/conservation-diagnostic-pilot/manifest.yml"
+      - "research_assets/runs/conservation-diagnostic-pilot/raw/conservation_report.json"
+      - "research_assets/runs/conservation-diagnostic-pilot/raw/metric_ledger.json"
+      - "research_assets/runs/conservation-diagnostic-pilot/raw/predicted_next_velocity.npy"
+      - "research_assets/runs/conservation-diagnostic-pilot/raw/reference_next_velocity.npy"
+    wording_allowed: >
+      A P1 discrete divergence operator yields a non-negligible divergence even for the
+      ground-truth field on this coarse mesh (dimensionless reference divergence ~0.037),
+      so an absolute divergence-free tolerance is not calibratable and the absolute mass-
+      conservation relation remains deferred. As a reference-relative diagnostic, the
+      surrogate's predicted next-state discrete divergence stayed within ~0.4-0.8% of the
+      ground-truth field's on two eval frames (all-cell ratio 1.0025 and 1.0044; interior-
+      only ratio over 3183/3612 cells 1.0042 and 1.0075, regression threshold 1.5): pass on
+      both. The interior-only ratio rules out a boundary-imposition artefact, so the
+      surrogate does not degrade mass conservation relative to the data representation on
+      these frames.
+    wording_forbidden:
+      - "The surrogate is divergence-free or conserves mass exactly."
+      - "Absolute mass conservation has been verified."
+      - "A conservation or violation rate has been measured."
+      - "The model is reliable, accurate, or superior to any baseline."
+    blocked_reason: null
+
 speculative_claims:
   - claim: "Seeded-fault detection effectiveness"
     status: "speculative"

@@ -1,0 +1,3 @@
+absolute_relation=deferred-uncalibrated-absolute-tolerance absolute_decision=deferred-uncalibrated-absolute-tolerance
+  frame=0 ratio=1.0025 div_pred=2.0901e+00 div_ref=2.0848e+00 verdict=pass
+  frame=4 ratio=1.0044 div_pred=2.0521e+00 div_ref=2.0431e+00 verdict=pass

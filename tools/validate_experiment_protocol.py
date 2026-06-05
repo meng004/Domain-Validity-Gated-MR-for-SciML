@@ -218,7 +218,12 @@ def verify_manifest_artifacts(root: Path, manifest_path: Path) -> list[dict[str,
                   "metric ledger missing raw_outputs mapping")
         )
         return errors
-    for name in REQUIRED_RAW_OUTPUTS:
+    # A run may declare its own essential-output set (different MR shapes have
+    # different raw outputs); otherwise the default source/follow-up/mapped trio
+    # is required.
+    declared = ledger_data.get("required_raw_outputs")
+    required = declared if isinstance(declared, list) and declared else REQUIRED_RAW_OUTPUTS
+    for name in required:
         if not raw_outputs.get(name):
             errors.append(
                 error("real_sut_preconditions", ledger_path,
