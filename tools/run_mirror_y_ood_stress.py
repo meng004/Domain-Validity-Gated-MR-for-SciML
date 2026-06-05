@@ -196,11 +196,13 @@ def build_mirror_metric_ledger(
         "rubric_downgrade": rubric.DOWNGRADE_OOD_STRESS,
         "precondition_report": precondition_report or {},
         "claim_limitations": (
-            "Pilot evidence: one real SUT, one metamorphic relation (mirror-y), a "
-            "few eval frames. The exact mirror relation is out-of-relation-domain "
-            "for this mesh (measured non-mirror-symmetric geometry); the reported "
-            "violation is an approximate OOD-stress probe relative to its mapping-"
-            "error floor. It is not a violation rate, reliability, or baseline claim."
+            "One real SUT and checkpoint, one metamorphic relation (mirror-y), the "
+            "recorded eval frames of a single trajectory. The exact mirror relation "
+            "is out-of-relation-domain for this mesh (measured non-mirror-symmetric "
+            "geometry); the reported violation is an approximate within-SUT OOD-stress "
+            "measurement relative to its mapping-error floor. Any frame-level rate is a "
+            "bounded within-SUT rate only -- not a geometry-independent or cross-SUT "
+            "violation rate, and not a reliability, accuracy, or baseline claim."
         ),
         "raw_outputs": {name: _record(path) for name, path in raw_output_paths.items()},
         "entries": entries,
