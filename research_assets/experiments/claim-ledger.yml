@@ -16,15 +16,27 @@ claims:
     blocked_reason: null
 
   - claim_id: "C2-real-sut-verdicts"
-    status: "blocked"
-    evidence: []
+    status: "observed"
+    scope: "one-SUT / one-MR / single-source-case pilot"
+    evidence:
+      - "research_assets/runs/real-sut-node-permutation-pilot/manifest.yml"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/source_output.npy"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/follow_up_output.npy"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/mapped_output.npy"
     wording_allowed: >
-      Real MeshGraphNets SUT verdicts are planned but blocked until dataset, repository,
-      checkpoint, command, and output artifacts are recorded.
+      As a single-SUT, single-MR pilot, one real trained MeshGraphNets cylinder-flow
+      surrogate (from the read-only Minimum-MR-SubSet repository, checkpoint sha256
+      cf281f85...b04a9) was executed on one eval-split source case under the node
+      permutation equivariance metamorphic relation. The inverse-mapped follow-up output
+      equalled the source output (relative L2 = 0.0, tolerance 1e-6), giving a pass
+      verdict for that one case.
     wording_forbidden:
-      - "Real MeshGraphNets inference has been run."
-      - "The SUT satisfies or violates the MR."
-    blocked_reason: "Missing METBENCH_MGN_DATA_ROOT, METBENCH_MGN_REPO, METBENCH_MGN_CHECKPOINT, exact command, and raw outputs."
+      - "The SUT passes the MR in general."
+      - "A pass/fail rate or violation rate has been measured."
+      - "Model reliability has been established."
+      - "More than one SUT, MR, or source case has been evaluated."
+    blocked_reason: null
 
   - claim_id: "C3-baseline-comparison"
     status: "blocked"

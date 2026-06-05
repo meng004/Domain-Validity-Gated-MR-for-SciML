@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import os
 import re
 from pathlib import Path
@@ -9,6 +10,26 @@ REAL_SUT_REQUIRED_ENV = [
     "METBENCH_MGN_DATA_ROOT",
     "METBENCH_MGN_REPO",
     "METBENCH_MGN_CHECKPOINT",
+]
+
+
+# Fields a run manifest must record before a real-SUT run can be trusted.
+MANIFEST_REQUIRED_FIELDS = [
+    "run_id",
+    "sut_id",
+    "sut_repo",
+    "sut_commit",
+    "checkpoint_path",
+    "checkpoint_sha256",
+    "dataset_root",
+    "source_case_path",
+    "mr_id",
+    "command",
+    "raw_output_dir",
+    "seed",
+    "device",
+    "python_version",
+    "framework_version",
 ]
 
 
@@ -102,6 +123,109 @@ def yaml_scalar(item: list[str], key: str) -> str | None:
     return None
 
 
+def parse_flat_manifest(text: str) -> dict[str, str]:
+    """Parse a flat ``key: value`` manifest into a dict.
+
+    Comments and blank lines are ignored. Values are stripped of surrounding
+    quotes. Nested structures are not supported on purpose: the run manifest is
+    deliberately flat so it is trivially auditable.
+    """
+    fields: dict[str, str] = {}
+    for raw_line in text.splitlines():
+        line = raw_line.split("#", 1)[0] if raw_line.lstrip().startswith("#") else raw_line
+        match = re.match(r"^([A-Za-z0-9_]+):\s*(.*?)\s*$", line)
+        if match:
+            key, value = match.group(1), match.group(2).strip().strip('"').strip("'")
+            fields[key] = value
+    return fields
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 16), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def validate_run_manifest(path: Path) -> list[dict[str, str]]:
+    """Field-presence contract for a run manifest.
+
+    Every required field must be present and non-empty. Placeholder values are
+    accepted here (the example template uses them); artifact verification is a
+    separate, stronger gate applied only to runs referenced by the ledger.
+    """
+    text, errors = read_text(Path(path), "run_manifest")
+    if errors:
+        return errors
+    fields = parse_flat_manifest(text)
+    for required in MANIFEST_REQUIRED_FIELDS:
+        value = fields.get(required, "")
+        if not value:
+            errors.append(
+                error("run_manifest", Path(path), f"missing manifest field: {required}")
+            )
+    return errors
+
+
+def validate_run_manifest_contract(root: Path) -> list[dict[str, str]]:
+    manifest_dir = root / "research_assets" / "experiments" / "manifests"
+    example = manifest_dir / "node_permutation_real_sut.example.yml"
+    if not example.exists():
+        return [error("run_manifest", example, "missing example run manifest")]
+    errors: list[dict[str, str]] = []
+    for manifest_path in sorted(manifest_dir.glob("*.yml")):
+        errors.extend(validate_run_manifest(manifest_path))
+    return errors
+
+
+def verify_manifest_artifacts(root: Path, manifest_path: Path) -> list[dict[str, str]]:
+    """Artifact gate: a run manifest is only trustworthy when its recorded
+    artifacts actually exist on disk and the checkpoint hashes to the recorded
+    ``checkpoint_sha256``.
+
+    This replaces the earlier prose-only precondition with an on-disk check.
+    """
+    errors = validate_run_manifest(manifest_path)
+    if errors:
+        return errors
+    fields = parse_flat_manifest(manifest_path.read_text(encoding="utf-8"))
+
+    checkpoint = root / fields["checkpoint_path"]
+    if not checkpoint.exists():
+        errors.append(
+            error("real_sut_preconditions", manifest_path,
+                  f"checkpoint_path does not exist: {fields['checkpoint_path']}")
+        )
+    else:
+        actual = sha256_file(checkpoint)
+        if actual != fields["checkpoint_sha256"]:
+            errors.append(
+                error("real_sut_preconditions", manifest_path,
+                      f"checkpoint_sha256 mismatch: manifest={fields['checkpoint_sha256']} "
+                      f"actual={actual}")
+            )
+
+    for field in ("source_case_path", "raw_output_dir"):
+        target = root / fields[field]
+        if not target.exists():
+            errors.append(
+                error("real_sut_preconditions", manifest_path,
+                      f"{field} does not exist: {fields[field]}")
+            )
+
+    metric_ledger = root / fields["raw_output_dir"] / "metric_ledger.json"
+    if not metric_ledger.exists():
+        # Allow the ledger to sit beside the manifest as well.
+        alt = manifest_path.parent / "metric_ledger.json"
+        if not alt.exists():
+            errors.append(
+                error("real_sut_preconditions", manifest_path,
+                      "metric ledger missing: expected metric_ledger.json next to raw outputs")
+            )
+    return errors
+
+
 def validate_protocol_files(root: Path) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
     for relative_path in REQUIRED_FILES.values():
@@ -182,15 +306,12 @@ def validate_experiment_ledger(root: Path) -> list[dict[str, str]]:
     errors.extend(reject_forbidden_empirical_markers(text, "experiment_ledger", path))
     for item_index, item in enumerate(split_run_items(text)):
         run_id = yaml_scalar(item, "run_id")
-        if run_id and run_id.startswith("real-sut-"):
-            if yaml_scalar(item, "status") != "blocked":
-                errors.append(
-                    error(
-                        "experiment_ledger",
-                        path,
-                        f"real SUT run {item_index} status must remain blocked",
-                    )
-                )
+        if not (run_id and run_id.startswith("real-sut-")):
+            continue
+        status = yaml_scalar(item, "status")
+        if status == "blocked":
+            # A blocked real run must record not-run and keep its missing
+            # prerequisite markers so the gap stays explicit.
             if yaml_scalar(item, "sut_execution") != "not-run":
                 errors.append(
                     error(
@@ -216,6 +337,28 @@ def validate_experiment_ledger(root: Path) -> list[dict[str, str]]:
                             f"real SUT run {item_index} missing blocked prerequisite marker: {marker}",
                         )
                     )
+        else:
+            # A non-blocked (observed) real run must point at a run manifest;
+            # the manifest's artifacts are verified by the artifact gate. Without
+            # a manifest the run has no evidence and must remain blocked.
+            if not yaml_scalar(item, "manifest"):
+                errors.append(
+                    error(
+                        "experiment_ledger",
+                        path,
+                        f"real SUT run {item_index} status must remain blocked "
+                        "until it references a verified run manifest",
+                    )
+                )
+            if yaml_scalar(item, "sut_execution") != "run":
+                errors.append(
+                    error(
+                        "experiment_ledger",
+                        path,
+                        f"real SUT run {item_index} observed run must record "
+                        "sut_execution: run",
+                    )
+                )
     return errors
 
 
@@ -245,42 +388,76 @@ def validate_claim_ledger(root: Path) -> list[dict[str, str]]:
 def validate_real_sut_preconditions(
     root: Path, env: dict[str, str] | None = None
 ) -> list[dict[str, str]]:
-    """Fail-closed gate: while any required real-SUT environment variable is
-    absent, every ``real-sut-*`` run must stay ``blocked``/``not-run``.
+    """Fail-closed **artifact** gate for real-SUT runs.
 
-    This executes the "前置条件检查" as code rather than prose. It does not, by
-    itself, authorize upgrading a run; artifact and ledger checks still apply.
+    A ``real-sut-*`` run may only leave ``blocked``/``not-run`` when it carries a
+    ``manifest:`` reference whose recorded artifacts actually exist on disk and
+    whose checkpoint hashes to the recorded ``checkpoint_sha256``. This executes
+    the "前置条件检查" as code: it checks path existence, the SUT commit record,
+    and the checkpoint sha256, rather than merely checking that environment
+    variables are present. A blocked run is always acceptable.
+
+    ``env`` is retained for compatibility and lets callers reason about the
+    originally-planned METBENCH_MGN_* subjects; the artifact gate is stronger
+    than (and subsumes) an env-presence check.
     """
     env = os.environ if env is None else env
     path = root / REQUIRED_FILES["experiment_ledger"]
     text, errors = read_text(path, "real_sut_preconditions")
     if errors:
         return errors
-    missing_env = [name for name in REAL_SUT_REQUIRED_ENV if not env.get(name)]
-    preconditions_met = not missing_env
-    if preconditions_met:
-        return errors
-    missing_label = ", ".join(missing_env)
     for item in split_run_items(text):
         run_id = yaml_scalar(item, "run_id")
         if not run_id or not run_id.startswith("real-sut-"):
             continue
-        if yaml_scalar(item, "status") != "blocked":
+        status = yaml_scalar(item, "status")
+        sut_execution = yaml_scalar(item, "sut_execution")
+        if status == "blocked":
+            # Blocked is always allowed; ledger-marker checks live elsewhere.
+            continue
+
+        manifest_rel = yaml_scalar(item, "manifest")
+        verified = False
+        if manifest_rel:
+            manifest_path = root / manifest_rel
+            if not manifest_path.exists():
+                errors.append(
+                    error(
+                        "real_sut_preconditions",
+                        path,
+                        f"manifest for {run_id} does not exist: {manifest_rel}",
+                    )
+                )
+            else:
+                artifact_errors = verify_manifest_artifacts(root, manifest_path)
+                errors.extend(artifact_errors)
+                verified = not artifact_errors
+
+        if not verified:
             errors.append(
                 error(
                     "real_sut_preconditions",
                     path,
-                    f"real SUT run {run_id} must stay blocked while "
-                    f"required env unset: {missing_label}",
+                    f"real SUT run {run_id} must stay blocked until its run "
+                    "manifest artifacts verify (checkpoint sha256, raw outputs, "
+                    "metric ledger)",
                 )
             )
-        if yaml_scalar(item, "sut_execution") != "not-run":
             errors.append(
                 error(
                     "real_sut_preconditions",
                     path,
-                    f"real SUT run {run_id} must stay not-run while "
-                    f"required env unset: {missing_label}",
+                    f"real SUT run {run_id} must stay not-run until its run "
+                    "manifest artifacts verify",
+                )
+            )
+        elif sut_execution != "run":
+            errors.append(
+                error(
+                    "real_sut_preconditions",
+                    path,
+                    f"real SUT run {run_id} has a verified manifest and must "
+                    "record sut_execution: run",
                 )
             )
     return errors
@@ -298,9 +475,10 @@ def validate_protocol_note(root: Path) -> list[dict[str, str]]:
         "## 4. 指标与判定",
         "## 5. Baseline",
         "## 6. 证据门槛",
-        "## 7. 当前 blocked 项",
+        "## 7. 当前 pilot 结果与 blocked 项",
         "不能写成 Results",
-        "真实 MeshGraphNets SUT execution remains blocked",
+        "三个 METBENCH 计划的真实 SUT execution 仍 blocked",
+        "single-SUT / single-MR / single-case pilot",
     ]
     return require_markers(text, markers, "protocol_note", path)
 
@@ -310,6 +488,7 @@ def validate_repo(root: Path) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
     errors.extend(validate_protocol_files(root))
     errors.extend(validate_score_task(root))
+    errors.extend(validate_run_manifest_contract(root))
     errors.extend(validate_experiment_ledger(root))
     errors.extend(validate_real_sut_preconditions(root))
     errors.extend(validate_claim_ledger(root))

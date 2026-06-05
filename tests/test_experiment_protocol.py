@@ -1,7 +1,60 @@
 from pathlib import Path
+import hashlib
 import importlib.util
 import tempfile
 import unittest
+
+
+def _write_real_run_fixture(root: Path, checkpoint_sha256: str) -> Path:
+    """Materialize a temp real-SUT run (manifest + artifacts) under ``root`` and
+    return the manifest path. ``checkpoint_sha256`` is written verbatim into the
+    manifest so callers can exercise both the matching and mismatching cases."""
+    run_dir = root / "research_assets" / "runs" / "r"
+    (run_dir / "raw").mkdir(parents=True)
+    (run_dir / "sut").mkdir()
+    (run_dir / "sut" / "checkpoint.pt").write_bytes(b"trained-weights")
+    (run_dir / "raw" / "metric_ledger.json").write_text("{}", encoding="utf-8")
+    (run_dir / "case.npz").write_bytes(b"source-case")
+    manifest = run_dir / "manifest.yml"
+    manifest.write_text(
+        "\n".join(
+            [
+                "run_id: real-sut-x",
+                "sut_id: cylinder_flow_meshgraphnet",
+                "sut_repo: /repo",
+                "sut_commit: abc123",
+                "checkpoint_path: research_assets/runs/r/sut/checkpoint.pt",
+                f"checkpoint_sha256: {checkpoint_sha256}",
+                "dataset_root: /data",
+                "source_case_path: research_assets/runs/r/case.npz",
+                "mr_id: mgn-node-permutation-equivariance",
+                "command: python3 tools/run_real_sut_mr.py --manifest manifest.yml",
+                "raw_output_dir: research_assets/runs/r/raw",
+                "seed: 0",
+                "device: cpu",
+                "python_version: 3.11.0",
+                "framework_version: torch 2.12.0",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    ledger = root / "research_assets" / "experiments" / "experiment-ledger.yml"
+    ledger.parent.mkdir(parents=True)
+    ledger.write_text(
+        "\n".join(
+            [
+                "runs:",
+                '  - run_id: "real-sut-x"',
+                '    status: "observed"',
+                '    sut_execution: "run"',
+                '    manifest: "research_assets/runs/r/manifest.yml"',
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return manifest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -128,6 +181,85 @@ class ExperimentProtocolTests(unittest.TestCase):
         self.assertFalse(
             [e for e in errors if e["asset"] == "real_sut_preconditions"], errors
         )
+
+    def test_real_sut_observed_run_requires_matching_checkpoint_sha256(self):
+        validator = load_validator()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            _write_real_run_fixture(root, checkpoint_sha256="0000deadbeef")
+            # Even with all env vars set, a wrong checkpoint hash must be caught:
+            # the gate is an artifact gate, not a prose/env gate.
+            env = {name: "/set" for name in validator.REAL_SUT_REQUIRED_ENV}
+            errors = validator.validate_real_sut_preconditions(root, env=env)
+            messages = " ".join(error["message"] for error in errors)
+            self.assertIn("sha256 mismatch", messages)
+
+    def test_real_sut_observed_run_passes_with_verified_manifest(self):
+        validator = load_validator()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            real_sha = hashlib.sha256(b"trained-weights").hexdigest()
+            _write_real_run_fixture(root, checkpoint_sha256=real_sha)
+            # A verified manifest unblocks the run even with env unset.
+            errors = validator.validate_real_sut_preconditions(root, env={})
+            self.assertEqual(errors, [], errors)
+
+    def test_run_manifest_example_declares_all_required_fields(self):
+        validator = load_validator()
+        errors = validator.validate_repo(ROOT)
+        self.assertFalse([e for e in errors if e["asset"] == "run_manifest"], errors)
+
+    def test_run_manifest_missing_field_fails(self):
+        validator = load_validator()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            manifest = root / "m.yml"
+            # Complete manifest minus checkpoint_sha256.
+            lines = [
+                "run_id: r1",
+                "sut_id: s1",
+                "sut_repo: /repo",
+                "sut_commit: deadbeef",
+                "checkpoint_path: ckpt.pt",
+                "dataset_root: /data",
+                "source_case_path: case.npz",
+                "mr_id: mgn-node-permutation-equivariance",
+                "command: python3 tools/run_real_sut_mr.py --manifest m.yml",
+                "raw_output_dir: raw",
+                "seed: 0",
+                "device: cpu",
+                "python_version: 3.11.0",
+                "framework_version: torch 2.12.0",
+            ]
+            manifest.write_text("\n".join(lines) + "\n", encoding="utf-8")
+            errors = validator.validate_run_manifest(manifest)
+            messages = " ".join(error["message"] for error in errors)
+            self.assertIn("checkpoint_sha256", messages)
+
+    def test_run_manifest_complete_passes(self):
+        validator = load_validator()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            manifest = root / "m.yml"
+            lines = [
+                "run_id: r1",
+                "sut_id: s1",
+                "sut_repo: /repo",
+                "sut_commit: deadbeef",
+                "checkpoint_path: ckpt.pt",
+                "checkpoint_sha256: abc123",
+                "dataset_root: /data",
+                "source_case_path: case.npz",
+                "mr_id: mgn-node-permutation-equivariance",
+                "command: python3 tools/run_real_sut_mr.py --manifest m.yml",
+                "raw_output_dir: raw",
+                "seed: 0",
+                "device: cpu",
+                "python_version: 3.11.0",
+                "framework_version: torch 2.12.0",
+            ]
+            manifest.write_text("\n".join(lines) + "\n", encoding="utf-8")
+            self.assertEqual(validator.validate_run_manifest(manifest), [])
 
     def test_score_task_command_template_has_no_cloud_shell_prefix(self):
         validator = load_validator()

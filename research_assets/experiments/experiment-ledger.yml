@@ -14,9 +14,18 @@ precondition_check:
     - "METBENCH_MGN_REPO"
     - "METBENCH_MGN_CHECKPOINT"
   observed_state: "all three required environment variables were UNSET at check time"
-  consequence: "fail-closed gate keeps every real-sut run blocked with sut_execution not-run"
+  consequence: >
+    The three METBENCH_MGN_*-planned SUTs (Echowve, PhysicsNeMo, third implementation)
+    stay blocked with sut_execution not-run. The gate is now an artifact gate: a real-sut
+    run may only be observed when it references a run manifest whose checkpoint sha256,
+    raw outputs, and metric ledger verify on disk.
+  separate_pilot: >
+    Independently of METBENCH_MGN_*, run real-sut-cylinder-flow-mgn-node-permutation-pilot-001
+    executed against a vendored real MeshGraphNets cylinder-flow checkpoint (sha256
+    cf281f85...b04a9) from the read-only Minimum-MR-SubSet repository (PR #103); its
+    artifacts verify, so the artifact gate admits it as observed pilot evidence.
   enforced_by: "tools/validate_experiment_protocol.py:validate_real_sut_preconditions"
-  evidence_limit: "Environmental observation only; it is not MeshGraphNets inference and yields no SUT verdict."
+  evidence_limit: "The environmental observation itself is not MeshGraphNets inference and yields no SUT verdict; the pilot verdict comes only from the executed run artifacts."
 
 runs:
   - run_id: "fixture-node-permutation-run-001"
@@ -30,6 +39,42 @@ runs:
       primary: null
       allowed_observation: "The fixture asset path and transformation-metric ledger exist."
     claim_limit: "May support asset-plumbing existence only; cannot be written as real SUT Results."
+
+  - run_id: "real-sut-cylinder-flow-mgn-node-permutation-pilot-001"
+    status: "observed"
+    sut_execution: "run"
+    evidence_level: "real-sut-single-mr-pilot"
+    subject: "MeshGraphNets cylinder-flow surrogate (Minimum-MR-SubSet repo, read-only)"
+    sut_repo: "/home/user/Minimum-MR-SubSet"
+    sut_repo_provenance: "meng004/Minimum-MR-SubSet merged PR #103 (cylinder-flow MGN runtime witness)"
+    sut_commit: "8c0b7ef3605fd9452884d701e2a191a2b14a5a35"
+    checkpoint_sha256: "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9"
+    manifest: "research_assets/runs/real-sut-node-permutation-pilot/manifest.yml"
+    mr_card: "research_assets/mr_cards/node_permutation_equivariance.json"
+    metric_ledger: "research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json"
+    raw_output_dir: "research_assets/runs/real-sut-node-permutation-pilot/raw"
+    raw_outputs:
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/source_output.npy"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/follow_up_output.npy"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/mapped_output.npy"
+    stdout_log: "research_assets/runs/real-sut-node-permutation-pilot/raw/stdout.log"
+    stderr_log: "research_assets/runs/real-sut-node-permutation-pilot/raw/stderr.log"
+    command: "python3 -B tools/run_real_sut_mr.py --manifest research_assets/runs/real-sut-node-permutation-pilot/manifest.yml --frame 0"
+    exit_code: 0
+    relation_metric: "permutation_relative_l2_error"
+    relation_metric_value: 0.0
+    tolerance_threshold: 0.000001
+    verdict: "pass"
+    output_summary:
+      primary: null
+      allowed_observation: >
+        One real MeshGraphNets cylinder-flow SUT executed one metamorphic relation
+        (node permutation equivariance) on one source case (eval-split frame 0, 1923
+        nodes, 11070 edges). Inverse-mapped follow-up output equals the source output
+        (relative L2 = 0.0, tolerance 1e-6), verdict pass.
+    claim_limit: >
+      Pilot evidence only: one SUT, one MR, one source case. It does not establish a
+      pass/fail rate, model reliability, baseline superiority, or seeded-fault detection.
 
   - run_id: "real-sut-echowve-blocked"
     status: "blocked"
