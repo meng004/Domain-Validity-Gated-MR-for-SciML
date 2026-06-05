@@ -73,6 +73,21 @@ class ConservationRunnerContractTests(unittest.TestCase):
         out = runner.conservation_probe(predict_next, pos, cells, np.zeros((4, 2)), ref)
         self.assertAlmostEqual(out["ratio"], 1.0, places=10)
 
+    def test_probe_reports_interior_only_ratio_when_node_types_given(self):
+        runner = load_runner()
+        pos, cells = _unit_square()
+        ref = np.stack([2 * pos[:, 0], -3 * pos[:, 1]], axis=-1)
+        node_type = np.array([0, 6, 0, 0])  # node 1 is wall -> cell 0 excluded
+
+        def predict_next(_v):
+            return np.stack([2 * pos[:, 0], -3 * pos[:, 1]], axis=-1)
+
+        out = runner.conservation_probe(predict_next, pos, cells, np.zeros((4, 2)), ref,
+                                        node_type=node_type)
+        self.assertIn("ratio_interior", out)
+        self.assertEqual(out["interior_cell_count"], 1)  # only cell (0,2,3)
+        self.assertAlmostEqual(out["ratio_interior"], 1.0, places=10)
+
     def test_metric_ledger_refuses_without_raw_outputs(self):
         runner = load_runner()
         with tempfile.TemporaryDirectory() as temp_dir:

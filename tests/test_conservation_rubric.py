@@ -50,6 +50,22 @@ class ConservationRubricTests(unittest.TestCase):
         self.assertTrue(np.allclose(div, 2.0))
         self.assertAlmostEqual(float(area.sum()), 1.0, places=10)  # unit square
 
+    def test_interior_cell_mask_excludes_boundary_touching_cells(self):
+        mod = load_mod()
+        pos, cells = _unit_square()  # cells [[0,1,2],[0,2,3]]
+        # node types: 0=NORMAL interior, others boundary. Mark node 1 as wall(6).
+        node_type = np.array([0, 6, 0, 0])
+        mask = mod.interior_cell_mask(cells, node_type, interior_types=(0, 5))
+        # cell 0 touches node 1 (wall) -> excluded; cell 1 (0,2,3) all NORMAL -> kept
+        self.assertTrue(np.array_equal(mask, np.array([False, True])))
+
+    def test_masked_divergence_rms_uses_only_selected_cells(self):
+        mod = load_mod()
+        pos, cells = _unit_square()
+        vel = np.stack([2 * pos[:, 0], -3 * pos[:, 1]], axis=-1)  # div = -1 per cell
+        mask = np.array([False, True])
+        self.assertAlmostEqual(mod.divergence_rms(pos, cells, vel, mask=mask), 1.0, places=10)
+
     def test_conservation_verdict_pass_when_ratio_within_threshold(self):
         mod = load_mod()
         self.assertEqual(

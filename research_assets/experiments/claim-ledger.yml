@@ -120,10 +120,12 @@ claims:
       ground-truth field on this coarse mesh (dimensionless reference divergence ~0.037),
       so an absolute divergence-free tolerance is not calibratable and the absolute mass-
       conservation relation remains deferred. As a reference-relative diagnostic, the
-      surrogate's predicted next-state discrete divergence stayed within ~0.4% of the
-      ground-truth field's on two eval frames (ratio 1.0025 and 1.0044, regression
-      threshold 1.5): pass on both. The surrogate does not degrade mass conservation
-      relative to the data representation on these frames.
+      surrogate's predicted next-state discrete divergence stayed within ~0.4-0.8% of the
+      ground-truth field's on two eval frames (all-cell ratio 1.0025 and 1.0044; interior-
+      only ratio over 3183/3612 cells 1.0042 and 1.0075, regression threshold 1.5): pass on
+      both. The interior-only ratio rules out a boundary-imposition artefact, so the
+      surrogate does not degrade mass conservation relative to the data representation on
+      these frames.
     wording_forbidden:
       - "The surrogate is divergence-free or conserves mass exactly."
       - "Absolute mass conservation has been verified."

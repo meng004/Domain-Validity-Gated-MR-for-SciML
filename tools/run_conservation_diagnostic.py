@@ -47,20 +47,24 @@ def conservation_probe(
     cells: np.ndarray,
     vel_t: np.ndarray,
     vel_t1: np.ndarray,
+    node_type: np.ndarray | None = None,
 ) -> dict[str, object]:
     """Compare the surrogate's predicted next-state divergence to the reference.
 
     ``predict_next`` maps the current velocity field to the predicted next-state
-    field and is the only SUT-dependent piece; the caller injects it.
+    field and is the only SUT-dependent piece; the caller injects it. When
+    ``node_type`` is given, an interior-only ratio (cells touching no prescribed
+    boundary node) is also computed, so the verdict is not driven by the cells
+    where the predicted field copies prescribed boundary values.
     """
-    pred = np.asarray(predict_next(vel_t), dtype=np.float64)
+    pred = np.asarray(predict_next(np.asarray(vel_t, dtype=np.float64)), dtype=np.float64)
     ref = np.asarray(vel_t1, dtype=np.float64)
     div_pred_cells, _ = rubric.cell_divergence(pos, cells, pred)
     div_ref_cells, _ = rubric.cell_divergence(pos, cells, ref)
     pred_rms = rubric.divergence_rms(pos, cells, pred)
     ref_rms = rubric.divergence_rms(pos, cells, ref)
     ratio = pred_rms / ref_rms if ref_rms > 0 else float("inf")
-    return {
+    result = {
         "predicted_next_velocity": pred,
         "reference_next_velocity": ref,
         "cell_divergence_pred": div_pred_cells,
@@ -69,6 +73,15 @@ def conservation_probe(
         "divergence_reference_rms": float(ref_rms),
         "ratio": float(ratio),
     }
+    if node_type is not None:
+        mask = rubric.interior_cell_mask(cells, node_type)
+        ip = rubric.divergence_rms(pos, cells, pred, mask=mask)
+        ir = rubric.divergence_rms(pos, cells, ref, mask=mask)
+        result["divergence_pred_rms_interior"] = float(ip)
+        result["divergence_reference_rms_interior"] = float(ir)
+        result["ratio_interior"] = float(ip / ir) if ir > 0 else float("inf")
+        result["interior_cell_count"] = int(mask.sum())
+    return result
 
 
 # --------------------------------------------------------------------------- #
@@ -201,8 +214,14 @@ def run_from_manifest(manifest_path: Path, *, frames: list[int] | None = None) -
     n_inflow, n_wall = ds.NODE_INFLOW, ds.NODE_WALL
 
     def make_predict_next(frame: int):
-        def predict_next(_v_field):
-            v_t = torch.as_tensor(traj.velocity[frame])
+        def predict_next(v_field):
+            # The model is run on the provided current-state velocity field; the
+            # next-state inflow Dirichlet value (frame+1) and the wall no-slip
+            # value are prescribed boundary conditions, re-imposed exactly as the
+            # SUT rollout pipeline does. These prescribed nodes therefore match
+            # the reference at the boundary; the interior-only ratio isolates the
+            # bulk field the model is free to choose.
+            v_t = torch.as_tensor(np.asarray(v_field, dtype=np.float32))
             nf = torch.cat([vel_norm.normalize(v_t), onehot], dim=-1)
             with torch.no_grad():
                 delta = delta_norm.denormalize(model(nf, edge_feat0, edge_index0))
@@ -231,7 +250,8 @@ def run_from_manifest(manifest_path: Path, *, frames: list[int] | None = None) -
     ref_nondim_values = []
     for idx, frame in enumerate(frames):
         result = conservation_probe(make_predict_next(frame), pos, cells,
-                                    traj.velocity[frame], traj.velocity[frame + 1])
+                                    traj.velocity[frame], traj.velocity[frame + 1],
+                                    node_type=nt)
         suffix = f"_f{frame}"
         arrays = {
             "predicted_next_velocity": result["predicted_next_velocity"],
@@ -258,6 +278,15 @@ def run_from_manifest(manifest_path: Path, *, frames: list[int] | None = None) -
             evidence_artifact=str((raw_dir / f"predicted_next_velocity{suffix}.npy").relative_to(repo_root)))
         entry["divergence_pred_nondim"] = float(result["divergence_pred_rms"] * char_len / max(speed, 1e-12))
         entry["divergence_reference_nondim"] = float(ref_nondim)
+        entry["ratio_interior"] = float(result["ratio_interior"])
+        entry["divergence_pred_rms_interior"] = float(result["divergence_pred_rms_interior"])
+        entry["divergence_reference_rms_interior"] = float(result["divergence_reference_rms_interior"])
+        entry["interior_cell_count"] = int(result["interior_cell_count"])
+        entry["boundary_condition_note"] = (
+            "inflow (Dirichlet, frame+1) and wall (no-slip) nodes are prescribed, "
+            "so the predicted field matches the reference at those nodes; the "
+            "interior-only ratio isolates the bulk field"
+        )
         entries.append(entry)
 
     absolute_decision = rubric.classify_absolute_admissible(

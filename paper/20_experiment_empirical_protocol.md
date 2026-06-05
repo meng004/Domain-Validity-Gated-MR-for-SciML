@@ -110,7 +110,7 @@ Blocked claims 不能写成 Results。它们只能出现在 method/protocol、li
 已完成的 discrete divergence / 质量守恒诊断 pilot（同一 SUT，少量 frame；展示 rubric 的 deferred + 诊断降级）：
 
 - P1 逐单元离散散度算子在这张粗网格上,对**真值场**也给出非零散度（无量纲参考散度 ≈ `0.037`,原始 RMS ≈ `2.08`）,因此 `div ≈ 0` 的绝对容差无法标定——rubric 据此让绝对守恒关系维持 `deferred`,本 pilot 即是该 deferred 决定的证据。
-- 作为参考相对诊断(仅当代理散度超过真值场 50% 时报 regression),代理预测的下一步散度与真值场相差约 0.4%(frame 0/4 比值 `1.0025`、`1.0044`,阈值 1.5),两帧均 `pass`。证据见 `research_assets/runs/conservation-diagnostic-pilot/`。
+- 作为参考相对诊断(仅当代理散度超过真值场 50% 时报 regression),代理预测的下一步散度与真值场相差约 0.4-0.8%(frame 0/4 全单元比值 `1.0025`、`1.0044`;仅内部单元比值 `1.0042`、`1.0075`,排除边界条件 imposition 的影响,阈值 1.5),两帧均 `pass`。证据见 `research_assets/runs/conservation-diagnostic-pilot/`。
 - 限定：一个 SUT、一条 MR、两帧的参考相对诊断;不构成绝对守恒、conservation/violation rate、reliability、accuracy 或 baseline 结论。
 
 当前 blocked 项包括：
@@ -131,7 +131,7 @@ Blocked claims 不能写成 Results。它们只能出现在 method/protocol、li
 
 - **Pilot 1（结构性 MR,正确性 sanity check）：** node permutation 等变性,relative L2 = 0.0（容差 1e-6）,verdict pass。这是消息传递 GNN 的结构性属性,只作为 pipeline 正确性检查,不构成模型能力或精度证据。
 - **Pilot 2（物理 OOD-stress MR,违背结局）：** rubric 先依据实测几何把精确 mirror-y 判为 out-of-relation-domain 并降级为近似 OOD-stress 探针；在该探针下（按 MR card 公式计分）模型的 mirror-y 等变残差达 0.69-0.75 相对 L2（两帧）,约为同空间映射误差地板的 3.6-3.8 倍,判为违背。该 checkpoint 是真实训练收敛的代理（训练 loss 1.62 → 0.022,SUT 仓库 provenance,本文未独立测其精度）。
-- **Pilot 3（物理守恒 MR,deferred + 诊断结局）：** 离散散度（质量守恒）。P1 算子在粗网格上对真值场也给出无量纲散度 ≈ 0.037,绝对 `div ≈ 0` 容差无法标定,故 rubric 让绝对守恒关系维持 deferred；改用参考相对诊断后,代理预测的下一步散度与真值场相差约 0.4%（比值 1.0025/1.0044,阈值 1.5）,两帧 pass。
+- **Pilot 3（物理守恒 MR,deferred + 诊断结局）：** 离散散度（质量守恒）。P1 算子在粗网格上对真值场也给出无量纲散度 ≈ 0.037,绝对 `div ≈ 0` 容差无法标定,故 rubric 让绝对守恒关系维持 deferred；改用参考相对诊断后,代理预测的下一步散度与真值场相差约 0.4-0.8%（全单元比值 1.0025/1.0044,仅内部单元比值 1.0042/1.0075,已排除边界 imposition 影响,阈值 1.5）,两帧 pass。
 
 对比解读:三个结局并存——结构性 MR 通过、物理对称 MR 违背、物理守恒的绝对关系因证据不足而 deferred 但参考相对诊断通过。这与"低训练误差未必意味着模型尊重问题的物理结构,且并非每条物理 MR 都能在给定网格/数据上被干净判定"这一方向一致。方法论意义在于 rubric 是**证据门控**的:它对 mirror-y 用实测几何降级并标注近似性,对散度拒绝一个无法标定的绝对容差而非编造一个,因此每条结论都带有可核验的边界。
 

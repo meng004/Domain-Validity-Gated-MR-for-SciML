@@ -54,13 +54,39 @@ def cell_divergence(
     return dux_dx + duy_dy, 0.5 * np.abs(two_a)
 
 
-def divergence_rms(pos: np.ndarray, cells: np.ndarray, vel: np.ndarray) -> float:
-    """Area-weighted root-mean-square of the per-cell discrete divergence."""
+def divergence_rms(
+    pos: np.ndarray, cells: np.ndarray, vel: np.ndarray, mask: np.ndarray | None = None
+) -> float:
+    """Area-weighted root-mean-square of the per-cell discrete divergence.
+
+    When ``mask`` (a per-cell boolean array) is given, only the selected cells
+    contribute -- e.g. interior cells, to isolate the bulk field from cells that
+    touch prescribed-boundary nodes.
+    """
     div, area = cell_divergence(pos, cells, vel)
+    if mask is not None:
+        mask = np.asarray(mask, dtype=bool)
+        div, area = div[mask], area[mask]
     total = float(area.sum())
     if total <= 0.0:
         return float("nan")
     return float(np.sqrt(np.sum(area * div ** 2) / total))
+
+
+def interior_cell_mask(
+    cells: np.ndarray, node_type: np.ndarray, interior_types: tuple = (0, 5)
+) -> np.ndarray:
+    """Per-cell mask: True when all three nodes are interior (not prescribed).
+
+    For cylinder flow the prescribed-boundary nodes are INFLOW (Dirichlet) and
+    WALL (no-slip); interior cells (NORMAL/OUTFLOW only) carry the bulk field the
+    model is free to choose, so they isolate model behaviour from copied
+    boundary values.
+    """
+    node_type = np.asarray(node_type)
+    cells = np.asarray(cells)
+    in_interior = np.isin(node_type[cells], list(interior_types))  # (C, 3)
+    return in_interior.all(axis=1)
 
 
 def classify_absolute_admissible(

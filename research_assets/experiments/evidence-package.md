@@ -80,8 +80,10 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
   evidence for that deferral.
 - As a reference-relative diagnostic (flag a regression only if the surrogate's divergence
   exceeds the reference field's by > 50%), the surrogate's predicted next-state divergence
-  stayed within ~0.4% of the reference on two eval frames (ratio `1.0025` / `1.0044`):
-  **pass** on both. Artifacts under `research_assets/runs/conservation-diagnostic-pilot/`.
+  stayed within ~0.4-0.8% of the reference on two eval frames (all-cell ratio `1.0025` /
+  `1.0044`; interior-only ratio over 3183/3612 cells `1.0042` / `1.0075`, which rules out a
+  boundary-imposition artefact): **pass** on both. Artifacts under
+  `research_assets/runs/conservation-diagnostic-pilot/`.
 - Evidence-gating takeaway: the rubric refuses an uncalibratable absolute tolerance instead
   of fabricating one, and the calibrated diagnostic shows the surrogate does not degrade
   conservation relative to the data.

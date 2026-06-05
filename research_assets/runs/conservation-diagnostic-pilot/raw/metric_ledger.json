@@ -58,7 +58,12 @@
       "divergence_reference_rms": 2.0847539375878554,
       "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
       "divergence_pred_nondim": 0.0377350933306861,
-      "divergence_reference_nondim": 0.03763921091735467
+      "divergence_reference_nondim": 0.03763921091735467,
+      "ratio_interior": 1.00415752536663,
+      "divergence_pred_rms_interior": 1.6822749923186127,
+      "divergence_reference_rms_interior": 1.675309849123915,
+      "interior_cell_count": 3183,
+      "boundary_condition_note": "inflow (Dirichlet, frame+1) and wall (no-slip) nodes are prescribed, so the predicted field matches the reference at those nodes; the interior-only ratio isolates the bulk field"
     },
     {
       "run_id": "real-sut-conservation-diagnostic-pilot-001",
@@ -80,10 +85,15 @@
       "divergence_reference_rms": 2.043138508341774,
       "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
       "divergence_pred_nondim": 0.03685913803436183,
-      "divergence_reference_nondim": 0.03669904403197494
+      "divergence_reference_nondim": 0.03669904403197494,
+      "ratio_interior": 1.0075129064614574,
+      "divergence_pred_rms_interior": 1.619391118487701,
+      "divergence_reference_rms_interior": 1.607315507426357,
+      "interior_cell_count": 3183,
+      "boundary_condition_note": "inflow (Dirichlet, frame+1) and wall (no-slip) nodes are prescribed, so the predicted field matches the reference at those nodes; the interior-only ratio isolates the bulk field"
     }
   ],
-  "generated_at": "2026-06-05T09:47:18Z",
+  "generated_at": "2026-06-05T10:01:18Z",
   "frames": [
     0,
     4

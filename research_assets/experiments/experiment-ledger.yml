@@ -150,7 +150,10 @@ runs:
     diagnostic_verdict: "pass"
     divergence_ratio_frame0: 1.0025
     divergence_ratio_frame4: 1.0044
+    divergence_ratio_interior_frame0: 1.0042
+    divergence_ratio_interior_frame4: 1.0075
     reference_nondim_divergence_mean: 0.0372
+    boundary_condition_note: "inflow (Dirichlet, frame+1) and wall (no-slip) nodes are prescribed and match the reference; the interior-only ratio over 3183/3612 cells isolates the bulk field"
     output_summary:
       primary: null
       allowed_observation: >
@@ -158,8 +161,10 @@ runs:
         ground-truth field (dimensionless reference divergence ~0.037), so an absolute
         divergence-free tolerance is not calibratable and the absolute relation stays
         deferred. As a reference-relative diagnostic, the surrogate's predicted next-state
-        divergence stays within ~0.4% of the reference field's on two eval frames
-        (ratio 1.0025 and 1.0044, regression threshold 1.5): verdict pass on both.
+        divergence stays within ~0.4-0.8% of the reference field's on two eval frames
+        (all-cell ratio 1.0025 and 1.0044; interior-only ratio 1.0042 and 1.0075,
+        regression threshold 1.5): verdict pass on both. The interior-only ratio rules out
+        a boundary-imposition artefact.
     claim_limit: >
       Pilot diagnostic evidence: one SUT, one MR, two eval frames. The absolute mass-
       conservation relation remains deferred; this is reference-relative only and

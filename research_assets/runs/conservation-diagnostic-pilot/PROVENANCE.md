@@ -37,15 +37,27 @@ predicted next-state discrete divergence to the ground-truth next-state divergen
 on the same mesh, flagging a conservation *regression* only when the ratio exceeds
 `1.5`.
 
-| frame | div_rms (pred) | div_rms (reference) | ratio pred/reference | verdict |
-|---|---|---|---|---|
-| 0 | 2.0901 | 2.0848 | 1.0025 | pass |
-| 4 | 2.0521 | 2.0431 | 1.0044 | pass |
+| frame | div_rms (pred) | div_rms (reference) | ratio (all cells) | ratio (interior only) | verdict |
+|---|---|---|---|---|---|
+| 0 | 2.0901 | 2.0848 | 1.0025 | 1.0042 | pass |
+| 4 | 2.0521 | 2.0431 | 1.0044 | 1.0075 | pass |
 
 The surrogate's predicted field differs from the reference (max abs velocity diff
 ≈ 0.106, so the model genuinely predicts a different field), yet its discrete
-divergence stays within ~0.4% of the reference level: the surrogate does **not**
-degrade mass conservation relative to the data representation.
+divergence stays within ~0.4-0.8% of the reference level: the surrogate does
+**not** degrade mass conservation relative to the data representation.
+
+### Boundary conditions and the interior-only control
+
+The predicted next state re-imposes the SUT rollout pipeline's boundary
+conditions: INFLOW nodes (17) take the prescribed next-state (frame+1) Dirichlet
+velocity and WALL nodes (200) take zero (no-slip). At those 217 prescribed nodes
+the predicted field necessarily matches the reference. To rule out that the
+~1.00 ratio is an artefact of these copied boundary values, the runner also
+reports an **interior-only** ratio computed over the 3183 of 3612 cells whose
+three nodes are all interior (NORMAL/OUTFLOW). The interior-only ratio (1.0042,
+1.0075) is essentially the same as the all-cell ratio, so the agreement is a
+property of the model's bulk field, not of boundary imposition.
 
 ## Honesty boundary
 
