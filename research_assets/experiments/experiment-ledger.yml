@@ -190,30 +190,33 @@ runs:
       - "research_assets/runs/conservation-diagnostic-pilot/raw/cell_divergence_reference.npy"
     stdout_log: "research_assets/runs/conservation-diagnostic-pilot/raw/stdout.log"
     stderr_log: "research_assets/runs/conservation-diagnostic-pilot/raw/stderr.log"
-    command: "python3 -B tools/run_conservation_diagnostic.py --manifest research_assets/runs/conservation-diagnostic-pilot/manifest.yml --frames 0,4"
+    command: "python3 -B tools/run_conservation_diagnostic.py --manifest research_assets/runs/conservation-diagnostic-pilot/manifest.yml --frames 0,1,2,3,4,5,6,7,8"
     exit_code: 0
     relation_metric: "divergence_pred_over_reference_ratio"
     absolute_relation_status: "deferred-uncalibrated-absolute-tolerance"
     diagnostic_verdict: "pass"
-    divergence_ratio_frame0: 1.0025
-    divergence_ratio_frame4: 1.0044
-    divergence_ratio_interior_frame0: 1.0042
-    divergence_ratio_interior_frame4: 1.0075
-    reference_nondim_divergence_mean: 0.0372
+    recorded_frames: "0,1,2,3,4,5,6,7,8"
+    divergence_ratio_allcell_min: 1.0025
+    divergence_ratio_allcell_max: 1.0248
+    divergence_ratio_interior_min: 1.0042
+    divergence_ratio_interior_max: 1.0418
+    reference_nondim_divergence_mean: 0.0368
     boundary_condition_note: "inflow (Dirichlet, frame+1) and wall (no-slip) nodes are prescribed and match the reference; the interior-only ratio over 3183/3612 cells isolates the bulk field"
     output_summary:
       primary: null
       allowed_observation: >
         A P1 discrete divergence operator gives a non-negligible divergence even for the
-        ground-truth field (dimensionless reference divergence ~0.037), so an absolute
-        divergence-free tolerance is not calibratable and the absolute relation stays
-        deferred. As a reference-relative diagnostic, the surrogate's predicted next-state
-        divergence stays within ~0.4-0.8% of the reference field's on two eval frames
-        (all-cell ratio 1.0025 and 1.0044; interior-only ratio 1.0042 and 1.0075,
-        regression threshold 1.5): verdict pass on both. The interior-only ratio rules out
-        a boundary-imposition artefact.
+        ground-truth field (mesh-normalised reference divergence ~0.037; dimensional RMS
+        ~2.0-2.1; a discrete-space mismatch with the solver's own norm, not a solver error),
+        so an absolute divergence-free tolerance is not calibratable and the absolute relation
+        stays deferred. As a reference-relative diagnostic, the surrogate's predicted
+        next-state divergence stays within ~0.2-2.5% of the reference field's on all nine
+        evaluable frames (frames 0-8; all-cell ratio 1.0025-1.0248; interior-only 1.0042-1.0418,
+        regression threshold 1.5): verdict pass on all nine. The interior-only ratio rules out
+        a boundary-imposition artefact, and the pass is consistent with in-distribution
+        accuracy rather than independent conservation evidence.
     claim_limit: >
-      Pilot diagnostic evidence: one SUT, one MR, two eval frames. The absolute mass-
+      Pilot diagnostic evidence: one SUT, one MR, nine eval frames. The absolute mass-
       conservation relation remains deferred; this is reference-relative only and
       establishes no absolute conservation, conservation rate, reliability, accuracy, or
       baseline result.

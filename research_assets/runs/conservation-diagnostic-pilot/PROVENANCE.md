@@ -15,7 +15,7 @@ and **not** an absolute mass-conservation proof.
 ```bash
 python3 -B tools/run_conservation_diagnostic.py \
   --manifest research_assets/runs/conservation-diagnostic-pilot/manifest.yml \
-  --frames 0,4
+  --frames 0,1,2,3,4,5,6,7,8
 ```
 Exit code `0`. Stdout/stderr in `raw/stdout.log`, `raw/stderr.log`.
 
@@ -37,15 +37,26 @@ predicted next-state discrete divergence to the ground-truth next-state divergen
 on the same mesh, flagging a conservation *regression* only when the ratio exceeds
 `1.5`.
 
+All nine evaluable frames (frames 0-8; frame f predicts state f+1):
+
 | frame | div_rms (pred) | div_rms (reference) | ratio (all cells) | ratio (interior only) | verdict |
 |---|---|---|---|---|---|
 | 0 | 2.0901 | 2.0848 | 1.0025 | 1.0042 | pass |
+| 1 | 2.1043 | 2.0791 | 1.0121 | 1.0231 | pass |
+| 2 | 2.0911 | 2.0736 | 1.0085 | 1.0140 | pass |
+| 3 | 2.0820 | 2.0391 | 1.0211 | 1.0391 | pass |
 | 4 | 2.0521 | 2.0431 | 1.0044 | 1.0075 | pass |
+| 5 | 2.0573 | 2.0516 | 1.0028 | 1.0067 | pass |
+| 6 | 2.0634 | 2.0378 | 1.0126 | 1.0207 | pass |
+| 7 | 2.0481 | 1.9985 | 1.0248 | 1.0418 | pass |
+| 8 | 2.0110 | 1.9883 | 1.0114 | 1.0192 | pass |
 
-The surrogate's predicted field differs from the reference (max abs velocity diff
-≈ 0.106, so the model genuinely predicts a different field), yet its discrete
-divergence stays within ~0.4-0.8% of the reference level: the surrogate does
-**not** degrade mass conservation relative to the data representation.
+The surrogate's predicted field differs from the reference (the model genuinely
+predicts a different field), yet its discrete divergence stays within ~0.2-2.5% of
+the reference level on every frame: the surrogate does **not** degrade the discrete
+divergence statistic relative to the reference field. This is consistent with the
+surrogate being accurate on in-distribution frames and is not independent evidence of
+conservation beyond rollout accuracy.
 
 ### Boundary conditions and the interior-only control
 
@@ -55,13 +66,13 @@ velocity and WALL nodes (200) take zero (no-slip). At those 217 prescribed nodes
 the predicted field necessarily matches the reference. To rule out that the
 ~1.00 ratio is an artefact of these copied boundary values, the runner also
 reports an **interior-only** ratio computed over the 3183 of 3612 cells whose
-three nodes are all interior (NORMAL/OUTFLOW). The interior-only ratio (1.0042,
-1.0075) is essentially the same as the all-cell ratio, so the agreement is a
-property of the model's bulk field, not of boundary imposition.
+three nodes are all interior (NORMAL/OUTFLOW). The interior-only ratio
+(1.0042-1.0418 across frames) is essentially the same as the all-cell ratio, so the
+agreement is a property of the model's bulk field, not of boundary imposition.
 
 ## Honesty boundary
 
-Pilot evidence for one SUT, two eval frames. It asserts no absolute mass
+Pilot evidence for one SUT, nine eval frames. It asserts no absolute mass
 conservation (the absolute relation is deferred), no violation/conservation rate,
 no reliability, no accuracy, and no baseline result. It supports only the narrow,
 reference-relative statement that the surrogate's discrete divergence matches the

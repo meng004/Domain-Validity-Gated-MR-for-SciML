@@ -15,7 +15,7 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
 | `research_assets/runs/node_permutation_fixture_verdict.json` | observed | Fixture-level asset plumbing only; SUT execution is `not-run`. |
 | `research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json` (+ raw `.npy` outputs, manifest) | observed | One-SUT/one-MR/one-case pilot: real MeshGraphNets cylinder-flow inference under node permutation; relative L2 = 0.0 (tol 1e-6), verdict pass. No rate or reliability claim. |
 | `research_assets/runs/mirror-y-rate-upgrade/raw/metric_ledger.json` (+ raw `.npy`, manifest; geometry in mirror-y-ood-stress-pilot) | observed | One-SUT/one-MR within-SUT frame rate: exact mirror-y is out-of-relation-domain on the real mesh; the approximate OOD-stress probe failed on 10/10 eval frames (0-9), median rel L2 0.737, ~3-5.5x the same-space mapping-error floor. Bounded within-SUT frame rate only; no reliability/accuracy/baseline/multi-SUT/geometry-independent claim. |
-| `research_assets/runs/conservation-diagnostic-pilot/raw/{metric_ledger,conservation_report}.json` (+ raw `.npy`, manifest) | observed | One-SUT/one-MR/two-frame conservation diagnostic: absolute divergence-free relation stays deferred (reference divergence ~0.037 nondim, uncalibratable); reference-relative diagnostic passes (pred/reference divergence ratio 1.0025/1.0044). No absolute-conservation or rate claim. |
+| `research_assets/runs/conservation-diagnostic-pilot/raw/{metric_ledger,conservation_report}.json` (+ raw `.npy`, manifest) | observed | One-SUT/one-MR/nine-frame conservation diagnostic: absolute divergence-free relation stays deferred (reference divergence ~0.037 mesh-normalised, uncalibratable); reference-relative diagnostic passes on all 9 frames (pred/reference divergence ratio 1.0025-1.0248). Consistent with in-distribution accuracy; no absolute-conservation or rate claim. |
 | `research_assets/experiments/experiment-ledger.yml` (`precondition_check`) | observed | 2026-06-05 environmental check: required `METBENCH_MGN_*` vars unset; the three METBENCH-planned SUTs stay blocked. |
 | `research_assets/rubric/domain_validity_rubric.json` | qualified | Design-time rubric coverage; not a proof and not runtime evidence. |
 | Real Echowve SUT run | blocked | Missing dataset root, model repository, checkpoint, command, and outputs. |
@@ -89,9 +89,9 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
   itself the evidence for that deferral.
 - As a reference-relative diagnostic (conservative threshold: flag a regression only if the
   surrogate's divergence exceeds the reference field's by > 50%), the surrogate's predicted
-  next-state divergence stayed within ~0.4-0.8% of the reference on two eval frames (all-cell
-  ratio `1.0025` / `1.0044`; interior-only ratio over 3183/3612 cells `1.0042` / `1.0075`,
-  which rules out a boundary-imposition artefact): **pass** on both. This pass is consistent
+  next-state divergence stayed within ~0.2-2.5% of the reference on all nine evaluable frames
+  (frames 0-8; all-cell ratio `1.0025`-`1.0248`; interior-only ratio over 3183/3612 cells
+  `1.0042`-`1.0418`, which rules out a boundary-imposition artefact): **pass** on all nine. This pass is consistent
   with the surrogate simply being accurate on in-distribution frames and is not independent
   evidence of conservation beyond rollout accuracy; it calibrates the deferred absolute
   relation. Artifacts under `research_assets/runs/conservation-diagnostic-pilot/`.

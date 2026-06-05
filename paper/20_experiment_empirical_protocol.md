@@ -110,8 +110,8 @@ Blocked claims 不能写成 Results。它们只能出现在 method/protocol、li
 已完成的 discrete divergence / 质量守恒诊断 pilot（同一 SUT，少量 frame；展示 rubric 的 deferred + 诊断降级）：
 
 - P1 逐单元离散散度算子在这张粗网格上,对**真值场**也给出非零散度（无量纲参考散度 ≈ `0.037`,原始 RMS ≈ `2.08`）,因此 `div ≈ 0` 的绝对容差无法标定——rubric 据此让绝对守恒关系维持 `deferred`,本 pilot 即是该 deferred 决定的证据。
-- 作为参考相对诊断(仅当代理散度超过真值场 50% 时报 regression),代理预测的下一步散度与真值场相差约 0.4-0.8%(frame 0/4 全单元比值 `1.0025`、`1.0044`;仅内部单元比值 `1.0042`、`1.0075`,排除边界条件 imposition 的影响,阈值 1.5),两帧均 `pass`。证据见 `research_assets/runs/conservation-diagnostic-pilot/`。
-- 限定：一个 SUT、一条 MR、两帧的参考相对诊断;不构成绝对守恒、conservation/violation rate、reliability、accuracy 或 baseline 结论。
+- 作为参考相对诊断(仅当代理散度超过真值场 50% 时报 regression),代理预测的下一步散度与真值场在全部 9 个可评估帧上相差约 0.2-2.5%(frames 0-8,全单元比值 `1.0025`-`1.0248`;仅内部单元比值 `1.0042`-`1.0418`,排除边界条件 imposition 的影响,阈值 1.5),9 帧均 `pass`。该 pass 与 in-distribution 精度一致,非独立守恒证据。证据见 `research_assets/runs/conservation-diagnostic-pilot/`。
+- 限定：一个 SUT、一条 MR、9 帧的参考相对诊断;不构成绝对守恒、conservation/violation rate、reliability、accuracy 或 baseline 结论。
 
 当前 blocked 项包括：
 
@@ -131,7 +131,7 @@ Blocked claims 不能写成 Results。它们只能出现在 method/protocol、li
 
 - **Pilot 1（结构性 MR,正确性 sanity check）：** node permutation 等变性,relative L2 = 0.0（容差 1e-6）,verdict pass。这是消息传递 GNN 的结构性属性,只作为 pipeline 正确性检查,不构成模型能力或精度证据。
 - **Pilot 2（物理 OOD-stress MR,probe-level 违背）：** rubric 先依据实测几何（圆柱偏心,这是 DFG 基准为触发涡街的刻意设计）把精确 mirror-y 判为 out-of-relation-domain 并降级为近似 OOD-stress 探针。单步 mirror 关系在原理上对瞬时(非对称)涡街帧也成立(N-S 在对称边界下关于 y 反射对称),因此违背来自几何前置条件失败而非涡街本身。在该探针下,该探针在记录的 10 个连续 eval 帧上全部 probe-level 违背(中位相对 L2 0.737,逐帧与地板之比 3.0–5.5 倍),所有帧计入分母、无 inconclusive。这些是同一轨迹的连续帧,**非独立观测**;映射误差地板是启发式下界,违背无法在几何/近似映射/模型非等变之间干净分解。可下的结论仅为"该 SUT 在该网格上,在预声明探针下不满足 mirror-y 等变",非 reliability/accuracy/baseline/多 SUT/精确对称/geometry-independent 结论。
-- **Pilot 3（物理守恒 MR,deferred + 诊断结局）：** 离散散度（连续性/不可压缩约束,非 Noether 守恒律）。P1 算子在粗网格上对真值场也给出非零散度(mesh-normalised ≈ 0.037,量纲 RMS ≈ 2.08)——这是 P1 节点配点范数与求解器自身离散范数的空间不匹配,**非求解器错误**。绝对 `div ≈ 0` 容差无法标定,故 rubric 让绝对守恒关系维持 deferred;改用参考相对诊断后,两帧 pass(全单元比值 1.0025/1.0044,仅内部单元 1.0042/1.0075,保守阈值 1.5)。该 pass 与"模型在 in-distribution 帧上本就准确"一致,**并非独立的守恒证据**(预测接近参考时比值必然近 1),其作用是为 deferred 的绝对关系做标定。
+- **Pilot 3（物理守恒 MR,deferred + 诊断结局）：** 离散散度（连续性/不可压缩约束,非 Noether 守恒律）。P1 算子在粗网格上对真值场也给出非零散度(mesh-normalised ≈ 0.037,量纲 RMS ≈ 2.08)——这是 P1 节点配点范数与求解器自身离散范数的空间不匹配,**非求解器错误**。绝对 `div ≈ 0` 容差无法标定,故 rubric 让绝对守恒关系维持 deferred;改用参考相对诊断后,全部 9 个可评估帧均 pass(全单元比值 1.0025-1.0248,仅内部单元 1.0042-1.0418,保守阈值 1.5)。该 pass 与"模型在 in-distribution 帧上本就准确"一致,**并非独立的守恒证据**(预测接近参考时比值必然近 1),其作用是为 deferred 的绝对关系做标定。
 
 对比解读:三个结局并存——结构性 MR 通过(by construction 的 sanity check)、物理对称 MR 的 probe-level 违背、物理守恒绝对关系因无法标定而 deferred(诊断 pass 仅反映 in-distribution 精度)。方法论意义在于 rubric 是**证据门控**的:它对 mirror-y 用实测几何降级并标注近似性,对散度拒绝一个无法标定的绝对容差而非编造一个,因此每条结论都带有可核验的边界。
 

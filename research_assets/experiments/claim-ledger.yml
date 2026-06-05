@@ -114,7 +114,7 @@ claims:
 
   - claim_id: "C7-conservation-diagnostic"
     status: "observed"
-    scope: "one-SUT / one-MR (discrete divergence) / two-eval-frame reference-relative diagnostic"
+    scope: "one-SUT / one-MR (discrete divergence) / nine-eval-frame reference-relative diagnostic"
     evidence:
       - "research_assets/runs/conservation-diagnostic-pilot/manifest.yml"
       - "research_assets/runs/conservation-diagnostic-pilot/raw/conservation_report.json"
@@ -124,18 +124,19 @@ claims:
     wording_allowed: >
       A P1 discrete divergence operator yields a non-negligible divergence even for the
       ground-truth field on this coarse mesh (mesh-normalised reference divergence ~0.037;
-      dimensional RMS ~2.08), so an absolute divergence-free tolerance is not calibratable
+      dimensional RMS ~2.0-2.1), so an absolute divergence-free tolerance is not calibratable
       and the absolute mass-conservation relation remains deferred. The nonzero reference
       divergence is a discrete-space mismatch (the solver enforces incompressibility in its
       own discrete norm, not the node-collocated P1 norm), not a solver error. As a
       reference-relative diagnostic, the surrogate's predicted next-state discrete divergence
-      stayed within ~0.4-0.8% of the ground-truth field's on two eval frames (all-cell ratio
-      1.0025 and 1.0044; interior-only ratio over 3183/3612 cells 1.0042 and 1.0075,
-      conservative regression threshold 1.5): pass on both. The interior-only ratio rules
-      out a boundary-imposition artefact. This pass is consistent with the surrogate simply
-      being accurate on in-distribution frames (the ratio is bounded near 1.0 whenever the
-      prediction is close to the reference) and is not independent evidence of conservation
-      beyond rollout accuracy; its role is to calibrate the deferred absolute relation.
+      stayed within ~0.2-2.5% of the ground-truth field's on all nine evaluable frames
+      (frames 0-8; all-cell ratio range 1.0025-1.0248, interior-only over 3183/3612 cells
+      1.0042-1.0418, conservative regression threshold 1.5): pass on all nine. The
+      interior-only ratio rules out a boundary-imposition artefact. This pass is consistent
+      with the surrogate simply being accurate on in-distribution frames (the ratio is
+      bounded near 1.0 whenever the prediction is close to the reference) and is not
+      independent evidence of conservation beyond rollout accuracy; its role is to calibrate
+      the deferred absolute relation.
     wording_forbidden:
       - "The surrogate is divergence-free or conserves mass exactly."
       - "Absolute mass conservation has been verified."

@@ -104,17 +104,15 @@ However, SciML MRs cannot be treated as generic input perturbations. In image-ba
 
 Prior work on scientific software testing has shown that MRs can be elicited from monotonicity, conservation-like behavior, scaling relations, simulation assumptions, and domain-specific expectations. Work on simulation validation similarly treats multi-run relations as pseudo-oracles when direct validation data are limited or unavailable. These studies establish that MR thinking is practical for scientific and simulation software, not merely for toy functions.
 
-Other work has explored automated or semi-automated MR identification. For example, research on ocean system models shows that data-driven search can discover candidate transformations in complex physical software. Mandrioli et al. [1] show, for cyber-physical systems, that design assumptions can be encoded as metamorphic relations and combined with genetic programming to generate new test traces. These ideas are important for the present paper because they show that MR sources can include system assumptions, model structure, and physical design knowledge. Our setting differs in that the validity of a candidate relation for a mesh-based neural PDE surrogate depends on geometry, boundary labels, discretization, and numerical tolerance, which is exactly what the domain-validity rubric is designed to screen.
+Other work has explored automated or semi-automated MR identification. For example, Hiremath et al. [10] pursue automated metamorphic test identification for ocean system models, using known physical symmetries to discover candidate transformations in complex simulation software where oracles rarely exist. Mandrioli et al. [1] show, for cyber-physical systems, that design assumptions can be encoded as metamorphic relations and combined with genetic programming to generate new test traces. These ideas are important for the present paper because they show that MR sources can include system assumptions, model structure, and physical design knowledge. Our setting differs in that the validity of a candidate relation for a mesh-based neural PDE surrogate depends on geometry, boundary labels, discretization, and numerical tolerance, which is exactly what the domain-validity rubric is designed to screen.
 
 The gap is that candidate identification is not enough for SciML. A candidate relation must also state when it is supposed to hold. Without a domain-of-validity record, a failed test may mean several different things: the relation was invalid under the chosen boundary conditions, the transformation left the physical regime, the tolerance was not numerically justified, or the SUT violated a relation it should have preserved. This paper makes that distinction explicit.
 
 ### 2.4 Physics-Based MT for Learned Scientific Simulators
 
-Recent candidate studies are directly relevant because they appear to test learned physical-field or fluid-velocity predictors using physics-based metamorphic ideas. The current reference ledger treats these studies as verification leads rather than submission-ready anchors: one physical-field prediction lead remains unverified, and one fluid-velocity prediction lead is only partially verified.
+The most directly related work applies physics-based metamorphic and mutation testing to learned fluid-velocity predictors. Yu et al. [11] study mutation-testing strategies for intelligent models that predict fluid-velocity fields, which is the closest reported use of physics-motivated metamorphic ideas for learned fluid predictors. We therefore explicitly do not claim to be the first to apply physics-based MT to learned fluid or field predictors. (A further physical-field-prediction lead exists but could not be confirmed against a trusted record and is not relied upon here.)
 
-These candidate leads are treated cautiously because the current reference ledger has not upgraded them into submission-ready closest-work evidence. They nevertheless reinforce an important boundary for this paper: the contribution should not be framed as the first use of physics-based MT for learned fluid or field predictors.
-
-Our contribution is narrower and methodological. We shift the emphasis from scenario-level physical consistency checks to a validity-gated workflow. A retained relation is represented as an executable MR asset, not only as an intuitive physical expectation. Each asset records its preconditions, boundary-condition compatibility, output mapping, metric, tolerance rationale, exclusion rule, and verdict interpretation. This allows the test report to distinguish a model inconsistency from a relation that was applied outside its valid domain.
+Our contribution is narrower and methodological, and we state the differentiator positively. Relative to scenario-level physical consistency checks and to prior physics-motivated MT for learned predictors, the unit of contribution here is the *validity gate and its auditable record*, not the idea that physical relations can be tested. Concretely, the workflow (i) screens each candidate with a domain-validity rubric that emits one of four explicit decisions — retained, retained-as-OOD-stress, deferred, rejected — rather than treating every physically motivated transformation as a usable MR; (ii) represents each retained relation as an executable MR card with declared preconditions, boundary-condition compatibility, output mapping, metric, tolerance provenance, exclusion rules, and a verdict taxonomy that includes an out-of-relation-domain category; and (iii) records every decision and every executed verdict, with raw outputs and provenance, in a fail-closed ledger so the screening and the result are both auditable. The practical payoff is that a test report can distinguish a model inconsistency from a relation applied outside its valid domain, and can show *why* a candidate was downgraded, deferred, or rejected — distinctions that an undifferentiated physics-MT suite does not record.
 
 ### 2.5 SciML V&V, Residuals, UQ, and Failure Modes
 
@@ -185,7 +183,7 @@ For cylinder-flow surrogates, candidate MRs may come from six sources.
 
 ### 3.3 Domain-Validity Rubric
 
-Each candidate MR is screened using a rubric with six criteria.
+Each candidate MR is screened using a rubric with seven criteria: six design criteria that judge whether the relation is physically and operationally well-posed, and a seventh executability gate. The seven correspond one-to-one to the dimensions in the released rubric artifact.
 
 **Physical basis.** The relation must cite its source: governing equation, boundary condition, nondimensional law, representation property, numerical assumption, or implementation contract.
 
@@ -199,7 +197,7 @@ Each candidate MR is screened using a rubric with six criteria.
 
 **Failure diagnosability.** The relation should indicate what kind of failure or boundary condition it can help interpret. If every possible violation has the same ambiguous meaning, the relation is weak evidence and should be treated cautiously.
 
-**SUT runtime requirements.** The relation must be executable against the SUT with the available dataset, checkpoint, mesh format, and runtime. A relation that cannot be run on any accessible system under test is deferred rather than retained, and the missing runtime prerequisites are recorded. (This seventh criterion corresponds to the `sut_runtime_requirements` dimension in the released rubric artifact; the six criteria above are the design criteria, and this one is the executability gate.)
+**SUT runtime requirements (executability gate).** The relation must be executable against the SUT with the available dataset, checkpoint, mesh format, and runtime. A relation that is otherwise well-posed but cannot yet be run on any accessible system under test is deferred rather than retained, and the missing runtime prerequisites are recorded. In our case study this gate, together with the metric-and-tolerance criterion, is what keeps the divergence relation deferred until a calibrated operator and an executable configuration exist (Table 1).
 
 The rubric outputs one of four screening decisions:
 
@@ -329,7 +327,7 @@ The primary efficacy parameters are:
 
 - candidate retention rate: the proportion of candidate MRs retained by the rubric;
 - executable MR rate: the proportion of retained MRs that can be executed on each SUT;
-- MR violation rate: the proportion of valid-domain executions that fail the relation;
+- MR violation rate: the proportion of valid-domain executions that fail the relation (computed only over relations retained as physics-preserving MRs; probe-level executions of out-of-relation-domain relations are reported separately and are not counted in this denominator);
 - violation magnitude: the metric distance from the stated tolerance;
 - fault-detection rate: the proportion of seeded faults or mutants detected by at least one retained MR;
 - boundary characterization: the transformation regions or parameter bins associated with elevated violation rates;
@@ -392,10 +390,11 @@ and metric ledgers are committed under `research_assets/runs/`.
   exact mirror-y equivariance as out-of-relation-domain for this mesh: the reflection
   about the channel centerline is non-bijective, the worst reflected-node mismatch is
   about one mesh edge length, and the cylinder center sits ≈7.2 mm below the
-  centerline. (This off-centring is a deliberate DFG-benchmark design choice that
-  breaks geometric symmetry and triggers the Kármán vortex street at Re ≈ 100; the
-  nominal DFG offset is ≈5 mm, and the measured 7.2 mm indicates the released mesh
-  differs slightly from the nominal geometry.) The single-step mirror relation is, in
+  centerline. (This off-centring is a deliberate design choice
+  of the DFG laminar cylinder-flow benchmark [12] that breaks geometric symmetry and
+  triggers the Kármán vortex street at Re ≈ 100; the standard DFG geometry places the
+  cylinder ≈5 mm from the channel centerline, and the measured 7.2 mm indicates the
+  released mesh differs slightly from the nominal geometry.) The single-step mirror relation is, in
   principle, valid even on an instantaneous (asymmetric) shedding frame: because the
   Navier–Stokes equations are y-reflection symmetric under symmetric boundary
   conditions, a perfectly equivariant predictor should map a mirrored input state to
@@ -409,14 +408,16 @@ and metric ledgers are committed under `research_assets/runs/`.
   inconclusive). Because these are consecutive frames of a single rollout they are not
   independent observations, so we treat the trajectory as the unit of analysis and
   report the outcome qualitatively rather than as a calibrated rate. The mapping-error
-  floor (≈13–25% of the field norm) is a heuristic lower bound on what the approximate
-  reflection alone could contribute, not a clean additive decomposition; the per-frame
-  ratio of 3.0–5.5× indicates the violation substantially exceeds that floor, but the
-  residual cannot be cleanly partitioned among geometry, the approximate map, and the
-  model's own non-equivariance. The defensible statement is that mirror-y equivariance
-  does not hold for this SUT on this mesh under the predeclared probe — not a
-  reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent
-  claim.
+  floor (≈13–25% of the field norm) estimates what the approximate reflection alone
+  could contribute, but it is a heuristic, not a clean additive decomposition: the same
+  approximate correspondence also distorts the fields being compared, so the per-frame
+  ratio of 3.0–5.5× should be read as an upper bound on the model's own non-equivariance
+  contribution rather than a lower bound — the residual cannot be cleanly partitioned
+  among the geometric precondition failure, the approximate map, and the model. This is
+  a probe-level outcome, not an MR-level verdict on the SUT's correctness; the
+  defensible statement is that mirror-y equivariance does not hold for this SUT on this
+  mesh under the predeclared probe — not a reliability, accuracy, baseline, multi-SUT,
+  exact-symmetry, or geometry-independent claim.
 - **Continuity MR (deferred absolute relation; reference-relative diagnostic).** A P1
   (piecewise-constant-gradient) discrete-divergence operator yields a non-negligible
   divergence even for the ground-truth field. This is expected and is not a solver
@@ -425,20 +426,22 @@ and metric ledgers are committed under `research_assets/runs/`.
   flux balance), which does not coincide with the node-collocated P1 divergence applied
   here, so extracting node velocities and applying a P1 divergence is nonzero by
   construction of the space mismatch. The mesh-normalised reference divergence
-  (scaled by the median edge length) is ≈0.037; the dimensional RMS is ≈2.08 s⁻¹, and a
-  cylinder-diameter normalisation would give ≈0.2 — all far above any near-machine
+  (scaled by the median edge length) is ≈0.037; the dimensional RMS is ≈2.0–2.1 s⁻¹
+  across frames, and a cylinder-diameter normalisation would give ≈0.2 — all far above
+  any near-machine
   absolute tolerance — so an absolute divergence-free relation is not calibratable and
   stays deferred. As a reference-relative diagnostic, the surrogate's predicted
-  next-state divergence stays within ≈0.4–0.8% of the reference field's on the two eval
-  frames measured (frames 0 and 4; all-cell ratio 1.0025 and 1.0044, interior-only
-  1.0042 and 1.0075), passing the conservative regression threshold of 1.5. We
-  emphasize that this "pass" is consistent with the surrogate simply being accurate on
-  in-distribution frames — the ratio is bounded near 1.0 whenever the prediction is
-  close to the reference — and therefore is not independent evidence of conservation
-  beyond what rollout accuracy already captures. Its role is to calibrate the deferred
-  absolute relation, and the threshold of 1.5 is a deliberately conservative,
-  uncalibrated choice that should be tightened against the across-frame variability of
-  the reference divergence before it carries weight.
+  next-state divergence stays within ≈0.2–2.5% of the reference field's across all nine
+  evaluable frames of the trajectory (frames 0–8; all-cell ratio range 1.0025–1.0248,
+  median 1.011; interior-only range 1.0042–1.0418, median 1.019), passing the
+  conservative regression threshold of 1.5 on every frame. We emphasize that this
+  "pass" is consistent with the surrogate simply being accurate on in-distribution
+  frames — the ratio is bounded near 1.0 whenever the prediction is close to the
+  reference — and therefore is not independent evidence of conservation beyond what
+  rollout accuracy already captures. Its role is to calibrate the deferred absolute
+  relation, and the threshold of 1.5 is a deliberately conservative, uncalibrated choice
+  that should be tightened against the across-frame variability of the reference
+  divergence before it carries weight.
 
 Table 2 summarizes the three executed relations. All numbers are computed from
 committed raw outputs and metric ledgers (Section 5.3) and were recomputed from those
@@ -451,7 +454,7 @@ committed outputs; the specific artifact for the ten-frame mirror-y figure is
 |---|---|---|---|---|
 | Node-permutation equivariance | retained MR | relative L2 vs source (tol 1e-6) | 0.0 (1 case) | MR-level pass — sanity check, expected by construction |
 | Mirror-y equivariance | retained OOD stress (exact relation out-of-relation-domain) | approximate-reflection relative L2 vs same-space mapping-error floor | median 0.737; per-frame 3.0–5.5× floor; 10/10 consecutive frames | probe-level fail (not independent observations) |
-| Discrete divergence boundedness | deferred (absolute); reference-relative diagnostic | predicted/reference RMS divergence ratio (flag > 1.5) | 1.0025, 1.0044 (interior-only 1.0042, 1.0075); n=2 frames | diagnostic pass (consistent with in-distribution accuracy); absolute relation deferred |
+| Discrete divergence boundedness | deferred (absolute); reference-relative diagnostic | predicted/reference RMS divergence ratio (flag > 1.5) | all-cell 1.0025–1.0248 (median 1.011), interior-only 1.0042–1.0418; n=9 frames | diagnostic pass on all 9 (consistent with in-distribution accuracy); absolute relation deferred |
 
 These pilots illustrate the direction of the paper's argument — that an
 evidence-gated rubric will refuse, downgrade, or defer a relation rather than
@@ -568,11 +571,25 @@ in Neural Information Processing Systems (NeurIPS)*, 2021. arXiv:2109.01050.
 [9] T. S. Cohen and M. Welling, "Group Equivariant Convolutional Networks," in *Proc.
 Int. Conf. on Machine Learning (ICML)*, 2016. arXiv:1602.07576.
 
-*Leads pending verification (not cited).* Several closest-work items are tracked in the
-project reference ledger but held at partial or unverified status pending a trusted
-record and corrected metadata, and are therefore not cited above: physics-based
-metamorphic/mutation testing for learned fluid-velocity and physical-field predictors
-(closest-work leads); automated MR identification for ocean-system models; a NOETHER-style
-framework for metamorphic pattern discovery from operator algebras; and residual-guided
-hybrid ML–solver trust-region frameworks. Resolving or removing these leads is the main
-remaining bibliographic step before submission.
+[10] D. J. Hiremath, M. Claus, W. Hasselbring, and W. Rath, "Towards Automated
+Metamorphic Test Identification for Ocean System Models," 2021. arXiv:2103.09782 (also
+IEEE/ACM MET 2021).
+
+[11] K. Yu et al., "Research on Mutation Testing Strategies for Intelligent Models
+Predicting Fluid Velocity Fields," in *Proc. 2025 7th Int. Academic Exchange Conf. on
+Science and Technology Innovation (IAECST)*, pp. 178–182, 2025, doi:
+10.1109/IAECST68792.2025.11415187. (DOI verified to resolve to the publisher record;
+full text not inspected, so we cite it only as a closest-work lead, not for method
+detail.)
+
+[12] M. Schäfer, S. Turek, F. Durst, E. Krause, and R. Rannacher, "Benchmark
+Computations of Laminar Flow Around a Cylinder," in *Flow Simulation with
+High-Performance Computers II*, Notes on Numerical Fluid Mechanics, vol. 52, pp.
+547–566, Vieweg, 1996, doi: 10.1007/978-3-322-89849-4_39.
+
+*Leads pending verification (not cited).* A few items remain at partial or unverified
+status in the project reference ledger and are therefore not cited: a physical-field
+prediction MT lead for which no trusted record was found; a NOETHER-style framework for
+metamorphic pattern discovery from operator algebras (arXiv-only, metadata inconsistent);
+and residual-guided hybrid ML–solver trust-region frameworks. Resolving or removing these
+remaining leads is a small final bibliographic step before submission.

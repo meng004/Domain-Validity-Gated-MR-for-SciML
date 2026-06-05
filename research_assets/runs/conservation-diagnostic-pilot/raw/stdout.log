@@ -1,3 +1,10 @@
 absolute_relation=deferred-uncalibrated-absolute-tolerance absolute_decision=deferred-uncalibrated-absolute-tolerance
   frame=0 ratio=1.0025 div_pred=2.0901e+00 div_ref=2.0848e+00 verdict=pass
+  frame=1 ratio=1.0121 div_pred=2.1043e+00 div_ref=2.0791e+00 verdict=pass
+  frame=2 ratio=1.0085 div_pred=2.0911e+00 div_ref=2.0736e+00 verdict=pass
+  frame=3 ratio=1.0211 div_pred=2.0820e+00 div_ref=2.0391e+00 verdict=pass
   frame=4 ratio=1.0044 div_pred=2.0521e+00 div_ref=2.0431e+00 verdict=pass
+  frame=5 ratio=1.0028 div_pred=2.0573e+00 div_ref=2.0516e+00 verdict=pass
+  frame=6 ratio=1.0126 div_pred=2.0634e+00 div_ref=2.0378e+00 verdict=pass
+  frame=7 ratio=1.0248 div_pred=2.0481e+00 div_ref=1.9985e+00 verdict=pass
+  frame=8 ratio=1.0114 div_pred=2.0110e+00 div_ref=1.9883e+00 verdict=pass
