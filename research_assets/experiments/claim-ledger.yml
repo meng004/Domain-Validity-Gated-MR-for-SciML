@@ -82,26 +82,29 @@ claims:
 
   - claim_id: "C6-mirror-y-ood-stress"
     status: "observed"
-    scope: "one-SUT / one-MR (mirror-y) / two-eval-frame approximate OOD-stress pilot"
+    scope: "one-SUT / one-checkpoint / one-MR (mirror-y) / bounded within-SUT frame-level approximate OOD-stress rate over one eval trajectory's 10 frames"
     evidence:
-      - "research_assets/runs/mirror-y-ood-stress-pilot/manifest.yml"
       - "research_assets/runs/mirror-y-ood-stress-pilot/raw/precondition_report.json"
-      - "research_assets/runs/mirror-y-ood-stress-pilot/raw/metric_ledger.json"
-      - "research_assets/runs/mirror-y-ood-stress-pilot/raw/source_output.npy"
-      - "research_assets/runs/mirror-y-ood-stress-pilot/raw/follow_up_output.npy"
-      - "research_assets/runs/mirror-y-ood-stress-pilot/raw/mapped_output.npy"
+      - "research_assets/runs/mirror-y-rate-upgrade/manifest.yml"
+      - "research_assets/runs/mirror-y-rate-upgrade/raw/metric_ledger.json"
+      - "research_assets/runs/mirror-y-rate-upgrade/raw/source_output.npy"
+      - "research_assets/runs/mirror-y-rate-upgrade/raw/follow_up_output.npy"
+      - "research_assets/runs/mirror-y-rate-upgrade/raw/mapped_output.npy"
     wording_allowed: >
       For the real eval mesh the rubric classified the exact mirror-y equivariance relation
       as out-of-relation-domain from measured geometry (reflection non-bijective; worst
       reflected-node mismatch about one mesh edge length; cylinder off-centre by -7.2 mm)
-      and downgraded it to an approximate OOD-stress probe. Under that probe, scored by the
-      MR card formula, the SUT's mirror-y equivariance residual was 0.691 and 0.749 relative
-      L2 on eval frames 0 and 4, about 3.6-3.8x the same-space mapping-error floor, i.e. a
-      violation well above the approximation noise. This shows a genuinely trained, converged
-      surrogate can still substantially violate a physically-motivated reflection symmetry.
+      and downgraded it to an approximate OOD-stress probe. Within the same SUT and
+      checkpoint, scored by the predeclared MR card formula, the approximate mirror-y
+      OOD-stress probe failed on 10 of 10 recorded eval frames (0-9), each violation
+      standing about 3-5.5x above its same-space mapping-error floor (median relative L2
+      0.737, median ratio 3.96); no frame was skipped, out-of-relation-domain at the probe
+      level, or inconclusive. This shows a genuinely trained, converged surrogate can still
+      substantially violate a physically-motivated reflection symmetry across every recorded
+      eval frame of this trajectory.
     wording_forbidden:
       - "The SUT fails mirror-y in general."
-      - "A mirror-y violation rate has been measured."
+      - "A geometry-independent, cross-SUT, or reliability-implying mirror-y violation rate."
       - "Mirror-y is a valid exact relation for this mesh."
       - "The model is unreliable, or any baseline comparison or accuracy result."
     blocked_reason: null

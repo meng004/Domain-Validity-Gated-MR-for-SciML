@@ -66,6 +66,23 @@ class MirrorYRunnerContractTests(unittest.TestCase):
         out = runner.mirror_y_probe(predict, v, pi)
         self.assertGreater(float(out["violation"]), 0.0)
 
+    def test_aggregate_violation_rate_keeps_all_frames_in_denominator(self):
+        runner = load_runner()
+        entries = [
+            {"frame": 0, "verdict": "fail", "metric_value": 0.69, "violation_over_floor": 3.5},
+            {"frame": 1, "verdict": "fail", "metric_value": 0.73, "violation_over_floor": 3.3},
+            {"frame": 2, "verdict": "inconclusive", "metric_value": 0.10, "violation_over_floor": 1.1},
+        ]
+        agg = runner.aggregate_violation_rate(entries)
+        # denominator includes the inconclusive frame; it is not silently dropped
+        self.assertEqual(agg["n_frames"], 3)
+        self.assertEqual(agg["n_fail"], 2)
+        self.assertEqual(agg["n_inconclusive"], 1)
+        self.assertEqual(agg["n_pass"], 0)
+        self.assertEqual(agg["verdict_counts"]["fail"], 2)
+        self.assertAlmostEqual(agg["violation_rate"], 2.0 / 3.0, places=10)
+        self.assertAlmostEqual(agg["median_violation"], 0.69, places=10)
+
     def test_metric_ledger_refuses_without_raw_outputs(self):
         runner = load_runner()
         with tempfile.TemporaryDirectory() as temp_dir:
