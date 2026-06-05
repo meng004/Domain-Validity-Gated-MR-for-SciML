@@ -67,7 +67,7 @@ run_manifest_contract:
     - "METBENCH_MGN_DATA_ROOT"
     - "METBENCH_MGN_REPO"
     - "METBENCH_MGN_CHECKPOINT"
-  command_template: "rtk python3 tools/run_real_sut_mr.py --manifest <run-manifest.yml>"
+  command_template: "python3 tools/run_real_sut_mr.py --manifest <run-manifest.yml>"
   seed_capture: "record random seed, deterministic flags, device, Python version, framework version, and git commit"
   source_case_path: "path to source graph/case artifact used by the MR"
   follow_up_case_path: "path to transformed follow-up graph/case artifact"

@@ -52,6 +52,20 @@ claims:
       - "Design-time review is an empirical SUT result."
     blocked_reason: "Runtime evidence remains separate from design-time rubric coverage."
 
+  - claim_id: "C5-precondition-check"
+    status: "observed"
+    evidence:
+      - "research_assets/experiments/experiment-ledger.yml"
+      - "tools/validate_experiment_protocol.py"
+    wording_allowed: >
+      On 2026-06-05 the required real-SUT environment variables (METBENCH_MGN_DATA_ROOT,
+      METBENCH_MGN_REPO, METBENCH_MGN_CHECKPOINT) were verified unset, and a fail-closed
+      validator gate keeps all real MeshGraphNets SUT runs blocked.
+    wording_forbidden:
+      - "The MeshGraphNets SUT was executed and produced verdicts."
+      - "Real SUT inference is unblocked."
+    blocked_reason: null
+
 speculative_claims:
   - claim: "Seeded-fault detection effectiveness"
     status: "speculative"

@@ -6,6 +6,18 @@ claim_limitations: >
   It does not record real SUT verdicts, empirical rates, model reliability, seeded-fault
   detection, or baseline comparison results.
 
+precondition_check:
+  checked_on: "2026-06-05"
+  method: "inspected METBENCH_MGN_* environment variables in the execution environment and enforced the validator real-SUT precondition gate"
+  required_env:
+    - "METBENCH_MGN_DATA_ROOT"
+    - "METBENCH_MGN_REPO"
+    - "METBENCH_MGN_CHECKPOINT"
+  observed_state: "all three required environment variables were UNSET at check time"
+  consequence: "fail-closed gate keeps every real-sut run blocked with sut_execution not-run"
+  enforced_by: "tools/validate_experiment_protocol.py:validate_real_sut_preconditions"
+  evidence_limit: "Environmental observation only; it is not MeshGraphNets inference and yields no SUT verdict."
+
 runs:
   - run_id: "fixture-node-permutation-run-001"
     status: "observed-fixture-only"

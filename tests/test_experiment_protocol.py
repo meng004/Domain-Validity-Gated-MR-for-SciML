@@ -94,6 +94,56 @@ class ExperimentProtocolTests(unittest.TestCase):
         errors = validator.validate_repo(ROOT)
         self.assertFalse([e for e in errors if e["asset"] == "score_task"], errors)
 
+    def test_real_sut_preconditions_block_runs_when_env_unset(self):
+        validator = load_validator()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            ledger = root / "research_assets" / "experiments" / "experiment-ledger.yml"
+            ledger.parent.mkdir(parents=True)
+            ledger.write_text(
+                "\n".join(
+                    [
+                        "runs:",
+                        "  - run_id: \"real-sut-echowve-blocked\"",
+                        "    status: \"observed\"",
+                        "    sut_execution: \"run\"",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            errors = validator.validate_real_sut_preconditions(root, env={})
+            messages = " ".join(error["message"] for error in errors)
+            self.assertIn("must stay blocked", messages)
+            self.assertIn("must stay not-run", messages)
+
+    def test_real_sut_preconditions_pass_for_current_blocked_ledger(self):
+        validator = load_validator()
+        errors = validator.validate_real_sut_preconditions(ROOT, env={})
+        self.assertEqual(errors, [], errors)
+
+    def test_real_sut_preconditions_run_inside_validate_repo(self):
+        validator = load_validator()
+        errors = validator.validate_repo(ROOT)
+        self.assertFalse(
+            [e for e in errors if e["asset"] == "real_sut_preconditions"], errors
+        )
+
+    def test_score_task_command_template_has_no_cloud_shell_prefix(self):
+        validator = load_validator()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            task = root / "research_assets" / "experiments" / "score-task.yml"
+            task.parent.mkdir(parents=True)
+            task.write_text(
+                "command_template: \"rtk python3 tools/run_real_sut_mr.py --manifest <run-manifest.yml>\"\n",
+                encoding="utf-8",
+            )
+
+            errors = validator.validate_score_task(root)
+            messages = " ".join(error["message"] for error in errors)
+            self.assertIn("rtk", messages)
+
 
 if __name__ == "__main__":
     unittest.main()

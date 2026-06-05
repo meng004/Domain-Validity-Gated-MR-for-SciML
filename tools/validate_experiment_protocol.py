@@ -1,7 +1,15 @@
 from __future__ import annotations
 
+import os
 import re
 from pathlib import Path
+
+
+REAL_SUT_REQUIRED_ENV = [
+    "METBENCH_MGN_DATA_ROOT",
+    "METBENCH_MGN_REPO",
+    "METBENCH_MGN_CHECKPOINT",
+]
 
 
 REQUIRED_FILES = {
@@ -134,7 +142,21 @@ def validate_score_task(root: Path) -> list[dict[str, str]]:
         "evidence_completeness",
         "review_effort",
     ]
-    return require_markers(text, markers, "score_task", path)
+    errors = require_markers(text, markers, "score_task", path)
+    for line in text.splitlines():
+        match = re.match(r"^\s*command_template:\s*(.+?)\s*$", line)
+        if match:
+            value = match.group(1).strip().strip('"').strip("'")
+            if value.startswith("rtk "):
+                errors.append(
+                    error(
+                        "score_task",
+                        path,
+                        "command_template must not use the cloud-shell-invalid 'rtk' "
+                        f"prefix so the recorded command is runnable: {value}",
+                    )
+                )
+    return errors
 
 
 def validate_experiment_ledger(root: Path) -> list[dict[str, str]]:
@@ -220,6 +242,50 @@ def validate_claim_ledger(root: Path) -> list[dict[str, str]]:
     return errors
 
 
+def validate_real_sut_preconditions(
+    root: Path, env: dict[str, str] | None = None
+) -> list[dict[str, str]]:
+    """Fail-closed gate: while any required real-SUT environment variable is
+    absent, every ``real-sut-*`` run must stay ``blocked``/``not-run``.
+
+    This executes the "前置条件检查" as code rather than prose. It does not, by
+    itself, authorize upgrading a run; artifact and ledger checks still apply.
+    """
+    env = os.environ if env is None else env
+    path = root / REQUIRED_FILES["experiment_ledger"]
+    text, errors = read_text(path, "real_sut_preconditions")
+    if errors:
+        return errors
+    missing_env = [name for name in REAL_SUT_REQUIRED_ENV if not env.get(name)]
+    preconditions_met = not missing_env
+    if preconditions_met:
+        return errors
+    missing_label = ", ".join(missing_env)
+    for item in split_run_items(text):
+        run_id = yaml_scalar(item, "run_id")
+        if not run_id or not run_id.startswith("real-sut-"):
+            continue
+        if yaml_scalar(item, "status") != "blocked":
+            errors.append(
+                error(
+                    "real_sut_preconditions",
+                    path,
+                    f"real SUT run {run_id} must stay blocked while "
+                    f"required env unset: {missing_label}",
+                )
+            )
+        if yaml_scalar(item, "sut_execution") != "not-run":
+            errors.append(
+                error(
+                    "real_sut_preconditions",
+                    path,
+                    f"real SUT run {run_id} must stay not-run while "
+                    f"required env unset: {missing_label}",
+                )
+            )
+    return errors
+
+
 def validate_protocol_note(root: Path) -> list[dict[str, str]]:
     path = root / REQUIRED_FILES["protocol_note"]
     text, errors = read_text(path, "protocol_note")
@@ -245,6 +311,7 @@ def validate_repo(root: Path) -> list[dict[str, str]]:
     errors.extend(validate_protocol_files(root))
     errors.extend(validate_score_task(root))
     errors.extend(validate_experiment_ledger(root))
+    errors.extend(validate_real_sut_preconditions(root))
     errors.extend(validate_claim_ledger(root))
     errors.extend(validate_protocol_note(root))
     return errors

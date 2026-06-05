@@ -11,6 +11,7 @@ It is a protocol and asset-readiness package, not a Results package.
 | Artifact | Status | Evidence Limit |
 |---|---|---|
 | `research_assets/runs/node_permutation_fixture_verdict.json` | observed | Fixture-level asset plumbing only; SUT execution is `not-run`. |
+| `research_assets/experiments/experiment-ledger.yml` (`precondition_check`) | observed | 2026-06-05 environmental check: required `METBENCH_MGN_*` vars unset; no SUT inference. |
 | `research_assets/rubric/domain_validity_rubric.json` | qualified | Design-time rubric coverage; not a proof and not runtime evidence. |
 | Real Echowve SUT run | blocked | Missing dataset root, model repository, checkpoint, command, and outputs. |
 | Real PhysicsNeMo SUT run | blocked | Missing dataset root, model repository, checkpoint, command, and outputs. |
@@ -25,6 +26,7 @@ It is a protocol and asset-readiness package, not a Results package.
 | `C2-real-sut-verdicts` | blocked | May describe planned evidence gate. | Cannot be written as Results. |
 | `C3-baseline-comparison` | blocked | May describe baseline protocol commitments. | Cannot be written as Results. |
 | `C4-rubric-decision-coverage` | qualified | May describe design-time decision coverage with limitations. | Cannot substitute for runtime evidence. |
+| `C5-precondition-check` | observed | May describe the 2026-06-05 fail-closed precondition gate. | Cannot describe any SUT verdict or unblocked run. |
 | Seeded-fault effectiveness | speculative | Future-work only. | Cannot be written as Results. |
 
 ## Methods-Ready Statements
@@ -32,6 +34,7 @@ It is a protocol and asset-readiness package, not a Results package.
 - The study evaluates relation-level verdict coverage and evidence completeness.
 - The current protocol records baselines as commitments rather than outcomes.
 - Missing real-SUT prerequisites fail closed and keep empirical claims blocked.
+- The fail-closed precondition gate is enforced in code (`tools/validate_experiment_protocol.py:validate_real_sut_preconditions`), not only described in prose.
 - Fixture-level observations are limited to asset plumbing and transformation metrics.
 
 ## Statements Not Supported

@@ -447,3 +447,49 @@ Report honestly:
 - what can be written as protocol/method;
 - what cannot be written as Results;
 - what real artifacts are needed before running SUT experiments.
+
+## Follow-up Increment (2026-06-05): Executable Precondition Gate
+
+**Goal:** Turn the "前置条件检查" from prose into a fail-closed code gate and remove a
+cloud-shell-invalid command prefix from the recorded run-manifest contract.
+
+- [x] **Step 1: Write failing tests (RED)** in `tests/test_experiment_protocol.py`:
+  - `test_real_sut_preconditions_block_runs_when_env_unset` — a `real-sut-*` run marked
+    `observed`/`run` while env is unset must error.
+  - `test_real_sut_preconditions_pass_for_current_blocked_ledger` — the shipped ledger
+    must pass with env unset.
+  - `test_real_sut_preconditions_run_inside_validate_repo` — the gate runs in `validate_repo`.
+  - `test_score_task_command_template_has_no_cloud_shell_prefix` — `command_template`
+    must not start with the `rtk ` prefix.
+
+  Observed RED:
+
+  ```text
+  python3 -B -m unittest tests/test_experiment_protocol.py
+  FAILED (failures=1, errors=2)
+  AttributeError: ... no attribute 'validate_real_sut_preconditions'  (x2)
+  AssertionError: 'rtk' not found in '...'
+  ```
+
+- [x] **Step 2: Implement (GREEN)**
+  - Added `REAL_SUT_REQUIRED_ENV` and `validate_real_sut_preconditions(root, env)` to
+    `tools/validate_experiment_protocol.py`; wired it into `validate_repo`.
+  - Added a `command_template` `rtk `-prefix rejection inside `validate_score_task`.
+  - Dropped the `rtk ` prefix in `research_assets/experiments/score-task.yml` and
+    `paper/20_experiment_empirical_protocol.md`.
+  - Recorded the 2026-06-05 environmental check (all `METBENCH_MGN_*` UNSET) in
+    `experiment-ledger.yml:precondition_check`, claim `C5-precondition-check` (observed),
+    and the evidence package.
+
+  Observed GREEN:
+
+  ```text
+  python3 -B -m unittest tests/test_experiment_protocol.py
+  Ran 12 tests
+  OK
+  python3 -B tools/validate_experiment_protocol.py
+  exit 0
+  ```
+
+**Evidence boundary:** the precondition record is an environmental observation only; it
+asserts no SUT verdict, rate, accuracy, or baseline result. Real SUT execution stays blocked.

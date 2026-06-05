@@ -50,10 +50,12 @@ Secondary metrics:
 
 判定规则采用 fail-closed policy：任何真实 SUT claim 缺少 dataset、repo、checkpoint、command 或 output artifact 时，claim 维持 blocked。Fixture verdict 只能支持 asset path observed，不能外推为 SUT behavior。
 
+该 fail-closed 前置条件检查由代码强制执行，而非仅停留在文字层面：`tools/validate_experiment_protocol.py` 中的 `validate_real_sut_preconditions` 在 `METBENCH_MGN_DATA_ROOT`、`METBENCH_MGN_REPO`、`METBENCH_MGN_CHECKPOINT` 任一缺失时，要求所有 `real-sut-*` run 维持 `blocked` 且 `sut_execution: not-run`。
+
 真实 SUT 的最小 run manifest 必须包含：
 
 - required env：`METBENCH_MGN_DATA_ROOT`、`METBENCH_MGN_REPO`、`METBENCH_MGN_CHECKPOINT`；
-- command template：`rtk python3 tools/run_real_sut_mr.py --manifest <run-manifest.yml>`；
+- command template：`python3 tools/run_real_sut_mr.py --manifest <run-manifest.yml>`；
 - seed/env capture：随机种子、deterministic flags、device、Python/framework 版本、git commit；
 - source_case_path 与 follow_up_case_path；
 - raw output paths：source prediction、follow-up prediction、restored/mapped follow-up output；
@@ -95,5 +97,7 @@ Blocked claims 不能写成 Results。它们只能出现在 method/protocol、li
 - Third implementation SUT verdicts: missing `METBENCH_MGN_DATA_ROOT`, `METBENCH_MGN_REPO`, `METBENCH_MGN_CHECKPOINT`, exact command, and raw outputs.
 - Baseline comparison: missing matched baseline artifacts, scoring ledgers, and comparable outputs.
 - Seeded-fault effectiveness: missing seeded-fault subjects, commands, and outputs.
+
+前置条件检查记录（可写入 Method/Protocol，不可写入 Results）：2026-06-05 检查 `METBENCH_MGN_DATA_ROOT`、`METBENCH_MGN_REPO`、`METBENCH_MGN_CHECKPOINT` 均为 UNSET，因此上述真实 SUT run 全部维持 blocked。该记录是环境观测，不构成任何 SUT 推理或 verdict 证据，详见 `research_assets/experiments/experiment-ledger.yml` 的 `precondition_check` 与 claim ledger `C5-precondition-check`。
 
 这些 blocked claims 不能写成 Results；只能作为实验协议、证据门槛和后续实验计划来呈现。
