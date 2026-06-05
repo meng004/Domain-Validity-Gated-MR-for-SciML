@@ -110,7 +110,7 @@ The gap is that candidate identification is not enough for SciML. A candidate re
 
 ### 2.4 Physics-Based MT for Learned Scientific Simulators
 
-The most directly related work applies physics-based metamorphic and mutation testing to learned fluid-velocity predictors. Yu et al. [11] study mutation-testing strategies for intelligent models that predict fluid-velocity fields, which is the closest reported use of physics-motivated metamorphic ideas for learned fluid predictors. We therefore explicitly do not claim to be the first to apply physics-based MT to learned fluid or field predictors. (A further physical-field-prediction lead exists but could not be confirmed against a trusted record and is not relied upon here.)
+The most directly related work applies physics-based metamorphic and mutation testing to learned fluid-velocity predictors. Yu et al. [11] study mutation-testing strategies for intelligent models that predict fluid-velocity fields, which is the closest reported use of physics-motivated metamorphic ideas for learned fluid predictors (we cite it as a closest-work lead established from its publisher record; we did not inspect its full text and make no claim about its specific method). We therefore explicitly do not claim to be the first to apply physics-based MT to learned fluid or field predictors. (A further physical-field-prediction lead exists but could not be confirmed against a trusted record and is not relied upon here.)
 
 Our contribution is narrower and methodological, and we state the differentiator positively. Relative to scenario-level physical consistency checks and to prior physics-motivated MT for learned predictors, the unit of contribution here is the *validity gate and its auditable record*, not the idea that physical relations can be tested. Concretely, the workflow (i) screens each candidate with a domain-validity rubric that emits one of four explicit decisions — retained, retained-as-OOD-stress, deferred, rejected — rather than treating every physically motivated transformation as a usable MR; (ii) represents each retained relation as an executable MR card with declared preconditions, boundary-condition compatibility, output mapping, metric, tolerance provenance, exclusion rules, and a verdict taxonomy that includes an out-of-relation-domain category; and (iii) records every decision and every executed verdict, with raw outputs and provenance, in a fail-closed ledger so the screening and the result are both auditable. The practical payoff is that a test report can distinguish a model inconsistency from a relation applied outside its valid domain, and can show *why* a candidate was downgraded, deferred, or rejected — distinctions that an undifferentiated physics-MT suite does not record.
 
@@ -268,6 +268,12 @@ We further distinguish **MR-level** verdicts from **probe-level** verdicts, beca
 We organize retained MRs into a hierarchy inspired by scientific-computing MR classification: physical-model relations, computational-model relations, and code-model relations. For learned mesh surrogates, the computational-model level includes graph representation and message-passing discretization assumptions. The intent is a predeclared protocol in which representation-level MRs point to graph-encoding issues, physical-model MRs to continuity, symmetry, or similarity violations, and code-model MRs to determinism or rollout issues. We present this only as a design sketch: it is a localization *protocol*, not a validated localization model, and it can be validated only with seeded faults or mutants of known layer, which are out of scope for the present single-SUT study and are left to future work.
 
 ## 4. Empirical Design
+
+Sections 4.1–4.5 describe the full planned study; the realized evidence is the
+single-SUT case study reported in Section 5. We keep the planned design here because
+it fixes the subject systems, MR classes, comparators, metrics, and analysis against
+which the realized pilot — and the still-blocked cross-SUT work — should be read; the
+future-tense passages below are commitments, not reported results.
 
 ### 4.1 Subject Systems
 
@@ -455,6 +461,8 @@ committed outputs; the specific artifact for the ten-frame mirror-y figure is
 | Node-permutation equivariance | retained MR | relative L2 vs source (tol 1e-6) | 0.0 (1 case) | MR-level pass — sanity check, expected by construction |
 | Mirror-y equivariance | retained OOD stress (exact relation out-of-relation-domain) | approximate-reflection relative L2 vs same-space mapping-error floor | median 0.737; per-frame 3.0–5.5× floor; 10/10 consecutive frames | probe-level fail (not independent observations) |
 | Discrete divergence boundedness | deferred (absolute); reference-relative diagnostic | predicted/reference RMS divergence ratio (flag > 1.5) | all-cell 1.0025–1.0248 (median 1.011), interior-only 1.0042–1.0418; n=9 frames | diagnostic pass on all 9 (consistent with in-distribution accuracy); absolute relation deferred |
+
+*Notes.* "MR-level" verdicts apply to relations retained as physics-preserving MRs; "probe-level" verdicts apply to an approximate stress probe that the rubric retained after classifying the exact relation as out-of-relation-domain (§3.5). For mirror-y, the same-space mapping-error floor against which the violation is compared is ≈13–25% of the field norm, and the 3.0–5.5× ratio is an upper bound on the model's own non-equivariance contribution (§5.1). The ten mirror-y frames are consecutive frames of one trajectory (not independent); the nine divergence frames likewise come from one trajectory.
 
 These pilots illustrate the direction of the paper's argument — that an
 evidence-gated rubric will refuse, downgrade, or defer a relation rather than
