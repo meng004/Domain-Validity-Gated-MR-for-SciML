@@ -1,0 +1,19 @@
+{
+  "dataset": "cylinder-flow-mgn-deepmind",
+  "benchmark_equivalence_claim": true,
+  "split": "train",
+  "source": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow/train.tfrecord (Range bytes for trajectory 5, frames 100-250; sustained vortex shedding)",
+  "train_trajectory_index": 5,
+  "train_frame_window": [
+    100,
+    250
+  ],
+  "meta_json": "data/raw/cylinder_flow_deepmind/meta.json",
+  "local_npz": "data/raw/cylinder_flow_deepmind/cylinder_flow_train.npz",
+  "npz_sha256": "2b36285e73e5b7c670b733397759c1acf7957c340fe1a38ad63a4c733be7f493",
+  "num_nodes": 1804,
+  "num_cells": 3374,
+  "num_steps": 150,
+  "validation_split": "test",
+  "validation_npz": "data/raw/cylinder_flow_deepmind/cylinder_flow_eval.npz"
+}
