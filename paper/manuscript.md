@@ -32,7 +32,7 @@ Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly
 
 ### Conclusion
 
-The evidence supports a validity-aware bridge from candidate MR ideas to auditable SciML test assets. The main empirical lesson is not that every physical intuition becomes a clean MR, or that every MR exposes a general fault. Rather, the scoped pilots show that a rubric-gated workflow can produce relation-level outcomes while preserving the evidence boundary for each claim.
+The evidence supports a validity-aware bridge from candidate MR ideas to auditable SciML test assets. The main empirical lesson is not that every physical intuition becomes a clean MR, or that every MR exposes a general fault. Rather, the scoped pilots show that a rubric-gated workflow can produce relation-level outcomes while preserving the evidence boundary for each claim. We frame this as a domain-admissibility-gated, relation-indexed approach to SciML OOD validation: a relation is admitted only when its tolerance dominates the relevant numerical error floor, and its verdict is read in a space that separates a model-level violation from an out-of-domain application.
 
 ## Keywords
 
@@ -51,6 +51,8 @@ The difficult part is deciding which candidate relations are valid and executabl
 Prior studies show that relation-based and residual-based evidence is useful when direct oracles are limited in scientific software, simulation testing, design-assumption MRs, and SciML reliability. Recent candidate leads also suggest that physics-based MRs are being explored for learned physical-field or fluid-velocity predictors, but the currently verified record is not strong enough to support a first-or-only novelty claim. The remaining problem addressed here is therefore narrower: how candidate MRs are screened for domain validity, turned into executable test assets, and reported through relation-level verdicts that distinguish SUT inconsistency from out-of-relation-domain cases and numerical tolerance effects.
 
 This paper treats MR identification for SciML as a validity-gated testing problem. Physical knowledge, expert reasoning, LLM-assisted candidate lists, and NOETHER-style pattern organization can all suggest candidate relations, but a candidate relation is not yet an executable MR. It must first state the physical or software basis of the relation, the transformation preconditions, boundary-condition compatibility, output mapping, metric, tolerance rationale, exclusion rule, and verdict interpretation. Only retained relations are converted into executable MR assets.
+
+Two ideas organize this treatment. First, a candidate relation is *admissible* only when, in addition to a physical or software basis and satisfied transformation preconditions, it is numerically decidable: its verdict tolerance must dominate the intrinsic error floor of the operator that measures it — machine precision for an exact representation relation, the interpolation or mapping floor for an approximate geometric relation, or the discretization floor of a discrete operator for a continuity relation. Second, a relation-level verdict is read in two dimensions — how far the measured quantity violates the relation, and how far the transformed case lies outside the relation's validity domain — so that a model-level inconsistency is not confused with a relation applied outside its domain. We refer to this as a domain-admissibility-gated, relation-indexed approach to SciML OOD validation. It is an organizing framework, not a new model and not a claim of superiority over uncertainty quantification.
 
 The case study is scoped to MeshGraphNets-family cylinder-flow surrogates. This is an intentionally narrow empirical setting rather than the paper's main conceptual contribution. It allows us to examine transformations over meshes, geometry, velocity fields, nondimensional quantities, and rollout behavior while keeping the SUT family concrete enough for reproducible testing. Full cross-SUT evaluation remains blocked. The current case study reports only one trained SUT and checkpoint, so we do not claim external validity across all neural fluid surrogates.
 
@@ -128,11 +130,13 @@ Hybrid ML-solver frameworks provide another relevant line of work. Some systems 
 
 Our study pursues a complementary direction. Before deployment, physically derived transformations are used to estimate where relation violations occur and what regimes, boundary conditions, or numerical assumptions are associated with them. The result is not a runtime switching policy by itself, but an evidence structure that can support later decisions about when a learned surrogate should be trusted.
 
+The distinction from residual- and uncertainty-based trust estimation is deliberate. Uncertainty quantification, conformal prediction, and residual-threshold trust regions locate unreliable behavior in feature, residual, or error-estimate space, and they do so passively from observed inputs. The present method instead acts in relation space: it applies a physically derived, controlled transformation and reports which necessary relation breaks under it, indexed by that transformation. The intended product is therefore the evidence structure needed for a relation-indexed applicability map — a statement of the form "under this controlled transformation, this relation no longer holds" — rather than a scalar field of high residual, and the two-dimensional verdict separates a model-level violation from an out-of-domain application in a way a residual magnitude alone cannot. We do not claim a completed applicability map in this paper; the mirror-y result reported below is one bounded within-SUT example of the evidence such a map would aggregate.
+
 ### 2.7 What Is New and What Is Not New
 
 The paper does not claim that metamorphic testing, MR identification, scientific-software MT, residual diagnostics, uncertainty quantification, LLM candidate generation, or NOETHER-style candidate organization is new. These are established or emerging sources of testing ideas. The paper's narrower claim is that SciML MR identification should be treated as a domain-validity problem: a candidate relation becomes useful only after its physical basis, transformation preconditions, output mapping, tolerance, exclusion rule, executable artifact, and relation-level verdict are recorded.
 
-What is new here is the evidence-gated conversion from candidate relation to executable SciML MR asset. The contribution is not a stronger neural simulator and not an automatic MR generator. It is a workflow that makes the validity boundary inspectable, so that a candidate can be retained, rejected, downgraded to OOD-stress, or deferred instead of being silently treated as a valid oracle.
+What is new here is the evidence-gated conversion from candidate relation to executable SciML MR asset. The contribution is not a stronger neural simulator and not an automatic MR generator. It is a workflow that makes the validity boundary inspectable, so that a candidate can be retained, rejected, downgraded to OOD-stress, or deferred instead of being silently treated as a valid oracle. Structurally, the novelty is two organizing devices rather than a checklist of MR fields: an admissibility gate that ties a relation's tolerance to the numerical error floor of its own measurement, and a two-dimensional relation-level verdict that separates a model violation from an out-of-domain application. Both are means to make the validity boundary inspectable, not claims of empirical superiority over existing diagnostics.
 
 ## 3. Method
 
@@ -166,6 +170,8 @@ For cylinder-flow surrogates, candidate MRs may come from six sources.
 
 ### 3.3 Domain-Validity Rubric
 
+We treat screening as deciding a single admissibility predicate. A candidate relation is an *admissible MR* when four conditions hold together: (i) it has a physical or software basis; (ii) its transformation preconditions are satisfied; (iii) its boundary conditions and output mapping remain compatible after the transformation; and (iv) it is numerically decidable, meaning the verdict tolerance dominates the intrinsic error floor of the operator that measures the relation. Conditions (i)-(iii) establish that the relation is meaningful for the transformed case; condition (iv) establishes that a violation can be told apart from numerical noise. None of the four is optional and none is merely documentary: each is a gate that can reject or defer a candidate, and provenance recording is the mechanism that makes each gate auditable, not a substitute for it. The six rubric criteria below are the recorded, auditable form of these four conditions.
+
 Each candidate MR is screened using a rubric with six criteria.
 
 **Physical basis.** The relation must cite its source: governing equation, boundary condition, nondimensional law, representation property, numerical assumption, or implementation contract.
@@ -176,7 +182,7 @@ Each candidate MR is screened using a rubric with six criteria.
 
 **Output mapping.** The expected relation among outputs must be measurable. A relation that cannot be mapped to available output fields is not executable.
 
-**Metric and tolerance.** The verdict rule must define a metric and a tolerance. The tolerance may come from numerical precision, solver reference behavior, calibration data, repeated-run variability, or expert thresholding, but the source must be recorded.
+**Metric and tolerance.** The verdict rule must define a metric and a tolerance. The tolerance may come from numerical precision, solver reference behavior, calibration data, repeated-run variability, or expert thresholding, but the source must be recorded. This criterion carries condition (iv): the tolerance must be shown to dominate the intrinsic error floor of the measuring operator. When that floor is itself uncalibratable — as for an absolute discrete-divergence relation whose reference field already carries non-negligible divergence — the relation is deferred rather than executed, because a violation could not be separated from the operator's own discretization error.
 
 **Failure diagnosability.** The relation should indicate what kind of failure or boundary condition it can help interpret. If every possible violation has the same ambiguous meaning, the relation is weak evidence and should be treated cautiously.
 
@@ -220,6 +226,10 @@ An MR execution can produce several verdicts:
 - **inconclusive:** the artifact is insufficient to decide.
 
 This scheme prevents a common overclaim: not every relation violation is a program fault. A violation may reveal a model inconsistency, but it may also reveal that the MR was applied outside its domain, that the threshold was too tight, that the mesh operator was unsuitable, or that the case is not comparable.
+
+It is useful to read these verdicts as regions of a two-dimensional space rather than as a flat list. One axis is the relation-violation magnitude — how far the measured quantity exceeds the tolerance, for example the violation-to-tolerance ratio or the violation-to-floor ratio V/floor. The other axis is the domain-violation magnitude — how far the transformed case lies outside the relation's validity domain, signalled by precondition violation, geometry mismatch, boundary-condition mismatch, or operator inadmissibility. Low domain-violation with low relation-violation is pass; low domain-violation with high relation-violation is the only region that may be read as SUT inconsistency; high domain-violation is out-of-relation-domain or, near the boundary, OOD-stress; a relation-violation that sits within the error floor is a numerical-tolerance issue. This decomposition is what keeps a model-level violation from being confused with a relation applied outside its domain, and it makes condition (iv) of the admissibility predicate explicit at verdict time.
+
+In the present study the relation-violation axis is quantitative — mirror-y reports V/floor — but the domain-violation axis is so far only partially operationalized. The mirror-y case is placed near the validity boundary *qualitatively*: the reflection is non-bijective and the worst reflected-node mismatch is about one mesh edge length, so the exact relation is out-of-relation-domain and is downgraded to an approximate OOD-stress probe. We do not claim a fully calibrated, continuous domain-violation score; defining such a score across MR classes is left to future work. The two-dimensional reading is used here as an interpretive structure, not as a calibrated boundary measurement.
 
 ### 3.6 Hierarchical Interpretation Protocol
 
@@ -415,6 +425,8 @@ The safer claim is that a domain-validity-aware workflow can make MR identificat
 ### 6.3 Implications for SciML Testing
 
 The scoped evidence shows how SciML testing can move from implicit expert checks to explicit MR assets. Such assets can complement residuals, uncertainty estimates, and accuracy metrics by making transformation assumptions and verdict rules inspectable. This is especially important for OOD validation, where the boundary of the relation is often as important as the violation itself.
+
+In that sense the workflow is aimed at producing, over many controlled transformations, a relation-indexed applicability map: a record of where a surrogate stops respecting the relations it should respect, expressed in relation space rather than in residual space. The present evidence is one bounded within-SUT point on such a map, not the map itself; assembling a calibrated map would require the cross-SUT, multi-trajectory, and domain-violation-score work that remains future work.
 
 ## 7. Threats to Validity
 

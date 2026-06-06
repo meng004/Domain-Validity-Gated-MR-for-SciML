@@ -48,6 +48,28 @@ PR4_BOUNDARY_MARKERS = [
 ]
 
 
+# Theory-lift markers: the admissibility-predicate + two-axis-verdict + relation-space
+# framing must appear in BOTH the manuscript and the IST package, kept in lockstep.
+FRAMEWORK_MARKERS = [
+    "domain-admissibility-gated, relation-indexed",
+    "admissible MR",
+    "intrinsic error floor",
+    "domain-violation magnitude",
+    "relation space",
+]
+
+
+# Boundary-guard markers: the hedges that keep the lift from overclaiming. Their
+# presence is asserted so a future edit cannot silently turn the framing into a
+# completed-applicability-map or calibrated-boundary claim.
+FRAMEWORK_GUARD_MARKERS = [
+    "We do not claim a completed applicability map",
+    "one bounded within-SUT",
+    "not as a calibrated boundary measurement",
+    "is left to future work",
+]
+
+
 def read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
@@ -116,6 +138,24 @@ class Stage25SubmissionReadinessTest(unittest.TestCase):
         for marker in required:
             with self.subTest(marker=marker):
                 self.assertIn(marker, text)
+
+    def test_framework_lift_markers_present_in_manuscript_and_ist(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in FRAMEWORK_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
+    def test_framework_lift_keeps_evidence_boundary_guards(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in FRAMEWORK_GUARD_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
 
     def test_experiment_ledger_has_single_precondition_check_and_no_phantom_enforcer(self) -> None:
         ledger = read(EXPERIMENT_LEDGER)
