@@ -23,12 +23,11 @@
 
 \title{Domain-Validity-Gated Metamorphic Relation Identification and Executable Test Assets for Scientific Machine Learning}
 
-\author[inst1]{Author Name(s)}
+% Double-anonymized submission: author identity and affiliation are intentionally
+% withheld for review and will be added in the camera-ready version.
+\author[inst1]{Anonymous Author(s)}
 \affiliation[inst1]{
-  organization={Institution},
-  addressline={Address},
-  city={City},
-  country={Country}
+  organization={Affiliation withheld for double-anonymized review},
 }
 
 \begin{abstract}
@@ -416,16 +415,22 @@ Full cross-SUT, comparative, and fault-detection results remain blocked. This se
 \toprule
 \textbf{Claim} & \textbf{Status} & \textbf{Evidence} & \textbf{Boundary} \\
 \midrule
-C1-domain-validity-rubric & Method claim & Rubric asset and manuscript method section & Does not prove physical validity by itself. \\
-C2-mr-card-executable-assets & Workflow claim & MR cards and validators & Not every card has cross-SUT evidence. \\
-C3-baseline-comparison-blocked & Blocked & Claim and experiment ledgers & No baseline superiority, seeded-fault, localization, or runtime claim. \\
-C4-node-permutation-sanity & Observed pilot & Node-permutation metric ledger & One SUT and one pilot case only. \\
-C5-conservation-diagnostic-deferred & Diagnostic; absolute claim deferred & Conservation metric ledger and report & absolute conservation remains deferred. \\
-C6-mirror-y-ood-stress & Observed bounded pilot & Mirror-y rate metric ledger and claim ledger & failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. \\
-C7-llm-candidate-support-only & Process boundary & Method and ethics sections & LLMs organize candidates; they do not judge MR validity. \\
+PC1-domain-validity-rubric & Method claim & Rubric asset and manuscript method section & Does not prove physical validity by itself. \\
+PC2-mr-card-executable-assets & Workflow claim & MR cards and validators & Not every card has cross-SUT evidence. \\
+PC3-baseline-comparison-blocked & Blocked & Claim and experiment ledgers & No baseline superiority, seeded-fault, localization, or runtime claim. \\
+PC4-node-permutation-sanity & Observed pilot & Node-permutation metric ledger & One SUT and one pilot case only. \\
+PC5-conservation-diagnostic-deferred & Diagnostic; absolute claim deferred & Conservation metric ledger and report & absolute conservation remains deferred. \\
+PC6-mirror-y-ood-stress & Observed bounded pilot & Mirror-y rate metric ledger and claim ledger & failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. \\
+PC7-llm-candidate-support-only & Process boundary & Method and ethics sections & LLMs organize candidates; they do not judge MR validity. \\
 \bottomrule
 \end{tabularx}
 \end{table}
+
+The \texttt{PC\#} identifiers are paper-level claims, kept distinct from the
+authoritative runtime claim ledger (\texttt{claim-ledger.yml}, claims \texttt{C1}--\texttt{C7})
+so the two cannot be confused. The runtime claim ledger is the single source of truth for
+runtime-evidence claims; the mapping is PC1$\to$C4, PC2$\to$C1/C4, PC3$\to$C3, PC4$\to$C2,
+PC5$\to$C7, PC6$\to$C6, and PC7$\to$ no runtime-evidence claim (a method/ethics boundary).
 
 \subsection{MR-card-to-verdict map}
 \label{subsec:mr-card-verdict-map}

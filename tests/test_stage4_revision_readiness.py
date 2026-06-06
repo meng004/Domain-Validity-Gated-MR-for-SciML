@@ -25,7 +25,7 @@ class Stage4RevisionReadinessTest(unittest.TestCase):
             "### 5.1 Claim-to-Evidence Map",
             "### 5.2 MR-Card-to-Verdict Map",
             "### 2.7 What Is New and What Is Not New",
-            "C6-mirror-y-ood-stress",
+            "PC6-mirror-y-ood-stress",
             "failed on 10 of 10 recorded eval frames",
             "not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim",
             "absolute conservation remains deferred",
@@ -41,7 +41,7 @@ class Stage4RevisionReadinessTest(unittest.TestCase):
             "\\subsection{What is new and what is not new}",
             "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
-            "C6-mirror-y-ood-stress",
+            "PC6-mirror-y-ood-stress",
             "failed on 10 of 10 recorded eval frames",
             "absolute conservation remains deferred",
         ]:

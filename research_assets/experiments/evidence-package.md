@@ -43,7 +43,7 @@ within-SUT mirror-y OOD-stress frame rate recorded by PR4.
 - The study evaluates relation-level verdict coverage and evidence completeness.
 - The current protocol records baselines as commitments rather than outcomes.
 - Missing real-SUT prerequisites fail closed and keep empirical claims blocked.
-- The fail-closed precondition and artifact gates are enforced in code (`tools/validate_experiment_protocol.py:validate_experiment_ledger` and `validate_pr4_mirror_y_artifacts`), not only described in prose.
+- The fail-closed precondition and artifact gates are enforced in code (`tools/validate_experiment_protocol.py:validate_experiment_ledger` and `validate_real_sut_preconditions`), not only described in prose.
 - Fixture-level observations are limited to asset plumbing and transformation metrics.
 
 ## Single Real-SUT Pilot (scoped)

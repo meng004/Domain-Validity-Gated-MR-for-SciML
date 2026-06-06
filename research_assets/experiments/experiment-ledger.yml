@@ -26,28 +26,7 @@ precondition_check:
     executed against a vendored real MeshGraphNets cylinder-flow checkpoint (sha256
     cf281f85...b04a9) from the read-only Minimum-MR-SubSet repository (PR #103); its
     artifacts verify, so the artifact gate admits it as observed pilot evidence.
-  enforced_by: "tools/validate_experiment_protocol.py:validate_pr4_mirror_y_artifacts and validate_experiment_ledger"
-  evidence_limit: "The environmental observation itself is not MeshGraphNets inference and yields no SUT verdict; the pilot verdict comes only from the executed run artifacts."
-
-precondition_check:
-  checked_on: "2026-06-05"
-  method: "inspected METBENCH_MGN_* environment variables in the execution environment and enforced the validator real-SUT precondition gate"
-  required_env:
-    - "METBENCH_MGN_DATA_ROOT"
-    - "METBENCH_MGN_REPO"
-    - "METBENCH_MGN_CHECKPOINT"
-  observed_state: "all three required environment variables were UNSET at check time"
-  consequence: >
-    The three METBENCH_MGN_*-planned SUTs (Echowve, PhysicsNeMo, third implementation)
-    stay blocked with sut_execution not-run. The gate is now an artifact gate: a real-sut
-    run may only be observed when it references a run manifest whose checkpoint sha256,
-    raw outputs, and metric ledger verify on disk.
-  separate_pilot: >
-    Independently of METBENCH_MGN_*, run real-sut-cylinder-flow-mgn-node-permutation-pilot-001
-    executed against a vendored real MeshGraphNets cylinder-flow checkpoint (sha256
-    cf281f85...b04a9) from the read-only Minimum-MR-SubSet repository (PR #103); its
-    artifacts verify, so the artifact gate admits it as observed pilot evidence.
-  enforced_by: "tools/validate_experiment_protocol.py:validate_real_sut_preconditions"
+  enforced_by: "tools/validate_experiment_protocol.py:validate_experiment_ledger and validate_real_sut_preconditions"
   evidence_limit: "The environmental observation itself is not MeshGraphNets inference and yields no SUT verdict; the pilot verdict comes only from the executed run artifacts."
 
 runs:

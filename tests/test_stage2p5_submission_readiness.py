@@ -94,13 +94,13 @@ class Stage25SubmissionReadinessTest(unittest.TestCase):
     def test_stage25_claim_evidence_audit_records_claim_boundaries(self) -> None:
         text = read(STAGE25_AUDIT)
         required = [
-            "C1-domain-validity-rubric",
-            "C2-mr-card-executable-assets",
-            "C3-baseline-comparison-blocked",
-            "C4-node-permutation-sanity",
-            "C5-conservation-diagnostic-deferred",
-            "C6-mirror-y-ood-stress",
-            "C7-llm-candidate-support-only",
+            "PC1-domain-validity-rubric",
+            "PC2-mr-card-executable-assets",
+            "PC3-baseline-comparison-blocked",
+            "PC4-node-permutation-sanity",
+            "PC5-conservation-diagnostic-deferred",
+            "PC6-mirror-y-ood-stress",
+            "PC7-llm-candidate-support-only",
             "claim-ledger.yml",
             "experiment-ledger.yml",
             "metric_ledger.json",

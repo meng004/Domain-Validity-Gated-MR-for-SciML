@@ -333,13 +333,15 @@ artifacts are committed and validated.
 
 | Claim | Current status | Evidence | Boundary |
 |---|---|---|---|
-| C1-domain-validity-rubric | Supported method claim | `research_assets/rubric/domain_validity_rubric.json` | Does not prove physical validity by itself. |
-| C2-mr-card-executable-assets | Supported asset/workflow claim | `research_assets/mr_cards/`; validators | Not every card has cross-SUT evidence. |
-| C3-baseline-comparison-blocked | Blocked | `claim-ledger.yml`; `experiment-ledger.yml` | No baseline superiority, seeded-fault, localization, or runtime claim. |
-| C4-node-permutation-sanity | Observed pilot | `real-sut-node-permutation-pilot/raw/metric_ledger.json` | One SUT and one pilot case only. |
-| C5-conservation-diagnostic-deferred | Observed diagnostic; absolute claim deferred | `conservation-diagnostic-pilot/raw/metric_ledger.json`; `conservation_report.json` | absolute conservation remains deferred. |
-| C6-mirror-y-ood-stress | Observed bounded pilot | `mirror-y-rate-upgrade/raw/metric_ledger.json`; `claim-ledger.yml` | failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. |
-| C7-llm-candidate-support-only | Supported process boundary | Method and ethics sections | LLMs organize candidates; they do not judge MR validity. |
+| PC1-domain-validity-rubric | Supported method claim | `research_assets/rubric/domain_validity_rubric.json` | Does not prove physical validity by itself. |
+| PC2-mr-card-executable-assets | Supported asset/workflow claim | `research_assets/mr_cards/`; validators | Not every card has cross-SUT evidence. |
+| PC3-baseline-comparison-blocked | Blocked | `claim-ledger.yml`; `experiment-ledger.yml` | No baseline superiority, seeded-fault, localization, or runtime claim. |
+| PC4-node-permutation-sanity | Observed pilot | `real-sut-node-permutation-pilot/raw/metric_ledger.json` | One SUT and one pilot case only. |
+| PC5-conservation-diagnostic-deferred | Observed diagnostic; absolute claim deferred | `conservation-diagnostic-pilot/raw/metric_ledger.json`; `conservation_report.json` | absolute conservation remains deferred. |
+| PC6-mirror-y-ood-stress | Observed bounded pilot | `mirror-y-rate-upgrade/raw/metric_ledger.json`; `claim-ledger.yml` | failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. |
+| PC7-llm-candidate-support-only | Supported process boundary | Method and ethics sections | LLMs organize candidates; they do not judge MR validity. |
+
+The PC# identifiers above are paper-level claims. The single source of truth for runtime-evidence claims is the runtime claim ledger (`research_assets/experiments/claim-ledger.yml`, claims C1–C7); each paper claim maps to it as: PC1→C4-rubric-decision-coverage; PC2→C1-fixture-asset-path and C4-rubric-decision-coverage; PC3→C3-baseline-comparison; PC4→C2-real-sut-verdicts; PC5→C7-conservation-diagnostic; PC6→C6-mirror-y-ood-stress; PC7→ no runtime-evidence claim (a method/ethics process boundary). The ledger's C5-precondition-check underlies the precondition gate described in the method section.
 
 ### 5.2 MR-Card-to-Verdict Map
 
