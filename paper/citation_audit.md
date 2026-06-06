@@ -48,3 +48,13 @@ Decision rule:
 |---|---|---|
 | `qi2025physicalfield` | UNVERIFIED | No trusted DOI, publisher, arXiv, official proceedings, Crossref, or Semantic Scholar-grade record was found in the prior ledger pass. It is excluded from the submission bibliography. |
 | `yu2025fluidvelocity` | NOT_CITED_LEAD | The DOI lead exists, but the paper text and publisher landing page were not inspected in this pass. It remains a novelty guardrail and should not support detailed closest-work claims yet. |
+
+## Stage 5 additions (2026-06-06): three closest prior works after Socratic debate
+
+| Key | Status | DOI / arXiv | Why added |
+|---|---|---|---|
+| `reichert2024hess` | VERIFIED | doi 10.5194/hess-28-2505-2024 | Closest prior on Contribution 3 (relation-indexed applicability map for a trained neural surrogate); must be cited in Section 2.4 and the discussion of active-transformation MT vs passive UQ. |
+| `eniser2022relaxations` | VERIFIED | doi 10.1145/3533767.3534392 | Closest prior on Contribution 1 (calibrated MR tolerance / admissibility floor); must be cited where the admissibility predicate is introduced. |
+| `duqueTorres2023bugornot` | VERIFIED | doi 10.1109/SANER56733.2023.00080 | Part of the 2023 cluster on bug-vs-inapplicability; closest prior on Contribution 2 (2D verdict). |
+| `duqueTorres2023completePipeline` | VERIFIED_PREPRINT | arXiv:2310.00338 | Companion 2023-cluster paper introducing MR constraints as a pipeline stage. |
+| `duqueTorres2023metaTrimmer` | VERIFIED_PREPRINT | arXiv:2307.15522 | Companion 2023-cluster paper automating domain-constraint derivation. |
