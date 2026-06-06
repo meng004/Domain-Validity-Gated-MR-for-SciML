@@ -187,8 +187,37 @@ claims:
       - "Exact mirror-y holds for the real DeepMind eval mesh."
     blocked_reason: null
 
+  - claim_id: "C10-seeded-fault-detection"
+    status: "observed"
+    scope: "one-SUT / one-checkpoint / one eval trajectory / 10-mutant injected-fault catalogue / 3 domain-validity MRs as detectors"
+    evidence:
+      - "research_assets/runs/seeded-fault-detection/manifest.yml"
+      - "research_assets/runs/seeded-fault-detection/raw/metric_ledger.json"
+      - "tools/run_seeded_fault_detection.py"
+    wording_allowed: >
+      Using the paper's own domain-validity MRs as fault detectors against a 10-mutant,
+      five-class seeded-fault catalogue (re-implemented from the read-only Minimum-MR-SubSet
+      witness taxonomy), the conservation (continuity) MR detected boundary-condition and
+      gross normalization-scale faults (3/10), the mirror-y (symmetry) MR detected a
+      physical-channel and a mesh-adjacency fault (2/10), and node-permutation equivariance
+      detected none (these faults preserve node-relabeling invariance, so the MR stays exact
+      by design); 5 of 10 mutants were detected by at least one MR. Detections localize by MR
+      class: continuity -> boundary/scale faults, symmetry -> physical-channel/adjacency
+      faults. This is a bounded, honest fault-detection result that also delimits where these
+      MRs are insensitive (subtle per-step update faults whose effect on the scored quantity
+      is small).
+    wording_forbidden:
+      - "A real-world fault-detection rate or a general fault-detection-rate claim."
+      - "The MRs detect all or most faults, or are superior to any baseline detector."
+      - "A reliability, cross-SUT, multi-checkpoint, or localization-accuracy claim beyond this catalogue."
+      - "node-permutation equivariance is useless (it is exact-by-design here, not broken)."
+    blocked_reason: null
+
 speculative_claims:
-  - claim: "Seeded-fault detection effectiveness"
-    status: "speculative"
-    wording_allowed: "May be listed only as a future experiment."
-    blocked_reason: "No seeded-fault subjects, commands, or outputs exist."
+  - claim: "General seeded-fault detection effectiveness"
+    status: "partially-observed"
+    wording_allowed: >
+      A bounded result now exists (see C10-seeded-fault-detection): the MRs detect 5/10
+      mutants of one injected-fault catalogue on one SUT. General fault-detection
+      effectiveness across SUTs, checkpoints, and real-world faults remains future work.
+    blocked_reason: "Only one SUT/checkpoint and one injected-fault catalogue have been run."
