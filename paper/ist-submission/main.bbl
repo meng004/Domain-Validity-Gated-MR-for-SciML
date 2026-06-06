@@ -1,4 +1,4 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{25}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -40,6 +40,48 @@
   Next Test Cases}.
 \newblock \bibinfo{type}{Technical Report} \bibinfo{number}{HKUST-CS98-01}. The
   Hong Kong University of Science and Technology.
+%Type = Inproceedings
+\bibitem[{Duque-Torres et~al.(2023a)Duque-Torres, Pfahl, Klammer and
+  Fischer}]{duqueTorres2023bugornot}
+\bibinfo{author}{Duque-Torres, A.}, \bibinfo{author}{Pfahl, D.},
+  \bibinfo{author}{Klammer, C.}, \bibinfo{author}{Fischer, S.},
+  \bibinfo{year}{2023}a.
+\newblock \bibinfo{title}{Bug or not bug? analysing the reasons behind
+  metamorphic relation violations}, in: \bibinfo{booktitle}{Proceedings of the
+  2023 IEEE International Conference on Software Analysis, Evolution and
+  Reengineering (SANER)}.
+\newblock \DOIprefix\doi{10.1109/SANER56733.2023.00080}.
+%Type = Misc
+\bibitem[{Duque-Torres et~al.(2023b)Duque-Torres, Pfahl, Klammer and
+  Fischer}]{duqueTorres2023metaTrimmer}
+\bibinfo{author}{Duque-Torres, A.}, \bibinfo{author}{Pfahl, D.},
+  \bibinfo{author}{Klammer, C.}, \bibinfo{author}{Fischer, S.},
+  \bibinfo{year}{2023}b.
+\newblock \bibinfo{title}{Exploring a test data-driven method for selecting and
+  constraining metamorphic relations}.
+\newblock \DOIprefix\doi{10.48550/arXiv.2307.15522},
+  \href{http://arxiv.org/abs/2307.15522}{{\tt arXiv:2307.15522}}.
+%Type = Misc
+\bibitem[{Duque-Torres et~al.(2023c)Duque-Torres, Pfahl, Klammer and
+  Fischer}]{duqueTorres2023completePipeline}
+\bibinfo{author}{Duque-Torres, A.}, \bibinfo{author}{Pfahl, D.},
+  \bibinfo{author}{Klammer, C.}, \bibinfo{author}{Fischer, S.},
+  \bibinfo{year}{2023}c.
+\newblock \bibinfo{title}{Towards a complete metamorphic testing pipeline}.
+\newblock \DOIprefix\doi{10.48550/arXiv.2310.00338},
+  \href{http://arxiv.org/abs/2310.00338}{{\tt arXiv:2310.00338}}.
+%Type = Inproceedings
+\bibitem[{Eniser et~al.(2022)Eniser, Gros, W\"ustholz, Hoffmann and
+  Christakis}]{eniser2022relaxations}
+\bibinfo{author}{Eniser, H.F.}, \bibinfo{author}{Gros, T.P.},
+  \bibinfo{author}{W\"ustholz, V.}, \bibinfo{author}{Hoffmann, J.},
+  \bibinfo{author}{Christakis, M.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Metamorphic relations via relaxations: An approach to
+  obtain oracles for action-policy testing}, in:
+  \bibinfo{booktitle}{Proceedings of the 31st ACM SIGSOFT International
+  Symposium on Software Testing and Analysis (ISSTA)}, pp.
+  \bibinfo{pages}{52--63}.
+\newblock \DOIprefix\doi{10.1145/3533767.3534392}.
 %Type = Inproceedings
 \bibitem[{Gopakumar et~al.(2025)Gopakumar, Onken, Boussif, Azizzadenesheli and
   Anandkumar}]{gopakumar2025calibrated}
@@ -170,6 +212,23 @@
   software}, in: \bibinfo{booktitle}{2021 IEEE/ACM 6th International Workshop
   on Metamorphic Testing}, pp. \bibinfo{pages}{18--25}.
 \newblock \DOIprefix\doi{10.1109/MET52542.2021.00015}.
+%Type = Article
+\bibitem[{Reichert et~al.(2024)Reichert, Bouaziz, Verbeke, Eberle, Kratzert,
+  Klotz, Gauch, Schulz, Hofmann, Holzleitner, Klambauer, Hochreiter, Nearing
+  and Gnann}]{reichert2024hess}
+\bibinfo{author}{Reichert, M.}, \bibinfo{author}{Bouaziz, L.},
+  \bibinfo{author}{Verbeke, B.}, \bibinfo{author}{Eberle, C.},
+  \bibinfo{author}{Kratzert, F.}, \bibinfo{author}{Klotz, D.},
+  \bibinfo{author}{Gauch, M.}, \bibinfo{author}{Schulz, K.},
+  \bibinfo{author}{Hofmann, T.}, \bibinfo{author}{Holzleitner, M.},
+  \bibinfo{author}{Klambauer, G.}, \bibinfo{author}{Hochreiter, S.},
+  \bibinfo{author}{Nearing, G.}, \bibinfo{author}{Gnann, S.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Metamorphic testing of machine learning and
+  conceptual hydrologic models}.
+\newblock \bibinfo{journal}{Hydrology and Earth System Sciences}
+  \bibinfo{volume}{28}, \bibinfo{pages}{2505--2529}.
+\newblock \DOIprefix\doi{10.5194/hess-28-2505-2024}.
 %Type = Article
 \bibitem[{Segura et~al.(2016)Segura, Fraser, Sanchez and
   Ruiz-Cortes}]{segura2016survey}

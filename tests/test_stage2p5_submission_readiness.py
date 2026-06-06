@@ -80,6 +80,15 @@ ROUND2_INTEGRITY_MARKERS = [
 ]
 
 
+SOCRATIC_DEBATE_CITATION_MARKERS = [
+    "reichert2024hess",
+    "eniser2022relaxations",
+    "duqueTorres2023bugornot",
+    "duqueTorres2023completePipeline",
+    "duqueTorres2023metaTrimmer",
+]
+
+
 # Seeded-fault detection (C10/PC10): the MR-as-detector result and its boundaries
 # must appear in BOTH the manuscript and the IST package.
 SEEDED_FAULT_MARKERS = [
@@ -259,3 +268,17 @@ class Stage25SubmissionReadinessTest(unittest.TestCase):
         for marker in required:
             with self.subTest(marker=marker):
                 self.assertIn(marker, text)
+    def test_socratic_debate_citations_present_in_bib_and_manuscript_and_tex(self) -> None:
+        bib = read(BIB)
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for key in SOCRATIC_DEBATE_CITATION_MARKERS:
+            with self.subTest(file="bib", key=key):
+                self.assertIn(key, bib)
+            # manuscript references them by key (Markdown bracket-style)
+            with self.subTest(file="manuscript", key=key):
+                self.assertIn(key, manuscript)
+            # main.tex \citep{key}
+            with self.subTest(file="ist_main", key=key):
+                self.assertIn(key, ist)
+
