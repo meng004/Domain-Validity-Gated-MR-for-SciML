@@ -1,0 +1,9 @@
+{
+  "split": "test",
+  "t_eval": 0,
+  "onestep_rmse": 0.011977025307714939,
+  "persistence_rmse": 0.01507564540952444,
+  "skill_vs_persistence": 1.2587136640525876,
+  "mean_speed": 1.1624997854232788,
+  "relative_rmse": 0.010302819370718398
+}
