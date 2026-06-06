@@ -107,6 +107,7 @@ claims:
       - "A geometry-independent, cross-SUT, or reliability-implying mirror-y violation rate."
       - "Mirror-y is a valid exact relation for this mesh."
       - "The model is unreliable, or any baseline comparison or accuracy result."
+      - "This is not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim."
     blocked_reason: null
 
   - claim_id: "C7-conservation-diagnostic"

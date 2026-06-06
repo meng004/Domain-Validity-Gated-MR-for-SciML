@@ -1,0 +1,213 @@
+\begin{thebibliography}{20}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Baral et~al.(2026)Baral, Lee, Khanal and Jeon}]{baral2025xrepit}
+\bibinfo{author}{Baral, S.}, \bibinfo{author}{Lee, Y.},
+  \bibinfo{author}{Khanal, S.}, \bibinfo{author}{Jeon, J.},
+  \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Xrepit: A deep learning-computational fluid dynamics
+  hybrid framework implemented in openfoam for fast, robust, and scalable
+  unsteady simulations}.
+\newblock \bibinfo{journal}{Computers \& Fluids} \bibinfo{volume}{314},
+  \bibinfo{pages}{107075}.
+\newblock \DOIprefix\doi{10.1016/j.compfluid.2026.107075}.
+%Type = Article
+\bibitem[{Barr et~al.(2015)Barr, Harman, McMinn, Shahbaz and
+  Yoo}]{barr2015oracle}
+\bibinfo{author}{Barr, E.T.}, \bibinfo{author}{Harman, M.},
+  \bibinfo{author}{McMinn, P.}, \bibinfo{author}{Shahbaz, M.},
+  \bibinfo{author}{Yoo, S.}, \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{The oracle problem in software testing: A survey}.
+\newblock \bibinfo{journal}{IEEE Transactions on Software Engineering}
+  \bibinfo{volume}{41}, \bibinfo{pages}{507--525}.
+\newblock \DOIprefix\doi{10.1109/TSE.2014.2372785}.
+%Type = Techreport
+\bibitem[{Chen et~al.(1998)Chen, Cheung and Yiu}]{chen1998metamorphic}
+\bibinfo{author}{Chen, T.Y.}, \bibinfo{author}{Cheung, S.C.},
+  \bibinfo{author}{Yiu, S.M.}, \bibinfo{year}{1998}.
+\newblock \bibinfo{title}{Metamorphic Testing: A New Approach for Generating
+  Next Test Cases}.
+\newblock \bibinfo{type}{Technical Report} \bibinfo{number}{HKUST-CS98-01}. The
+  Hong Kong University of Science and Technology.
+%Type = Inproceedings
+\bibitem[{Gopakumar et~al.(2025)Gopakumar, Onken, Boussif, Azizzadenesheli and
+  Anandkumar}]{gopakumar2025calibrated}
+\bibinfo{author}{Gopakumar, V.}, \bibinfo{author}{Onken, D.},
+  \bibinfo{author}{Boussif, O.}, \bibinfo{author}{Azizzadenesheli, K.},
+  \bibinfo{author}{Anandkumar, A.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Calibrated physics-informed uncertainty
+  quantification}, in: \bibinfo{booktitle}{Proceedings of the 42nd
+  International Conference on Machine Learning}, pp.
+  \bibinfo{pages}{20103--20141}.
+%Type = Inproceedings
+\bibitem[{Hiremath et~al.(2021)Hiremath, Claus, Hasselbring and
+  Rath}]{hiremath2021ocean}
+\bibinfo{author}{Hiremath, D.J.}, \bibinfo{author}{Claus, M.},
+  \bibinfo{author}{Hasselbring, W.}, \bibinfo{author}{Rath, W.},
+  \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Towards automated metamorphic test identification for
+  ocean system models}, in: \bibinfo{booktitle}{2021 IEEE/ACM 6th International
+  Workshop on Metamorphic Testing}, pp. \bibinfo{pages}{31--35}.
+\newblock \DOIprefix\doi{10.1109/MET52542.2021.00014},
+  \href{http://arxiv.org/abs/2103.09782}{{\tt arXiv:2103.09782}}.
+%Type = Article
+\bibitem[{Kanewala and Bieman(2019)}]{kanewala2019scientific}
+\bibinfo{author}{Kanewala, U.}, \bibinfo{author}{Bieman, J.M.},
+  \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Metamorphic testing of scientific software: A machine
+  learning approach}.
+\newblock \bibinfo{journal}{Journal of Software: Evolution and Process}
+  \bibinfo{volume}{31}, \bibinfo{pages}{e1894}.
+\newblock \DOIprefix\doi{10.1002/smr.1894}.
+%Type = Article
+\bibitem[{Karniadakis et~al.(2021)Karniadakis, Kevrekidis, Lu, Perdikaris, Wang
+  and Yang}]{karniadakis2021piml}
+\bibinfo{author}{Karniadakis, G.E.}, \bibinfo{author}{Kevrekidis, I.G.},
+  \bibinfo{author}{Lu, L.}, \bibinfo{author}{Perdikaris, P.},
+  \bibinfo{author}{Wang, S.}, \bibinfo{author}{Yang, L.}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Physics-informed machine learning}.
+\newblock \bibinfo{journal}{Nature Reviews Physics} \bibinfo{volume}{3},
+  \bibinfo{pages}{422--440}.
+\newblock \DOIprefix\doi{10.1038/s42254-021-00314-5}.
+%Type = Inproceedings
+\bibitem[{Krishnapriyan et~al.(2021)Krishnapriyan, Gholami, Zhe, Kirby and
+  Mahoney}]{krishnapriyan2021failure}
+\bibinfo{author}{Krishnapriyan, A.S.}, \bibinfo{author}{Gholami, A.},
+  \bibinfo{author}{Zhe, S.}, \bibinfo{author}{Kirby, R.M.},
+  \bibinfo{author}{Mahoney, M.W.}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Characterizing possible failure modes in
+  physics-informed neural networks}, in: \bibinfo{booktitle}{Advances in Neural
+  Information Processing Systems}, pp. \bibinfo{pages}{26548--26560}.
+%Type = Misc
+\bibitem[{Li et~al.(2026)Li, Yang, Liu and Yan}]{zhao2026noether}
+\bibinfo{author}{Li, M.}, \bibinfo{author}{Yang, X.}, \bibinfo{author}{Liu,
+  J.}, \bibinfo{author}{Yan, S.}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Noether: A constructive framework for metamorphic
+  pattern discovery from operator algebras}.
+\newblock \DOIprefix\doi{10.48550/arXiv.2605.17390},
+  \href{http://arxiv.org/abs/2605.17390}{{\tt arXiv:2605.17390}}.
+%Type = Inproceedings
+\bibitem[{Li et~al.(2021)Li, Kovachki, Azizzadenesheli, Liu, Bhattacharya,
+  Stuart and Anandkumar}]{li2021fno}
+\bibinfo{author}{Li, Z.}, \bibinfo{author}{Kovachki, N.},
+  \bibinfo{author}{Azizzadenesheli, K.}, \bibinfo{author}{Liu, B.},
+  \bibinfo{author}{Bhattacharya, K.}, \bibinfo{author}{Stuart, A.},
+  \bibinfo{author}{Anandkumar, A.}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Fourier neural operator for parametric partial
+  differential equations}, in: \bibinfo{booktitle}{International Conference on
+  Learning Representations}.
+%Type = Article
+\bibitem[{Lin et~al.(2020)Lin, Kuo, Liu, Poon, Chen and
+  Tse}]{lin2020exploratory}
+\bibinfo{author}{Lin, Q.}, \bibinfo{author}{Kuo, F.C.}, \bibinfo{author}{Liu,
+  H.}, \bibinfo{author}{Poon, P.L.}, \bibinfo{author}{Chen, T.Y.},
+  \bibinfo{author}{Tse, T.H.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Exploratory metamorphic testing for scientific
+  software}.
+\newblock \bibinfo{journal}{Computing in Science and Engineering}
+  \bibinfo{volume}{22}, \bibinfo{pages}{78--89}.
+\newblock \DOIprefix\doi{10.1109/MCSE.2018.2880577}.
+%Type = Article
+\bibitem[{Mandrioli et~al.(2025)Mandrioli, Shin, Bianculli and
+  Briand}]{mandrioli2025cps}
+\bibinfo{author}{Mandrioli, C.}, \bibinfo{author}{Shin, S.Y.},
+  \bibinfo{author}{Bianculli, D.}, \bibinfo{author}{Briand, L.},
+  \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Testing cps with design assumptions-based metamorphic
+  relations and genetic programming}.
+\newblock \bibinfo{journal}{IEEE Transactions on Software Engineering}
+  \bibinfo{volume}{51}, \bibinfo{pages}{1666--1684}.
+\newblock \DOIprefix\doi{10.1109/TSE.2025.3563121}.
+%Type = Article
+\bibitem[{Olsen et~al.(2019)Olsen, Raunak and Rothermel}]{olsen2019simulation}
+\bibinfo{author}{Olsen, P.C.}, \bibinfo{author}{Raunak, M.S.},
+  \bibinfo{author}{Rothermel, G.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Increasing validity and reliability in
+  simulation-based testing}.
+\newblock \bibinfo{journal}{IEEE Transactions on Reliability}
+  \bibinfo{volume}{68}, \bibinfo{pages}{1322--1337}.
+\newblock \DOIprefix\doi{10.1109/TR.2019.2906504}.
+%Type = Inproceedings
+\bibitem[{Pfaff et~al.(2021)Pfaff, Fortunato, Sanchez-Gonzalez and
+  Battaglia}]{pfaff2021meshgraphnets}
+\bibinfo{author}{Pfaff, T.}, \bibinfo{author}{Fortunato, M.},
+  \bibinfo{author}{Sanchez-Gonzalez, A.}, \bibinfo{author}{Battaglia, P.W.},
+  \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Learning mesh-based simulation with graph networks},
+  in: \bibinfo{booktitle}{International Conference on Learning
+  Representations}.
+\newblock \DOIprefix\doi{10.48550/arXiv.2010.03409},
+  \href{http://arxiv.org/abs/2010.03409}{{\tt arXiv:2010.03409}}.
+%Type = Article
+\bibitem[{Raissi et~al.(2019)Raissi, Perdikaris and
+  Karniadakis}]{raissi2019pinn}
+\bibinfo{author}{Raissi, M.}, \bibinfo{author}{Perdikaris, P.},
+  \bibinfo{author}{Karniadakis, G.E.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Physics-informed neural networks: A deep learning
+  framework for solving forward and inverse problems involving nonlinear
+  partial differential equations}.
+\newblock \bibinfo{journal}{Journal of Computational Physics}
+  \bibinfo{volume}{378}, \bibinfo{pages}{686--707}.
+\newblock \DOIprefix\doi{10.1016/j.jcp.2018.10.045}.
+%Type = Inproceedings
+\bibitem[{Raunak et~al.(2021)Raunak, Olsen, Simko and
+  Kuhn}]{raunak2021continuum}
+\bibinfo{author}{Raunak, M.S.}, \bibinfo{author}{Olsen, P.C.},
+  \bibinfo{author}{Simko, G.}, \bibinfo{author}{Kuhn, D.R.},
+  \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{A continuum of oracles for testing scientific
+  software}, in: \bibinfo{booktitle}{2021 IEEE/ACM 6th International Workshop
+  on Metamorphic Testing}, pp. \bibinfo{pages}{18--25}.
+\newblock \DOIprefix\doi{10.1109/MET52542.2021.00015}.
+%Type = Article
+\bibitem[{Segura et~al.(2016)Segura, Fraser, Sanchez and
+  Ruiz-Cortes}]{segura2016survey}
+\bibinfo{author}{Segura, S.}, \bibinfo{author}{Fraser, G.},
+  \bibinfo{author}{Sanchez, A.B.}, \bibinfo{author}{Ruiz-Cortes, A.},
+  \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{A survey on metamorphic testing}.
+\newblock \bibinfo{journal}{IEEE Transactions on Software Engineering}
+  \bibinfo{volume}{42}, \bibinfo{pages}{805--824}.
+\newblock \DOIprefix\doi{10.1109/TSE.2016.2532875}.
+%Type = Article
+\bibitem[{Wang et~al.(2025)Wang, Hakimzadeh, Ruan and
+  Goswami}]{wang2025deeponetfe}
+\bibinfo{author}{Wang, W.}, \bibinfo{author}{Hakimzadeh, M.},
+  \bibinfo{author}{Ruan, H.}, \bibinfo{author}{Goswami, S.},
+  \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Time-marching neural operator-finite element
+  coupling: Ai-accelerated physics modeling}.
+\newblock \bibinfo{journal}{Computer Methods in Applied Mechanics and
+  Engineering} \bibinfo{volume}{446}, \bibinfo{pages}{118319}.
+\newblock \DOIprefix\doi{10.1016/j.cma.2025.118319}.
+%Type = Article
+\bibitem[{Xie et~al.(2011)Xie, Ho, Murphy, Kaiser, Xu and Chen}]{chen2011ml}
+\bibinfo{author}{Xie, X.}, \bibinfo{author}{Ho, J.W.K.},
+  \bibinfo{author}{Murphy, C.}, \bibinfo{author}{Kaiser, G.},
+  \bibinfo{author}{Xu, B.}, \bibinfo{author}{Chen, T.Y.}, \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{Testing and validating machine learning classifiers
+  by metamorphic testing}.
+\newblock \bibinfo{journal}{Journal of Systems and Software}
+  \bibinfo{volume}{84}, \bibinfo{pages}{544--558}.
+\newblock \DOIprefix\doi{10.1016/j.jss.2010.11.920}.
+%Type = Article
+\bibitem[{Yang et~al.(2020)Yang, Zhang, Chen and Liu}]{yang2020hierarchical}
+\bibinfo{author}{Yang, F.}, \bibinfo{author}{Zhang, J.}, \bibinfo{author}{Chen,
+  T.Y.}, \bibinfo{author}{Liu, H.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Hierarchical classification model for metamorphic
+  relations of scientific computing programs}.
+\newblock \bibinfo{journal}{Computer Science}
+  \DOIprefix\doi{10.11896/jsjkx.200200015}.
+
+\end{thebibliography}

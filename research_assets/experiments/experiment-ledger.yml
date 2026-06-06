@@ -2,9 +2,11 @@ ledger_id: "mgn-cylinder-flow-experiment-ledger-v0.1"
 evidence_policy: "fail-closed"
 keep_failed_runs: true
 claim_limitations: >
-  This ledger separates fixture-level asset plumbing from real MeshGraphNets SUT execution.
-  It does not record real SUT verdicts, empirical rates, model reliability, seeded-fault
-  detection, or baseline comparison results.
+  This ledger separates fixture-level asset plumbing, strictly scoped artifact-gated
+  real-SUT pilots, and blocked METBENCH/baseline claims. It records observed pilot
+  verdicts only at their stated scope; it does not record model reliability,
+  seeded-fault detection, baseline comparison, cross-SUT, geometry-independent, or
+  accuracy results.
 
 precondition_check:
   checked_on: "2026-06-05"
@@ -24,7 +26,7 @@ precondition_check:
     executed against a vendored real MeshGraphNets cylinder-flow checkpoint (sha256
     cf281f85...b04a9) from the read-only Minimum-MR-SubSet repository (PR #103); its
     artifacts verify, so the artifact gate admits it as observed pilot evidence.
-  enforced_by: "tools/validate_experiment_protocol.py:validate_real_sut_preconditions"
+  enforced_by: "tools/validate_experiment_protocol.py:validate_experiment_ledger and validate_real_sut_preconditions"
   evidence_limit: "The environmental observation itself is not MeshGraphNets inference and yields no SUT verdict; the pilot verdict comes only from the executed run artifacts."
 
 runs:
