@@ -28,7 +28,7 @@ We propose a domain-validity rubric for screening candidate MRs, an MR-card and 
 
 ### Results
 
-Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.1): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. This draft makes no claims about cross-SUT pass rates, fault-detection rates, comparative performance, localization accuracy, model accuracy, or SUT reliability.
+Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.1): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this asymmetric mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. Two further within-SUT runs sharpen the interpretation: a same-trajectory one-step rollout-accuracy diagnostic gives median relative L2 0.0216, so the mirror-y violation is about 34 times the surrogate's in-distribution accuracy; and on a synthetic mesh that is provably symmetric about the centerline — where the rubric admits the exact mirror-y relation rather than downgrading it — the surrogate still violates exact mirror-y equivariance (relative L2 1.10), which removes the out-of-relation-domain objection to the mirror-y finding. This draft makes no claims about cross-SUT pass rates, fault-detection rates, comparative baseline superiority, localization accuracy, model accuracy, or SUT reliability.
 
 ### Conclusion
 
@@ -130,13 +130,13 @@ Hybrid ML-solver frameworks provide another relevant line of work. Some systems 
 
 Our study pursues a complementary direction. Before deployment, physically derived transformations are used to estimate where relation violations occur and what regimes, boundary conditions, or numerical assumptions are associated with them. The result is not a runtime switching policy by itself, but an evidence structure that can support later decisions about when a learned surrogate should be trusted.
 
-The distinction from residual- and uncertainty-based trust estimation is deliberate. Uncertainty quantification, conformal prediction, and residual-threshold trust regions locate unreliable behavior in feature, residual, or error-estimate space, and they do so passively from observed inputs. The present method instead acts in relation space: it applies a physically derived, controlled transformation and reports which necessary relation breaks under it, indexed by that transformation. The intended product is therefore the evidence structure needed for a relation-indexed applicability map — a statement of the form "under this controlled transformation, this relation no longer holds" — rather than a scalar field of high residual, and the two-dimensional verdict separates a model-level violation from an out-of-domain application in a way a residual magnitude alone cannot. We do not claim a completed applicability map in this paper; the mirror-y result reported below is one bounded within-SUT example of the evidence such a map would aggregate.
+The distinction from residual- and uncertainty-based trust estimation is deliberate. Uncertainty quantification, conformal prediction, and residual-threshold trust regions locate unreliable behavior in feature, residual, or error-estimate space, and they do so passively from observed inputs. The present method instead acts in relation space: it applies a physically derived, controlled transformation and reports which necessary relation breaks under it, indexed by that transformation. The intended product is therefore the evidence structure needed for a relation-indexed applicability map — a statement of the form "under this controlled transformation, this relation no longer holds" — rather than a scalar field of high residual, and the two-dimensional verdict separates a model-level violation from an out-of-domain application, a separation a scalar accuracy or residual magnitude does not by itself provide. Section 5.3 gives a concrete within-SUT instance: a surrogate that is accurate in-distribution (median one-step relative L2 0.0216) still violates mirror-y equivariance by roughly an order of magnitude more, so the accuracy number does not bound the relation violation. We do not claim a completed applicability map in this paper; the mirror-y result reported below is one bounded within-SUT example of the evidence such a map would aggregate.
 
 ### 2.7 What Is New and What Is Not New
 
 The paper does not claim that metamorphic testing, MR identification, scientific-software MT, residual diagnostics, uncertainty quantification, LLM candidate generation, or NOETHER-style candidate organization is new. These are established or emerging sources of testing ideas. The paper's narrower claim is that SciML MR identification should be treated as a domain-validity problem: a candidate relation becomes useful only after its physical basis, transformation preconditions, output mapping, tolerance, exclusion rule, executable artifact, and relation-level verdict are recorded.
 
-What is new here is the evidence-gated conversion from candidate relation to executable SciML MR asset. The contribution is not a stronger neural simulator and not an automatic MR generator. It is a workflow that makes the validity boundary inspectable, so that a candidate can be retained, rejected, downgraded to OOD-stress, or deferred instead of being silently treated as a valid oracle. Structurally, the novelty is two organizing devices rather than a checklist of MR fields: an admissibility gate that ties a relation's tolerance to the numerical error floor of its own measurement, and a two-dimensional relation-level verdict that separates a model violation from an out-of-domain application. Both are means to make the validity boundary inspectable, not claims of empirical superiority over existing diagnostics.
+What is new here is the evidence-gated conversion from candidate relation to executable SciML MR asset. The contribution is not a stronger neural simulator and not an automatic MR generator. It is a workflow that makes the validity boundary inspectable, so that a candidate can be retained, rejected, downgraded to OOD-stress, or deferred instead of being silently treated as a valid oracle. Structurally, the novelty is two organizing devices rather than a checklist of MR fields: an admissibility gate that ties a relation's tolerance to the numerical error floor of its own measurement, and a two-dimensional relation-level verdict that separates a model violation from an out-of-domain application. The admissibility gate is fully operational (it decides retain, downgrade, or defer on stated grounds in the case study); the verdict's domain-violation axis is, so far, only qualitatively operationalized, so the two-dimensional verdict is at this stage an interpretive structure pending a calibrated domain-violation score rather than a fully measured device. Both are means to make the validity boundary inspectable, not claims of empirical superiority over existing diagnostics.
 
 ## 3. Method
 
@@ -350,15 +350,18 @@ artifacts are committed and validated.
 | PC5-conservation-diagnostic-deferred | Observed diagnostic; absolute claim deferred | `conservation-diagnostic-pilot/raw/metric_ledger.json`; `conservation_report.json` | absolute conservation remains deferred. |
 | PC6-mirror-y-ood-stress | Observed bounded pilot | `mirror-y-rate-upgrade/raw/metric_ledger.json`; `claim-ledger.yml` | failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. |
 | PC7-llm-candidate-support-only | Supported process boundary | Method and ethics sections | LLMs organize candidates; they do not judge MR validity. |
+| PC8-rollout-accuracy-diagnostic | Observed | `rollout-accuracy-baseline/raw/metric_ledger.json` | Same-SUT one-step accuracy (median rel L2 0.0216); mirror-y is ~34x larger; not a baseline-superiority or multi-trajectory claim. |
+| PC9-exact-mirror-y-symmetric-mesh | Observed | `mirror-y-symmetric-mesh/raw/metric_ledger.json` | Exact relation admissible and fails (rel L2 1.10) on a synthetic OOD symmetric mesh; not an accuracy, reliability, or cross-SUT claim. |
 
-The PC# identifiers above are paper-level claims. The single source of truth for runtime-evidence claims is the runtime claim ledger (`research_assets/experiments/claim-ledger.yml`, claims C1–C7); each paper claim maps to it as: PC1→C4-rubric-decision-coverage; PC2→C1-fixture-asset-path and C4-rubric-decision-coverage; PC3→C3-baseline-comparison; PC4→C2-real-sut-verdicts; PC5→C7-conservation-diagnostic; PC6→C6-mirror-y-ood-stress; PC7→ no runtime-evidence claim (a method/ethics process boundary). The ledger's C5-precondition-check underlies the precondition gate described in the method section.
+The PC# identifiers above are paper-level claims. The single source of truth for runtime-evidence claims is the runtime claim ledger (`research_assets/experiments/claim-ledger.yml`, claims C1–C9); each paper claim maps to it as: PC1→C4-rubric-decision-coverage; PC2→C1-fixture-asset-path and C4-rubric-decision-coverage; PC3→C3-baseline-comparison; PC4→C2-real-sut-verdicts; PC5→C7-conservation-diagnostic; PC6→C6-mirror-y-ood-stress; PC7→ no runtime-evidence claim (a method/ethics process boundary); PC8→C8-rollout-accuracy-baseline; PC9→C9-mirror-y-exact-symmetric-mesh. The ledger's C5-precondition-check underlies the precondition gate described in the method section.
 
 ### 5.2 MR-Card-to-Verdict Map
 
 | MR card | Rubric decision | Runtime verdict | What the verdict can and cannot mean |
 |---|---|---|---|
 | Node permutation equivariance | Retained as representation MR | pass sanity; relative L2 = 0.0 | Supports the executable path and representation contract for one case; does not establish model reliability. |
-| Mirror-y equivariance | Exact relation out-of-relation-domain; downgraded to approximate OOD-stress | fail on 10 of 10 recorded eval frames; median relative L2 0.737; median V/floor 3.96 | Shows bounded within-SUT OOD-stress violation for one trajectory; does not show exact symmetry failure, cross-SUT rate, or geometry-independent behavior. |
+| Mirror-y equivariance (asymmetric eval mesh) | Exact relation out-of-relation-domain; downgraded to approximate OOD-stress | fail on 10 of 10 recorded eval frames; median relative L2 0.737; median V/floor 3.96 | Shows bounded within-SUT OOD-stress violation for one trajectory; does not by itself show exact symmetry failure, cross-SUT rate, or geometry-independent behavior. |
+| Mirror-y equivariance (synthetic symmetric mesh) | Exact relation admissible (bijection verified, offset < 1e-12, type-match 1.0) | fail; relative L2 1.10 on one input state | Shows an exact-symmetry violation where the relation is admissible, removing the out-of-relation-domain objection; synthetic no-obstacle OOD mesh, one input; not an accuracy or cross-SUT claim. |
 | Discrete divergence / conservation | Absolute mass-conservation MR deferred; reference-relative diagnostic retained | reference-relative diagnostic pass on recorded frames | Shows no extra degradation relative to the reference representation; does not prove absolute conservation. |
 
 ### 5.3 Within-SUT pilot evidence (single SUT, single checkpoint)
@@ -385,7 +388,14 @@ and metric ledgers are committed under `research_assets/runs/`.
   frame-level OOD-stress result under an approximate reflection: one SUT, one
   checkpoint, one MR, one eval trajectory. It is not an exact mirror-symmetry result
   and not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or
-  geometry-independent claim.
+  geometry-independent claim. The 10 frames are consecutive states of one trajectory
+  and are therefore not independent samples; the 10/10 count is evidence about one
+  trajectory segment, and an exact binomial 95% interval for 10 successes in 10 trials
+  is wide ([0.69, 1.00]). The V/floor ratio is normalized by a mapping-error floor that
+  is itself a function of the same geometric mismatch that triggered the downgrade, so
+  on this asymmetric mesh V/floor cannot fully separate a model-level violation from an
+  amplified geometric artifact; the exact-symmetry run on a symmetric mesh below is what
+  resolves that ambiguity.
 - **Continuity MR (deferred absolute relation, reference-relative diagnostic).** A
   P1 discrete-divergence operator yields a non-negligible divergence even for the
   ground-truth field on this coarse mesh (dimensionless reference divergence ≈
@@ -393,12 +403,47 @@ and metric ledgers are committed under `research_assets/runs/`.
   absolute mass-conservation relation stays deferred. As a reference-relative
   diagnostic, the surrogate's predicted next-state divergence stays within ~0.4–0.8%
   of the reference on the recorded eval frames (interior-only ratio confirms this is
-  not a boundary-imposition artefact). This asserts no absolute conservation.
+  not a boundary-imposition artefact). This asserts no absolute conservation. Two
+  caveats bound this diagnostic. First, the reference divergence ≈ 0.037 is not yet
+  decomposed into discrete-operator error, solver projection artefact, or genuinely
+  non-solenoidal training data; if the reference field is itself materially
+  non-solenoidal, the reference-relative ratio compares two imperfect fields and is a
+  non-regression guard rather than a conservation measurement. Second, the diagnostic
+  uses a 50% regression threshold (ratio > 1.5) on two eval frames only, so "passes"
+  means "does not regress conservation by more than 50% on those frames," not
+  "conserves mass."
 
-These pilots illustrate the direction of the paper's argument — that accuracy
-alone does not bound whether a surrogate respects physical structure, and that an
-evidence-gated rubric will refuse or downgrade a relation rather than fabricate a
-verdict. They are pilot-scale and do not by themselves prove the general claim.
+- **Rollout-accuracy diagnostic (accuracy comparator on the same SUT).** On the same
+  eval trajectory, the surrogate's one-step next-state prediction error
+  (`v_pred = v_t + denormalized predicted delta`, the trainer's own convention) has
+  median relative L2 0.0216 (min 0.0116, max 0.0788) over the nine recorded
+  transitions. The surrogate is therefore accurate in-distribution to about 2% per
+  step, yet the mirror-y OOD-stress violation (median 0.737) is about 34 times larger.
+  This is the first within-SUT evidence that the relation-level diagnostic and ordinary
+  rollout accuracy answer different validation questions on this surrogate; it remains a
+  same-SUT accuracy diagnostic, not a baseline-superiority, multi-trajectory, or
+  cross-SUT claim, and it is one-step, not a free-running rollout-stability result.
+- **Exact mirror-y on a symmetric mesh (admissible relation, out-of-sample test).** To
+  test whether the mirror-y finding survives once the exact relation is admissible, we
+  built a synthetic structured channel mesh that is provably symmetric about the
+  centerline: the reflection is a verified bijection (node-type match 1.0, reflection
+  offset < 1e-12, edge set invariant), so the admissibility predicate retains the exact
+  relation rather than downgrading it. On one constructed input state the surrogate
+  violated exact mirror-y equivariance with relative L2 1.10 (verdict fail). Because
+  equivariance is oracle-free and structural — a mirror-equivariant model would satisfy
+  it to machine precision regardless of accuracy — this nonzero result is a genuine
+  learned-symmetry violation, not a geometric or accuracy artifact, and it is an
+  out-of-sample check that the admissibility predicate did not fit to the original three
+  pilots. The mesh is synthetic, has no obstacle, and is out-of-distribution for the
+  cylinder-trained surrogate, and this is one input on one mesh; it is not an accuracy,
+  reliability, cross-SUT, or geometry-independent claim.
+
+These pilots illustrate the direction of the paper's argument — that in-distribution
+accuracy alone does not bound whether a surrogate respects physical structure (the
+mirror-y violation is about 34x the one-step accuracy on the same SUT), and that an
+evidence-gated rubric will refuse, downgrade, or admit a relation on stated grounds
+rather than fabricate a verdict. They are pilot-scale, within one SUT and checkpoint,
+and do not by themselves prove the general claim.
 
 ### 5.4 Still blocked
 
@@ -406,7 +451,10 @@ The following remain blocked and must not be written as results: cross-SUT or
 geometry-independent pass/fail rates; comparative superiority over any baseline;
 fault-detection rates; localization accuracy; runtime or performance claims; and
 any claim that one SUT is more reliable than another. The three METBENCH-planned
-SUTs and the baseline comparison stay blocked pending their artifacts.
+SUTs, and the expert-MR, generic-MR-generation, and LLM-candidate baselines, stay
+blocked pending their artifacts. The rollout-accuracy comparator is the one exception:
+it has now been executed on the existing SUT (Section 5.3) and is reported as a
+same-SUT diagnostic, not as a defeated competitor.
 
 ## 6. Discussion
 
@@ -415,6 +463,8 @@ SUTs and the baseline comparison stay blocked pending their artifacts.
 The value of the current study is not that every MR finds a new fault beyond rollout accuracy. Rather, the value is that retained MRs provide relation-level evidence under explicit transformations. When a violation or deferral is observed, the MR card and verdict rule help distinguish model inconsistency, relation-domain boundary, numerical tolerance problem, and inconclusive evidence.
 
 The PR4 mirror-y evidence adds one bounded rate claim only: the approximate OOD-stress probe failed on 10 of 10 recorded eval frames for one SUT, one checkpoint, one MR, one eval trajectory. It remains an out-of-relation-domain exact mirror-y case and a bounded within-SUT frame-level OOD-stress result, not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim.
+
+A natural objection is that the admissibility predicate merely re-describes the three outcomes it was introduced with — node permutation passes, mirror-y is downgraded, conservation is deferred — and is therefore fitted rather than tested. The two added within-SUT runs are designed to answer this. The symmetric-mesh run is an out-of-sample use of the predicate: the predicate states that on a symmetric mesh the exact mirror-y relation becomes admissible, and the experiment then tests that admitted relation independently, finding a genuine equivariance violation (relative L2 1.10) rather than confirming a pre-arranged result. The rollout-accuracy run supplies the accuracy comparator the original three pilots lacked, and shows the mirror-y violation is about 34 times the surrogate's in-distribution one-step error, so the relation evidence is not a restatement of accuracy. Neither run removes the central limitation — this is still one SUT and one checkpoint — but together they convert the mirror-y finding from a self-downgraded probe into an admissible-relation violation with an accuracy baseline.
 
 ### 6.2 Boundary of Claims
 

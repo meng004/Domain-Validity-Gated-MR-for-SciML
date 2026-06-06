@@ -70,6 +70,26 @@ FRAMEWORK_GUARD_MARKERS = [
 ]
 
 
+# A+B convergence: the two added within-SUT runs (rollout-accuracy comparator and the
+# exact mirror-y test on a provably symmetric, admissible mesh) and their honesty
+# caveats must appear in BOTH the manuscript and the IST package.
+ADDED_EVIDENCE_MARKERS = [
+    "median relative L2 0.0216",   # rollout-accuracy one-step diagnostic
+    "34 times",                     # mirror-y violation vs in-distribution accuracy
+    "relative L2 1.10",             # exact mirror-y fail on symmetric admissible mesh
+    "provably symmetric",           # admissible-mesh framing
+    "out-of-sample",                # rebuts the circularity objection
+]
+
+
+# Guards that the conservation diagnostic is not overstated and that the wide 10/10
+# interval is disclosed (both required by the Stage-3 reviewers).
+ADDED_EVIDENCE_GUARD_MARKERS = [
+    "non-regression guard",         # conservation 1.5x threshold honesty
+    "[0.69, 1.00]",                 # exact binomial interval for 10/10
+]
+
+
 def read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
@@ -152,6 +172,24 @@ class Stage25SubmissionReadinessTest(unittest.TestCase):
         manuscript = read(MANUSCRIPT)
         ist = read(IST_MAIN)
         for marker in FRAMEWORK_GUARD_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
+    def test_added_within_sut_evidence_present_in_manuscript_and_ist(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in ADDED_EVIDENCE_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
+    def test_added_evidence_keeps_honesty_caveats(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in ADDED_EVIDENCE_GUARD_MARKERS:
             with self.subTest(file="manuscript", marker=marker):
                 self.assertIn(marker, manuscript)
             with self.subTest(file="ist_main", marker=marker):

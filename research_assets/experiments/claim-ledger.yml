@@ -42,12 +42,15 @@ claims:
     status: "blocked"
     evidence: []
     wording_allowed: >
-      Baselines are protocol commitments: Manual expert MR design, Generic automatic MR generation
-      scope contrast, LLM-generated candidate MRs, and Pure rollout accuracy.
+      The comparative baselines remain protocol commitments: Manual expert MR design,
+      Generic automatic MR generation scope contrast, and LLM-generated candidate MRs.
+      The rollout-accuracy diagnostic is no longer a commitment only: it has been executed
+      (see C8-rollout-accuracy-baseline) and is reported as a same-SUT diagnostic
+      comparator, not as a defeated competitor.
     wording_forbidden:
       - "The proposed protocol outperforms any baseline."
-      - "Baseline comparison results are available."
-    blocked_reason: "No matched baseline run artifacts, scoring ledgers, or comparable outputs exist."
+      - "Expert-MR, generic-MR, or LLM baseline comparison results are available."
+    blocked_reason: "No matched expert-MR, generic-MR, or LLM baseline run artifacts or scoring ledgers exist; only the rollout-accuracy diagnostic (C8) has been run."
 
   - claim_id: "C4-rubric-decision-coverage"
     status: "qualified"
@@ -135,6 +138,53 @@ claims:
       - "Absolute mass conservation has been verified."
       - "A conservation or violation rate has been measured."
       - "The model is reliable, accurate, or superior to any baseline."
+    blocked_reason: null
+
+  - claim_id: "C8-rollout-accuracy-baseline"
+    status: "observed"
+    scope: "one-SUT / one-checkpoint / one eval trajectory / one-step next-state accuracy diagnostic"
+    evidence:
+      - "research_assets/runs/rollout-accuracy-baseline/manifest.yml"
+      - "research_assets/runs/rollout-accuracy-baseline/raw/metric_ledger.json"
+    wording_allowed: >
+      On the same single eval trajectory used by the mirror-y OOD-stress probe, the
+      surrogate's one-step next-state prediction error (v_pred = v_t + denormalized
+      predicted delta) has median relative L2 0.0216 (min 0.0116, max 0.0788) over the
+      9 recorded transitions. The mirror-y OOD-stress violation (median relative L2
+      0.737) is about 34x this in-distribution one-step accuracy, so ordinary rollout
+      accuracy does not bound the magnitude of the symmetry-relation violation: the two
+      diagnostics answer different validation questions on this SUT.
+    wording_forbidden:
+      - "The surrogate is accurate, reliable, or stable in general."
+      - "A free-running multi-step rollout-stability result has been measured."
+      - "A baseline-superiority, multi-trajectory, or cross-SUT accuracy claim."
+    blocked_reason: null
+
+  - claim_id: "C9-mirror-y-exact-symmetric-mesh"
+    status: "observed"
+    scope: "one-SUT / one-checkpoint / one synthetic symmetric mesh / one input state / exact mirror-y equivariance"
+    evidence:
+      - "research_assets/runs/mirror-y-symmetric-mesh/manifest.yml"
+      - "research_assets/runs/mirror-y-symmetric-mesh/raw/metric_ledger.json"
+      - "research_assets/runs/mirror-y-symmetric-mesh/raw/source_output.npy"
+      - "research_assets/runs/mirror-y-symmetric-mesh/raw/follow_up_output.npy"
+      - "research_assets/runs/mirror-y-symmetric-mesh/raw/mapped_output.npy"
+    wording_allowed: >
+      On a synthetic structured channel mesh that is exactly symmetric about y=0
+      (bijective reflection, node-type match 1.0, reflection offset < 1e-12, edge-set
+      invariant under reflection), the rubric admits the exact mirror-y relation rather
+      than downgrading it. The surrogate violated exact mirror-y equivariance with
+      relative L2 = 1.10 (verdict fail) on one constructed input state. Because
+      equivariance is a structural property that a mirror-equivariant model would satisfy
+      to machine precision regardless of accuracy, the nonzero result is a genuine
+      learned-symmetry violation, not a geometric or accuracy artifact. This complements
+      the asymmetric-mesh OOD-stress probe by removing the out-of-relation-domain
+      objection: the exact relation is admissible here and still fails.
+    wording_forbidden:
+      - "The model is unreliable or inaccurate in general."
+      - "This is a cylinder-flow accuracy result (the synthetic mesh has no obstacle and is out-of-distribution)."
+      - "A cross-SUT, multi-input, multi-mesh, or geometry-independent symmetry-violation rate."
+      - "Exact mirror-y holds for the real DeepMind eval mesh."
     blocked_reason: null
 
 speculative_claims:
