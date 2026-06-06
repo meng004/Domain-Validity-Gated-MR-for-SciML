@@ -1,0 +1,36 @@
+== S0 == load
+   seed 20260601: baseline + 10 mutants
+   seed 20260602: baseline + 10 mutants
+   seed 20260603: baseline + 10 mutants
+   seed 20260604: baseline + 10 mutants
+   seed 20260605: baseline + 10 mutants
+   NS_double_scale severity sweep
+   PC_zero_vy partial-fraction sweep
+== S1 == load
+   seed 20260601: baseline + 10 mutants
+   seed 20260602: baseline + 10 mutants
+   seed 20260603: baseline + 10 mutants
+   seed 20260604: baseline + 10 mutants
+   seed 20260605: baseline + 10 mutants
+   NS_double_scale severity sweep
+   PC_zero_vy partial-fraction sweep
+== S2 == load
+   seed 20260601: baseline + 10 mutants
+   seed 20260602: baseline + 10 mutants
+   seed 20260603: baseline + 10 mutants
+   seed 20260604: baseline + 10 mutants
+   seed 20260605: baseline + 10 mutants
+   NS_double_scale severity sweep
+   PC_zero_vy partial-fraction sweep
+== S3 == load
+   seed 20260601: baseline + 10 mutants
+   seed 20260602: baseline + 10 mutants
+   seed 20260603: baseline + 10 mutants
+   seed 20260604: baseline + 10 mutants
+   seed 20260605: baseline + 10 mutants
+   NS_double_scale severity sweep
+   PC_zero_vy partial-fraction sweep
+== S4 == load
+   seed 20260601: baseline + 10 mutants
+   seed 20260602: baseline + 10 mutants
+   seed 20260603: baseline + 10 mutants
