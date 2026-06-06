@@ -12,6 +12,8 @@ BIB = ROOT / "paper" / "ist-submission" / "references.bib"
 CITATION_AUDIT = ROOT / "paper" / "citation_audit.md"
 STAGE25_AUDIT = ROOT / "paper" / "22_stage2p5_integrity_audit.md"
 STAGE3_REVIEW = ROOT / "paper" / "23_stage3_reviewer_simulation.md"
+EXPERIMENT_LEDGER = ROOT / "research_assets" / "experiments" / "experiment-ledger.yml"
+EVIDENCE_PACKAGE = ROOT / "research_assets" / "experiments" / "evidence-package.md"
 
 
 STALE_MARKERS = [
@@ -31,6 +33,8 @@ STALE_MARKERS = [
     "Preprint metadata to be verified before submission",
     "Metadata from the Undermind research report; verify venue details before submission",
     "yu2025fluidvelocity",
+    "Author Name(s)",
+    "organization={Institution}",
 ]
 
 
@@ -112,6 +116,16 @@ class Stage25SubmissionReadinessTest(unittest.TestCase):
         for marker in required:
             with self.subTest(marker=marker):
                 self.assertIn(marker, text)
+
+    def test_experiment_ledger_has_single_precondition_check_and_no_phantom_enforcer(self) -> None:
+        ledger = read(EXPERIMENT_LEDGER)
+        # Exactly one top-level precondition_check (YAML duplicate keys parse unreliably).
+        top_level = re.findall(r"(?m)^precondition_check:", ledger)
+        self.assertEqual(len(top_level), 1, "experiment-ledger must have one precondition_check")
+        # enforced_by must reference real validators, not the removed phantom function.
+        phantom = "validate_pr4_mirror_y_artifacts"
+        self.assertNotIn(phantom, ledger)
+        self.assertNotIn(phantom, read(EVIDENCE_PACKAGE))
 
     def test_stage3_reviewer_simulation_records_evidence_limited_decision(self) -> None:
         text = read(STAGE3_REVIEW)
