@@ -1,9 +1,9 @@
 {
   "split": "test",
   "t_eval": 0,
-  "onestep_rmse": 0.011453213170170784,
+  "onestep_rmse": 0.011793937534093857,
   "persistence_rmse": 0.01507564540952444,
-  "skill_vs_persistence": 1.3162808711871414,
+  "skill_vs_persistence": 1.2782537948792623,
   "mean_speed": 1.1624997854232788,
-  "relative_rmse": 0.009852228201487834
+  "relative_rmse": 0.01014532448261877
 }

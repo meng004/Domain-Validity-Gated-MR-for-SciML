@@ -1,6 +1,6 @@
 # Provenance for S2
 
-Generated at: `2026-06-06T14:35:02Z`
+Generated at: `2026-06-06T14:55:38Z`
 
 ## Data source
 
@@ -12,7 +12,7 @@ Generated at: `2026-06-06T14:35:02Z`
 ## Model / checkpoint
 
 - `scripts/mcmr/cylinder_flow/mgn.py` MeshGraphNet, config `{"hidden": 64, "num_layers": 4, "node_in": 11, "edge_in": 3, "out_dim": 2, "seed": 2, "steps": 1500, "train_steps_max": 149, "lr": 0.001}`.
-- Checkpoint `checkpoint.pt` sha256 `c63b5126860781012060a89b705915f2098b13a2dc35045cc07f4e52f1151477`.
+- Checkpoint `checkpoint.pt` sha256 `e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562`.
 
 ## Honesty boundary
 
