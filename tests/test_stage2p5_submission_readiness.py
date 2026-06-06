@@ -70,6 +70,16 @@ FRAMEWORK_GUARD_MARKERS = [
 ]
 
 
+# Round-2 reviewer-driven integrity markers: the normalizer decomposition control
+# (separating learned weights from the input normalizer), the OOD binary-magnitude
+# caveat, and the conservation verdict relabel must all stay in BOTH files.
+ROUND2_INTEGRITY_MARKERS = [
+    "from 1.1032 to 1.1014",            # normalizer-equivariance control
+    "binary equivariance failure",      # OOD magnitude read as binary only
+    "inconclusive: reference-relative non-regression guard",  # conservation relabel
+]
+
+
 # A+B convergence: the two added within-SUT runs (rollout-accuracy comparator and the
 # exact mirror-y test on a provably symmetric, admissible mesh) and their honesty
 # caveats must appear in BOTH the manuscript and the IST package.
@@ -190,6 +200,15 @@ class Stage25SubmissionReadinessTest(unittest.TestCase):
         manuscript = read(MANUSCRIPT)
         ist = read(IST_MAIN)
         for marker in ADDED_EVIDENCE_GUARD_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
+    def test_round2_reviewer_integrity_fixes_present(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in ROUND2_INTEGRITY_MARKERS:
             with self.subTest(file="manuscript", marker=marker):
                 self.assertIn(marker, manuscript)
             with self.subTest(file="ist_main", marker=marker):

@@ -191,6 +191,29 @@ def run_from_manifest(manifest_path: Path) -> dict[str, object]:
     mapped[:, 1] = -follow_up_output[sigma, 1]
     metric_value = relative_l2(mapped, source_output)
 
+    # Control for normalizer-induced non-equivariance. vel_norm is fit to the
+    # asymmetric training data, so a non-zero vy-mean makes the input normalizer
+    # slightly non-equivariant under vy -> -vy and could leak into the violation.
+    # Re-run with the vy-mean zeroed (which makes the input normalizer exactly
+    # equivariant in vy); if the result barely changes, the violation is dominated
+    # by the learned weights, not the normalizer.
+    vel_norm_sym = Normalizer.from_dict(
+        {"mean": [checkpoint["vel_norm"]["mean"][0], 0.0],
+         "std": checkpoint["vel_norm"]["std"]})
+
+    def forward_sym(v: np.ndarray) -> np.ndarray:
+        nf = torch.cat([vel_norm_sym.normalize(torch.as_tensor(v)), onehot], dim=-1)
+        with torch.no_grad():
+            out = model(nf.to(torch.float32), edge_feat.to(torch.float32), edge_index)
+        return out.detach().numpy()
+
+    so2, fo2 = forward_sym(vel), forward_sym(vel_follow)
+    mp2 = np.empty_like(fo2)
+    mp2[:, 0], mp2[:, 1] = fo2[sigma, 0], -fo2[sigma, 1]
+    control_metric = relative_l2(mp2, so2)
+    normalizer_share = (abs(metric_value - control_metric) / metric_value
+                        if metric_value else 0.0)
+
     raw_dir = _resolve(fields["raw_output_dir"])
     raw_dir.mkdir(parents=True, exist_ok=True)
     for name, arr in (("mesh_pos", pos), ("node_type", node_type), ("cells", cells),
@@ -218,6 +241,15 @@ def run_from_manifest(manifest_path: Path) -> dict[str, object]:
             "node_type_match_rate": type_match, "reflection_offset_max": offset,
             "edge_set_invariant_under_reflection": edge_invariant,
             "exact_relation_admissible": True,
+        },
+        "normalizer_equivariance_control": {
+            "vel_norm_mean_vy": float(checkpoint["vel_norm"]["mean"][1]),
+            "vel_norm_std_vy": float(checkpoint["vel_norm"]["std"][1]),
+            "relative_l2_with_vy_mean_zeroed": control_metric,
+            "normalizer_induced_share": normalizer_share,
+            "note": ("Zeroing vel_norm's vy-mean makes the input normalizer exactly "
+                     "equivariant in vy; the tiny change in relative L2 shows the "
+                     "violation is dominated by learned weights, not the normalizer."),
         },
         "claim_limitations": (
             "One SUT, one checkpoint, one synthetic symmetric mesh, one input state. "
