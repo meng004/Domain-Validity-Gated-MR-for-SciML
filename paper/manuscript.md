@@ -28,7 +28,7 @@ We propose a domain-validity rubric for screening candidate MRs, an MR-card and 
 
 ### Results
 
-Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.1): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this asymmetric mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. Two further within-SUT runs sharpen the interpretation: a same-trajectory one-step rollout-accuracy diagnostic gives median relative L2 0.0216, so the mirror-y violation is about 34 times the surrogate's in-distribution accuracy; and on a synthetic mesh that is provably symmetric about the centerline — where the rubric admits the exact mirror-y relation rather than downgrading it — the surrogate still violates exact mirror-y equivariance (relative L2 1.10), which removes the out-of-relation-domain objection to the mirror-y finding. Used as detectors against a 10-mutant injected-fault catalogue, the MRs catch 5 of 10 faults and localize them by MR class (continuity to boundary/scale faults, symmetry to physical-channel/adjacency faults). This draft makes no claims about cross-SUT pass rates, general or real-world fault-detection rates, comparative baseline superiority, validated localization accuracy, model accuracy, or SUT reliability.
+Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.1): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this asymmetric mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. Two further within-SUT runs sharpen the interpretation: a same-trajectory one-step rollout-accuracy diagnostic gives median relative L2 0.0216, so the mirror-y violation is about 34 times the surrogate's in-distribution accuracy; and on a synthetic mesh that is provably symmetric about the centerline — where the rubric admits the exact mirror-y relation rather than downgrading it — the surrogate still violates exact mirror-y equivariance (relative L2 1.10), which removes the out-of-relation-domain objection to the mirror-y finding. Used as detectors against a 10-mutant injected-fault catalogue, the MRs catch 5 of 10 faults and, in a first suggestive test, localize them by MR class (continuity to boundary/scale faults, symmetry to physical-channel/adjacency faults). This draft makes no claims about cross-SUT pass rates, general or real-world fault-detection rates, comparative baseline superiority, validated localization accuracy, model accuracy, or SUT reliability.
 
 ### Conclusion
 
@@ -462,14 +462,22 @@ and metric ledgers are committed under `research_assets/runs/`.
   vs the 1.5 threshold); the mirror-y (symmetry) MR detected a physical-channel and a
   mesh-adjacency fault (violation rising 69–142% above its 0.735 baseline); node-permutation
   equivariance detected none, because these faults preserve node-relabeling invariance and
-  the MR stays exact by design. Five of ten mutants were detected by at least one MR, and
-  the detections localize by MR class — continuity to boundary/scale faults, symmetry to
-  physical-channel/adjacency faults — which is the first evidence for the §3.6 interpretation
-  protocol. The undetected five (e.g. doubling a small update, sign-flipping the step, zeroing
-  the transverse update) have only a small effect on the scored quantity, so this also
-  delimits where these MRs are insensitive. It is one SUT, one checkpoint, one injected-fault
-  catalogue; it is not a real-world or general fault-detection rate, a reliability claim, or a
-  baseline-superiority claim.
+  the MR stays exact by design. Five of ten mutants were detected by at least one MR (at least
+  one mutant per detected fault class), and the detections localize by MR class — continuity to
+  boundary/scale faults, symmetry to physical-channel/adjacency faults — which is a first
+  bounded test of the §3.6 interpretation protocol, suggestive rather than a validation. Three
+  honesty notes bound this. First, the detected faults are gross corruptions (zeroed inflow,
+  non-zero wall, un-denormalized update, swapped velocity channels, permuted edges) that any
+  divergence- or symmetry-sensitive detector would catch; the catalogue is an independent
+  taxonomy, not adversarial to these MRs but not designed for them. Second, two undetected
+  cases are near or by-construction: the edge-drop fault is a near-miss (32% mirror-y change vs
+  the 50% threshold), and the boundary-condition faults are invisible to mirror-y by
+  construction because boundary imposition happens downstream of the update the symmetry MR
+  scores. Third, the remaining undetected faults (doubling a small update, sign-flipping the
+  step, zeroing the transverse update) shift the absolute output without crossing the
+  scored-quantity thresholds, delimiting where these MRs are structurally insensitive. It is
+  one SUT, one checkpoint, one injected-fault catalogue; it is not a real-world or general
+  fault-detection rate, a reliability claim, or a baseline-superiority claim.
 
 These pilots illustrate the direction of the paper's argument — that in-distribution
 accuracy alone does not bound whether a surrogate respects physical structure (the
@@ -501,6 +509,8 @@ The value of the current study is not that every MR finds a new fault beyond rol
 The PR4 mirror-y evidence adds one bounded rate claim only: the approximate OOD-stress probe failed on 10 of 10 recorded eval frames for one SUT, one checkpoint, one MR, one eval trajectory. It remains an out-of-relation-domain exact mirror-y case and a bounded within-SUT frame-level OOD-stress result, not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim.
 
 A natural objection is that the admissibility predicate merely re-describes the three outcomes it was introduced with — node permutation passes, mirror-y is downgraded, conservation is deferred — and is therefore fitted rather than tested. The two added within-SUT runs are designed to answer this. The symmetric-mesh run is an out-of-sample use of the predicate: the predicate states that on a symmetric mesh the exact mirror-y relation becomes admissible, and the experiment then tests that admitted relation independently, finding a genuine equivariance violation (relative L2 1.10) rather than confirming a pre-arranged result. The rollout-accuracy run supplies the accuracy comparator the original three pilots lacked, and shows the mirror-y violation is about 34 times the surrogate's in-distribution one-step error, so the relation evidence is not a restatement of accuracy. Neither run removes the central limitation — this is still one SUT and one checkpoint — but together they convert the mirror-y finding from a self-downgraded probe into an admissible-relation violation with an accuracy baseline.
+
+The comparative baselines (expert MR design, generic MR generation, LLM candidates) remain blocked, so we cannot yet quantify what the rubric adds over unguided MR identification. We can, however, make the counterfactual concrete on the present evidence: the rubric averted two specific misreadings that an unguided application would plausibly have made. Without the numerical-decidability gate, the absolute discrete-divergence relation would have been executed and, because the surrogate's predicted divergence is close to the reference, recorded as a conservation *pass* — a false assurance, since the reference field itself carries non-negligible divergence and no calibrated tolerance exists; the rubric instead deferred it. Without the boundary-compatibility and bijectivity checks, the exact mirror-y failure on the asymmetric eval mesh would have been read as a model symmetry fault, when the symmetric-mesh run shows the exact relation is admissible elsewhere and the asymmetric-mesh violation is partly a geometric artifact; the rubric instead downgraded it to an OOD-stress probe and flagged the geometry. These are two concrete cases where the rubric prevented an overclaim that the candidate relation alone would have produced — a counterfactual argument for the workflow's value, pending the blocked baseline measurements.
 
 ### 6.2 Boundary of Claims
 
