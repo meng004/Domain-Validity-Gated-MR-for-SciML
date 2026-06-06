@@ -499,7 +499,91 @@ evidence-gated rubric will refuse, downgrade, or admit a relation on stated grou
 rather than fabricate a verdict. They are pilot-scale, within one SUT and checkpoint,
 and do not by themselves prove the general claim.
 
-### 5.4 Still blocked
+### 5.4 Multi-checkpoint replication (K=6 checkpoints, one architecture family / one dataset)
+
+To address a single-checkpoint objection without overclaiming a cross-SUT result, the
+five within-SUT measurements above are replicated across a roster of K=6 MeshGraphNets
+cylinder-flow checkpoints trained on the same DeepMind dataset using the same
+read-only Minimum-MR-SubSet trainer: four base-config seed replicas S0–S3 (hidden=64,
+num_layers=4, training seeds {0, 1, 2, 3}, 1500 stage-A optimization steps each) and
+two configuration variants S4 (hidden=128, seed 0) and S5 (num_layers=6, seed 0).
+Each checkpoint has a distinct sha256 (recorded in the per-SUT manifest and in
+`research_assets/runs/multicheckpoint/e1_aggregate.json`); the S4/S5 variants reuse
+the trainer's read-only `train()` entry point through a thin wrapper
+(`tools/train_config_variant.py`) that writes only into this repository. The same
+six runners (`tools/run_real_sut_mr.py`,
+`tools/run_mirror_y_ood_stress.py`, `tools/run_mirror_y_symmetric_mesh.py`,
+`tools/run_conservation_diagnostic.py`, `tools/run_rollout_accuracy.py`,
+`tools/run_seeded_fault_detection.py`) are executed against every checkpoint by
+`tools/e1_multicheckpoint_runner.py`; the seed-replica family carries a bootstrap 95%
+confidence interval (B=2000 over S0–S3), and S4 and S5 are reported descriptively as
+single-instance configuration variants. The honesty boundary is explicit: K=6 is a
+cross-checkpoint / cross-configuration replication across one architecture family and
+one dataset, not a cross-SUT (cross-architecture-family) generalization. The
+seed-replica family standardises only the training seed and so should not be treated
+as an independent SUT sample. The replication results are:
+
+- **Node-permutation equivariance** holds to machine precision (relative L2 = 0.0)
+  on every one of the six checkpoints, confirming the representation-MR sanity check
+  is a structural property of the message-passing pipeline rather than an artifact of
+  one trained instance.
+- **Mirror-y OOD-stress** (approximate reflection on the asymmetric DeepMind mesh)
+  reports a per-checkpoint median relative L2 with seed-family mean 0.774 and 95%
+  bootstrap CI [0.743, 0.804]; S4 = 0.764 and S5 = 0.832 sit within or just outside
+  that band. The violation is therefore reproducible across seed and configuration
+  variation, not specific to one checkpoint.
+- **Exact mirror-y on the synthetic symmetric mesh** fails on every checkpoint;
+  the seed-family mean is 1.00 with 95% CI [0.75, 1.15], and S4 = 1.10, S5 = 1.00
+  remain in the same neighbourhood. The exact-symmetry failure is therefore a
+  property of the architecture family on this dataset, not of one trained instance.
+- **Reference-relative conservation ratio** (max over the recorded eval frames)
+  sits tightly above 1: seed-family mean 1.009, 95% CI [1.007, 1.011]; S4 = 1.008,
+  S5 = 1.010. All six checkpoints stay well below the predeclared 1.5 regression
+  threshold, so the reference-relative non-regression verdict reproduces across the
+  family without any checkpoint passing absolute conservation.
+- **One-step rollout accuracy** (median relative L2) is also tight: seed-family
+  mean 0.0221, 95% CI [0.0217, 0.0224]; S4 = 0.0226, S5 = 0.0221. The mirror-y
+  OOD-stress violation is therefore about 35x the in-distribution one-step accuracy
+  on *every* checkpoint of the roster, not just on the original pilot.
+
+What this multi-checkpoint replication adds is not a new measurement but a
+robustness check: the within-SUT verdicts of Sections 5.3 are not artifacts of a
+single training run. The mirror-y violation magnitude survives seed replication and
+mild configuration variation; the conservation diagnostic stays in its narrow band;
+the rollout accuracy is consistent. What this replication does *not* license is a
+cross-architecture-family generalization (only MeshGraphNets and a fixed dataset
+are exercised), an exact reliability claim (the seed-replicas share more variance
+than independent SUTs would), or a real-world fault-detection claim.
+
+### 5.5 Operator-floor resolution sweep (calibration of numerical decidability)
+
+The admissibility predicate of Section 3.3 requires the verdict tolerance to
+dominate the operator's intrinsic error floor (numerical decidability). For the
+P1 constant-per-cell discrete divergence operator that scores the continuity MR,
+that floor is a property of the operator and the mesh, not of any SUT, and it
+admits a direct empirical calibration. On a y=0-symmetric structured triangular
+channel mesh family (built by `tools.run_mirror_y_symmetric_mesh.build_symmetric_channel`)
+at four resolutions h0, h0/2, h0/4, h0/8, we evaluated the analytically
+divergence-free reference velocity field $u = (\partial_y \psi, -\partial_x \psi)$
+with stream function $\psi(x, y) = \sin(\pi x / L_x) \sin(\pi y / L_y)$ and measured the
+area-weighted RMS of the per-cell discrete divergence. A log–log linear fit of
+RMS vs. characteristic edge length gives slope **0.988** (all cells, $R^2 = 1.000$)
+and slope **0.995** (interior-only, $R^2 = 1.000$), matching the theoretical
+$O(h)$ truncation rate of P1 piecewise-linear shape functions on smooth fields.
+This empirically calibrates the operator-floor magnitude that the verdict
+tolerance must dominate, confirming that the admissibility-predicate gating
+condition for the continuity MR has a measurable basis on this mesh family rather
+than only a theoretical justification. Raw outputs and the fit are committed at
+`research_assets/runs/operator-floor-sweep/operator_floor_report.json`. The scope
+is one mesh family and one smooth analytic field; the calibration confirms the
+expected rate of the operator on this mesh family but does not generalize across
+mesh geometries or analytic fields.
+
+### 5.6 Fault-detection robustness across the multi-checkpoint roster
+
+[E3-RESULTS-PLACEHOLDER]
+
+### 5.7 Still blocked
 
 The following remain blocked and must not be written as results: cross-SUT or
 geometry-independent pass/fail rates; comparative superiority over any baseline;
