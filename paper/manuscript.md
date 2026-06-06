@@ -558,6 +558,17 @@ cross-architecture-family generalization (only MeshGraphNets and a fixed dataset
 are exercised), an exact reliability claim (the seed-replicas share more variance
 than independent SUTs would), or a real-world fault-detection claim.
 
+Table 5.4 summarizes the per-MR aggregates.
+
+| MR / diagnostic (per-SUT scalar) | S0–S3 mean | 95% CI (bootstrap, B=2000) | S4 (hidden=128) | S5 (num_layers=6) |
+|---|---|---|---|---|
+| Node-permutation rel L2 | 0.0 | [0.0, 0.0] | 0.0 | 0.0 |
+| Mirror-y OOD-stress median rel L2 | 0.774 | [0.743, 0.804] | 0.764 | 0.832 |
+| Exact mirror-y on symmetric mesh rel L2 | 1.00 | [0.75, 1.15] | 1.10 | 1.00 |
+| Conservation max ratio (vs. reference) | 1.009 | [1.007, 1.011] | 1.008 | 1.010 |
+| One-step rollout median rel L2 | 0.0221 | [0.0217, 0.0224] | 0.0226 | 0.0221 |
+| Seeded-fault union detection (k/10) | 5/10 (each) | — | 4/10 | 4/10 |
+
 ### 5.5 Operator-floor resolution sweep (calibration of numerical decidability)
 
 The admissibility predicate of Section 3.3 requires the verdict tolerance to
@@ -650,6 +661,26 @@ fault's residual mirror-y symmetry — are now bounded with Wilson 95% CIs. This
 robustness and structural-insight result within one architecture family on one dataset
 against one fixed 10-mutant catalogue; it is not a real-world fault-detection rate, a
 cross-architecture-family generalization, or a baseline-superiority claim.
+
+Table 5.6 summarizes the per-mutant Wilson 95% CIs.
+
+| Mutant | Fault class | Detecting MR | k / n | Rate | 95% CI |
+|---|---|---|---|---|---|
+| BC_zero_inflow | boundary_condition | conservation | 30/30 | 1.00 | [0.89, 1.00] |
+| BC_nonzero_wall | boundary_condition | conservation | 30/30 | 1.00 | [0.89, 1.00] |
+| NS_skip_denorm | normalization_scale | conservation | 30/30 | 1.00 | [0.89, 1.00] |
+| PC_swap_xy | physical_channel | mirror-y | 30/30 | 1.00 | [0.89, 1.00] |
+| MA_permute_edges | mesh_adjacency | mirror-y (S0–S3 only) | 20/30 | 0.67 | [0.49, 0.81] |
+| MA_drop_edges | mesh_adjacency | (none) | 0/30 | 0.00 | [0.00, 0.11] |
+| NS_double_scale | normalization_scale | (none) | 0/30 | 0.00 | [0.00, 0.11] |
+| TR_sign_flip | temporal_rollout | (none) | 0/30 | 0.00 | [0.00, 0.11] |
+| TR_double_step | temporal_rollout | (none) | 0/30 | 0.00 | [0.00, 0.11] |
+| PC_zero_vy | physical_channel | (none at p=1.0) | 0/30 | 0.00 | [0.00, 0.11] |
+
+The R3 partial-fraction sweep on PC_zero_vy is plotted alongside in Figure 5.6
+(detection rate vs. fraction, mirror-y detector): 6/6 across the K=6 roster at
+fractions {0.25, 0.5, 0.75}, dropping to 0/6 at fraction 1.0 — the non-monotone
+detection–severity curve described above.
 
 ### 5.7 Still blocked
 
