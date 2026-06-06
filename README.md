@@ -101,7 +101,7 @@ the precondition gate fails closed and the SUT runs stay blocked by design.
 
 ## Positioning
 
-The intended venue is a software V&V method paper (e.g. STVR / IST / JSS), framed as:
+The intended venue is a software V&V method paper (e.g. IST / JSS), framed as:
 
 > A domain-validity-aware workflow for identifying and executing metamorphic relations in
 > SciML OOD validation.

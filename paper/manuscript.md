@@ -74,13 +74,17 @@ We decompose this into four questions.
 
 ### 1.2 Contributions
 
-This paper makes four scoped contributions.
+This paper makes five scoped contributions, each repositioned narrowly with respect to the closest prior we identify in Section 2.
 
-First, we propose a domain-validity rubric for screening candidate MRs in SciML testing. The rubric checks whether a candidate relation has a clear physical basis, compatible boundary conditions, a semantics-preserving transformation, a measurable output relation, an interpretable tolerance, and a diagnosable failure mode.
+First, we propose a domain-validity rubric for screening candidate MRs in SciML testing. The rubric checks physical basis, transformation preconditions, boundary-condition compatibility, output mapping, metric and tolerance, and failure diagnosability. As a SciML-specific instantiation of the calibrated-tolerance principle introduced by Eniser et al. [eniser2022relaxations] as *relaxations* for stochastic RL policy testing, we ground the tolerance floor in the *analytically computable truncation error of the discrete measurement operator* — an a-priori floor rather than an empirically estimated one — which to our knowledge is new for SciML MRs.
 
 Second, we define an MR-card and executable-asset workflow that converts retained candidates into auditable test assets. NOETHER-style pattern organization may be used as one candidate source, but it is not the contribution being evaluated here and it does not decide MR validity.
 
-Third, we define a relation-level verdict and ledger scheme. Each retained MR records a source-case schema, follow-up transformation, output mapping, metric, tolerance rule, exclusion rule, and verdict interpretation. This converts physical diagnostics such as residuals, conservation errors, and equivariance errors into auditable oracle-free tests only when their transformation and validity conditions are explicit. We read verdicts in two dimensions (relation-violation against domain-violation magnitude); the relation-violation axis is quantified, but the domain-violation axis is at present only qualitatively operationalized, and a calibrated domain-violation score across MR classes is left to future work.
+Third, we define a relation-level verdict and ledger scheme that reads verdicts in two dimensions (relation-violation against domain-violation magnitude). This instantiates, for physics-governed SciML, the constraint-architecture pattern introduced by Duque-Torres et al. [duqueTorres2023bugornot], formalised by *Towards a Complete Metamorphic Testing Pipeline* [duqueTorres2023completePipeline], and automated data-drivenly by MetaTrimmer [duqueTorres2023metaTrimmer]; what is new here is a *typed ontology* of domain-inadmissibility drawn from PDE-domain preconditions, geometry, boundary conditions, and operator admissibility. The relation-violation axis is quantified; the domain-violation axis is at present only qualitatively operationalized, and a calibrated continuous score is left to future work.
+
+Fourth, we provide a MeshGraphNets-family cylinder-flow case study on one trained SUT and checkpoint, extending the active-transformation testing direction of Reichert et al. [reichert2024hess] — who applied physics-derived MRs to a trained LSTM hydrologic surrogate and produced a basin-stratified applicability map — from hydrology to mesh-based neural fluid surrogates. The current evidence contains three scoped pilots, a same-SUT rollout-accuracy comparator, and an exact mirror-y test on a provably symmetric admissible synthetic mesh. Expert MR design, generic MR-generation scope contrasts, LLM-assisted candidate generation, and cross-SUT comparisons remain protocol commitments until matched artifacts exist.
+
+Fifth, as an element that none of the closest prior works addresses, we use the paper's own MRs as fault detectors against an independently re-implemented 10-mutant seeded-fault catalogue, and report a by-class localization: the continuity MR localizes to boundary-condition and gross normalization-scale faults; the symmetry MR localizes to physical-channel and mesh-adjacency faults; node-permutation equivariance, by-design exact under these faults, localizes to none. This is suggestive evidence for a typed mapping from MR class to fault class, not a validated localization model.
 
 Fourth, we provide a MeshGraphNets-family cylinder-flow case study on one trained SUT and checkpoint. The current evidence contains three scoped pilots: node-permutation sanity evidence, a bounded within-SUT mirror-y OOD-stress frame-rate result, and a reference-relative discrete-divergence diagnostic. Expert MR design, generic MR-generation scope contrasts, LLM-assisted candidate generation, rollout-accuracy baselines, and cross-SUT comparisons remain protocol commitments until matched artifacts exist.
 
@@ -112,11 +116,15 @@ The gap is that candidate identification is not enough for SciML. A candidate re
 
 ### 2.4 Physics-Based MT for Learned Scientific Simulators
 
-Recent candidate studies are directly relevant because they appear to test learned physical-field or fluid-velocity predictors using physics-based metamorphic ideas. The current reference ledger treats these studies as verification leads rather than submission-ready anchors: one physical-field prediction lead remains unverified, and one fluid-velocity prediction lead is only partially verified.
+Three contemporary works are the closest prior to ours and frame what is and is not new here. We engage each one explicitly.
 
-These candidate leads are treated cautiously because the current reference ledger has not upgraded them into submission-ready closest-work evidence. They nevertheless reinforce an important boundary for this paper: the contribution should not be framed as the first use of physics-based MT for learned fluid or field predictors.
+**Reichert et al. (2024)** [reichert2024hess] applied physics-derived metamorphic relations to a trained LSTM hydrologic surrogate. They perturbed climate-forcing inputs (temperature, precipitation) in directions where the qualitative physical response is known a priori, stratified pass/fail outcomes by basin elevation to produce an implicit applicability map, and excluded basins where forcing uncertainty dominated the response signal — an informal admissibility filter. The present work formalises these practices as an explicit admissibility predicate, a two-dimensional verdict type, and a relation-indexed applicability map, and extends them from hydrology to mesh-based neural fluid surrogates whose outputs live on irregular meshes and whose MR validity depends on geometry and discrete operators rather than basin physiography. We do not claim to be the first to use physics-derived MRs on a trained neural surrogate.
 
-Our contribution is narrower and methodological. We shift the emphasis from scenario-level physical consistency checks to a validity-gated workflow. A retained relation is represented as an executable MR asset, not only as an intuitive physical expectation. Each asset records its preconditions, boundary-condition compatibility, output mapping, metric, tolerance rationale, exclusion rule, and verdict interpretation. This allows the test report to distinguish a model inconsistency from a relation that was applied outside its valid domain.
+**Eniser et al. (2022)** [eniser2022relaxations] introduced *relaxations* — numerical tolerances embedded inside MR oracles — for action-policy testing of stochastic reinforcement-learning systems, deriving them empirically from policy rollouts on Highway, LunarLander and BipedalWalker. We extend this calibrated-tolerance principle to deterministic numerical surrogates by grounding the tolerance floor in the *analytically computable truncation error of the discrete measurement operator* (for instance, the P1 discrete-divergence floor of a triangular FEM mesh), rather than empirically estimating it from rollouts. This is a domain-specific instantiation that enables a-priori floor computation for SciML systems governed by known numerical schemes. We do not claim that calibrated MR tolerance is itself new.
+
+**The 2023 violation-attribution cluster** — Duque-Torres et al. (SANER 2023) [duqueTorres2023bugornot], *Towards a Complete Metamorphic Testing Pipeline* [duqueTorres2023completePipeline] and MetaTrimmer [duqueTorres2023metaTrimmer] — identified the bug-vs-MR-inapplicability separation as a research problem and addressed it architecturally with explicit MR constraints used as a pipeline pre-filter, with MetaTrimmer automating the constraint derivation from random-input violation logs. Our two-dimensional verdict instantiates this architectural pattern for physics-governed SciML; what is new is a *typed ontology of domain-inadmissibility* drawn from PDE-domain preconditions, geometry compatibility, boundary-condition compatibility, and operator admissibility, rather than a binary skip/proceed gate or a data-derived constraint set. We do not claim that the bug-vs-inapplicability separation is itself new.
+
+Across all three closest works, the element our debates could not pre-empt is the seeded-fault MR-as-detector with by-class fault localization reported in Section 5.3. None of Reichert, Eniser, or the 2023 cluster attempts to map MR failures back to identifiable fault classes within the system under test.
 
 ### 2.5 SciML V&V, Residuals, UQ, and Failure Modes
 
@@ -452,7 +460,15 @@ and metric ledgers are committed under `research_assets/runs/`.
   amplified by normalization mismatch relative to in-distribution behaviour; the result
   should be read as a binary equivariance failure, not as a calibrated in-distribution
   magnitude. And this is one input on one mesh; it is not an accuracy, reliability,
-  cross-SUT, or geometry-independent claim.
+  cross-SUT, or geometry-independent claim. The 1.10 magnitude is also larger than the
+  asymmetric-mesh OOD-stress 0.737, which would be paradoxical if the symmetric mesh were
+  the cleaner setting; the more likely reading is that the synthetic no-obstacle channel
+  is itself more aggressively out-of-distribution for the cylinder-trained surrogate
+  (Poiseuille-like profile rather than vortex shedding, no obstacle wake), so the larger
+  magnitude reflects deeper OOD rather than a cleaner equivariance measurement. The two
+  runs therefore answer different questions — admissibility of the relation, and severity
+  of the violation under OOD — and the symmetric-mesh number should be read as a binary
+  equivariance failure on an admissible relation, not as a directly comparable magnitude.
 - **Seeded-fault detection (do the MRs catch known faults?).** We re-implemented, in
   pure numpy/torch from the read-only Minimum-MR-SubSet witness taxonomy, a catalogue of
   10 injected pipeline faults across five fault classes (boundary-condition, mesh-adjacency,
