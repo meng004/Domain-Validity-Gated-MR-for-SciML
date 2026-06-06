@@ -1,0 +1,39 @@
+%%{init: {'theme':'neutral', 'flowchart': {'htmlLabels': false}}}%%
+flowchart TB
+    A["MR card\nbasis; preconditions\nmapping; metric; tolerance\nexclusion rule"]
+    B["Source case"]
+    C["Follow-up transform"]
+    D["Follow-up case"]
+    E["Source run"]
+    F["Follow-up run"]
+    G["Output mapping"]
+    H["Metric computation"]
+    I{Exclusion check}
+    J{Verdict rule}
+    K["Verdict ledger"]
+    L["Metric outputs"]
+    M["Run logs"]
+    N["Transformation record"]
+
+    A --> B
+    A --> C
+    B --> E
+    C --> D --> F
+    E --> G
+    F --> G
+    G --> H
+    H --> I
+    A --> I
+    I -->|eligible| J
+    I -->|excluded| J
+    A --> J
+    J --> K
+    H --> L
+    E --> M
+    F --> M
+    C --> N
+
+    classDef decision fill:#ffffff,stroke:#111,stroke-width:1px;
+    classDef artifact fill:#f7f7f7,stroke:#444,stroke-width:1px;
+    class I,J decision;
+    class K,L,M,N artifact;

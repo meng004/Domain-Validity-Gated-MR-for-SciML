@@ -1,6 +1,6 @@
 {
   "ledger_id": "real-sut-mirror-y-ood-stress-metric-ledger",
-  "evidence_level": "real-sut-single-mr-ood-stress-pilot",
+  "evidence_level": "real-sut-single-mr-ood-stress-frame-rate",
   "schema_version": "0.1.0",
   "sut_repo": "/home/user/Minimum-MR-SubSet",
   "sut_commit": "8c0b7ef3605fd9452884d701e2a191a2b14a5a35",

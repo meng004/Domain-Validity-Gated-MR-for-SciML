@@ -6,7 +6,9 @@ This package defines an evidence-gated empirical protocol for physically grounde
 metamorphic-relation testing of MeshGraphNets-family cylinder-flow surrogates. It is a
 protocol and asset-readiness package plus three strictly-scoped real-SUT pilots (node
 permutation, mirror-y OOD-stress, divergence/conservation diagnostic); it is not a full
-Results package and reports no rate, reliability, accuracy, or baseline outcome.
+Results package and reports no general reliability, accuracy, baseline, cross-SUT, or
+geometry-independent rate outcome. The only rate-like result admitted here is the bounded
+within-SUT mirror-y OOD-stress frame rate recorded by PR4.
 
 ## Evidence Inventory
 
@@ -41,7 +43,7 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
 - The study evaluates relation-level verdict coverage and evidence completeness.
 - The current protocol records baselines as commitments rather than outcomes.
 - Missing real-SUT prerequisites fail closed and keep empirical claims blocked.
-- The fail-closed precondition gate is enforced in code (`tools/validate_experiment_protocol.py:validate_real_sut_preconditions`), not only described in prose.
+- The fail-closed precondition and artifact gates are enforced in code (`tools/validate_experiment_protocol.py:validate_experiment_ledger` and `validate_pr4_mirror_y_artifacts`), not only described in prose.
 - Fixture-level observations are limited to asset plumbing and transformation metrics.
 
 ## Single Real-SUT Pilot (scoped)
@@ -72,7 +74,7 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
 - Evidence-gating takeaway: the method refuses to treat mirror-y as a clean MR where the
   geometry does not support it, yet the downgraded probe surfaces a large symmetry violation
   on every recorded eval frame of a genuinely trained, converged surrogate. This is a bounded
-  within-SUT frame rate, not a geometry-independent or cross-SUT rate.
+  within-SUT frame rate, not a geometry-independent or cross-SUT rate. The bounded within-SUT frame rate is reported only for this one SUT, one checkpoint, one MR, and one eval trajectory.
 
 ## Conservation Diagnostic Pilot (scoped, evidence-gated)
 
@@ -93,7 +95,8 @@ Results package and reports no rate, reliability, accuracy, or baseline outcome.
 
 ## Statements Not Supported
 
-- A pass/fail rate, violation rate, or model-reliability conclusion (the pilots are single/few cases).
+- Any pass/fail or violation rate beyond the bounded within-SUT mirror-y OOD-stress frame
+  rate; no model-reliability conclusion is supported.
 - Absolute mass conservation (the divergence-free relation is deferred; only a reference-relative diagnostic was run).
 - More than one SUT has been evaluated; mirror-y is asserted only as an approximate OOD-stress probe, not an exact relation for this mesh.
 - The protocol improves accuracy or is superior to any baseline.
