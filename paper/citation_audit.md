@@ -36,7 +36,7 @@ Decision rule:
 | `karniadakis2021piml` | VERIFIED | Nature Reviews Physics DOI `10.1038/s42254-021-00314-5`. | Physics-informed machine-learning background. |
 | `li2021fno` | VERIFIED | ICLR/OpenReview record for Fourier Neural Operator. | Neural-operator background. |
 | `krishnapriyan2021failure` | VERIFIED | NeurIPS 2021 proceedings record. | PINN failure-mode background; no claim about MeshGraphNets. |
-| `gopakumar2025calibrated` | VERIFIED | ICML 2025/PMLR record. | Calibrated uncertainty/residual comparator context; not MT evidence. |
+| `gopakumar2025calibrated` | VERIFIED (author list corrected 2026-06-06) | Calibrated Physics-Informed Uncertainty Quantification, Gopakumar, Gray, Zanisi, Nunn, Pamela, Giles, Kusner, Deisenroth; arXiv:2502.04406; ICML 2025 (PMLR v267). Prior local author list was wrong and is fixed. | Calibrated UQ/residual comparator context; not MT evidence. |
 | `baral2025xrepit` | VERIFIED_WITH_LIMITS | ScienceDirect page and DOI `10.1016/j.compfluid.2026.107075`. | Hybrid ML-CFD trust/switching context; not MT or relation-level violation statistics. |
 | `wang2025deeponetfe` | VERIFIED_WITH_LIMITS | ScienceDirect page and DOI `10.1016/j.cma.2025.118319`. | Hybrid neural-operator/FE coupling context; not MT evidence. |
 | `zhao2026noether` | VERIFIED_WITH_LIMITS | arXiv `2605.17390` and DOI `10.48550/arXiv.2605.17390`. | Preprint-level candidate pattern organization context only; not peer-reviewed validation of this paper's MRs. |

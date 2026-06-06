@@ -83,15 +83,18 @@
   \bibinfo{pages}{52--63}.
 \newblock \DOIprefix\doi{10.1145/3533767.3534392}.
 %Type = Inproceedings
-\bibitem[{Gopakumar et~al.(2025)Gopakumar, Onken, Boussif, Azizzadenesheli and
-  Anandkumar}]{gopakumar2025calibrated}
-\bibinfo{author}{Gopakumar, V.}, \bibinfo{author}{Onken, D.},
-  \bibinfo{author}{Boussif, O.}, \bibinfo{author}{Azizzadenesheli, K.},
-  \bibinfo{author}{Anandkumar, A.}, \bibinfo{year}{2025}.
+\bibitem[{Gopakumar et~al.(2025)Gopakumar, Gray, Zanisi, Nunn, Pamela, Giles,
+  Kusner and Deisenroth}]{gopakumar2025calibrated}
+\bibinfo{author}{Gopakumar, V.}, \bibinfo{author}{Gray, A.},
+  \bibinfo{author}{Zanisi, L.}, \bibinfo{author}{Nunn, T.},
+  \bibinfo{author}{Pamela, S.}, \bibinfo{author}{Giles, D.},
+  \bibinfo{author}{Kusner, M.J.}, \bibinfo{author}{Deisenroth, M.P.},
+  \bibinfo{year}{2025}.
 \newblock \bibinfo{title}{Calibrated physics-informed uncertainty
   quantification}, in: \bibinfo{booktitle}{Proceedings of the 42nd
-  International Conference on Machine Learning}, pp.
-  \bibinfo{pages}{20103--20141}.
+  International Conference on Machine Learning (ICML)}.
+\newblock \DOIprefix\doi{10.48550/arXiv.2502.04406},
+  \href{http://arxiv.org/abs/2502.04406}{{\tt arXiv:2502.04406}}.
 %Type = Inproceedings
 \bibitem[{Hiremath et~al.(2021)Hiremath, Claus, Hasselbring and
   Rath}]{hiremath2021ocean}
