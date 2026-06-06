@@ -1,0 +1,74 @@
+{
+  "experiment_id": "E2-operator-floor-resolution-sweep",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-06T15:09:15Z",
+  "analytic_reference": {
+    "stream_function": "psi(x,y) = sin(pi x / Lx) * sin(pi y / Ly)",
+    "velocity": "u = (psi_y, -psi_x); div(u) = 0 analytically",
+    "Lx": 1.6,
+    "Ly": 0.4
+  },
+  "operator": "P1 constant-per-cell divergence (tools.conservation_rubric.cell_divergence)",
+  "norm": "area-weighted RMS",
+  "mesh_family": "y=0-symmetric structured triangular channel (tools.run_mirror_y_symmetric_mesh.build_symmetric_channel)",
+  "levels": [
+    {
+      "level": "h0",
+      "nx": 24,
+      "half_rows": 10,
+      "num_nodes": 504,
+      "num_cells": 920,
+      "h_rms_edge": 0.06552007056721593,
+      "divergence_rms_all": 1.3152622541411465,
+      "divergence_rms_interior": 1.3374320442477088,
+      "interior_cell_count": 794
+    },
+    {
+      "level": "h0/2",
+      "nx": 48,
+      "half_rows": 20,
+      "num_nodes": 1968,
+      "num_cells": 3760,
+      "h_rms_edge": 0.032237611861461686,
+      "divergence_rms_all": 0.6574700548070663,
+      "divergence_rms_interior": 0.6637758959013456,
+      "interior_cell_count": 3498
+    },
+    {
+      "level": "h0/4",
+      "nx": 96,
+      "half_rows": 40,
+      "num_nodes": 7776,
+      "num_cells": 15200,
+      "h_rms_edge": 0.01599284235098712,
+      "divergence_rms_all": 0.32845849885842154,
+      "divergence_rms_interior": 0.3300999745927822,
+      "interior_cell_count": 14666
+    },
+    {
+      "level": "h0/8",
+      "nx": 192,
+      "half_rows": 80,
+      "num_nodes": 30912,
+      "num_cells": 61120,
+      "h_rms_edge": 0.007965488684753361,
+      "divergence_rms_all": 0.16413127001624672,
+      "divergence_rms_interior": 0.16454769601793887,
+      "interior_cell_count": 60042
+    }
+  ],
+  "fit_all_cells": {
+    "slope": 0.9878316388904063,
+    "intercept": 2.9696078541605564,
+    "r_squared": 0.9999834875258939,
+    "expected_slope_oh": 1.0
+  },
+  "fit_interior_only": {
+    "slope": 0.994544859207402,
+    "intercept": 3.003442629913926,
+    "r_squared": 0.999993388455573,
+    "expected_slope_oh": 1.0
+  },
+  "verdict": "operator-floor-empirically-first-order",
+  "claim_limitations": "Structured symmetric mesh family and one smooth stream-function field. Calibrates the admissibility-predicate operator floor; not a generalization claim across mesh families or SUTs."
+}
