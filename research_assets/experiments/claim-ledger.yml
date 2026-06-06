@@ -213,11 +213,90 @@ claims:
       - "node-permutation equivariance is useless (it is exact-by-design here, not broken)."
     blocked_reason: null
 
+  - claim_id: "C11-multicheckpoint-replication"
+    status: "observed"
+    scope: "one-architecture-family / one-dataset / K=6 checkpoints (S0..S3 = seed-replica family base config; S4 = hidden=128; S5 = num_layers=6)"
+    evidence:
+      - "docs/superpowers/plans/2026-06-06-empirical-enhancement-E1E2E3.md"
+      - "tools/e1_multicheckpoint_runner.py"
+      - "tools/train_config_variant.py"
+      - "research_assets/runs/multicheckpoint/e1_aggregate.json"
+      - "research_assets/runs/multicheckpoint/S0/"
+      - "research_assets/runs/multicheckpoint/S1/"
+      - "research_assets/runs/multicheckpoint/S2/"
+      - "research_assets/runs/multicheckpoint/S3/"
+      - "research_assets/runs/multicheckpoint/S4/"
+      - "research_assets/runs/multicheckpoint/S5/"
+    wording_allowed: >
+      Across six MeshGraphNets cylinder-flow checkpoints of one architecture family
+      (four base-config seed replicas S0-S3 and two configuration variants S4=hidden=128,
+      S5=num_layers=6), the per-MR verdicts are stable: node-permutation equivariance is
+      exact (relative L2 = 0.0) on every checkpoint; the mirror-y OOD-stress probe
+      reports a median relative L2 of 0.77 (S0-S3 bootstrap 95% CI [0.74, 0.80];
+      S4=0.76, S5=0.83); exact mirror-y on the synthetic admissible mesh fails on every
+      checkpoint (relative L2 around 1.0); the reference-relative conservation ratio sits
+      at 1.01 (CI [1.007, 1.011]); and in-distribution one-step rollout median relative L2
+      is 0.022 (CI [0.0217, 0.0224]). The mirror-y violation magnitude is approximately
+      35x the in-distribution rollout error on every checkpoint. This is a
+      cross-checkpoint / cross-configuration replication across one architecture family
+      on one dataset.
+    wording_forbidden:
+      - "Cross-SUT generalization, cross-architecture-family generalization, or geometry-independent rates."
+      - "A real-world fault-detection or reliability claim."
+      - "The base-config seed family stands in for an independent SUT sample."
+    blocked_reason: null
+
+  - claim_id: "C12-operator-floor-resolution"
+    status: "observed"
+    scope: "one mesh family (y=0-symmetric structured triangular channel), four resolutions h0..h0/8, one smooth analytic stream-function field"
+    evidence:
+      - "tools/run_operator_floor_sweep.py"
+      - "tools/conservation_rubric.py"
+      - "research_assets/runs/operator-floor-sweep/operator_floor_report.json"
+    wording_allowed: >
+      On a y=0-symmetric structured triangular channel mesh at four resolutions
+      (h0, h0/2, h0/4, h0/8), the area-weighted RMS of the P1 constant-per-cell
+      discrete divergence operator applied to the analytically divergence-free
+      reference velocity field u = (psi_y, -psi_x) with psi(x,y) = sin(pi x / Lx)
+      sin(pi y / Ly) decays at a log-log slope of 0.988 (all cells) / 0.995
+      (interior cells), R-squared = 1.000, matching the theoretical O(h) truncation
+      rate of P1 piecewise-linear shape functions on smooth fields. This empirically
+      calibrates the operator-floor magnitude that the verdict tolerance must
+      dominate under the admissibility predicate (numerical decidability).
+    wording_forbidden:
+      - "Generalization across mesh families, geometries, or analytic fields."
+      - "An absolute divergence-free tolerance claim on the real DeepMind eval mesh."
+    blocked_reason: null
+
+  - claim_id: "C13-fault-detection-robustness"
+    status: "observed"
+    scope: "K=6 checkpoints / 10-mutant injected-fault catalogue / 3 domain-validity MR detectors / 5 input-permutation seeds / NS_double_scale severity grid {1.1, 1.25, 1.5, 2.0, 4.0} / PC_zero_vy partial-fraction grid {0.25, 0.5, 0.75, 1.0}"
+    evidence:
+      - "tools/run_e3_fault_robustness.py"
+      - "research_assets/runs/fault-robustness-e3/fault_robustness_report.json"
+    wording_allowed: >
+      Replaying the 10-mutant five-class seeded-fault catalogue against the K=6 checkpoint
+      roster yields stable per-mutant cross-SUT detection rates with Wilson 95% CIs; the
+      severity sweep on NS_double_scale s in {1.1, 1.25, 1.5, 2.0, 4.0} and on PC_zero_vy
+      partial-fraction p in {0.25, 0.5, 0.75, 1.0} shows monotone-non-decreasing detection
+      versus severity. Detection localizes by MR class (continuity -> boundary/scale;
+      symmetry -> physical-channel/adjacency; node-permutation is exact-by-design and
+      flags none of these mutants). This bounds the detector sensitivity of these
+      domain-validity MRs against this catalogue across the family, and is not a
+      real-world fault-detection rate.
+    wording_forbidden:
+      - "A real-world fault-detection rate or general baseline-superiority claim."
+      - "Cross-SUT (cross-architecture-family) generalization."
+    blocked_reason: null
+
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
     status: "partially-observed"
     wording_allowed: >
-      A bounded result now exists (see C10-seeded-fault-detection): the MRs detect 5/10
-      mutants of one injected-fault catalogue on one SUT. General fault-detection
-      effectiveness across SUTs, checkpoints, and real-world faults remains future work.
-    blocked_reason: "Only one SUT/checkpoint and one injected-fault catalogue have been run."
+      A bounded result now exists (see C10-seeded-fault-detection and
+      C13-fault-detection-robustness): the MRs detect 5/10 mutants of one injected-fault
+      catalogue on one SUT, and the rate is stable at 5/10 across the seed-replica
+      family and 4/10 across the capacity/depth variants in the K=6 roster, with severity
+      sweeps showing monotone-non-decreasing detection. General fault-detection
+      effectiveness across architecture families and real-world faults remains future work.
+    blocked_reason: "K=6 checkpoints share one architecture family / one dataset; one injected-fault catalogue."
