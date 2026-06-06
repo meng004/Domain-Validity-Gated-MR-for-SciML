@@ -80,6 +80,16 @@ ROUND2_INTEGRITY_MARKERS = [
 ]
 
 
+# Seeded-fault detection (C10/PC10): the MR-as-detector result and its boundaries
+# must appear in BOTH the manuscript and the IST package.
+SEEDED_FAULT_MARKERS = [
+    "Seeded-fault detection",
+    "injected-fault catalogue",
+    "5 of 10",
+    "PC10-seeded-fault-detection",
+]
+
+
 # A+B convergence: the two added within-SUT runs (rollout-accuracy comparator and the
 # exact mirror-y test on a provably symmetric, admissible mesh) and their honesty
 # caveats must appear in BOTH the manuscript and the IST package.
@@ -209,6 +219,15 @@ class Stage25SubmissionReadinessTest(unittest.TestCase):
         manuscript = read(MANUSCRIPT)
         ist = read(IST_MAIN)
         for marker in ROUND2_INTEGRITY_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
+    def test_seeded_fault_detection_present_in_manuscript_and_ist(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in SEEDED_FAULT_MARKERS:
             with self.subTest(file="manuscript", marker=marker):
                 self.assertIn(marker, manuscript)
             with self.subTest(file="ist_main", marker=marker):

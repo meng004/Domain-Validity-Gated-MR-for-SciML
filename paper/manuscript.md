@@ -28,7 +28,7 @@ We propose a domain-validity rubric for screening candidate MRs, an MR-card and 
 
 ### Results
 
-Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.1): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this asymmetric mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. Two further within-SUT runs sharpen the interpretation: a same-trajectory one-step rollout-accuracy diagnostic gives median relative L2 0.0216, so the mirror-y violation is about 34 times the surrogate's in-distribution accuracy; and on a synthetic mesh that is provably symmetric about the centerline — where the rubric admits the exact mirror-y relation rather than downgrading it — the surrogate still violates exact mirror-y equivariance (relative L2 1.10), which removes the out-of-relation-domain objection to the mirror-y finding. This draft makes no claims about cross-SUT pass rates, fault-detection rates, comparative baseline superiority, localization accuracy, model accuracy, or SUT reliability.
+Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.1): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this asymmetric mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. Two further within-SUT runs sharpen the interpretation: a same-trajectory one-step rollout-accuracy diagnostic gives median relative L2 0.0216, so the mirror-y violation is about 34 times the surrogate's in-distribution accuracy; and on a synthetic mesh that is provably symmetric about the centerline — where the rubric admits the exact mirror-y relation rather than downgrading it — the surrogate still violates exact mirror-y equivariance (relative L2 1.10), which removes the out-of-relation-domain objection to the mirror-y finding. Used as detectors against a 10-mutant injected-fault catalogue, the MRs catch 5 of 10 faults and localize them by MR class (continuity to boundary/scale faults, symmetry to physical-channel/adjacency faults). This draft makes no claims about cross-SUT pass rates, general or real-world fault-detection rates, comparative baseline superiority, validated localization accuracy, model accuracy, or SUT reliability.
 
 ### Conclusion
 
@@ -235,7 +235,7 @@ In the present study the relation-violation axis is quantitative — mirror-y re
 
 We organize retained MRs into a three-level hierarchy inspired by MR classification for scientific computing: physical-model relations, computational-model relations, and code-model relations. For learned mesh surrogates, the computational-model level includes graph representation and message-passing discretization assumptions.
 
-We use this hierarchy as a predeclared interpretation protocol that maps representation-level MRs to possible graph encoding or adapter problems, physical-model MRs to possible continuity, symmetry, or similarity violations, and code-model MRs to possible determinism, rollout, or implementation issues. At this stage, this is a localization protocol, not a validated localization model. It becomes validated only if seeded faults or mutants with known layers are used to evaluate the inference rule.
+We use this hierarchy as a predeclared interpretation protocol that maps representation-level MRs to possible graph encoding or adapter problems, physical-model MRs to possible continuity, symmetry, or similarity violations, and code-model MRs to possible determinism, rollout, or implementation issues. At this stage, this is a localization protocol, not a validated localization model. It becomes validated only if seeded faults or mutants with known layers are used to evaluate the inference rule. Section 5.3 reports a first bounded test of this protocol: against an injected-fault catalogue the continuity MR localized to boundary and normalization-scale faults while the symmetry MR localized to physical-channel and mesh-adjacency faults, which is suggestive evidence for the protocol's direction but not, on one SUT and one catalogue, a validated localization model.
 
 ## 4. Empirical Design
 
@@ -352,8 +352,9 @@ artifacts are committed and validated.
 | PC7-llm-candidate-support-only | Supported process boundary | Method and ethics sections | LLMs organize candidates; they do not judge MR validity. |
 | PC8-rollout-accuracy-diagnostic | Observed | `rollout-accuracy-baseline/raw/metric_ledger.json` | Same-SUT one-step accuracy (median rel L2 0.0216); mirror-y is ~34x larger; not a baseline-superiority or multi-trajectory claim. |
 | PC9-exact-mirror-y-symmetric-mesh | Observed | `mirror-y-symmetric-mesh/raw/metric_ledger.json` | Exact relation admissible and fails (rel L2 1.10) on a synthetic OOD symmetric mesh; not an accuracy, reliability, or cross-SUT claim. |
+| PC10-seeded-fault-detection | Observed | `seeded-fault-detection/raw/metric_ledger.json` | MRs as detectors catch 5/10 injected mutants, localizing by MR class; not a general or real-world fault-detection rate. |
 
-The PC# identifiers above are paper-level claims. The single source of truth for runtime-evidence claims is the runtime claim ledger (`research_assets/experiments/claim-ledger.yml`, claims C1–C9); each paper claim maps to it as: PC1→C4-rubric-decision-coverage; PC2→C1-fixture-asset-path and C4-rubric-decision-coverage; PC3→C3-baseline-comparison; PC4→C2-real-sut-verdicts; PC5→C7-conservation-diagnostic; PC6→C6-mirror-y-ood-stress; PC7→ no runtime-evidence claim (a method/ethics process boundary); PC8→C8-rollout-accuracy-baseline; PC9→C9-mirror-y-exact-symmetric-mesh. The ledger's C5-precondition-check underlies the precondition gate described in the method section.
+The PC# identifiers above are paper-level claims. The single source of truth for runtime-evidence claims is the runtime claim ledger (`research_assets/experiments/claim-ledger.yml`, claims C1–C9); each paper claim maps to it as: PC1→C4-rubric-decision-coverage; PC2→C1-fixture-asset-path and C4-rubric-decision-coverage; PC3→C3-baseline-comparison; PC4→C2-real-sut-verdicts; PC5→C7-conservation-diagnostic; PC6→C6-mirror-y-ood-stress; PC7→ no runtime-evidence claim (a method/ethics process boundary); PC8→C8-rollout-accuracy-baseline; PC9→C9-mirror-y-exact-symmetric-mesh; PC10→C10-seeded-fault-detection. The ledger's C5-precondition-check underlies the precondition gate described in the method section.
 
 ### 5.2 MR-Card-to-Verdict Map
 
@@ -452,6 +453,23 @@ and metric ledgers are committed under `research_assets/runs/`.
   should be read as a binary equivariance failure, not as a calibrated in-distribution
   magnitude. And this is one input on one mesh; it is not an accuracy, reliability,
   cross-SUT, or geometry-independent claim.
+- **Seeded-fault detection (do the MRs catch known faults?).** We re-implemented, in
+  pure numpy/torch from the read-only Minimum-MR-SubSet witness taxonomy, a catalogue of
+  10 injected pipeline faults across five fault classes (boundary-condition, mesh-adjacency,
+  normalization-scale, temporal-rollout, physical-channel), and used the paper's own MRs as
+  detectors on the model's predicted update. The conservation (continuity) MR detected the
+  two boundary-condition faults and the gross normalization fault (divergence ratio 3.8–10.6
+  vs the 1.5 threshold); the mirror-y (symmetry) MR detected a physical-channel and a
+  mesh-adjacency fault (violation rising 69–142% above its 0.735 baseline); node-permutation
+  equivariance detected none, because these faults preserve node-relabeling invariance and
+  the MR stays exact by design. Five of ten mutants were detected by at least one MR, and
+  the detections localize by MR class — continuity to boundary/scale faults, symmetry to
+  physical-channel/adjacency faults — which is the first evidence for the §3.6 interpretation
+  protocol. The undetected five (e.g. doubling a small update, sign-flipping the step, zeroing
+  the transverse update) have only a small effect on the scored quantity, so this also
+  delimits where these MRs are insensitive. It is one SUT, one checkpoint, one injected-fault
+  catalogue; it is not a real-world or general fault-detection rate, a reliability claim, or a
+  baseline-superiority claim.
 
 These pilots illustrate the direction of the paper's argument — that in-distribution
 accuracy alone does not bound whether a surrogate respects physical structure (the
@@ -464,12 +482,15 @@ and do not by themselves prove the general claim.
 
 The following remain blocked and must not be written as results: cross-SUT or
 geometry-independent pass/fail rates; comparative superiority over any baseline;
-fault-detection rates; localization accuracy; runtime or performance claims; and
-any claim that one SUT is more reliable than another. The three METBENCH-planned
-SUTs, and the expert-MR, generic-MR-generation, and LLM-candidate baselines, stay
-blocked pending their artifacts. The rollout-accuracy comparator is the one exception:
-it has now been executed on the existing SUT (Section 5.3) and is reported as a
-same-SUT diagnostic, not as a defeated competitor.
+general or real-world fault-detection rates; localization accuracy as a validated
+model; runtime or performance claims; and any claim that one SUT is more reliable than
+another. The three METBENCH-planned SUTs, and the expert-MR, generic-MR-generation, and
+LLM-candidate baselines, stay blocked pending their artifacts. Two exceptions are now
+executed on the existing SUT and reported as scoped diagnostics, not as defeated
+competitors or general rates: the rollout-accuracy comparator (Section 5.3), and a
+bounded seeded-fault detection result over one 10-mutant injected-fault catalogue
+(Section 5.3), whose by-class localization is suggestive evidence for, not a validation
+of, the interpretation protocol.
 
 ## 6. Discussion
 
