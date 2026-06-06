@@ -1,0 +1,79 @@
+{
+  "ledger_id": "real-sut-rollout-accuracy-baseline",
+  "evidence_level": "real-sut-single-trajectory-accuracy-diagnostic",
+  "schema_version": "0.1.0",
+  "sut_repo": "/home/user/Minimum-MR-SubSet",
+  "sut_commit": "8c0b7ef3605fd9452884d701e2a191a2b14a5a35",
+  "checkpoint_path": "research_assets/runs/multicheckpoint/S1/checkpoint.pt",
+  "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+  "claim_limitations": "Accuracy diagnostic: one real SUT, one checkpoint, one eval trajectory, one-step next-state prediction. Not a reliability, baseline-superiority, cross-SUT, or multi-trajectory claim.",
+  "metric_name": "one_step_relative_l2",
+  "transitions": [
+    {
+      "from_frame": 0,
+      "to_frame": 1,
+      "metric_name": "one_step_relative_l2",
+      "metric_value": 0.011891014032480642
+    },
+    {
+      "from_frame": 1,
+      "to_frame": 2,
+      "metric_name": "one_step_relative_l2",
+      "metric_value": 0.07339503534610252
+    },
+    {
+      "from_frame": 2,
+      "to_frame": 3,
+      "metric_name": "one_step_relative_l2",
+      "metric_value": 0.01839250952208278
+    },
+    {
+      "from_frame": 3,
+      "to_frame": 4,
+      "metric_name": "one_step_relative_l2",
+      "metric_value": 0.07899449053847947
+    },
+    {
+      "from_frame": 4,
+      "to_frame": 5,
+      "metric_name": "one_step_relative_l2",
+      "metric_value": 0.020761530291942675
+    },
+    {
+      "from_frame": 5,
+      "to_frame": 6,
+      "metric_name": "one_step_relative_l2",
+      "metric_value": 0.07497958388755606
+    },
+    {
+      "from_frame": 6,
+      "to_frame": 7,
+      "metric_name": "one_step_relative_l2",
+      "metric_value": 0.02090153077466601
+    },
+    {
+      "from_frame": 7,
+      "to_frame": 8,
+      "metric_name": "one_step_relative_l2",
+      "metric_value": 0.07387752152114027
+    },
+    {
+      "from_frame": 8,
+      "to_frame": 9,
+      "metric_name": "one_step_relative_l2",
+      "metric_value": 0.021785567115404535
+    }
+  ],
+  "summary": {
+    "num_transitions": 9,
+    "median_relative_l2": 0.021785567115404535,
+    "mean_relative_l2": 0.04388653144776166,
+    "min_relative_l2": 0.011891014032480642,
+    "max_relative_l2": 0.07899449053847947
+  },
+  "generated_at": "2026-06-06T15:08:26Z",
+  "num_nodes": 1923,
+  "num_edges": 11070,
+  "device": "cpu",
+  "framework_version": "torch 2.12.0+cpu"
+}

@@ -1,0 +1,23 @@
+{
+  "axis": 0.205,
+  "num_nodes": 1923,
+  "max_nn_dist": 0.019303899832939817,
+  "mean_nn_dist": 0.004019755580403748,
+  "median_edge_length": 0.0187822361506945,
+  "max_nn_over_edge": 1.0277743117518001,
+  "bijection": false,
+  "type_match_rate": 0.9771190847633905,
+  "cylinder": {
+    "center": [
+      0.4105819749335448,
+      0.19775427070756754
+    ],
+    "mean_radius": 0.04559386536236668,
+    "offset_from_axis": -0.007245729292432446,
+    "interior_wall_nodes": 24
+  },
+  "precondition_decision": "out-of-relation-domain",
+  "rubric_downgrade": "retained-ood-stress",
+  "ratio_threshold": 2.0,
+  "axis_source": "channel centerline (geometric mid of y-extent)"
+}

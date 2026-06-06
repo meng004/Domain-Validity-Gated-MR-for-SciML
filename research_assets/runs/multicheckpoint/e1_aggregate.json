@@ -1,0 +1,2220 @@
+{
+  "per_sut": {
+    "S0": {
+      "_desc": "base config, seed 0",
+      "_ckpt_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+      "node_perm": {
+        "ok": true,
+        "rel_l2": 0.0,
+        "verdict": "pass",
+        "returncode": 0
+      },
+      "mirror_ood": {
+        "ok": true,
+        "rel_l2_per_frame": [
+          0.6913759038776945,
+          0.7493719699474907
+        ],
+        "violation_over_floor": [
+          3.558437967270107,
+          3.8393731842084073
+        ],
+        "verdicts": [
+          "fail",
+          "fail"
+        ],
+        "median_rel_l2": 0.7493719699474907,
+        "precondition_decision": "out-of-relation-domain",
+        "returncode": 0
+      },
+      "mirror_sym": {
+        "ok": true,
+        "rel_l2": 1.103194870471862,
+        "verdict": "fail",
+        "normalizer_control": {
+          "vel_norm_mean_vy": -0.0039393100887537,
+          "vel_norm_std_vy": 0.1552189588546753,
+          "relative_l2_with_vy_mean_zeroed": 1.1014120494628763,
+          "normalizer_induced_share": 0.001616052663681333,
+          "note": "Zeroing vel_norm's vy-mean makes the input normalizer exactly equivariant in vy; the tiny change in relative L2 shows the violation is dominated by learned weights, not the normalizer."
+        },
+        "returncode": 0
+      },
+      "conservation": {
+        "ok": true,
+        "ratio_interior_per_frame": [
+          1.00415752536663,
+          1.0075129064614574
+        ],
+        "verdicts": [
+          "pass",
+          "pass"
+        ],
+        "max_ratio": 1.0075129064614574,
+        "returncode": 0
+      },
+      "rollout": {
+        "ok": true,
+        "rel_l2_per_transition": [
+          0.011573067021690517,
+          0.07302589756280417,
+          0.018284416841347045,
+          0.07880227816932493,
+          0.020613742963926693,
+          0.0750508666895515,
+          0.020934995329406,
+          0.07418352801782935,
+          0.02162959373432519
+        ],
+        "median": 0.02162959373432519,
+        "mean": 0.04378870959224504,
+        "min": 0.011573067021690517,
+        "max": 0.07880227816932493,
+        "returncode": 0
+      },
+      "fault_det": {
+        "ok": true,
+        "detection_matrix": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.019537707382744,
+            "mirror_y_violation_median": 0.7354229295205208,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.7963038815912107,
+            "mirror_y_violation_median": 0.7354229295205208,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0177662063293462,
+            "mirror_y_violation_median": 0.9715306461787413,
+            "mirror_y_relative_change_from_baseline": 0.321050251740393,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0141872833449908,
+            "mirror_y_violation_median": 1.244552582944676,
+            "mirror_y_relative_change_from_baseline": 0.6922950495384965,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 10.575160371625408,
+            "mirror_y_violation_median": 0.7364042486816924,
+            "mirror_y_relative_change_from_baseline": 0.0013343603004211605,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0272944025008368,
+            "mirror_y_violation_median": 0.7354229295205208,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0044255752174083,
+            "mirror_y_violation_median": 0.7354229295205208,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0251494485796322,
+            "mirror_y_violation_median": 0.7354229295205208,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0153999835630858,
+            "mirror_y_violation_median": 1.7803453168148082,
+            "mirror_y_relative_change_from_baseline": 1.4208455371055038,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0094525653545106,
+            "mirror_y_violation_median": 0.7439214328675889,
+            "mirror_y_relative_change_from_baseline": 0.011555940134486934,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "summary": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.2,
+          "union_detection_rate": 0.5,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "mesh_adjacency_fault",
+            "physical_channel_fault"
+          ]
+        },
+        "union_rate": 0.5,
+        "node_permutation_rate": 0.0,
+        "conservation_rate": 0.3,
+        "mirror_y_rate": 0.2,
+        "returncode": 0
+      }
+    },
+    "S1": {
+      "_desc": "base config, seed 1",
+      "_ckpt_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+      "node_perm": {
+        "ok": true,
+        "rel_l2": 0.0,
+        "verdict": "pass",
+        "returncode": 0
+      },
+      "mirror_ood": {
+        "ok": true,
+        "rel_l2_per_frame": [
+          0.8217584445440408,
+          0.8193110684011153
+        ],
+        "violation_over_floor": [
+          4.145960137354531,
+          4.0434217194475135
+        ],
+        "verdicts": [
+          "fail",
+          "fail"
+        ],
+        "median_rel_l2": 0.8217584445440408,
+        "precondition_decision": "out-of-relation-domain",
+        "returncode": 0
+      },
+      "mirror_sym": {
+        "ok": true,
+        "rel_l2": 1.0947508404057762,
+        "verdict": "fail",
+        "normalizer_control": {
+          "vel_norm_mean_vy": -0.0039393100887537,
+          "vel_norm_std_vy": 0.1552189588546753,
+          "relative_l2_with_vy_mean_zeroed": 1.1007801980408798,
+          "normalizer_induced_share": 0.00550751587719154,
+          "note": "Zeroing vel_norm's vy-mean makes the input normalizer exactly equivariant in vy; the tiny change in relative L2 shows the violation is dominated by learned weights, not the normalizer."
+        },
+        "returncode": 0
+      },
+      "conservation": {
+        "ok": true,
+        "ratio_interior_per_frame": [
+          1.0013649382579826,
+          1.0074281753416587
+        ],
+        "verdicts": [
+          "pass",
+          "pass"
+        ],
+        "max_ratio": 1.0074281753416587,
+        "returncode": 0
+      },
+      "rollout": {
+        "ok": true,
+        "rel_l2_per_transition": [
+          0.011891014032480642,
+          0.07339503534610252,
+          0.01839250952208278,
+          0.07899449053847947,
+          0.020761530291942675,
+          0.07497958388755606,
+          0.02090153077466601,
+          0.07387752152114027,
+          0.021785567115404535
+        ],
+        "median": 0.021785567115404535,
+        "mean": 0.04388653144776166,
+        "min": 0.011891014032480642,
+        "max": 0.07899449053847947,
+        "returncode": 0
+      },
+      "fault_det": {
+        "ok": true,
+        "detection_matrix": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.019580071068026,
+            "mirror_y_violation_median": 0.8112657955892675,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.797537001675753,
+            "mirror_y_violation_median": 0.8112657955892675,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0193508297944742,
+            "mirror_y_violation_median": 1.0043626814742646,
+            "mirror_y_relative_change_from_baseline": 0.23801926191740902,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0186399172330844,
+            "mirror_y_violation_median": 1.231633918095372,
+            "mirror_y_relative_change_from_baseline": 0.518163251540474,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 10.676756331859405,
+            "mirror_y_violation_median": 0.817039864189959,
+            "mirror_y_relative_change_from_baseline": 0.007117357384083339,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0239651678040629,
+            "mirror_y_violation_median": 0.8112657955892675,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0039808075519774,
+            "mirror_y_violation_median": 0.8112657955892675,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0229587290392645,
+            "mirror_y_violation_median": 0.8112657955892675,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0153832749601082,
+            "mirror_y_violation_median": 1.7533011252684492,
+            "mirror_y_relative_change_from_baseline": 1.161191972841563,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0096073971011448,
+            "mirror_y_violation_median": 0.8030423369322157,
+            "mirror_y_relative_change_from_baseline": 0.01013657755788731,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "summary": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.2,
+          "union_detection_rate": 0.5,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "mesh_adjacency_fault",
+            "physical_channel_fault"
+          ]
+        },
+        "union_rate": 0.5,
+        "node_permutation_rate": 0.0,
+        "conservation_rate": 0.3,
+        "mirror_y_rate": 0.2,
+        "returncode": 0
+      }
+    },
+    "S2": {
+      "_desc": "base config, seed 2",
+      "_ckpt_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+      "node_perm": {
+        "ok": true,
+        "rel_l2": 0.0,
+        "verdict": "pass",
+        "returncode": 0
+      },
+      "mirror_ood": {
+        "ok": true,
+        "rel_l2_per_frame": [
+          0.736343283297829,
+          0.6706676934617523
+        ],
+        "violation_over_floor": [
+          2.763292348847249,
+          2.9572965154508526
+        ],
+        "verdicts": [
+          "fail",
+          "fail"
+        ],
+        "median_rel_l2": 0.736343283297829,
+        "precondition_decision": "out-of-relation-domain",
+        "returncode": 0
+      },
+      "mirror_sym": {
+        "ok": true,
+        "rel_l2": 0.6347358984060852,
+        "verdict": "fail",
+        "normalizer_control": {
+          "vel_norm_mean_vy": -0.0039393100887537,
+          "vel_norm_std_vy": 0.1552189588546753,
+          "relative_l2_with_vy_mean_zeroed": 0.6327353128692189,
+          "normalizer_induced_share": 0.003151839279754133,
+          "note": "Zeroing vel_norm's vy-mean makes the input normalizer exactly equivariant in vy; the tiny change in relative L2 shows the violation is dominated by learned weights, not the normalizer."
+        },
+        "returncode": 0
+      },
+      "conservation": {
+        "ok": true,
+        "ratio_interior_per_frame": [
+          1.0035587114502864,
+          1.0120341936392088
+        ],
+        "verdicts": [
+          "pass",
+          "pass"
+        ],
+        "max_ratio": 1.0120341936392088,
+        "returncode": 0
+      },
+      "rollout": {
+        "ok": true,
+        "rel_l2_per_transition": [
+          0.01188610050612988,
+          0.07336759685408424,
+          0.018634163513403256,
+          0.0791406436887975,
+          0.021142979297231725,
+          0.07556661511819172,
+          0.02172958020059524,
+          0.07498658655438797,
+          0.022605647656860167
+        ],
+        "median": 0.022605647656860167,
+        "mean": 0.044339990376631305,
+        "min": 0.01188610050612988,
+        "max": 0.0791406436887975,
+        "returncode": 0
+      },
+      "fault_det": {
+        "ok": true,
+        "detection_matrix": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.019942224893336,
+            "mirror_y_violation_median": 0.7159334970815119,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.8015847057195016,
+            "mirror_y_violation_median": 0.7159334970815119,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0171662413054716,
+            "mirror_y_violation_median": 0.9696759477478041,
+            "mirror_y_relative_change_from_baseline": 0.3544218166920085,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0148608441747402,
+            "mirror_y_violation_median": 1.1054376160919355,
+            "mirror_y_relative_change_from_baseline": 0.5440506982816548,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 11.089748446182496,
+            "mirror_y_violation_median": 0.7142392639893622,
+            "mirror_y_relative_change_from_baseline": 0.0023664671356434254,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0260262549065606,
+            "mirror_y_violation_median": 0.7159334970815119,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0039501839735692,
+            "mirror_y_violation_median": 0.7159334970815119,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0245811077238258,
+            "mirror_y_violation_median": 0.7159334970815119,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0149348809155911,
+            "mirror_y_violation_median": 1.7993178665688436,
+            "mirror_y_relative_change_from_baseline": 1.5132472134684656,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0082701965959593,
+            "mirror_y_violation_median": 0.7660013826824299,
+            "mirror_y_relative_change_from_baseline": 0.06993371005130884,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "summary": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.2,
+          "union_detection_rate": 0.5,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "mesh_adjacency_fault",
+            "physical_channel_fault"
+          ]
+        },
+        "union_rate": 0.5,
+        "node_permutation_rate": 0.0,
+        "conservation_rate": 0.3,
+        "mirror_y_rate": 0.2,
+        "returncode": 0
+      }
+    },
+    "S3": {
+      "_desc": "base config, seed 3",
+      "_ckpt_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+      "node_perm": {
+        "ok": true,
+        "rel_l2": 0.0,
+        "verdict": "pass",
+        "returncode": 0
+      },
+      "mirror_ood": {
+        "ok": true,
+        "rel_l2_per_frame": [
+          0.766812050026377,
+          0.7863585484138412
+        ],
+        "violation_over_floor": [
+          3.438292389959235,
+          4.007129800143013
+        ],
+        "verdicts": [
+          "fail",
+          "fail"
+        ],
+        "median_rel_l2": 0.7863585484138412,
+        "precondition_decision": "out-of-relation-domain",
+        "returncode": 0
+      },
+      "mirror_sym": {
+        "ok": true,
+        "rel_l2": 1.1669998553102234,
+        "verdict": "fail",
+        "normalizer_control": {
+          "vel_norm_mean_vy": -0.0039393100887537,
+          "vel_norm_std_vy": 0.1552189588546753,
+          "relative_l2_with_vy_mean_zeroed": 1.1709175335451332,
+          "normalizer_induced_share": 0.003357051174499334,
+          "note": "Zeroing vel_norm's vy-mean makes the input normalizer exactly equivariant in vy; the tiny change in relative L2 shows the violation is dominated by learned weights, not the normalizer."
+        },
+        "returncode": 0
+      },
+      "conservation": {
+        "ok": true,
+        "ratio_interior_per_frame": [
+          1.0013128845445765,
+          1.0089313037373082
+        ],
+        "verdicts": [
+          "pass",
+          "pass"
+        ],
+        "max_ratio": 1.0089313037373082,
+        "returncode": 0
+      },
+      "rollout": {
+        "ok": true,
+        "rel_l2_per_transition": [
+          0.012052852200132006,
+          0.07345923171610035,
+          0.018889106672082778,
+          0.07929541407938974,
+          0.021414732278874107,
+          0.0757830973096526,
+          0.021708640240912316,
+          0.07466375496896718,
+          0.02220901832598942
+        ],
+        "median": 0.02220901832598942,
+        "mean": 0.04438620531023339,
+        "min": 0.012052852200132006,
+        "max": 0.07929541407938974,
+        "returncode": 0
+      },
+      "fault_det": {
+        "ok": true,
+        "detection_matrix": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.0155678916652295,
+            "mirror_y_violation_median": 0.7972346553166318,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.7993445974113302,
+            "mirror_y_violation_median": 0.7972346553166318,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0158503874800793,
+            "mirror_y_violation_median": 0.9310715133853523,
+            "mirror_y_relative_change_from_baseline": 0.1678763676116983,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0160303970531674,
+            "mirror_y_violation_median": 1.2345096159706628,
+            "mirror_y_relative_change_from_baseline": 0.5484896545049984,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 10.924404919934235,
+            "mirror_y_violation_median": 0.7959365092520206,
+            "mirror_y_relative_change_from_baseline": 0.0016283111326810425,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0259799124635913,
+            "mirror_y_violation_median": 0.7972346553166318,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0027366825826467,
+            "mirror_y_violation_median": 0.7972346553166318,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0244782471083147,
+            "mirror_y_violation_median": 0.7972346553166318,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0133729344130682,
+            "mirror_y_violation_median": 1.7307423359601524,
+            "mirror_y_relative_change_from_baseline": 1.1709321395126333,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0089479473578904,
+            "mirror_y_violation_median": 0.8497329223763997,
+            "mirror_y_relative_change_from_baseline": 0.06585045784157181,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "summary": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.2,
+          "union_detection_rate": 0.5,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "mesh_adjacency_fault",
+            "physical_channel_fault"
+          ]
+        },
+        "union_rate": 0.5,
+        "node_permutation_rate": 0.0,
+        "conservation_rate": 0.3,
+        "mirror_y_rate": 0.2,
+        "returncode": 0
+      }
+    },
+    "S4": {
+      "_desc": "hidden=128, seed 0",
+      "_ckpt_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+      "node_perm": {
+        "ok": true,
+        "rel_l2": 0.0,
+        "verdict": "pass",
+        "returncode": 0
+      },
+      "mirror_ood": {
+        "ok": true,
+        "rel_l2_per_frame": [
+          0.7586946933760186,
+          0.7641165162954794
+        ],
+        "violation_over_floor": [
+          3.2424320420573634,
+          3.8055156712430303
+        ],
+        "verdicts": [
+          "fail",
+          "fail"
+        ],
+        "median_rel_l2": 0.7641165162954794,
+        "precondition_decision": "out-of-relation-domain",
+        "returncode": 0
+      },
+      "mirror_sym": {
+        "ok": true,
+        "rel_l2": 1.1039014013599775,
+        "verdict": "fail",
+        "normalizer_control": {
+          "vel_norm_mean_vy": -0.0039393100887537,
+          "vel_norm_std_vy": 0.1552189588546753,
+          "relative_l2_with_vy_mean_zeroed": 1.112869923371301,
+          "normalizer_induced_share": 0.008124386834072865,
+          "note": "Zeroing vel_norm's vy-mean makes the input normalizer exactly equivariant in vy; the tiny change in relative L2 shows the violation is dominated by learned weights, not the normalizer."
+        },
+        "returncode": 0
+      },
+      "conservation": {
+        "ok": true,
+        "ratio_interior_per_frame": [
+          1.001684663992417,
+          1.0083700026474374
+        ],
+        "verdicts": [
+          "pass",
+          "pass"
+        ],
+        "max_ratio": 1.0083700026474374,
+        "returncode": 0
+      },
+      "rollout": {
+        "ok": true,
+        "rel_l2_per_transition": [
+          0.012248315232060953,
+          0.07348743922499533,
+          0.018927125124760445,
+          0.0793148079890932,
+          0.021612360300840627,
+          0.07575228531633109,
+          0.022101225059650568,
+          0.0750746004900245,
+          0.022601764659358814
+        ],
+        "median": 0.022601764659358814,
+        "mean": 0.044568880377457286,
+        "min": 0.012248315232060953,
+        "max": 0.0793148079890932,
+        "returncode": 0
+      },
+      "fault_det": {
+        "ok": true,
+        "detection_matrix": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.014962566657553,
+            "mirror_y_violation_median": 0.762094544601033,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.7985337652546023,
+            "mirror_y_violation_median": 0.762094544601033,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0235138230247833,
+            "mirror_y_violation_median": 1.0569828901616074,
+            "mirror_y_relative_change_from_baseline": 0.3869445696071116,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0150785736605101,
+            "mirror_y_violation_median": 0.9352101037293854,
+            "mirror_y_relative_change_from_baseline": 0.22715758872015124,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 11.031882484368943,
+            "mirror_y_violation_median": 0.7610367366310395,
+            "mirror_y_relative_change_from_baseline": 0.00138802721720993,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0230235250902457,
+            "mirror_y_violation_median": 0.762094544601033,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0041684124684562,
+            "mirror_y_violation_median": 0.762094544601033,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0223705348965355,
+            "mirror_y_violation_median": 0.762094544601033,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0127213726519007,
+            "mirror_y_violation_median": 1.8028720639907168,
+            "mirror_y_relative_change_from_baseline": 1.3656803171771097,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.008296718543968,
+            "mirror_y_violation_median": 0.7721510970297805,
+            "mirror_y_relative_change_from_baseline": 0.013195938089298647,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "summary": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.1,
+          "union_detection_rate": 0.4,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "physical_channel_fault"
+          ]
+        },
+        "union_rate": 0.4,
+        "node_permutation_rate": 0.0,
+        "conservation_rate": 0.3,
+        "mirror_y_rate": 0.1,
+        "returncode": 0
+      }
+    },
+    "S5": {
+      "_desc": "num_layers=6, seed 0",
+      "_ckpt_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+      "node_perm": {
+        "ok": true,
+        "rel_l2": 0.0,
+        "verdict": "pass",
+        "returncode": 0
+      },
+      "mirror_ood": {
+        "ok": true,
+        "rel_l2_per_frame": [
+          0.8160720479374515,
+          0.8317907752608924
+        ],
+        "violation_over_floor": [
+          3.210307383858963,
+          3.6195133233280212
+        ],
+        "verdicts": [
+          "fail",
+          "fail"
+        ],
+        "median_rel_l2": 0.8317907752608924,
+        "precondition_decision": "out-of-relation-domain",
+        "returncode": 0
+      },
+      "mirror_sym": {
+        "ok": true,
+        "rel_l2": 0.9969485394834282,
+        "verdict": "fail",
+        "normalizer_control": {
+          "vel_norm_mean_vy": -0.0039393100887537,
+          "vel_norm_std_vy": 0.1552189588546753,
+          "relative_l2_with_vy_mean_zeroed": 0.9886035417137227,
+          "normalizer_induced_share": 0.008370540142452615,
+          "note": "Zeroing vel_norm's vy-mean makes the input normalizer exactly equivariant in vy; the tiny change in relative L2 shows the violation is dominated by learned weights, not the normalizer."
+        },
+        "returncode": 0
+      },
+      "conservation": {
+        "ok": true,
+        "ratio_interior_per_frame": [
+          1.0002734137285958,
+          1.0095816083607432
+        ],
+        "verdicts": [
+          "pass",
+          "pass"
+        ],
+        "max_ratio": 1.0095816083607432,
+        "returncode": 0
+      },
+      "rollout": {
+        "ok": true,
+        "rel_l2_per_transition": [
+          0.011798556932223238,
+          0.07320545182542013,
+          0.018514762760241915,
+          0.07906652779080273,
+          0.021160554065110235,
+          0.07553553353657277,
+          0.021317832584247486,
+          0.0744926241704272,
+          0.022059216917158
+        ],
+        "median": 0.022059216917158,
+        "mean": 0.044127895620244856,
+        "min": 0.011798556932223238,
+        "max": 0.07906652779080273,
+        "returncode": 0
+      },
+      "fault_det": {
+        "ok": true,
+        "detection_matrix": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.020977984019228,
+            "mirror_y_violation_median": 0.8282140162294923,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.7985759368652743,
+            "mirror_y_violation_median": 0.8282140162294923,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.016352574843391,
+            "mirror_y_violation_median": 0.9506014892759903,
+            "mirror_y_relative_change_from_baseline": 0.14777276241191417,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.009826614938375,
+            "mirror_y_violation_median": 1.024026454555367,
+            "mirror_y_relative_change_from_baseline": 0.23642734183288253,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 11.20584985604944,
+            "mirror_y_violation_median": 0.8268719122499694,
+            "mirror_y_relative_change_from_baseline": 0.0016204796746050944,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0263424476261274,
+            "mirror_y_violation_median": 0.8282140162294923,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0036019807482635,
+            "mirror_y_violation_median": 0.8282140162294923,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0247597043156191,
+            "mirror_y_violation_median": 0.8282140162294923,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.016152185177021,
+            "mirror_y_violation_median": 1.7502344618399301,
+            "mirror_y_relative_change_from_baseline": 1.1132635134672153,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.010144369521185,
+            "mirror_y_violation_median": 0.8544055417982895,
+            "mirror_y_relative_change_from_baseline": 0.03162410325779821,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "summary": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.1,
+          "union_detection_rate": 0.4,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "physical_channel_fault"
+          ]
+        },
+        "union_rate": 0.4,
+        "node_permutation_rate": 0.0,
+        "conservation_rate": 0.3,
+        "mirror_y_rate": 0.1,
+        "returncode": 0
+      }
+    }
+  },
+  "per_mr_aggregates": {
+    "node_perm": {
+      "scalar": "rel_l2",
+      "seed_family_values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seed_family_mean": 0.0,
+      "seed_family_ci_lo": 0.0,
+      "seed_family_ci_hi": 0.0,
+      "S4_value": 0.0,
+      "S5_value": 0.0
+    },
+    "mirror_ood": {
+      "scalar": "median_rel_l2",
+      "seed_family_values": [
+        0.7493719699474907,
+        0.8217584445440408,
+        0.736343283297829,
+        0.7863585484138412
+      ],
+      "seed_family_mean": 0.7734580615508004,
+      "seed_family_ci_lo": 0.7428576266226599,
+      "seed_family_ci_hi": 0.804058496478941,
+      "S4_value": 0.7641165162954794,
+      "S5_value": 0.8317907752608924
+    },
+    "mirror_sym": {
+      "scalar": "rel_l2",
+      "seed_family_values": [
+        1.103194870471862,
+        1.0947508404057762,
+        0.6347358984060852,
+        1.1669998553102234
+      ],
+      "seed_family_mean": 0.9999203661484868,
+      "seed_family_ci_lo": 0.7518506414225293,
+      "seed_family_ci_hi": 1.151048609100633,
+      "S4_value": 1.1039014013599775,
+      "S5_value": 0.9969485394834282
+    },
+    "conservation": {
+      "scalar": "max_ratio",
+      "seed_family_values": [
+        1.0075129064614574,
+        1.0074281753416587,
+        1.0120341936392088,
+        1.0089313037373082
+      ],
+      "seed_family_mean": 1.0089766447949082,
+      "seed_family_ci_lo": 1.007470540901558,
+      "seed_family_ci_hi": 1.010903871844771,
+      "S4_value": 1.0083700026474374,
+      "S5_value": 1.0095816083607432
+    },
+    "rollout": {
+      "scalar": "median",
+      "seed_family_values": [
+        0.02162959373432519,
+        0.021785567115404535,
+        0.022605647656860167,
+        0.02220901832598942
+      ],
+      "seed_family_mean": 0.02205745670814483,
+      "seed_family_ci_lo": 0.021707580424864863,
+      "seed_family_ci_hi": 0.022407332991424795,
+      "S4_value": 0.022601764659358814,
+      "S5_value": 0.022059216917158
+    },
+    "fault_det": {
+      "detection_matrix_per_sut": {
+        "S0": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.019537707382744,
+            "mirror_y_violation_median": 0.7354229295205208,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.7963038815912107,
+            "mirror_y_violation_median": 0.7354229295205208,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0177662063293462,
+            "mirror_y_violation_median": 0.9715306461787413,
+            "mirror_y_relative_change_from_baseline": 0.321050251740393,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0141872833449908,
+            "mirror_y_violation_median": 1.244552582944676,
+            "mirror_y_relative_change_from_baseline": 0.6922950495384965,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 10.575160371625408,
+            "mirror_y_violation_median": 0.7364042486816924,
+            "mirror_y_relative_change_from_baseline": 0.0013343603004211605,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0272944025008368,
+            "mirror_y_violation_median": 0.7354229295205208,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0044255752174083,
+            "mirror_y_violation_median": 0.7354229295205208,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0251494485796322,
+            "mirror_y_violation_median": 0.7354229295205208,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0153999835630858,
+            "mirror_y_violation_median": 1.7803453168148082,
+            "mirror_y_relative_change_from_baseline": 1.4208455371055038,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0094525653545106,
+            "mirror_y_violation_median": 0.7439214328675889,
+            "mirror_y_relative_change_from_baseline": 0.011555940134486934,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "S1": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.019580071068026,
+            "mirror_y_violation_median": 0.8112657955892675,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.797537001675753,
+            "mirror_y_violation_median": 0.8112657955892675,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0193508297944742,
+            "mirror_y_violation_median": 1.0043626814742646,
+            "mirror_y_relative_change_from_baseline": 0.23801926191740902,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0186399172330844,
+            "mirror_y_violation_median": 1.231633918095372,
+            "mirror_y_relative_change_from_baseline": 0.518163251540474,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 10.676756331859405,
+            "mirror_y_violation_median": 0.817039864189959,
+            "mirror_y_relative_change_from_baseline": 0.007117357384083339,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0239651678040629,
+            "mirror_y_violation_median": 0.8112657955892675,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0039808075519774,
+            "mirror_y_violation_median": 0.8112657955892675,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0229587290392645,
+            "mirror_y_violation_median": 0.8112657955892675,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0153832749601082,
+            "mirror_y_violation_median": 1.7533011252684492,
+            "mirror_y_relative_change_from_baseline": 1.161191972841563,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0096073971011448,
+            "mirror_y_violation_median": 0.8030423369322157,
+            "mirror_y_relative_change_from_baseline": 0.01013657755788731,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "S2": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.019942224893336,
+            "mirror_y_violation_median": 0.7159334970815119,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.8015847057195016,
+            "mirror_y_violation_median": 0.7159334970815119,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0171662413054716,
+            "mirror_y_violation_median": 0.9696759477478041,
+            "mirror_y_relative_change_from_baseline": 0.3544218166920085,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0148608441747402,
+            "mirror_y_violation_median": 1.1054376160919355,
+            "mirror_y_relative_change_from_baseline": 0.5440506982816548,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 11.089748446182496,
+            "mirror_y_violation_median": 0.7142392639893622,
+            "mirror_y_relative_change_from_baseline": 0.0023664671356434254,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0260262549065606,
+            "mirror_y_violation_median": 0.7159334970815119,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0039501839735692,
+            "mirror_y_violation_median": 0.7159334970815119,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0245811077238258,
+            "mirror_y_violation_median": 0.7159334970815119,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0149348809155911,
+            "mirror_y_violation_median": 1.7993178665688436,
+            "mirror_y_relative_change_from_baseline": 1.5132472134684656,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0082701965959593,
+            "mirror_y_violation_median": 0.7660013826824299,
+            "mirror_y_relative_change_from_baseline": 0.06993371005130884,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "S3": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.0155678916652295,
+            "mirror_y_violation_median": 0.7972346553166318,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.7993445974113302,
+            "mirror_y_violation_median": 0.7972346553166318,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0158503874800793,
+            "mirror_y_violation_median": 0.9310715133853523,
+            "mirror_y_relative_change_from_baseline": 0.1678763676116983,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0160303970531674,
+            "mirror_y_violation_median": 1.2345096159706628,
+            "mirror_y_relative_change_from_baseline": 0.5484896545049984,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 10.924404919934235,
+            "mirror_y_violation_median": 0.7959365092520206,
+            "mirror_y_relative_change_from_baseline": 0.0016283111326810425,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0259799124635913,
+            "mirror_y_violation_median": 0.7972346553166318,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0027366825826467,
+            "mirror_y_violation_median": 0.7972346553166318,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0244782471083147,
+            "mirror_y_violation_median": 0.7972346553166318,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0133729344130682,
+            "mirror_y_violation_median": 1.7307423359601524,
+            "mirror_y_relative_change_from_baseline": 1.1709321395126333,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0089479473578904,
+            "mirror_y_violation_median": 0.8497329223763997,
+            "mirror_y_relative_change_from_baseline": 0.06585045784157181,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "S4": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.014962566657553,
+            "mirror_y_violation_median": 0.762094544601033,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.7985337652546023,
+            "mirror_y_violation_median": 0.762094544601033,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0235138230247833,
+            "mirror_y_violation_median": 1.0569828901616074,
+            "mirror_y_relative_change_from_baseline": 0.3869445696071116,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0150785736605101,
+            "mirror_y_violation_median": 0.9352101037293854,
+            "mirror_y_relative_change_from_baseline": 0.22715758872015124,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 11.031882484368943,
+            "mirror_y_violation_median": 0.7610367366310395,
+            "mirror_y_relative_change_from_baseline": 0.00138802721720993,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0230235250902457,
+            "mirror_y_violation_median": 0.762094544601033,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0041684124684562,
+            "mirror_y_violation_median": 0.762094544601033,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0223705348965355,
+            "mirror_y_violation_median": 0.762094544601033,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0127213726519007,
+            "mirror_y_violation_median": 1.8028720639907168,
+            "mirror_y_relative_change_from_baseline": 1.3656803171771097,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.008296718543968,
+            "mirror_y_violation_median": 0.7721510970297805,
+            "mirror_y_relative_change_from_baseline": 0.013195938089298647,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ],
+        "S5": [
+          {
+            "mutant": "BC_zero_inflow",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 4.020977984019228,
+            "mirror_y_violation_median": 0.8282140162294923,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "BC_nonzero_wall",
+            "fault_class": "boundary_condition_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 3.7985759368652743,
+            "mirror_y_violation_median": 0.8282140162294923,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "MA_drop_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.016352574843391,
+            "mirror_y_violation_median": 0.9506014892759903,
+            "mirror_y_relative_change_from_baseline": 0.14777276241191417,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "MA_permute_edges",
+            "fault_class": "mesh_adjacency_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.009826614938375,
+            "mirror_y_violation_median": 1.024026454555367,
+            "mirror_y_relative_change_from_baseline": 0.23642734183288253,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "NS_skip_denorm",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 11.20584985604944,
+            "mirror_y_violation_median": 0.8268719122499694,
+            "mirror_y_relative_change_from_baseline": 0.0016204796746050944,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": true,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "NS_double_scale",
+            "fault_class": "normalization_scale_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0263424476261274,
+            "mirror_y_violation_median": 0.8282140162294923,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_sign_flip",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0036019807482635,
+            "mirror_y_violation_median": 0.8282140162294923,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "TR_double_step",
+            "fault_class": "temporal_rollout_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.0247597043156191,
+            "mirror_y_violation_median": 0.8282140162294923,
+            "mirror_y_relative_change_from_baseline": 0.0,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          },
+          {
+            "mutant": "PC_swap_xy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.016152185177021,
+            "mirror_y_violation_median": 1.7502344618399301,
+            "mirror_y_relative_change_from_baseline": 1.1132635134672153,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": true,
+            "detected_by_any": true
+          },
+          {
+            "mutant": "PC_zero_vy",
+            "fault_class": "physical_channel_fault",
+            "node_perm_relative_l2_median": 0.0,
+            "conservation_ratio_median": 1.010144369521185,
+            "mirror_y_violation_median": 0.8544055417982895,
+            "mirror_y_relative_change_from_baseline": 0.03162410325779821,
+            "node_permutation_MR_detects": false,
+            "conservation_MR_detects": false,
+            "mirror_y_MR_detects": false,
+            "detected_by_any": false
+          }
+        ]
+      },
+      "summary_per_sut": {
+        "S0": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.2,
+          "union_detection_rate": 0.5,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "mesh_adjacency_fault",
+            "physical_channel_fault"
+          ]
+        },
+        "S1": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.2,
+          "union_detection_rate": 0.5,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "mesh_adjacency_fault",
+            "physical_channel_fault"
+          ]
+        },
+        "S2": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.2,
+          "union_detection_rate": 0.5,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "mesh_adjacency_fault",
+            "physical_channel_fault"
+          ]
+        },
+        "S3": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.2,
+          "union_detection_rate": 0.5,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "mesh_adjacency_fault",
+            "physical_channel_fault"
+          ]
+        },
+        "S4": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.1,
+          "union_detection_rate": 0.4,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "physical_channel_fault"
+          ]
+        },
+        "S5": {
+          "num_mutants": 10,
+          "node_permutation_MR_detection_rate": 0.0,
+          "conservation_MR_detection_rate": 0.3,
+          "mirror_y_MR_detection_rate": 0.1,
+          "union_detection_rate": 0.4,
+          "fault_classes_localized_by_node_permutation": [],
+          "fault_classes_localized_by_conservation": [
+            "boundary_condition_fault",
+            "normalization_scale_fault"
+          ],
+          "fault_classes_localized_by_mirror_y": [
+            "physical_channel_fault"
+          ]
+        }
+      }
+    }
+  }
+}

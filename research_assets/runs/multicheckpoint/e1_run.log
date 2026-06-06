@@ -1,0 +1,45 @@
+== S0 :: node_perm ==
+== S0 :: mirror_ood ==
+== S0 :: mirror_sym ==
+== S0 :: conservation ==
+== S0 :: rollout ==
+== S0 :: fault_det ==
+== S1 :: node_perm ==
+== S1 :: mirror_ood ==
+== S1 :: mirror_sym ==
+== S1 :: conservation ==
+== S1 :: rollout ==
+== S1 :: fault_det ==
+== S2 :: node_perm ==
+== S2 :: mirror_ood ==
+== S2 :: mirror_sym ==
+== S2 :: conservation ==
+== S2 :: rollout ==
+== S2 :: fault_det ==
+== S3 :: node_perm ==
+== S3 :: mirror_ood ==
+== S3 :: mirror_sym ==
+== S3 :: conservation ==
+== S3 :: rollout ==
+== S3 :: fault_det ==
+== S4 :: node_perm ==
+== S4 :: mirror_ood ==
+== S4 :: mirror_sym ==
+== S4 :: conservation ==
+== S4 :: rollout ==
+== S4 :: fault_det ==
+== S5 :: node_perm ==
+== S5 :: mirror_ood ==
+== S5 :: mirror_sym ==
+== S5 :: conservation ==
+== S5 :: rollout ==
+== S5 :: fault_det ==
+
+wrote /home/user/Domain-Validity-Gated-MR-for-SciML/research_assets/runs/multicheckpoint/e1_aggregate.json
+
+=== E1 per-MR seed-family aggregates (S0..S3 bootstrap 95% CI) ===
+  node_perm      mean=0 CI=[0, 0] S4=0.0 S5=0.0
+  mirror_ood     mean=0.7735 CI=[0.7429, 0.8041] S4=0.7641165162954794 S5=0.8317907752608924
+  mirror_sym     mean=0.9999 CI=[0.7519, 1.151] S4=1.1039014013599775 S5=0.9969485394834282
+  conservation   mean=1.009 CI=[1.007, 1.011] S4=1.0083700026474374 S5=1.0095816083607432
+  rollout        mean=nan CI=[nan, nan] S4=None S5=None

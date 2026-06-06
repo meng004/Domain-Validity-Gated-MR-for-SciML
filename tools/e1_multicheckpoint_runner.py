@@ -155,16 +155,26 @@ def extract_metric(runner_id: str, ledger_path: Path) -> dict:
                 "max_ratio": max([r for r in ratios if r is not None], default=None)}
     if runner_id == "rollout":
         t = d.get("transitions", [])
-        rl2 = [x.get("relative_l2") for x in t]
+        rl2 = [x.get("metric_value") for x in t]
         rl2 = [x for x in rl2 if x is not None]
-        rl2_sorted = sorted(rl2)
+        summary = d.get("summary", {})
         return {"ok": True, "rel_l2_per_transition": rl2,
-                "median": (rl2_sorted[len(rl2_sorted)//2] if rl2_sorted else None),
-                "mean": (sum(rl2_sorted)/len(rl2_sorted) if rl2_sorted else None)}
+                "median": summary.get("median_relative_l2"),
+                "mean": summary.get("mean_relative_l2"),
+                "min": summary.get("min_relative_l2"),
+                "max": summary.get("max_relative_l2")}
     if runner_id == "fault_det":
         det = d.get("detection_matrix", {})
         summary = d.get("summary", {})
-        return {"ok": True, "detection_matrix": det, "summary": summary}
+        return {
+            "ok": True,
+            "detection_matrix": det,
+            "summary": summary,
+            "union_rate": summary.get("union_detection_rate"),
+            "node_permutation_rate": summary.get("node_permutation_MR_detection_rate"),
+            "conservation_rate": summary.get("conservation_MR_detection_rate"),
+            "mirror_y_rate": summary.get("mirror_y_MR_detection_rate"),
+        }
     return {"ok": False, "error": "unknown_runner"}
 
 
