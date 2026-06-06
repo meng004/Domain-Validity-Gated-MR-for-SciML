@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.6.6)  6 JUN 2026 10:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.6.6)  6 JUN 2026 11:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -385,6 +385,12 @@ Underfull \hbox (badness 4967) in paragraph at lines 151--152
 que-Torres et
  []
 
+
+Underfull \hbox (badness 1968) in paragraph at lines 151--152
+\T1/cmr/m/it/12 inadmissibility sub-dimensions \T1/cmr/m/n/12 drawn from PDE-do
+main pre-con-di-tions,
+ []
+
 [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
 53.
@@ -407,11 +413,11 @@ L3 programming layer <2024-01-22>
 Here is how much of TeX's memory you used:
  6911 strings out of 476182
  106852 string characters out of 5795596
- 1942975 words of memory out of 5000000
+ 1943975 words of memory out of 5000000
  28827 multiletter control sequences out of 15000+600000
  574831 words of font info for 81 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,12n,79p,2576b,486s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,12n,79p,2697b,486s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0800.600pk> </
 root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </root/
 .texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </root/.texl
@@ -432,9 +438,9 @@ e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on main.pdf (35 pages, 309571 bytes).
+Output written on main.pdf (35 pages, 311332 bytes).
 PDF statistics:
- 747 PDF objects out of 1000 (max. 8388607)
+ 748 PDF objects out of 1000 (max. 8388607)
  154 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  10241 words of extra memory for PDF output out of 12000 (max. 10000000)
