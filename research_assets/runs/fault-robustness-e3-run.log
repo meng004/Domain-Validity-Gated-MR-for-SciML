@@ -34,3 +34,42 @@
    seed 20260601: baseline + 10 mutants
    seed 20260602: baseline + 10 mutants
    seed 20260603: baseline + 10 mutants
+   seed 20260604: baseline + 10 mutants
+   seed 20260605: baseline + 10 mutants
+   NS_double_scale severity sweep
+   PC_zero_vy partial-fraction sweep
+== S5 == load
+   seed 20260601: baseline + 10 mutants
+   seed 20260602: baseline + 10 mutants
+   seed 20260603: baseline + 10 mutants
+   seed 20260604: baseline + 10 mutants
+   seed 20260605: baseline + 10 mutants
+   NS_double_scale severity sweep
+   PC_zero_vy partial-fraction sweep
+
+wrote /home/user/Domain-Validity-Gated-MR-for-SciML/research_assets/runs/fault-robustness-e3/fault_robustness_report.json
+
+R1 per-mutant any-detector rate (across all SUTs x input seeds):
+  BC_zero_inflow     boundary_condition_fault any: 30/30 = 1.00 CI[0.89,1.00]
+  BC_nonzero_wall    boundary_condition_fault any: 30/30 = 1.00 CI[0.89,1.00]
+  MA_drop_edges      mesh_adjacency_fault     any: 0/30 = 0.00 CI[0.00,0.11]
+  MA_permute_edges   mesh_adjacency_fault     any: 20/30 = 0.67 CI[0.49,0.81]
+  NS_skip_denorm     normalization_scale_fault any: 30/30 = 1.00 CI[0.89,1.00]
+  NS_double_scale    normalization_scale_fault any: 0/30 = 0.00 CI[0.00,0.11]
+  TR_sign_flip       temporal_rollout_fault   any: 0/30 = 0.00 CI[0.00,0.11]
+  TR_double_step     temporal_rollout_fault   any: 0/30 = 0.00 CI[0.00,0.11]
+  PC_swap_xy         physical_channel_fault   any: 30/30 = 1.00 CI[0.89,1.00]
+  PC_zero_vy         physical_channel_fault   any: 0/30 = 0.00 CI[0.00,0.11]
+
+R2 NS_double_scale severity sweep (any-detector):
+  scale=1.1: 0/6  rate=0.00 CI[0.00,0.39]
+  scale=1.25: 0/6  rate=0.00 CI[0.00,0.39]
+  scale=1.5: 0/6  rate=0.00 CI[0.00,0.39]
+  scale=2.0: 0/6  rate=0.00 CI[0.00,0.39]
+  scale=4.0: 0/6  rate=0.00 CI[0.00,0.39]
+
+R3 PC_zero_vy partial-fraction sweep (any-detector):
+  frac=0.25: 6/6  rate=1.00 CI[0.61,1.00]
+  frac=0.5: 6/6  rate=1.00 CI[0.61,1.00]
+  frac=0.75: 6/6  rate=1.00 CI[0.61,1.00]
+  frac=1.0: 0/6  rate=0.00 CI[0.00,0.39]
