@@ -465,7 +465,7 @@ and metric ledgers are committed under `research_assets/runs/`.
   the MR stays exact by design. Five of ten mutants were detected by at least one MR (at least
   one mutant per detected fault class), and the detections localize by MR class — continuity to
   boundary/scale faults, symmetry to physical-channel/adjacency faults — which is a first
-  bounded test of the §3.6 interpretation protocol, suggestive rather than a validation. Three
+  bounded test of the §3.6 interpretation protocol, suggestive rather than a validation. Three honesty notes bound this. First, the detected faults are gross corruptions (zeroed inflow, non-zero wall, un-denormalized update, swapped velocity channels, permuted edges) that any divergence- or symmetry-sensitive detector would catch; the catalogue is an independent taxonomy, not adversarial to these MRs but not designed for them. Second, two undetected cases are near or by-construction: the edge-drop fault is a near-miss (32% mirror-y change vs the 50% threshold), and the boundary-condition faults are invisible to mirror-y by construction because boundary imposition happens downstream of the update the symmetry MR scores. Three
   honesty notes bound this. First, the detected faults are gross corruptions (zeroed inflow,
   non-zero wall, un-denormalized update, swapped velocity channels, permuted edges) that any
   divergence- or symmetry-sensitive detector would catch; the catalogue is an independent
