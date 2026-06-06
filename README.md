@@ -47,21 +47,28 @@ between accuracy, residual, UQ, equivariance error, and MRs is left implicit.
 
 ## Evidence boundary (read before citing any number)
 
-The current manuscript reports **only strictly scoped, within-SUT pilot evidence** on one
-trained MeshGraphNets checkpoint:
+The current evidence is **within one SUT and one MeshGraphNets checkpoint** (cross-SUT is
+infeasible in this environment: only one checkpoint exists). It comprises:
 
 - node-permutation equivariance holds to machine precision (relative L2 = 0.0, tol 1e-6);
-- an approximate mirror-y OOD-stress probe (the exact relation being out-of-relation-domain
-  for this mesh) failed on 10 of 10 recorded eval frames (median relative L2 0.737, median
-  V/floor 3.96);
-- an absolute mass-conservation relation stays deferred while a reference-relative
-  divergence diagnostic passes.
+- an approximate mirror-y OOD-stress probe (exact relation out-of-relation-domain on the
+  asymmetric eval mesh) failed on 10/10 eval frames (median relative L2 0.737, V/floor 3.96);
+- an absolute mass-conservation relation stays deferred; the reference-relative divergence
+  diagnostic is recorded as *inconclusive* (non-regression guard on 2 frames, not a pass);
+- a one-step rollout-accuracy comparator (median relative L2 0.0216) — the mirror-y violation
+  is ~34x the median / ~17x the mean in-distribution accuracy;
+- exact mirror-y on a synthetic, provably symmetric (admissible) mesh fails (relative L2 1.10);
+  a control shows the input normalizer accounts for ~0.2%, so the violation is dominated by the
+  learned weights. Read as a binary equivariance failure (OOD magnitude not calibrated);
+- seeded-fault detection: the MRs as detectors catch 5/10 injected mutants and, in a first
+  suggestive test, localize by MR class (continuity to boundary/scale, symmetry to
+  physical-channel/adjacency; node-permutation none, exact-by-design).
 
-No cross-SUT, comparative-superiority, fault-detection, localization, runtime, reliability,
-accuracy, exact-symmetry, or geometry-independent claim is supported. These remain blocked
-until matched artifacts exist. The authoritative runtime claims live in
-`research_assets/experiments/claim-ledger.yml` (claims `C1`–`C7`); the paper-level claims
-(`PC1`–`PC7`) map onto them and are kept in a distinct namespace to avoid collision.
+**Still blocked / not claimed:** cross-SUT or geometry-independent rates; expert-MR,
+generic-MR, and LLM baselines; general or real-world fault-detection rates; validated
+localization; runtime; reliability; model accuracy. The authoritative runtime claims live in
+`research_assets/experiments/claim-ledger.yml` (claims `C1`–`C10`); the paper-level claims
+(`PC1`–`PC10`) map onto them and are kept in a distinct namespace to avoid collision.
 
 ## Repository layout
 
