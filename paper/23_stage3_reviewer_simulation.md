@@ -146,6 +146,20 @@ Major risk:
 - If the manuscript does not show exactly how a candidate relation becomes an
   executable asset, the contribution may be judged as process documentation.
 
+Overlap risk (UQ / trust-region):
+
+- A reviewer may ask how "violation as SUT applicability boundary" differs from
+  uncertainty quantification, conformal prediction, or residual-threshold trust
+  regions, which already locate where a surrogate is unreliable. Defense (now in
+  Related Work and Discussion): UQ/trust-region methods act passively in
+  feature/residual/error space; this method acts in relation space via a
+  controlled physical transformation and reports which necessary relation breaks,
+  indexed by that transformation. The product is the evidence structure for a
+  relation-indexed applicability map, and the two-dimensional verdict separates a
+  model-level violation from an out-of-domain application in a way a residual
+  magnitude cannot. The boundary is held: no completed applicability map is
+  claimed; mirror-y is one bounded within-SUT point.
+
 Minor risk:
 
 - Several wide tables currently produce LaTeX overfull/underfull warnings. They

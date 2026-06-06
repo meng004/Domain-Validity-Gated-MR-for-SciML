@@ -48,6 +48,77 @@ PR4_BOUNDARY_MARKERS = [
 ]
 
 
+# Theory-lift markers: the admissibility-predicate + two-axis-verdict + relation-space
+# framing must appear in BOTH the manuscript and the IST package, kept in lockstep.
+FRAMEWORK_MARKERS = [
+    "domain-admissibility-gated, relation-indexed",
+    "admissible MR",
+    "intrinsic error floor",
+    "domain-violation magnitude",
+    "relation space",
+]
+
+
+# Boundary-guard markers: the hedges that keep the lift from overclaiming. Their
+# presence is asserted so a future edit cannot silently turn the framing into a
+# completed-applicability-map or calibrated-boundary claim.
+FRAMEWORK_GUARD_MARKERS = [
+    "We do not claim a completed applicability map",
+    "one bounded within-SUT",
+    "not as a calibrated boundary measurement",
+    "is left to future work",
+]
+
+
+# Round-2 reviewer-driven integrity markers: the normalizer decomposition control
+# (separating learned weights from the input normalizer), the OOD binary-magnitude
+# caveat, and the conservation verdict relabel must all stay in BOTH files.
+ROUND2_INTEGRITY_MARKERS = [
+    "from 1.1032 to 1.1014",            # normalizer-equivariance control
+    "calibrated in-distribution magnitude",  # OOD magnitude read cautiously (round-4 narrowing)
+    "inconclusive: reference-relative non-regression guard",  # conservation relabel
+]
+
+
+SOCRATIC_DEBATE_CITATION_MARKERS = [
+    "reichert2024hess",
+    "eniser2022relaxations",
+    "duqueTorres2023bugornot",
+    "duqueTorres2023completePipeline",
+    "duqueTorres2023metaTrimmer",
+]
+
+
+# Seeded-fault detection (C10/PC10): the MR-as-detector result and its boundaries
+# must appear in BOTH the manuscript and the IST package.
+SEEDED_FAULT_MARKERS = [
+    "Seeded-fault detection",
+    "injected-fault catalogue",
+    "5 of 10",
+    "PC10-seeded-fault-detection",
+]
+
+
+# A+B convergence: the two added within-SUT runs (rollout-accuracy comparator and the
+# exact mirror-y test on a provably symmetric, admissible mesh) and their honesty
+# caveats must appear in BOTH the manuscript and the IST package.
+ADDED_EVIDENCE_MARKERS = [
+    "median relative L2 0.0216",   # rollout-accuracy one-step diagnostic
+    "34 times",                     # mirror-y violation vs in-distribution accuracy
+    "relative L2 1.10",             # exact mirror-y fail on symmetric admissible mesh
+    "provably symmetric",           # admissible-mesh framing
+    "out-of-sample",                # rebuts the circularity objection
+]
+
+
+# Guards that the conservation diagnostic is not overstated and that the wide 10/10
+# interval is disclosed (both required by the Stage-3 reviewers).
+ADDED_EVIDENCE_GUARD_MARKERS = [
+    "non-regression guard",         # conservation 1.5x threshold honesty
+    "[0.69, 1.00]",                 # exact binomial interval for 10/10
+]
+
+
 def read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
@@ -117,6 +188,60 @@ class Stage25SubmissionReadinessTest(unittest.TestCase):
             with self.subTest(marker=marker):
                 self.assertIn(marker, text)
 
+    def test_framework_lift_markers_present_in_manuscript_and_ist(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in FRAMEWORK_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
+    def test_framework_lift_keeps_evidence_boundary_guards(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in FRAMEWORK_GUARD_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
+    def test_added_within_sut_evidence_present_in_manuscript_and_ist(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in ADDED_EVIDENCE_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
+    def test_added_evidence_keeps_honesty_caveats(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in ADDED_EVIDENCE_GUARD_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
+    def test_round2_reviewer_integrity_fixes_present(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in ROUND2_INTEGRITY_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
+    def test_seeded_fault_detection_present_in_manuscript_and_ist(self) -> None:
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for marker in SEEDED_FAULT_MARKERS:
+            with self.subTest(file="manuscript", marker=marker):
+                self.assertIn(marker, manuscript)
+            with self.subTest(file="ist_main", marker=marker):
+                self.assertIn(marker, ist)
+
     def test_experiment_ledger_has_single_precondition_check_and_no_phantom_enforcer(self) -> None:
         ledger = read(EXPERIMENT_LEDGER)
         # Exactly one top-level precondition_check (YAML duplicate keys parse unreliably).
@@ -143,3 +268,17 @@ class Stage25SubmissionReadinessTest(unittest.TestCase):
         for marker in required:
             with self.subTest(marker=marker):
                 self.assertIn(marker, text)
+    def test_socratic_debate_citations_present_in_bib_and_manuscript_and_tex(self) -> None:
+        bib = read(BIB)
+        manuscript = read(MANUSCRIPT)
+        ist = read(IST_MAIN)
+        for key in SOCRATIC_DEBATE_CITATION_MARKERS:
+            with self.subTest(file="bib", key=key):
+                self.assertIn(key, bib)
+            # manuscript references them by key (Markdown bracket-style)
+            with self.subTest(file="manuscript", key=key):
+                self.assertIn(key, manuscript)
+            # main.tex \citep{key}
+            with self.subTest(file="ist_main", key=key):
+                self.assertIn(key, ist)
+

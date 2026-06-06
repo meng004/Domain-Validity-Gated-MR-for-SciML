@@ -1,0 +1,115 @@
+{
+  "ledger_id": "real-sut-mirror-y-ood-stress-metric-ledger",
+  "evidence_level": "real-sut-single-mr-ood-stress-pilot",
+  "schema_version": "0.1.0",
+  "sut_repo": "/home/user/Minimum-MR-SubSet",
+  "sut_commit": "8c0b7ef3605fd9452884d701e2a191a2b14a5a35",
+  "checkpoint_path": "research_assets/runs/multicheckpoint/S3/checkpoint.pt",
+  "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+  "exact_relation_verdict": "out-of-relation-domain",
+  "precondition_decision": "out-of-relation-domain",
+  "rubric_downgrade": "retained-ood-stress",
+  "precondition_report": {
+    "axis": 0.205,
+    "num_nodes": 1923,
+    "max_nn_dist": 0.019303899832939817,
+    "mean_nn_dist": 0.004019755580403748,
+    "median_edge_length": 0.0187822361506945,
+    "max_nn_over_edge": 1.0277743117518001,
+    "bijection": false,
+    "type_match_rate": 0.9771190847633905,
+    "cylinder": {
+      "center": [
+        0.4105819749335448,
+        0.19775427070756754
+      ],
+      "mean_radius": 0.04559386536236668,
+      "offset_from_axis": -0.007245729292432446,
+      "interior_wall_nodes": 24
+    },
+    "precondition_decision": "out-of-relation-domain",
+    "rubric_downgrade": "retained-ood-stress",
+    "ratio_threshold": 2.0,
+    "axis_source": "channel centerline (geometric mid of y-extent)"
+  },
+  "claim_limitations": "One real SUT and checkpoint, one metamorphic relation (mirror-y), the recorded eval frames of a single trajectory. The exact mirror relation is out-of-relation-domain for this mesh (measured non-mirror-symmetric geometry); the reported violation is an approximate within-SUT OOD-stress measurement relative to its mapping-error floor. Any frame-level rate is a bounded within-SUT rate only -- not a geometry-independent or cross-SUT violation rate, and not a reliability, accuracy, or baseline claim.",
+  "raw_outputs": {
+    "source_output_f0": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/source_output_f0.npy",
+    "source_output": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/source_output.npy",
+    "follow_up_output_f0": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/follow_up_output_f0.npy",
+    "follow_up_output": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/follow_up_output.npy",
+    "mapped_output_f0": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/mapped_output_f0.npy",
+    "mapped_output": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/mapped_output.npy",
+    "source_output_f4": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/source_output_f4.npy",
+    "follow_up_output_f4": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/follow_up_output_f4.npy",
+    "mapped_output_f4": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/mapped_output_f4.npy"
+  },
+  "entries": [
+    {
+      "run_id": "e1-mc-S3-mirror_ood-001",
+      "sut_id": "cylinder_flow_meshgraphnet",
+      "mr_id": "mgn-mirror-y-equivariance",
+      "source_case_id": "source_case-frame0",
+      "follow_up_case_id": "source_case-frame0-mirror-y",
+      "metric_name": "mirror_y_relative_l2_error",
+      "metric_value": 0.766812050026377,
+      "tolerance": {
+        "assertion": "less_or_equal",
+        "threshold": 1e-06,
+        "source": "theory/蜕变测试实验方案.md"
+      },
+      "verdict": "fail",
+      "evidence_artifact": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/source_output_f0.npy",
+      "frame": 0,
+      "mapping_error_floor": 0.22302118698970463,
+      "violation_over_floor": 3.438292389959235,
+      "exact_relation_verdict": "out-of-relation-domain"
+    },
+    {
+      "run_id": "e1-mc-S3-mirror_ood-001",
+      "sut_id": "cylinder_flow_meshgraphnet",
+      "mr_id": "mgn-mirror-y-equivariance",
+      "source_case_id": "source_case-frame4",
+      "follow_up_case_id": "source_case-frame4-mirror-y",
+      "metric_name": "mirror_y_relative_l2_error",
+      "metric_value": 0.7863585484138412,
+      "tolerance": {
+        "assertion": "less_or_equal",
+        "threshold": 1e-06,
+        "source": "theory/蜕变测试实验方案.md"
+      },
+      "verdict": "fail",
+      "evidence_artifact": "research_assets/runs/multicheckpoint/S3/mirror_ood/raw/source_output_f4.npy",
+      "frame": 4,
+      "mapping_error_floor": 0.19623984937692218,
+      "violation_over_floor": 4.007129800143013,
+      "exact_relation_verdict": "out-of-relation-domain"
+    }
+  ],
+  "rate_summary": {
+    "n_frames": 2,
+    "verdict_counts": {
+      "fail": 2
+    },
+    "n_fail": 2,
+    "n_pass": 0,
+    "n_inconclusive": 0,
+    "violation_rate": 1.0,
+    "median_violation": 0.7765852992201091,
+    "median_violation_over_floor": 3.7227110950511237,
+    "frames": [
+      0,
+      4
+    ],
+    "denominator_note": "all recorded frames are counted; inconclusive/out-of-relation-domain frames remain in the denominator"
+  },
+  "generated_at": "2026-06-06T15:09:08Z",
+  "frames": [
+    0,
+    4
+  ],
+  "num_nodes": 1923,
+  "num_edges": 11070,
+  "device": "cpu",
+  "framework_version": "torch 2.12.0+cpu"
+}

@@ -1,0 +1,171 @@
+{
+  "ledger_id": "real-sut-seeded-fault-detection",
+  "evidence_level": "real-sut-single-checkpoint-seeded-fault-detection",
+  "schema_version": "0.1.0",
+  "sut_repo": "/home/user/Minimum-MR-SubSet",
+  "sut_commit": "8c0b7ef3605fd9452884d701e2a191a2b14a5a35",
+  "checkpoint_path": "research_assets/runs/multicheckpoint/S2/checkpoint.pt",
+  "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+  "fault_taxonomy_source": "re-implemented from read-only Minimum-MR-SubSet scripts/mcmr/cylinder_flow/witness_stage_b.py",
+  "detectors": {
+    "node_permutation_equivariance": {
+      "class": "representation MR",
+      "tolerance": 1e-05
+    },
+    "conservation_divergence": {
+      "class": "continuity MR",
+      "reference_relative_regression_threshold": 1.5
+    },
+    "mirror_y_ood_stress": {
+      "class": "geometric/symmetry MR",
+      "baseline_violation": 0.7159334970815119,
+      "relative_change_detection_threshold": 0.5
+    }
+  },
+  "baseline": {
+    "node_perm_relative_l2_median": 0.0,
+    "conservation_ratio_median": 1.01056159665668,
+    "mirror_y_violation_median": 0.7159334970815119
+  },
+  "num_frames": 9,
+  "detection_matrix": [
+    {
+      "mutant": "BC_zero_inflow",
+      "fault_class": "boundary_condition_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 4.019942224893336,
+      "mirror_y_violation_median": 0.7159334970815119,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": true,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": true
+    },
+    {
+      "mutant": "BC_nonzero_wall",
+      "fault_class": "boundary_condition_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 3.8015847057195016,
+      "mirror_y_violation_median": 0.7159334970815119,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": true,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": true
+    },
+    {
+      "mutant": "MA_drop_edges",
+      "fault_class": "mesh_adjacency_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0171662413054716,
+      "mirror_y_violation_median": 0.9696759477478041,
+      "mirror_y_relative_change_from_baseline": 0.3544218166920085,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "MA_permute_edges",
+      "fault_class": "mesh_adjacency_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0148608441747402,
+      "mirror_y_violation_median": 1.1054376160919355,
+      "mirror_y_relative_change_from_baseline": 0.5440506982816548,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": true,
+      "detected_by_any": true
+    },
+    {
+      "mutant": "NS_skip_denorm",
+      "fault_class": "normalization_scale_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 11.089748446182496,
+      "mirror_y_violation_median": 0.7142392639893622,
+      "mirror_y_relative_change_from_baseline": 0.0023664671356434254,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": true,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": true
+    },
+    {
+      "mutant": "NS_double_scale",
+      "fault_class": "normalization_scale_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0260262549065606,
+      "mirror_y_violation_median": 0.7159334970815119,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "TR_sign_flip",
+      "fault_class": "temporal_rollout_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0039501839735692,
+      "mirror_y_violation_median": 0.7159334970815119,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "TR_double_step",
+      "fault_class": "temporal_rollout_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0245811077238258,
+      "mirror_y_violation_median": 0.7159334970815119,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "PC_swap_xy",
+      "fault_class": "physical_channel_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0149348809155911,
+      "mirror_y_violation_median": 1.7993178665688436,
+      "mirror_y_relative_change_from_baseline": 1.5132472134684656,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": true,
+      "detected_by_any": true
+    },
+    {
+      "mutant": "PC_zero_vy",
+      "fault_class": "physical_channel_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0082701965959593,
+      "mirror_y_violation_median": 0.7660013826824299,
+      "mirror_y_relative_change_from_baseline": 0.06993371005130884,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    }
+  ],
+  "summary": {
+    "num_mutants": 10,
+    "node_permutation_MR_detection_rate": 0.0,
+    "conservation_MR_detection_rate": 0.3,
+    "mirror_y_MR_detection_rate": 0.2,
+    "union_detection_rate": 0.5,
+    "fault_classes_localized_by_node_permutation": [],
+    "fault_classes_localized_by_conservation": [
+      "boundary_condition_fault",
+      "normalization_scale_fault"
+    ],
+    "fault_classes_localized_by_mirror_y": [
+      "mesh_adjacency_fault",
+      "physical_channel_fault"
+    ]
+  },
+  "claim_limitations": "One SUT, one checkpoint, one eval trajectory, one injected-fault catalogue. Detection rates are for this mutant set only; not a real-world fault-detection rate, reliability, baseline-superiority, or cross-SUT claim.",
+  "generated_at": "2026-06-06T15:09:04Z"
+}

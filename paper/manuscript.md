@@ -28,11 +28,11 @@ We propose a domain-validity rubric for screening candidate MRs, an MR-card and 
 
 ### Results
 
-Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.1): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. This draft makes no claims about cross-SUT pass rates, fault-detection rates, comparative performance, localization accuracy, model accuracy, or SUT reliability.
+Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.3): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this asymmetric mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. Two further within-SUT runs sharpen the interpretation: a same-trajectory one-step rollout-accuracy diagnostic gives median relative L2 0.0216, so the mirror-y violation is about 34 times the surrogate's in-distribution accuracy; and on a synthetic mesh that is provably symmetric about the centerline — where the rubric admits the exact mirror-y relation rather than downgrading it — the surrogate still violates exact mirror-y equivariance (relative L2 1.10), which removes the out-of-relation-domain objection to the mirror-y finding. Used as detectors against a 10-mutant injected-fault catalogue, the MRs catch 5 of 10 faults and, in a suggestive, single-SUT test, localize them by MR class (continuity to boundary/scale faults, symmetry to physical-channel/adjacency faults). To address a single-checkpoint objection, the five within-SUT measurements are replicated across a roster of K=6 MeshGraphNets cylinder-flow checkpoints (four base-config seed replicas plus one wider and one deeper configuration variant, all from the same read-only trainer on the same DeepMind dataset; Section 5.4): node-permutation equivariance is exact on every checkpoint; mirror-y OOD-stress median relative L2 has bootstrap 95% CI [0.74, 0.80] over the seed family with the configuration variants within the same band; the synthetic symmetric-mesh exact-mirror-y test fails on every checkpoint; the reference-relative conservation ratio sits in CI [1.007, 1.011]; and the one-step rollout median relative L2 sits in CI [0.0217, 0.0224], so the mirror-y violation is about 35x the in-distribution accuracy on every checkpoint. The P1 discrete-divergence operator that underwrites the continuity-MR admissibility predicate is empirically O(h) on the symmetric-mesh family (log–log slope 0.988, R² = 1.000; Section 5.5), confirming the numerical-decidability gate has a measurable basis. This draft makes no claims about cross-SUT (cross-architecture-family) pass rates, general or real-world fault-detection rates, comparative baseline superiority, validated localization accuracy, model accuracy, or SUT reliability.
 
 ### Conclusion
 
-The evidence supports a validity-aware bridge from candidate MR ideas to auditable SciML test assets. The main empirical lesson is not that every physical intuition becomes a clean MR, or that every MR exposes a general fault. Rather, the scoped pilots show that a rubric-gated workflow can produce relation-level outcomes while preserving the evidence boundary for each claim.
+The evidence supports a validity-aware bridge from candidate MR ideas to auditable SciML test assets. The main empirical lesson is not that every physical intuition becomes a clean MR, or that every MR exposes a general fault. Rather, the scoped pilots show that a rubric-gated workflow can produce relation-level outcomes while preserving the evidence boundary for each claim. We frame this as a domain-admissibility-gated, relation-indexed approach to SciML OOD validation: a relation is admitted only when its tolerance dominates the relevant numerical error floor, and its verdict is read in a space that separates a model-level violation from an out-of-domain application.
 
 ## Keywords
 
@@ -52,6 +52,8 @@ Prior studies show that relation-based and residual-based evidence is useful whe
 
 This paper treats MR identification for SciML as a validity-gated testing problem. Physical knowledge, expert reasoning, LLM-assisted candidate lists, and NOETHER-style pattern organization can all suggest candidate relations, but a candidate relation is not yet an executable MR. It must first state the physical or software basis of the relation, the transformation preconditions, boundary-condition compatibility, output mapping, metric, tolerance rationale, exclusion rule, and verdict interpretation. Only retained relations are converted into executable MR assets.
 
+Two ideas organize this treatment. First, a candidate relation is *admissible* only when, in addition to a physical or software basis and satisfied transformation preconditions, it is numerically decidable: its verdict tolerance must dominate the intrinsic error floor of the operator that measures it — machine precision for an exact representation relation, the interpolation or mapping floor for an approximate geometric relation, or the discretization floor of a discrete operator for a continuity relation. Second, a relation-level verdict is read in two dimensions — how far the measured quantity violates the relation, and how far the transformed case lies outside the relation's validity domain — so that a model-level inconsistency is not confused with a relation applied outside its domain. We refer to this as a domain-admissibility-gated, relation-indexed approach to SciML OOD validation. It is an organizing framework, not a new model and not a claim of superiority over uncertainty quantification.
+
 The case study is scoped to MeshGraphNets-family cylinder-flow surrogates. This is an intentionally narrow empirical setting rather than the paper's main conceptual contribution. It allows us to examine transformations over meshes, geometry, velocity fields, nondimensional quantities, and rollout behavior while keeping the SUT family concrete enough for reproducible testing. Full cross-SUT evaluation remains blocked. The current case study reports only one trained SUT and checkpoint, so we do not claim external validity across all neural fluid surrogates.
 
 ### 1.1 Research Questions
@@ -68,19 +70,19 @@ We decompose this into four questions.
 
 **RQ3 - Verdict and interpretation.** How can relation-level verdicts distinguish pass, fail, skip, out-of-relation-domain, numerical tolerance issue, and inconclusive outcomes?
 
-**RQ4 - Case-study evidence.** In a MeshGraphNets-family cylinder-flow case study, what evidence does the rubric-gated asset workflow add relative to expert MR design, LLM-assisted candidate generation, generic MR-generation scope contrasts, and rollout-accuracy diagnostics?
+**RQ4 - Case-study evidence.** In a MeshGraphNets-family cylinder-flow case study, what evidence does the rubric-gated asset workflow add relative to expert MR design, LLM-assisted candidate generation, generic MR-generation scope contrasts, and rollout-accuracy diagnostics? In the current evidence only the rollout-accuracy comparator is answered; the expert-MR, LLM-candidate, and generic-MR comparators remain planned and are blocked pending their artifacts.
 
 ### 1.2 Contributions
 
-This paper makes four scoped contributions.
+This paper makes three scoped contributions, each repositioned narrowly with respect to the closest prior we identify in Section 2, and evaluated through a single MeshGraphNets-family cylinder-flow case study.
 
-First, we propose a domain-validity rubric for screening candidate MRs in SciML testing. The rubric checks whether a candidate relation has a clear physical basis, compatible boundary conditions, a semantics-preserving transformation, a measurable output relation, an interpretable tolerance, and a diagnosable failure mode.
+First, we propose a domain-validity rubric and MR-card executable-asset workflow that screens candidate MRs and converts retained ones into auditable, executable test assets recording physical basis, transformation preconditions, boundary-condition compatibility, output mapping, metric, tolerance, and exclusion rules. As a SciML-specific instantiation of the calibrated-tolerance principle introduced by Eniser et al. [eniser2022relaxations] as *relaxations* for stochastic RL policy testing, we ground the tolerance floor in the *intrinsic error floor of the discrete measurement operator*, whose truncation order is theoretically characterizable (for a P1 discrete-divergence operator on a triangular mesh, $O(h)$ in the mesh spacing); in this study the floor magnitude is estimated from the reference field on the deployed mesh rather than computed from a closed-form bound, which we leave to future work. NOETHER-style pattern organization may serve as one candidate source but does not decide MR validity. To our knowledge, grounding an MR tolerance in the measurement operator's own error floor in this way is new in the SciML setting.
 
-Second, we define an MR-card and executable-asset workflow that converts retained candidates into auditable test assets. NOETHER-style pattern organization may be used as one candidate source, but it is not the contribution being evaluated here and it does not decide MR validity.
+Second, we define a relation-level verdict and ledger scheme that reads verdicts in two dimensions (relation-violation against domain-violation magnitude). This instantiates, for physics-governed SciML, the constraint-architecture pattern introduced by Duque-Torres et al. [duqueTorres2023bugornot], formalised by *Towards a Complete Metamorphic Testing Pipeline* [duqueTorres2023completePipeline], and automated data-drivenly by MetaTrimmer [duqueTorres2023metaTrimmer]; what is new here is a *typed classification* of domain-inadmissibility sub-dimensions drawn from PDE-domain preconditions, geometry, boundary conditions, and operator admissibility. The relation-violation axis is quantified; the domain-violation axis is at present only qualitatively operationalized, and a calibrated continuous score is left to future work.
 
-Third, we define a relation-level verdict and ledger scheme. Each retained MR records a source-case schema, follow-up transformation, output mapping, metric, tolerance rule, exclusion rule, and verdict interpretation. This converts physical diagnostics such as residuals, conservation errors, and equivariance errors into auditable oracle-free tests only when their transformation and validity conditions are explicit.
+Third, as an element that none of the closest prior works addresses, we use the paper's own MRs as fault detectors against an independently re-implemented 10-mutant seeded-fault catalogue, and report a by-class localization: the continuity MR localizes to boundary-condition and gross normalization-scale faults; the symmetry MR localizes to physical-channel and mesh-adjacency faults; node-permutation equivariance, by-design exact under these faults, localizes to none. This is suggestive evidence for a typed mapping from MR class to fault class, not a validated localization model.
 
-Fourth, we provide a MeshGraphNets-family cylinder-flow case study on one trained SUT and checkpoint. The current evidence contains three scoped pilots: node-permutation sanity evidence, a bounded within-SUT mirror-y OOD-stress frame-rate result, and a reference-relative discrete-divergence diagnostic. Expert MR design, generic MR-generation scope contrasts, LLM-assisted candidate generation, rollout-accuracy baselines, and cross-SUT comparisons remain protocol commitments until matched artifacts exist.
+We evaluate these contributions on one trained MeshGraphNets cylinder-flow checkpoint, extending the active-transformation testing direction of Reichert et al. [reichert2024hess] — who applied physics-derived MRs to a trained LSTM hydrologic surrogate and produced a basin-stratified applicability map — from hydrology to mesh-based neural fluid surrogates. The evidence comprises three scoped relation pilots, a same-SUT rollout-accuracy comparator, and an exact mirror-y test on a provably symmetric admissible synthetic mesh; expert MR design, generic MR-generation scope contrasts, LLM-assisted candidate generation, and cross-SUT comparisons remain protocol commitments until matched artifacts exist.
 
 ## 2. Background and Related Work
 
@@ -110,11 +112,15 @@ The gap is that candidate identification is not enough for SciML. A candidate re
 
 ### 2.4 Physics-Based MT for Learned Scientific Simulators
 
-Recent candidate studies are directly relevant because they appear to test learned physical-field or fluid-velocity predictors using physics-based metamorphic ideas. The current reference ledger treats these studies as verification leads rather than submission-ready anchors: one physical-field prediction lead remains unverified, and one fluid-velocity prediction lead is only partially verified.
+Three contemporary works are the closest prior to ours and frame what is and is not new here. We engage each one explicitly.
 
-These candidate leads are treated cautiously because the current reference ledger has not upgraded them into submission-ready closest-work evidence. They nevertheless reinforce an important boundary for this paper: the contribution should not be framed as the first use of physics-based MT for learned fluid or field predictors.
+**Reichert et al. (2024)** [reichert2024hess] applied physics-derived metamorphic relations to a trained LSTM hydrologic surrogate. They perturbed climate-forcing inputs (temperature, precipitation) in directions where the qualitative physical response is known a priori, stratified pass/fail outcomes by basin elevation to produce an implicit applicability map, and excluded basins where forcing uncertainty dominated the response signal — an informal admissibility filter. The present work formalises these practices as an explicit admissibility predicate, a two-dimensional verdict type, and a relation-indexed applicability map, and extends them from hydrology to mesh-based neural fluid surrogates whose outputs live on irregular meshes and whose MR validity depends on geometry and discrete operators rather than basin physiography. We do not claim to be the first to use physics-derived MRs on a trained neural surrogate.
 
-Our contribution is narrower and methodological. We shift the emphasis from scenario-level physical consistency checks to a validity-gated workflow. A retained relation is represented as an executable MR asset, not only as an intuitive physical expectation. Each asset records its preconditions, boundary-condition compatibility, output mapping, metric, tolerance rationale, exclusion rule, and verdict interpretation. This allows the test report to distinguish a model inconsistency from a relation that was applied outside its valid domain.
+**Eniser et al. (2022)** [eniser2022relaxations] introduced *relaxations* — numerical tolerances embedded inside MR oracles — for action-policy testing of stochastic reinforcement-learning systems, deriving them empirically from policy rollouts on Highway, LunarLander and BipedalWalker. We extend this calibrated-tolerance principle to deterministic numerical surrogates by grounding the tolerance floor in the intrinsic error floor of the discrete measurement operator, whose truncation order is theoretically characterizable (for a P1 discrete-divergence operator on a triangular mesh, $O(h)$ in the mesh spacing). The distinction from rollout-derived relaxations is that the floor is a property of the measurement operator rather than of model stochasticity; in the present study we estimate its magnitude empirically from the reference field on the deployed mesh, and a closed-form a-priori bound is left to future work. We do not claim that calibrated MR tolerance is itself new.
+
+**The 2023 violation-attribution cluster** — Duque-Torres et al. (SANER 2023) [duqueTorres2023bugornot], *Towards a Complete Metamorphic Testing Pipeline* [duqueTorres2023completePipeline] and MetaTrimmer [duqueTorres2023metaTrimmer] — identified the bug-vs-MR-inapplicability separation as a research problem and addressed it architecturally with explicit MR constraints used as a pipeline pre-filter, with MetaTrimmer automating the constraint derivation from random-input violation logs. Our two-dimensional verdict instantiates this architectural pattern for physics-governed SciML; what is new is a *typed classification of domain-inadmissibility sub-dimensions* drawn from PDE-domain preconditions, geometry compatibility, boundary-condition compatibility, and operator admissibility, rather than a binary skip/proceed gate or a data-derived constraint set. We do not claim that the bug-vs-inapplicability separation is itself new.
+
+Across all three closest works, the element our debates could not pre-empt is the seeded-fault MR-as-detector with by-class fault localization reported in Section 5.3. None of Reichert, Eniser, or the 2023 cluster attempts to map MR failures back to identifiable fault classes within the system under test.
 
 ### 2.5 SciML V&V, Residuals, UQ, and Failure Modes
 
@@ -128,11 +134,13 @@ Hybrid ML-solver frameworks provide another relevant line of work. Some systems 
 
 Our study pursues a complementary direction. Before deployment, physically derived transformations are used to estimate where relation violations occur and what regimes, boundary conditions, or numerical assumptions are associated with them. The result is not a runtime switching policy by itself, but an evidence structure that can support later decisions about when a learned surrogate should be trusted.
 
+The distinction from residual- and uncertainty-based trust estimation is deliberate. Uncertainty quantification, conformal prediction, and residual-threshold trust regions locate unreliable behavior in feature, residual, or error-estimate space, and they do so passively from observed inputs. The present method instead acts in relation space: it applies a physically derived, controlled transformation and reports which necessary relation breaks under it, indexed by that transformation. The intended product is therefore the evidence structure needed for a relation-indexed applicability map — a statement of the form "under this controlled transformation, this relation no longer holds" — rather than a scalar field of high residual, and the two-dimensional verdict separates a model-level violation from an out-of-domain application, a separation that, as the present case illustrates, a scalar accuracy or residual magnitude does not by itself provide. Section 5.3 gives that concrete within-SUT instance: a surrogate that is accurate in-distribution (median one-step relative L2 0.0216) still violates mirror-y equivariance by roughly an order of magnitude more, so the accuracy number does not bound the relation violation. We do not claim a completed applicability map in this paper; the mirror-y result reported below is one bounded within-SUT example of the evidence such a map would aggregate.
+
 ### 2.7 What Is New and What Is Not New
 
 The paper does not claim that metamorphic testing, MR identification, scientific-software MT, residual diagnostics, uncertainty quantification, LLM candidate generation, or NOETHER-style candidate organization is new. These are established or emerging sources of testing ideas. The paper's narrower claim is that SciML MR identification should be treated as a domain-validity problem: a candidate relation becomes useful only after its physical basis, transformation preconditions, output mapping, tolerance, exclusion rule, executable artifact, and relation-level verdict are recorded.
 
-What is new here is the evidence-gated conversion from candidate relation to executable SciML MR asset. The contribution is not a stronger neural simulator and not an automatic MR generator. It is a workflow that makes the validity boundary inspectable, so that a candidate can be retained, rejected, downgraded to OOD-stress, or deferred instead of being silently treated as a valid oracle.
+What is new here is the evidence-gated conversion from candidate relation to executable SciML MR asset. The contribution is not a stronger neural simulator and not an automatic MR generator. It is a workflow that makes the validity boundary inspectable, so that a candidate can be retained, rejected, downgraded to OOD-stress, or deferred instead of being silently treated as a valid oracle. Structurally, the novelty is two organizing devices rather than a checklist of MR fields: an admissibility gate that ties a relation's tolerance to the numerical error floor of its own measurement, and a two-dimensional relation-level verdict that separates a model violation from an out-of-domain application. The admissibility gate is fully operational (it decides retain, downgrade, or defer on stated grounds in the case study); the verdict's domain-violation axis is, so far, only qualitatively operationalized, so the two-dimensional verdict is at this stage an interpretive structure pending a calibrated domain-violation score rather than a fully measured device. Both are means to make the validity boundary inspectable, not claims of empirical superiority over existing diagnostics. A third, empirically distinct element, examined in Section 5.3, is the seeded-fault by-class localization: used as detectors against an independently re-implemented injected-fault catalogue, the MRs map by class to fault class (continuity to boundary/scale faults, symmetry to physical-channel/adjacency faults), an element none of the three closest prior works addresses.
 
 ## 3. Method
 
@@ -166,6 +174,8 @@ For cylinder-flow surrogates, candidate MRs may come from six sources.
 
 ### 3.3 Domain-Validity Rubric
 
+We treat screening as deciding a single admissibility predicate. A candidate relation is an *admissible MR* when four conditions hold together: (i) it has a physical or software basis; (ii) its transformation preconditions are satisfied; (iii) its boundary conditions and output mapping remain compatible after the transformation; and (iv) it is numerically decidable, meaning the verdict tolerance dominates the intrinsic error floor of the operator that measures the relation. Conditions (i)-(iii) establish that the relation is meaningful for the transformed case; condition (iv) establishes that a violation can be told apart from numerical noise. None of the four is optional and none is merely documentary: each is a gate that can reject or defer a candidate, and provenance recording is the mechanism that makes each gate auditable, not a substitute for it. The six rubric criteria below are the recorded, auditable form of these four conditions.
+
 Each candidate MR is screened using a rubric with six criteria.
 
 **Physical basis.** The relation must cite its source: governing equation, boundary condition, nondimensional law, representation property, numerical assumption, or implementation contract.
@@ -176,7 +186,7 @@ Each candidate MR is screened using a rubric with six criteria.
 
 **Output mapping.** The expected relation among outputs must be measurable. A relation that cannot be mapped to available output fields is not executable.
 
-**Metric and tolerance.** The verdict rule must define a metric and a tolerance. The tolerance may come from numerical precision, solver reference behavior, calibration data, repeated-run variability, or expert thresholding, but the source must be recorded.
+**Metric and tolerance.** The verdict rule must define a metric and a tolerance. The tolerance may come from numerical precision, solver reference behavior, calibration data, repeated-run variability, or expert thresholding, but the source must be recorded. This criterion carries condition (iv): the tolerance must be shown to dominate the intrinsic error floor of the measuring operator. When that floor is itself uncalibratable — as for an absolute discrete-divergence relation whose reference field already carries non-negligible divergence — the relation is deferred rather than executed, because a violation could not be separated from the operator's own discretization error.
 
 **Failure diagnosability.** The relation should indicate what kind of failure or boundary condition it can help interpret. If every possible violation has the same ambiguous meaning, the relation is weak evidence and should be treated cautiously.
 
@@ -221,11 +231,15 @@ An MR execution can produce several verdicts:
 
 This scheme prevents a common overclaim: not every relation violation is a program fault. A violation may reveal a model inconsistency, but it may also reveal that the MR was applied outside its domain, that the threshold was too tight, that the mesh operator was unsuitable, or that the case is not comparable.
 
+It is useful to read these verdicts as regions of a two-dimensional space rather than as a flat list. One axis is the relation-violation magnitude — how far the measured quantity exceeds the tolerance, for example the violation-to-tolerance ratio or the violation-to-floor ratio V/floor. The other axis is the domain-violation magnitude — how far the transformed case lies outside the relation's validity domain, signalled by precondition violation, geometry mismatch, boundary-condition mismatch, or operator inadmissibility. Low domain-violation with low relation-violation is pass; low domain-violation with high relation-violation is the only region that may be read as SUT inconsistency; high domain-violation is out-of-relation-domain or, near the boundary, OOD-stress; a relation-violation that sits within the error floor is a numerical-tolerance issue. This decomposition is what keeps a model-level violation from being confused with a relation applied outside its domain, and it makes condition (iv) of the admissibility predicate explicit at verdict time.
+
+In the present study the relation-violation axis is quantitative — mirror-y reports V/floor — but the domain-violation axis is so far only partially operationalized. The mirror-y case is placed near the validity boundary *qualitatively*: the reflection is non-bijective and the worst reflected-node mismatch is about one mesh edge length, so the exact relation is out-of-relation-domain and is downgraded to an approximate OOD-stress probe. We do not claim a fully calibrated, continuous domain-violation score; defining such a score across MR classes is left to future work. The two-dimensional reading is used here as an interpretive structure, not as a calibrated boundary measurement.
+
 ### 3.6 Hierarchical Interpretation Protocol
 
 We organize retained MRs into a three-level hierarchy inspired by MR classification for scientific computing: physical-model relations, computational-model relations, and code-model relations. For learned mesh surrogates, the computational-model level includes graph representation and message-passing discretization assumptions.
 
-We use this hierarchy as a predeclared interpretation protocol that maps representation-level MRs to possible graph encoding or adapter problems, physical-model MRs to possible continuity, symmetry, or similarity violations, and code-model MRs to possible determinism, rollout, or implementation issues. At this stage, this is a localization protocol, not a validated localization model. It becomes validated only if seeded faults or mutants with known layers are used to evaluate the inference rule.
+We use this hierarchy as a predeclared interpretation protocol that maps representation-level MRs to possible graph encoding or adapter problems, physical-model MRs to possible continuity, symmetry, or similarity violations, and code-model MRs to possible determinism, rollout, or implementation issues. At this stage, this is a localization protocol, not a validated localization model. It becomes validated only if seeded faults or mutants with known layers are used to evaluate the inference rule. Section 5.3 reports a first bounded test of this protocol: against an injected-fault catalogue the continuity MR localized to boundary and normalization-scale faults while the symmetry MR localized to physical-channel and mesh-adjacency faults, which is suggestive evidence for the protocol's direction but not, on one SUT and one catalogue, a validated localization model.
 
 ## 4. Empirical Design
 
@@ -340,16 +354,23 @@ artifacts are committed and validated.
 | PC5-conservation-diagnostic-deferred | Observed diagnostic; absolute claim deferred | `conservation-diagnostic-pilot/raw/metric_ledger.json`; `conservation_report.json` | absolute conservation remains deferred. |
 | PC6-mirror-y-ood-stress | Observed bounded pilot | `mirror-y-rate-upgrade/raw/metric_ledger.json`; `claim-ledger.yml` | failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. |
 | PC7-llm-candidate-support-only | Supported process boundary | Method and ethics sections | LLMs organize candidates; they do not judge MR validity. |
+| PC8-rollout-accuracy-diagnostic | Observed | `rollout-accuracy-baseline/raw/metric_ledger.json` | Same-SUT one-step accuracy (median rel L2 0.0216); mirror-y is ~34x larger; not a baseline-superiority or multi-trajectory claim. |
+| PC9-exact-mirror-y-symmetric-mesh | Observed | `mirror-y-symmetric-mesh/raw/metric_ledger.json` | Exact relation admissible and fails (rel L2 1.10) on a synthetic OOD symmetric mesh; not an accuracy, reliability, or cross-SUT claim. |
+| PC10-seeded-fault-detection | Observed | `seeded-fault-detection/raw/metric_ledger.json` | MRs as detectors catch 5/10 injected mutants, localizing by MR class; not a general or real-world fault-detection rate. |
+| PC11-multicheckpoint-replication | Observed | `multicheckpoint/e1_aggregate.json`; per-SUT manifests under `multicheckpoint/S0..S5/` | K=6 checkpoints of one MeshGraphNets architecture family on one dataset (S0-S3 seed-replica family + S4 wider + S5 deeper); cross-checkpoint replication, not cross-architecture-family generalization. |
+| PC12-operator-floor-resolution | Observed | `operator-floor-sweep/operator_floor_report.json` | Log-log slope 0.988 (all)/0.995 (interior), R² = 1.0 over four resolutions on one symmetric structured mesh family with one analytic field; calibrates the admissibility predicate, does not generalize across mesh geometries. |
+| PC13-fault-detection-robustness | Observed | `fault-robustness-e3/fault_robustness_report.json` | 30-trial Wilson CIs per (mutant, detector) across the K=6 roster; NS_double_scale undetected across {1.1, 1.25, 1.5, 2, 4}; PC_zero_vy non-monotone (partial detected, full undetected because uniform-zero is mirror-symmetric); MA_permute_edges configuration-sensitive. Within-family robustness; not a real-world or cross-family fault-detection-rate claim. |
 
-The PC# identifiers above are paper-level claims. The single source of truth for runtime-evidence claims is the runtime claim ledger (`research_assets/experiments/claim-ledger.yml`, claims C1–C7); each paper claim maps to it as: PC1→C4-rubric-decision-coverage; PC2→C1-fixture-asset-path and C4-rubric-decision-coverage; PC3→C3-baseline-comparison; PC4→C2-real-sut-verdicts; PC5→C7-conservation-diagnostic; PC6→C6-mirror-y-ood-stress; PC7→ no runtime-evidence claim (a method/ethics process boundary). The ledger's C5-precondition-check underlies the precondition gate described in the method section.
+The PC# identifiers above are paper-level claims. The single source of truth for runtime-evidence claims is the runtime claim ledger (`research_assets/experiments/claim-ledger.yml`, claims C1–C13); each paper claim maps to it as: PC1→C4-rubric-decision-coverage; PC2→C1-fixture-asset-path and C4-rubric-decision-coverage; PC3→C3-baseline-comparison; PC4→C2-real-sut-verdicts; PC5→C7-conservation-diagnostic; PC6→C6-mirror-y-ood-stress; PC7→ no runtime-evidence claim (a method/ethics process boundary); PC8→C8-rollout-accuracy-baseline; PC9→C9-mirror-y-exact-symmetric-mesh; PC10→C10-seeded-fault-detection; PC11→C11-multicheckpoint-replication; PC12→C12-operator-floor-resolution; PC13→C13-fault-detection-robustness. The ledger's C5-precondition-check underlies the precondition gate described in the method section.
 
 ### 5.2 MR-Card-to-Verdict Map
 
 | MR card | Rubric decision | Runtime verdict | What the verdict can and cannot mean |
 |---|---|---|---|
 | Node permutation equivariance | Retained as representation MR | pass sanity; relative L2 = 0.0 | Supports the executable path and representation contract for one case; does not establish model reliability. |
-| Mirror-y equivariance | Exact relation out-of-relation-domain; downgraded to approximate OOD-stress | fail on 10 of 10 recorded eval frames; median relative L2 0.737; median V/floor 3.96 | Shows bounded within-SUT OOD-stress violation for one trajectory; does not show exact symmetry failure, cross-SUT rate, or geometry-independent behavior. |
-| Discrete divergence / conservation | Absolute mass-conservation MR deferred; reference-relative diagnostic retained | reference-relative diagnostic pass on recorded frames | Shows no extra degradation relative to the reference representation; does not prove absolute conservation. |
+| Mirror-y equivariance (asymmetric eval mesh) | Exact relation out-of-relation-domain; downgraded to approximate OOD-stress | fail on 10 of 10 recorded eval frames; median relative L2 0.737; median V/floor 3.96 | Shows bounded within-SUT OOD-stress violation for one trajectory; does not by itself show exact symmetry failure, cross-SUT rate, or geometry-independent behavior. |
+| Mirror-y equivariance (synthetic symmetric mesh) | Exact relation admissible (bijection verified, offset < 1e-12, type-match 1.0) | fail; relative L2 1.10 on one input state | Shows an exact-symmetry violation where the relation is admissible, removing the out-of-relation-domain objection; synthetic no-obstacle OOD mesh, one input; not an accuracy or cross-SUT claim. |
+| Discrete divergence / conservation | Absolute mass-conservation MR deferred; reference-relative diagnostic retained | inconclusive: reference-relative non-regression guard on 2 frames (not scored as a conservation pass) | At 2 frames with a 50% slack threshold and an undecomposed reference divergence, this guards against regression but does not establish conservation. |
 
 ### 5.3 Within-SUT pilot evidence (single SUT, single checkpoint)
 
@@ -375,7 +396,14 @@ and metric ledgers are committed under `research_assets/runs/`.
   frame-level OOD-stress result under an approximate reflection: one SUT, one
   checkpoint, one MR, one eval trajectory. It is not an exact mirror-symmetry result
   and not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or
-  geometry-independent claim.
+  geometry-independent claim. The 10 frames are consecutive states of one trajectory
+  and are therefore not independent samples; the 10/10 count is evidence about one
+  trajectory segment, and an exact binomial 95% interval for 10 successes in 10 trials
+  is wide ([0.69, 1.00]). The V/floor ratio is normalized by a mapping-error floor that
+  is itself a function of the same geometric mismatch that triggered the downgrade, so
+  on this asymmetric mesh V/floor cannot fully separate a model-level violation from an
+  amplified geometric artifact; the exact-symmetry run on a symmetric mesh below is what
+  resolves that ambiguity.
 - **Continuity MR (deferred absolute relation, reference-relative diagnostic).** A
   P1 discrete-divergence operator yields a non-negligible divergence even for the
   ground-truth field on this coarse mesh (dimensionless reference divergence ≈
@@ -383,20 +411,290 @@ and metric ledgers are committed under `research_assets/runs/`.
   absolute mass-conservation relation stays deferred. As a reference-relative
   diagnostic, the surrogate's predicted next-state divergence stays within ~0.4–0.8%
   of the reference on the recorded eval frames (interior-only ratio confirms this is
-  not a boundary-imposition artefact). This asserts no absolute conservation.
+  not a boundary-imposition artefact). This asserts no absolute conservation. Two
+  caveats bound this diagnostic. First, the reference divergence ≈ 0.037 is not yet
+  decomposed into discrete-operator error, solver projection artefact, or genuinely
+  non-solenoidal training data; if the reference field is itself materially
+  non-solenoidal, the reference-relative ratio compares two imperfect fields and is a
+  non-regression guard rather than a conservation measurement. Second, the diagnostic
+  uses a 50% regression threshold (ratio > 1.5) on two eval frames only, so "passes"
+  means "does not regress conservation by more than 50% on those frames," not
+  "conserves mass."
 
-These pilots illustrate the direction of the paper's argument — that accuracy
-alone does not bound whether a surrogate respects physical structure, and that an
-evidence-gated rubric will refuse or downgrade a relation rather than fabricate a
-verdict. They are pilot-scale and do not by themselves prove the general claim.
+- **Rollout-accuracy diagnostic (accuracy comparator on the same SUT).** On the same
+  eval trajectory, the surrogate's one-step next-state prediction error
+  (`v_pred = v_t + denormalized predicted delta`, the trainer's own convention) has
+  median relative L2 0.0216 (mean 0.044; min 0.0116, max 0.0788) over the nine recorded
+  transitions. The per-transition error is bimodal (alternating ~0.012 and ~0.075),
+  consistent with the vortex-shedding cycle, so we quote both statistics. The surrogate
+  is therefore accurate in-distribution to a few percent per step, yet the mirror-y
+  OOD-stress violation (median 0.737) is larger by roughly an order of magnitude — about
+  34x the median accuracy and 17x the mean. Both quantities are dimensionless relative
+  L2, but of different objects (equivariance of the model output versus next-state
+  velocity error against the ground truth), so the ratio is an order-of-magnitude gap
+  rather than a precise factor, and we do not compare the symmetric-mesh 1.10 to this
+  number directly because their reference distributions differ. This is the first
+  within-SUT evidence that the relation-level diagnostic and ordinary rollout accuracy
+  answer different validation questions on this surrogate; it remains a same-SUT accuracy
+  diagnostic, not a baseline-superiority, multi-trajectory, or cross-SUT claim, and it is
+  one-step, not a free-running rollout-stability result.
+- **Exact mirror-y on a symmetric mesh (admissible relation, out-of-sample test).** To
+  test whether the mirror-y finding survives once the exact relation is admissible, we
+  built a synthetic structured channel mesh that is provably symmetric about the
+  centerline: the reflection is a verified bijection (node-type match 1.0, reflection
+  offset < 1e-12, edge set invariant), so the admissibility predicate retains the exact
+  relation rather than downgrading it. On one constructed input state the surrogate
+  violated exact mirror-y equivariance with relative L2 1.10 (verdict fail). Because
+  equivariance is oracle-free and structural — a mirror-equivariant model would satisfy
+  it to machine precision regardless of accuracy — the nonzero result is not a geometric
+  artifact, and it is an out-of-sample check that the admissibility predicate did not fit
+  to the original three pilots. We ran one control to separate the learned weights from
+  the input normalizer, which is fit to the asymmetric training data and so is not exactly
+  equivariant in the transverse velocity: zeroing the normalizer's transverse-velocity
+  mean (which makes it exactly equivariant in that component) changes the violation only
+  from 1.1032 to 1.1014, so the normalizer accounts for about 0.2% of it and the violation
+  is dominated by the learned message-passing weights, which carry no equivariance
+  constraint. Two boundaries remain. The mesh is synthetic, has no obstacle, and is
+  out-of-distribution for the cylinder-trained surrogate, so the *magnitude* 1.10 may be
+  amplified by normalization mismatch relative to in-distribution behaviour; the result
+  should be read as confirming that the surrogate carries no exact mirror-y equivariance
+  constraint, while not bounding the in-distribution equivariance violation, rather than as a
+  calibrated in-distribution magnitude. And this is one input on one mesh; it is not an accuracy, reliability,
+  cross-SUT, or geometry-independent claim. The 1.10 magnitude is also larger than the
+  asymmetric-mesh OOD-stress 0.737, which would be paradoxical if the symmetric mesh were
+  the cleaner setting; the more likely reading is that the synthetic no-obstacle channel
+  is itself more aggressively out-of-distribution for the cylinder-trained surrogate
+  (Poiseuille-like profile rather than vortex shedding, no obstacle wake), so the larger
+  magnitude reflects deeper OOD rather than a cleaner equivariance measurement. The two
+  runs therefore answer different questions — admissibility of the relation, and severity
+  of the violation under OOD — and the symmetric-mesh number should be read as a binary
+  equivariance failure on an admissible relation, not as a directly comparable magnitude.
+- **Seeded-fault detection (do the MRs catch known faults?).** We re-implemented, in
+  pure numpy/torch from the read-only Minimum-MR-SubSet witness taxonomy, a catalogue of
+  10 injected pipeline faults across five fault classes (boundary-condition, mesh-adjacency,
+  normalization-scale, temporal-rollout, physical-channel), and used the paper's own MRs as
+  detectors on the model's predicted update. The conservation (continuity) MR detected the
+  two boundary-condition faults and the gross normalization fault (divergence ratio 3.8–10.6
+  vs the 1.5 threshold); the mirror-y (symmetry) MR detected a physical-channel and a
+  mesh-adjacency fault (violation rising 69–142% above its 0.735 baseline); node-permutation
+  equivariance detected none, because these faults preserve node-relabeling invariance and
+  the MR stays exact by design. Five of ten mutants were detected by at least one MR (at least
+  one mutant per detected fault class), and the detections localize by MR class — continuity to
+  boundary/scale faults, symmetry to physical-channel/adjacency faults — which is a first
+  bounded test of the §3.6 interpretation protocol, suggestive rather than a validation. Three honesty notes bound this. First, the detected faults are gross corruptions (zeroed inflow, non-zero wall, un-denormalized update, swapped velocity channels, permuted edges) that any divergence- or symmetry-sensitive detector would catch; the catalogue is an independent taxonomy, not adversarial to these MRs but not designed for them. Second, two undetected cases are near or by-construction: the edge-drop fault is a near-miss (32% mirror-y change vs the 50% threshold), and the boundary-condition faults are invisible to mirror-y by construction because boundary imposition happens downstream of the update the symmetry MR scores. Three
+  honesty notes bound this. First, the detected faults are gross corruptions (zeroed inflow,
+  non-zero wall, un-denormalized update, swapped velocity channels, permuted edges) that any
+  divergence- or symmetry-sensitive detector would catch; the catalogue is an independent
+  taxonomy, not adversarial to these MRs but not designed for them. Second, two undetected
+  cases are near or by-construction: the edge-drop fault is a near-miss (32% mirror-y change vs
+  the 50% threshold), and the boundary-condition faults are invisible to mirror-y by
+  construction because boundary imposition happens downstream of the update the symmetry MR
+  scores. Third, the remaining undetected faults (doubling a small update, sign-flipping the
+  step, zeroing the transverse update) shift the absolute output without crossing the
+  scored-quantity thresholds, delimiting where these MRs are structurally insensitive. It is
+  one SUT, one checkpoint, one injected-fault catalogue; it is not a real-world or general
+  fault-detection rate, a reliability claim, or a baseline-superiority claim.
 
-### 5.4 Still blocked
+These pilots illustrate the direction of the paper's argument — that in-distribution
+accuracy alone does not bound whether a surrogate respects physical structure (the
+mirror-y violation is about 34x the one-step accuracy on the same SUT), and that an
+evidence-gated rubric will refuse, downgrade, or admit a relation on stated grounds
+rather than fabricate a verdict. They are pilot-scale, within one SUT and checkpoint,
+and do not by themselves prove the general claim.
+
+### 5.4 Multi-checkpoint replication (K=6 checkpoints, one architecture family / one dataset)
+
+To address a single-checkpoint objection without overclaiming a cross-SUT result, the
+five within-SUT measurements above are replicated across a roster of K=6 MeshGraphNets
+cylinder-flow checkpoints trained on the same DeepMind dataset using the same
+read-only Minimum-MR-SubSet trainer: four base-config seed replicas S0–S3 (hidden=64,
+num_layers=4, training seeds {0, 1, 2, 3}, 1500 stage-A optimization steps each) and
+two configuration variants S4 (hidden=128, seed 0) and S5 (num_layers=6, seed 0).
+Each checkpoint has a distinct sha256 (recorded in the per-SUT manifest and in
+`research_assets/runs/multicheckpoint/e1_aggregate.json`); the S4/S5 variants reuse
+the trainer's read-only `train()` entry point through a thin wrapper
+(`tools/train_config_variant.py`) that writes only into this repository. The same
+six runners (`tools/run_real_sut_mr.py`,
+`tools/run_mirror_y_ood_stress.py`, `tools/run_mirror_y_symmetric_mesh.py`,
+`tools/run_conservation_diagnostic.py`, `tools/run_rollout_accuracy.py`,
+`tools/run_seeded_fault_detection.py`) are executed against every checkpoint by
+`tools/e1_multicheckpoint_runner.py`; the seed-replica family carries a bootstrap 95%
+confidence interval (B=2000 over S0–S3), and S4 and S5 are reported descriptively as
+single-instance configuration variants. The honesty boundary is explicit: K=6 is a
+cross-checkpoint / cross-configuration replication across one architecture family and
+one dataset, not a cross-SUT (cross-architecture-family) generalization. The
+seed-replica family standardises only the training seed and so should not be treated
+as an independent SUT sample. The replication results are:
+
+- **Node-permutation equivariance** holds to machine precision (relative L2 = 0.0)
+  on every one of the six checkpoints, confirming the representation-MR sanity check
+  is a structural property of the message-passing pipeline rather than an artifact of
+  one trained instance.
+- **Mirror-y OOD-stress** (approximate reflection on the asymmetric DeepMind mesh)
+  reports a per-checkpoint median relative L2 with seed-family mean 0.774 and 95%
+  bootstrap CI [0.743, 0.804]; S4 = 0.764 and S5 = 0.832 sit within or just outside
+  that band. The violation is therefore reproducible across seed and configuration
+  variation, not specific to one checkpoint.
+- **Exact mirror-y on the synthetic symmetric mesh** fails on every checkpoint;
+  the seed-family mean is 1.00 with 95% CI [0.75, 1.15], and S4 = 1.10, S5 = 1.00
+  remain in the same neighbourhood. The exact-symmetry failure is therefore a
+  property of the architecture family on this dataset, not of one trained instance.
+- **Reference-relative conservation ratio** (max over the recorded eval frames)
+  sits tightly above 1: seed-family mean 1.009, 95% CI [1.007, 1.011]; S4 = 1.008,
+  S5 = 1.010. All six checkpoints stay well below the predeclared 1.5 regression
+  threshold, so the reference-relative non-regression verdict reproduces across the
+  family without any checkpoint passing absolute conservation.
+- **One-step rollout accuracy** (median relative L2) is also tight: seed-family
+  mean 0.0221, 95% CI [0.0217, 0.0224]; S4 = 0.0226, S5 = 0.0221. The mirror-y
+  OOD-stress violation is therefore about 35x the in-distribution one-step accuracy
+  on *every* checkpoint of the roster, not just on the original pilot.
+
+What this multi-checkpoint replication adds is not a new measurement but a
+robustness check: the within-SUT verdicts of Sections 5.3 are not artifacts of a
+single training run. The mirror-y violation magnitude survives seed replication and
+mild configuration variation; the conservation diagnostic stays in its narrow band;
+the rollout accuracy is consistent. What this replication does *not* license is a
+cross-architecture-family generalization (only MeshGraphNets and a fixed dataset
+are exercised), an exact reliability claim (the seed-replicas share more variance
+than independent SUTs would), or a real-world fault-detection claim.
+
+Table 5.4 summarizes the per-MR aggregates.
+
+| MR / diagnostic (per-SUT scalar) | S0–S3 mean | 95% CI (bootstrap, B=2000) | S4 (hidden=128) | S5 (num_layers=6) |
+|---|---|---|---|---|
+| Node-permutation rel L2 | 0.0 | [0.0, 0.0] | 0.0 | 0.0 |
+| Mirror-y OOD-stress median rel L2 | 0.774 | [0.743, 0.804] | 0.764 | 0.832 |
+| Exact mirror-y on symmetric mesh rel L2 | 1.00 | [0.75, 1.15] | 1.10 | 1.00 |
+| Conservation max ratio (vs. reference) | 1.009 | [1.007, 1.011] | 1.008 | 1.010 |
+| One-step rollout median rel L2 | 0.0221 | [0.0217, 0.0224] | 0.0226 | 0.0221 |
+| Seeded-fault union detection (k/10) | 5/10 (each) | — | 4/10 | 4/10 |
+
+### 5.5 Operator-floor resolution sweep (calibration of numerical decidability)
+
+The admissibility predicate of Section 3.3 requires the verdict tolerance to
+dominate the operator's intrinsic error floor (numerical decidability). For the
+P1 constant-per-cell discrete divergence operator that scores the continuity MR,
+that floor is a property of the operator and the mesh, not of any SUT, and it
+admits a direct empirical calibration. On a y=0-symmetric structured triangular
+channel mesh family (built by `tools.run_mirror_y_symmetric_mesh.build_symmetric_channel`)
+at four resolutions h0, h0/2, h0/4, h0/8, we evaluated the analytically
+divergence-free reference velocity field $u = (\partial_y \psi, -\partial_x \psi)$
+with stream function $\psi(x, y) = \sin(\pi x / L_x) \sin(\pi y / L_y)$ and measured the
+area-weighted RMS of the per-cell discrete divergence. A log–log linear fit of
+RMS vs. characteristic edge length gives slope **0.988** (all cells, $R^2 = 1.000$)
+and slope **0.995** (interior-only, $R^2 = 1.000$), matching the theoretical
+$O(h)$ truncation rate of P1 piecewise-linear shape functions on smooth fields.
+This empirically calibrates the operator-floor magnitude that the verdict
+tolerance must dominate, confirming that the admissibility-predicate gating
+condition for the continuity MR has a measurable basis on this mesh family rather
+than only a theoretical justification. Raw outputs and the fit are committed at
+`research_assets/runs/operator-floor-sweep/operator_floor_report.json`. The scope
+is one mesh family and one smooth analytic field; the calibration confirms the
+expected rate of the operator on this mesh family but does not generalize across
+mesh geometries or analytic fields.
+
+### 5.6 Fault-detection robustness across the multi-checkpoint roster
+
+To check whether the seeded-fault detection result of Section 5.3 reproduces beyond a
+single checkpoint and to delimit where its detectors are structurally insensitive, the
+10-mutant catalogue is replayed against the K=6 multi-checkpoint roster across five
+input-permutation seeds (30 trials per mutant per detector), and two predeclared
+severity dimensions are swept: NS_double_scale s ∈ {1.1, 1.25, 1.5, 2, 4} and
+PC_zero_vy partial fraction p ∈ {0.25, 0.5, 0.75, 1.0} (the canonical mutant is p =
+1.0). Detection is decided by the same predeclared thresholds as Section 5.3
+(node-permutation tolerance 1e-5, conservation ratio threshold 1.5, mirror-y
+relative-change threshold 0.5). Wilson 95% CIs are computed across the (SUT, seed)
+cells. Raw outputs are committed at
+`research_assets/runs/fault-robustness-e3/fault_robustness_report.json`.
+
+**Per-mutant cross-family detection (R1).** Four mutants are detected on every cell
+(30/30, CI [0.89, 1.00]): conservation flags both boundary-condition faults
+(BC_zero_inflow, BC_nonzero_wall) and the un-denormalized output fault (NS_skip_denorm);
+mirror-y flags the swapped-channel fault (PC_swap_xy). Five mutants are not detected
+on any cell (0/30, CI [0.00, 0.11]) — MA_drop_edges, NS_double_scale, TR_sign_flip,
+TR_double_step, PC_zero_vy — and the by-class localization of the original C10 pilot
+holds: continuity → boundary/scale faults, symmetry → physical-channel/adjacency
+faults, node-permutation → none of these mutants (since they preserve node-relabeling
+invariance, and the representation MR stays exact by design). One mutant is
+configuration-sensitive: mirror-y detects MA_permute_edges on every (S0–S3, seed) cell
+(20/20 over the seed-replica family) but on neither (S4, seed) nor (S5, seed) cell
+(0/10 over the wider and deeper configuration variants). The within-family detection
+rate of that mutant is therefore 20/30 (CI [0.49, 0.81]) — a quantitative bound on
+within-family generalization that is invisible to a single-checkpoint experiment.
+
+**NS_double_scale severity sweep (R2).** At every multiplicative scale
+s ∈ {1.1, 1.25, 1.5, 2.0, 4.0} the detection rate stays at 0/6 (Wilson CI [0.00,
+0.39]). This widens the bounded-insensitivity note from C10: multiplying the per-step
+output by a constant factor does not push the reference-relative conservation ratio
+past 1.5 (the per-step delta is small, so the next-state field stays close enough to
+the reference), does not move mirror-y by 50% (both the source and the mirrored output
+scale together, so the relative L2 between them is invariant under output scaling),
+and does not break node-permutation equivariance (a linear operation is permutation-
+equivariant). The MR catalogue at the current thresholds is therefore structurally
+insensitive to multiplicative output scaling on this surrogate across the swept grid,
+not only at the canonical 2× fault.
+
+**PC_zero_vy partial-fraction sweep (R3) — non-monotone detection.** At partial
+zeroing fractions p ∈ {0.25, 0.5, 0.75} the detection rate is 6/6 across the
+checkpoint roster (Wilson CI [0.61, 1.00]); at the canonical full fraction p = 1.0 the
+detection rate drops to 0/6 (CI [0.00, 0.39]). The intuition is structural: uniform
+vy = 0 is itself mirror-y-symmetric (0 = −0 under reflection in the transverse
+component), so it preserves the very symmetry the MR scores; only spatially partial
+zeroing creates an asymmetric residual that the symmetry MR can resolve. The
+detection–severity curve is therefore non-monotone, with the canonical (full) fault
+sitting in a detection blind region that intermediate severities expose. This is a
+within-family finding about one MR–fault pair, not a general non-monotonicity claim
+across all symmetry MRs, but it is a concrete instance of a structural insight that a
+severity sweep makes explicit and a single-severity experiment hides: a fault MR may
+be insensitive to the most severe instance precisely because that instance shares an
+invariance the MR depends on.
+
+**Aggregate reading.** The 5-of-10 union detection rate from C10 reproduces tightly
+across the seed-replica family (5/10 on each of S0–S3) and drops by one to 4/10 on the
+capacity (S4) and depth (S5) variants because MA_permute_edges crosses below the
+mirror-y relative-change threshold there. The by-class localization mapping
+(continuity → boundary/scale; symmetry → physical-channel/adjacency; node-permutation
+→ none of these faults) replicates across the full roster. The catalogue's
+insensitivity regions — multiplicative output scaling at any swept severity, and a
+detection blind region at the most severe PC_zero_vy fraction caused by the
+fault's residual mirror-y symmetry — are now bounded with Wilson 95% CIs. This is a
+robustness and structural-insight result within one architecture family on one dataset
+against one fixed 10-mutant catalogue; it is not a real-world fault-detection rate, a
+cross-architecture-family generalization, or a baseline-superiority claim.
+
+Table 5.6 summarizes the per-mutant Wilson 95% CIs.
+
+| Mutant | Fault class | Detecting MR | k / n | Rate | 95% CI |
+|---|---|---|---|---|---|
+| BC_zero_inflow | boundary_condition | conservation | 30/30 | 1.00 | [0.89, 1.00] |
+| BC_nonzero_wall | boundary_condition | conservation | 30/30 | 1.00 | [0.89, 1.00] |
+| NS_skip_denorm | normalization_scale | conservation | 30/30 | 1.00 | [0.89, 1.00] |
+| PC_swap_xy | physical_channel | mirror-y | 30/30 | 1.00 | [0.89, 1.00] |
+| MA_permute_edges | mesh_adjacency | mirror-y (S0–S3 only) | 20/30 | 0.67 | [0.49, 0.81] |
+| MA_drop_edges | mesh_adjacency | (none) | 0/30 | 0.00 | [0.00, 0.11] |
+| NS_double_scale | normalization_scale | (none) | 0/30 | 0.00 | [0.00, 0.11] |
+| TR_sign_flip | temporal_rollout | (none) | 0/30 | 0.00 | [0.00, 0.11] |
+| TR_double_step | temporal_rollout | (none) | 0/30 | 0.00 | [0.00, 0.11] |
+| PC_zero_vy | physical_channel | (none at p=1.0) | 0/30 | 0.00 | [0.00, 0.11] |
+
+The R3 partial-fraction sweep on PC_zero_vy is plotted alongside in Figure 5.6
+(detection rate vs. fraction, mirror-y detector): 6/6 across the K=6 roster at
+fractions {0.25, 0.5, 0.75}, dropping to 0/6 at fraction 1.0 — the non-monotone
+detection–severity curve described above.
+
+### 5.7 Still blocked
 
 The following remain blocked and must not be written as results: cross-SUT or
 geometry-independent pass/fail rates; comparative superiority over any baseline;
-fault-detection rates; localization accuracy; runtime or performance claims; and
-any claim that one SUT is more reliable than another. The three METBENCH-planned
-SUTs and the baseline comparison stay blocked pending their artifacts.
+general or real-world fault-detection rates; localization accuracy as a validated
+model; runtime or performance claims; and any claim that one SUT is more reliable than
+another. The three METBENCH-planned SUTs, and the expert-MR, generic-MR-generation, and
+LLM-candidate baselines, stay blocked pending their artifacts. Two exceptions are now
+executed on the existing SUT and reported as scoped diagnostics, not as defeated
+competitors or general rates: the rollout-accuracy comparator (Section 5.3), and a
+bounded seeded-fault detection result over one 10-mutant injected-fault catalogue
+(Section 5.3), whose by-class localization is suggestive evidence for, not a validation
+of, the interpretation protocol.
 
 ## 6. Discussion
 
@@ -405,6 +703,10 @@ SUTs and the baseline comparison stay blocked pending their artifacts.
 The value of the current study is not that every MR finds a new fault beyond rollout accuracy. Rather, the value is that retained MRs provide relation-level evidence under explicit transformations. When a violation or deferral is observed, the MR card and verdict rule help distinguish model inconsistency, relation-domain boundary, numerical tolerance problem, and inconclusive evidence.
 
 The PR4 mirror-y evidence adds one bounded rate claim only: the approximate OOD-stress probe failed on 10 of 10 recorded eval frames for one SUT, one checkpoint, one MR, one eval trajectory. It remains an out-of-relation-domain exact mirror-y case and a bounded within-SUT frame-level OOD-stress result, not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim.
+
+A natural objection is that the admissibility predicate merely re-describes the three outcomes it was introduced with — node permutation passes, mirror-y is downgraded, conservation is deferred — and is therefore fitted rather than tested. The two added within-SUT runs are designed to answer this. The symmetric-mesh run is an out-of-sample use of the predicate: the predicate states that on a symmetric mesh the exact mirror-y relation becomes admissible, and the experiment then tests that admitted relation independently, finding a genuine equivariance violation (relative L2 1.10) rather than confirming a pre-arranged result. The rollout-accuracy run supplies the accuracy comparator the original three pilots lacked, and shows the mirror-y violation is about 34 times the surrogate's in-distribution one-step error, so the relation evidence is not a restatement of accuracy. Neither run removes the central limitation — this is still one SUT and one checkpoint — but together they convert the mirror-y finding from a self-downgraded probe into an admissible-relation violation with an accuracy baseline.
+
+The comparative baselines (expert MR design, generic MR generation, LLM candidates) remain blocked, so we cannot yet quantify what the rubric adds over unguided MR identification. We can, however, make the counterfactual concrete on the present evidence: the rubric averted two specific misreadings that an unguided application would plausibly have made. Without the numerical-decidability gate, the absolute discrete-divergence relation would have been executed and, because the surrogate's predicted divergence is close to the reference, recorded as a conservation *pass* — a false assurance, since the reference field itself carries non-negligible divergence and no calibrated tolerance exists; the rubric instead deferred it. Without the boundary-compatibility and bijectivity checks, the exact mirror-y failure on the asymmetric eval mesh would have been read as a model symmetry fault, when the symmetric-mesh run shows the exact relation is admissible elsewhere and the asymmetric-mesh violation is partly a geometric artifact; the rubric instead downgraded it to an OOD-stress probe and flagged the geometry. These are two concrete cases where the rubric prevented an overclaim that the candidate relation alone would have produced — a counterfactual argument for the workflow's value, pending the blocked baseline measurements.
 
 ### 6.2 Boundary of Claims
 
@@ -416,13 +718,15 @@ The safer claim is that a domain-validity-aware workflow can make MR identificat
 
 The scoped evidence shows how SciML testing can move from implicit expert checks to explicit MR assets. Such assets can complement residuals, uncertainty estimates, and accuracy metrics by making transformation assumptions and verdict rules inspectable. This is especially important for OOD validation, where the boundary of the relation is often as important as the violation itself.
 
+In that sense the workflow is aimed at producing, over many controlled transformations, a relation-indexed applicability map: a record of where a surrogate stops respecting the relations it should respect, expressed in relation space rather than in residual space. The present evidence is one bounded within-SUT point on such a map, not the map itself; assembling a calibrated map would require the cross-SUT, multi-trajectory, and domain-violation-score work that remains future work.
+
 ## 7. Threats to Validity
 
 **Construct validity.** MR validity depends on the rubric, physical assumptions, boundary-condition compatibility, and tolerance rules. Incorrect discrete operators or thresholds may create false violations or false passes.
 
 **Internal validity.** SUT setup, checkpoint differences, random seeds, mesh preprocessing, and runtime nondeterminism may affect verdicts. The experiment ledger must record these details.
 
-**External validity.** The study is limited to MeshGraphNets-family cylinder-flow implementations or configurations. It should not be generalized to all neural operators, PINNs, or fluid surrogates without further evidence.
+**External validity.** The empirical evidence covers one MeshGraphNets architecture family on one DeepMind cylinder-flow dataset, replicated across a K=6 checkpoint roster (four base-config training-seed replicas plus one wider and one deeper configuration variant; Section 5.4). Within that family the within-SUT verdicts are stable (CIs in Sections 5.4 and 5.6) and the operator-floor that gates the continuity-MR admissibility predicate has the expected O(h) rate on the symmetric mesh family (Section 5.5). The replication should not be read as a cross-architecture-family generalization: cross-SUT artifacts spanning distinct architecture families (e.g. PINNs, neural operators, other mesh-based simulators) remain blocked, and the seed-replica family standardises only training seed, so it shares more variance than independent SUTs would. Generalization to all neural operators, PINNs, or fluid surrogates without further evidence is not supported.
 
 **Baseline fairness.** Generic MR-generation and LLM baselines may not be designed for SciML. They should be interpreted as scope contrasts and candidate-generation comparators, not as defeated competitors.
 
@@ -432,7 +736,7 @@ The scoped evidence shows how SciML testing can move from implicit expert checks
 
 ## 8. Conclusion
 
-This paper presents domain-validity-gated MR identification as an auditable oracle-free testing workflow for MeshGraphNets-family cylinder-flow surrogates. The current evidence supports one bounded within-SUT frame-level OOD-stress result for mirror-y, plus scoped node-permutation and conservation pilots. It does not support broader rates, external-validity claims, seeded-fault claims, baseline comparisons, reliability conclusions, accuracy conclusions, exact mirror-y claims, or absolute conservation claims. The central claim remains methodological: physically meaningful SciML MRs require explicit validity conditions, executable assets, raw evidence records, and relation-level verdicts.
+This paper presents domain-validity-gated MR identification as an auditable oracle-free testing workflow for MeshGraphNets-family cylinder-flow surrogates. The current evidence supports the scoped within-SUT pilots of Section 5.3 (node-permutation, mirror-y OOD-stress, conservation diagnostic, rollout-accuracy comparator, exact mirror-y on a symmetric admissible mesh, and seeded-fault detection over a 10-mutant catalogue), replicated across a K=6 multi-checkpoint roster of one MeshGraphNets architecture family on one dataset (Section 5.4) — the verdicts reproduce with tight Wilson and bootstrap 95% confidence intervals — together with an empirical calibration of the P1 discrete-divergence operator floor that gates the admissibility predicate (slope 0.988, R² = 1.000; Section 5.5), and a within-family fault-detection robustness study with severity sweeps that bound where the present MR set is structurally insensitive (Section 5.6). It does not support cross-architecture-family generalization, real-world or general fault-detection rates, baseline-superiority claims, reliability conclusions, accuracy conclusions, exact-mirror-y claims beyond the bounded results above, or absolute conservation claims. The central claim remains methodological: physically meaningful SciML MRs require explicit validity conditions, executable assets, raw evidence records, and relation-level verdicts; the K=6 replication and the operator-floor calibration are the present study's bounded evidence that the workflow's verdicts hold beyond a single checkpoint and that the admissibility-predicate gate it relies on has a measurable basis.
 
 ## References
 

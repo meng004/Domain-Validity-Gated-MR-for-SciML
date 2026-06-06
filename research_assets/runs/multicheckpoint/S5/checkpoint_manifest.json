@@ -1,0 +1,22 @@
+{
+  "checkpoint": "/home/user/Domain-Validity-Gated-MR-for-SciML/research_assets/runs/multicheckpoint/S5/checkpoint.pt",
+  "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+  "config": {
+    "hidden": 64,
+    "num_layers": 6,
+    "node_in": 11,
+    "edge_in": 3,
+    "out_dim": 2,
+    "seed": 0,
+    "steps": 1500,
+    "train_steps_max": 149,
+    "lr": 0.001
+  },
+  "loss_first": 1.6460161209106445,
+  "loss_last": 0.019491502037271857,
+  "num_parameters": 251394,
+  "train_command": "train_config_variant --hidden 64 --num-layers 6 --steps 1500 --seed 0",
+  "sut_repo": "/home/user/Minimum-MR-SubSet",
+  "generated_at": "2026-06-06T15:04:50Z",
+  "note": "config variant for E1 multi-checkpoint robustness; same arch family + dataset."
+}

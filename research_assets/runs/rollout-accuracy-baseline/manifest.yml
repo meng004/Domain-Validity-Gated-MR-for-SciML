@@ -1,0 +1,17 @@
+# Real-SUT run manifest: rollout-accuracy baseline (same SUT/checkpoint/trajectory
+# as the mirror-y OOD-stress probe). One-step next-state prediction error.
+record_type: "real-sut-run"
+run_id: "real-sut-rollout-accuracy-baseline-001"
+sut_id: "cylinder_flow_meshgraphnet"
+sut_repo: "/home/user/Minimum-MR-SubSet"
+sut_commit: "8c0b7ef3605fd9452884d701e2a191a2b14a5a35"
+checkpoint_path: "research_assets/runs/real-sut-node-permutation-pilot/sut/checkpoint.pt"
+checkpoint_sha256: "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9"
+dataset_root: "/home/user/Minimum-MR-SubSet/data/raw/cylinder_flow_deepmind"
+source_case_path: "research_assets/runs/real-sut-node-permutation-pilot/source_case.npz"
+mr_id: "rollout-accuracy-diagnostic"
+raw_output_dir: "research_assets/runs/rollout-accuracy-baseline/raw"
+seed: "20260605"
+device: "cpu"
+python_version: "3.11.15"
+framework_version: "torch 2.12.0+cpu"

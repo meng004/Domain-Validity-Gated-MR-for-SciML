@@ -68,4 +68,4 @@ class Stage4RevisionReadinessTest(unittest.TestCase):
         self.assertNotIn("Citation(s) may have changed", log)
         self.assertNotIn("Label(s) may have changed", log)
         self.assertNotIn("undefined", log.lower())
-        self.assertNotRegex(log, re.compile(r"Overfull \\\\hbox"))
+        self.assertNotRegex(log, re.compile(r"Overfull \\hbox"))

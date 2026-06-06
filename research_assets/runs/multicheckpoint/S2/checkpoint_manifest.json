@@ -1,0 +1,18 @@
+{
+  "checkpoint": "/home/user/Domain-Validity-Gated-MR-for-SciML/research_assets/runs/multicheckpoint/S2/checkpoint.pt",
+  "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+  "config": {
+    "hidden": 64,
+    "num_layers": 4,
+    "node_in": 11,
+    "edge_in": 3,
+    "out_dim": 2,
+    "seed": 2,
+    "steps": 1500,
+    "train_steps_max": 149,
+    "lr": 0.001
+  },
+  "loss_first": 1.55649995803833,
+  "loss_last": 0.019903942942619324,
+  "num_parameters": 176386
+}

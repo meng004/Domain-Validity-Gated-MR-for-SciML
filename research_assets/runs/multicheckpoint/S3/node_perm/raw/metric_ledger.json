@@ -1,0 +1,41 @@
+{
+  "ledger_id": "real-sut-node-permutation-metric-ledger",
+  "evidence_level": "real-sut-single-mr-pilot",
+  "schema_version": "0.1.0",
+  "sut_repo": "/home/user/Minimum-MR-SubSet",
+  "sut_commit": "8c0b7ef3605fd9452884d701e2a191a2b14a5a35",
+  "checkpoint_path": "research_assets/runs/multicheckpoint/S3/checkpoint.pt",
+  "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+  "claim_limitations": "Pilot evidence: one real SUT, one metamorphic relation (node permutation equivariance), a single source case. It does not report violation rates, model reliability, baseline comparison, or seeded-fault detection.",
+  "raw_outputs": {
+    "source_output": "research_assets/runs/multicheckpoint/S3/node_perm/raw/source_output.npy",
+    "follow_up_output": "research_assets/runs/multicheckpoint/S3/node_perm/raw/follow_up_output.npy",
+    "mapped_output": "research_assets/runs/multicheckpoint/S3/node_perm/raw/mapped_output.npy",
+    "permutation": "research_assets/runs/multicheckpoint/S3/node_perm/raw/permutation.npy",
+    "inverse_permutation": "research_assets/runs/multicheckpoint/S3/node_perm/raw/inverse_permutation.npy"
+  },
+  "entries": [
+    {
+      "run_id": "e1-mc-S3-node_perm-001",
+      "sut_id": "cylinder_flow_meshgraphnet",
+      "mr_id": "mgn-node-permutation-equivariance",
+      "source_case_id": "source_case-frame0",
+      "follow_up_case_id": "source_case-frame0-node-permuted-seed20260606",
+      "metric_name": "permutation_relative_l2_error",
+      "metric_value": 0.0,
+      "tolerance": {
+        "assertion": "less_or_equal",
+        "threshold": 1e-06,
+        "source": "theory/MeshGraphNets圆柱绕流MetBench_MR资产编制与验证说明.md"
+      },
+      "verdict": "pass",
+      "evidence_artifact": "research_assets/runs/multicheckpoint/S3/node_perm/raw"
+    }
+  ],
+  "generated_at": "2026-06-06T15:09:06Z",
+  "frame": 0,
+  "num_nodes": 1923,
+  "num_edges": 11070,
+  "device": "cpu",
+  "framework_version": "torch 2.12.0+cpu"
+}
