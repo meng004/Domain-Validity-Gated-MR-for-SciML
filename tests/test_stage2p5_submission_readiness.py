@@ -75,7 +75,7 @@ FRAMEWORK_GUARD_MARKERS = [
 # caveat, and the conservation verdict relabel must all stay in BOTH files.
 ROUND2_INTEGRITY_MARKERS = [
     "from 1.1032 to 1.1014",            # normalizer-equivariance control
-    "binary equivariance failure",      # OOD magnitude read as binary only
+    "calibrated in-distribution magnitude",  # OOD magnitude read cautiously (round-4 narrowing)
     "inconclusive: reference-relative non-regression guard",  # conservation relabel
 ]
 
