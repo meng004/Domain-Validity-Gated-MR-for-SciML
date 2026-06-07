@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.6.6)  7 JUN 2026 02:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.6.6)  7 JUN 2026 02:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -401,25 +401,45 @@ Underfull \hbox (badness 1968) in paragraph at lines 156--157
 main pre-con-di-tions,
  []
 
-[9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23]
-[24] [25] [26] [27]
-Underfull \hbox (badness 10000) in alignment at lines 537--537
+[9] [10] [11]
+<figures/fig_1_validity_gated_workflow.pdf, id=56, 614.295pt x 794.97pt>
+File: figures/fig_1_validity_gated_workflow.pdf Graphic file (type pdf)
+<use figures/fig_1_validity_gated_workflow.pdf>
+Package pdftex.def Info: figures/fig_1_validity_gated_workflow.pdf  used on inp
+ut line 202.
+(pdftex.def)             Requested size: 331.50238pt x 429.01054pt.
+ [12] [13] [14]
+<figures/fig_2_mr_asset_dataflow.pdf, id=67, 614.295pt x 794.97pt>
+File: figures/fig_2_mr_asset_dataflow.pdf Graphic file (type pdf)
+<use figures/fig_2_mr_asset_dataflow.pdf>
+Package pdftex.def Info: figures/fig_2_mr_asset_dataflow.pdf  used on input lin
+e 270.
+(pdftex.def)             Requested size: 331.50238pt x 429.01054pt.
+ [15] [16] [17] [18] [19] [20] [21] [22] [23]
+[24] [25] [26]
+Underfull \hbox (badness 10000) in alignment at lines 525--525
 [][][][][] 
  []
 
-[28]
-Underfull \hbox (badness 1609) in paragraph at lines 550--551
+<figures/fig_4_operator_floor_loglog.pdf, id=111, 367.95387pt x 247.49263pt>
+File: figures/fig_4_operator_floor_loglog.pdf Graphic file (type pdf)
+<use figures/fig_4_operator_floor_loglog.pdf>
+Package pdftex.def Info: figures/fig_4_operator_floor_loglog.pdf  used on input
+ line 535.
+(pdftex.def)             Requested size: 280.80048pt x 188.87807pt.
+[27]
+Underfull \hbox (badness 1609) in paragraph at lines 545--546
 []\T1/cmr/bx/n/12 Per-mutant cross-family de-tec-tion (R1). \T1/cmr/m/n/12 Four
  mu-tants are
  []
 
 
-Underfull \hbox (badness 5847) in paragraph at lines 550--551
+Underfull \hbox (badness 5847) in paragraph at lines 545--546
 \T1/cmr/m/n/12 boundary-condition faults (BC_zero_inflow, BC_nonzero_wall) and
  []
 
-[29]
-Underfull \hbox (badness 10000) in alignment at lines 579--579
+[28]
+Underfull \hbox (badness 10000) in alignment at lines 574--574
 [][][][][][] 
  []
 
@@ -427,20 +447,22 @@ Underfull \hbox (badness 10000) in alignment at lines 579--579
 File: figures/r3_pc_zero_vy_nonmonotone.pdf Graphic file (type pdf)
 <use figures/r3_pc_zero_vy_nonmonotone.pdf>
 Package pdftex.def Info: figures/r3_pc_zero_vy_nonmonotone.pdf  used on input l
-ine 584.
+ine 579.
 (pdftex.def)             Requested size: 272.99881pt x 144.66321pt.
-[30] [31 <./figures/r3_pc_zero_vy_nonmonotone.pdf>] [32] [33] [34] [35]
-(./main.bbl [36] [37] [38]) [39] [40] [41] [42] (./main.aux)
+[29] [30] [31] [32] [33] (./main.bbl [34] [35] [36]) [37] [38 <./figures/fig_1_
+validity_gated_workflow.pdf>] [39 <./figures/fig_2_mr_asset_dataflow.pdf>]
+[40] [41] [42 <./figures/fig_4_operator_floor_loglog.pdf>] [43 <./figures/r3_pc
+_zero_vy_nonmonotone.pdf>] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 6938 strings out of 476182
- 107560 string characters out of 5795596
- 1955975 words of memory out of 5000000
- 28851 multiletter control sequences out of 15000+600000
+ 6960 strings out of 476182
+ 108600 string characters out of 5795596
+ 1958975 words of memory out of 5000000
+ 28873 multiletter control sequences out of 15000+600000
  576225 words of font info for 84 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,12n,79p,2697b,486s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -465,14 +487,15 @@ exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy8.pfb>
-Output written on main.pdf (43 pages, 420367 bytes).
+/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
+>
+Output written on main.pdf (44 pages, 511835 bytes).
 PDF statistics:
- 1000 PDF objects out of 1000 (max. 8388607)
- 200 compressed objects within 2 object streams
+ 1098 PDF objects out of 1200 (max. 8388607)
+ 234 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 11782 words of extra memory for PDF output out of 12000 (max. 10000000)
+ 11797 words of extra memory for PDF output out of 12000 (max. 10000000)
 

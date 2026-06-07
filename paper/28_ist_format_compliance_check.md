@@ -23,20 +23,28 @@ sections added).
 | Declaration of competing interest    | required         | present        | PASS   |
 | Generative-AI usage declaration      | required         | present        | PASS   |
 | Data availability statement          | required         | present        | PASS   |
-| **Total length (IST counting rule)** | **≤ 15,000 words** | **~16,584 words** | **FAIL — over by ~1,584** |
+| **Total length (IST counting rule)** | **≤ 15,000 words** | **~16,779 words** | **FAIL — over by ~1,779** |
 
 IST counts references and appendices in the total, and assigns **200 words per
 figure or table**. The current estimate is:
 
 ```
-detex body (incl. abstract, headings, captions): 11,539 words
+detex body (incl. abstract, headings, captions): 11,534 words
 + 25 references (bbl text):                        1,645 words
-+ 1 figure + 16 tables, 200 words each:            3,400 words
++ 4 figures + 14 tables, 200 words each:           3,600 words
 -----------------------------------------------------------
-                            IST-counted total: ~16,584 words
+                            IST-counted total: ~16,779 words
                             IST regular limit:   15,000 words
-                                       Over by:    1,584 words (10.6%)
+                                       Over by:    1,779 words (11.9%)
 ```
+
+Figure regime delta since the previous compliance pass: the 1 figure + 16
+tables baseline became 4 figures + 14 tables. Figures Fig.\,1 (validity-gated
+workflow), Fig.\,2 (MR-asset data flow), and Fig.\,4 (P1 operator-floor log-log)
+were inserted; the orphan Fig.\,3 hierarchy mermaid was deleted (its content is
+already carried by Tables 5/6). The MR-card skeleton table was deleted (its
+information is in Tables 5/6). Net IST count change: +200 (best lever is now
+table consolidation in Sec.\,5.4--5.6).
 
 ## Targeted trimming plan (to fit ≤ 15,000)
 
