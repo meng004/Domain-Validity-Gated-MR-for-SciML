@@ -1,0 +1,102 @@
+{
+  "record_type": "cross-family-pinn-extension",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-07T14:46:22Z",
+  "sut": {
+    "id": "pinn_burgers2d_v1",
+    "model_type": "PINN",
+    "pde_id": "burgers2d_viscous",
+    "spatial_dim": 2,
+    "output_dim": 2,
+    "has_mirror_symmetry": true,
+    "conservation_quantity": "integral of u_x over domain (Dirichlet zero BC)",
+    "checkpoint_sha256": "ff3eae5b40eb31326735191b01adeeb3837390d3eabc62143be03c92acec52ed",
+    "training_provenance": "trained 2026-06-07T14:39:25Z with Adam+StepLR, 8000 iter, final PDE residual L2 = 1.0716e-02",
+    "num_parameters": 10502
+  },
+  "evaluation_set": {
+    "n_points": 5000,
+    "sampling": "uniform on [-1,1]^2 x [0, 0.5]",
+    "rng_seed": 20260607
+  },
+  "mr_A_permutation_equivariance": {
+    "violation": 0.0,
+    "tolerance": 1e-05,
+    "verdict": "pass"
+  },
+  "mr_B_symmetry_equivariance": {
+    "violation": 0.007917930372059345,
+    "floor": 0.010715533847498843,
+    "ratio": 0.7389207559797482,
+    "verdict": "pass"
+  },
+  "mr_C_conservation": {
+    "ratios_ux_per_snapshot": [
+      0.998661287309417,
+      1.0009130836793834,
+      1.002462170062219,
+      1.0046090516120227,
+      1.007289280237638,
+      1.0100885888575417
+    ],
+    "median_ratio_ux": 1.0035356108371207,
+    "verdict": "pass"
+  },
+  "rollout_accuracy_baseline": {
+    "relative_l2_per_snapshot": [
+      0.009079675893404837,
+      0.007269862510993518,
+      0.008384974380710024,
+      0.010907479871782,
+      0.013176890895250112,
+      0.01501966395215832
+    ],
+    "median_relative_l2": 0.009993577882593419,
+    "note": "median relative L2 of PINN (u_x, u_y) vs FD reference over snapshot times {0, 0.1, 0.2, 0.3, 0.4, 0.5}; the rollout-accuracy comparator from Section 5.3"
+  },
+  "per_snapshot_raw": [
+    {
+      "t": 0.0,
+      "Q_pred": 0.6253436803817749,
+      "Q_ref": 0.6261819581157185,
+      "ratio_ux": 0.998661287309417,
+      "rollout_rel_l2": 0.009079675893404837
+    },
+    {
+      "t": 0.1,
+      "Q_pred": 0.622249186038971,
+      "Q_ref": 0.6216815387721442,
+      "ratio_ux": 1.0009130836793834,
+      "rollout_rel_l2": 0.007269862510993518
+    },
+    {
+      "t": 0.2,
+      "Q_pred": 0.6187758445739746,
+      "Q_ref": 0.6172560551941522,
+      "ratio_ux": 1.002462170062219,
+      "rollout_rel_l2": 0.008384974380710024
+    },
+    {
+      "t": 0.3,
+      "Q_pred": 0.6149910688400269,
+      "Q_ref": 0.6121695477989131,
+      "ratio_ux": 1.0046090516120227,
+      "rollout_rel_l2": 0.010907479871782
+    },
+    {
+      "t": 0.4,
+      "Q_pred": 0.6108406186103821,
+      "Q_ref": 0.6064202514557422,
+      "ratio_ux": 1.007289280237638,
+      "rollout_rel_l2": 0.013176890895250112
+    },
+    {
+      "t": 0.5,
+      "Q_pred": 0.6059465408325195,
+      "Q_ref": 0.5998944523448918,
+      "ratio_ux": 1.0100885888575417,
+      "rollout_rel_l2": 0.01501966395215832
+    }
+  ],
+  "honesty_boundary": "One PINN (5x50 MLP, seed 20260607), one PDE (2D viscous Burgers, nu=0.05), one evaluation set, one set of thresholds chosen from the trained PINN's PDE residual floor. Not a generalization across PINN architectures, PDEs, or training regimes."
+}
