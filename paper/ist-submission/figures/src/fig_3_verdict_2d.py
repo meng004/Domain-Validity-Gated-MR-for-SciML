@@ -111,14 +111,14 @@ points = [
      f"$V/\\mathrm{{floor}} = {my_v_over_eff_tol:.2f}$ (floor as eff.\\ tol.)",
      my_v_over_eff_tol, Y_OUT, "s", "#d68a1e", "#7a4d00"),
 ]
-# P5 is "admissibility-failed", does NOT enter the verdict plane; rendered
-# as an off-plane callout to the right of the axes (see legend).
-p5_key = "P5"
-p5_label = "Conservation (absolute, deferred)"
-p5_note = "admissibility predicate fails: tol.\\ $\\leq$ operator floor"
+# Absolute conservation (a fifth MR considered in the manuscript) is not
+# plotted at all: its admissibility predicate fails because the absolute
+# tolerance does not dominate the P1 operator floor (Sec. 3.2 / Sec. 5.5),
+# so it never enters the verdict space. The figure caption flags this
+# absence; the figure itself stays confined to admitted relations only.
 
 # ---------------------------------------------------------------------------
-fig = plt.figure(figsize=(11.4, 5.0))
+fig = plt.figure(figsize=(10.8, 4.2))
 gs = fig.add_gridspec(2, 2, width_ratios=[1.55, 0.78],
                       height_ratios=[1.0, 1.45], wspace=0.05, hspace=0.05)
 ax = fig.add_subplot(gs[:, 0])
@@ -229,33 +229,11 @@ leg_pilot = ax_leg_bot.legend(handles=pilot_handles, loc="upper left",
                               borderpad=0.9)
 leg_pilot._legend_box.align = "left"
 
-# ---------------------------------------------------------------------------
-# Off-plane callout for P5: rendered as a single-row figure-level legend
-# below the main axes, physically detached from the verdict plane and from
-# the pilot legend, so legend entries map one-to-one onto markers in the
-# main plot.
-# ---------------------------------------------------------------------------
-p5_handle = Line2D(
-    [0], [0], marker="o", color="none",
-    markerfacecolor="white", markeredgecolor="#555",
-    markersize=10, markeredgewidth=1.4, linestyle=":",
-    label=(f"Off-plane: {p5_key} {p5_label} -- {p5_note}; "
-           "not admitted to the verdict space (Sec.~3.2)."),
-)
-# Reserve vertical space at the bottom of the figure so the callout does
-# not collide with the x-axis 10^k tick labels of the log-scaled main axes.
-fig.subplots_adjust(bottom=0.20)
-fig.legend(handles=[p5_handle], loc="lower left",
-           bbox_to_anchor=(0.01, 0.015),
-           frameon=True, fontsize=9, handlelength=1.6,
-           handletextpad=0.8, borderpad=0.8)
-
 OUT_PDF.parent.mkdir(parents=True, exist_ok=True)
-fig.savefig(OUT_PDF, bbox_inches="tight", pad_inches=0.18)
-fig.savefig(OUT_PNG, bbox_inches="tight", dpi=150, pad_inches=0.18)
+fig.savefig(OUT_PDF, bbox_inches="tight", pad_inches=0.12)
+fig.savefig(OUT_PNG, bbox_inches="tight", dpi=150, pad_inches=0.12)
 print(f"wrote {OUT_PDF}")
 print(f"wrote {OUT_PNG}")
 print("\nplotted coordinates (V/tolerance, y_bin):")
 for (key, label, note, vt, y, *_rest) in points:
     print(f"  {key}  V/tol={vt:.4g}  y={y}  {label}")
-print(f"  {p5_key}  (off-plane callout)  {p5_label}")
