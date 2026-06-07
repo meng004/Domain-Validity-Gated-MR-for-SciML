@@ -40,17 +40,27 @@ claims:
 
   - claim_id: "C3-baseline-comparison"
     status: "blocked"
-    evidence: []
+    evidence:
+      - "tools/run_llm_mr_baseline.py"
+      - "tools/score_llm_mr_baseline.py"
+      - "tests/test_p2_llm_baseline.py"
     wording_allowed: >
       The comparative baselines remain protocol commitments: Manual expert MR design,
       Generic automatic MR generation scope contrast, and LLM-generated candidate MRs.
       The rollout-accuracy diagnostic is no longer a commitment only: it has been executed
       (see C8-rollout-accuracy-baseline) and is reported as a same-SUT diagnostic
-      comparator, not as a defeated competitor.
+      comparator, not as a defeated competitor. For the LLM-generated-MR baseline the
+      execution pipeline is now committed and reproducible-by-protocol: tools/run_llm_mr_baseline.py
+      asks an LLM (default claude-opus-4-8 with gpt-5.5 fallback, via the bltcy
+      OpenAI-compatible gateway) for K=8 candidate MRs at temperature=0 and
+      tools/score_llm_mr_baseline.py grades each candidate against this paper's
+      four-condition admissibility predicate. The pipeline fails closed without LLM
+      credentials, so no candidates have been generated in this sandbox; the baseline
+      stays blocked-pending-credentials, not blocked-without-method.
     wording_forbidden:
       - "The proposed protocol outperforms any baseline."
       - "Expert-MR, generic-MR, or LLM baseline comparison results are available."
-    blocked_reason: "No matched expert-MR, generic-MR, or LLM baseline run artifacts or scoring ledgers exist; only the rollout-accuracy diagnostic (C8) has been run."
+    blocked_reason: "Sandbox lacks OPENAI_API_KEY + OPENAI_BASE_URL; the LLM-baseline pipeline (run_llm_mr_baseline.py + score_llm_mr_baseline.py) fails closed by design until credentials are provided. Expert-MR and generic-MR baselines remain protocol commitments without committed pipelines."
 
   - claim_id: "C4-rubric-decision-coverage"
     status: "qualified"
