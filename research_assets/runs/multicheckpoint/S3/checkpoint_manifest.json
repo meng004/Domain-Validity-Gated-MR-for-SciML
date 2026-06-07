@@ -1,6 +1,9 @@
 {
-  "checkpoint": "/home/user/Domain-Validity-Gated-MR-for-SciML/research_assets/runs/multicheckpoint/S3/checkpoint.pt",
-  "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+  "record_type": "multicheckpoint-training",
+  "sut_id": "S3",
+  "generated_at": "2026-06-07T06:15:38Z",
+  "checkpoint": "research_assets/runs/multicheckpoint/S3/sut/checkpoint.pt",
+  "checkpoint_sha256": "bc05d328ad14abbd86d0fe8e7a95aca7cb59bdb20fa671de91e9754e5fa77d59",
   "config": {
     "hidden": 64,
     "num_layers": 4,
@@ -12,7 +15,25 @@
     "train_steps_max": 149,
     "lr": 0.001
   },
+  "num_parameters": 176386,
   "loss_first": 1.5132654905319214,
-  "loss_last": 0.019463828532025218,
-  "num_parameters": 176386
+  "loss_last": 0.020341674610972405,
+  "inference_smoke": {
+    "split": "test",
+    "t_eval": 0,
+    "onestep_rmse": 0.01210970152169466,
+    "persistence_rmse": 0.01507564540952444,
+    "skill_vs_persistence": 1.2449229555754335,
+    "mean_speed": 1.1624997854232788,
+    "relative_rmse": 0.01041694946832647
+  },
+  "data_provenance": {
+    "train_npz": "/home/user/Minimum-MR-SubSet/data/raw/cylinder_flow_deepmind/cylinder_flow_train.npz",
+    "train_npz_sha256": "2b36285e73e5b7c670b733397759c1acf7957c340fe1a38ad63a4c733be7f493",
+    "eval_npz": "/home/user/Minimum-MR-SubSet/data/raw/cylinder_flow_deepmind/cylinder_flow_eval.npz",
+    "eval_npz_sha256": "f72a285d9c98ea0f132d22b08e6bbf0caa6a249c07d856195cec1f466467ac02",
+    "source": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow/train.tfrecord (committed compact npz slice)"
+  },
+  "sut_repo": "/home/user/Minimum-MR-SubSet",
+  "honesty_boundary": "Within-architecture-family roster. S0-S3 are training-seed replicas of one base config; only S4/S5 vary architecture. Not a cross-family study."
 }
