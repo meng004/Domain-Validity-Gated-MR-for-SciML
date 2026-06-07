@@ -43,6 +43,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[4]
@@ -52,71 +53,68 @@ OUT_PNG = ROOT / "paper/ist-submission/figures/fig_3_verdict_2d.png"
 
 # ---- Pull V/floor coordinates from the REAL pilot ledgers ----
 
-# Node-permutation: V = 0; floor = machine precision (we use the recorded tol).
-# V/floor = 0; plot at the log-axis left edge.
 np_led = json.loads((RUNS / "real-sut-node-permutation-pilot" / "raw" /
                      "metric_ledger.json").read_text())
-np_entry = np_led["entries"][0]
-node_perm_v = float(np_entry["metric_value"])  # 0.0
+node_perm_v = float(np_led["entries"][0]["metric_value"])  # 0.0
 
-# Mirror-y OOD-stress: V and mapping_error_floor per frame; take median V/floor.
 my_led = json.loads((RUNS / "mirror-y-rate-upgrade" / "raw" /
                      "metric_ledger.json").read_text())
 my_ratios = [float(e["violation_over_floor"]) for e in my_led["entries"]]
 my_v_over_floor = float(np.median(my_ratios))
 
-# Mirror-y on the synthetic symmetric mesh: V vs the exact-relation tol (1e-6).
 sym_led = json.loads((RUNS / "mirror-y-symmetric-mesh" / "raw" /
                       "metric_ledger.json").read_text())
 sym_v = float(sym_led["metric_value"])
 sym_tol = float(sym_led["tolerance"]["threshold"])
-sym_v_over_floor = sym_v / sym_tol  # large -- this is the headline finding
+sym_v_over_floor = sym_v / sym_tol
 
-# Conservation (reference-relative): excess over pass region, normalized by
-# the remaining tolerance budget. ratio < 1.0 has no meaning here, so we clip.
 cons_led = json.loads((RUNS / "conservation-diagnostic-pilot" / "raw" /
                        "metric_ledger.json").read_text())
 cons_ratios = [float(e["metric_value"]) for e in cons_led["entries"]]
-cons_excess = max(0.0, float(np.median(cons_ratios)) - 1.0)
-cons_tol_budget = 1.5 - 1.0
-cons_v_over_floor = cons_excess / cons_tol_budget  # ~ 0.005--0.01
+cons_median = float(np.median(cons_ratios))
+cons_v_over_floor = max(0.0, cons_median - 1.0) / (1.5 - 1.0)
 
-# Conservation (absolute, deferred): no measurement -- illustrative position
-# in the numerical-tolerance / OOD region, drawn as a hollow marker.
-cons_abs_x = 0.3  # below floor: V/floor < 1
-cons_abs_y_bin = "Out"  # operator-floor admissibility fails on the real mesh
+cons_abs_x = 0.3  # deferred -- illustrative
 
 # ---- Coordinate mapping ----
-# x: V/floor on log scale; replace 0 with a small floor for plotting.
-def x_for(v_over_floor: float) -> float:
-    return max(v_over_floor, 1e-2)
-
-# y: qualitative bin -> numeric for plotting only.
 Y_LOW, Y_BORDER, Y_OUT = 0.5, 1.5, 2.5
+X_FLOOR_PLOT = 1e-3  # for V/floor = 0 (node-perm)
 
+
+def x_plot(v):
+    return max(v, X_FLOOR_PLOT)
+
+
+# (key, label, V/floor, y, marker, facecolor, edgecolor)
 points = [
-    # (label, V/floor, y-bin, marker, facecolor, edgecolor, note line)
-    ("Node-perm.\nequivariance",
-     0.0, Y_LOW, "o", "#2c7a2c", "#1c4d1c",
-     f"V/floor $\\approx 0$"),
-    ("Conservation\n(ref.-relative)",
-     cons_v_over_floor, Y_LOW, "o", "#2c7a2c", "#1c4d1c",
-     f"ratio $= {np.median(cons_ratios):.3f}$"),
-    ("Mirror-y on\nsymmetric mesh",
-     sym_v_over_floor, Y_LOW, "*", "#b03030", "#600",
-     f"V $= {sym_v:.2f}$, floor $= 10^{{-6}}$"),
-    ("Mirror-y\nOOD-stress",
-     my_v_over_floor, Y_OUT, "s", "#d68a1e", "#7a4d00",
-     f"V/floor median $= {my_v_over_floor:.2f}$"),
-    ("Conservation\n(absolute, deferred)",
-     cons_abs_x, Y_OUT, "o", "white", "#555",
-     "operator-floor admissibility fails"),
+    ("P1", "Node-perm.\\ equivariance",
+     0.0, Y_LOW, "o", "#2c7a2c", "#1c4d1c"),
+    ("P2", "Conservation (ref.-relative)",
+     cons_v_over_floor, Y_LOW, "D", "#2c7a2c", "#1c4d1c"),
+    ("P3", "Mirror-y on symmetric mesh",
+     sym_v_over_floor, Y_LOW, "*", "#b03030", "#600"),
+    ("P4", "Mirror-y OOD-stress",
+     my_v_over_floor, Y_OUT, "s", "#d68a1e", "#7a4d00"),
+    ("P5", "Conservation (absolute, deferred)",
+     cons_abs_x, Y_OUT, "o", "white", "#555"),
 ]
 
+# point coordinate notes for legend
+point_notes = {
+    "P1": f"V/floor $\\approx 0$",
+    "P2": f"ratio $= {cons_median:.3f}$, V/floor $= {cons_v_over_floor:.3f}$",
+    "P3": f"V $= {sym_v:.2f}$, floor $= 10^{{-6}}$",
+    "P4": f"V/floor median $= {my_v_over_floor:.2f}$",
+    "P5": "operator-floor admissibility fails",
+}
+
 # ---- Plot ----
-fig, ax = plt.subplots(figsize=(6.3, 4.0))
-x_lo, x_hi = 1e-2, 5e6
-y_lo, y_hi = 0.0, 3.0
+fig = plt.figure(figsize=(8.6, 4.2))
+gs = fig.add_gridspec(1, 2, width_ratios=[1.0, 0.68], wspace=0.05)
+ax = fig.add_subplot(gs[0, 0])
+ax_leg = fig.add_subplot(gs[0, 1]); ax_leg.axis("off")
+
+x_lo, x_hi = X_FLOOR_PLOT, 1e7
 
 # Region shading
 pass_color = "#d8efd8"
@@ -124,49 +122,37 @@ fail_color = "#f2cdcd"
 ood_color = "#fde4c4"
 numtol_color = "#e6e6f5"
 
-ax.axhspan(0.0, 1.0, xmin=0, xmax=0.5, facecolor=pass_color, alpha=0.55, zorder=0)
+# y in [0,1] = Low; [1,2] = Borderline; [2,3] = Out
+# x split at V/floor = 1 (the "V dominates floor" line)
+ax.axhspan(0.0, 1.0, xmin=0.0, xmax=0.5, facecolor=pass_color, alpha=0.55, zorder=0)
 ax.axhspan(0.0, 1.0, xmin=0.5, xmax=1.0, facecolor=fail_color, alpha=0.55, zorder=0)
 ax.axhspan(2.0, 3.0, xmin=0.0, xmax=1.0, facecolor=ood_color, alpha=0.55, zorder=0)
 ax.axhspan(1.0, 2.0, xmin=0.0, xmax=1.0, facecolor=ood_color, alpha=0.28, zorder=0)
-# numerical-tolerance band: V/floor < 1 strip (vertical) overlay on the pass band
-ax.axvspan(x_lo, 1.0, ymin=0.0, ymax=1.0/3, facecolor=numtol_color, alpha=0.55, zorder=0)
+# numerical-tolerance band overlay on pass strip where V < floor
+ax.axvspan(x_lo, 1.0, ymin=0.0, ymax=1.0 / 3, facecolor=numtol_color,
+           alpha=0.55, zorder=0)
 
-# Region labels
-def rtext(x, y, s, color="#333"):
-    ax.text(x, y, s, ha="center", va="center", fontsize=9.5, color=color,
-            weight="bold", zorder=2)
-
-rtext(0.18, 0.5, "numerical-\ntolerance", color="#444466")
-rtext(1e2, 0.5, "SUT\ninconsistency", color="#7a1d1d")
-rtext(0.18, 2.5, "out-of-relation-domain", color="#7a4d00")
-rtext(1e2, 2.5, "OOD-stress\n(downgraded)", color="#7a4d00")
-rtext(6, 0.5, "pass", color="#1f5d1f")
-
-# Vertical floor line
-ax.axvline(1.0, color="#555", lw=0.9, ls="--", zorder=1.5)
-ax.text(1.0, 2.95, "V = floor", ha="center", va="top", fontsize=8,
+# Floor reference line
+ax.axvline(1.0, color="#444", lw=0.9, ls="--", zorder=1.5)
+ax.text(1.0, 2.98, "V = floor", ha="center", va="top", fontsize=8,
         color="#444", style="italic", zorder=3)
 
-# Plot the points
-for (label, vf, y, mk, fc, ec, note) in points:
-    x = x_for(vf)
-    ax.scatter([x], [y], s=180 if mk == "*" else 120,
-               marker=mk, facecolor=fc, edgecolor=ec, linewidth=1.4,
-               zorder=4)
-    dx = 1.6 if mk == "s" else 1.8
-    dy = 0.32
-    ax.annotate(label, (x, y),
-                xytext=(x * dx if vf > 0.1 else 0.04, y + dy),
-                textcoords="data" if vf > 0.1 else "data",
-                fontsize=8.5, ha="left", va="bottom",
-                bbox=dict(boxstyle="round,pad=0.25", facecolor="white",
-                          edgecolor=ec, lw=0.8, alpha=0.92),
+# Plot points + P1..P5 chips (no overlapping textual labels in-axis)
+for (key, label, vf, y, mk, fc, ec) in points:
+    x = x_plot(vf)
+    ax.scatter([x], [y], s=(220 if mk == "*" else 130),
+               marker=mk, facecolor=fc, edgecolor=ec, linewidth=1.4, zorder=4)
+    # small chip label next to the point with white halo so it never overlaps shading
+    ax.annotate(key, (x, y), xytext=(7, -10), textcoords="offset points",
+                fontsize=9, weight="bold", color=ec,
+                bbox=dict(boxstyle="round,pad=0.15", facecolor="white",
+                          edgecolor="none", alpha=0.85),
                 zorder=5)
 
 # Axes
 ax.set_xscale("log")
 ax.set_xlim(x_lo, x_hi)
-ax.set_ylim(y_lo, y_hi)
+ax.set_ylim(0.0, 3.0)
 ax.set_xlabel(r"Relation-violation $V/\mathrm{floor}$ (log scale)", fontsize=10)
 ax.set_ylabel("Domain-violation level (qualitative)", fontsize=10)
 ax.set_yticks([Y_LOW, Y_BORDER, Y_OUT])
@@ -175,12 +161,47 @@ ax.set_title("Two-dimensional verdict reading of the four cylinder-flow pilots",
              fontsize=11)
 ax.grid(True, which="both", axis="x", alpha=0.25, linestyle=":", linewidth=0.5)
 
+# ---- Right-side legends (regions + pilots), so no labels live inside the axes
+# Region legend
+region_handles = [
+    mpatches.Patch(facecolor=pass_color, edgecolor="#1f5d1f",
+                   label="pass  (low V, low D)"),
+    mpatches.Patch(facecolor=fail_color, edgecolor="#7a1d1d",
+                   label="SUT inconsistency  (high V, low D)"),
+    mpatches.Patch(facecolor=ood_color, edgecolor="#7a4d00",
+                   label="OOD-stress / out-of-domain  (high D)"),
+    mpatches.Patch(facecolor=numtol_color, edgecolor="#444466",
+                   label="numerical-tolerance  (V $<$ floor)"),
+]
+leg_region = ax_leg.legend(handles=region_handles, loc="upper left",
+                           bbox_to_anchor=(0.0, 1.00),
+                           title="Verdict regions", title_fontsize=9.5,
+                           fontsize=9, frameon=True, handlelength=1.6)
+leg_region._legend_box.align = "left"
+ax_leg.add_artist(leg_region)
+
+# Pilot legend (per-point key with measured coordinate)
+pilot_handles = []
+for (key, label, vf, y, mk, fc, ec) in points:
+    pilot_handles.append(Line2D([0], [0], marker=mk,
+                                color="none", markerfacecolor=fc,
+                                markeredgecolor=ec, markersize=10,
+                                markeredgewidth=1.4,
+                                label=f"{key}: {label}\n     {point_notes[key]}"))
+leg_pilot = ax_leg.legend(handles=pilot_handles, loc="lower left",
+                          bbox_to_anchor=(0.0, 0.00),
+                          title="Pilots (medians from real ledgers)",
+                          title_fontsize=9.5, fontsize=8.6,
+                          labelspacing=0.9, handletextpad=0.6,
+                          frameon=True, handlelength=1.6)
+leg_pilot._legend_box.align = "left"
+
 fig.tight_layout()
 OUT_PDF.parent.mkdir(parents=True, exist_ok=True)
 fig.savefig(OUT_PDF, bbox_inches="tight")
 fig.savefig(OUT_PNG, bbox_inches="tight", dpi=150)
 print(f"wrote {OUT_PDF}")
 print(f"wrote {OUT_PNG}")
-print(f"\nplotted coordinates:")
-for (lb, vf, y, *_rest) in points:
-    print(f"  {lb!r:35s}  V/floor={vf:.3g}  y_bin={y}")
+print("\nplotted coordinates:")
+for (key, label, vf, y, *_rest) in points:
+    print(f"  {key}  V/floor={vf:.3g}  y_bin={y}  {label}")
