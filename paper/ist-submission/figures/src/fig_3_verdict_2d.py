@@ -208,7 +208,8 @@ region_handles = [
 leg_region = ax_leg_top.legend(handles=region_handles, loc="upper left",
                                bbox_to_anchor=(0.0, 1.00),
                                title="Verdict regions", title_fontsize=9.5,
-                               fontsize=9, frameon=True, handlelength=1.6)
+                               fontsize=9, frameon=True, handlelength=1.6,
+                               borderpad=0.8, handletextpad=0.7)
 leg_region._legend_box.align = "left"
 
 pilot_handles = []
@@ -223,8 +224,9 @@ leg_pilot = ax_leg_bot.legend(handles=pilot_handles, loc="upper left",
                               title="Pilots in verdict space "
                                     "(medians from real ledgers)",
                               title_fontsize=9.5, fontsize=8.6,
-                              labelspacing=1.0, handletextpad=0.6,
-                              frameon=True, handlelength=1.6)
+                              labelspacing=1.0, handletextpad=0.7,
+                              frameon=True, handlelength=1.6,
+                              borderpad=0.9)
 leg_pilot._legend_box.align = "left"
 
 # ---------------------------------------------------------------------------
@@ -240,14 +242,17 @@ p5_handle = Line2D(
     label=(f"Off-plane: {p5_key} {p5_label} -- {p5_note}; "
            "not admitted to the verdict space (Sec.~3.2)."),
 )
+# Reserve vertical space at the bottom of the figure so the callout does
+# not collide with the x-axis 10^k tick labels of the log-scaled main axes.
+fig.subplots_adjust(bottom=0.20)
 fig.legend(handles=[p5_handle], loc="lower left",
-           bbox_to_anchor=(0.01, 0.0),
+           bbox_to_anchor=(0.01, 0.015),
            frameon=True, fontsize=9, handlelength=1.6,
-           handletextpad=0.7)
+           handletextpad=0.8, borderpad=0.8)
 
 OUT_PDF.parent.mkdir(parents=True, exist_ok=True)
-fig.savefig(OUT_PDF, bbox_inches="tight")
-fig.savefig(OUT_PNG, bbox_inches="tight", dpi=150)
+fig.savefig(OUT_PDF, bbox_inches="tight", pad_inches=0.18)
+fig.savefig(OUT_PNG, bbox_inches="tight", dpi=150, pad_inches=0.18)
 print(f"wrote {OUT_PDF}")
 print(f"wrote {OUT_PNG}")
 print("\nplotted coordinates (V/tolerance, y_bin):")
