@@ -118,10 +118,12 @@ p5_label = "Conservation (absolute, deferred)"
 p5_note = "admissibility predicate fails: tol.\\ $\\leq$ operator floor"
 
 # ---------------------------------------------------------------------------
-fig = plt.figure(figsize=(9.4, 4.3))
-gs = fig.add_gridspec(1, 2, width_ratios=[1.0, 0.78], wspace=0.06)
-ax = fig.add_subplot(gs[0, 0])
-ax_leg = fig.add_subplot(gs[0, 1]); ax_leg.axis("off")
+fig = plt.figure(figsize=(9.6, 4.6))
+gs = fig.add_gridspec(2, 2, width_ratios=[1.0, 0.78],
+                      height_ratios=[1.0, 1.45], wspace=0.06, hspace=0.18)
+ax = fig.add_subplot(gs[:, 0])
+ax_leg_top = fig.add_subplot(gs[0, 1]); ax_leg_top.axis("off")
+ax_leg_bot = fig.add_subplot(gs[1, 1]); ax_leg_bot.axis("off")
 
 x_lo, x_hi = X_PLOT_FLOOR, 1e7
 
@@ -203,12 +205,11 @@ region_handles = [
     mpatches.Patch(facecolor=ood_color, edgecolor="#7a4d00", hatch="xx",
                    label="OOD-stress / out-of-domain  (Out row)"),
 ]
-leg_region = ax_leg.legend(handles=region_handles, loc="upper left",
-                           bbox_to_anchor=(0.0, 1.00),
-                           title="Verdict regions", title_fontsize=9.5,
-                           fontsize=9, frameon=True, handlelength=1.6)
+leg_region = ax_leg_top.legend(handles=region_handles, loc="upper left",
+                               bbox_to_anchor=(0.0, 1.00),
+                               title="Verdict regions", title_fontsize=9.5,
+                               fontsize=9, frameon=True, handlelength=1.6)
 leg_region._legend_box.align = "left"
-ax_leg.add_artist(leg_region)
 
 pilot_handles = []
 for (key, label, note, vt, y, mk, fc, ec) in points:
@@ -223,12 +224,12 @@ pilot_handles.append(Line2D([0], [0], marker="o", color="none",
                             label=f"{p5_key}: {p5_label}\n     {p5_note}\n"
                                   "     (off-plane: not admitted to verdict space)"))
 
-leg_pilot = ax_leg.legend(handles=pilot_handles, loc="lower left",
-                          bbox_to_anchor=(0.0, 0.00),
-                          title="Pilots (medians from real ledgers)",
-                          title_fontsize=9.5, fontsize=8.6,
-                          labelspacing=1.0, handletextpad=0.6,
-                          frameon=True, handlelength=1.6)
+leg_pilot = ax_leg_bot.legend(handles=pilot_handles, loc="upper left",
+                              bbox_to_anchor=(0.0, 1.00),
+                              title="Pilots (medians from real ledgers)",
+                              title_fontsize=9.5, fontsize=8.6,
+                              labelspacing=1.0, handletextpad=0.6,
+                              frameon=True, handlelength=1.6)
 leg_pilot._legend_box.align = "left"
 
 OUT_PDF.parent.mkdir(parents=True, exist_ok=True)
