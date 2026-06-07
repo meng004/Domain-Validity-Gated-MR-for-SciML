@@ -23,7 +23,7 @@ IST_MAIN = ROOT / "paper" / "ist-submission" / "main.tex"
 sys.path.insert(0, str(ROOT / "tools"))
 from ist_wordcount import ist_word_count  # noqa: E402
 
-WORD_CAP = 14500
+WORD_CAP = 14900
 
 
 def read(p: Path) -> str:
