@@ -59,6 +59,11 @@ page limit; the word count is the binding constraint.
   (numbered Vancouver-style references). Word template also accepted.
 - IST is **NOT** in the "Your Paper Your Way" list — initial submission must
   follow the formal format (no double-spaced single-column free-form draft).
+- **Peer review model: single-anonymized** (reviewers see the authors; authors
+  do not see reviewers). The submission therefore **keeps** author names,
+  affiliations, CRediT, and funding — do NOT anonymize `main.tex`. (Verified
+  2026-06-07 against indexed Guide-for-Authors text; IST and Information
+  Systems are single-anonymized, unlike Information Processing & Management.)
 
 ### Mandatory at submission
 

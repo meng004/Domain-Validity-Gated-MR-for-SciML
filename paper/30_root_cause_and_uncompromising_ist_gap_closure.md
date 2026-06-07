@@ -122,7 +122,7 @@ on the merits; P2 closes the methodological deficits).
 | ID | Item | Acceptance gate |
 |---|---|---|
 | P0-1 | Trim IST-counted total from ~16,779 to ≤ 14,500 words (1,500-word slack). Background −600, Empirical Design −700, consolidate three §5.4–§5.6 tables into one (−400). | `paper/28_ist_format_compliance_check.md` total ≤ 14,500 |
-| P0-2 | Switch to a double-anonymized version: replace author/affiliation/CRediT/grant numbers with `[anonymized]`; keep a `named-camera-ready` branch. | `grep` for known names / emails / grant numbers in `main.tex` returns nothing |
+| ~~P0-2~~ | **DROPPED 2026-06-07.** A factual check of IST's peer-review model found IST uses **single-anonymized** review (reviewers see authors), not double-anonymized. The Stage-9 Action Editor's "not anonymous → FAIL" was a hallucinated requirement, and the README's "double-anonymized for review" note was wrong (now corrected). The submission **keeps** author names, affiliations, CRediT, and funding. No anonymization is performed. | n/a — keep named submission |
 | P0-3 | Shorten title to ≤ 70 chars, lower jargon. Candidate: *"Domain-Validity-Gated Metamorphic Testing for Scientific ML Surrogates"*. | `\title{...}` length ≤ 70 |
 | P0-4 | Rewrite Abstract Conclusion from four "not"s to scoped positive framing (stay inside ledger `wording_forbidden`). | Conclusion contains no "is not" sentences; 3 sentences max |
 

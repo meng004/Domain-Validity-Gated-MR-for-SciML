@@ -74,7 +74,8 @@ localization; runtime; reliability; model accuracy. The authoritative runtime cl
 
 - `paper/manuscript.md` — working manuscript (source of truth for prose).
 - `paper/ist-submission/` — Elsevier/IST LaTeX package (`main.tex`, `references.bib`,
-  vendored `elsarticle` class); double-anonymized for review.
+  vendored `elsarticle` class). IST uses single-anonymized review, so the
+  submission carries author names, affiliations, CRediT, and funding.
 - `paper/22_stage2p5_integrity_audit.md`, `paper/23_stage3_reviewer_simulation.md` —
   integrity audit and multi-role reviewer simulations.
 - `research_assets/experiments/` — `claim-ledger.yml` (authoritative claims),
