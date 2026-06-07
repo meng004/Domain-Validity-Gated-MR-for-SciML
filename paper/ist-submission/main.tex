@@ -197,7 +197,7 @@ The proposed method is a five-stage workflow:
 
 The method deliberately separates candidate generation from validity judgment. NOETHER-style patterns may help organize or generate candidate relation structures, but they do not certify that a relation is physically valid for a particular SUT, dataset, mesh, boundary condition, or numerical tolerance. Validity is determined by the rubric and by executable evidence. Figure~\ref{fig:workflow} summarizes the workflow end-to-end.
 
-\begin{figure}[t]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/fig_1_validity_gated_workflow.pdf}
 \caption{Validity-gated workflow for converting physically motivated candidate relations into executable, oracle-free MR assets and relation-level verdicts. The rubric and the verdict are explicit gates (diamonds); rejected candidates and out-of-relation-domain cases are recorded as evidence rather than discarded silently.}
@@ -265,7 +265,7 @@ Initial card skeletons for the cylinder-flow study (one card per MR class --- re
 
 Executable assets are generated from MR cards. Each asset includes transformation code, runner configuration, metric computation, verdict logic, and artifact recording. The asset format is intended to make MR execution auditable: another researcher should be able to inspect why a relation was retained, how the follow-up case was generated, how the comparison was made, and what a violation means. Figure~\ref{fig:asset-flow} shows the resulting data flow.
 
-\begin{figure}[t]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/fig_2_mr_asset_dataflow.pdf}
 \caption{Executable MR asset and verdict data flow. The MR card supplies the basis, preconditions, mapping, metric, tolerance, and exclusion rule; the source and follow-up runs feed the output mapping and metric; the exclusion check and verdict rule emit a relation-level verdict to the ledger together with metric outputs, run logs, and the transformation record as artifacts.}
@@ -332,7 +332,7 @@ It is useful to read these verdicts as regions of a two-dimensional space rather
 
 In the present study the relation-violation axis is quantitative --- mirror-y reports V/floor --- but the domain-violation axis is so far only partially operationalized. The mirror-y case is placed near the validity boundary \emph{qualitatively}: the reflection is non-bijective and the worst reflected-node mismatch is about one mesh edge length, so the exact relation is out-of-relation-domain and is downgraded to an approximate OOD-stress probe. We do not claim a fully calibrated, continuous domain-violation score; defining such a score across MR classes is left to future work. The two-dimensional reading is used here as an interpretive structure, not as a calibrated boundary measurement. Figure~\ref{fig:verdict-2d} plots the four cylinder-flow pilots in this verdict space; the placement of the synthetic-symmetric-mesh probe in the SUT-inconsistency region --- low domain-violation, high relation-violation --- is what makes the mirror-y violation a model-level finding rather than an out-of-domain artefact.
 
-\begin{figure}[t]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.92\linewidth]{figures/fig_3_verdict_2d.pdf}
 \caption{Two-dimensional verdict reading of the cylinder-flow pilots. Horizontal axis: relation-violation $V/\mathrm{tolerance}$ on a log scale, where tolerance is the per-MR verdict threshold (machine-precision floor for an exact relation; the reference-relative regression threshold for conservation; the mapping-error floor when an approximate relation has been downgraded to an OOD-stress probe, as for P4). Vertical axis: domain-violation as a three-level categorical bin (In-domain, Boundary, Out-of-domain), kept qualitative because, as Sec.~\ref{subsec:verdicts} notes, it is so far only partially operationalized. The dashed line at $V/\mathrm{tolerance} = 1$ is the pass/fail border for an admissible relation. Coordinates (medians from the metric ledgers; full numbers in Sec.~\ref{subsec:within-sut-pilot} and Table~\ref{tab:mr-card-verdict}): P1 node-permutation equivariance $V = 0$ exactly (structurally exact, plotted at the log-axis floor); P2 conservation (reference-relative) ratio $= 1.005$, so $V/\mathrm{tolerance} \approx 0.01$ --- two orders of magnitude above P1 yet still well inside pass; P3 mirror-y on the synthetic symmetric mesh, where the rubric admits the exact relation, $V = 1.10$ against tolerance $10^{-6}$, $V/\mathrm{tolerance} \approx 1.1\times 10^{6}$ --- the SUT-inconsistency region, which is what removes the out-of-relation-domain objection to the mirror-y finding; P4 mirror-y OOD-stress (downgraded), $V/\mathrm{floor} = 3.96$ with the mapping-error floor as effective tolerance, sitting in the Out-of-domain row. Absolute conservation is not plotted: its admissibility predicate (Sec.~\ref{subsec:rubric}) fails because the absolute tolerance does not dominate the P1 operator floor calibrated in Sec.~\ref{subsec:operator-floor-sweep}, so the rubric never admits it into the verdict space.}
@@ -537,7 +537,7 @@ Seeded-fault union (k/10) & 5/10 (each) & --- & 4/10 & 4/10 \\
 
 The admissibility predicate of Section~\ref{subsec:rubric} requires the verdict tolerance to dominate the operator's intrinsic error floor (numerical decidability). For the P1 constant-per-cell discrete divergence operator that scores the continuity MR, that floor is a property of the operator and the mesh, not of any SUT, and it admits a direct empirical calibration. On the same $y=0$-symmetric structured triangular channel mesh family used by the exact-mirror-y experiment of Section~\ref{subsec:within-sut-pilot}, at four resolutions $h_0, h_0/2, h_0/4, h_0/8$, we evaluated the analytically divergence-free reference velocity field $u = (\partial_y \psi, -\partial_x \psi)$ with stream function $\psi(x,y) = \sin(\pi x / L_x)\sin(\pi y / L_y)$ and measured the area-weighted RMS of the per-cell discrete divergence. A log--log linear fit of RMS vs.\ characteristic edge length gives slope \textbf{0.988} (all cells, $R^2 = 1.000$) and slope \textbf{0.995} (interior-only, $R^2 = 1.000$), matching the theoretical $O(h)$ truncation rate of P1 piecewise-linear shape functions on smooth fields (Figure~\ref{fig:operator-floor}). This empirically calibrates the operator-floor magnitude the verdict tolerance must dominate, confirming the admissibility-predicate gating condition for the continuity MR has a measurable basis. The scope is one mesh family and one smooth analytic field; the calibration confirms the expected rate on this mesh family but does not generalize across mesh geometries.
 
-\begin{figure}[t]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.72\linewidth]{figures/fig_4_operator_floor_loglog.pdf}
 \caption{Empirical $O(h)$ convergence of the area-weighted RMS of the P1 discrete-divergence operator on the $y=0$-symmetric structured triangular channel mesh at four resolutions, evaluated on an analytically divergence-free reference field. All-cell slope = 0.988 ($R^2 = 1.000$); interior-only slope = 0.995. The grey dotted line is the theoretical $O(h)$ reference.}
@@ -581,7 +581,7 @@ PC\_zero\_vy & physical channel & (none at $p=1.0$) & 0/30 & 0.00 & $[0.00, 0.11
 \end{tabularx}
 \end{table}
 
-\begin{figure}[t]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.7\linewidth]{figures/r3_pc_zero_vy_nonmonotone.pdf}
 \caption{R3 non-monotone detection of PC\_zero\_vy by mirror-y. Partial-fraction zeroing $p \in \{0.25, 0.5, 0.75\}$ is detected on every checkpoint of the K=6 roster (6/6); the canonical $p=1.0$ is detected on none (0/6). Uniform $v_y=0$ is itself mirror-y-symmetric ($0=-0$), so the most severe fault sits in a detection blind region that intermediate severities expose. Error bars are Wilson 95\% CIs across the 6-checkpoint roster.}
