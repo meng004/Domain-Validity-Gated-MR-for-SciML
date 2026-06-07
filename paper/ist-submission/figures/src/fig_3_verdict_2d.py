@@ -1,29 +1,31 @@
 """Render the 2D verdict-reading figure (Figure 3).
 
-This figure visualizes the paper's central conceptual contribution: reading a
-relation-level verdict in TWO dimensions rather than as a flat pass/fail label.
+Visualises the paper's central conceptual contribution: reading a relation-
+level verdict in TWO dimensions rather than as a flat pass/fail label.
 
-  x-axis: relation-violation magnitude, V/floor (log scale). "Floor" is the
-          tolerance or operator floor of the MR. V/floor < 1 means the
-          measurement sits within the numerical floor; V/floor >> 1 means a
-          large violation relative to the floor.
+  x-axis: relation-violation V/tolerance (log scale). "Tolerance" is the
+          per-MR verdict threshold (machine-precision floor for exact
+          relations, the reference-relative regression threshold for
+          conservation, the mapping-error floor for the downgraded mirror-y
+          OOD-stress probe). x < 1 = within tolerance; x = 1 is the pass/fail
+          border; x >> 1 = the verdict's measured quantity violates the
+          tolerance.
 
-  y-axis: domain-violation magnitude, the degree to which the transformed case
-          lies outside the relation's validity domain. The manuscript admits
-          this axis is only qualitatively operationalized so far (Sec. 3.5);
-          we therefore use three discrete bins -- LOW, BORDERLINE, OUT --
-          rather than a calibrated continuous score.
+  y-axis: domain-violation, kept categorical (In-domain / Boundary /
+          Out-of-domain), matching the manuscript's honest note that this
+          axis is so far only qualitatively operationalized (Sec. 3.5).
 
-Background shading partitions the plane into the four verdict regions in
+Background shading partitions the plane into the four verdict regions of
 Sec. 3.5:
-  - pass                          : low V, low D
-  - SUT inconsistency             : high V, low D    (the only model-level fail)
-  - OOD-stress / out-of-domain    : high D
-  - numerical-tolerance issue     : low V relative to floor (V/floor < 1)
+  - pass                          : x < 1, In-domain
+  - SUT inconsistency             : x >= 1, In-domain    (only model fail)
+  - OOD-stress / out-of-domain    : Out-of-domain row    (downgraded probe)
+  - boundary                      : Boundary row         (transition strip)
 
-Five real pilot points (all from K=6-aggregated ledgers) are plotted at their
-measured coordinates, demonstrating that the same verdict-space distinguishes
-genuine model violations from out-of-domain applications.
+Five real pilot points, all read from committed metric ledgers, are plotted
+at their measured (V/tolerance, D-bin) coordinates. Pass-region differentia-
+tion between machine-precision exactness (P1) and within-tolerance regression
+(P2) is shown by their x positions (orders of magnitude apart), not by colour.
 
 Source ledgers:
   - research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json
@@ -51,127 +53,139 @@ RUNS = ROOT / "research_assets" / "runs"
 OUT_PDF = ROOT / "paper/ist-submission/figures/fig_3_verdict_2d.pdf"
 OUT_PNG = ROOT / "paper/ist-submission/figures/fig_3_verdict_2d.png"
 
-# ---- Pull V/floor coordinates from the REAL pilot ledgers ----
-
+# ---------------------------------------------------------------------------
+# Read every coordinate from the real metric ledgers. Compute the per-MR
+# tolerance-normalised violation: x = V / tolerance (log scale on the axis).
+# ---------------------------------------------------------------------------
 np_led = json.loads((RUNS / "real-sut-node-permutation-pilot" / "raw" /
                      "metric_ledger.json").read_text())
-node_perm_v = float(np_led["entries"][0]["metric_value"])  # 0.0
+np_entry = np_led["entries"][0]
+node_perm_v = float(np_entry["metric_value"])                            # 0.0
+node_perm_tol = float(np_entry["tolerance"]["threshold"])                # 1e-6
+node_perm_v_over_tol = node_perm_v / node_perm_tol                       # 0.0
 
 my_led = json.loads((RUNS / "mirror-y-rate-upgrade" / "raw" /
                      "metric_ledger.json").read_text())
-my_ratios = [float(e["violation_over_floor"]) for e in my_led["entries"]]
-my_v_over_floor = float(np.median(my_ratios))
+# Mirror-y is a DOWNGRADED probe: exact relation rejected by the rubric, the
+# effective tolerance is the mapping-error floor of the approximate
+# correspondence. The ledger already records V/floor per frame.
+my_v_over_eff_tol = float(np.median([float(e["violation_over_floor"])
+                                     for e in my_led["entries"]]))       # 3.96
 
 sym_led = json.loads((RUNS / "mirror-y-symmetric-mesh" / "raw" /
                       "metric_ledger.json").read_text())
-sym_v = float(sym_led["metric_value"])
-sym_tol = float(sym_led["tolerance"]["threshold"])
-sym_v_over_floor = sym_v / sym_tol
+sym_v = float(sym_led["metric_value"])                                   # 1.10
+sym_tol = float(sym_led["tolerance"]["threshold"])                       # 1e-6
+sym_v_over_tol = sym_v / sym_tol                                        # 1.1e6
 
 cons_led = json.loads((RUNS / "conservation-diagnostic-pilot" / "raw" /
                        "metric_ledger.json").read_text())
 cons_ratios = [float(e["metric_value"]) for e in cons_led["entries"]]
-cons_median = float(np.median(cons_ratios))
-cons_v_over_floor = max(0.0, cons_median - 1.0) / (1.5 - 1.0)
+cons_median = float(np.median(cons_ratios))                             # 1.005
+cons_tol = 1.5
+# Normalise into the per-MR pass-budget: V_normalised = (ratio - 1) / (tol - 1)
+cons_v_over_tol = max(0.0, cons_median - 1.0) / (cons_tol - 1.0)        # ~0.01
 
-cons_abs_x = 0.3  # deferred -- illustrative
-
-# ---- Coordinate mapping ----
-Y_LOW, Y_BORDER, Y_OUT = 0.5, 1.5, 2.5
-X_FLOOR_PLOT = 1e-3  # for V/floor = 0 (node-perm)
-
+# ---------------------------------------------------------------------------
+# Plot layout
+# ---------------------------------------------------------------------------
+Y_IN, Y_BORDER, Y_OUT = 0.5, 1.5, 2.5
+X_PLOT_FLOOR = 1e-4   # for V/tol = 0 (machine-precision exact)
 
 def x_plot(v):
-    return max(v, X_FLOOR_PLOT)
+    return max(v, X_PLOT_FLOOR)
 
 
-# (key, label, V/floor, y, marker, facecolor, edgecolor)
+# (key, pilot label, mechanism note, V/tolerance, y-bin, marker, fc, ec)
 points = [
     ("P1", "Node-perm.\\ equivariance",
-     0.0, Y_LOW, "o", "#2c7a2c", "#1c4d1c"),
+     "structurally exact ($V \\equiv 0$)",
+     node_perm_v_over_tol, Y_IN, "o", "#2c7a2c", "#1c4d1c"),
     ("P2", "Conservation (ref.-relative)",
-     cons_v_over_floor, Y_LOW, "D", "#2c7a2c", "#1c4d1c"),
+     f"ratio $= {cons_median:.3f}$, within tol.\\ budget",
+     cons_v_over_tol, Y_IN, "D", "#2c7a2c", "#1c4d1c"),
     ("P3", "Mirror-y on symmetric mesh",
-     sym_v_over_floor, Y_LOW, "*", "#b03030", "#600"),
-    ("P4", "Mirror-y OOD-stress",
-     my_v_over_floor, Y_OUT, "s", "#d68a1e", "#7a4d00"),
-    ("P5", "Conservation (absolute, deferred)",
-     cons_abs_x, Y_OUT, "o", "white", "#555"),
+     f"$V = {sym_v:.2f}$, $\\mathrm{{tol}} = 10^{{-6}}$",
+     sym_v_over_tol, Y_IN, "*", "#b03030", "#600"),
+    ("P4", "Mirror-y OOD-stress (downgraded)",
+     f"$V/\\mathrm{{floor}} = {my_v_over_eff_tol:.2f}$ (floor as eff.\\ tol.)",
+     my_v_over_eff_tol, Y_OUT, "s", "#d68a1e", "#7a4d00"),
 ]
+# P5 is "admissibility-failed", does NOT enter the verdict plane; rendered
+# as an off-plane callout to the right of the axes (see legend).
+p5_key = "P5"
+p5_label = "Conservation (absolute, deferred)"
+p5_note = "admissibility predicate fails: tol.\\ $\\leq$ operator floor"
 
-# point coordinate notes for legend
-point_notes = {
-    "P1": f"V/floor $\\approx 0$",
-    "P2": f"ratio $= {cons_median:.3f}$, V/floor $= {cons_v_over_floor:.3f}$",
-    "P3": f"V $= {sym_v:.2f}$, floor $= 10^{{-6}}$",
-    "P4": f"V/floor median $= {my_v_over_floor:.2f}$",
-    "P5": "operator-floor admissibility fails",
-}
-
-# ---- Plot ----
-fig = plt.figure(figsize=(8.6, 4.2))
-gs = fig.add_gridspec(1, 2, width_ratios=[1.0, 0.68], wspace=0.05)
+# ---------------------------------------------------------------------------
+fig = plt.figure(figsize=(9.4, 4.3))
+gs = fig.add_gridspec(1, 2, width_ratios=[1.0, 0.78], wspace=0.06)
 ax = fig.add_subplot(gs[0, 0])
 ax_leg = fig.add_subplot(gs[0, 1]); ax_leg.axis("off")
 
-x_lo, x_hi = X_FLOOR_PLOT, 1e7
+x_lo, x_hi = X_PLOT_FLOOR, 1e7
 
-# Region shading
+# Region shading. Pass / SUT-inconsistency split at V/tol = 1 in the In-domain
+# row. Boundary and Out-of-domain rows shade the entire x range (the verdict
+# is "OOD-stress / out-of-domain" regardless of x once D is high).
 pass_color = "#d8efd8"
 fail_color = "#f2cdcd"
 ood_color = "#fde4c4"
-numtol_color = "#e6e6f5"
 
-# y in [0,1] = Low; [1,2] = Borderline; [2,3] = Out
-# x split at V/floor = 1 (the "V dominates floor" line)
 ax.axhspan(0.0, 1.0, xmin=0.0, xmax=0.5, facecolor=pass_color, alpha=0.55, zorder=0)
 ax.axhspan(0.0, 1.0, xmin=0.5, xmax=1.0, facecolor=fail_color, alpha=0.55, zorder=0)
-ax.axhspan(2.0, 3.0, xmin=0.0, xmax=1.0, facecolor=ood_color, alpha=0.55, zorder=0)
-ax.axhspan(1.0, 2.0, xmin=0.0, xmax=1.0, facecolor=ood_color, alpha=0.28, zorder=0)
-# numerical-tolerance band overlay on pass strip where V < floor
-ax.axvspan(x_lo, 1.0, ymin=0.0, ymax=1.0 / 3, facecolor=numtol_color,
-           alpha=0.55, zorder=0)
+ax.axhspan(1.0, 2.0, xmin=0.0, xmax=1.0, facecolor=ood_color, alpha=0.30, zorder=0)
+ax.axhspan(2.0, 3.0, xmin=0.0, xmax=1.0, facecolor=ood_color, alpha=0.60, zorder=0)
 
-# Floor reference line
+# Vertical pass/fail border at V/tol = 1
 ax.axvline(1.0, color="#444", lw=0.9, ls="--", zorder=1.5)
-ax.text(1.0, 2.98, "V = floor", ha="center", va="top", fontsize=8,
-        color="#444", style="italic", zorder=3)
+ax.text(1.0, 2.97, r"$V = \mathrm{tolerance}$", ha="center", va="top",
+        fontsize=8.5, color="#444", style="italic", zorder=3,
+        bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
+                  edgecolor="none", alpha=0.85))
 
-# Plot points + P1..P5 chips (no overlapping textual labels in-axis)
-for (key, label, vf, y, mk, fc, ec) in points:
-    x = x_plot(vf)
-    ax.scatter([x], [y], s=(220 if mk == "*" else 130),
+# Data points + tiny bold key labels (white halo, never occludes shading)
+for (key, label, note, vt, y, mk, fc, ec) in points:
+    x = x_plot(vt)
+    ax.scatter([x], [y], s=(230 if mk == "*" else 140),
                marker=mk, facecolor=fc, edgecolor=ec, linewidth=1.4, zorder=4)
-    # small chip label next to the point with white halo so it never overlaps shading
-    ax.annotate(key, (x, y), xytext=(7, -10), textcoords="offset points",
-                fontsize=9, weight="bold", color=ec,
+    ax.annotate(key, (x, y), xytext=(8, -11), textcoords="offset points",
+                fontsize=9.5, weight="bold", color=ec,
                 bbox=dict(boxstyle="round,pad=0.15", facecolor="white",
                           edgecolor="none", alpha=0.85),
                 zorder=5)
+
+# Hint that P1 sits at V/tol = 0 (clipped to the plot floor for log display)
+ax.annotate("(P1 plotted at axis floor;\nactual $V/\\mathrm{tol} = 0$)",
+            (X_PLOT_FLOOR, Y_IN), xytext=(4, 18),
+            textcoords="offset points", fontsize=7.6, style="italic",
+            color="#1c4d1c", zorder=5,
+            bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
+                      edgecolor="#1c4d1c", lw=0.5, alpha=0.92))
 
 # Axes
 ax.set_xscale("log")
 ax.set_xlim(x_lo, x_hi)
 ax.set_ylim(0.0, 3.0)
-ax.set_xlabel(r"Relation-violation $V/\mathrm{floor}$ (log scale)", fontsize=10)
-ax.set_ylabel("Domain-violation level (qualitative)", fontsize=10)
-ax.set_yticks([Y_LOW, Y_BORDER, Y_OUT])
-ax.set_yticklabels(["Low", "Borderline", "Out"])
-ax.set_title("Two-dimensional verdict reading of the four cylinder-flow pilots",
+ax.set_xlabel(r"Relation-violation $V/\mathrm{tolerance}$ (log scale)",
+              fontsize=10)
+ax.set_ylabel("Domain-violation", fontsize=10)
+ax.set_yticks([Y_IN, Y_BORDER, Y_OUT])
+ax.set_yticklabels(["In-domain", "Boundary", "Out-of-domain"])
+ax.set_title("Two-dimensional verdict reading of the cylinder-flow pilots",
              fontsize=11)
 ax.grid(True, which="both", axis="x", alpha=0.25, linestyle=":", linewidth=0.5)
 
-# ---- Right-side legends (regions + pilots), so no labels live inside the axes
-# Region legend
+# ---------------------------------------------------------------------------
+# Right-hand legends
+# ---------------------------------------------------------------------------
 region_handles = [
     mpatches.Patch(facecolor=pass_color, edgecolor="#1f5d1f",
-                   label="pass  (low V, low D)"),
+                   label="pass  ($V < $ tol., In-domain)"),
     mpatches.Patch(facecolor=fail_color, edgecolor="#7a1d1d",
-                   label="SUT inconsistency  (high V, low D)"),
+                   label="SUT inconsistency  ($V \\geq$ tol., In-domain)"),
     mpatches.Patch(facecolor=ood_color, edgecolor="#7a4d00",
-                   label="OOD-stress / out-of-domain  (high D)"),
-    mpatches.Patch(facecolor=numtol_color, edgecolor="#444466",
-                   label="numerical-tolerance  (V $<$ floor)"),
+                   label="OOD-stress / out-of-domain  (Out / Boundary)"),
 ]
 leg_region = ax_leg.legend(handles=region_handles, loc="upper left",
                            bbox_to_anchor=(0.0, 1.00),
@@ -180,28 +194,33 @@ leg_region = ax_leg.legend(handles=region_handles, loc="upper left",
 leg_region._legend_box.align = "left"
 ax_leg.add_artist(leg_region)
 
-# Pilot legend (per-point key with measured coordinate)
 pilot_handles = []
-for (key, label, vf, y, mk, fc, ec) in points:
-    pilot_handles.append(Line2D([0], [0], marker=mk,
-                                color="none", markerfacecolor=fc,
-                                markeredgecolor=ec, markersize=10,
-                                markeredgewidth=1.4,
-                                label=f"{key}: {label}\n     {point_notes[key]}"))
+for (key, label, note, vt, y, mk, fc, ec) in points:
+    pilot_handles.append(Line2D([0], [0], marker=mk, color="none",
+                                markerfacecolor=fc, markeredgecolor=ec,
+                                markersize=10, markeredgewidth=1.4,
+                                label=f"{key}: {label}\n     {note}"))
+# P5 callout entry
+pilot_handles.append(Line2D([0], [0], marker="o", color="none",
+                            markerfacecolor="white", markeredgecolor="#555",
+                            markersize=10, markeredgewidth=1.4, linestyle=":",
+                            label=f"{p5_key}: {p5_label}\n     {p5_note}\n"
+                                  "     (off-plane: not admitted to verdict space)"))
+
 leg_pilot = ax_leg.legend(handles=pilot_handles, loc="lower left",
                           bbox_to_anchor=(0.0, 0.00),
                           title="Pilots (medians from real ledgers)",
                           title_fontsize=9.5, fontsize=8.6,
-                          labelspacing=0.9, handletextpad=0.6,
+                          labelspacing=1.0, handletextpad=0.6,
                           frameon=True, handlelength=1.6)
 leg_pilot._legend_box.align = "left"
 
-fig.tight_layout()
 OUT_PDF.parent.mkdir(parents=True, exist_ok=True)
 fig.savefig(OUT_PDF, bbox_inches="tight")
 fig.savefig(OUT_PNG, bbox_inches="tight", dpi=150)
 print(f"wrote {OUT_PDF}")
 print(f"wrote {OUT_PNG}")
-print("\nplotted coordinates:")
-for (key, label, vf, y, *_rest) in points:
-    print(f"  {key}  V/floor={vf:.3g}  y_bin={y}  {label}")
+print("\nplotted coordinates (V/tolerance, y_bin):")
+for (key, label, note, vt, y, *_rest) in points:
+    print(f"  {key}  V/tol={vt:.4g}  y={y}  {label}")
+print(f"  {p5_key}  (off-plane callout)  {p5_label}")
