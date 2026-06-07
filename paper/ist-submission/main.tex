@@ -23,12 +23,19 @@
 
 \title{A Domain-Validity-Gated Workflow for Metamorphic Relation Testing of Scientific Machine-Learning Surrogates}
 
-% Double-anonymized submission: author identity and affiliation are intentionally
-% withheld for review and will be added in the camera-ready version.
-\author[inst1]{Anonymous Author(s)}
-\affiliation[inst1]{
-  organization={Affiliation withheld for double-anonymized review},
-}
+\author[inst1,inst2,inst3]{Meng Li\corref{cor1}}
+\ead{mlemon@usc.edu.cn}
+\author[inst1,inst2,inst3]{Xiaohua Yang}
+\ead{xiaohua1963@foxmail.com}
+\author[inst1,inst2,inst3]{Jie Liu}
+\author[inst1,inst2,inst3]{Shiyu Yan}
+\cortext[cor1]{Corresponding author.}
+\affiliation[inst1]{organization={School of Computing, University of South China},
+  city={Hengyang}, country={China}}
+\affiliation[inst2]{organization={Hunan Engineering Research Center of Software Evaluation and Testing for Intellectual Equipment},
+  city={Hengyang}, country={China}}
+\affiliation[inst3]{organization={CNNC Key Laboratory on High Trusted Computing},
+  city={Hengyang}, country={China}}
 
 \begin{abstract}
 \textbf{Context:}
@@ -633,16 +640,19 @@ In that sense the workflow is aimed at producing, over many controlled transform
 This paper presents domain-validity-gated MR identification as an auditable oracle-free testing workflow for MeshGraphNets-family cylinder-flow surrogates. The current evidence supports the scoped within-SUT pilots of Section~\ref{subsec:within-sut-pilot} (node-permutation, mirror-y OOD-stress, conservation diagnostic, rollout-accuracy comparator, exact mirror-y on a symmetric admissible mesh, and seeded-fault detection over a 10-mutant catalogue), replicated across a K=6 multi-checkpoint roster of one MeshGraphNets architecture family on one dataset (Section~\ref{subsec:multicheckpoint-replication}) --- the verdicts reproduce with tight Wilson and bootstrap 95\% confidence intervals --- together with an empirical calibration of the P1 discrete-divergence operator floor that gates the admissibility predicate (slope 0.988, $R^2 = 1.000$; Section~\ref{subsec:operator-floor-sweep}), and a within-family fault-detection robustness study with severity sweeps that bound where the present MR set is structurally insensitive (Section~\ref{subsec:fault-robustness}). It does not support cross-architecture-family generalization, real-world or general fault-detection rates, baseline-superiority claims, reliability conclusions, accuracy conclusions, exact-mirror-y claims beyond the bounded results above, or absolute conservation claims. The central claim remains methodological: physically meaningful SciML MRs require explicit validity conditions, executable assets, raw evidence records, and relation-level verdicts; the K=6 replication and the operator-floor calibration are the present study's bounded evidence that the workflow's verdicts hold beyond a single checkpoint and that the admissibility-predicate gate it relies on has a measurable basis.
 
 \section*{CRediT authorship contribution statement}
-\textbf{Anonymous Author(s):} Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation, Writing -- original draft, Writing -- review \& editing, Visualization. (Author identities and per-role assignments will be supplied in the camera-ready version.)
+\textbf{Meng Li:} Conceptualization, Methodology, Software, Writing -- original draft. \textbf{Xiaohua Yang:} Supervision, Formal analysis, Writing -- review \& editing. \textbf{Jie Liu:} Investigation, Validation. \textbf{Shiyu Yan:} Data curation, Visualization.
 
 \section*{Declaration of competing interest}
-The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+The authors declare no conflict of interest.
 
 \section*{Declaration of generative AI and AI-assisted technologies in the writing process}
-During the preparation of this work the author(s) used generative AI assistants for code scaffolding, prose copy-editing, and reference cross-checking. After using these tools the author(s) reviewed and edited the content as needed and take full responsibility for the content of the publication. No generative AI was used to fabricate, alter, or invent experimental data, results, or citations; every numerical claim is backed by a tracked artifact under \texttt{research\_assets/runs/} and a claim-ledger entry.
+During the preparation of this work the authors used generative AI assistants for code scaffolding, prose copy-editing, and reference cross-checking. After using these tools the authors reviewed and edited the content as needed and take full responsibility for the content of the publication. No generative AI was used to fabricate, alter, or invent experimental data, results, or citations; every numerical claim is backed by a tracked artifact under \texttt{research\_assets/runs/} and a claim-ledger entry.
+
+\section*{Acknowledgments}
+This work was supported by the National Natural Science Foundation of China (NSFC) General Program (grant no.\ 12575176), the Hunan Provincial Education Department Project, China (grant no.\ 202502000728), the Research Project on Degree and Graduate Education Reform of the University of South China (grant no.\ 2023JG030), the Natural Science Foundation of Hunan Province, China (grant no.\ 2025JJ70193), and an industry-funded research project (grant no.\ 230KHX060001).
 
 \section*{Data availability}
-The manuscript's source, executable test assets (MR cards, runners, rubrics), claim ledger, and raw experiment outputs (checkpoints, per-run \texttt{.npy} arrays, metric ledgers) are available in the accompanying anonymized replication package. The trained MeshGraphNets cylinder-flow checkpoints derive from the public DeepMind cylinder-flow benchmark; no proprietary data was used.
+The manuscript source, executable test assets (MR cards, runners, rubrics), claim ledger, and raw experiment outputs (checkpoints, per-run \texttt{.npy} arrays, metric ledgers) are available in the accompanying replication package. The trained MeshGraphNets cylinder-flow checkpoints derive from the public DeepMind cylinder-flow benchmark; no proprietary data was used.
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{references}
