@@ -60,3 +60,11 @@ Decision rule:
 | `duqueTorres2023metaTrimmer` | VERIFIED_PREPRINT | arXiv:2307.15522 | Companion 2023-cluster paper automating domain-constraint derivation. |
 | `verdecchia2023threats` | VERIFIED | doi 10.1016/j.infsof.2023.107329 | Threats-to-validity standard (IST 164, 2023); cited in Section Threats to Validity as the classification reference. |
 | `ralph2021empirical` | VERIFIED | ACM SIGSOFT Empirical Standards | Reporting standard for SE empirical research; cited in Threats to Validity and the statistical plan. |
+
+## P2-5 additions (2026-06-07): reference-coverage gap-closure
+
+| Key | Status | DOI / arXiv | Why added |
+|---|---|---|---|
+| `chen2018mtSurvey` | VERIFIED | doi 10.1145/3143561 | Canonical MT review (ACM CSUR 51(1)); cited as the MT review of record in §2.2. |
+| `kanewala2016graphkernel` | VERIFIED | doi 10.1002/stvr.1594 | Closest prior on predictive MR identification with graph kernels over scientific source code; cited in §2.3 alongside Hiremath et al. and Mandrioli et al. |
+| `wang2021gradflow` | VERIFIED | doi 10.1137/20M1318043 | PINN training gradient-flow pathologies (SIAM J. Sci. Comput. 43(5)); cited in §2.4 alongside Krishnapriyan et al. to sharpen the case for relation-level validation independent of training stability. |
