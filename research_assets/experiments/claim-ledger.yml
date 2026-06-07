@@ -42,6 +42,7 @@ claims:
     status: "blocked"
     evidence:
       - "tools/run_llm_mr_baseline.py"
+      - "tools/rate_llm_mr_baseline.py"
       - "tools/score_llm_mr_baseline.py"
       - "tests/test_p2_llm_baseline.py"
     wording_allowed: >
@@ -50,12 +51,21 @@ claims:
       The rollout-accuracy diagnostic is no longer a commitment only: it has been executed
       (see C8-rollout-accuracy-baseline) and is reported as a same-SUT diagnostic
       comparator, not as a defeated competitor. For the LLM-generated-MR baseline the
-      execution pipeline is now committed and reproducible-by-protocol: tools/run_llm_mr_baseline.py
-      asks an LLM (default claude-opus-4-8 with gpt-5.5 fallback, via the bltcy
-      OpenAI-compatible gateway) for K=8 candidate MRs at temperature=0 and
+      execution pipeline is now committed and reproducible-by-protocol in three stages
+      with vendor-disjoint LLMs: tools/run_llm_mr_baseline.py asks one generator
+      (claude-opus-4-8 with gpt-5.5 fallback, via the bltcy OpenAI-compatible
+      gateway) for K=8 candidate MRs at temperature=0; tools/rate_llm_mr_baseline.py
+      then collects three INDEPENDENT validity votes per candidate from three
+      vendor-disjoint LLMs (glm-5.1, kimi-k2.6, deepseek-v4-flash - explicitly NOT
+      the generator's vendor, to avoid self-preference) on a 3-class label
+      {valid, borderline, invalid}, persisting the raw votes, Fleiss kappa,
+      raw pointwise agreement, item-unanimous rate, and a constant-rater screen
+      that excludes any rater that emits a single label across all candidates;
       tools/score_llm_mr_baseline.py grades each candidate against this paper's
-      four-condition admissibility predicate. The pipeline fails closed without LLM
-      credentials, so no candidates have been generated in this sandbox; the baseline
+      four-condition admissibility predicate AND merges the three-LLM majority
+      verdict, reporting the cross-tab (admitted-by-predicate and panel-valid).
+      Every stage fails closed without OPENAI_API_KEY + OPENAI_BASE_URL, so no
+      candidates or votes have been generated in this sandbox; the baseline
       stays blocked-pending-credentials, not blocked-without-method.
     wording_forbidden:
       - "The proposed protocol outperforms any baseline."

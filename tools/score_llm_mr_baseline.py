@@ -24,6 +24,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_IN = ROOT / "research_assets/runs/llm-mr-baseline/llm_candidates.json"
+DEFAULT_VOTES = ROOT / "research_assets/runs/llm-mr-baseline/llm_votes.json"
 DEFAULT_OUT = ROOT / "research_assets/runs/llm-mr-baseline/llm_baseline_report.json"
 
 PAPER_MRS = {
@@ -118,6 +119,7 @@ def grade_candidate(c: dict) -> dict:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--input", default=str(DEFAULT_IN))
+    p.add_argument("--votes", default=str(DEFAULT_VOTES))
     p.add_argument("--output", default=str(DEFAULT_OUT))
     args = p.parse_args(argv)
 
@@ -135,6 +137,30 @@ def main(argv: list[str] | None = None) -> int:
     per_mr_overlap = {label: sum(1 for g in graded if g["overlaps_paper_mr"][label])
                       for label in PAPER_MRS}
 
+    # Merge the three-LLM rater verdict if available; otherwise carry None.
+    votes_doc = None
+    vp = Path(args.votes)
+    if vp.exists():
+        votes_doc = json.loads(vp.read_text())
+        by_name = {v["name"]: v for v in votes_doc.get("per_candidate_votes", [])}
+        for g in graded:
+            v = by_name.get(g["name"])
+            if v:
+                g["rater_panel"] = {
+                    "majority": v.get("majority"),
+                    "per_rater": v.get("per_rater"),
+                }
+        # Cross-tab: admitted-by-predicate vs rater-majority "valid".
+        n_panel_valid = sum(
+            1 for g in graded
+            if g.get("rater_panel", {}).get("majority") == "valid")
+        n_both = sum(
+            1 for g in graded
+            if g["predicate_admitted"]
+            and g.get("rater_panel", {}).get("majority") == "valid")
+    else:
+        n_panel_valid = n_both = None
+
     report = {
         "record_type": "llm-mr-baseline-report",
         "schema_version": "0.1.0",
@@ -144,6 +170,14 @@ def main(argv: list[str] | None = None) -> int:
         "n_admitted_by_predicate": n_admit,
         "n_overlap_with_paper_mrs": n_overlap,
         "per_paper_mr_overlap_count": per_mr_overlap,
+        "rater_panel_present": votes_doc is not None,
+        "rater_panel_fleiss_kappa": (votes_doc or {}).get("fleiss_kappa"),
+        "rater_panel_pra": (votes_doc or {}).get("raw_pointwise_agreement"),
+        "rater_panel_item_unanimous_rate": (votes_doc or {}).get("item_unanimous_rate"),
+        "rater_panel_constant_raters": (votes_doc or {}).get(
+            "constant_raters_excluded_from_kappa"),
+        "n_panel_majority_valid": n_panel_valid,
+        "n_admitted_by_predicate_and_panel_valid": n_both,
         "per_candidate": graded,
         "predicate_definition": (
             "physical/software basis ^ transformation preconditions ^ boundary + "
