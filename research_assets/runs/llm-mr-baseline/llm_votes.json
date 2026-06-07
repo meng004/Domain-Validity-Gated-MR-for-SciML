@@ -1,0 +1,185 @@
+{
+  "record_type": "llm-mr-baseline-votes",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-07T13:27:34Z",
+  "candidates_input": "research_assets/runs/llm-mr-baseline/llm_candidates.json",
+  "generator_model": "gpt-5.5",
+  "raters_requested": [
+    "glm-5.1",
+    "kimi-k2.6",
+    "deepseek-v4-flash"
+  ],
+  "raters_surviving": [
+    "glm-5.1",
+    "kimi-k2.6",
+    "deepseek-v4-flash"
+  ],
+  "rater_failures": [],
+  "constant_raters_excluded_from_kappa": [],
+  "raters_kappa_pool": [
+    "glm-5.1",
+    "kimi-k2.6",
+    "deepseek-v4-flash"
+  ],
+  "fleiss_kappa": 0.07692307692307666,
+  "raw_pointwise_agreement": 0.7916666666666666,
+  "item_unanimous_rate": 0.75,
+  "n_candidates": 8,
+  "label_space": [
+    "valid",
+    "borderline",
+    "invalid"
+  ],
+  "per_candidate_votes": [
+    {
+      "name": "node_relabel_equivariance",
+      "per_rater": {
+        "glm-5.1": {
+          "vote": "valid",
+          "justification": "Permutation equivariance is a fundamental software contract for message-passing GNNs, and the tolerance properly bounds floating-point summation order changes."
+        },
+        "kimi-k2.6": {
+          "vote": "valid",
+          "justification": "Permutation equivariance is a defining software contract of message-passing GNNs; tolerance explicitly bounds roundoff from message aggregation."
+        },
+        "deepseek-v4-flash": {
+          "vote": "valid",
+          "justification": "Permutation of node ordering should commute with GNN computation as aggregation is permutation-invariant; tolerance covers roundoff."
+        }
+      },
+      "majority": "valid"
+    },
+    {
+      "name": "edge_order_invariance",
+      "per_rater": {
+        "glm-5.1": {
+          "vote": "valid",
+          "justification": "Commutative aggregation makes edge order a software contract; the tolerance correctly bounds floating-point nondeterminism in message summation."
+        },
+        "kimi-k2.6": {
+          "vote": "valid",
+          "justification": "Edge-list shuffling does not change the mathematical graph; tolerance correctly covers order-dependent floating-point summation noise."
+        },
+        "deepseek-v4-flash": {
+          "vote": "valid",
+          "justification": "Reordering edge list does not affect commutative message aggregation; tolerance covers summation order changes."
+        }
+      },
+      "majority": "valid"
+    },
+    {
+      "name": "batch_context_invariance",
+      "per_rater": {
+        "glm-5.1": {
+          "vote": "valid",
+          "justification": "Independent trajectories shouldn't interact via batching; the tolerance accounts for hardware nondeterminism while excluding batch-dependent normalization."
+        },
+        "kimi-k2.6": {
+          "vote": "valid",
+          "justification": "Independent graph processing within a batch is a standard GNN contract; tolerance appropriately isolates hardware and batching nondeterminism."
+        },
+        "deepseek-v4-flash": {
+          "vote": "valid",
+          "justification": "In inference mode without batch statistics, batched and single evaluations should yield identical predictions for the same graph."
+        }
+      },
+      "majority": "valid"
+    },
+    {
+      "name": "deterministic_replay",
+      "per_rater": {
+        "glm-5.1": {
+          "vote": "valid",
+          "justification": "Identical inputs must yield identical outputs up to a well-defined platform nondeterminism floor, making this a valid software contract."
+        },
+        "kimi-k2.6": {
+          "vote": "valid",
+          "justification": "Identical inputs with fixed weights must yield identical outputs; tolerance is grounded in empirical repeatability and unit roundoff."
+        },
+        "deepseek-v4-flash": {
+          "vote": "valid",
+          "justification": "Repeated evaluation with fixed settings must produce the same output up to hardware nondeterminism floor."
+        }
+      },
+      "majority": "valid"
+    },
+    {
+      "name": "centerline_reflection_equivariance",
+      "per_rater": {
+        "glm-5.1": {
+          "vote": "invalid",
+          "justification": "Reflecting only velocities onto an unstructured asymmetric mesh ignores asymmetric mesh features, breaking the expected equivariance relation."
+        },
+        "kimi-k2.6": {
+          "vote": "valid",
+          "justification": "Reflection symmetry is physically exact for this symmetric geometry; tolerance accounts for interpolation and inference roundoff."
+        },
+        "deepseek-v4-flash": {
+          "vote": "borderline",
+          "justification": "Relation holds only if mesh is symmetric or interpolation error is tightly bounded; requires careful precondition on mesh."
+        }
+      },
+      "majority": "borderline"
+    },
+    {
+      "name": "dirichlet_boundary_preservation",
+      "per_rater": {
+        "glm-5.1": {
+          "vote": "valid",
+          "justification": "Perturbing interior nodes should leave Dirichlet outputs unchanged, testing BC adherence with a well-reasoned tolerance for weakly imposed boundaries."
+        },
+        "kimi-k2.6": {
+          "vote": "valid",
+          "justification": "Dirichlet nodes are physically independent of interior perturbations; tolerance distinguishes exact clamping from weak enforcement residuals."
+        },
+        "deepseek-v4-flash": {
+          "vote": "valid",
+          "justification": "Dirichlet boundary velocities are fixed functions of time, so interior perturbations must not affect them; tolerance covers model BC error."
+        }
+      },
+      "majority": "valid"
+    },
+    {
+      "name": "global_flux_balance",
+      "per_rater": {
+        "glm-5.1": {
+          "vote": "valid",
+          "justification": "Global incompressibility is a fundamental conservation law, and the tolerance properly accounts for boundary quadrature error and prediction noise."
+        },
+        "kimi-k2.6": {
+          "vote": "valid",
+          "justification": "Global mass conservation is a first-principle constraint of incompressible flow; tolerance includes quadrature error and prediction noise floors."
+        },
+        "deepseek-v4-flash": {
+          "vote": "valid",
+          "justification": "Global boundary flux must be near zero for incompressible flow; tolerance accounts for quadrature and prediction error."
+        }
+      },
+      "majority": "valid"
+    },
+    {
+      "name": "small_perturbation_one_step_stability",
+      "per_rater": {
+        "glm-5.1": {
+          "vote": "valid",
+          "justification": "One-step continuity of the solution operator is a defensible physical basis, and the tolerance rationale correctly estimates the local Lipschitz constant."
+        },
+        "kimi-k2.6": {
+          "vote": "borderline",
+          "justification": "Continuity of the NS operator supports bounded response, but calibrating L_local from the surrogate or nearby data risks circularity and loose bounds."
+        },
+        "deepseek-v4-flash": {
+          "vote": "valid",
+          "justification": "Output change under small admissible perturbation should be bounded by local Lipschitz constant plus numerical floor."
+        }
+      },
+      "majority": "valid"
+    }
+  ],
+  "majority_summary": {
+    "valid": 7,
+    "borderline": 1,
+    "invalid": 0
+  },
+  "honesty_boundary": "Three single-call temperature=0 votes by three vendor-diverse LLMs (not the generator's vendor) on this paper's specific cylinder-flow candidates. Small-sample (n_candidates around 8, R=3) Fleiss kappa is known to suffer paradox under near-unanimity; we therefore also report raw pointwise agreement and item-unanimous rate, and flag constant raters explicitly. Not a general LLM-MR-rating benchmark."
+}

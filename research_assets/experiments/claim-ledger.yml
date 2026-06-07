@@ -39,12 +39,16 @@ claims:
     blocked_reason: null
 
   - claim_id: "C3-baseline-comparison"
-    status: "blocked"
+    status: "partially-observed"
+    scope: "LLM-MR baseline: one generator (gpt-5.5 via bltcy), eight candidates at temperature=0, three vendor-disjoint raters (glm-5.1, kimi-k2.6, deepseek-v4-flash); expert-MR and generic-MR-generation baselines remain blocked at artifacts."
     evidence:
       - "tools/run_llm_mr_baseline.py"
       - "tools/rate_llm_mr_baseline.py"
       - "tools/score_llm_mr_baseline.py"
       - "tests/test_p2_llm_baseline.py"
+      - "research_assets/runs/llm-mr-baseline/llm_candidates.json"
+      - "research_assets/runs/llm-mr-baseline/llm_votes.json"
+      - "research_assets/runs/llm-mr-baseline/llm_baseline_report.json"
     wording_allowed: >
       The comparative baselines remain protocol commitments: Manual expert MR design,
       Generic automatic MR generation scope contrast, and LLM-generated candidate MRs.
@@ -63,14 +67,27 @@ claims:
       that excludes any rater that emits a single label across all candidates;
       tools/score_llm_mr_baseline.py grades each candidate against this paper's
       four-condition admissibility predicate AND merges the three-LLM majority
-      verdict, reporting the cross-tab (admitted-by-predicate and panel-valid).
-      Every stage fails closed without OPENAI_API_KEY + OPENAI_BASE_URL, so no
-      candidates or votes have been generated in this sandbox; the baseline
-      stays blocked-pending-credentials, not blocked-without-method.
+      verdict, reporting the cross-tab (admitted-by-predicate AND panel-valid).
+      One execution has been recorded: generator gpt-5.5 (opus-4-8 was
+      rate-limited and skipped) at max_tokens=12000 produced 8 candidates; the
+      three vendor-disjoint raters all voted, with no constant rater detected.
+      Results: 8/8 candidates satisfied the four-condition admissibility predicate
+      on their self-declared fields, 7/8 reached panel-majority "valid", and 6/8
+      overlap thematically with one of this paper's three MRs (2 node-permutation,
+      1 mirror-y, 4 conservation; one centerline-reflection candidate split the
+      panel valid/borderline/invalid for the same non-bijectivity reason this paper
+      downgrades mirror-y to OOD-stress). Inter-rater raw-PRA 0.79 and
+      item-unanimous 0.75; Fleiss kappa 0.077 (the small-sample paradox under
+      near-unanimity, documented in the sibling Minimum-MR-SubSet rubric).
+      This is one generator call, eight candidates, three raters - a bounded
+      result, not a generative-model benchmark and not a method-vs-LLM
+      superiority claim.
     wording_forbidden:
       - "The proposed protocol outperforms any baseline."
-      - "Expert-MR, generic-MR, or LLM baseline comparison results are available."
-    blocked_reason: "Sandbox lacks OPENAI_API_KEY + OPENAI_BASE_URL; the LLM-baseline pipeline (run_llm_mr_baseline.py + score_llm_mr_baseline.py) fails closed by design until credentials are provided. Expert-MR and generic-MR baselines remain protocol commitments without committed pipelines."
+      - "Expert-MR or generic-MR comparison results are available."
+      - "An LLM-vs-method superiority or general LLM-MR-generation quality claim."
+      - "A generative-model benchmark or LLM-quality ranking."
+    blocked_reason: "Expert-MR and generic-MR-generation baselines remain protocol commitments without committed pipelines. The LLM-MR baseline has produced one bounded execution; cross-LLM, multi-sample, or larger-K generalizations are not in scope."
 
   - claim_id: "C4-rubric-decision-coverage"
     status: "qualified"

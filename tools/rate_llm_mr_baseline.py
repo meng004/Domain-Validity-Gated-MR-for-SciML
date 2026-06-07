@@ -56,6 +56,7 @@ import argparse
 import json
 import math
 import os
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -72,6 +73,11 @@ RATERS = [
     os.environ.get("LLM_RATER_3", "deepseek-v4-flash"),
 ]
 LABELS = ["valid", "borderline", "invalid"]
+# Match the generator's escalating token ladder so reasoning raters (kimi-k2.6,
+# glm-5.1) get a second shot with more headroom when the first attempt burns the
+# whole budget on hidden reasoning_tokens.
+TOKEN_LADDER = tuple(int(x) for x in
+                     os.environ.get("LLM_TOKEN_LADDER", "12000,24000").split(","))
 
 VOTE_PROMPT_TEMPLATE = """You are validating proposed metamorphic relations (MRs) for testing a learned
 neural-network surrogate. The system under test is a MeshGraphNets-family
@@ -119,12 +125,12 @@ def fail_closed(msg: str, code: int = 2) -> int:
 
 
 def _post_chat(api_key: str, base_url: str, model: str, prompt: str,
-               timeout: int = 180) -> dict:
+               max_tokens: int, timeout: int = 360) -> dict:
     url = base_url.rstrip("/") + "/chat/completions"
     body = json.dumps({
         "model": model,
         "temperature": 0,
-        "max_tokens": 4096,
+        "max_tokens": max_tokens,
         "messages": [
             {"role": "system",
              "content": "You output JSON only. No prose, no markdown fences."},
@@ -140,16 +146,33 @@ def _post_chat(api_key: str, base_url: str, model: str, prompt: str,
 
 
 def _extract_json(raw: dict) -> dict:
+    """Tolerant JSON extraction; matches the generator's parser."""
     try:
-        content = raw["choices"][0]["message"]["content"]
+        content = raw["choices"][0]["message"]["content"] or ""
     except (KeyError, IndexError) as e:
-        raise RuntimeError(f"unparseable chat response: {e}") from e
-    content = content.strip()
-    if content.startswith("```"):
-        content = content.strip("`")
-        if content.startswith("json"):
-            content = content[4:].strip()
-    return json.loads(content)
+        raise RuntimeError(f"unparseable chat response shape: {e}") from e
+    finish = raw.get("choices", [{}])[0].get("finish_reason")
+    s = re.sub(r"<thinking>.*?</thinking>", "", content, flags=re.S).strip()
+    if not s:
+        raise RuntimeError(
+            f"empty content (finish_reason={finish!r}); reasoning tokens may "
+            "have consumed the budget")
+    fenced = re.search(r"```(?:json)?\s*(.*?)```", s, flags=re.S)
+    if fenced:
+        s = fenced.group(1).strip()
+    o_start, o_end = s.find("{"), s.rfind("}")
+    a_start, a_end = s.find("["), s.rfind("]")
+    if o_start >= 0 and o_end > o_start:
+        try:
+            return json.loads(s[o_start:o_end + 1])
+        except json.JSONDecodeError:
+            pass
+    if a_start >= 0 and a_end > a_start:
+        try:
+            return {"votes": json.loads(s[a_start:a_end + 1])}
+        except json.JSONDecodeError as e:
+            raise RuntimeError(f"unparseable extracted region: {e}") from e
+    raise RuntimeError(f"no JSON found in content[:200]={s[:200]!r}")
 
 
 def fleiss_kappa(votes: list[dict], raters: list[str]) -> float | None:
@@ -252,22 +275,33 @@ def main(argv: list[str] | None = None) -> int:
     rater_results: dict[str, dict] = {}
     rater_failures: list[dict] = []
     for model in RATERS:
-        try:
-            print(f"== rating with {model} ==", flush=True)
-            raw = _post_chat(api_key, base_url, model, prompt)
-            parsed = _extract_json(raw)
-            rv = parsed.get("votes")
-            if not isinstance(rv, list) or len(rv) != len(candidates):
-                raise RuntimeError(
-                    f"expected {len(candidates)} votes, got "
-                    f"{len(rv) if isinstance(rv, list) else type(rv).__name__}")
-            by_name = {v["name"]: v for v in rv if isinstance(v, dict) and "name" in v}
-            rater_results[model] = {"raw_response_for_audit": raw,
-                                     "by_name": by_name}
-        except (urllib.error.URLError, RuntimeError, json.JSONDecodeError) as e:
-            rater_failures.append({"model": model, "error": str(e)[:400]})
-            print(f"!! {model} failed: {type(e).__name__}: {str(e)[:200]}",
-                  flush=True)
+        success = False
+        for max_tokens in TOKEN_LADDER:
+            try:
+                print(f"== rating with {model} (max_tokens={max_tokens}) ==",
+                      flush=True)
+                raw = _post_chat(api_key, base_url, model, prompt,
+                                 max_tokens=max_tokens)
+                parsed = _extract_json(raw)
+                rv = parsed.get("votes")
+                if not isinstance(rv, list) or len(rv) != len(candidates):
+                    raise RuntimeError(
+                        f"expected {len(candidates)} votes, got "
+                        f"{len(rv) if isinstance(rv, list) else type(rv).__name__}")
+                by_name = {v["name"]: v for v in rv
+                           if isinstance(v, dict) and "name" in v}
+                rater_results[model] = {"raw_response_for_audit": raw,
+                                         "by_name": by_name,
+                                         "max_tokens_used": max_tokens}
+                success = True
+                break
+            except (urllib.error.URLError, RuntimeError, json.JSONDecodeError) as e:
+                rater_failures.append({"model": model, "max_tokens": max_tokens,
+                                       "error": str(e)[:400]})
+                print(f"!! {model} mt={max_tokens} failed: "
+                      f"{type(e).__name__}: {str(e)[:200]}", flush=True)
+        if not success:
+            print(f"!! {model}: all ladder attempts failed", flush=True)
 
     surviving = list(rater_results.keys())
     if len(surviving) < 2:

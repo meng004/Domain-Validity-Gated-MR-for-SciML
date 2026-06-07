@@ -685,19 +685,58 @@ The R3 partial-fraction sweep on PC_zero_vy is plotted alongside in Figure 5.6
 fractions {0.25, 0.5, 0.75}, dropping to 0/6 at fraction 1.0 — the non-monotone
 detection–severity curve described above.
 
+### 5.6.4 LLM-generated MR baseline (one-shot, vendor-disjoint panel)
+
+To bound what an LLM-only baseline contributes against the same SUT, we executed a
+three-stage vendor-disjoint pipeline (committed at
+`research_assets/runs/llm-mr-baseline/`). A single generator (gpt-5.5 via the bltcy
+OpenAI-compatible gateway, opus-4-8 rate-limited; temperature=0; prompt sha256
+recorded) was asked to propose K=8 candidate MRs for this surrogate from first
+principles. Each candidate was then voted on independently by three vendor-disjoint
+LLMs that are NOT the generator's vendor (`glm-5.1`, `kimi-k2.6`, `deepseek-v4-flash`;
+ZhipuAI, Moonshot, DeepSeek) on a 3-class label {valid, borderline, invalid}; raw
+per-rater responses are persisted for audit. We report this paper's predicate
+verdict and the panel majority side by side.
+
+Of 8 candidates, all 8 satisfied this paper's four-condition admissibility predicate
+on their self-declared fields and 7/8 reached a panel majority of "valid". Six
+overlap thematically with the three MRs this paper identifies: two with
+node-permutation equivariance (one of them an edge-order-invariance variant), one
+with mirror-y reflection, and four with the discrete-divergence-free conservation
+relation. The two LLM-only proposals are an implementation-contract pair
+(`batch_context_invariance`, `deterministic_replay`) — useful as software contracts
+but with no physical basis. The most informative single result is
+`centerline_reflection_equivariance`: it overlaps with this paper's mirror-y MR, was
+admitted by the predicate, and split the panel
+({valid, borderline, invalid}); the dissenting rater objected that the reflection
+across the channel centerline is not bijective on the asymmetric eval mesh, exactly
+the reason this paper downgrades that relation to an OOD-stress probe rather than an
+exact equivariance. Inter-rater agreement is raw-PRA 0.79 / item-unanimous 0.75 over
+the 3 vendor-disjoint raters; Fleiss kappa is 0.077 — the standard small-sample
+paradox when near-unanimous votes are split across three labels.
+
+This is one generator call, one temperature-0 sample, eight candidates, three
+vendor-disjoint raters. It is not a generative-model benchmark, not a sufficient
+sample for an LLM-vs-method comparison, and not a "method outperforms LLM" claim.
+The defensible reading is narrow: against this SUT, an LLM panel proposes mostly
+the same MR families this paper identifies, agrees with the predicate on what is
+admissible, and ratifies the paper's downgrade of the cylinder-flow mirror-y MR
+through independent reasoning. The expert-MR and generic-MR-generation baselines
+remain blocked at the artifact level.
+
 ### 5.7 Still blocked
 
 The following remain blocked and must not be written as results: cross-SUT or
 geometry-independent pass/fail rates; comparative superiority over any baseline;
 general or real-world fault-detection rates; localization accuracy as a validated
 model; runtime or performance claims; and any claim that one SUT is more reliable than
-another. The three METBENCH-planned SUTs, and the expert-MR, generic-MR-generation, and
-LLM-candidate baselines, stay blocked pending their artifacts. Two exceptions are now
-executed on the existing SUT and reported as scoped diagnostics, not as defeated
-competitors or general rates: the rollout-accuracy comparator (Section 5.3), and a
-bounded seeded-fault detection result over one 10-mutant injected-fault catalogue
-(Section 5.3), whose by-class localization is suggestive evidence for, not a validation
-of, the interpretation protocol.
+another. The three METBENCH-planned SUTs, and the expert-MR and generic-MR-generation baselines,
+stay blocked pending their artifacts. Three exceptions are now executed on the existing
+SUT and reported as scoped diagnostics, not as defeated competitors or general rates:
+the rollout-accuracy comparator (Section 5.3); a bounded seeded-fault detection result
+over one 10-mutant injected-fault catalogue (Section 5.3), whose by-class localization
+is suggestive evidence for, not a validation of, the interpretation protocol; and the
+one-shot, vendor-disjoint LLM-MR baseline of Section 5.6.4.
 
 ## 6. Discussion
 

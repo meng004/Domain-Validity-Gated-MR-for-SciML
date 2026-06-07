@@ -46,6 +46,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -57,6 +58,15 @@ OUTDIR = ROOT / "research_assets" / "runs" / "llm-mr-baseline"
 
 PRIMARY = os.environ.get("LLM_PRIMARY_MODEL", "claude-opus-4-8")
 FALLBACK = os.environ.get("LLM_FALLBACK_MODEL", "gpt-5.5")
+SECOND_FALLBACK = os.environ.get("LLM_SECOND_FALLBACK_MODEL", "deepseek-v4-flash")
+# Reasoning models on bltcy (gpt-5.5, opus, glm-5.1) can spend the entire
+# max_tokens budget on hidden reasoning_tokens and emit empty content
+# (`finish_reason: "length"`). Mirror the sibling Minimum-MR-SubSet's escalating
+# token ladder so the runner retries the same model with a bigger budget before
+# falling over to the next vendor. (Source: scripts/llm/multi_llm_pipeline.py
+# _MR_GEN_TOKEN_LADDER and _generate_mr_chunk.)
+TOKEN_LADDER = tuple(int(x) for x in
+                     os.environ.get("LLM_TOKEN_LADDER", "12000,24000").split(","))
 
 # Committed verbatim so the prompt is part of the audit trail.
 MR_PROPOSAL_PROMPT = """You are proposing metamorphic relations (MRs) for testing a learned
@@ -108,12 +118,12 @@ def fail_closed(msg: str) -> int:
 
 
 def _post_chat(api_key: str, base_url: str, model: str, prompt: str,
-               timeout: int = 180) -> dict:
+               max_tokens: int, timeout: int = 360) -> dict:
     url = base_url.rstrip("/") + "/chat/completions"
     body = json.dumps({
         "model": model,
         "temperature": 0,
-        "max_tokens": 4096,
+        "max_tokens": max_tokens,
         "messages": [
             {"role": "system",
              "content": "You output JSON only. No prose, no markdown fences."},
@@ -129,16 +139,45 @@ def _post_chat(api_key: str, base_url: str, model: str, prompt: str,
 
 
 def _extract_json(raw: dict) -> dict:
+    """Tolerant JSON extraction for reasoning-model gateway responses.
+
+    Mirrors scripts/llm/multi_llm_pipeline.py::_extract_json_array from the
+    sibling Minimum-MR-SubSet project: strip <thinking>, strip code fences,
+    then locate the outer JSON object by brace-matching before json.loads. If
+    the model emitted the candidates array directly without the outer object,
+    accept that shape too.
+    """
     try:
-        content = raw["choices"][0]["message"]["content"]
+        content = raw["choices"][0]["message"]["content"] or ""
     except (KeyError, IndexError) as e:
-        raise RuntimeError(f"unparseable chat response: {e}") from e
-    content = content.strip()
-    if content.startswith("```"):
-        content = content.strip("`")
-        if content.startswith("json"):
-            content = content[4:].strip()
-    return json.loads(content)
+        raise RuntimeError(f"unparseable chat response shape: {e}") from e
+    finish = raw.get("choices", [{}])[0].get("finish_reason")
+    s = re.sub(r"<thinking>.*?</thinking>", "", content, flags=re.S).strip()
+    if not s:
+        raise RuntimeError(
+            f"empty content (finish_reason={finish!r}); reasoning tokens may have "
+            "consumed the budget")
+    fenced = re.search(r"```(?:json)?\s*(.*?)```", s, flags=re.S)
+    if fenced:
+        s = fenced.group(1).strip()
+    # Prefer the outermost JSON object.
+    o_start, o_end = s.find("{"), s.rfind("}")
+    a_start, a_end = s.find("["), s.rfind("]")
+    obj = None
+    if o_start >= 0 and o_end > o_start:
+        try:
+            obj = json.loads(s[o_start:o_end + 1])
+        except json.JSONDecodeError:
+            obj = None
+    if obj is None and a_start >= 0 and a_end > a_start:
+        try:
+            arr = json.loads(s[a_start:a_end + 1])
+            obj = {"candidates": arr}
+        except json.JSONDecodeError as e:
+            raise RuntimeError(f"unparseable extracted region: {e}") from e
+    if obj is None:
+        raise RuntimeError(f"no JSON object or array found in content[:200]={s[:200]!r}")
+    return obj
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -159,24 +198,32 @@ def main(argv: list[str] | None = None) -> int:
     candidates = None
     raw_for_audit = None
     used_model = None
-    for model in [PRIMARY, FALLBACK]:
-        try:
-            print(f"== calling {model} via {base_url} ==", flush=True)
-            raw = _post_chat(api_key, base_url, model, MR_PROPOSAL_PROMPT)
-            parsed = _extract_json(raw)
-            cs = parsed.get("candidates")
-            if not isinstance(cs, list) or len(cs) != 8:
-                raise RuntimeError(
-                    f"expected 8 candidates, got "
-                    f"{len(cs) if isinstance(cs, list) else type(cs).__name__}")
-            candidates = cs
-            raw_for_audit = raw
-            used_model = model
+    used_max_tokens = None
+    for model in [PRIMARY, FALLBACK, SECOND_FALLBACK]:
+        for max_tokens in TOKEN_LADDER:
+            try:
+                print(f"== calling {model} via {base_url} (max_tokens={max_tokens}) ==",
+                      flush=True)
+                raw = _post_chat(api_key, base_url, model, MR_PROPOSAL_PROMPT,
+                                 max_tokens=max_tokens)
+                parsed = _extract_json(raw)
+                cs = parsed.get("candidates")
+                if not isinstance(cs, list) or len(cs) != 8:
+                    raise RuntimeError(
+                        f"expected 8 candidates, got "
+                        f"{len(cs) if isinstance(cs, list) else type(cs).__name__}")
+                candidates = cs
+                raw_for_audit = raw
+                used_model = model
+                used_max_tokens = max_tokens
+                break
+            except (urllib.error.URLError, RuntimeError, json.JSONDecodeError) as e:
+                log.append({"model": model, "max_tokens": max_tokens,
+                            "error": str(e)[:400]})
+                print(f"!! {model} mt={max_tokens} failed: "
+                      f"{type(e).__name__}: {str(e)[:200]}", flush=True)
+        if candidates is not None:
             break
-        except (urllib.error.URLError, RuntimeError, json.JSONDecodeError) as e:
-            log.append({"model": model, "error": str(e)[:400]})
-            print(f"!! {model} failed: {type(e).__name__}: {str(e)[:200]}",
-                  flush=True)
 
     if candidates is None:
         (outdir / "llm_call_failures.json").write_text(
@@ -195,6 +242,9 @@ def main(argv: list[str] | None = None) -> int:
         "model_used": used_model,
         "primary_model": PRIMARY,
         "fallback_model": FALLBACK,
+        "second_fallback_model": SECOND_FALLBACK,
+        "max_tokens_ladder": list(TOKEN_LADDER),
+        "max_tokens_used": used_max_tokens,
         "temperature": 0,
         "prompt_sha256": prompt_sha,
         "prompt": MR_PROPOSAL_PROMPT,
