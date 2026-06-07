@@ -44,6 +44,12 @@ between accuracy, residual, UQ, equivariance error, and MRs is left implicit.
    space* via controlled physical transformations and reports which relation breaks,
    indexed by that transformation. The current evidence is one bounded within-SUT point
    on such a map, not a completed map.
+4. **Severity sweeps expose symmetry blind regions.** A seeded fault can be invisible to
+   an MR precisely because the most severe instance shares the very invariance the MR
+   exploits: zeroing the transverse velocity entirely is itself mirror-y-symmetric, so the
+   canonical fault is detected on 0/6 checkpoints while partial (asymmetric) zeroing is
+   detected on 6/6. Detection vs. severity is therefore non-monotone, and a single-severity
+   experiment hides this; the validity-gated workflow makes the blind region explicit.
 
 ## Evidence boundary (read before citing any number)
 

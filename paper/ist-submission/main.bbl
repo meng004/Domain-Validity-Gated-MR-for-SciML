@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{27}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -205,6 +205,14 @@
 \newblock \bibinfo{journal}{Journal of Computational Physics}
   \bibinfo{volume}{378}, \bibinfo{pages}{686--707}.
 \newblock \DOIprefix\doi{10.1016/j.jcp.2018.10.045}.
+%Type = Misc
+\bibitem[{Ralph et~al.(2021)}]{ralph2021empirical}
+\bibinfo{author}{Ralph, P.}, et~al., \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Empirical standards for software engineering
+  research}.
+\newblock \bibinfo{howpublished}{ACM SIGSOFT}.
+\newblock
+  \bibinfo{note}{\url{https://github.com/acmsigsoft/EmpiricalStandards}}.
 %Type = Inproceedings
 \bibitem[{Raunak et~al.(2021)Raunak, Olsen, Simko and
   Kuhn}]{raunak2021continuum}
@@ -242,6 +250,17 @@
 \newblock \bibinfo{journal}{IEEE Transactions on Software Engineering}
   \bibinfo{volume}{42}, \bibinfo{pages}{805--824}.
 \newblock \DOIprefix\doi{10.1109/TSE.2016.2532875}.
+%Type = Article
+\bibitem[{Verdecchia et~al.(2023)Verdecchia, Engstr{\"o}m, Lago, Runeson and
+  Song}]{verdecchia2023threats}
+\bibinfo{author}{Verdecchia, R.}, \bibinfo{author}{Engstr{\"o}m, E.},
+  \bibinfo{author}{Lago, P.}, \bibinfo{author}{Runeson, P.},
+  \bibinfo{author}{Song, Q.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Threats to validity in software engineering research:
+  A critical reflection}.
+\newblock \bibinfo{journal}{Information and Software Technology}
+  \bibinfo{volume}{164}, \bibinfo{pages}{107329}.
+\newblock \DOIprefix\doi{10.1016/j.infsof.2023.107329}.
 %Type = Article
 \bibitem[{Wang et~al.(2025)Wang, Hakimzadeh, Ruan and
   Goswami}]{wang2025deeponetfe}

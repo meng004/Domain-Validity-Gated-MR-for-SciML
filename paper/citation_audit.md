@@ -58,3 +58,5 @@ Decision rule:
 | `duqueTorres2023bugornot` | VERIFIED | doi 10.1109/SANER56733.2023.00080 | Part of the 2023 cluster on bug-vs-inapplicability; closest prior on Contribution 2 (2D verdict). |
 | `duqueTorres2023completePipeline` | VERIFIED_PREPRINT | arXiv:2310.00338 | Companion 2023-cluster paper introducing MR constraints as a pipeline stage. |
 | `duqueTorres2023metaTrimmer` | VERIFIED_PREPRINT | arXiv:2307.15522 | Companion 2023-cluster paper automating domain-constraint derivation. |
+| `verdecchia2023threats` | VERIFIED | doi 10.1016/j.infsof.2023.107329 | Threats-to-validity standard (IST 164, 2023); cited in Section Threats to Validity as the classification reference. |
+| `ralph2021empirical` | VERIFIED | ACM SIGSOFT Empirical Standards | Reporting standard for SE empirical research; cited in Threats to Validity and the statistical plan. |
