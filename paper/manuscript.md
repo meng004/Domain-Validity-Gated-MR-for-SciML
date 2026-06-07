@@ -750,6 +750,23 @@ admissible, and ratifies the paper's downgrade of the cylinder-flow mirror-y MR
 through independent reasoning. The expert-MR and generic-MR-generation baselines
 remain blocked at the artifact level.
 
+### 5.6.5 Cross-family PINN extension (one bounded point)
+
+To check whether the workflow is MeshGraphNets-specific, a 5×50 MLP PINN was trained on
+2D viscous Burgers (ν=0.05, (x,y)∈[-1,1]², t∈[0,0.5], IC u_x=exp(-5(x²+y²)) and u_y=0
+symmetric under y→-y, Dirichlet zero BC) by Adam+StepLR for 8000 iter, reaching PDE
+residual L2 1.07×10⁻²; checkpoint and a 129×129 upwind FD reference are committed at
+`research_assets/runs/pinn-cross-family/`. The MR rewrites parallel Section 5.3:
+**MR-A** (collocation-point permutation) is exact-by-design for a pointwise MLP
+(violation 0.0); **MR-B** (mirror-y equivariance with the PDE residual as floor) gives
+violation 7.92×10⁻³, ratio 0.74 (pass; the PINN's learned symmetry is tighter than its
+PDE solution); **MR-C** (integral-of-u_x ratio vs reference) gives median 1.004 (pass at
+the 1.5× gate); rollout-accuracy median relative L2 1.0×10⁻². Magnitudes match the MGN
+roster (MR-A 0.0; MR-C CI [1.007, 1.011]; rollout 0.022), so the 4-condition predicate
+and three MR rewrites transfer to a different architecture and PDE without
+re-engineering. One PINN, one PDE, one seed — a single bounded point on the
+cross-architecture-family applicability map, not a PINN-vs-MGN benchmark.
+
 ### 5.7 Still blocked
 
 The following remain blocked and must not be written as results: cross-SUT or
