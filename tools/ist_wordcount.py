@@ -75,5 +75,5 @@ if __name__ == "__main__":
           f"(body={r['body']} bib={r['bib']} "
           f"figs={r['figures']} tabs={r['tables']} "
           f"floats={r['float_words']}; method={r['method']})")
-    print(f"cap=15000 (regular paper); working target<=14900; "
-          f"headroom={14900 - r['total']}")
+    print(f"cap=15000 (regular paper, hard); "
+          f"headroom={15000 - r['total']}")

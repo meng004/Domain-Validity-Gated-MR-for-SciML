@@ -493,6 +493,8 @@ PC\_zero\_vy & physical channel & (none at $p=1.0$) & 0/30 & 0.00 & $[0.00, 0.11
 \label{fig:r3-pc-nonmonotone}
 \end{figure}
 
+\textbf{Adversarial mutants (R4) --- the blind region is a subspace, not a point.} Two mutants designed to be invariant under all three detectors were replayed on the K=6 roster (\texttt{adversarial-mutants-e3-extra/}). A1 adds $c = 0.05$ to $\delta v_x$; A2 adds $c \cdot v_y^2$. Both are uniform per-node (permutation-invariant), even under $v_y \mapsto -v_y$ (mirror-y-invariant), and have $\partial_x = 0$ (conservation-invariant). A2 escapes every detector on every checkpoint (any-detector 0/6, Wilson CI $[0.00, 0.39]$; mirror-y relative change $\sim 10^{-4}$, three orders of magnitude below the 0.5 threshold) -- the R3 blind point is not isolated. A1 is flagged 6/6 by mirror-y but node-permutation 0/6 and conservation 0/6; A1 trips the mirror-y \emph{magnitude}-shift threshold, not a symmetry break. The blind region under the predeclared thresholds is therefore a subspace whose extent is set by the relative-change tolerances; a calibrated adversary stays inside it. This motivates an explicit symmetry-breaking score in future work; not a real-world fault-detection rate or baseline-superiority claim.
+
 \subsection{LLM-generated MR baseline (one-shot, vendor-disjoint panel)}
 \label{subsec:llm-mr-baseline}
 

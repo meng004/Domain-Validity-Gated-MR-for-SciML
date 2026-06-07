@@ -23,7 +23,10 @@ IST_MAIN = ROOT / "paper" / "ist-submission" / "main.tex"
 sys.path.insert(0, str(ROOT / "tools"))
 from ist_wordcount import ist_word_count  # noqa: E402
 
-WORD_CAP = 14900
+WORD_CAP = 15000  # IST regular-paper hard cap; the P2 work consumed the
+                  # earlier 14500-then-14900 working-target buffers in exchange
+                  # for the LLM-baseline, R3 refinement, and R4 adversarial
+                  # subsections, so the only remaining ceiling is the hard cap.
 
 
 def read(p: Path) -> str:

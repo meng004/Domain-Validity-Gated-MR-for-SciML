@@ -652,6 +652,32 @@ claim, but it is a concrete instance of a structural insight that a severity swe
 explicit and a single-severity experiment hides: a fault can be invisible to a geometric
 MR suite precisely when it shares the invariances those MRs depend on.
 
+**Adversarial mutants (R4) — the blind region is a subspace, not a point.** To check
+whether the R3 blind point (PC_zero_vy at p=1.0) is isolated or one member of an entire
+fault subspace, we constructed two adversarial mutants that are deliberately invariant
+under every one of the three detectors at once and replayed them across the K=6 roster
+(raw outputs at `research_assets/runs/adversarial-mutants-e3-extra/`). A1 adds a uniform
+constant `c=0.05` to the predicted `delta_vx`; A2 adds `c·vy²` to the predicted
+`delta_vx`. Both modifications are uniform per-node (node-permutation invariant), both
+are invariant under the mirror-y reflection `(vx, vy) → (vx, −vy)` (vx and vy² are even
+under that map), and both have zero spatial divergence in `x` (so the
+reference-relative conservation ratio is unchanged). A2 escapes every detector on every
+checkpoint (any-detector 0/6, Wilson CI [0.00, 0.39]; the mirror-y relative change is
+1–3 × 10⁻⁴, three orders of magnitude below the 0.5 threshold): the R3 blind point is
+not isolated. A1 is unexpectedly flagged on every checkpoint (mirror-y 6/6), but
+inspection shows the mechanism is not symmetry-breaking — the per-detector breakdown is
+node-permutation 0/6 and conservation 0/6, with only mirror-y firing because A1 shifts
+the *magnitude* of the surrogate's mirror-y violation enough to cross the
+relative-change threshold. This is detector engineering, not a recovery: A1 says the
+current threshold catches an invariance-preserving fault whenever it perturbs the
+violation magnitude beyond 50 % of baseline, and a calibrated adversary can stay below
+that bound (A2 does so by orders of magnitude). The defensible reading is that the
+suite's blind region under the predeclared thresholds is a subspace, not a point, whose
+extent is governed by how tightly the relative-change tolerances are set. This bounds
+the false-reassurance risk against this MR suite and motivates an explicit
+symmetry-breaking score in future work; it is not a real-world fault-detection-rate
+claim or a baseline-superiority claim.
+
 **Aggregate reading.** The 5-of-10 union detection rate from C10 reproduces tightly
 across the seed-replica family (5/10 on each of S0–S3) and drops by one to 4/10 on the
 capacity (S4) and depth (S5) variants because MA_permute_edges crosses below the

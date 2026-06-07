@@ -92,10 +92,11 @@ class P1ReviewReadinessTest(unittest.TestCase):
         self.assertIn("Empirical Standards", self.tex,
                       "Threats should reference the Empirical Standards for SE")
 
-    # Regression: word count stays within the P0 working target (raised to 14900
-    # after the P2 LLM-MR baseline subsection was added; IST hard cap remains 15000).
+    # Regression: word count stays within the IST regular-paper hard cap. The
+    # earlier working-target buffer (14500 -> 14900) was consumed by the P2
+    # additions; only the hard cap is enforced now.
     def test_p1_word_count_still_within_cap(self) -> None:
-        self.assertLessEqual(ist_word_count()["total"], 14900)
+        self.assertLessEqual(ist_word_count()["total"], 15000)
 
 
 if __name__ == "__main__":
