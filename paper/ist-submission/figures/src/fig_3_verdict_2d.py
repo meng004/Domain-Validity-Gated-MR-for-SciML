@@ -125,17 +125,31 @@ ax_leg = fig.add_subplot(gs[0, 1]); ax_leg.axis("off")
 
 x_lo, x_hi = X_PLOT_FLOOR, 1e7
 
-# Region shading. Pass / SUT-inconsistency split at V/tol = 1 in the In-domain
-# row. Boundary and Out-of-domain rows shade the entire x range (the verdict
-# is "OOD-stress / out-of-domain" regardless of x once D is high).
+# Region shading with hatch patterns so the figure survives grayscale print.
+# Each region gets a distinct pattern in addition to colour, and the legend
+# echoes the same pattern so colour is never the only signal.
 pass_color = "#d8efd8"
 fail_color = "#f2cdcd"
-ood_color = "#fde4c4"
+boundary_color = "#fde4c4"
+ood_color = "#fbcb88"
 
-ax.axhspan(0.0, 1.0, xmin=0.0, xmax=0.5, facecolor=pass_color, alpha=0.55, zorder=0)
-ax.axhspan(0.0, 1.0, xmin=0.5, xmax=1.0, facecolor=fail_color, alpha=0.55, zorder=0)
-ax.axhspan(1.0, 2.0, xmin=0.0, xmax=1.0, facecolor=ood_color, alpha=0.30, zorder=0)
-ax.axhspan(2.0, 3.0, xmin=0.0, xmax=1.0, facecolor=ood_color, alpha=0.60, zorder=0)
+# Use hatch for pattern-based encoding. Light edgecolor keeps hatch readable
+# without overpowering the markers.
+plt.rcParams["hatch.linewidth"] = 0.6
+plt.rcParams["hatch.color"] = "#666666"
+
+ax.axhspan(0.0, 1.0, xmin=0.0, xmax=0.5,
+           facecolor=pass_color, alpha=0.55, zorder=0, hatch="..",
+           edgecolor="#1f5d1f")
+ax.axhspan(0.0, 1.0, xmin=0.5, xmax=1.0,
+           facecolor=fail_color, alpha=0.55, zorder=0, hatch="///",
+           edgecolor="#7a1d1d")
+ax.axhspan(1.0, 2.0, xmin=0.0, xmax=1.0,
+           facecolor=boundary_color, alpha=0.40, zorder=0, hatch="---",
+           edgecolor="#7a4d00")
+ax.axhspan(2.0, 3.0, xmin=0.0, xmax=1.0,
+           facecolor=ood_color, alpha=0.55, zorder=0, hatch="xx",
+           edgecolor="#7a4d00")
 
 # Vertical pass/fail border at V/tol = 1
 ax.axvline(1.0, color="#444", lw=0.9, ls="--", zorder=1.5)
@@ -180,12 +194,14 @@ ax.grid(True, which="both", axis="x", alpha=0.25, linestyle=":", linewidth=0.5)
 # Right-hand legends
 # ---------------------------------------------------------------------------
 region_handles = [
-    mpatches.Patch(facecolor=pass_color, edgecolor="#1f5d1f",
+    mpatches.Patch(facecolor=pass_color, edgecolor="#1f5d1f", hatch="..",
                    label="pass  ($V < $ tol., In-domain)"),
-    mpatches.Patch(facecolor=fail_color, edgecolor="#7a1d1d",
+    mpatches.Patch(facecolor=fail_color, edgecolor="#7a1d1d", hatch="///",
                    label="SUT inconsistency  ($V \\geq$ tol., In-domain)"),
-    mpatches.Patch(facecolor=ood_color, edgecolor="#7a4d00",
-                   label="OOD-stress / out-of-domain  (Out / Boundary)"),
+    mpatches.Patch(facecolor=boundary_color, edgecolor="#7a4d00", hatch="---",
+                   label="boundary  (Boundary row)"),
+    mpatches.Patch(facecolor=ood_color, edgecolor="#7a4d00", hatch="xx",
+                   label="OOD-stress / out-of-domain  (Out row)"),
 ]
 leg_region = ax_leg.legend(handles=region_handles, loc="upper left",
                            bbox_to_anchor=(0.0, 1.00),
