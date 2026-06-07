@@ -21,7 +21,7 @@
 
 \begin{frontmatter}
 
-\title{Domain-Validity-Gated Metamorphic Relation Identification and Executable Test Assets for Scientific Machine Learning}
+\title{A Domain-Validity-Gated Workflow for Metamorphic Relation Testing of Scientific Machine-Learning Surrogates}
 
 % Double-anonymized submission: author identity and affiliation are intentionally
 % withheld for review and will be added in the camera-ready version.
@@ -32,30 +32,30 @@
 
 \begin{abstract}
 \textbf{Context:}
-Scientific machine-learning (SciML) surrogates are increasingly used to approximate expensive physical simulations. Mesh-based neural simulators are attractive for fluid-flow problems because they operate on irregular meshes and predict spatiotemporal physical fields. Testing such systems is difficult because exact expected outputs are often unavailable for arbitrary inputs without running a trusted high-fidelity solver. Rollout accuracy and physics residuals provide useful evidence, but they do not by themselves specify which physical relations should hold under controlled transformations of inputs, meshes, boundary conditions, or parameters.
+Scientific machine-learning (SciML) surrogates approximate expensive physical simulations, but exact expected outputs for arbitrary inputs are unavailable --- the classical oracle problem. Metamorphic testing addresses this through relations across executions, yet a candidate relation is not automatically valid: its preconditions, output mapping, and the numerical floor of the scoring operator determine whether a violation is meaningful.
 
 \textbf{Objective:}
-This paper investigates how physically meaningful metamorphic relations (MRs) can be screened and operationalized as executable oracle-free test assets for scientific machine-learning systems. The goal is not to improve a predictive model, but to make the step from candidate relation to executable test asset more systematic, auditable, and explicit about the physical, numerical, and software conditions under which each relation is expected to hold. MeshGraphNets-family cylinder-flow surrogates are used as the concrete case study.
+We investigate how candidate metamorphic relations (MRs) can be screened for \emph{domain validity} and operationalized as executable, oracle-free test assets for SciML surrogates, making the step from candidate to executable asset auditable and explicit about the physical, numerical, and software conditions each relation requires.
 
 \textbf{Method:}
-We propose a domain-validity rubric for screening candidate MRs, an MR-card and executable-asset format that records source cases, follow-up transformations, output mappings, metrics, tolerances, exclusion rules, and relation-level verdicts, and a case-study protocol for applying these assets to mesh-based neural cylinder-flow surrogates. Candidate sources may include physical equations, boundary conditions, representation contracts, expert reasoning, LLM-assisted candidate lists, and NOETHER-style pattern organization, but validity is decided by the rubric and evidence records rather than by candidate generation alone.
+We propose (i) a domain-validity rubric admitting a candidate only when its tolerance dominates the operator's numerical floor and its preconditions hold; (ii) an MR-card / executable-asset format recording source cases, transformations, mappings, metrics, tolerances, exclusion rules, and relation-level verdicts; and (iii) a case-study protocol on MeshGraphNets cylinder-flow surrogates trained on the DeepMind benchmark.
 
 \textbf{Results:}
-Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported: node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe, with the exact relation out of relation domain for this asymmetric mesh, failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. Two further within-SUT runs sharpen the interpretation: a same-trajectory one-step rollout-accuracy diagnostic gives median relative L2 0.0216, so the mirror-y violation is about 34 times the surrogate's in-distribution accuracy; and on a synthetic mesh that is provably symmetric about the centerline, where the rubric admits the exact mirror-y relation rather than downgrading it, the surrogate still violates exact mirror-y equivariance (relative L2 1.10), removing the out-of-relation-domain objection to the mirror-y finding. Used as detectors against a 10-mutant injected-fault catalogue, the MRs catch 5 of 10 faults and, in a suggestive, single-SUT test, localize them by MR class. To address a single-checkpoint objection, the five within-SUT measurements are replicated across a roster of K=6 MeshGraphNets cylinder-flow checkpoints (four base-config seed replicas plus one wider and one deeper configuration variant, all from the same read-only trainer on the same DeepMind dataset): node-permutation equivariance is exact on every checkpoint; mirror-y OOD-stress median relative L2 has bootstrap 95\% CI $[0.74, 0.80]$ over the seed family with the configuration variants within the same band; the synthetic symmetric-mesh exact-mirror-y test fails on every checkpoint; the reference-relative conservation ratio sits in CI $[1.007, 1.011]$; and the one-step rollout median relative L2 sits in CI $[0.0217, 0.0224]$, so the mirror-y violation is about $35\times$ the in-distribution accuracy on every checkpoint. The P1 discrete-divergence operator that underwrites the continuity-MR admissibility predicate is empirically $O(h)$ on the symmetric-mesh family (log--log slope 0.988, $R^2 = 1.000$), confirming the numerical-decidability gate has a measurable basis. This is bounded within-SUT and within-architecture-family evidence, not a reliability, accuracy, baseline, cross-architecture-family, geometry-independent, or general fault-detection-rate claim.
+Across $K=6$ checkpoints (four seed replicas, one wider and one deeper variant), node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe fails on every checkpoint with bootstrap 95\% CI on median relative $L_2$ of $[0.74, 0.80]$, about $35\times$ the in-distribution rollout error (CI $[0.0217, 0.0224]$); on a synthetic mesh where exact mirror-y is admitted, the surrogate still violates it ($L_2=1.10$), removing the out-of-relation-domain objection. The P1 discrete-divergence operator underwriting the continuity-MR admissibility predicate is empirically $O(h)$ (log--log slope $0.988$, $R^2=1.000$). As fault detectors against a 10-mutant catalogue, the MRs catch 5 of 10 faults and localize them by class, with Wilson 95\% CIs across the roster.
 
 \textbf{Conclusion:}
-The evidence supports a validity-aware bridge from candidate MR ideas to auditable SciML test assets. The scoped pilots show that a rubric-gated workflow can produce relation-level outcomes while preserving the evidence boundary for each claim. We frame this as a domain-admissibility-gated, relation-indexed approach to SciML OOD validation: a relation is admitted only when its tolerance dominates the relevant numerical error floor, and its verdict separates a model-level violation from an out-of-domain application.
+Within-architecture-family evidence supports a validity-aware bridge from candidate MRs to auditable SciML test assets, separating model-level violations from out-of-domain applications. This is not a reliability, baseline, cross-family, or geometry-independent claim.
 \end{abstract}
 
 \begin{highlights}
 \item A domain-validity rubric screens candidate MRs for SciML surrogate testing.
 \item MR cards convert retained candidates into auditable executable test assets.
-\item Relation-level verdict ledgers separate pass, fail, skip, OOD, and inconclusive cases.
-\item MeshGraphNets cylinder flow is used as a case study, not as the paper's main novelty.
+\item Verdict ledgers separate pass, fail, skip, OOD, and inconclusive cases.
+\item Replicated across K=6 MeshGraphNets cylinder-flow checkpoints with 95\% CIs.
 \end{highlights}
 
 \begin{keyword}
-Metamorphic testing \sep metamorphic relation identification \sep oracle problem \sep scientific machine learning \sep MeshGraphNets \sep cylinder flow \sep software verification and validation
+Metamorphic testing \sep metamorphic relation identification \sep oracle problem \sep scientific machine learning \sep neural surrogates \sep MeshGraphNets \sep domain-validity rubric
 \end{keyword}
 
 \end{frontmatter}
@@ -631,6 +631,18 @@ In that sense the workflow is aimed at producing, over many controlled transform
 \label{sec:conclusion}
 
 This paper presents domain-validity-gated MR identification as an auditable oracle-free testing workflow for MeshGraphNets-family cylinder-flow surrogates. The current evidence supports the scoped within-SUT pilots of Section~\ref{subsec:within-sut-pilot} (node-permutation, mirror-y OOD-stress, conservation diagnostic, rollout-accuracy comparator, exact mirror-y on a symmetric admissible mesh, and seeded-fault detection over a 10-mutant catalogue), replicated across a K=6 multi-checkpoint roster of one MeshGraphNets architecture family on one dataset (Section~\ref{subsec:multicheckpoint-replication}) --- the verdicts reproduce with tight Wilson and bootstrap 95\% confidence intervals --- together with an empirical calibration of the P1 discrete-divergence operator floor that gates the admissibility predicate (slope 0.988, $R^2 = 1.000$; Section~\ref{subsec:operator-floor-sweep}), and a within-family fault-detection robustness study with severity sweeps that bound where the present MR set is structurally insensitive (Section~\ref{subsec:fault-robustness}). It does not support cross-architecture-family generalization, real-world or general fault-detection rates, baseline-superiority claims, reliability conclusions, accuracy conclusions, exact-mirror-y claims beyond the bounded results above, or absolute conservation claims. The central claim remains methodological: physically meaningful SciML MRs require explicit validity conditions, executable assets, raw evidence records, and relation-level verdicts; the K=6 replication and the operator-floor calibration are the present study's bounded evidence that the workflow's verdicts hold beyond a single checkpoint and that the admissibility-predicate gate it relies on has a measurable basis.
+
+\section*{CRediT authorship contribution statement}
+\textbf{Anonymous Author(s):} Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation, Writing -- original draft, Writing -- review \& editing, Visualization. (Author identities and per-role assignments will be supplied in the camera-ready version.)
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the writing process}
+During the preparation of this work the author(s) used generative AI assistants for code scaffolding, prose copy-editing, and reference cross-checking. After using these tools the author(s) reviewed and edited the content as needed and take full responsibility for the content of the publication. No generative AI was used to fabricate, alter, or invent experimental data, results, or citations; every numerical claim is backed by a tracked artifact under \texttt{research\_assets/runs/} and a claim-ledger entry.
+
+\section*{Data availability}
+The manuscript's source, executable test assets (MR cards, runners, rubrics), claim ledger, and raw experiment outputs (checkpoints, per-run \texttt{.npy} arrays, metric ledgers) are available in the accompanying anonymized replication package. The trained MeshGraphNets cylinder-flow checkpoints derive from the public DeepMind cylinder-flow benchmark; no proprietary data was used.
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{references}
