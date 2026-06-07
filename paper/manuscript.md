@@ -600,8 +600,8 @@ single checkpoint and to delimit where its detectors are structurally insensitiv
 10-mutant catalogue is replayed against the K=6 multi-checkpoint roster across five
 input-permutation seeds (30 trials per mutant per detector), and two predeclared
 severity dimensions are swept: NS_double_scale s ∈ {1.1, 1.25, 1.5, 2, 4} and
-PC_zero_vy partial fraction p ∈ {0.25, 0.5, 0.75, 1.0} (the canonical mutant is p =
-1.0). Detection is decided by the same predeclared thresholds as Section 5.3
+PC_zero_vy partial fraction p ∈ {0.25, 0.5, 0.75, 0.85, 0.9, 0.95, 0.99, 1.0} (the
+canonical mutant is p = 1.0). Detection is decided by the same predeclared thresholds as Section 5.3
 (node-permutation tolerance 1e-5, conservation ratio threshold 1.5, mirror-y
 relative-change threshold 0.5). Wilson 95% CIs are computed across the (SUT, seed)
 cells. Raw outputs are committed at
@@ -634,20 +634,23 @@ equivariant). The MR catalogue at the current thresholds is therefore structural
 insensitive to multiplicative output scaling on this surrogate across the swept grid,
 not only at the canonical 2× fault.
 
-**PC_zero_vy partial-fraction sweep (R3) — non-monotone detection.** At partial
-zeroing fractions p ∈ {0.25, 0.5, 0.75} the detection rate is 6/6 across the
-checkpoint roster (Wilson CI [0.61, 1.00]); at the canonical full fraction p = 1.0 the
-detection rate drops to 0/6 (CI [0.00, 0.39]). The intuition is structural: uniform
-vy = 0 is itself mirror-y-symmetric (0 = −0 under reflection in the transverse
-component), so it preserves the very symmetry the MR scores; only spatially partial
-zeroing creates an asymmetric residual that the symmetry MR can resolve. The
-detection–severity curve is therefore non-monotone, with the canonical (full) fault
-sitting in a detection blind region that intermediate severities expose. This is a
-within-family finding about one MR–fault pair, not a general non-monotonicity claim
-across all symmetry MRs, but it is a concrete instance of a structural insight that a
-severity sweep makes explicit and a single-severity experiment hides: a fault MR may
-be insensitive to the most severe instance precisely because that instance shares an
-invariance the MR depends on.
+**PC_zero_vy partial-fraction sweep (R3) — a knife-edge symmetry blind spot.**
+Refining the fraction grid resolves *where* detection collapses. At every partial
+fraction up to and including p = 0.99 the detection rate is 6/6 across the roster
+(Wilson CI [0.61, 1.00]); it falls to 0/6 (CI [0.00, 0.39]) only at the exactly-uniform
+fraction p = 1.0. The transition is a step at the symmetric point, not a gradual
+decline — even 1%-asymmetric zeroing is caught on every checkpoint. The mechanism is
+structural and the responsible detector is specific: partial zeroing masks vy on a
+node-index-selected random subset, which is not invariant under node relabeling, so it
+is the *node-permutation* detector that trips — not the symmetry MR, which never fires
+in this sweep (0/6 at all fractions). At p = 1.0 the fault becomes simultaneously
+permutation-invariant and mirror-y-symmetric (uniform vy = 0 = −0 under reflection), so
+it escapes every geometric detector at once. The canonical (full) fault therefore sits
+in a measure-zero blind region — the exactly-symmetric configuration — that any partial
+severity exposes. This is a within-family finding about one MR–fault pair, not a general
+claim, but it is a concrete instance of a structural insight that a severity sweep makes
+explicit and a single-severity experiment hides: a fault can be invisible to a geometric
+MR suite precisely when it shares the invariances those MRs depend on.
 
 **Aggregate reading.** The 5-of-10 union detection rate from C10 reproduces tightly
 across the seed-replica family (5/10 on each of S0–S3) and drops by one to 4/10 on the

@@ -955,6 +955,10 @@
       0.25,
       0.5,
       0.75,
+      0.85,
+      0.9,
+      0.95,
+      0.99,
       1.0
     ],
     "per_level_detection_rate": {
@@ -1019,6 +1023,126 @@
         }
       },
       "0.75": {
+        "node_perm": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        },
+        "conservation": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "any": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        }
+      },
+      "0.85": {
+        "node_perm": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        },
+        "conservation": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "any": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        }
+      },
+      "0.9": {
+        "node_perm": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        },
+        "conservation": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "any": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        }
+      },
+      "0.95": {
+        "node_perm": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        },
+        "conservation": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "any": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        }
+      },
+      "0.99": {
         "node_perm": {
           "k": 6,
           "n": 6,
@@ -1136,6 +1260,62 @@
             "any": false,
             "mirror_y_relative_change": 0.011555940134486934
           }
+        },
+        "0.85": {
+          "values": {
+            "node_perm_median": 0.4808751956484797,
+            "conservation_median": 1.0112919446247062,
+            "mirror_y_median": 0.8464783281578949
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.1510088877834959
+          }
+        },
+        "0.9": {
+          "values": {
+            "node_perm_median": 0.4451373869699987,
+            "conservation_median": 1.0127907382847903,
+            "mirror_y_median": 0.7853935709500437
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.06794816890208011
+          }
+        },
+        "0.95": {
+          "values": {
+            "node_perm_median": 0.3380900828191812,
+            "conservation_median": 1.0117308732149104,
+            "mirror_y_median": 0.7767226699419801
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.05615780901526397
+          }
+        },
+        "0.99": {
+          "values": {
+            "node_perm_median": 0.1551891527234744,
+            "conservation_median": 1.010080482914043,
+            "mirror_y_median": 0.748834329389321
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.01823630910929603
+          }
         }
       },
       "S1": {
@@ -1193,6 +1373,62 @@
             "mirror_y": false,
             "any": false,
             "mirror_y_relative_change": 0.01013657755788731
+          }
+        },
+        "0.85": {
+          "values": {
+            "node_perm_median": 0.48183966172661324,
+            "conservation_median": 1.0128578757051694,
+            "mirror_y_median": 0.8719729354305968
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.07483014835752368
+          }
+        },
+        "0.9": {
+          "values": {
+            "node_perm_median": 0.4420838087897157,
+            "conservation_median": 1.0109683274312757,
+            "mirror_y_median": 0.8519871953081496
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.05019489289487904
+          }
+        },
+        "0.95": {
+          "values": {
+            "node_perm_median": 0.3032261649252888,
+            "conservation_median": 1.0102695933555883,
+            "mirror_y_median": 0.8267544530551203
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.01909196412576786
+          }
+        },
+        "0.99": {
+          "values": {
+            "node_perm_median": 0.14864879503931044,
+            "conservation_median": 1.01026589383456,
+            "mirror_y_median": 0.8061657438119297
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.00628653618218095
           }
         }
       },
@@ -1252,6 +1488,62 @@
             "any": false,
             "mirror_y_relative_change": 0.06993371005130884
           }
+        },
+        "0.85": {
+          "values": {
+            "node_perm_median": 0.5095886808076479,
+            "conservation_median": 1.0112396404232433,
+            "mirror_y_median": 0.8561404716340897
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.19583798652267095
+          }
+        },
+        "0.9": {
+          "values": {
+            "node_perm_median": 0.4608158742366275,
+            "conservation_median": 1.010529728939013,
+            "mirror_y_median": 0.7760080157630195
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.08391075278136884
+          }
+        },
+        "0.95": {
+          "values": {
+            "node_perm_median": 0.32973859183877824,
+            "conservation_median": 1.0093401641051494,
+            "mirror_y_median": 0.8052597256676618
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.1247688911753486
+          }
+        },
+        "0.99": {
+          "values": {
+            "node_perm_median": 0.15599333525804052,
+            "conservation_median": 1.0088285860775958,
+            "mirror_y_median": 0.7694685155474206
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.07477652419413687
+          }
         }
       },
       "S3": {
@@ -1309,6 +1601,62 @@
             "mirror_y": false,
             "any": false,
             "mirror_y_relative_change": 0.06585045784157181
+          }
+        },
+        "0.85": {
+          "values": {
+            "node_perm_median": 0.4823101889263101,
+            "conservation_median": 1.0116883782067871,
+            "mirror_y_median": 0.9173381403870516
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.15065010567399278
+          }
+        },
+        "0.9": {
+          "values": {
+            "node_perm_median": 0.43319149737109025,
+            "conservation_median": 1.010470800810877,
+            "mirror_y_median": 0.8519650969929815
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.06865035446133833
+          }
+        },
+        "0.95": {
+          "values": {
+            "node_perm_median": 0.3162141612522274,
+            "conservation_median": 1.0092200304342143,
+            "mirror_y_median": 0.8689794445517766
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.08999206037606376
+          }
+        },
+        "0.99": {
+          "values": {
+            "node_perm_median": 0.1209993499617446,
+            "conservation_median": 1.0095614481861193,
+            "mirror_y_median": 0.8519461478734508
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.06862658590159956
           }
         }
       },
@@ -1368,6 +1716,62 @@
             "any": false,
             "mirror_y_relative_change": 0.013195938089298647
           }
+        },
+        "0.85": {
+          "values": {
+            "node_perm_median": 0.4715213735624525,
+            "conservation_median": 1.0110948544642773,
+            "mirror_y_median": 0.8493203029417995
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.11445529817619991
+          }
+        },
+        "0.9": {
+          "values": {
+            "node_perm_median": 0.43242890523921473,
+            "conservation_median": 1.0110715321879111,
+            "mirror_y_median": 0.7912927780503638
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.03831313799079416
+          }
+        },
+        "0.95": {
+          "values": {
+            "node_perm_median": 0.2856106278644265,
+            "conservation_median": 1.0092440306054358,
+            "mirror_y_median": 0.8007468460350253
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.050718512168627786
+          }
+        },
+        "0.99": {
+          "values": {
+            "node_perm_median": 0.13912988997230566,
+            "conservation_median": 1.0087963648784817,
+            "mirror_y_median": 0.7757558312348223
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.017925973529886854
+          }
         }
       },
       "S5": {
@@ -1426,9 +1830,66 @@
             "any": false,
             "mirror_y_relative_change": 0.03162410325779821
           }
+        },
+        "0.85": {
+          "values": {
+            "node_perm_median": 0.44930070083461476,
+            "conservation_median": 1.012343752861168,
+            "mirror_y_median": 0.9031172827740479
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.09043950606578532
+          }
+        },
+        "0.9": {
+          "values": {
+            "node_perm_median": 0.39014485589594516,
+            "conservation_median": 1.0117705950180744,
+            "mirror_y_median": 0.8710699408837792
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.05174498839006827
+          }
+        },
+        "0.95": {
+          "values": {
+            "node_perm_median": 0.2768676535707339,
+            "conservation_median": 1.0103352564551862,
+            "mirror_y_median": 0.8772276384703358
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.05917989949503844
+          }
+        },
+        "0.99": {
+          "values": {
+            "node_perm_median": 0.1259095712598108,
+            "conservation_median": 1.0106870512493955,
+            "mirror_y_median": 0.8573881095352026
+          },
+          "detections": {
+            "node_perm": true,
+            "conservation": false,
+            "mirror_y": false,
+            "any": true,
+            "mirror_y_relative_change": 0.03522530738917894
+          }
         }
       }
-    }
+    },
+    "refinement_note": "Levels {0.85,0.9,0.95,0.99} added (P2-4) to resolve the any-detector collapse between p=0.75 (6/6) and p=1.0 (0/6); same permutation seed (20260606) and detection machinery as the original sweep."
   },
   "per_sut_per_seed_raw": {
     "S0": {

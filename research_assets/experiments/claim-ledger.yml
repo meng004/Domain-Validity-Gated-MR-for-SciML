@@ -270,16 +270,20 @@ claims:
 
   - claim_id: "C13-fault-detection-robustness"
     status: "observed"
-    scope: "K=6 checkpoints / 10-mutant injected-fault catalogue / 3 domain-validity MR detectors / 5 input-permutation seeds / NS_double_scale severity grid {1.1, 1.25, 1.5, 2.0, 4.0} / PC_zero_vy partial-fraction grid {0.25, 0.5, 0.75, 1.0}"
+    scope: "K=6 checkpoints / 10-mutant injected-fault catalogue / 3 domain-validity MR detectors / 5 input-permutation seeds / NS_double_scale severity grid {1.1, 1.25, 1.5, 2.0, 4.0} / PC_zero_vy partial-fraction grid {0.25, 0.5, 0.75, 0.85, 0.9, 0.95, 0.99, 1.0}"
     evidence:
       - "tools/run_e3_fault_robustness.py"
       - "research_assets/runs/fault-robustness-e3/fault_robustness_report.json"
     wording_allowed: >
       Replaying the 10-mutant five-class seeded-fault catalogue against the K=6 checkpoint
       roster yields stable per-mutant cross-SUT detection rates with Wilson 95% CIs; the
-      severity sweep on NS_double_scale s in {1.1, 1.25, 1.5, 2.0, 4.0} and on PC_zero_vy
-      partial-fraction p in {0.25, 0.5, 0.75, 1.0} shows monotone-non-decreasing detection
-      versus severity. Detection localizes by MR class (continuity -> boundary/scale;
+      severity sweep on NS_double_scale s in {1.1, 1.25, 1.5, 2.0, 4.0} stays at 0/6, and
+      the refined PC_zero_vy partial-fraction sweep p in {0.25, 0.5, 0.75, 0.85, 0.9, 0.95,
+      0.99, 1.0} shows a knife-edge: 6/6 detection (via the node-permutation detector, since
+      index-selected partial zeroing is not relabeling-invariant) at every p up to 0.99, and
+      0/6 only at the exactly-uniform p = 1.0, where the fault is simultaneously permutation-
+      invariant and mirror-symmetric and escapes all geometric detectors. Detection localizes
+      by MR class (continuity -> boundary/scale;
       symmetry -> physical-channel/adjacency; node-permutation is exact-by-design and
       flags none of these mutants). This bounds the detector sensitivity of these
       domain-validity MRs against this catalogue across the family, and is not a
@@ -296,7 +300,8 @@ speculative_claims:
       A bounded result now exists (see C10-seeded-fault-detection and
       C13-fault-detection-robustness): the MRs detect 5/10 mutants of one injected-fault
       catalogue on one SUT, and the rate is stable at 5/10 across the seed-replica
-      family and 4/10 across the capacity/depth variants in the K=6 roster, with severity
-      sweeps showing monotone-non-decreasing detection. General fault-detection
+      family and 4/10 across the capacity/depth variants in the K=6 roster, with the refined
+      PC_zero_vy sweep showing a knife-edge blind spot only at the exactly-symmetric fault.
+      General fault-detection
       effectiveness across architecture families and real-world faults remains future work.
     blocked_reason: "K=6 checkpoints share one architecture family / one dataset; one injected-fault catalogue."
