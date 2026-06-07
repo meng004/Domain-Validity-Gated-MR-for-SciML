@@ -1,0 +1,19 @@
+{
+  "record_type": "pinn-burgers2d-reference",
+  "generated_at": "2026-06-07T14:32:06Z",
+  "scheme": "forward Euler, centred FD, Dirichlet 0 BC",
+  "grid_N": 129,
+  "dx": 0.015625,
+  "dt": 0.0009765625,
+  "n_steps": 512,
+  "nu": 0.05,
+  "snapshot_times": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5
+  ],
+  "output": "research_assets/runs/pinn-cross-family/reference_solution.npz"
+}
