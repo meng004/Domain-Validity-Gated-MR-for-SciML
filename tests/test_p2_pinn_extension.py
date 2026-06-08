@@ -16,6 +16,10 @@ REPORT = PINN_DIR / "pinn_mr_report.json"
 CKPT = PINN_DIR / "sut/checkpoint.pt"
 MANIFEST = PINN_DIR / "checkpoint_manifest.json"
 REF = PINN_DIR / "reference_solution.npz"
+DIFF_DIR = ROOT / "research_assets/runs/pinn-cross-family-diffusion"
+DIFF_REPORT = DIFF_DIR / "pinn_mr_report.json"
+DIFF_CKPT = DIFF_DIR / "sut/checkpoint.pt"
+DIFF_REF = DIFF_DIR / "reference_solution.npz"
 MANUSCRIPT = ROOT / "paper/manuscript.md"
 LATEX = ROOT / "paper/ist-submission/main.tex"
 LEDGER = ROOT / "research_assets/experiments/claim-ledger.yml"
@@ -23,8 +27,35 @@ LEDGER = ROOT / "research_assets/experiments/claim-ledger.yml"
 
 class TestPinnArtifactsCommitted(unittest.TestCase):
     def test_all_artifacts_present(self):
-        for p in (REPORT, CKPT, MANIFEST, REF):
+        for p in (REPORT, CKPT, MANIFEST, REF,
+                  DIFF_REPORT, DIFF_CKPT, DIFF_REF):
             self.assertTrue(p.exists(), f"missing PINN artifact: {p}")
+
+
+class TestDiffusionPinnReport(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.r = json.loads(DIFF_REPORT.read_text())
+
+    def test_sut_identity(self):
+        sut = self.r["sut"]
+        self.assertEqual(sut["model_type"], "PINN")
+        self.assertEqual(sut["pde_id"], "heat2d")
+        self.assertEqual(sut["output_dim"], 1)
+        self.assertTrue(sut["has_mirror_symmetry"])
+        self.assertEqual(len(sut["checkpoint_sha256"]), 64)
+
+    def test_three_mrs_pass(self):
+        self.assertEqual(self.r["mr_A_permutation_equivariance"]["verdict"], "pass")
+        b = self.r["mr_B_symmetry_equivariance"]
+        self.assertEqual(b["verdict"], "pass")
+        self.assertLess(b["ratio"], 1.0)
+        c = self.r["mr_C_conservation"]
+        self.assertEqual(c["verdict"], "pass")
+        self.assertTrue(0.667 <= c["median_ratio"] <= 1.5)
+
+    def test_rollout_present(self):
+        self.assertLess(self.r["rollout_accuracy_baseline"]["median_relative_l2"], 0.1)
 
 
 class TestPinnReport(unittest.TestCase):
@@ -76,13 +107,18 @@ class TestManuscriptSyncedToReport(unittest.TestCase):
         self.assertIn("Cross-family PINN extension", self.l)
 
     def test_headline_numbers_present(self):
+        # Both Burgers (0.74 / 1.004) and Diffusion (0.46 / 0.995) cited.
         for txt in (self.m, self.l):
-            self.assertTrue(re.search(r"7\.92", txt),
-                            "MR-B violation 7.92e-3 must be cited")
             self.assertTrue(re.search(r"0\.74", txt),
-                            "MR-B ratio 0.74 must be cited")
+                            "MR-B Burgers ratio 0.74 must be cited")
+            self.assertTrue(re.search(r"0\.46", txt),
+                            "MR-B heat ratio 0.46 must be cited")
             self.assertTrue(re.search(r"1\.004", txt),
-                            "MR-C median ratio 1.004 must be cited")
+                            "MR-C Burgers median 1.004 must be cited")
+            self.assertTrue(re.search(r"0\.995", txt),
+                            "MR-C heat median 0.995 must be cited")
+            self.assertTrue(re.search(r"two bounded points", txt),
+                            "subsection must frame as two bounded points")
 
     def test_ledger_C14_observed(self):
         self.assertIn('claim_id: "C14-cross-family-pinn-extension"', self.led)

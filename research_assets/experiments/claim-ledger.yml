@@ -341,29 +341,33 @@ claims:
 
   - claim_id: "C14-cross-family-pinn-extension"
     status: "observed"
-    scope: "one PINN (5-layer x 50-neuron MLP) / one PDE (2D viscous Burgers, nu=0.05, Dirichlet zero BC) / one seed (20260607) / one evaluation set / three MRs rewritten for the PINN family + rollout-accuracy baseline against a 129x129 forward-Euler/upwind FD reference"
+    scope: "two PINNs (5-layer x 50-neuron MLP each) / two PDEs (2D viscous Burgers nu=0.05 Dirichlet-zero-BC vector field; 2D heat alpha=0.1 Neumann-zero-flux scalar field) / one seed each (20260607) / three MRs rewritten for the PINN family + rollout-accuracy baseline against 129x129 FD references"
     evidence:
       - "tools/train_pinn_burgers2d.py"
       - "tools/compute_burgers2d_reference.py"
       - "tools/run_pinn_mr_extension.py"
+      - "tools/train_pinn_diffusion2d.py"
+      - "tools/compute_diffusion2d_reference.py"
+      - "tools/run_pinn_diffusion_mr_extension.py"
       - "research_assets/runs/pinn-cross-family/sut/checkpoint.pt"
-      - "research_assets/runs/pinn-cross-family/checkpoint_manifest.json"
-      - "research_assets/runs/pinn-cross-family/reference_solution.npz"
-      - "research_assets/runs/pinn-cross-family/reference_manifest.json"
       - "research_assets/runs/pinn-cross-family/pinn_mr_report.json"
+      - "research_assets/runs/pinn-cross-family-diffusion/sut/checkpoint.pt"
+      - "research_assets/runs/pinn-cross-family-diffusion/pinn_mr_report.json"
+      - "research_assets/runs/pinn-cross-family-diffusion/reference_solution.npz"
     wording_allowed: >
       To check whether the four-condition admissibility predicate and the three MR rewrites
-      are MeshGraphNets-specific, the predicate was applied to a separately trained PINN on a
-      different PDE (2D viscous Burgers). All three MR rewrites pass at the same predeclared
-      thresholds: MR-A collocation-point permutation equivariance is exact-by-design for the
-      pointwise MLP (violation 0.0), MR-B mirror-y equivariance gives violation 7.92e-3
-      against a PDE-residual operator floor of 1.07e-2 (ratio 0.74 < 1), MR-C reference-
-      relative integral-of-u_x ratio is 1.004 (under the 1.5x gate), and the rollout-accuracy
-      baseline is median relative L2 1.0e-2. Magnitudes are comparable to the K=6 MGN roster
-      (MR-A 0.0, MR-C CI [1.007, 1.011], rollout 0.022). This is a single bounded point on the
-      cross-architecture-family applicability map; it is NOT a PINN-vs-MGN benchmark, NOT a
-      claim of generalization across PINN architectures or PDEs, and NOT a baseline-
-      superiority claim.
+      are MeshGraphNets-specific, the predicate was applied to two separately trained PINNs on
+      two different PDEs: 2D viscous Burgers (Dirichlet zero BC, near-conservation) and the 2D
+      heat equation (Neumann zero-flux BC, strict mass conservation). All three MR rewrites
+      pass on both at the same predeclared thresholds: MR-A collocation-point permutation is
+      exact-by-design (violation 0.0 for Burgers, 9.9e-9 for heat); MR-B mirror-y equivariance
+      gives violation/PDE-residual-floor ratio 0.74 (Burgers) and 0.46 (heat), both < 1; MR-C
+      reference-relative conservation ratio is 1.004 and 0.995 (both under the 1.5x gate); the
+      rollout-accuracy baseline is median relative L2 1.0e-2 and 1.6e-2. Magnitudes are
+      comparable to the K=6 MGN roster (MR-A 0.0, MR-C CI [1.007, 1.011], rollout 0.022). These
+      are two bounded points on the cross-architecture-family applicability map; NOT a
+      PINN-vs-MGN benchmark, NOT a claim of generalization across PINN architectures or PDEs,
+      and NOT a baseline-superiority claim.
     wording_forbidden:
       - "A general cross-architecture-family generalization claim."
       - "A PINN-vs-MGN benchmark or superiority claim."
