@@ -55,5 +55,29 @@ class TestPapersCiteD(unittest.TestCase):
             self.assertIn("future work", t)
 
 
+class TestGenericMRBaseline(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        p = ROOT / "research_assets/runs/generic-mr-baseline/generic_mr_report.json"
+        cls.r = json.loads(p.read_text())
+
+    def test_admit_count_and_overlap(self):
+        # 3/13 admitted, and every admitted template coincides with a paper MR.
+        self.assertEqual(self.r["n_templates"], 13)
+        self.assertEqual(self.r["n_admitted_by_predicate"], 3)
+        self.assertEqual(set(self.r["admitted_template_ids"]),
+                         set(self.r["admitted_overlapping_paper_mrs"]))
+
+    def test_basis_is_dominant_rejection(self):
+        fb = self.r["rejection_breakdown_by_failed_condition"]
+        self.assertEqual(fb["physical_or_software_basis"], 9)
+
+    def test_papers_cite_generic_baseline(self):
+        for p in (MANUSCRIPT, LATEX):
+            t = p.read_text()
+            self.assertIn("3/13", t)
+            self.assertTrue(re.search(r"generic-MR|generic MR", t))
+
+
 if __name__ == "__main__":
     unittest.main()

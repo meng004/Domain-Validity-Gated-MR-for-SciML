@@ -711,9 +711,19 @@ The R3 partial-fraction sweep on PC_zero_vy is plotted alongside in Figure 5.6
 fractions {0.25, 0.5, 0.75}, dropping to 0/6 at fraction 1.0 — the non-monotone
 detection–severity curve described above.
 
-### 5.6.4 LLM-generated MR baseline (one-shot, vendor-disjoint panel)
+### 5.6.4 LLM and generic-MR baselines
 
-To bound what an LLM-only baseline contributes against the same SUT, we executed a
+**Generic-MR generation.** A domain-blind catalogue of 13 standard MT transformation
+templates (committed at `research_assets/runs/generic-mr-baseline/`), run through the
+four-condition admissibility predicate, has 3/13 admitted (node-permutation, edge-reorder,
+conservation), each coinciding with an MR this paper identifies; the 10 rejections are
+dominated by a missing physical/software basis (9) and boundary/output incompatibility (7),
+with mirror-y rejected on the asymmetric eval mesh (matching the paper's downgrade). This is
+the empirical form of "what does the rubric add over generic MR generation": the predicate
+admits the generic templates that encode a true SUT invariance and rejects the rest with a
+stated reason, replacing the prior counterfactual-only argument.
+
+**LLM-generated MRs.** To bound what an LLM-only baseline contributes against the same SUT, we executed a
 three-stage vendor-disjoint pipeline (committed at
 `research_assets/runs/llm-mr-baseline/`). A single generator (gpt-5.5 via the bltcy
 OpenAI-compatible gateway, opus-4-8 rate-limited; temperature=0; prompt sha256

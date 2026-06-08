@@ -40,15 +40,17 @@ claims:
 
   - claim_id: "C3-baseline-comparison"
     status: "partially-observed"
-    scope: "LLM-MR baseline: one generator (gpt-5.5 via bltcy), eight candidates at temperature=0, three vendor-disjoint raters (glm-5.1, kimi-k2.6, deepseek-v4-flash); expert-MR and generic-MR-generation baselines remain blocked at artifacts."
+    scope: "LLM-MR baseline (one gpt-5.5 generator, eight candidates, three vendor-disjoint raters) and generic-MR baseline (13-template domain-blind catalogue) both executed and scored by the predicate; expert-MR baseline remains blocked at artifacts."
     evidence:
       - "tools/run_llm_mr_baseline.py"
       - "tools/rate_llm_mr_baseline.py"
       - "tools/score_llm_mr_baseline.py"
+      - "tools/run_generic_mr_baseline.py"
       - "tests/test_p2_llm_baseline.py"
       - "research_assets/runs/llm-mr-baseline/llm_candidates.json"
       - "research_assets/runs/llm-mr-baseline/llm_votes.json"
       - "research_assets/runs/llm-mr-baseline/llm_baseline_report.json"
+      - "research_assets/runs/generic-mr-baseline/generic_mr_report.json"
     wording_allowed: >
       The comparative baselines remain protocol commitments: Manual expert MR design,
       Generic automatic MR generation scope contrast, and LLM-generated candidate MRs.
@@ -81,7 +83,11 @@ claims:
       near-unanimity, documented in the sibling Minimum-MR-SubSet rubric).
       This is one generator call, eight candidates, three raters - a bounded
       result, not a generative-model benchmark and not a method-vs-LLM
-      superiority claim.
+      superiority claim. Separately, a deterministic generic-MR scope contrast over a 13-template
+      domain-blind catalogue admits 3/13 (node-permutation, edge-reorder,
+      conservation), all coinciding with this paper's MRs, rejecting 10 with stated
+      reasons (dominant: no physical/software basis, 9); this is the empirical form of
+      the rubric-value question, not a claim that generic generation is useless.
     wording_forbidden:
       - "The proposed protocol outperforms any baseline."
       - "Expert-MR or generic-MR comparison results are available."
