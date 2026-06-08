@@ -759,14 +759,18 @@ PDE residual L2 1.07×10⁻²); SUT 2 is the 2D heat equation (α=0.1, scalar fi
 zero-flux BC so mass is strictly conserved; residual L2 1.17×10⁻²). Checkpoints and
 129×129 FD references are committed under `research_assets/runs/pinn-cross-family/` and
 `research_assets/runs/pinn-cross-family-diffusion/`. The MR rewrites parallel Section 5.3.
-**MR-A** (collocation-point permutation) is exact-by-design for a pointwise MLP (violation
-0.0 / 9.9×10⁻⁹). **MR-B** (mirror-y equivariance with the PDE residual as the operator
-floor) gives violation/floor ratio 0.74 (Burgers) and 0.46 (heat) — both pass, the
-learned symmetry being tighter than the PDE solution. **MR-C** (reference-relative
+**MR-A** (collocation-point permutation) is *vacuous by construction* for a pointwise MLP:
+permuting input rows and inverting commutes with row-independent evaluation, so the
+near-zero violation (0.0 / 9.9×10⁻⁹) confirms only that the rewrite is well-defined, not a
+model property — unlike the MGN graph-aggregation case it carries no evidential weight
+here. The two non-trivial MRs do the cross-family work. **MR-B** (mirror-y equivariance,
+scored against the PINN's own PDE residual as a self-reported floor, not an independently
+calibrated one) gives violation/floor ratio 0.74 (Burgers) and 0.46 (heat) — both pass,
+the learned symmetry being tighter than the PDE solution. **MR-C** (reference-relative
 conservation ratio) gives median 1.004 and 0.995 (both pass at the 1.5× gate).
-Rollout-accuracy median relative L2 is 1.0×10⁻² and 1.6×10⁻². All magnitudes match the
-MGN roster (MR-A 0.0; MR-C CI [1.007, 1.011]; rollout 0.022), so the 4-condition
-predicate and the three MR rewrites transfer to two architectures and PDEs (Dirichlet
+Rollout-accuracy median relative L2 is 1.0×10⁻² and 1.6×10⁻². Magnitudes match the
+MGN roster (MR-C CI [1.007, 1.011]; rollout 0.022), so the admissibility predicate and the
+two non-trivial MR rewrites transfer to two architectures and PDEs (Dirichlet
 near-conservation and Neumann strict conservation) without re-engineering. Two PINNs, one
 seed each — two bounded points on the cross-architecture-family applicability map, not a
 PINN-vs-MGN benchmark or a generality claim.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.6.6)  8 JUN 2026 00:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.6.6)  8 JUN 2026 02:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -430,13 +430,13 @@ Underfull \hbox (badness 1803) in paragraph at lines 505--506
 ed-i-cate ad-mit-ted
  []
 
-[27] [28] [29]
+[27] [28]
 Underfull \hbox (badness 1603) in paragraph at lines 544--545
 \T1/cmr/m/n/12 and re-port against the Em-pir-i-cal Stan-dards for soft-ware en
 -gi-neer-ing
  []
 
-[30] [31] (./main.bbl [32] [33] [34]) [35] [36] [37] [38] (./main.aux)
+[29] [30] [31] (./main.bbl [32] [33] [34]) [35] [36] [37] [38] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -475,7 +475,7 @@ public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 sy8.pfb>
-Output written on main.pdf (39 pages, 555028 bytes).
+Output written on main.pdf (39 pages, 554572 bytes).
 PDF statistics:
  1188 PDF objects out of 1200 (max. 8388607)
  233 compressed objects within 3 object streams

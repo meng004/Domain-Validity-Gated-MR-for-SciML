@@ -119,6 +119,13 @@ class TestManuscriptSyncedToReport(unittest.TestCase):
                             "MR-C heat median 0.995 must be cited")
             self.assertTrue(re.search(r"two bounded points", txt),
                             "subsection must frame as two bounded points")
+            # MR-A must stay flagged as evidentially vacuous for the PINN, so a
+            # future edit cannot silently re-inflate the cross-family MR count.
+            self.assertTrue(re.search(r"vacuous by construction", txt),
+                            "MR-A must be marked vacuous-by-construction for the PINN")
+            self.assertTrue(re.search(r"two non-trivial MR", txt),
+                            "cross-family transfer must be attributed to the two "
+                            "non-trivial MRs (MR-B, MR-C), not all three")
 
     def test_ledger_C14_observed(self):
         self.assertIn('claim_id: "C14-cross-family-pinn-extension"', self.led)
