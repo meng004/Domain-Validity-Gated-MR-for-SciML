@@ -1,0 +1,102 @@
+{
+  "record_type": "cross-family-pinn-extension",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-08T00:33:42Z",
+  "sut": {
+    "id": "pinn_diffusion2d_v1",
+    "model_type": "PINN",
+    "pde_id": "heat2d",
+    "spatial_dim": 2,
+    "output_dim": 1,
+    "has_mirror_symmetry": true,
+    "conservation_quantity": "integral of u over domain (Neumann zero-flux)",
+    "checkpoint_sha256": "b54a6b529aa08d688ee7da04e2f30d519257a4685f1b6292a6ed1a7d3e5b0b30",
+    "training_provenance": "trained 2026-06-08T00:33:21Z with Adam+StepLR, 8000 iter, final PDE residual L2 = 1.1704e-02",
+    "num_parameters": 10451
+  },
+  "evaluation_set": {
+    "n_points": 5000,
+    "sampling": "uniform on [-1,1]^2 x [0, 0.5]",
+    "rng_seed": 20260607
+  },
+  "mr_A_permutation_equivariance": {
+    "violation": 9.909295606291835e-09,
+    "tolerance": 1e-05,
+    "verdict": "pass"
+  },
+  "mr_B_symmetry_equivariance": {
+    "violation": 0.005361977964639664,
+    "floor": 0.011703690772114564,
+    "ratio": 0.4581441930230308,
+    "verdict": "pass"
+  },
+  "mr_C_conservation": {
+    "ratios_per_snapshot": [
+      0.9950844067761124,
+      0.9946980217119897,
+      0.9953326684291468,
+      0.9946865430493924,
+      0.9913936847236463,
+      0.9897616276052649
+    ],
+    "median_ratio": 0.9946922823806911,
+    "verdict": "pass"
+  },
+  "rollout_accuracy_baseline": {
+    "relative_l2_per_snapshot": [
+      0.012759797370600488,
+      0.012556602839424249,
+      0.013848473852934027,
+      0.017317312189930083,
+      0.019534198792737448,
+      0.018692365956893837
+    ],
+    "median_relative_l2": 0.015582893021432054,
+    "note": "median relative L2 of PINN scalar field vs FD reference over snapshot times {0, 0.1, 0.2, 0.3, 0.4, 0.5}"
+  },
+  "per_snapshot_raw": [
+    {
+      "t": 0.0,
+      "Q_pred": 0.3126108944416046,
+      "Q_ref": 0.31415515338483246,
+      "ratio": 0.9950844067761124,
+      "rollout_rel_l2": 0.012759797370600488
+    },
+    {
+      "t": 0.1,
+      "Q_pred": 0.31248950958251953,
+      "Q_ref": 0.31415515338483246,
+      "ratio": 0.9946980217119897,
+      "rollout_rel_l2": 0.012556602839424249
+    },
+    {
+      "t": 0.2,
+      "Q_pred": 0.3126888871192932,
+      "Q_ref": 0.31415515338483246,
+      "ratio": 0.9953326684291468,
+      "rollout_rel_l2": 0.013848473852934027
+    },
+    {
+      "t": 0.3,
+      "Q_pred": 0.3124859035015106,
+      "Q_ref": 0.31415515338483246,
+      "ratio": 0.9946865430493924,
+      "rollout_rel_l2": 0.017317312189930083
+    },
+    {
+      "t": 0.4,
+      "Q_pred": 0.31145143508911133,
+      "Q_ref": 0.31415515338483246,
+      "ratio": 0.9913936847236463,
+      "rollout_rel_l2": 0.019534198792737448
+    },
+    {
+      "t": 0.5,
+      "Q_pred": 0.3109387159347534,
+      "Q_ref": 0.31415515338483246,
+      "ratio": 0.9897616276052649,
+      "rollout_rel_l2": 0.018692365956893837
+    }
+  ],
+  "honesty_boundary": "One PINN (5x50 MLP scalar, seed 20260607), one PDE (2D heat equation, alpha=0.1, Neumann zero-flux), one evaluation set, one set of thresholds chosen from the trained PINN's PDE residual floor. Not a generalization across PINN architectures or PDEs."
+}
