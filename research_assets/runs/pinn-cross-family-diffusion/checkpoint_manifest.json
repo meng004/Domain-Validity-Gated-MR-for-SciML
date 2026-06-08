@@ -1,0 +1,44 @@
+{
+  "record_type": "pinn-diffusion2d-training",
+  "sut_id": "pinn_diffusion2d_v1",
+  "generated_at": "2026-06-08T00:33:21Z",
+  "checkpoint": "research_assets/runs/pinn-cross-family-diffusion/sut/checkpoint.pt",
+  "checkpoint_sha256": "b54a6b529aa08d688ee7da04e2f30d519257a4685f1b6292a6ed1a7d3e5b0b30",
+  "config": {
+    "seed": 20260607,
+    "hidden": 50,
+    "layers": 5,
+    "iters": 8000,
+    "n_collocation": 8000,
+    "n_ic": 1000,
+    "n_bc": 1000,
+    "lr": 0.001,
+    "lr_step": 2000,
+    "lr_gamma": 0.5,
+    "outdir": "/home/user/Domain-Validity-Gated-MR-for-SciML/research_assets/runs/pinn-cross-family-diffusion/sut",
+    "log_every": 1000
+  },
+  "loss_first": {
+    "iter": 0,
+    "pde": 1.641050766920671e-05,
+    "ic": 0.036581557244062424,
+    "bc": 8.554277883376926e-05,
+    "total": 0.3666874170303345,
+    "elapsed_s": 1.9739787578582764
+  },
+  "loss_last": {
+    "iter": 7999,
+    "pde": 0.00013697637768927962,
+    "ic": 5.6828316701285075e-06,
+    "bc": 3.3888311463670107e-06,
+    "total": 0.00022769300267100334,
+    "elapsed_s": 388.51960158348083
+  },
+  "final_pde_residual_l2_sq": 0.00013697637768927962,
+  "final_pde_residual_l2": 0.011703690772114564,
+  "num_parameters": 10451,
+  "pde": "2D heat equation, alpha=0.1, domain [-1,1]^2 x [0, 0.5]",
+  "ic": "u = exp(-10(x^2 + y^2)) (symmetric under y -> -y)",
+  "bc": "homogeneous Neumann (zero-flux) on the four edges",
+  "honesty_boundary": "One PINN, one PDE, one seed. Not a generalization across PINN architectures or PDEs."
+}
