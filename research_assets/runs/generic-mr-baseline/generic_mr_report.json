@@ -1,0 +1,198 @@
+{
+  "record_type": "generic-mr-baseline",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-08T03:09:34Z",
+  "generator": "domain-agnostic template catalogue (standard MT transformation patterns)",
+  "predicate": "four-condition admissibility (basis ^ preconditions ^ BC/output ^ numerical decidability)",
+  "n_templates": 13,
+  "n_admitted_by_predicate": 3,
+  "admitted_template_ids": [
+    "node_permutation",
+    "edge_reorder",
+    "discrete_divergence_conservation"
+  ],
+  "admitted_overlapping_paper_mrs": [
+    "node_permutation",
+    "edge_reorder",
+    "discrete_divergence_conservation"
+  ],
+  "rejection_breakdown_by_failed_condition": {
+    "physical_or_software_basis": 9,
+    "transformation_preconditions": 6,
+    "boundary_output_compatibility": 7,
+    "numerical_decidability": 2
+  },
+  "per_template": [
+    {
+      "template_id": "node_permutation",
+      "transformation": "relabel mesh nodes by a permutation",
+      "admissibility": {
+        "physical_or_software_basis": true,
+        "transformation_preconditions": true,
+        "boundary_output_compatibility": true,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": true,
+      "justification": "Graph-relabelling invariance is a true software contract of a GNN; exact to machine precision.",
+      "overlaps_paper_mr": "node_permutation_equivariance"
+    },
+    {
+      "template_id": "edge_reorder",
+      "transformation": "shuffle the edge list / edge features",
+      "admissibility": {
+        "physical_or_software_basis": true,
+        "transformation_preconditions": true,
+        "boundary_output_compatibility": true,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": true,
+      "justification": "Edge-set permutation invariance is a true GNN contract; exact.",
+      "overlaps_paper_mr": "node_permutation_equivariance"
+    },
+    {
+      "template_id": "mirror_y_reflection",
+      "transformation": "reflect domain and velocity about y=0",
+      "admissibility": {
+        "physical_or_software_basis": true,
+        "transformation_preconditions": true,
+        "boundary_output_compatibility": false,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": false,
+      "justification": "A real symmetry, but the BOUNDARY/output compatibility fails on the asymmetric eval mesh (non-bijective reflection); admissible only on a symmetric mesh.",
+      "overlaps_paper_mr": "mirror_y_reflection"
+    },
+    {
+      "template_id": "mirror_x_reflection",
+      "transformation": "reflect domain and velocity about x=0",
+      "admissibility": {
+        "physical_or_software_basis": false,
+        "transformation_preconditions": false,
+        "boundary_output_compatibility": false,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": false,
+      "justification": "Inflow/outflow boundaries are not x-symmetric; reflecting swaps inlet and outlet, so there is no x-reflection invariance.",
+      "overlaps_paper_mr": null
+    },
+    {
+      "template_id": "rotation_90",
+      "transformation": "rotate the domain by 90 degrees",
+      "admissibility": {
+        "physical_or_software_basis": false,
+        "transformation_preconditions": false,
+        "boundary_output_compatibility": false,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": false,
+      "justification": "The cylinder-flow inflow direction and channel walls are not rotation-invariant; no basis.",
+      "overlaps_paper_mr": null
+    },
+    {
+      "template_id": "domain_translation",
+      "transformation": "translate all node positions by a vector",
+      "admissibility": {
+        "physical_or_software_basis": false,
+        "transformation_preconditions": false,
+        "boundary_output_compatibility": false,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": false,
+      "justification": "Translating moves nodes out of the bounded channel and breaks the fixed wall/inflow BCs.",
+      "overlaps_paper_mr": null
+    },
+    {
+      "template_id": "discrete_divergence_conservation",
+      "transformation": "compare predicted vs reference divergence",
+      "admissibility": {
+        "physical_or_software_basis": true,
+        "transformation_preconditions": true,
+        "boundary_output_compatibility": true,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": true,
+      "justification": "Incompressibility is a true governing constraint; reference-relative ratio is numerically decidable against the O(h) operator floor.",
+      "overlaps_paper_mr": "discrete_divergence_free_conservation"
+    },
+    {
+      "template_id": "additive_output_constant",
+      "transformation": "add a constant to the predicted velocity",
+      "admissibility": {
+        "physical_or_software_basis": false,
+        "transformation_preconditions": true,
+        "boundary_output_compatibility": false,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": false,
+      "justification": "No physical invariance: the surrogate output is not invariant to an arbitrary additive offset, and walls fix velocity to zero.",
+      "overlaps_paper_mr": null
+    },
+    {
+      "template_id": "input_global_scaling",
+      "transformation": "multiply the input velocity field by a constant",
+      "admissibility": {
+        "physical_or_software_basis": false,
+        "transformation_preconditions": false,
+        "boundary_output_compatibility": true,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": false,
+      "justification": "Navier-Stokes is not scale-invariant at fixed viscosity/Reynolds; arbitrary scaling leaves the regime.",
+      "overlaps_paper_mr": null
+    },
+    {
+      "template_id": "input_additive_noise",
+      "transformation": "add random noise to the input field",
+      "admissibility": {
+        "physical_or_software_basis": false,
+        "transformation_preconditions": true,
+        "boundary_output_compatibility": true,
+        "numerical_decidability": false
+      },
+      "predicate_admitted": false,
+      "justification": "No invariance basis, and no verdict tolerance dominates a noise-magnitude-dependent floor; at best a robustness probe, not an MR.",
+      "overlaps_paper_mr": null
+    },
+    {
+      "template_id": "channel_swap",
+      "transformation": "swap the vx and vy velocity channels",
+      "admissibility": {
+        "physical_or_software_basis": false,
+        "transformation_preconditions": true,
+        "boundary_output_compatibility": false,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": false,
+      "justification": "Swapping channels is not a symmetry of an anisotropic channel flow; useful only as a fault injection, not as a relation the SUT should satisfy.",
+      "overlaps_paper_mr": null
+    },
+    {
+      "template_id": "time_reversal",
+      "transformation": "reverse the temporal stepping direction",
+      "admissibility": {
+        "physical_or_software_basis": false,
+        "transformation_preconditions": false,
+        "boundary_output_compatibility": true,
+        "numerical_decidability": true
+      },
+      "predicate_admitted": false,
+      "justification": "Viscous diffusion is irreversible; the surrogate is not time-reversal invariant.",
+      "overlaps_paper_mr": null
+    },
+    {
+      "template_id": "mesh_coarsening",
+      "transformation": "predict on a coarsened mesh and compare",
+      "admissibility": {
+        "physical_or_software_basis": false,
+        "transformation_preconditions": false,
+        "boundary_output_compatibility": false,
+        "numerical_decidability": false
+      },
+      "predicate_admitted": false,
+      "justification": "Changing the discretization changes the SUT input distribution; no fixed tolerance separates model error from discretization change.",
+      "overlaps_paper_mr": null
+    }
+  ],
+  "headline": "A domain-blind generic generator proposes 13 candidate templates; the admissibility predicate admits 3/13, and every admitted template coincides with an MR this paper already identifies (['node_permutation', 'edge_reorder', 'discrete_divergence_conservation']). The rubric's value is the 10 reasoned rejections, each tied to a specific failed condition.",
+  "honesty_boundary": "Deterministic offline scope contrast over a fixed template catalogue with determinable per-template admissibility facts; not a learned generator, not a claim that generic generation is useless, and not a real-world yield rate beyond this SUT and catalogue."
+}
