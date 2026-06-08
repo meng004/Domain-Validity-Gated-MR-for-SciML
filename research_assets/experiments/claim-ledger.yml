@@ -378,6 +378,30 @@ pass on both. MR-A collocation-point permutation is VACUOUS BY CONSTRUCTION for 
       - "Generalization across PINN architectures, PDEs, or training regimes."
     blocked_reason: null
 
+  - claim_id: "C15-domain-violation-score"
+    status: "observed"
+    scope: "single relation (mirror-y), geometry-only continuous score from committed precondition measurements on two meshes (synthetic symmetric admissible; real asymmetric eval)"
+    evidence:
+      - "tools/compute_domain_violation_score.py"
+      - "research_assets/runs/domain-violation-score/domain_violation_report.json"
+      - "research_assets/runs/mirror-y-rate-upgrade/raw/precondition_report.json"
+      - "research_assets/runs/mirror-y-symmetric-mesh/raw/metric_ledger.json"
+    wording_allowed: >
+      The domain-violation axis of the two-dimensional verdict, previously only qualitatively
+      binned, is operationalized for the mirror-y relation as a continuous geometric score
+      D = m/(m+1) in [0,1), where m is the worst reflected-node placement error in
+      median-edge-length units, computed from already-committed precondition measurements.
+      The synthetic symmetric admissible mesh scores D ~ 0 (reflection offset ~1e-17) and the
+      real asymmetric eval mesh scores D = 0.51 (max nearest-neighbour-over-edge 1.03,
+      non-bijective), quantitatively confirming the qualitative placement that put the
+      symmetric-mesh failure in the SUT-inconsistency region and the real-mesh probe in the
+      out-of-relation-domain region. This is a single-relation, geometry-only score; a
+      calibrated continuous score spanning all MR classes remains future work.
+    wording_forbidden:
+      - "A calibrated domain-violation score across all MR classes."
+      - "A general or SUT-independent domain-violation metric."
+    blocked_reason: null
+
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
     status: "partially-observed"
