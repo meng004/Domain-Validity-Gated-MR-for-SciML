@@ -1,0 +1,29 @@
+{
+  "record_type": "domain-violation-score",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-08T02:59:39Z",
+  "definition": "D = m/(m+1), m = worst reflected-node placement error in median-edge-length units",
+  "relation": "mirror-y equivariance",
+  "cases": {
+    "node_permutation_relation": {
+      "m_edge_units": 0.0,
+      "D": 0.0,
+      "note": "permutation has no geometric precondition to violate; admissible by construction"
+    },
+    "mirror_y_synthetic_symmetric_mesh": {
+      "m_edge_units": 1.847195895162529e-15,
+      "D": 1.847195895162526e-15,
+      "bijection": true,
+      "node_type_match_rate": 1.0,
+      "verdict_region": "low-domain-violation: a violation here reads as SUT inconsistency"
+    },
+    "mirror_y_real_asymmetric_mesh": {
+      "m_edge_units": 1.0277743117518001,
+      "D": 0.5068484721378598,
+      "bijection": false,
+      "cylinder_offset_from_axis": -0.007245729292432446,
+      "verdict_region": "high-domain-violation: out-of-relation-domain / OOD-stress"
+    }
+  },
+  "honesty_boundary": "Single-relation (mirror-y), geometry-only continuous score from committed precondition measurements. Not a calibrated cross-MR-class domain-violation metric; that remains future work."
+}

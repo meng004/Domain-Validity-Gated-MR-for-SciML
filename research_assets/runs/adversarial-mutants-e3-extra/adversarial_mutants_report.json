@@ -1,0 +1,360 @@
+{
+  "experiment_id": "E3-adversarial-mutants",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-07T13:43:19Z",
+  "purpose": "Confirm or refute the hypothesis that the blind region identified at R3 (PC_zero_vy, p=1.0) is one point in an entire fault subspace defined by the conjunction of the three detector invariances.",
+  "suts": [
+    "S0",
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5"
+  ],
+  "input_seed": 20260606,
+  "adversarial_mutants": [
+    {
+      "id": "ADV_uniform_vx_offset",
+      "description": "uniform constant offset to vx (node-perm / mirror-y / conservation invariant)",
+      "params": {
+        "offset": 0.05
+      }
+    },
+    {
+      "id": "ADV_vx_plus_squared_vy",
+      "description": "add c * vy^2 to vx (node-perm / mirror-y / conservation invariant)",
+      "params": {
+        "coef": 0.05
+      }
+    }
+  ],
+  "per_sut_per_mutant": {
+    "S0": {
+      "baseline": {
+        "node_perm_median": 0.0,
+        "conservation_median": 1.0114302963147428,
+        "mirror_y_median": 0.7354229295205208
+      },
+      "ADV_uniform_vx_offset": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.054551605755432,
+          "mirror_y_median": 0.18006589002526543
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": true,
+          "any": true,
+          "mirror_y_relative_change": 0.7551532828291547
+        },
+        "description": "uniform constant offset to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "offset": 0.05
+        }
+      },
+      "ADV_vx_plus_squared_vy": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.0114176781007655,
+          "mirror_y_median": 0.7354795282013616
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": false,
+          "any": false,
+          "mirror_y_relative_change": 7.696072364475776e-05
+        },
+        "description": "add c * vy^2 to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "coef": 0.05
+        }
+      }
+    },
+    "S1": {
+      "baseline": {
+        "node_perm_median": 0.0,
+        "conservation_median": 1.0102897802168336,
+        "mirror_y_median": 0.8112657955892675
+      },
+      "ADV_uniform_vx_offset": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.0525893444737573,
+          "mirror_y_median": 0.19147762662595116
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": true,
+          "any": true,
+          "mirror_y_relative_change": 0.7639767044697474
+        },
+        "description": "uniform constant offset to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "offset": 0.05
+        }
+      },
+      "ADV_vx_plus_squared_vy": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.0102813906355372,
+          "mirror_y_median": 0.8114662893767721
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": false,
+          "any": false,
+          "mirror_y_relative_change": 0.00024713699085391743
+        },
+        "description": "add c * vy^2 to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "coef": 0.05
+        }
+      }
+    },
+    "S2": {
+      "baseline": {
+        "node_perm_median": 0.0,
+        "conservation_median": 1.01056159665668,
+        "mirror_y_median": 0.7159334970815119
+      },
+      "ADV_uniform_vx_offset": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.0529712931934294,
+          "mirror_y_median": 0.1476860824570633
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": true,
+          "any": true,
+          "mirror_y_relative_change": 0.7937153617492372
+        },
+        "description": "uniform constant offset to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "offset": 0.05
+        }
+      },
+      "ADV_vx_plus_squared_vy": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.0105523581940496,
+          "mirror_y_median": 0.7160015430939835
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": false,
+          "any": false,
+          "mirror_y_relative_change": 9.504515817314844e-05
+        },
+        "description": "add c * vy^2 to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "coef": 0.05
+        }
+      }
+    },
+    "S3": {
+      "baseline": {
+        "node_perm_median": 0.0,
+        "conservation_median": 1.010722181467056,
+        "mirror_y_median": 0.7972346553166318
+      },
+      "ADV_uniform_vx_offset": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.052765014213192,
+          "mirror_y_median": 0.1770184676097434
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": true,
+          "any": true,
+          "mirror_y_relative_change": 0.7779593919691835
+        },
+        "description": "uniform constant offset to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "offset": 0.05
+        }
+      },
+      "ADV_vx_plus_squared_vy": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.01071154115053,
+          "mirror_y_median": 0.7971154831494136
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": false,
+          "any": false,
+          "mirror_y_relative_change": 0.00014948192031480272
+        },
+        "description": "add c * vy^2 to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "coef": 0.05
+        }
+      }
+    },
+    "S4": {
+      "baseline": {
+        "node_perm_median": 0.0,
+        "conservation_median": 1.0096070555660301,
+        "mirror_y_median": 0.762094544601033
+      },
+      "ADV_uniform_vx_offset": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.0507810491086358,
+          "mirror_y_median": 0.16484680572282387
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": true,
+          "any": true,
+          "mirror_y_relative_change": 0.783692447491376
+        },
+        "description": "uniform constant offset to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "offset": 0.05
+        }
+      },
+      "ADV_vx_plus_squared_vy": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.009593809383857,
+          "mirror_y_median": 0.7619969812385455
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": false,
+          "any": false,
+          "mirror_y_relative_change": 0.00012802002478383762
+        },
+        "description": "add c * vy^2 to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "coef": 0.05
+        }
+      }
+    },
+    "S5": {
+      "baseline": {
+        "node_perm_median": 0.0,
+        "conservation_median": 1.0102971005177521,
+        "mirror_y_median": 0.8282140162294923
+      },
+      "ADV_uniform_vx_offset": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.0524153320778606,
+          "mirror_y_median": 0.17643893605517647
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": true,
+          "any": true,
+          "mirror_y_relative_change": 0.786964561577419
+        },
+        "description": "uniform constant offset to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "offset": 0.05
+        }
+      },
+      "ADV_vx_plus_squared_vy": {
+        "values": {
+          "node_perm_median": 0.0,
+          "conservation_median": 1.0102866382762703,
+          "mirror_y_median": 0.8282989007100099
+        },
+        "detections": {
+          "node_perm": false,
+          "conservation": false,
+          "mirror_y": false,
+          "any": false,
+          "mirror_y_relative_change": 0.00010249099731977558
+        },
+        "description": "add c * vy^2 to vx (node-perm / mirror-y / conservation invariant)",
+        "params": {
+          "coef": 0.05
+        }
+      }
+    }
+  },
+  "per_mutant_detection_rate": {
+    "ADV_uniform_vx_offset": {
+      "description": "uniform constant offset to vx (node-perm / mirror-y / conservation invariant)",
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "conservation": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "mirror_y": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        },
+        "any": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        }
+      }
+    },
+    "ADV_vx_plus_squared_vy": {
+      "description": "add c * vy^2 to vx (node-perm / mirror-y / conservation invariant)",
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "conservation": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "any": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        }
+      }
+    }
+  },
+  "claim_limitations": "Within-family bound: K=6 checkpoints of one architecture / one dataset, fixed thresholds, fixed input-permutation seed. Not a real-world fault-detection rate, not cross-architecture-family generalization, not a baseline-superiority claim."
+}

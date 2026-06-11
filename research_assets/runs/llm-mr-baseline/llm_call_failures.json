@@ -1,0 +1,12 @@
+{
+  "attempts": [
+    {
+      "model": "claude-opus-4-8",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "model": "gpt-5.5",
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    }
+  ]
+}

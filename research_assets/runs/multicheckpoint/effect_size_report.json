@@ -1,0 +1,73 @@
+{
+  "record_type": "effect-size-and-nonparametric-tests",
+  "roster_size": 6,
+  "note": "Paired per-checkpoint comparisons across the K=6 roster (S0-S3 seed family + S4 wider + S5 deeper). Wilcoxon is exact by enumeration; at n=6 the minimum attainable two-sided p is 0.03125.",
+  "comparisons": {
+    "mirror_ood_vs_rollout": {
+      "group_a": "mirror_ood",
+      "group_b": "rollout",
+      "a_values": [
+        0.7493719699474907,
+        0.8217584445440408,
+        0.736343283297829,
+        0.7863585484138412,
+        0.7641165162954794,
+        0.8317907752608924
+      ],
+      "b_values": [
+        0.02162959373432519,
+        0.021785567115404535,
+        0.022605647656860167,
+        0.02220901832598942,
+        0.022601764659358814,
+        0.022059216917158
+      ],
+      "cliffs_delta": {
+        "delta": 1.0,
+        "magnitude": "large",
+        "gt_pairs": 36,
+        "lt_pairs": 0,
+        "total_pairs": 36
+      },
+      "wilcoxon_signed_rank": {
+        "n": 6,
+        "W_plus": 21.0,
+        "p_two_sided": 0.03125,
+        "exact_min_two_sided_p": 0.03125
+      }
+    },
+    "mirror_sym_vs_conservation": {
+      "group_a": "mirror_sym",
+      "group_b": "conservation",
+      "a_values": [
+        1.103194870471862,
+        1.0947508404057762,
+        0.6347358984060852,
+        1.1669998553102234,
+        1.1039014013599775,
+        0.9969485394834282
+      ],
+      "b_values": [
+        1.0075129064614574,
+        1.0074281753416587,
+        1.0120341936392088,
+        1.0089313037373082,
+        1.0083700026474374,
+        1.0095816083607432
+      ],
+      "cliffs_delta": {
+        "delta": 0.3333333333333333,
+        "magnitude": "medium",
+        "gt_pairs": 24,
+        "lt_pairs": 12,
+        "total_pairs": 36
+      },
+      "wilcoxon_signed_rank": {
+        "n": 6,
+        "W_plus": 14.0,
+        "p_two_sided": 0.5625,
+        "exact_min_two_sided_p": 0.03125
+      }
+    }
+  }
+}

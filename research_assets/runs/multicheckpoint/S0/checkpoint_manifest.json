@@ -1,0 +1,19 @@
+{
+  "record_type": "multicheckpoint-training",
+  "sut_id": "S0",
+  "checkpoint": "research_assets/runs/multicheckpoint/S0/sut/checkpoint.pt",
+  "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+  "config": {
+    "hidden": 64,
+    "num_layers": 4,
+    "node_in": 11,
+    "edge_in": 3,
+    "out_dim": 2,
+    "seed": 0,
+    "steps": 1500,
+    "train_steps_max": 149,
+    "lr": 0.001
+  },
+  "num_parameters": 176386,
+  "provenance": "reuses the real-sut-node-permutation-pilot checkpoint (base config seed 0)"
+}

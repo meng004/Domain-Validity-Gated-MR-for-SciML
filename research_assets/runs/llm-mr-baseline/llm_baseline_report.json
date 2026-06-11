@@ -1,0 +1,289 @@
+{
+  "record_type": "llm-mr-baseline-report",
+  "schema_version": "0.1.0",
+  "input": "research_assets/runs/llm-mr-baseline/llm_candidates.json",
+  "model_used": "gpt-5.5",
+  "n_candidates": 8,
+  "n_admitted_by_predicate": 8,
+  "n_overlap_with_paper_mrs": 6,
+  "per_paper_mr_overlap_count": {
+    "node_permutation_equivariance": 2,
+    "mirror_y_reflection": 1,
+    "discrete_divergence_free_conservation": 4
+  },
+  "rater_panel_present": true,
+  "rater_panel_fleiss_kappa": 0.07692307692307666,
+  "rater_panel_pra": 0.7916666666666666,
+  "rater_panel_item_unanimous_rate": 0.75,
+  "rater_panel_constant_raters": [],
+  "n_panel_majority_valid": 7,
+  "n_admitted_by_predicate_and_panel_valid": 7,
+  "per_candidate": [
+    {
+      "name": "node_relabel_equivariance",
+      "dimensions": {
+        "physical_basis": "admit",
+        "preconditions": "qualified",
+        "boundary_output_compatibility": "admit",
+        "numerical_decidability": "qualified"
+      },
+      "predicate_admitted": true,
+      "overlaps_paper_mr": {
+        "node_permutation_equivariance": true,
+        "mirror_y_reflection": false,
+        "discrete_divergence_free_conservation": false
+      },
+      "any_overlap": true,
+      "rater_panel": {
+        "majority": "valid",
+        "per_rater": {
+          "glm-5.1": {
+            "vote": "valid",
+            "justification": "Permutation equivariance is a fundamental software contract for message-passing GNNs, and the tolerance properly bounds floating-point summation order changes."
+          },
+          "kimi-k2.6": {
+            "vote": "valid",
+            "justification": "Permutation equivariance is a defining software contract of message-passing GNNs; tolerance explicitly bounds roundoff from message aggregation."
+          },
+          "deepseek-v4-flash": {
+            "vote": "valid",
+            "justification": "Permutation of node ordering should commute with GNN computation as aggregation is permutation-invariant; tolerance covers roundoff."
+          }
+        }
+      }
+    },
+    {
+      "name": "edge_order_invariance",
+      "dimensions": {
+        "physical_basis": "admit",
+        "preconditions": "qualified",
+        "boundary_output_compatibility": "admit",
+        "numerical_decidability": "admit"
+      },
+      "predicate_admitted": true,
+      "overlaps_paper_mr": {
+        "node_permutation_equivariance": true,
+        "mirror_y_reflection": false,
+        "discrete_divergence_free_conservation": false
+      },
+      "any_overlap": true,
+      "rater_panel": {
+        "majority": "valid",
+        "per_rater": {
+          "glm-5.1": {
+            "vote": "valid",
+            "justification": "Commutative aggregation makes edge order a software contract; the tolerance correctly bounds floating-point nondeterminism in message summation."
+          },
+          "kimi-k2.6": {
+            "vote": "valid",
+            "justification": "Edge-list shuffling does not change the mathematical graph; tolerance correctly covers order-dependent floating-point summation noise."
+          },
+          "deepseek-v4-flash": {
+            "vote": "valid",
+            "justification": "Reordering edge list does not affect commutative message aggregation; tolerance covers summation order changes."
+          }
+        }
+      }
+    },
+    {
+      "name": "batch_context_invariance",
+      "dimensions": {
+        "physical_basis": "admit",
+        "preconditions": "qualified",
+        "boundary_output_compatibility": "admit",
+        "numerical_decidability": "qualified"
+      },
+      "predicate_admitted": true,
+      "overlaps_paper_mr": {
+        "node_permutation_equivariance": false,
+        "mirror_y_reflection": false,
+        "discrete_divergence_free_conservation": false
+      },
+      "any_overlap": false,
+      "rater_panel": {
+        "majority": "valid",
+        "per_rater": {
+          "glm-5.1": {
+            "vote": "valid",
+            "justification": "Independent trajectories shouldn't interact via batching; the tolerance accounts for hardware nondeterminism while excluding batch-dependent normalization."
+          },
+          "kimi-k2.6": {
+            "vote": "valid",
+            "justification": "Independent graph processing within a batch is a standard GNN contract; tolerance appropriately isolates hardware and batching nondeterminism."
+          },
+          "deepseek-v4-flash": {
+            "vote": "valid",
+            "justification": "In inference mode without batch statistics, batched and single evaluations should yield identical predictions for the same graph."
+          }
+        }
+      }
+    },
+    {
+      "name": "deterministic_replay",
+      "dimensions": {
+        "physical_basis": "admit",
+        "preconditions": "qualified",
+        "boundary_output_compatibility": "admit",
+        "numerical_decidability": "admit"
+      },
+      "predicate_admitted": true,
+      "overlaps_paper_mr": {
+        "node_permutation_equivariance": false,
+        "mirror_y_reflection": false,
+        "discrete_divergence_free_conservation": false
+      },
+      "any_overlap": false,
+      "rater_panel": {
+        "majority": "valid",
+        "per_rater": {
+          "glm-5.1": {
+            "vote": "valid",
+            "justification": "Identical inputs must yield identical outputs up to a well-defined platform nondeterminism floor, making this a valid software contract."
+          },
+          "kimi-k2.6": {
+            "vote": "valid",
+            "justification": "Identical inputs with fixed weights must yield identical outputs; tolerance is grounded in empirical repeatability and unit roundoff."
+          },
+          "deepseek-v4-flash": {
+            "vote": "valid",
+            "justification": "Repeated evaluation with fixed settings must produce the same output up to hardware nondeterminism floor."
+          }
+        }
+      }
+    },
+    {
+      "name": "centerline_reflection_equivariance",
+      "dimensions": {
+        "physical_basis": "admit",
+        "preconditions": "admit",
+        "boundary_output_compatibility": "admit",
+        "numerical_decidability": "admit"
+      },
+      "predicate_admitted": true,
+      "overlaps_paper_mr": {
+        "node_permutation_equivariance": false,
+        "mirror_y_reflection": true,
+        "discrete_divergence_free_conservation": true
+      },
+      "any_overlap": true,
+      "rater_panel": {
+        "majority": "borderline",
+        "per_rater": {
+          "glm-5.1": {
+            "vote": "invalid",
+            "justification": "Reflecting only velocities onto an unstructured asymmetric mesh ignores asymmetric mesh features, breaking the expected equivariance relation."
+          },
+          "kimi-k2.6": {
+            "vote": "valid",
+            "justification": "Reflection symmetry is physically exact for this symmetric geometry; tolerance accounts for interpolation and inference roundoff."
+          },
+          "deepseek-v4-flash": {
+            "vote": "borderline",
+            "justification": "Relation holds only if mesh is symmetric or interpolation error is tightly bounded; requires careful precondition on mesh."
+          }
+        }
+      }
+    },
+    {
+      "name": "dirichlet_boundary_preservation",
+      "dimensions": {
+        "physical_basis": "qualified",
+        "preconditions": "admit",
+        "boundary_output_compatibility": "admit",
+        "numerical_decidability": "admit"
+      },
+      "predicate_admitted": true,
+      "overlaps_paper_mr": {
+        "node_permutation_equivariance": false,
+        "mirror_y_reflection": false,
+        "discrete_divergence_free_conservation": true
+      },
+      "any_overlap": true,
+      "rater_panel": {
+        "majority": "valid",
+        "per_rater": {
+          "glm-5.1": {
+            "vote": "valid",
+            "justification": "Perturbing interior nodes should leave Dirichlet outputs unchanged, testing BC adherence with a well-reasoned tolerance for weakly imposed boundaries."
+          },
+          "kimi-k2.6": {
+            "vote": "valid",
+            "justification": "Dirichlet nodes are physically independent of interior perturbations; tolerance distinguishes exact clamping from weak enforcement residuals."
+          },
+          "deepseek-v4-flash": {
+            "vote": "valid",
+            "justification": "Dirichlet boundary velocities are fixed functions of time, so interior perturbations must not affect them; tolerance covers model BC error."
+          }
+        }
+      }
+    },
+    {
+      "name": "global_flux_balance",
+      "dimensions": {
+        "physical_basis": "admit",
+        "preconditions": "admit",
+        "boundary_output_compatibility": "admit",
+        "numerical_decidability": "admit"
+      },
+      "predicate_admitted": true,
+      "overlaps_paper_mr": {
+        "node_permutation_equivariance": false,
+        "mirror_y_reflection": false,
+        "discrete_divergence_free_conservation": true
+      },
+      "any_overlap": true,
+      "rater_panel": {
+        "majority": "valid",
+        "per_rater": {
+          "glm-5.1": {
+            "vote": "valid",
+            "justification": "Global incompressibility is a fundamental conservation law, and the tolerance properly accounts for boundary quadrature error and prediction noise."
+          },
+          "kimi-k2.6": {
+            "vote": "valid",
+            "justification": "Global mass conservation is a first-principle constraint of incompressible flow; tolerance includes quadrature error and prediction noise floors."
+          },
+          "deepseek-v4-flash": {
+            "vote": "valid",
+            "justification": "Global boundary flux must be near zero for incompressible flow; tolerance accounts for quadrature and prediction error."
+          }
+        }
+      }
+    },
+    {
+      "name": "small_perturbation_one_step_stability",
+      "dimensions": {
+        "physical_basis": "admit",
+        "preconditions": "admit",
+        "boundary_output_compatibility": "admit",
+        "numerical_decidability": "admit"
+      },
+      "predicate_admitted": true,
+      "overlaps_paper_mr": {
+        "node_permutation_equivariance": false,
+        "mirror_y_reflection": false,
+        "discrete_divergence_free_conservation": true
+      },
+      "any_overlap": true,
+      "rater_panel": {
+        "majority": "valid",
+        "per_rater": {
+          "glm-5.1": {
+            "vote": "valid",
+            "justification": "One-step continuity of the solution operator is a defensible physical basis, and the tolerance rationale correctly estimates the local Lipschitz constant."
+          },
+          "kimi-k2.6": {
+            "vote": "borderline",
+            "justification": "Continuity of the NS operator supports bounded response, but calibrating L_local from the surrogate or nearby data risks circularity and loose bounds."
+          },
+          "deepseek-v4-flash": {
+            "vote": "valid",
+            "justification": "Output change under small admissible perturbation should be bounded by local Lipschitz constant plus numerical floor."
+          }
+        }
+      }
+    }
+  ],
+  "predicate_definition": "physical/software basis ^ transformation preconditions ^ boundary + output-mapping compatibility ^ numerical decidability (verdict tolerance must dominate the operator floor).",
+  "honesty_boundary": "Self-reported fields by one LLM, graded by this paper's own rubric. Not a multi-rater study; not a claim that this LLM is representative of LLMs in general. The point is the comparison the paper claims is missing: which LLM-proposed MRs survive the admissibility gate."
+}

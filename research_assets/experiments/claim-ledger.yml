@@ -39,18 +39,61 @@ claims:
     blocked_reason: null
 
   - claim_id: "C3-baseline-comparison"
-    status: "blocked"
-    evidence: []
+    status: "partially-observed"
+    scope: "LLM-MR baseline (one gpt-5.5 generator, eight candidates, three vendor-disjoint raters) and generic-MR baseline (13-template domain-blind catalogue) both executed and scored by the predicate; expert-MR baseline remains blocked at artifacts."
+    evidence:
+      - "tools/run_llm_mr_baseline.py"
+      - "tools/rate_llm_mr_baseline.py"
+      - "tools/score_llm_mr_baseline.py"
+      - "tools/run_generic_mr_baseline.py"
+      - "tests/test_p2_llm_baseline.py"
+      - "research_assets/runs/llm-mr-baseline/llm_candidates.json"
+      - "research_assets/runs/llm-mr-baseline/llm_votes.json"
+      - "research_assets/runs/llm-mr-baseline/llm_baseline_report.json"
+      - "research_assets/runs/generic-mr-baseline/generic_mr_report.json"
     wording_allowed: >
       The comparative baselines remain protocol commitments: Manual expert MR design,
       Generic automatic MR generation scope contrast, and LLM-generated candidate MRs.
       The rollout-accuracy diagnostic is no longer a commitment only: it has been executed
       (see C8-rollout-accuracy-baseline) and is reported as a same-SUT diagnostic
-      comparator, not as a defeated competitor.
+      comparator, not as a defeated competitor. For the LLM-generated-MR baseline the
+      execution pipeline is now committed and reproducible-by-protocol in three stages
+      with vendor-disjoint LLMs: tools/run_llm_mr_baseline.py asks one generator
+      (claude-opus-4-8 with gpt-5.5 fallback, via the bltcy OpenAI-compatible
+      gateway) for K=8 candidate MRs at temperature=0; tools/rate_llm_mr_baseline.py
+      then collects three INDEPENDENT validity votes per candidate from three
+      vendor-disjoint LLMs (glm-5.1, kimi-k2.6, deepseek-v4-flash - explicitly NOT
+      the generator's vendor, to avoid self-preference) on a 3-class label
+      {valid, borderline, invalid}, persisting the raw votes, Fleiss kappa,
+      raw pointwise agreement, item-unanimous rate, and a constant-rater screen
+      that excludes any rater that emits a single label across all candidates;
+      tools/score_llm_mr_baseline.py grades each candidate against this paper's
+      four-condition admissibility predicate AND merges the three-LLM majority
+      verdict, reporting the cross-tab (admitted-by-predicate AND panel-valid).
+      One execution has been recorded: generator gpt-5.5 (opus-4-8 was
+      rate-limited and skipped) at max_tokens=12000 produced 8 candidates; the
+      three vendor-disjoint raters all voted, with no constant rater detected.
+      Results: 8/8 candidates satisfied the four-condition admissibility predicate
+      on their self-declared fields, 7/8 reached panel-majority "valid", and 6/8
+      overlap thematically with one of this paper's three MRs (2 node-permutation,
+      1 mirror-y, 4 conservation; one centerline-reflection candidate split the
+      panel valid/borderline/invalid for the same non-bijectivity reason this paper
+      downgrades mirror-y to OOD-stress). Inter-rater raw-PRA 0.79 and
+      item-unanimous 0.75; Fleiss kappa 0.077 (the small-sample paradox under
+      near-unanimity, documented in the sibling Minimum-MR-SubSet rubric).
+      This is one generator call, eight candidates, three raters - a bounded
+      result, not a generative-model benchmark and not a method-vs-LLM
+      superiority claim. Separately, a deterministic generic-MR scope contrast over a 13-template
+      domain-blind catalogue admits 3/13 (node-permutation, edge-reorder,
+      conservation), all coinciding with this paper's MRs, rejecting 10 with stated
+      reasons (dominant: no physical/software basis, 9); this is the empirical form of
+      the rubric-value question, not a claim that generic generation is useless.
     wording_forbidden:
       - "The proposed protocol outperforms any baseline."
-      - "Expert-MR, generic-MR, or LLM baseline comparison results are available."
-    blocked_reason: "No matched expert-MR, generic-MR, or LLM baseline run artifacts or scoring ledgers exist; only the rollout-accuracy diagnostic (C8) has been run."
+      - "Expert-MR or generic-MR comparison results are available."
+      - "An LLM-vs-method superiority or general LLM-MR-generation quality claim."
+      - "A generative-model benchmark or LLM-quality ranking."
+    blocked_reason: "Expert-MR and generic-MR-generation baselines remain protocol commitments without committed pipelines. The LLM-MR baseline has produced one bounded execution; cross-LLM, multi-sample, or larger-K generalizations are not in scope."
 
   - claim_id: "C4-rubric-decision-coverage"
     status: "qualified"
@@ -270,16 +313,29 @@ claims:
 
   - claim_id: "C13-fault-detection-robustness"
     status: "observed"
-    scope: "K=6 checkpoints / 10-mutant injected-fault catalogue / 3 domain-validity MR detectors / 5 input-permutation seeds / NS_double_scale severity grid {1.1, 1.25, 1.5, 2.0, 4.0} / PC_zero_vy partial-fraction grid {0.25, 0.5, 0.75, 1.0}"
+    scope: "K=6 checkpoints / 10-mutant injected-fault catalogue plus 2 adversarial mutants / 3 domain-validity MR detectors / 5 input-permutation seeds / NS_double_scale severity grid {1.1, 1.25, 1.5, 2.0, 4.0} / PC_zero_vy partial-fraction grid {0.25, 0.5, 0.75, 0.85, 0.9, 0.95, 0.99, 1.0}"
     evidence:
       - "tools/run_e3_fault_robustness.py"
+      - "tools/run_e3_adversarial_mutants.py"
       - "research_assets/runs/fault-robustness-e3/fault_robustness_report.json"
+      - "research_assets/runs/adversarial-mutants-e3-extra/adversarial_mutants_report.json"
     wording_allowed: >
       Replaying the 10-mutant five-class seeded-fault catalogue against the K=6 checkpoint
       roster yields stable per-mutant cross-SUT detection rates with Wilson 95% CIs; the
-      severity sweep on NS_double_scale s in {1.1, 1.25, 1.5, 2.0, 4.0} and on PC_zero_vy
-      partial-fraction p in {0.25, 0.5, 0.75, 1.0} shows monotone-non-decreasing detection
-      versus severity. Detection localizes by MR class (continuity -> boundary/scale;
+      severity sweep on NS_double_scale s in {1.1, 1.25, 1.5, 2.0, 4.0} stays at 0/6, and
+      the refined PC_zero_vy partial-fraction sweep p in {0.25, 0.5, 0.75, 0.85, 0.9, 0.95,
+      0.99, 1.0} shows a knife-edge: 6/6 detection (via the node-permutation detector, since
+      index-selected partial zeroing is not relabeling-invariant) at every p up to 0.99, and
+      0/6 only at the exactly-uniform p = 1.0, where the fault is simultaneously permutation-
+      invariant and mirror-symmetric and escapes all geometric detectors. Two adversarial
+      mutants (R4) confirm the blind region is a subspace rather than a point: A2
+      (delta_vx += 0.05 * vy^2, invariant under all three detectors) escapes every detector
+      on every checkpoint (any-detector 0/6), and A1 (delta_vx += 0.05) is flagged only by
+      mirror-y on 6/6 - node-permutation 0/6 and conservation 0/6 - because A1 shifts the
+      magnitude of the mirror-y violation beyond the 0.5 relative-change threshold, not
+      because it breaks any symmetry. A2 stays below that threshold by three orders of
+      magnitude. Detection localizes
+      by MR class (continuity -> boundary/scale;
       symmetry -> physical-channel/adjacency; node-permutation is exact-by-design and
       flags none of these mutants). This bounds the detector sensitivity of these
       domain-validity MRs against this catalogue across the family, and is not a
@@ -289,6 +345,69 @@ claims:
       - "Cross-SUT (cross-architecture-family) generalization."
     blocked_reason: null
 
+  - claim_id: "C14-cross-family-pinn-extension"
+    status: "observed"
+    scope: "two PINNs (5-layer x 50-neuron MLP each) / two PDEs (2D viscous Burgers nu=0.05 Dirichlet-zero-BC vector field; 2D heat alpha=0.1 Neumann-zero-flux scalar field) / one seed each (20260607) / three MRs rewritten for the PINN family + rollout-accuracy baseline against 129x129 FD references"
+    evidence:
+      - "tools/train_pinn_burgers2d.py"
+      - "tools/compute_burgers2d_reference.py"
+      - "tools/run_pinn_mr_extension.py"
+      - "tools/train_pinn_diffusion2d.py"
+      - "tools/compute_diffusion2d_reference.py"
+      - "tools/run_pinn_diffusion_mr_extension.py"
+      - "research_assets/runs/pinn-cross-family/sut/checkpoint.pt"
+      - "research_assets/runs/pinn-cross-family/pinn_mr_report.json"
+      - "research_assets/runs/pinn-cross-family-diffusion/sut/checkpoint.pt"
+      - "research_assets/runs/pinn-cross-family-diffusion/pinn_mr_report.json"
+      - "research_assets/runs/pinn-cross-family-diffusion/reference_solution.npz"
+    wording_allowed: >
+      To check whether the four-condition admissibility predicate and the three MR rewrites
+      are MeshGraphNets-specific, the predicate was applied to two separately trained PINNs on
+      two different PDEs: 2D viscous Burgers (Dirichlet zero BC, near-conservation) and the 2D
+      heat equation (Neumann zero-flux BC, strict mass conservation). All three MR rewrites
+pass on both. MR-A collocation-point permutation is VACUOUS BY CONSTRUCTION for a
+      pointwise MLP (the permute-and-invert commutes with row-independent evaluation, so the
+      near-zero violation 0.0 / 9.9e-9 confirms only that the rewrite is well-defined and
+      carries no evidential weight, unlike the MGN graph-aggregation case); the two
+      non-trivial MRs do the cross-family work. MR-B mirror-y equivariance, scored against the
+      PINN's own PDE residual as a self-reported floor (not an independently calibrated one),
+      gives violation/floor ratio 0.74 (Burgers) and 0.46 (heat), both < 1; MR-C
+      reference-relative conservation ratio is 1.004 and 0.995 (both under the 1.5x gate); the
+      rollout-accuracy baseline is median relative L2 1.0e-2 and 1.6e-2. Magnitudes are
+      comparable to the K=6 MGN roster (MR-C CI [1.007, 1.011], rollout 0.022). These
+      are two bounded points on the cross-architecture-family applicability map; NOT a
+      PINN-vs-MGN benchmark, NOT a claim of generalization across PINN architectures or PDEs,
+      and NOT a baseline-superiority claim.
+    wording_forbidden:
+      - "A general cross-architecture-family generalization claim."
+      - "A PINN-vs-MGN benchmark or superiority claim."
+      - "Generalization across PINN architectures, PDEs, or training regimes."
+    blocked_reason: null
+
+  - claim_id: "C15-domain-violation-score"
+    status: "observed"
+    scope: "single relation (mirror-y), geometry-only continuous score from committed precondition measurements on two meshes (synthetic symmetric admissible; real asymmetric eval)"
+    evidence:
+      - "tools/compute_domain_violation_score.py"
+      - "research_assets/runs/domain-violation-score/domain_violation_report.json"
+      - "research_assets/runs/mirror-y-rate-upgrade/raw/precondition_report.json"
+      - "research_assets/runs/mirror-y-symmetric-mesh/raw/metric_ledger.json"
+    wording_allowed: >
+      The domain-violation axis of the two-dimensional verdict, previously only qualitatively
+      binned, is operationalized for the mirror-y relation as a continuous geometric score
+      D = m/(m+1) in [0,1), where m is the worst reflected-node placement error in
+      median-edge-length units, computed from already-committed precondition measurements.
+      The synthetic symmetric admissible mesh scores D ~ 0 (reflection offset ~1e-17) and the
+      real asymmetric eval mesh scores D = 0.51 (max nearest-neighbour-over-edge 1.03,
+      non-bijective), quantitatively confirming the qualitative placement that put the
+      symmetric-mesh failure in the SUT-inconsistency region and the real-mesh probe in the
+      out-of-relation-domain region. This is a single-relation, geometry-only score; a
+      calibrated continuous score spanning all MR classes remains future work.
+    wording_forbidden:
+      - "A calibrated domain-violation score across all MR classes."
+      - "A general or SUT-independent domain-violation metric."
+    blocked_reason: null
+
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
     status: "partially-observed"
@@ -296,7 +415,8 @@ speculative_claims:
       A bounded result now exists (see C10-seeded-fault-detection and
       C13-fault-detection-robustness): the MRs detect 5/10 mutants of one injected-fault
       catalogue on one SUT, and the rate is stable at 5/10 across the seed-replica
-      family and 4/10 across the capacity/depth variants in the K=6 roster, with severity
-      sweeps showing monotone-non-decreasing detection. General fault-detection
+      family and 4/10 across the capacity/depth variants in the K=6 roster, with the refined
+      PC_zero_vy sweep showing a knife-edge blind spot only at the exactly-symmetric fault.
+      General fault-detection
       effectiveness across architecture families and real-world faults remains future work.
     blocked_reason: "K=6 checkpoints share one architecture family / one dataset; one injected-fault catalogue."

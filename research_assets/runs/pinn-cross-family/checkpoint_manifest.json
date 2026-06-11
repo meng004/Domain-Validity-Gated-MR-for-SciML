@@ -1,0 +1,45 @@
+{
+  "record_type": "pinn-burgers2d-training",
+  "sut_id": "pinn_burgers2d_v1",
+  "generated_at": "2026-06-07T14:39:25Z",
+  "checkpoint": "research_assets/runs/pinn-cross-family/sut/checkpoint.pt",
+  "checkpoint_sha256": "ff3eae5b40eb31326735191b01adeeb3837390d3eabc62143be03c92acec52ed",
+  "config": {
+    "seed": 20260607,
+    "hidden": 50,
+    "layers": 5,
+    "iters": 8000,
+    "n_collocation": 8000,
+    "n_ic": 1000,
+    "n_bc": 1000,
+    "lr": 0.001,
+    "lr_step": 2000,
+    "lr_gamma": 0.5,
+    "outdir": "/home/user/Domain-Validity-Gated-MR-for-SciML/research_assets/runs/pinn-cross-family/sut",
+    "early_stop_residual": null,
+    "log_every": 100
+  },
+  "loss_first": {
+    "iter": 0,
+    "pde": 5.023269841331057e-05,
+    "ic": 0.07008931040763855,
+    "bc": 0.0031438861042261124,
+    "total": 0.7323822379112244,
+    "elapsed_s": 0.6998627185821533
+  },
+  "loss_last": {
+    "iter": 7999,
+    "pde": 0.00011482266563689336,
+    "ic": 8.826797056826763e-06,
+    "bc": 6.291672889346955e-06,
+    "total": 0.00026600735145621,
+    "elapsed_s": 423.2718789577484
+  },
+  "final_pde_residual_l2_sq": 0.00011482266563689336,
+  "final_pde_residual_l2": 0.010715533847498843,
+  "num_parameters": 10502,
+  "pde": "2D viscous Burgers, nu=0.05, domain [-1,1]^2 x [0, 0.5]",
+  "ic": "u_x = exp(-5(x^2 + y^2)), u_y = 0 (symmetric under y -> -y)",
+  "bc": "Dirichlet u = 0 on boundary",
+  "honesty_boundary": "One PINN, one PDE, one seed, one set of hyperparameters. Not a generalization across PINN architectures or PDEs."
+}

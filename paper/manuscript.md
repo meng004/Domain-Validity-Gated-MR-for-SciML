@@ -233,7 +233,7 @@ This scheme prevents a common overclaim: not every relation violation is a progr
 
 It is useful to read these verdicts as regions of a two-dimensional space rather than as a flat list. One axis is the relation-violation magnitude — how far the measured quantity exceeds the tolerance, for example the violation-to-tolerance ratio or the violation-to-floor ratio V/floor. The other axis is the domain-violation magnitude — how far the transformed case lies outside the relation's validity domain, signalled by precondition violation, geometry mismatch, boundary-condition mismatch, or operator inadmissibility. Low domain-violation with low relation-violation is pass; low domain-violation with high relation-violation is the only region that may be read as SUT inconsistency; high domain-violation is out-of-relation-domain or, near the boundary, OOD-stress; a relation-violation that sits within the error floor is a numerical-tolerance issue. This decomposition is what keeps a model-level violation from being confused with a relation applied outside its domain, and it makes condition (iv) of the admissibility predicate explicit at verdict time.
 
-In the present study the relation-violation axis is quantitative — mirror-y reports V/floor — but the domain-violation axis is so far only partially operationalized. The mirror-y case is placed near the validity boundary *qualitatively*: the reflection is non-bijective and the worst reflected-node mismatch is about one mesh edge length, so the exact relation is out-of-relation-domain and is downgraded to an approximate OOD-stress probe. We do not claim a fully calibrated, continuous domain-violation score; defining such a score across MR classes is left to future work. The two-dimensional reading is used here as an interpretive structure, not as a calibrated boundary measurement.
+In the present study the relation-violation axis is quantitative — mirror-y reports V/floor — and for the mirror-y relation the domain-violation axis is now operationalized as a continuous geometric score D = m/(m+1), where m is the worst reflected-node placement error in median-edge-length units (committed at `research_assets/runs/domain-violation-score/`). The synthetic symmetric mesh scores D ≈ 0 (a reflected node lands on an existing node, so the exact relation is admissible) and the real asymmetric eval mesh scores D = 0.51 (a reflected node lands about one edge length off, so the exact relation is out-of-relation-domain and is downgraded to an approximate OOD-stress probe). We do not claim a fully calibrated, continuous domain-violation score across all MR classes; defining such a score is left to future work, so for the other relations the two-dimensional reading is used as an interpretive structure, not as a calibrated boundary measurement.
 
 ### 3.6 Hierarchical Interpretation Protocol
 
@@ -600,8 +600,8 @@ single checkpoint and to delimit where its detectors are structurally insensitiv
 10-mutant catalogue is replayed against the K=6 multi-checkpoint roster across five
 input-permutation seeds (30 trials per mutant per detector), and two predeclared
 severity dimensions are swept: NS_double_scale s ∈ {1.1, 1.25, 1.5, 2, 4} and
-PC_zero_vy partial fraction p ∈ {0.25, 0.5, 0.75, 1.0} (the canonical mutant is p =
-1.0). Detection is decided by the same predeclared thresholds as Section 5.3
+PC_zero_vy partial fraction p ∈ {0.25, 0.5, 0.75, 0.85, 0.9, 0.95, 0.99, 1.0} (the
+canonical mutant is p = 1.0). Detection is decided by the same predeclared thresholds as Section 5.3
 (node-permutation tolerance 1e-5, conservation ratio threshold 1.5, mirror-y
 relative-change threshold 0.5). Wilson 95% CIs are computed across the (SUT, seed)
 cells. Raw outputs are committed at
@@ -634,20 +634,49 @@ equivariant). The MR catalogue at the current thresholds is therefore structural
 insensitive to multiplicative output scaling on this surrogate across the swept grid,
 not only at the canonical 2× fault.
 
-**PC_zero_vy partial-fraction sweep (R3) — non-monotone detection.** At partial
-zeroing fractions p ∈ {0.25, 0.5, 0.75} the detection rate is 6/6 across the
-checkpoint roster (Wilson CI [0.61, 1.00]); at the canonical full fraction p = 1.0 the
-detection rate drops to 0/6 (CI [0.00, 0.39]). The intuition is structural: uniform
-vy = 0 is itself mirror-y-symmetric (0 = −0 under reflection in the transverse
-component), so it preserves the very symmetry the MR scores; only spatially partial
-zeroing creates an asymmetric residual that the symmetry MR can resolve. The
-detection–severity curve is therefore non-monotone, with the canonical (full) fault
-sitting in a detection blind region that intermediate severities expose. This is a
-within-family finding about one MR–fault pair, not a general non-monotonicity claim
-across all symmetry MRs, but it is a concrete instance of a structural insight that a
-severity sweep makes explicit and a single-severity experiment hides: a fault MR may
-be insensitive to the most severe instance precisely because that instance shares an
-invariance the MR depends on.
+**PC_zero_vy partial-fraction sweep (R3) — a knife-edge symmetry blind spot.**
+Refining the fraction grid resolves *where* detection collapses. At every partial
+fraction up to and including p = 0.99 the detection rate is 6/6 across the roster
+(Wilson CI [0.61, 1.00]); it falls to 0/6 (CI [0.00, 0.39]) only at the exactly-uniform
+fraction p = 1.0. The transition is a step at the symmetric point, not a gradual
+decline — even 1%-asymmetric zeroing is caught on every checkpoint. The mechanism is
+structural and the responsible detector is specific: partial zeroing masks vy on a
+node-index-selected random subset, which is not invariant under node relabeling, so it
+is the *node-permutation* detector that trips — not the symmetry MR, which never fires
+in this sweep (0/6 at all fractions). At p = 1.0 the fault becomes simultaneously
+permutation-invariant and mirror-y-symmetric (uniform vy = 0 = −0 under reflection), so
+it escapes every geometric detector at once. The canonical (full) fault therefore sits
+in a measure-zero blind region — the exactly-symmetric configuration — that any partial
+severity exposes. This is a within-family finding about one MR–fault pair, not a general
+claim, but it is a concrete instance of a structural insight that a severity sweep makes
+explicit and a single-severity experiment hides: a fault can be invisible to a geometric
+MR suite precisely when it shares the invariances those MRs depend on.
+
+**Adversarial mutants (R4) — the blind region is a subspace, not a point.** To check
+whether the R3 blind point (PC_zero_vy at p=1.0) is isolated or one member of an entire
+fault subspace, we constructed two adversarial mutants that are deliberately invariant
+under every one of the three detectors at once and replayed them across the K=6 roster
+(raw outputs at `research_assets/runs/adversarial-mutants-e3-extra/`). A1 adds a uniform
+constant `c=0.05` to the predicted `delta_vx`; A2 adds `c·vy²` to the predicted
+`delta_vx`. Both modifications are uniform per-node (node-permutation invariant), both
+are invariant under the mirror-y reflection `(vx, vy) → (vx, −vy)` (vx and vy² are even
+under that map), and both have zero spatial divergence in `x` (so the
+reference-relative conservation ratio is unchanged). A2 escapes every detector on every
+checkpoint (any-detector 0/6, Wilson CI [0.00, 0.39]; the mirror-y relative change is
+1–3 × 10⁻⁴, three orders of magnitude below the 0.5 threshold): the R3 blind point is
+not isolated. A1 is unexpectedly flagged on every checkpoint (mirror-y 6/6), but
+inspection shows the mechanism is not symmetry-breaking — the per-detector breakdown is
+node-permutation 0/6 and conservation 0/6, with only mirror-y firing because A1 shifts
+the *magnitude* of the surrogate's mirror-y violation enough to cross the
+relative-change threshold. This is detector engineering, not a recovery: A1 says the
+current threshold catches an invariance-preserving fault whenever it perturbs the
+violation magnitude beyond 50 % of baseline, and a calibrated adversary can stay below
+that bound (A2 does so by orders of magnitude). The defensible reading is that the
+suite's blind region under the predeclared thresholds is a subspace, not a point, whose
+extent is governed by how tightly the relative-change tolerances are set. This bounds
+the false-reassurance risk against this MR suite and motivates an explicit
+symmetry-breaking score in future work; it is not a real-world fault-detection-rate
+claim or a baseline-superiority claim.
 
 **Aggregate reading.** The 5-of-10 union detection rate from C10 reproduces tightly
 across the seed-replica family (5/10 on each of S0–S3) and drops by one to 4/10 on the
@@ -682,19 +711,93 @@ The R3 partial-fraction sweep on PC_zero_vy is plotted alongside in Figure 5.6
 fractions {0.25, 0.5, 0.75}, dropping to 0/6 at fraction 1.0 — the non-monotone
 detection–severity curve described above.
 
+### 5.6.4 LLM and generic-MR baselines
+
+**Generic-MR generation.** A domain-blind catalogue of 13 standard MT transformation
+templates (committed at `research_assets/runs/generic-mr-baseline/`), run through the
+four-condition admissibility predicate, has 3/13 admitted (node-permutation, edge-reorder,
+conservation), each coinciding with an MR this paper identifies; the 10 rejections are
+dominated by a missing physical/software basis (9) and boundary/output incompatibility (7),
+with mirror-y rejected on the asymmetric eval mesh (matching the paper's downgrade). This is
+the empirical form of "what does the rubric add over generic MR generation": the predicate
+admits the generic templates that encode a true SUT invariance and rejects the rest with a
+stated reason, replacing the prior counterfactual-only argument.
+
+**LLM-generated MRs.** To bound what an LLM-only baseline contributes against the same SUT, we executed a
+three-stage vendor-disjoint pipeline (committed at
+`research_assets/runs/llm-mr-baseline/`). A single generator (gpt-5.5 via the bltcy
+OpenAI-compatible gateway, opus-4-8 rate-limited; temperature=0; prompt sha256
+recorded) was asked to propose K=8 candidate MRs for this surrogate from first
+principles. Each candidate was then voted on independently by three vendor-disjoint
+LLMs that are NOT the generator's vendor (`glm-5.1`, `kimi-k2.6`, `deepseek-v4-flash`;
+ZhipuAI, Moonshot, DeepSeek) on a 3-class label {valid, borderline, invalid}; raw
+per-rater responses are persisted for audit. We report this paper's predicate
+verdict and the panel majority side by side.
+
+Of 8 candidates, all 8 satisfied this paper's four-condition admissibility predicate
+on their self-declared fields and 7/8 reached a panel majority of "valid". Six
+overlap thematically with the three MRs this paper identifies: two with
+node-permutation equivariance (one of them an edge-order-invariance variant), one
+with mirror-y reflection, and four with the discrete-divergence-free conservation
+relation. The two LLM-only proposals are an implementation-contract pair
+(`batch_context_invariance`, `deterministic_replay`) — useful as software contracts
+but with no physical basis. The most informative single result is
+`centerline_reflection_equivariance`: it overlaps with this paper's mirror-y MR, was
+admitted by the predicate, and split the panel
+({valid, borderline, invalid}); the dissenting rater objected that the reflection
+across the channel centerline is not bijective on the asymmetric eval mesh, exactly
+the reason this paper downgrades that relation to an OOD-stress probe rather than an
+exact equivariance. Inter-rater agreement is raw-PRA 0.79 / item-unanimous 0.75 over
+the 3 vendor-disjoint raters; Fleiss kappa is 0.077 — the standard small-sample
+paradox when near-unanimous votes are split across three labels.
+
+This is one generator call, one temperature-0 sample, eight candidates, three
+vendor-disjoint raters. It is not a generative-model benchmark, not a sufficient
+sample for an LLM-vs-method comparison, and not a "method outperforms LLM" claim.
+The defensible reading is narrow: against this SUT, an LLM panel proposes mostly
+the same MR families this paper identifies, agrees with the predicate on what is
+admissible, and ratifies the paper's downgrade of the cylinder-flow mirror-y MR
+through independent reasoning. The expert-MR and generic-MR-generation baselines
+remain blocked at the artifact level.
+
+### 5.6.5 Cross-family PINN extension (two bounded points)
+
+To check whether the workflow is MeshGraphNets-specific, two 5×50 MLP PINNs were trained
+from scratch and put through the same three MRs. SUT 1 is 2D viscous Burgers (ν=0.05,
+vector field, Dirichlet zero BC, IC u_x=exp(-5(x²+y²)) and u_y=0 symmetric under y→-y;
+PDE residual L2 1.07×10⁻²); SUT 2 is the 2D heat equation (α=0.1, scalar field, Neumann
+zero-flux BC so mass is strictly conserved; residual L2 1.17×10⁻²). Checkpoints and
+129×129 FD references are committed under `research_assets/runs/pinn-cross-family/` and
+`research_assets/runs/pinn-cross-family-diffusion/`. The MR rewrites parallel Section 5.3.
+**MR-A** (collocation-point permutation) is *vacuous by construction* for a pointwise MLP:
+permuting input rows and inverting commutes with row-independent evaluation, so the
+near-zero violation (0.0 / 9.9×10⁻⁹) confirms only that the rewrite is well-defined, not a
+model property — unlike the MGN graph-aggregation case it carries no evidential weight
+here. The two non-trivial MRs do the cross-family work. **MR-B** (mirror-y equivariance,
+scored against the PINN's own PDE residual as a self-reported floor, not an independently
+calibrated one) gives violation/floor ratio 0.74 (Burgers) and 0.46 (heat) — both pass,
+the learned symmetry being tighter than the PDE solution. **MR-C** (reference-relative
+conservation ratio) gives median 1.004 and 0.995 (both pass at the 1.5× gate).
+Rollout-accuracy median relative L2 is 1.0×10⁻² and 1.6×10⁻². Magnitudes match the
+MGN roster (MR-C CI [1.007, 1.011]; rollout 0.022), so the admissibility predicate and the
+two non-trivial MR rewrites transfer to two architectures and PDEs (Dirichlet
+near-conservation and Neumann strict conservation) without re-engineering. Two PINNs, one
+seed each — two bounded points on the cross-architecture-family applicability map, not a
+PINN-vs-MGN benchmark or a generality claim.
+
 ### 5.7 Still blocked
 
 The following remain blocked and must not be written as results: cross-SUT or
 geometry-independent pass/fail rates; comparative superiority over any baseline;
 general or real-world fault-detection rates; localization accuracy as a validated
 model; runtime or performance claims; and any claim that one SUT is more reliable than
-another. The three METBENCH-planned SUTs, and the expert-MR, generic-MR-generation, and
-LLM-candidate baselines, stay blocked pending their artifacts. Two exceptions are now
-executed on the existing SUT and reported as scoped diagnostics, not as defeated
-competitors or general rates: the rollout-accuracy comparator (Section 5.3), and a
-bounded seeded-fault detection result over one 10-mutant injected-fault catalogue
-(Section 5.3), whose by-class localization is suggestive evidence for, not a validation
-of, the interpretation protocol.
+another. The three METBENCH-planned SUTs, and the expert-MR and generic-MR-generation baselines,
+stay blocked pending their artifacts. Three exceptions are now executed on the existing
+SUT and reported as scoped diagnostics, not as defeated competitors or general rates:
+the rollout-accuracy comparator (Section 5.3); a bounded seeded-fault detection result
+over one 10-mutant injected-fault catalogue (Section 5.3), whose by-class localization
+is suggestive evidence for, not a validation of, the interpretation protocol; and the
+one-shot, vendor-disjoint LLM-MR baseline of Section 5.6.4.
 
 ## 6. Discussion
 

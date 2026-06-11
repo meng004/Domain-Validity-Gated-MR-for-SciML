@@ -1,0 +1,28 @@
+{
+  "record_type": "pinn-diffusion2d-reference",
+  "generated_at": "2026-06-07T15:56:13Z",
+  "scheme": "forward Euler, centred FD Laplacian, Neumann zero-flux via edge-replicating ghost cells",
+  "grid_N": 129,
+  "dx": 0.015625,
+  "dt": 0.00048828125,
+  "n_steps": 1024,
+  "alpha": 0.1,
+  "snapshot_times": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5
+  ],
+  "mass_per_snapshot": [
+    0.31415515338483246,
+    0.31415515338483246,
+    0.31415515338483246,
+    0.31415515338483246,
+    0.31415515338483246,
+    0.31415515338483246
+  ],
+  "mass_drift_percent_over_T_END": 0.0,
+  "output": "research_assets/runs/pinn-cross-family-diffusion/reference_solution.npz"
+}
