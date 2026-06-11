@@ -296,24 +296,31 @@ claims:
 
   - claim_id: "C12-operator-floor-resolution"
     status: "observed"
-    scope: "one mesh family (y=0-symmetric structured triangular channel), four resolutions h0..h0/8, one smooth analytic stream-function field"
+    scope: "one mesh family (y=0-symmetric structured triangular channel), nine resolutions h0*2..h0/16, one smooth analytic stream-function field"
     evidence:
       - "tools/run_operator_floor_sweep.py"
+      - "tools/run_operator_floor_sweep_extended.py"
       - "tools/conservation_rubric.py"
       - "research_assets/runs/operator-floor-sweep/operator_floor_report.json"
+      - "research_assets/runs/operator-floor-sweep-extended/operator_floor_extended_report.json"
     wording_allowed: >
-      On a y=0-symmetric structured triangular channel mesh at four resolutions
-      (h0, h0/2, h0/4, h0/8), the area-weighted RMS of the P1 constant-per-cell
-      discrete divergence operator applied to the analytically divergence-free
-      reference velocity field u = (psi_y, -psi_x) with psi(x,y) = sin(pi x / Lx)
-      sin(pi y / Ly) decays at a log-log slope of 0.988 (all cells) / 0.995
-      (interior cells), R-squared = 1.000, matching the theoretical O(h) truncation
-      rate of P1 piecewise-linear shape functions on smooth fields. This empirically
-      calibrates the operator-floor magnitude that the verdict tolerance must
-      dominate under the admissibility predicate (numerical decidability).
+      On a y=0-symmetric structured triangular channel mesh at nine resolutions
+      (h0*2, h0, h0/2, h0/3, h0/4, h0/6, h0/8, h0/12, h0/16; 220 to 245,120 cells),
+      the area-weighted RMS of the P1 constant-per-cell discrete divergence operator
+      applied to the analytically divergence-free reference velocity field
+      u = (psi_y, -psi_x) with psi(x,y) = sin(pi x / Lx) sin(pi y / Ly) decays at a
+      log-log slope of 0.984 with standard error 0.003 and Student-t 95% CI
+      [0.975, 0.992] (all cells; interior cells: 0.989, 95% CI [0.982, 0.997]),
+      R-squared = 0.9999, consistent with the theoretical O(h) truncation rate of
+      P1 piecewise-linear shape functions on smooth fields. The original 4-point
+      sweep (slope 0.988 / 0.995, R-squared = 1.000) is a subset of this grid.
+      This empirically calibrates the operator-floor magnitude that the verdict
+      tolerance must dominate under the admissibility predicate (numerical
+      decidability).
     wording_forbidden:
       - "Generalization across mesh families, geometries, or analytic fields."
       - "An absolute divergence-free tolerance claim on the real DeepMind eval mesh."
+      - "A closed-form bound or any analytically derived guarantee on the operator floor."
     blocked_reason: null
 
   - claim_id: "C13-fault-detection-robustness"

@@ -1,0 +1,147 @@
+{
+  "experiment_id": "E2-operator-floor-resolution-sweep-extended",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-11T13:10:43Z",
+  "extends": "research_assets/runs/operator-floor-sweep/operator_floor_report.json",
+  "motivation": "Reviewer concern P1-5: 4-resolution R^2=1.000 fit reported no slope confidence interval. This run widens the same sweep to 9 resolutions and reports the OLS slope standard error and Student-t 95% CI.",
+  "analytic_reference": {
+    "stream_function": "psi(x,y) = sin(pi x / Lx) * sin(pi y / Ly)",
+    "velocity": "u = (psi_y, -psi_x); div(u) = 0 analytically",
+    "Lx": 1.6,
+    "Ly": 0.4
+  },
+  "operator": "P1 constant-per-cell divergence (tools.conservation_rubric.cell_divergence)",
+  "norm": "area-weighted RMS",
+  "mesh_family": "y=0-symmetric structured triangular channel (tools.run_mirror_y_symmetric_mesh.build_symmetric_channel)",
+  "levels": [
+    {
+      "level": "h0*2",
+      "nx": 12,
+      "half_rows": 5,
+      "num_nodes": 132,
+      "num_cells": 220,
+      "h_rms_edge": 0.13554095271267264,
+      "divergence_rms_all": 2.6159984845015654,
+      "divergence_rms_interior": 2.66868255275469,
+      "interior_cell_count": 162
+    },
+    {
+      "level": "h0",
+      "nx": 24,
+      "half_rows": 10,
+      "num_nodes": 504,
+      "num_cells": 920,
+      "h_rms_edge": 0.06552007056721593,
+      "divergence_rms_all": 1.3152622541411465,
+      "divergence_rms_interior": 1.3374320442477088,
+      "interior_cell_count": 794
+    },
+    {
+      "level": "h0/2",
+      "nx": 48,
+      "half_rows": 20,
+      "num_nodes": 1968,
+      "num_cells": 3760,
+      "h_rms_edge": 0.032237611861461686,
+      "divergence_rms_all": 0.6574700548070663,
+      "divergence_rms_interior": 0.6637758959013456,
+      "interior_cell_count": 3498
+    },
+    {
+      "level": "h0/3",
+      "nx": 72,
+      "half_rows": 30,
+      "num_nodes": 4392,
+      "num_cells": 8520,
+      "h_rms_edge": 0.02137932840624946,
+      "divergence_rms_all": 0.4380904890412769,
+      "divergence_rms_interior": 0.44097443090202365,
+      "interior_cell_count": 8122
+    },
+    {
+      "level": "h0/4",
+      "nx": 96,
+      "half_rows": 40,
+      "num_nodes": 7776,
+      "num_cells": 15200,
+      "h_rms_edge": 0.01599284235098712,
+      "divergence_rms_all": 0.3284584988584216,
+      "divergence_rms_interior": 0.3300999745927822,
+      "interior_cell_count": 14666
+    },
+    {
+      "level": "h0/6",
+      "nx": 144,
+      "half_rows": 60,
+      "num_nodes": 17424,
+      "num_cells": 34320,
+      "h_rms_edge": 0.010634344996701675,
+      "divergence_rms_all": 0.21888806296803506,
+      "divergence_rms_interior": 0.21962506577007118,
+      "interior_cell_count": 33514
+    },
+    {
+      "level": "h0/8",
+      "nx": 192,
+      "half_rows": 80,
+      "num_nodes": 30912,
+      "num_cells": 61120,
+      "h_rms_edge": 0.007965488684753361,
+      "divergence_rms_all": 0.16413127001624672,
+      "divergence_rms_interior": 0.16454769601793887,
+      "interior_cell_count": 60042
+    },
+    {
+      "level": "h0/12",
+      "nx": 288,
+      "half_rows": 120,
+      "num_nodes": 69408,
+      "num_cells": 137760,
+      "h_rms_edge": 0.005303506064503838,
+      "divergence_rms_all": 0.1093962567590384,
+      "divergence_rms_interior": 0.10958209195973567,
+      "interior_cell_count": 136138
+    },
+    {
+      "level": "h0/16",
+      "nx": 384,
+      "half_rows": 160,
+      "num_nodes": 123264,
+      "num_cells": 245120,
+      "h_rms_edge": 0.003975079706367531,
+      "divergence_rms_all": 0.08203757730442589,
+      "divergence_rms_interior": 0.0821423075357532,
+      "interior_cell_count": 242954
+    }
+  ],
+  "fit_all_cells": {
+    "n_points": 9,
+    "slope": 0.9836727691700503,
+    "intercept": 2.9476067022293644,
+    "r_squared": 0.9999140781007214,
+    "slope_se": 0.0034464519005933136,
+    "dof": 7,
+    "t_975": 2.365,
+    "slope_ci95": [
+      0.9755219104251471,
+      0.9918236279149535
+    ],
+    "expected_slope_oh": 1.0
+  },
+  "fit_interior_only": {
+    "n_points": 9,
+    "slope": 0.9893036036887491,
+    "intercept": 2.977708629095518,
+    "r_squared": 0.9999295202805921,
+    "slope_se": 0.003139264864142329,
+    "dof": 7,
+    "t_975": 2.365,
+    "slope_ci95": [
+      0.9818792422850525,
+      0.9967279650924458
+    ],
+    "expected_slope_oh": 1.0
+  },
+  "verdict": "operator-floor-empirically-first-order",
+  "honesty_boundary": "Single structured y=0-symmetric triangular mesh family and one smooth analytic stream-function field. This calibrates the operator-floor magnitude in the admissibility predicate (numerical decidability); it is NOT a generalization claim across mesh families, geometries, analytic fields, or SUTs, and NOT a closed-form bound."
+}

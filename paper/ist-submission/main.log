@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.19)  11 JUN 2026 21:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.19)  11 JUN 2026 21:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -405,24 +405,12 @@ Package pdftex.def Info: figures/fig_2_mr_asset_dataflow.pdf  used on input lin
 e 217.
 (pdftex.def)             Requested size: 331.50238pt x 429.01054pt.
  [11] [12 <./figures/fig_2_mr_asset_dataflow.pdf>] [13]
-Underfull \hbox (badness 1082) in paragraph at lines 262--263
-\T1/cmr/m/n/12 where $\OML/cmm/m/it/12 m$ \T1/cmr/m/n/12 is the worst reflected
--node place-ment er-ror in median-edge-
- []
-
-
-Underfull \hbox (badness 6775) in paragraph at lines 262--263
-\T1/cmtt/m/n/12 domain_violation_scores_all.json\T1/cmr/m/n/12 ): permutation-c
-lass and PINN
- []
-
-[14]
-<figures/fig_3_verdict_2d.pdf, id=103, 777.54897pt x 298.60294pt>
+<figures/fig_3_verdict_2d.pdf, id=99, 777.54897pt x 298.60294pt>
 File: figures/fig_3_verdict_2d.pdf Graphic file (type pdf)
 <use figures/fig_3_verdict_2d.pdf>
 Package pdftex.def Info: figures/fig_3_verdict_2d.pdf  used on input line 266.
 (pdftex.def)             Requested size: 358.79929pt x 137.79185pt.
- [15 <./figures/fig_3_verdict_2d.pdf>]
+ [14] [15 <./figures/fig_3_verdict_2d.pdf>]
 Underfull \hbox (badness 1430) in paragraph at lines 289--290
 []\T1/cmr/m/n/12 The study uses four com-para-tor fam-i-lies: (1) \T1/cmr/bx/n/
 12 Ex-pert MR de-
@@ -447,6 +435,11 @@ Underfull \hbox (badness 2173) in paragraph at lines 415--416
 
 Underfull \hbox (badness 10000) in paragraph at lines 416--416
 []|\T1/cmr/m/n/10.95 P1 symmetric-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--416
+[]|\T1/cmr/m/n/10.95 O(h), slope 0.984, CI
  []
 
 
@@ -519,13 +512,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 418--419
 \T1/cmr/m/n/10.95 vs-MGN
  []
 
-[21]
-Underfull \hbox (badness 1199) in paragraph at lines 436--437
-[]\T1/cmr/m/n/12 To check whether the seeded-fault de-tec-tion re-sult of Sec-t
-ion 5.3[]
- []
-
-[22]
+[21] [22]
 Underfull \hbox (badness 1609) in paragraph at lines 438--439
 []\T1/cmr/bx/n/12 Per-mutant cross-family de-tec-tion (R1). \T1/cmr/m/n/12 Four
  mu-tants are
@@ -537,12 +524,6 @@ Underfull \hbox (badness 5847) in paragraph at lines 438--439
  []
 
 [23]
-Underfull \hbox (badness 1527) in paragraph at lines 444--445
-\T1/cmr/m/n/12 thresh-old there. By-class lo-cal-iza-tion (con-ti-nu-ity $\OMS/
-cmsy/m/n/12 !$ \T1/cmr/m/n/12 bound-ary/scale;
- []
-
-
 Underfull \hbox (badness 10000) in alignment at lines 467--467
 [][][][][][] 
  []
@@ -572,7 +553,7 @@ Here is how much of TeX's memory you used:
  35643 multiletter control sequences out of 15000+600000
  645877 words of font info for 88 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 72i,12n,79p,2697b,504s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,12n,79p,2654b,504s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </private/tmp/codex-texmfvar/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk> </p
 rivate/tmp/codex-texmfvar/fonts/pk/ljfour/jknappen/ec/ecbx0800.600pk> </private
 /tmp/codex-texmfvar/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </private/tmp/c
@@ -599,9 +580,9 @@ s/cm/cmr8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmsy10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmsy7.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmsy8.pfb>
-Output written on main.pdf (37 pages, 496806 bytes).
+Output written on main.pdf (37 pages, 496589 bytes).
 PDF statistics:
- 1029 PDF objects out of 1200 (max. 8388607)
+ 1028 PDF objects out of 1200 (max. 8388607)
  211 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  11792 words of extra memory for PDF output out of 12000 (max. 10000000)
