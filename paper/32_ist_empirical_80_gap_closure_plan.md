@@ -124,25 +124,35 @@ points"，需要的是 rate 不是 point。E1 的全部工程模式（orchestrat
 且素材几乎全部现成，是单位时间分数增量第二高的项。precision/recall 形式化把
 "suggestive localization"升级为可检验断言，直接抬 empirical rigor。
 
-### Phase 4 — 仅删不增的清晰度手术（2–3 天）
+### Phase 4 — 仅删不增的清晰度手术（已执行）
 
-- 目标 −15% 正文：claim-to-evidence 大表移附录；每小节重复的 scope disclaimer 收敛为
-  一处 canonical "Still blocked"；§5.3/§5.6 复述数字去重。
-- 硬约束：分支上约 25 个 test-guarded marker 字符串必须在 main.tex 与 manuscript.md
-  同步保留（31 号评估已标记此风险）；改后全量跑测试。
-- 同步项：Abstract 去经验数字复核（IST.md §2 禁数字）、Highlights ≤85 字符复核。
+- **已执行（Phase 4 clarity surgery）**：`paper/manuscript.md` 从 13,134 words 降至
+  10,547 words，`paper/ist-submission/main.tex` 从 10,456 words 降至 8,113 words；IST-counted
+  total 从 12,401 降至 10,087（headroom 4,913），超过原 −15% 目标。
+- **已执行（scope 收敛）**：§5.4–§5.7 的重复数值复述被压缩为 reviewer-facing summary；
+  stale “only one trained SUT / comparator planned” wording 删除；blocked 口径收敛为 canonical
+  “cross-SUT and broad generalization claims remain blocked”。
+- **已执行（submission polish）**：IST abstract Results/Conclusion 改为无 empirical-number dump 的边界摘要；
+  Highlights 全部 ≤85 字符；新增 `tests/test_phase4_clarity_surgery.py` 锁定 word-count buffer、
+  abstract/highlight 约束和 stale blocked wording。
 
 **理由**：clarity 6.2 是七维最低分且随每次加内容继续下跌（6.6→6.2）；面板 4/5 关切
 "overlong/hedged/ledger-heavy"。这是唯一**不加任何实验**就能涨分的维度，并且若不做，
 Phase 1–3 的新增内容会把 clarity 进一步压低、对冲掉实证涨分——所以它是实证分的保护性
 配套，不是可选美化。
 
-### Phase 5 — 重跑面板 + §11 提交前流水线（2 天）
+### Phase 5 — 重跑面板 + §11 提交前流水线（v4 已执行，未达标）
 
-- 重跑五厂商面板 v4：门槛 = empirical ≥8.0 ∧ overall ≥7.8 ∧ accept ≥0.65 ∧ clarity ≥7.0。
-- 未达标 → 按 v4 收敛关切做一轮定向修复后 v5；连续两轮平台期则触发 27 号文档 Path B
-  （JSS）决策点，交用户拍板。
-- 达标 → 走 CLAUDE.md §11 五步流水线（bib 审计、proofread、humanizer、构建验证）。
+- **已执行（panel v4）**：通过 OpenAI-compatible 网关运行五角色 panel，输出
+  `research_assets/runs/academic-review-panel-phase5-baseurl-v1/review_panel_report.json`。
+- **Gate 结果**：empirical rigor 6.6 < 8.0，overall 7.34 < 7.8，accept probability
+  0.452 < 0.65，clarity 7.0 = 7.0；多数 verdict = major_revision。
+- **已执行（review triage）**：`paper/33_phase5_review_panel_triage.md` 记录四个收敛关切：
+  empirical base 仍窄、domain-violation axis 仅 mirror-y 数值化、fault catalogue 仍偏 synthetic/gross、
+  以及 prose/ledger 仍需继续压缩。
+- **诚实状态**：Phase 5 未通过提交门槛；§11 final submission pipeline 不应启动。下一轮 v5 需要
+  新证据（不同 SUT/架构、非几何 MR 的 D-score、真实/更强 fault evidence 或 DOI 归档），
+  不能仅靠改写措辞声称达标。
 
 **理由**：用同一把尺子验收，避免自由心证；预设平台期出口防止无限强化循环。
 
