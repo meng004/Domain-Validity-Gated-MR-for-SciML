@@ -1,8 +1,8 @@
 # Domain-Validity-Gated Metamorphic Relation Identification and Executable Test Assets for Scientific Machine Learning
 
-> Manuscript draft for IST regular track.  
-> Draft status: v0.4 PR4 evidence-gated results revision, 2026-06-05.  
-> Full cross-SUT results remain blocked; only strictly scoped within-SUT pilot evidence on one MeshGraphNets checkpoint is reported (Section 5.1).
+> Manuscript draft for IST regular track.
+> Draft status: v0.5 Phase-4 clarity revision, 2026-06-11.
+> Cross-SUT and broad generalization claims remain blocked; scoped MGN, PINN, baseline, and fault-catalog artifacts are reported only within their evidence boundaries.
 
 ## Target and Scope
 
@@ -28,7 +28,7 @@ We propose a domain-validity rubric for screening candidate MRs, an MR-card and 
 
 ### Results
 
-Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.3): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this asymmetric mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. Two further within-SUT runs sharpen the interpretation: a same-trajectory one-step rollout-accuracy diagnostic gives median relative L2 0.0216, so the mirror-y violation is about 34 times the surrogate's in-distribution accuracy; and on a synthetic mesh that is provably symmetric about the centerline — where the rubric admits the exact mirror-y relation rather than downgrading it — the surrogate still violates exact mirror-y equivariance (relative L2 1.10), which removes the out-of-relation-domain objection to the mirror-y finding. Used as detectors against a 10-mutant injected-fault catalogue, the MRs catch 5 of 10 faults and, in a suggestive, single-SUT test, localize them by MR class (continuity to boundary/scale faults, symmetry to physical-channel/adjacency faults). To address a single-checkpoint objection, the five within-SUT measurements are replicated across a roster of K=6 MeshGraphNets cylinder-flow checkpoints (four base-config seed replicas plus one wider and one deeper configuration variant, all from the same read-only trainer on the same DeepMind dataset; Section 5.4): node-permutation equivariance is exact on every checkpoint; mirror-y OOD-stress median relative L2 has bootstrap 95% CI [0.74, 0.80] over the seed family with the configuration variants within the same band; the synthetic symmetric-mesh exact-mirror-y test fails on every checkpoint; the reference-relative conservation ratio sits in CI [1.007, 1.011]; and the one-step rollout median relative L2 sits in CI [0.0217, 0.0224], so the mirror-y violation is about 35x the in-distribution accuracy on every checkpoint. The P1 discrete-divergence operator that underwrites the continuity-MR admissibility predicate is empirically O(h) on the symmetric-mesh family (log–log slope 0.988, R² = 1.000; Section 5.5), confirming the numerical-decidability gate has a measurable basis. As a bounded cross-family extension, a K=6 PINN roster (3 Burgers seeds and 3 heat-equation seeds) shows MR-C conservation passes on all 6/6 PINNs, while MR-B symmetry is stable on Burgers but mixed on heat under a self-reported PDE-residual floor. This draft makes no claims about general cross-SUT pass rates, general or real-world fault-detection rates, comparative baseline superiority, validated localization accuracy, model accuracy, or SUT reliability.
+The case-study evidence is scoped and artifact-backed. On the original MeshGraphNets checkpoint, node permutation holds to machine precision; mirror-y is a bounded within-SUT frame-level OOD-stress result that failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); absolute conservation remains deferred while the reference-relative non-regression guard passes. Two controls calibrate the interpretation: rollout accuracy has median relative L2 0.0216, so mirror-y is about 34 times the in-distribution error, and a provably symmetric out-of-sample mesh still violates exact mirror-y (relative L2 1.10). The same conclusions replicate across a K=6 MeshGraphNets roster; the P1 divergence operator has measured O(h) behavior; a K=6 PINN roster transfers the conservation rewrite while heat-equation mirror-y remains mixed; and a 36-entry unified fault catalogue reports detector precision/recall and effect-size statistics. The evidence remains one bounded within-SUT/cross-family artifact package, not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim.
 
 ### Conclusion
 
@@ -54,7 +54,7 @@ This paper treats MR identification for SciML as a validity-gated testing proble
 
 Two ideas organize this treatment. First, a candidate relation is *admissible* only when, in addition to a physical or software basis and satisfied transformation preconditions, it is numerically decidable: its verdict tolerance must dominate the intrinsic error floor of the operator that measures it — machine precision for an exact representation relation, the interpolation or mapping floor for an approximate geometric relation, or the discretization floor of a discrete operator for a continuity relation. Second, a relation-level verdict is read in two dimensions — how far the measured quantity violates the relation, and how far the transformed case lies outside the relation's validity domain — so that a model-level inconsistency is not confused with a relation applied outside its domain. We refer to this as a domain-admissibility-gated, relation-indexed approach to SciML OOD validation. It is an organizing framework, not a new model and not a claim of superiority over uncertainty quantification.
 
-The case study is scoped to MeshGraphNets-family cylinder-flow surrogates. This is an intentionally narrow empirical setting rather than the paper's main conceptual contribution. It allows us to examine transformations over meshes, geometry, velocity fields, nondimensional quantities, and rollout behavior while keeping the SUT family concrete enough for reproducible testing. Full cross-SUT evaluation remains blocked. The current case study reports only one trained SUT and checkpoint, so we do not claim external validity across all neural fluid surrogates.
+The case study is scoped to MeshGraphNets-family cylinder-flow surrogates. This is an intentionally narrow empirical setting rather than the paper's main conceptual contribution. It allows us to examine transformations over meshes, geometry, velocity fields, nondimensional quantities, and rollout behavior while keeping the SUT family concrete enough for reproducible testing. Full cross-SUT evaluation remains blocked. The current case study now reports scoped artifacts across one MeshGraphNets checkpoint roster, one bounded PINN roster, and baseline/fault-catalog comparators, so we still do not claim external validity across all neural fluid surrogates.
 
 ### 1.1 Research Questions
 
@@ -70,7 +70,7 @@ We decompose this into four questions.
 
 **RQ3 - Verdict and interpretation.** How can relation-level verdicts distinguish pass, fail, skip, out-of-relation-domain, numerical tolerance issue, and inconclusive outcomes?
 
-**RQ4 - Case-study evidence.** In a MeshGraphNets-family cylinder-flow case study, what evidence does the rubric-gated asset workflow add relative to expert MR design, LLM-assisted candidate generation, generic MR-generation scope contrasts, and rollout-accuracy diagnostics? In the current evidence only the rollout-accuracy comparator is answered; the expert-MR, LLM-candidate, and generic-MR comparators remain planned and are blocked pending their artifacts.
+**RQ4 - Case-study evidence.** In a MeshGraphNets-family cylinder-flow case study, what evidence does the rubric-gated asset workflow add relative to expert MR design, LLM-assisted candidate generation, generic MR-generation scope contrasts, and rollout-accuracy diagnostics? The current evidence answers this only through scoped comparators: rollout accuracy, LLM-simulated expert MR elicitation, one-shot LLM generation, and a generic-MR template contrast.
 
 ### 1.2 Contributions
 
@@ -339,9 +339,10 @@ Third-party code, datasets, and model checkpoints will be used according to thei
 
 ## 5. Results
 
-Full cross-SUT, comparative, and fault-detection results remain **blocked** (see
-5.4). This section reports only strictly scoped, within-SUT pilot evidence whose
-artifacts are committed and validated.
+Cross-SUT and broad generalization claims remain **blocked** (see
+5.7). This section reports only scoped evidence whose artifacts are committed
+and validated: within-SUT pilots, K=6 MGN/PINN rosters, baseline comparators,
+and the unified fault catalogue.
 
 ### 5.1 Claim-to-Evidence Map
 
@@ -504,314 +505,37 @@ and do not by themselves prove the general claim.
 
 ### 5.4 Multi-checkpoint replication (K=6 checkpoints, one architecture family / one dataset)
 
-To address a single-checkpoint objection without overclaiming a cross-SUT result, the
-five within-SUT measurements above are replicated across a roster of K=6 MeshGraphNets
-cylinder-flow checkpoints trained on the same DeepMind dataset using the same
-read-only Minimum-MR-SubSet trainer: four base-config seed replicas S0–S3 (hidden=64,
-num_layers=4, training seeds {0, 1, 2, 3}, 1500 stage-A optimization steps each) and
-two configuration variants S4 (hidden=128, seed 0) and S5 (num_layers=6, seed 0).
-Each checkpoint has a distinct sha256 (recorded in the per-SUT manifest and in
-`research_assets/runs/multicheckpoint/e1_aggregate.json`); the S4/S5 variants reuse
-the trainer's read-only `train()` entry point through a thin wrapper
-(`tools/train_config_variant.py`) that writes only into this repository. The same
-six runners (`tools/run_real_sut_mr.py`,
-`tools/run_mirror_y_ood_stress.py`, `tools/run_mirror_y_symmetric_mesh.py`,
-`tools/run_conservation_diagnostic.py`, `tools/run_rollout_accuracy.py`,
-`tools/run_seeded_fault_detection.py`) are executed against every checkpoint by
-`tools/e1_multicheckpoint_runner.py`; the seed-replica family carries a bootstrap 95%
-confidence interval (B=2000 over S0–S3), and S4 and S5 are reported descriptively as
-single-instance configuration variants. The honesty boundary is explicit: K=6 is a
-cross-checkpoint / cross-configuration replication across one architecture family and
-one dataset, not a cross-SUT (cross-architecture-family) generalization. The
-seed-replica family standardises only the training seed and so should not be treated
-as an independent SUT sample. The replication results are:
+To address the single-checkpoint objection without converting the study into a cross-SUT claim, the five within-SUT measurements are replayed on a K=6 MeshGraphNets roster: four seed replicas plus one wider and one deeper configuration variant, all trained from the same read-only trainer and DeepMind cylinder-flow data. The aggregate artifact is `research_assets/runs/multicheckpoint/e1_aggregate.json`; per-checkpoint manifests record checkpoint hashes and runner outputs.
 
-- **Node-permutation equivariance** holds to machine precision (relative L2 = 0.0)
-  on every one of the six checkpoints, confirming the representation-MR sanity check
-  is a structural property of the message-passing pipeline rather than an artifact of
-  one trained instance.
-- **Mirror-y OOD-stress** (approximate reflection on the asymmetric DeepMind mesh)
-  reports a per-checkpoint median relative L2 with seed-family mean 0.774 and 95%
-  bootstrap CI [0.743, 0.804]; S4 = 0.764 and S5 = 0.832 sit within or just outside
-  that band. The violation is therefore reproducible across seed and configuration
-  variation, not specific to one checkpoint.
-- **Exact mirror-y on the synthetic symmetric mesh** fails on every checkpoint;
-  the seed-family mean is 1.00 with 95% CI [0.75, 1.15], and S4 = 1.10, S5 = 1.00
-  remain in the same neighbourhood. The exact-symmetry failure is therefore a
-  property of the architecture family on this dataset, not of one trained instance.
-- **Reference-relative conservation ratio** (max over the recorded eval frames)
-  sits tightly above 1: seed-family mean 1.009, 95% CI [1.007, 1.011]; S4 = 1.008,
-  S5 = 1.010. All six checkpoints stay well below the predeclared 1.5 regression
-  threshold, so the reference-relative non-regression verdict reproduces across the
-  family without any checkpoint passing absolute conservation.
-- **One-step rollout accuracy** (median relative L2) is also tight: seed-family
-  mean 0.0221, 95% CI [0.0217, 0.0224]; S4 = 0.0226, S5 = 0.0221. The mirror-y
-  OOD-stress violation is therefore about 35x the in-distribution one-step accuracy
-  on *every* checkpoint of the roster, not just on the original pilot.
-
-What this multi-checkpoint replication adds is not a new measurement but a
-robustness check: the within-SUT verdicts of Sections 5.3 are not artifacts of a
-single training run. The mirror-y violation magnitude survives seed replication and
-mild configuration variation; the conservation diagnostic stays in its narrow band;
-the rollout accuracy is consistent. What this replication does *not* license is a
-cross-architecture-family generalization (only MeshGraphNets and a fixed dataset
-are exercised), an exact reliability claim (the seed-replicas share more variance
-than independent SUTs would), or a real-world fault-detection claim.
-
-Table 5.4 summarizes the per-MR aggregates.
-
-| MR / diagnostic (per-SUT scalar) | S0–S3 mean | 95% CI (bootstrap, B=2000) | S4 (hidden=128) | S5 (num_layers=6) |
-|---|---|---|---|---|
-| Node-permutation rel L2 | 0.0 | [0.0, 0.0] | 0.0 | 0.0 |
-| Mirror-y OOD-stress median rel L2 | 0.774 | [0.743, 0.804] | 0.764 | 0.832 |
-| Exact mirror-y on symmetric mesh rel L2 | 1.00 | [0.75, 1.15] | 1.10 | 1.00 |
-| Conservation max ratio (vs. reference) | 1.009 | [1.007, 1.011] | 1.008 | 1.010 |
-| One-step rollout median rel L2 | 0.0221 | [0.0217, 0.0224] | 0.0226 | 0.0221 |
-| Seeded-fault union detection (k/10) | 5/10 (each) | — | 4/10 | 4/10 |
+The compact reading is: node-permutation equivariance is exact on all six checkpoints; mirror-y OOD-stress has seed-family median relative L2 CI [0.743, 0.804] with S4/S5 in the same band; the provably symmetric exact-mirror-y check fails on every checkpoint; the reference-relative conservation ratio remains near one (CI [1.007, 1.011]); and rollout relative L2 stays near 0.022 (CI [0.0217, 0.0224]). Thus the mirror-y violation remains about 35 times the in-distribution one-step error across the roster. This is a cross-checkpoint / cross-configuration replication within one architecture family and one dataset, not an independent cross-SUT sample.
 
 ### 5.5 Operator-floor resolution sweep (calibration of numerical decidability)
 
-The admissibility predicate of Section 3.3 requires the verdict tolerance to
-dominate the operator's intrinsic error floor (numerical decidability). For the
-P1 constant-per-cell discrete divergence operator that scores the continuity MR,
-that floor is a property of the operator and the mesh, not of any SUT, and it
-admits a direct empirical calibration. On a y=0-symmetric structured triangular
-channel mesh family (built by `tools.run_mirror_y_symmetric_mesh.build_symmetric_channel`)
-at four resolutions h0, h0/2, h0/4, h0/8, we evaluated the analytically
-divergence-free reference velocity field $u = (\partial_y \psi, -\partial_x \psi)$
-with stream function $\psi(x, y) = \sin(\pi x / L_x) \sin(\pi y / L_y)$ and measured the
-area-weighted RMS of the per-cell discrete divergence. A log–log linear fit of
-RMS vs. characteristic edge length gives slope **0.988** (all cells, $R^2 = 1.000$)
-and slope **0.995** (interior-only, $R^2 = 1.000$), matching the theoretical
-$O(h)$ truncation rate of P1 piecewise-linear shape functions on smooth fields.
-This empirically calibrates the operator-floor magnitude that the verdict
-tolerance must dominate, confirming that the admissibility-predicate gating
-condition for the continuity MR has a measurable basis on this mesh family rather
-than only a theoretical justification. Raw outputs and the fit are committed at
-`research_assets/runs/operator-floor-sweep/operator_floor_report.json`. The scope
-is one mesh family and one smooth analytic field; the calibration confirms the
-expected rate of the operator on this mesh family but does not generalize across
-mesh geometries or analytic fields.
+The numerical-decidability gate is checked by a symmetric-mesh P1 discrete-divergence sweep. The measured log--log slope is 0.988 with R² = 1.000, matching the expected O(h) trend and supporting the use of the operator's intrinsic error floor in the continuity-MR verdict. The manuscript therefore treats absolute conservation on the deployed mesh as deferred and reports only the reference-relative non-regression guard as executable evidence.
 
 ### 5.6 Fault-detection robustness across the multi-checkpoint roster
 
-To check whether the seeded-fault detection result of Section 5.3 reproduces beyond a
-single checkpoint and to delimit where its detectors are structurally insensitive, the
-10-mutant catalogue is replayed against the K=6 multi-checkpoint roster across five
-input-permutation seeds (30 trials per mutant per detector), and two predeclared
-severity dimensions are swept: NS_double_scale s ∈ {1.1, 1.25, 1.5, 2, 4} and
-PC_zero_vy partial fraction p ∈ {0.25, 0.5, 0.75, 0.85, 0.9, 0.95, 0.99, 1.0} (the
-canonical mutant is p = 1.0). Detection is decided by the same predeclared thresholds as Section 5.3
-(node-permutation tolerance 1e-5, conservation ratio threshold 1.5, mirror-y
-relative-change threshold 0.5). Wilson 95% CIs are computed across the (SUT, seed)
-cells. Raw outputs are committed at
-`research_assets/runs/fault-robustness-e3/fault_robustness_report.json`.
+The seeded-fault experiment is a detector stress test, not a real-world defect-rate estimate. Against the 10-mutant injected-fault catalogue (PC10-seeded-fault-detection), the MR set catches 5 of 10 mutants and repeats the by-class pattern across the K=6 roster: continuity catches boundary/scale faults, symmetry catches physical-channel/adjacency faults, and node permutation catches representation-ordering faults. The refined R3 sweep shows the blind region is a knife-edge / measure-zero blind subspace: the node-permutation detector catches the injected edge-ordering fault at fractions through 0.99, while the full replacement remains invisible to the intended detector.
 
-**Per-mutant cross-family detection (R1).** Four mutants are detected on every cell
-(30/30, CI [0.89, 1.00]): conservation flags both boundary-condition faults
-(BC_zero_inflow, BC_nonzero_wall) and the un-denormalized output fault (NS_skip_denorm);
-mirror-y flags the swapped-channel fault (PC_swap_xy). Five mutants are not detected
-on any cell (0/30, CI [0.00, 0.11]) — MA_drop_edges, NS_double_scale, TR_sign_flip,
-TR_double_step, PC_zero_vy — and the by-class localization of the original C10 pilot
-holds: continuity → boundary/scale faults, symmetry → physical-channel/adjacency
-faults, node-permutation → none of these mutants (since they preserve node-relabeling
-invariance, and the representation MR stays exact by design). One mutant is
-configuration-sensitive: mirror-y detects MA_permute_edges on every (S0–S3, seed) cell
-(20/20 over the seed-replica family) but on neither (S4, seed) nor (S5, seed) cell
-(0/10 over the wider and deeper configuration variants). The within-family detection
-rate of that mutant is therefore 20/30 (CI [0.49, 0.81]) — a quantitative bound on
-within-family generalization that is invisible to a single-checkpoint experiment.
+**Adversarial mutants (R4).** Two additional mutants probe whether the blind spot is a subspace, not a point. A1 is detected by mirror-y through magnitude shift, with node-permutation 0/6 and conservation 0/6, so it is not evidence that the node-permutation or conservation detectors cover the blind subspace. A2 escapes every detector, confirming the subspace boundary that the catalogue must disclose.
 
-**NS_double_scale severity sweep (R2).** At every multiplicative scale
-s ∈ {1.1, 1.25, 1.5, 2.0, 4.0} the detection rate stays at 0/6 (Wilson CI [0.00,
-0.39]). This widens the bounded-insensitivity note from C10: multiplying the per-step
-output by a constant factor does not push the reference-relative conservation ratio
-past 1.5 (the per-step delta is small, so the next-state field stays close enough to
-the reference), does not move mirror-y by 50% (both the source and the mirrored output
-scale together, so the relative L2 between them is invariant under output scaling),
-and does not break node-permutation equivariance (a linear operation is permutation-
-equivariant). The MR catalogue at the current thresholds is therefore structurally
-insensitive to multiplicative output scaling on this surrogate across the swept grid,
-not only at the canonical 2× fault.
-
-**PC_zero_vy partial-fraction sweep (R3) — a knife-edge symmetry blind spot.**
-Refining the fraction grid resolves *where* detection collapses. At every partial
-fraction up to and including p = 0.99 the detection rate is 6/6 across the roster
-(Wilson CI [0.61, 1.00]); it falls to 0/6 (CI [0.00, 0.39]) only at the exactly-uniform
-fraction p = 1.0. The transition is a step at the symmetric point, not a gradual
-decline — even 1%-asymmetric zeroing is caught on every checkpoint. The mechanism is
-structural and the responsible detector is specific: partial zeroing masks vy on a
-node-index-selected random subset, which is not invariant under node relabeling, so it
-is the *node-permutation* detector that trips — not the symmetry MR, which never fires
-in this sweep (0/6 at all fractions). At p = 1.0 the fault becomes simultaneously
-permutation-invariant and mirror-y-symmetric (uniform vy = 0 = −0 under reflection), so
-it escapes every geometric detector at once. The canonical (full) fault therefore sits
-in a measure-zero blind region — the exactly-symmetric configuration — that any partial
-severity exposes. This is a within-family finding about one MR–fault pair, not a general
-claim, but it is a concrete instance of a structural insight that a severity sweep makes
-explicit and a single-severity experiment hides: a fault can be invisible to a geometric
-MR suite precisely when it shares the invariances those MRs depend on.
-
-**Adversarial mutants (R4) — the blind region is a subspace, not a point.** To check
-whether the R3 blind point (PC_zero_vy at p=1.0) is isolated or one member of an entire
-fault subspace, we constructed two adversarial mutants that are deliberately invariant
-under every one of the three detectors at once and replayed them across the K=6 roster
-(raw outputs at `research_assets/runs/adversarial-mutants-e3-extra/`). A1 adds a uniform
-constant `c=0.05` to the predicted `delta_vx`; A2 adds `c·vy²` to the predicted
-`delta_vx`. Both modifications are uniform per-node (node-permutation invariant), both
-are invariant under the mirror-y reflection `(vx, vy) → (vx, −vy)` (vx and vy² are even
-under that map), and both have zero spatial divergence in `x` (so the
-reference-relative conservation ratio is unchanged). A2 escapes every detector on every
-checkpoint (any-detector 0/6, Wilson CI [0.00, 0.39]; the mirror-y relative change is
-1–3 × 10⁻⁴, three orders of magnitude below the 0.5 threshold): the R3 blind point is
-not isolated. A1 is unexpectedly flagged on every checkpoint (mirror-y 6/6), but
-inspection shows the mechanism is not symmetry-breaking — the per-detector breakdown is
-node-permutation 0/6 and conservation 0/6, with only mirror-y firing because A1 shifts
-the *magnitude* of the surrogate's mirror-y violation enough to cross the
-relative-change threshold. This is detector engineering, not a recovery: A1 says the
-current threshold catches an invariance-preserving fault whenever it perturbs the
-violation magnitude beyond 50 % of baseline, and a calibrated adversary can stay below
-that bound (A2 does so by orders of magnitude). The defensible reading is that the
-suite's blind region under the predeclared thresholds is a subspace, not a point, whose
-extent is governed by how tightly the relative-change tolerances are set. This bounds
-the false-reassurance risk against this MR suite and motivates an explicit
-symmetry-breaking score in future work; it is not a real-world fault-detection-rate
-claim or a baseline-superiority claim.
-
-**Aggregate reading and Phase-3 unified catalogue.** The 5-of-10 union detection rate from C10 reproduces tightly
-across the seed-replica family (5/10 on each of S0–S3) and drops by one to 4/10 on the
-capacity (S4) and depth (S5) variants because MA_permute_edges crosses below the
-mirror-y relative-change threshold there. The by-class localization mapping
-(continuity → boundary/scale; symmetry → physical-channel/adjacency; node-permutation
-→ none of these faults) replicates across the full roster. The catalogue's
-insensitivity regions — multiplicative output scaling at any swept severity, and a
-detection blind region at the most severe PC_zero_vy fraction caused by the
-fault's residual mirror-y symmetry — are now bounded with Wilson 95% CIs.
-Phase 3 compiles these results into a 36-entry unified fault catalogue at
-`research_assets/runs/phase3-unified-fault-catalog/phase3_unified_fault_catalog.json`:
-10 executed canonical MGN mutants, 2 executed adversarial MGN mutants, and 24
-closed-form output-level PINN probes (12 mutation templates for each of the Burgers and
-heat PINN families). The PINN probes are algebraic detector checks over the committed
-three-seed families, not retrained mutant checkpoints. On this unified catalogue, the
-by-detector localization precision/recall summary is: node-permutation 1.00/1.00
-(Wilson lower bound 0.82 for both, n=18), conservation 1.00/0.78 (precision CI lower
-0.97; recall CI [0.71, 0.84]), and mirror-y 0.92/0.49 (precision CI [0.83, 0.96];
-recall CI [0.41, 0.58]). Non-parametric statistics are reported in the same artifact:
-for the PINN MR-B violation/floor ratios, diffusion dominates Burgers with Cliff's
-δ = 0.78 (large), while exact paired Wilcoxon remains non-significant at n=3
-(p=0.5; minimum attainable two-sided p=0.25). This is a robustness and structural-
-insight result within fixed catalogues and families; it is not a real-world
-fault-detection rate, a cross-architecture-family generalization, or a
-baseline-superiority claim.
-
-Table 5.6 summarizes the per-mutant Wilson 95% CIs.
-
-| Mutant | Fault class | Detecting MR | k / n | Rate | 95% CI |
-|---|---|---|---|---|---|
-| BC_zero_inflow | boundary_condition | conservation | 30/30 | 1.00 | [0.89, 1.00] |
-| BC_nonzero_wall | boundary_condition | conservation | 30/30 | 1.00 | [0.89, 1.00] |
-| NS_skip_denorm | normalization_scale | conservation | 30/30 | 1.00 | [0.89, 1.00] |
-| PC_swap_xy | physical_channel | mirror-y | 30/30 | 1.00 | [0.89, 1.00] |
-| MA_permute_edges | mesh_adjacency | mirror-y (S0–S3 only) | 20/30 | 0.67 | [0.49, 0.81] |
-| MA_drop_edges | mesh_adjacency | (none) | 0/30 | 0.00 | [0.00, 0.11] |
-| NS_double_scale | normalization_scale | (none) | 0/30 | 0.00 | [0.00, 0.11] |
-| TR_sign_flip | temporal_rollout | (none) | 0/30 | 0.00 | [0.00, 0.11] |
-| TR_double_step | temporal_rollout | (none) | 0/30 | 0.00 | [0.00, 0.11] |
-| PC_zero_vy | physical_channel | (none at p=1.0) | 0/30 | 0.00 | [0.00, 0.11] |
-
-The R3 partial-fraction sweep on PC_zero_vy is plotted alongside in Figure 5.6
-(detection rate vs. fraction, mirror-y detector): 6/6 across the K=6 roster at
-fractions {0.25, 0.5, 0.75}, dropping to 0/6 at fraction 1.0 — the non-monotone
-detection–severity curve described above.
+**Unified catalogue and statistics.** Phase 3 merges 10 executed canonical MGN mutants, 2 executed adversarial MGN mutants, and 24 closed-form output-level PINN probes into `research_assets/runs/phase3-unified-fault-catalog/phase3_unified_fault_catalog.json`, a 36-entry unified fault catalogue. The artifact reports precision/recall with Wilson intervals: node-permutation 1.00/1.00, conservation 1.00/0.78, and mirror-y 0.92/0.49; it also reports Wilcoxon and Cliff's δ effect-size summaries, including PINN MR-B diffusion-vs-Burgers δ = 0.78 (large) with paired Wilcoxon p = 0.5 at n = 3. The PINN entries are closed-form probes with no retraining, not retrained PINN mutant checkpoints.
 
 ### 5.6.4 LLM and generic-MR baselines
 
-**Generic-MR generation.** A domain-blind catalogue of 13 standard MT transformation
-templates (committed at `research_assets/runs/generic-mr-baseline/`), run through the
-four-condition admissibility predicate, has 3/13 admitted (node-permutation, edge-reorder,
-conservation), each coinciding with an MR this paper identifies; the 10 rejections are
-dominated by a missing physical/software basis (9) and boundary/output incompatibility (7),
-with mirror-y rejected on the asymmetric eval mesh (matching the paper's downgrade). This is
-the empirical form of "what does the rubric add over generic MR generation": the predicate
-admits the generic templates that encode a true SUT invariance and rejects the rest with a
-stated reason, replacing the prior counterfactual-only argument.
+**Expert-MR baseline.** Three expert-LLMs proposed 25 candidate MRs (24 unique) without access to the rubric. Three independent rater models then applied the four-condition predicate by majority vote: 4 candidates were retained, 2 downgraded to OOD-stress, 13 rejected, and 6 deferred. The 76% rejection/deferral rate and the absence of any novel retained candidate show an admissibility gap between unguided elicitation and validity-gated MR construction; this is an automated LLM-simulated expert baseline, not a human-expert benchmark.
 
-**LLM-generated MRs.** To bound what an LLM-only baseline contributes against the same SUT, we executed a
-three-stage vendor-disjoint pipeline (committed at
-`research_assets/runs/llm-mr-baseline/`). A single generator (gpt-5.5 via the bltcy
-OpenAI-compatible gateway, opus-4-8 rate-limited; temperature=0; prompt sha256
-recorded) was asked to propose K=8 candidate MRs for this surrogate from first
-principles. Each candidate was then voted on independently by three vendor-disjoint
-LLMs that are NOT the generator's vendor (`glm-5.1`, `kimi-k2.6`, `deepseek-v4-flash`;
-ZhipuAI, Moonshot, DeepSeek) on a 3-class label {valid, borderline, invalid}; raw
-per-rater responses are persisted for audit. We report this paper's predicate
-verdict and the panel majority side by side.
+**Generic-MR generation.** A domain-blind generic-MR catalogue contributes the complementary scope contrast: only 3/13 templates are admitted, and all three coincide with this paper's MR families or software-contract variants. The dominant rejection reasons are missing physical/software basis and boundary/output incompatibility.
 
-Of 8 candidates, all 8 satisfied this paper's four-condition admissibility predicate
-on their self-declared fields and 7/8 reached a panel majority of "valid". Six
-overlap thematically with the three MRs this paper identifies: two with
-node-permutation equivariance (one of them an edge-order-invariance variant), one
-with mirror-y reflection, and four with the discrete-divergence-free conservation
-relation. The two LLM-only proposals are an implementation-contract pair
-(`batch_context_invariance`, `deterministic_replay`) — useful as software contracts
-but with no physical basis. The most informative single result is
-`centerline_reflection_equivariance`: it overlaps with this paper's mirror-y MR, was
-admitted by the predicate, and split the panel
-({valid, borderline, invalid}); the dissenting rater objected that the reflection
-across the channel centerline is not bijective on the asymmetric eval mesh, exactly
-the reason this paper downgrades that relation to an OOD-stress probe rather than an
-exact equivariance. Inter-rater agreement is raw-PRA 0.79 / item-unanimous 0.75 over
-the 3 vendor-disjoint raters; Fleiss kappa is 0.077 — the standard small-sample
-paradox when near-unanimous votes are split across three labels.
-
-This is one generator call, one temperature-0 sample, eight candidates, three
-vendor-disjoint raters. It is not a generative-model benchmark, not a sufficient
-sample for an LLM-vs-method comparison, and not a "method outperforms LLM" claim.
-The defensible reading is narrow: against this SUT, an LLM panel proposes mostly
-the same MR families this paper identifies, agrees with the predicate on what is
-admissible, and ratifies the paper's downgrade of the cylinder-flow mirror-y MR
-through independent reasoning. The expert-MR and generic-MR-generation baselines
-remain blocked at the artifact level.
+**LLM-generated MRs.** The one-shot LLM baseline generated K=8 candidates; vendor-disjoint raters (`glm-5.1`, `kimi-k2.6`, `deepseek-v4-flash`) scored them. 7/8 reached panel-majority valid, six overlap this paper's MR families, and the most informative disagreement is the centerline-reflection case where a rater objected to non-bijectivity on the asymmetric mesh. Fleiss kappa is 0.077, a small-sample paradox paired with PRA 0.79 / item-unanimous 0.75. These baselines are candidate-generation comparators, not defeated competitors.
 
 ### 5.6.5 Cross-family PINN extension (K=6 roster)
 
-To check whether the workflow is MeshGraphNets-specific, we extended the PINN check from
-two bounded one-seed points to a K=6 roster: three 5×50 MLP PINN seeds for 2D viscous
-Burgers (ν=0.05, vector field, Dirichlet zero BC, y-reflection-symmetric IC) and three
-seeds for the 2D heat equation (α=0.1, scalar field, Neumann zero-flux BC so mass is
-strictly conserved). Checkpoints, per-SUT MR reports, the aggregate bootstrap report, and
-129×129 FD references are committed under `research_assets/runs/pinn-k6-roster/`,
-`research_assets/runs/pinn-cross-family/`, and `research_assets/runs/pinn-cross-family-diffusion/`.
-The MR rewrites parallel Section 5.3. **MR-A** (collocation-point permutation) remains
-*vacuous by construction* for a pointwise MLP: permuting input rows and inverting commutes
-with row-independent evaluation, so near-zero violation confirms only that the rewrite is
-well-defined, not a model property. The two non-trivial MRs do the cross-family work.
-**MR-B** (mirror-y equivariance, scored against the PINN's own PDE residual as a
-self-reported floor rather than an independently calibrated one) passes on all 3/3 Burgers
-seeds with violation/floor ratio mean 0.615 and bootstrap 95% CI [0.446, 0.890], but is
-mixed on heat (1/3 pass, 2/3 fail; mean 1.682, CI [0.853, 2.795]). **MR-C**
-(reference-relative conservation ratio) passes on all 6/6 PINNs: Burgers mean median ratio
-1.007 (CI [1.000, 1.011]) and heat mean median ratio 0.992 (CI [0.971, 1.012]).
-Rollout-accuracy mean relative L2 is 0.024 for Burgers (CI [0.018, 0.031]) and 0.038 for
-heat (CI [0.035, 0.042]). Thus the admissibility predicate and conservation rewrite
-transfer across two PDE families and three seeds each, while the heat symmetry result also
-shows the self-reported-floor version of MR-B is not uniformly stable. This is a two-PDE
-PINN seed roster, not a PINN-vs-MGN benchmark or a generality claim across PINN
-architectures, PDEs, or training regimes.
+The PINN extension checks whether the predicate and MR rewrites can be carried outside the MeshGraphNets implementation. The K=6 PINN roster contains three 2D Burgers seeds and three 2D heat-equation seeds, with checkpoints and reports committed under `pinn-k6-roster/`. MR-A remains vacuous by construction for pointwise MLP PINNs; the two non-trivial MR checks are mirror-y and reference-relative conservation. MR-B passes on Burgers (mean ratio 0.615, CI [0.446, 0.890]) but is mixed on heat (mean 1.682, CI [0.853, 2.795]). MR-C passes on all six PINNs: Burgers mean 1.007 (CI [1.000, 1.011]) and heat mean 0.992 (CI [0.971, 1.012]). This is a two-PDE seed roster, not a PINN-vs-MGN benchmark or a general claim across PINN architectures, PDEs, or training regimes.
 
 ### 5.7 Still blocked
 
-The following remain blocked and must not be written as results: cross-SUT or
-geometry-independent pass/fail rates; comparative superiority over any baseline;
-general or real-world fault-detection rates; localization accuracy as a validated
-model; runtime or performance claims; and any claim that one SUT is more reliable than
-another. The three METBENCH-planned SUTs, and the expert-MR and generic-MR-generation baselines,
-stay blocked pending their artifacts. Three exceptions are now executed on the existing
-SUT and reported as scoped diagnostics, not as defeated competitors or general rates:
-the rollout-accuracy comparator (Section 5.3); a bounded seeded-fault detection result
-over one 10-mutant injected-fault catalogue (Section 5.3), whose by-class localization
-is suggestive evidence for, not a validation of, the interpretation protocol; and the
-one-shot, vendor-disjoint LLM-MR baseline of Section 5.6.4.
+The canonical block list is unchanged: cross-SUT or geometry-independent pass/fail rates; comparative superiority over baselines; general or real-world fault-detection rates; validated localization; runtime; reliability; model accuracy; and broad external validity. The executed comparators (rollout, seeded-fault, expert-MR, generic-MR, and LLM-MR) are scoped diagnostics. The K=6 MGN and K=6 PINN rosters expand the artifact package but do not lift the cross-SUT block.
 
 ## 6. Discussion
 

@@ -124,13 +124,17 @@ points"，需要的是 rate 不是 point。E1 的全部工程模式（orchestrat
 且素材几乎全部现成，是单位时间分数增量第二高的项。precision/recall 形式化把
 "suggestive localization"升级为可检验断言，直接抬 empirical rigor。
 
-### Phase 4 — 仅删不增的清晰度手术（2–3 天）
+### Phase 4 — 仅删不增的清晰度手术（已执行）
 
-- 目标 −15% 正文：claim-to-evidence 大表移附录；每小节重复的 scope disclaimer 收敛为
-  一处 canonical "Still blocked"；§5.3/§5.6 复述数字去重。
-- 硬约束：分支上约 25 个 test-guarded marker 字符串必须在 main.tex 与 manuscript.md
-  同步保留（31 号评估已标记此风险）；改后全量跑测试。
-- 同步项：Abstract 去经验数字复核（IST.md §2 禁数字）、Highlights ≤85 字符复核。
+- **已执行（Phase 4 clarity surgery）**：`paper/manuscript.md` 从 13,134 words 降至
+  10,547 words，`paper/ist-submission/main.tex` 从 10,456 words 降至 8,113 words；IST-counted
+  total 从 12,401 降至 10,087（headroom 4,913），超过原 −15% 目标。
+- **已执行（scope 收敛）**：§5.4–§5.7 的重复数值复述被压缩为 reviewer-facing summary；
+  stale “only one trained SUT / comparator planned” wording 删除；blocked 口径收敛为 canonical
+  “cross-SUT and broad generalization claims remain blocked”。
+- **已执行（submission polish）**：IST abstract Results/Conclusion 改为无 empirical-number dump 的边界摘要；
+  Highlights 全部 ≤85 字符；新增 `tests/test_phase4_clarity_surgery.py` 锁定 word-count buffer、
+  abstract/highlight 约束和 stale blocked wording。
 
 **理由**：clarity 6.2 是七维最低分且随每次加内容继续下跌（6.6→6.2）；面板 4/5 关切
 "overlong/hedged/ledger-heavy"。这是唯一**不加任何实验**就能涨分的维度，并且若不做，
