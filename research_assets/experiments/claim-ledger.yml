@@ -441,6 +441,45 @@ claims:
       - "Cross-architecture-family generalization or baseline superiority."
     blocked_reason: null
 
+  - claim_id: "C17-domain-violation-score-all"
+    status: "observed"
+    scope: "multi-relation extension of C15: per-relation domain-violation scores D = m/(m+1) for every executed MR class (MGN node-permutation, mirror-y on two meshes, absolute-conservation precondition, operator-floor diagnostic; PINN MR-A/B/C on Burgers and heat), each computed from already-committed artifacts only; one entry (PINN MR-C per-K=6-seed) explicitly marked not-operationalizable-from-committed-data"
+    evidence:
+      - "tools/compute_domain_violation_scores_all.py"
+      - "research_assets/runs/domain-violation-score-all/domain_violation_scores_all.json"
+      - "research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json"
+      - "research_assets/runs/mirror-y-rate-upgrade/raw/precondition_report.json"
+      - "research_assets/runs/mirror-y-symmetric-mesh/raw/metric_ledger.json"
+      - "research_assets/runs/conservation-diagnostic-pilot/raw/conservation_report.json"
+      - "research_assets/runs/operator-floor-sweep/operator_floor_report.json"
+      - "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
+      - "research_assets/runs/pinn-cross-family/pinn_mr_report.json"
+      - "research_assets/runs/pinn-cross-family-diffusion/pinn_mr_report.json"
+    wording_allowed: >
+      The domain-violation axis of the two-dimensional verdict is given a per-relation
+      operationalization from committed measurements: for each executed MR class, D = m/(m+1)
+      in [0,1) with a relation-specific dimensionless precondition-violation measure m read
+      from already-committed artifacts (no new experiment). Node-permutation (MGN) and
+      collocation-point permutation (PINN MR-A) score D = 0 by construction (an exact
+      relabeling has no precondition to violate); mirror-y scores D ~ 0 on the synthetic
+      symmetric mesh and D = 0.51 on the real asymmetric mesh (as in C15); the absolute
+      conservation relation scores D = 0.036 from the committed open-boundary
+      reference-divergence relative imbalance (its executed DEFERRED verdict is driven by the
+      numerical-decidability gate, i.e. the tolerance axis, not by D); the operator-floor
+      diagnostic and PINN MR-B score D = 0 by construction (analytic divergence-free
+      reference; exactly mirror-symmetric closed-form domain); PINN MR-C scores D = 0.040 on
+      Burgers (reference Q drift under Dirichlet BC) and D = 0 on heat (bit-identical
+      conserved reference Q under zero-flux BC). A per-K=6-seed PINN MR-C score is not
+      operationalizable from committed data (no per-snapshot Q_ref committed) and is reported
+      as such rather than invented. The per-relation m's use different relation-specific
+      units, so the D values are not mutually calibrated across MR classes or domains, and
+      no claim of a domain-violation score calibrated or validated across domains is made.
+    wording_forbidden:
+      - "A domain-violation score calibrated or validated across domains or MR classes."
+      - "A general or SUT-independent domain-violation metric."
+      - "Any wording implying the per-relation D values are mutually comparable on a common scale."
+    blocked_reason: null
+
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
     status: "partially-observed"

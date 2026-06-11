@@ -1,0 +1,161 @@
+{
+  "record_type": "domain-violation-score-all",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-11T13:00:51Z",
+  "definition": "Per-relation domain-violation score D = m/(m+1) in [0,1), where m is a dimensionless, relation-specific measure of precondition violation computed from already-committed artifacts only; see m_definition per entry.",
+  "relations": [
+    {
+      "relation_id": "mgn-node-permutation",
+      "family": "MGN",
+      "status": "exact-by-construction",
+      "m": 0.0,
+      "D": 0.0,
+      "m_definition": "m = 0 by construction: a node permutation is an exact relabeling with no geometric/physical precondition to violate; the follow-up input is exactly samplable (bit-identical coordinates).",
+      "sources": [
+        "research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json"
+      ],
+      "honesty_boundary": "Construction argument; the committed pilot ledger records the executed relation (measured violation 0.0 <= 1e-6) but D = 0 does not depend on the measurement.",
+      "measured_relation_violation": 0.0
+    },
+    {
+      "relation_id": "mgn-mirror-y-synthetic-symmetric-mesh",
+      "family": "MGN",
+      "status": "operationalized-from-committed-data",
+      "m": 1.847195895162529e-15,
+      "D": 1.847195895162526e-15,
+      "m_definition": "m = worst reflection involution offset (committed symmetric-mesh ledger, ~machine epsilon) over the real-mesh median edge length, the common length scale used by the existing single-relation script.",
+      "sources": [
+        "research_assets/runs/mirror-y-symmetric-mesh/raw/metric_ledger.json",
+        "research_assets/runs/mirror-y-rate-upgrade/raw/precondition_report.json"
+      ],
+      "honesty_boundary": "Geometry-only score; same definition as the committed single-relation report (low D: a violation here reads as SUT inconsistency).",
+      "reflection_offset_max": 3.469446951953614e-17,
+      "bijection": true
+    },
+    {
+      "relation_id": "mgn-mirror-y-real-asymmetric-mesh",
+      "family": "MGN",
+      "status": "operationalized-from-committed-data",
+      "m": 1.0277743117518001,
+      "D": 0.5068484721378598,
+      "m_definition": "m = worst reflected-node nearest-existing-node distance in median-edge-length units (committed precondition report).",
+      "sources": [
+        "research_assets/runs/mirror-y-rate-upgrade/raw/precondition_report.json"
+      ],
+      "honesty_boundary": "Geometry-only score; same definition and value as the committed single-relation report (high D: out-of-relation-domain / OOD-stress).",
+      "bijection": false,
+      "precondition_decision": "out-of-relation-domain"
+    },
+    {
+      "relation_id": "mgn-conservation-absolute-divergence-free",
+      "family": "MGN",
+      "status": "operationalized-from-committed-data",
+      "m": 0.037169127474664804,
+      "D": 0.03583709396091019,
+      "m_definition": "m = mean nondimensional discrete-divergence imbalance of the committed reference field on the deployed open-boundary mesh (mean_reference_nondim_divergence): the open-boundary flux-imbalance relative quantity, i.e. how far the deployed data sit from the divergence-free validity domain of the absolute relation.",
+      "sources": [
+        "research_assets/runs/conservation-diagnostic-pilot/raw/conservation_report.json"
+      ],
+      "honesty_boundary": "D quantifies only the domain-side precondition imbalance. The executed verdict for this MR was DEFERRED through the numerical-decidability gate (the absolute tolerance 1e-6 is uncalibratable: imbalance/tol ~ 3.7e4), which is the tolerance axis of the verdict plane, not the domain axis. No absolute conservation claim is made or implied.",
+      "absolute_divergence_tol": 1e-06,
+      "imbalance_over_absolute_tol": 37169.127474664805,
+      "executed_verdict": "deferred-uncalibrated-absolute-tolerance"
+    },
+    {
+      "relation_id": "mgn-operator-floor-diagnostic",
+      "family": "MGN",
+      "status": "exact-by-construction",
+      "m": 0.0,
+      "D": 0.0,
+      "m_definition": "m = 0 by construction: the committed sweep evaluates the P1 divergence operator on an analytic stream-function field with div(u) = 0 exactly, on a mesh family symmetric by construction, so the precondition is satisfied exactly.",
+      "sources": [
+        "research_assets/runs/operator-floor-sweep/operator_floor_report.json"
+      ],
+      "honesty_boundary": "Calibration diagnostic feeding the admissibility predicate, not a verdict-bearing MR execution; D = 0 states only that its reference field is in-domain by construction.",
+      "analytic_reference": "u = (psi_y, -psi_x); div(u) = 0 analytically"
+    },
+    {
+      "relation_id": "pinn-mr-a-collocation-permutation",
+      "family": "PINN",
+      "status": "exact-by-construction",
+      "m": 0.0,
+      "D": 0.0,
+      "m_definition": "m = 0 by construction: pointwise MLP evaluation is row-independent, so permuting evaluation points and inverting is an exact relabeling with no precondition to violate (relation vacuous by construction, C14).",
+      "sources": [
+        "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
+      ],
+      "honesty_boundary": "Construction argument; committed K=6 measured violations (max 6.67e-09) are well-definedness checks only and carry no evidential weight.",
+      "measured_relation_violation_max": 6.6680101440397266e-09
+    },
+    {
+      "relation_id": "pinn-mr-b-mirror-y-burgers",
+      "family": "PINN",
+      "status": "exact-by-construction",
+      "m": 0.0,
+      "D": 0.0,
+      "m_definition": "m = 0 by construction: the closed-form domain [-1,1]^2 is exactly invariant under the mirror and reflected evaluation points are computed in closed form (no mesh, no interpolation), so the reflected-point placement error (the same m as the MGN mirror-y score) is exactly zero; the committed SUT manifest records has_mirror_symmetry = true.",
+      "sources": [
+        "research_assets/runs/pinn-cross-family/pinn_mr_report.json",
+        "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
+      ],
+      "honesty_boundary": "With D = 0, a measured MR-B failure (heat seeds s1/s2 in the K=6 roster) reads as SUT inconsistency on the verdict plane, subject to C14's caveat that the floor is the PINN's self-reported PDE residual, not an independently calibrated floor.",
+      "has_mirror_symmetry": true
+    },
+    {
+      "relation_id": "pinn-mr-b-mirror-y-heat",
+      "family": "PINN",
+      "status": "exact-by-construction",
+      "m": 0.0,
+      "D": 0.0,
+      "m_definition": "m = 0 by construction: the closed-form domain [-1,1]^2 is exactly invariant under the mirror and reflected evaluation points are computed in closed form (no mesh, no interpolation), so the reflected-point placement error (the same m as the MGN mirror-y score) is exactly zero; the committed SUT manifest records has_mirror_symmetry = true.",
+      "sources": [
+        "research_assets/runs/pinn-cross-family-diffusion/pinn_mr_report.json",
+        "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
+      ],
+      "honesty_boundary": "With D = 0, a measured MR-B failure (heat seeds s1/s2 in the K=6 roster) reads as SUT inconsistency on the verdict plane, subject to C14's caveat that the floor is the PINN's self-reported PDE residual, not an independently calibrated floor.",
+      "has_mirror_symmetry": true
+    },
+    {
+      "relation_id": "pinn-mr-c-conservation-burgers",
+      "family": "PINN",
+      "status": "operationalized-from-committed-data",
+      "m": 0.041980618301316164,
+      "D": 0.04028925064820771,
+      "m_definition": "m = max_t |Q_ref(t) - Q_ref(0)| / |Q_ref(0)| over the committed per-snapshot reference table (Q = integral of u_x, Dirichlet zero BC): the open-boundary flux-imbalance relative quantity of the reference itself.",
+      "sources": [
+        "research_assets/runs/pinn-cross-family/pinn_mr_report.json"
+      ],
+      "honesty_boundary": "Nonzero m is exactly why the executed MR is reference-relative rather than absolute; D quantifies the distance of the deployed case from an exact-conservation validity domain.",
+      "q_ref_first": 0.6261819581157185,
+      "q_ref_last": 0.5998944523448918
+    },
+    {
+      "relation_id": "pinn-mr-c-conservation-heat",
+      "family": "PINN",
+      "status": "operationalized-from-committed-data",
+      "m": 0.0,
+      "D": 0.0,
+      "m_definition": "m = max_t |Q_ref(t) - Q_ref(0)| / |Q_ref(0)| over the committed per-snapshot reference table (Q = integral of u, Neumann zero-flux BC): the committed reference conserves Q bit-identically, so m = 0.",
+      "sources": [
+        "research_assets/runs/pinn-cross-family-diffusion/pinn_mr_report.json"
+      ],
+      "honesty_boundary": "Exact-conservation precondition holds on the committed reference (zero-flux boundary); a conservation violation here would read as SUT inconsistency.",
+      "q_ref_first": 0.31415515338483246,
+      "q_ref_last": 0.31415515338483246
+    },
+    {
+      "relation_id": "pinn-mr-c-conservation-k6-per-seed",
+      "family": "PINN",
+      "status": "not-operationalizable-from-committed-data",
+      "m": null,
+      "D": null,
+      "m_definition": "A per-K=6-seed D would need per-snapshot Q_ref tables, which the committed K=6 roster reports do not contain (they commit only median conservation ratios).",
+      "sources": [
+        "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
+      ],
+      "honesty_boundary": "Not operationalizable from committed data; no number is invented. The class-level D for PINN MR-C comes from the cross-family pilot artifacts (entries pinn-mr-c-conservation-burgers / -heat).",
+      "reason": "pinn-k6-roster/*/mr_report.json commit only mr_c_median_ratio; no per-snapshot Q_ref is committed."
+    }
+  ],
+  "honesty_boundary": "Per-relation operationalization from committed measurements only. The per-relation m's use different relation-specific units, so the D values are NOT mutually calibrated across MR classes or domains; no cross-domain calibrated or validated domain-violation metric is claimed. Entries marked exact-by-construction rest on construction arguments recorded alongside committed artifacts; the one entry without committed support is explicitly marked not-operationalizable-from-committed-data."
+}
