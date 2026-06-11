@@ -1,0 +1,276 @@
+{
+  "gpt-5.1-chat": {
+    "candidates": [
+      {
+        "name": "inflow_velocity_scaling",
+        "source_transformation": "Multiply only the inflow boundary nodes' velocities (vx, vy) by a scalar s>0 while keeping interior, wall, and obstacle node velocities unchanged",
+        "expected_relation": "The predicted outflow momentum flux should scale approximately by s; interior velocity magnitudes should scale close to s in regions dominated by advection from the inlet; direction should remain unchanged",
+        "tolerance_rationale": "Use L2 norm of velocity differences normalized by mean interior speed; tolerance must dominate numerical noise from mesh irregularities and known GNN approximation error (e.g., ~2–5% of baseline magnitude)",
+        "physical_basis": "Laminar–vortical channel flow scales approximately linearly with inflow speed under incompressible Navier–Stokes for fixed geometry and Reynolds proportionality",
+        "preconditions": "Flow must not exceed regime where nonlinear vortex shedding changes qualitatively; transformation must preserve mesh and boundary tags",
+        "failure_interpretation": "Indicates the surrogate fails to preserve basic input–output scaling, suggesting overfitting or nonphysical internal normalization",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "uniform_velocity_shift_invariance",
+        "source_transformation": "Add a constant vector (ux, uy) to all node velocities including boundaries",
+        "expected_relation": "Prediction should shift by approximately the same constant vector everywhere",
+        "tolerance_rationale": "Use L-infinity norm of discrepancy normalized by magnitude of imposed shift; tolerance covers discretization error and learned biases",
+        "physical_basis": "Galilean invariance of Navier–Stokes",
+        "preconditions": "Shift must not violate boundary conditions physically, so apply only if wall and obstacle velocities are simultaneously shifted (i.e., treat transformation as a frame change)",
+        "failure_interpretation": "Model lacks Galilean invariance, possibly due to training data biases or feature normalization artifacts",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "mesh_node_permutation",
+        "source_transformation": "Permute node ordering arbitrarily while preserving connectivity, features, and edge lists",
+        "expected_relation": "Predicted velocities should remain identical when reordered back into canonical index order",
+        "tolerance_rationale": "Exact match expected; tolerance only for floating‑point roundoff (<1e-12 relative)",
+        "physical_basis": "Permutation invariance of message passing in GNNs",
+        "preconditions": "Graph construction and batching must not leak positional assumptions",
+        "failure_interpretation": "Indicates implementation bugs in the GNN (e.g., order‑dependent aggregation)",
+        "expected_difficulty": "exact"
+      },
+      {
+        "name": "rotation_symmetry",
+        "source_transformation": "Rotate coordinates and velocities by an angle θ (e.g., 90°) about the domain center and rotate the boundary-type labels accordingly",
+        "expected_relation": "Outputs, when rotated back by −θ, should match original predictions",
+        "tolerance_rationale": "Use L2 velocity difference normalized by mean speed; tolerance accounts for GNN approximation (~few percent)",
+        "physical_basis": "Rotational symmetry of Navier–Stokes under rigid rotation of entire geometry and fields",
+        "preconditions": "Cylinder, channel, and inflow profile must be simultaneously rotated; requires domain to be embedded in larger space without anisotropic BCs",
+        "failure_interpretation": "Model has learned geometry‑specific orientation bias not supported by physics",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "velocity_reflection_symmetry",
+        "source_transformation": "Reflect mesh and velocity field across the channel centerline, flipping vx sign but keeping vy appropriately mirrored; swap left/right boundary types if present",
+        "expected_relation": "Reflected prediction, when mirrored back, should reproduce original",
+        "tolerance_rationale": "Normalization by root‑mean‑square velocity; tolerance similar to rotation MR",
+        "physical_basis": "Symmetry of the governing equations under reflection combined with velocity component sign flip",
+        "preconditions": "Inflow profile must be symmetric about the centerline; geometry must be symmetric (cylinder centered)",
+        "failure_interpretation": "Model encodes asymmetric biases learned from training data distribution",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "zero_internal_perturbation_invariance",
+        "source_transformation": "Add zero to all interior-node velocities but randomize internal ordering or add explicit zero‑value features",
+        "expected_relation": "Output must remain bitwise identical",
+        "tolerance_rationale": "Exact; any deviation indicates nondeterminism or sensitivity to irrelevant features",
+        "physical_basis": "Representation invariance: adding a feature with constant value or reshuffling no-op identities should not change outputs",
+        "preconditions": "Transformation must not affect boundary conditions or graph topology",
+        "failure_interpretation": "Model uses irrelevant feature channels or indexing artifacts",
+        "expected_difficulty": "exact"
+      },
+      {
+        "name": "mass_conservation_check",
+        "source_transformation": "Use original input; follow-up is identical (no change)",
+        "expected_relation": "Net divergence (discrete) of predicted field should remain near zero",
+        "tolerance_rationale": "Use L2 norm of divergence normalized by area; tolerance should exceed numerical divergence from the training simulations",
+        "physical_basis": "Incompressibility constraint",
+        "preconditions": "Mesh must be consistent with divergence operator; boundary fluxes must be handled properly",
+        "failure_interpretation": "Model violates incompressibility, indicating poor approximation of PDE constraints",
+        "expected_difficulty": "diagnostic_only"
+      },
+      {
+        "name": "wall_no_slip_preservation",
+        "source_transformation": "Zero out velocities at wall and obstacle nodes (already zero) but slightly perturb interior nodes",
+        "expected_relation": "Predicted wall-node velocities should remain close to zero",
+        "tolerance_rationale": "L-infinity norm normalized by characteristic velocity at interior; tolerance small (~1e-3–1e-2)",
+        "physical_basis": "No‑slip boundary condition",
+        "preconditions": "Boundary node types must be correctly labeled",
+        "failure_interpretation": "Indicates boundary-condition leakage or GNN message-passing bleed-through",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "time_scale_linearity_small_dt",
+        "source_transformation": "Scale velocities by α<1 to approximate a smaller effective time step dt'=α dt",
+        "expected_relation": "Predicted change in velocity (output minus input) should scale approximately by α",
+        "tolerance_rationale": "Use L2 difference of increments normalized by baseline increment; tolerance covers nonlinearity and model noise",
+        "physical_basis": "For small dt, Euler-forward step is locally linear in dt",
+        "preconditions": "Velocity field must be smooth; α small enough for linear regime",
+        "failure_interpretation": "Model learns nonphysical time-stepping behavior or memorizes dt-specific patterns",
+        "expected_difficulty": "diagnostic_only"
+      }
+    ],
+    "raw_finish_reason": "stop",
+    "model": "gpt-5.1-chat",
+    "timestamp": "2026-06-11T05:43:14.394560+00:00"
+  },
+  "deepseek-v4-pro": {
+    "candidates": [
+      {
+        "name": "identity_determinism",
+        "source_transformation": "Return an exact copy of the source input (same node features, edge features, and mesh).",
+        "expected_relation": "Output velocity vectors at every node must be element-wise equal to the output from the source input.",
+        "tolerance_rationale": "The model is deterministic; assuming no dropout or stochastic operations, the forward pass must produce identical results. Use absolute tolerance of 1e-12 (machine epsilon) on velocity components relative to a scale of 1 m/s.",
+        "physical_basis": "Determinism of a fixed neural network inference.",
+        "preconditions": "None.",
+        "failure_interpretation": "Indicates non-deterministic operations (e.g., dropout not disabled, non-associative floating-point accumulations causing run-to-run variation, or use of random noise).",
+        "expected_difficulty": "exact"
+      },
+      {
+        "name": "node_permutation_equivariance",
+        "source_transformation": "Randomly permute the node indices. Reorder node features (coordinates, velocity, node type) accordingly, and reassign edge connectivity indices and edge features to match the new node ordering. The geometric mesh and graph topology remain unchanged.",
+        "expected_relation": "The output velocity field, when un-permuted back to the original node ordering, must equal the source output velocity field to machine precision.",
+        "tolerance_rationale": "MeshGraphNets are permutation equivariant by design (graph convolutions, edge aggregation). Any dependence on node order would be an implementation bug. Use max absolute error < 1e-10 normalized by the characteristic velocity (e.g., maximum inflow velocity).",
+        "physical_basis": "Graph neural network architecture invariance: the computation is symmetric with respect to node ordering.",
+        "preconditions": "None.",
+        "failure_interpretation": "Violation suggests a bug in the graph construction (e.g., sorting operations), message-passing code that captures node identity, or non-permutation-equivariant layers.",
+        "expected_difficulty": "exact"
+      },
+      {
+        "name": "mirror_symmetry_centerline",
+        "source_transformation": "For each node with coordinates (x, y), map to (x, -y). Flip the sign of the y‑velocity component: vy → −vy, while keeping vx unchanged. Adjust node type labels if necessary (top wall ↔ bottom wall, inflow/outflow nodes map to themselves). The transformation must respect the symmetric node pairing of the mesh.",
+        "expected_relation": "The output velocity field of the follow‑up input at a node should equal the mirror‑transformed output of the source input at the corresponding mirror node: vx_followup( (x,-y) ) = vx_source( (x, y) ), vy_followup( (x,-y) ) = − vy_source( (x, y) ).",
+        "tolerance_rationale": "Model is an approximator; the symmetry will not be perfect. Use a relative L2 error metric (normalized by the characteristic velocity) and set tolerance to a value slightly above the model’s typical single‑step validation RMSE, e.g., 5×10⁻². This dominates the numerical noise floor of symmetry breaking from training data imbalance.",
+        "physical_basis": "The Navier–Stokes equations, the channel geometry, and the boundary conditions are symmetric under reflection about the horizontal centerline. The physics is exactly equivariant under this transformation.",
+        "preconditions": "The mesh must be strictly symmetric about y=0 (cylinder centered, walls symmetric). The source input can be arbitrary but must allow a well‑defined mirror mapping; node type assignments must be consistent with the symmetry (inflow/outflow nodes should lie on the axis of symmetry).",
+        "failure_interpretation": "The surrogate has learned asymmetric features, possibly due to unbalanced training data, use of absolute coordinates in a non‑equivariant manner, or insufficient representation of symmetry in the model.",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "wall_no_slip_perturbation_invariance",
+        "source_transformation": "Construct a divergence‑free perturbation field (e.g., from a random smoothed stream function) that vanishes on all wall, obstacle, inflow, and outflow nodes. Add this perturbation to the interior velocity of the source input. Boundary node velocities remain exactly as in the source (zero for walls).",
+        "expected_relation": "The predicted velocity at every wall and obstacle node must be approximately zero (within a small absolute tolerance). Equivalently, the output at those nodes must equal the source output at the same nodes (both ~0).",
+        "tolerance_rationale": "Use an absolute tolerance on the velocity magnitude of 1×10⁻⁴ × U_in_max, based on the typical wall‑prediction error floor observed in training. The no‑slip condition is a hard constraint; the model should not allow slip.",
+        "physical_basis": "The no‑slip boundary condition: fluid velocity at a solid wall is zero. This condition is independent of the interior flow field.",
+        "preconditions": "The source input must have zero velocity on all wall and obstacle nodes. The perturbation field must be exactly zero on those nodes and should be divergence‑free to avoid introducing spurious compressibility.",
+        "failure_interpretation": "The model fails to enforce the Dirichlet boundary condition on walls, indicating poor generalization or insufficient penalty on boundary errors during training.",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "inflow_bc_persistence_under_perturbation",
+        "source_transformation": "Apply the same interior perturbation as above (zero on all boundary nodes, including inflow). The inflow velocity profile remains identical to the source input.",
+        "expected_relation": "The output velocity at all inflow nodes must equal the source input velocity at those nodes (the prescribed Poiseuille profile) within tolerance. Equivalently, output_followup_inflow == output_source_inflow.",
+        "tolerance_rationale": "Absolute error on each velocity component < 1×10⁻⁴ × U_in_max, comparable to the model’s training error on preserving Dirichlet inflow conditions.",
+        "physical_basis": "The inflow boundary condition is a fixed Dirichlet profile; the next‑step velocity at the inlet must remain unchanged, regardless of interior dynamics.",
+        "preconditions": "Source input must have the correct inflow profile. The perturbation must not alter inflow node velocities.",
+        "failure_interpretation": "The surrogate allows spurious drift at the inflow, which would corrupt flux and violate the specified boundary conditions.",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "global_mass_flux_conservation_perturbation",
+        "source_transformation": "Use any divergence‑free, boundary‑preserving interior perturbation. The net volume flux Q = ∫ vx dy across any vertical cross‑section (e.g., at the inflow) is set by the prescribed inflow profile and is a constant for all valid flows.",
+        "expected_relation": "The computed flux Q for the follow‑up output must equal the flux for the source output (both should equal the fixed inflow flux). |Q_followup − Q_source| < ε_Q.",
+        "tolerance_rationale": "Tolerance ε_Q is set to 1×10⁻³ × Q_in, based on the numerical integration error on the discrete mesh (area‑weighted sum of vx on a vertical cut) and the model’s typical divergence error. The metric uses volume flux (assuming unit depth, density constant).",
+        "physical_basis": "Mass conservation for incompressible flow: the net mass flux through any cross‑section is constant and equal to the inlet flux. The one‑step prediction should maintain this global constraint.",
+        "preconditions": "Source input must respect the inflow profile; perturbation must be divergence‑free and preserve all boundary velocities.",
+        "failure_interpretation": "Violation indicates the model does not conserve mass globally, leading to net sources or sinks, which is a severe physical inconsistency.",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "lipschitz_continuity_small_perturbation",
+        "source_transformation": "Add a small divergence‑free perturbation ε·δv to the source velocity field, where δv is a normalized random field (‖δv‖₂ = 1) and ε is 0.01 × U_in_max. The perturbation is zero on all boundaries.",
+        "expected_relation": "The relative L2 change in the output velocity field should be bounded: ‖output_fup − output_src‖₂ / ‖output_src‖₂ ≤ L·ε + δ_model, with L an estimated Lipschitz constant (e.g., L ≤ 2 based on flow stability). A practical threshold: the change should be less than 5·ε.",
+        "tolerance_rationale": "The Navier–Stokes initial‑value problem is well‑posed; one‑step amplification factor for small perturbations is bounded. Tolerance combines an a‑priori estimated amplification factor (from training dynamics) and a model error floor. Use a diagnostic threshold of 5·ε for a sanity check.",
+        "physical_basis": "Continuous dependence on initial conditions ensures that infinitesimal perturbations lead to proportionally small changes over a short time step.",
+        "preconditions": "Source input should lie within the training distribution. ε must be small enough to stay in the linear response regime.",
+        "failure_interpretation": "Unusually large output change indicates instability, overfitting, or sharp non‑physical sensitivity, which could manifest as blow‑up in multi‑step rollouts.",
+        "expected_difficulty": "diagnostic_only"
+      },
+      {
+        "name": "divergence_preservation_under_solenoidal_perturbation",
+        "source_transformation": "Add a divergence‑free (solenoidal) perturbation field to the source input, as in previous perturbations. The perturbation must be exactly discretely divergence‑free on the mesh.",
+        "expected_relation": "The discrete divergence of the output velocity field (computed via cell‑based net flux) must be approximately zero for both source and follow‑up. More precisely, the divergence error norm (e.g., L2 norm of cell divergences) for the follow‑up output should be of the same order as for the source output, or below a set tolerance.",
+        "tolerance_rationale": "Discrete divergence tolerance ε_div = 1×10⁻² × (U_in_max / h_cell), based on typical divergence error of the surrogate on the training distribution. Numerical integration uses the same mesh and area‑weighted flux balances.",
+        "physical_basis": "Incompressibility requires ∇·v = 0 everywhere. A physically consistent surrogate must preserve this kinematic constraint, especially when the input is solenoidal.",
+        "preconditions": "Source input must be approximately divergence‑free. Perturbation must be divergence‑free and satisfy all boundary conditions.",
+        "failure_interpretation": "The model generates non‑physical compressible modes, violating mass conservation and potentially destabilising long‑term predictions.",
+        "expected_difficulty": "approximate"
+      }
+    ],
+    "raw_finish_reason": "stop",
+    "model": "deepseek-v4-pro",
+    "timestamp": "2026-06-11T05:47:26.422217+00:00"
+  },
+  "qwen3-max": {
+    "candidates": [
+      {
+        "name": "Mesh_Rotation_Invariance",
+        "source_transformation": "Rotate the entire mesh geometry and all node coordinates by an arbitrary angle theta (e.g., 45 degrees) around the cylinder center. Rotate the velocity vectors at each node by the same angle theta. Keep edge connectivity and relative features invariant under rotation.",
+        "expected_relation": "The predicted velocity field at t+1, when rotated back by -theta, must equal the prediction from the original unrotated input within tolerance.",
+        "tolerance_rationale": "Tolerance should be set to 3x the machine epsilon of the GNN's internal arithmetic plus a small term for interpolation errors in feature construction. Metric: L2 norm of the difference between rotated predictions normalized by the RMS magnitude of the velocity field.",
+        "physical_basis": "Rotational symmetry of the Navier-Stokes equations and the circular cylinder geometry. The physics is isotropic.",
+        "preconditions": "The mesh must be perfectly symmetric or sufficiently fine to approximate rotational symmetry; the obstacle must be circular; boundary conditions (inflow/outflow) must be rotated consistently with the domain.",
+        "failure_interpretation": "Indicates the GNN has learned spurious dependencies on absolute orientation or the feature encoding (edge displacement) is not rotationally equivariant.",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "Velocity_Scaling_Linearity",
+        "source_transformation": "Scale the input velocity field (vx, vy) at time t by a scalar factor alpha (e.g., 0.5 or 2.0). Scale the Reynolds number implicitly by adjusting viscosity if the model accepts it, or simply scale velocities assuming linear superposition holds locally.",
+        "expected_relation": "The output velocity field at t+1 should scale by approximately alpha. i.e., Output(alpha * V_in) ≈ alpha * Output(V_in).",
+        "tolerance_rationale": "Tolerance depends on non-linear advection terms (V·∇V). For low Re, tolerance is tight (~1e-3 relative error). For Re=1000, tolerance must account for non-linearity, so check if Output(αV)/Output(V) ≈ α with a margin based on the ratio of convective to diffusive forces.",
+        "physical_basis": "Linearity of the diffusion term; weak linearity of advection term under scaling if boundary conditions are scaled proportionally. Incompressibility is preserved.",
+        "preconditions": "Boundary conditions (inflow profile) must be scaled by alpha. The flow regime must remain sub-critical (no transition to turbulence that breaks simple scaling).",
+        "failure_interpretation": "Suggests the model fails to capture the non-linear coupling correctly or has bias terms that break scaling invariance.",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "Time_Reversal_Adjoint_Violation",
+        "source_transformation": "Reverse the sign of the velocity field (V -> -V) and reverse the direction of time (conceptually predicting t-1 from t, but here we test the forward step on reversed state). Actually, simpler: Input = -V(t). Predict V_pred(t+1). Compare with -(predicted V for +V(t)).",
+        "expected_relation": "For the specific case of steady-state or symmetric flow reversal, the system might exhibit symmetry. However, due to the convective term (u·∇u), reversing velocity does NOT simply reverse the future state in a time-reversible way without also changing pressure gradients. A better MR: If the flow is purely diffusive (Stokes limit), Output(-V) = -Output(V). At Re=1000, this relation is expected to fail significantly, but if the model predicts it holds, it's wrong. Let's reframe: Symmetry of steady wake. Input V_steady. Output should be V_steady. Input -V_steady. Output should be -V_steady? No, because pressure gradient drives flow. Better MR: Reflection Symmetry.",
+        "physical_basis": "Symmetry of the governing equations under spatial reflection x -> -x (for symmetric inflow and geometry).",
+        "preconditions": "Inflow must be symmetric about the centerline (y=0). Geometry must be symmetric. Flow must be laminar and symmetric (Re=1000 is near transition, may have asymmetry, so use Re < 47 first, or assume symmetric initial condition).",
+        "failure_interpretation": "If the model breaks reflection symmetry where the physics preserves it, it indicates architectural bias or training data noise.",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "Mass_Conservation_Local_Divergence",
+        "source_transformation": "Take the source input V(t). Compute the predicted output V(t+1). Calculate the discrete divergence of V(t+1) over the mesh cells using the graph Laplacian or finite volume method derived from the mesh topology.",
+        "expected_relation": "The sum of fluxes out of any closed control volume (or the global integral of divergence) must be zero (or very close to zero). ||Div(V(t+1))||_L2 < epsilon.",
+        "tolerance_rationale": "Tolerance should be dominated by the discretization error of the divergence operator on the unstructured mesh (O(h^p)) plus the numerical precision of the GNN. Typically 1e-4 to 1e-3 relative to max velocity.",
+        "physical_basis": "Continuity equation (incompressibility): ∇·u = 0. This is a hard constraint for Newtonian incompressible flow.",
+        "preconditions": "The mesh must be valid (no degenerate triangles). The model must respect the incompressibility constraint either via architecture or loss function.",
+        "failure_interpretation": "Indicates the model produces non-physical mass sources/sinks, a critical failure in fluid simulation surrogates.",
+        "expected_difficulty": "diagnostic_only"
+      },
+      {
+        "name": "Node_Permutation_Equivariance",
+        "source_transformation": "Permute the indices of the nodes arbitrarily. Permute the corresponding node features (coordinates, velocity) and edge connections accordingly to maintain the graph structure. The input is a set of nodes/edges, not a sequence.",
+        "expected_relation": "The output features at the permuted node indices must match the permuted version of the original output. If P is the permutation matrix, Output(P*X) = P*Output(X).",
+        "tolerance_rationale": "Tolerance should be near machine epsilon (1e-15) if the implementation uses standard set-based aggregation (Sum/Mean) which is permutation invariant. Any deviation > 1e-12 suggests ordering dependency in the code.",
+        "physical_basis": "Set-based nature of graph neural networks. Physics does not depend on node indexing order.",
+        "preconditions": "The GNN must use permutation-invariant aggregation functions (Sum, Mean, Max). No positional encodings that rely on fixed index order.",
+        "failure_interpretation": "Indicates a bug in the inference code where node ordering affects computation, violating the fundamental definition of a Graph Neural Network.",
+        "expected_difficulty": "exact"
+      },
+      {
+        "name": "Uniform_Shift_Boundary_Response",
+        "source_transformation": "Add a constant uniform vector C to the entire velocity field V(t). This represents a Galilean transformation if boundaries were infinite, but here walls exist. Instead, use a translation of the domain? No, domain is fixed. Use: Add a constant v_shift to the inflow velocity profile only, keeping walls no-slip. Wait, Galilean invariance doesn't hold with no-slip walls unless the whole frame moves. Let's try: Translation of the coordinate system. Shift all node coordinates by vector d. Shift the domain boundary definitions accordingly? Too complex. Alternative: Mirror the inflow profile? No. Let's use: **Pressure Gradient Invariance**. If we add a constant pressure gradient, velocity shifts. Hard to simulate. Back to **Galilean**: If we remove walls (periodic), Output(V+C) = Output(V)+C. With walls, this fails. Let's propose **Local Velocity Offset** in the interior only? No. Let's try **Reflection of Inflow Profile**.",
+        "physical_basis": "Dimensional analysis and similarity laws. The Navier-Stokes equations are invariant under scaling if Re is kept constant.",
+        "revised_name": "Edge_Length_Scaling_Equivariance",
+        "revised_source_transformation": "Scale the coordinates of all nodes by a factor s (e.g., 2.0). This scales the physical size of the channel and cylinder. To keep Reynolds number constant, we must scale the velocity by 1/s (since Re ~ VL/nu). So: New X' = s*X, New V' = (1/s)*V.",
+        "expected_relation": "The predicted velocity field V'(t+1) at the scaled grid should be related to the original prediction by V'_pred = (1/s) * V_pred (evaluated at scaled positions). Essentially, the dimensionless flow pattern remains identical.",
+        "tolerance_rationale": "Tolerance depends on the mesh resolution relative to the new length scale. If the mesh density (nodes per unit length) changes, accuracy drops. Tolerance should be set to allow for discretization error changes, e.g., 5% relative error.",
+        "preconditions": "Mesh must be rescaled such that the topological connectivity remains the same (just coordinates change). The number of nodes/cells stays constant, so the aspect ratio of elements changes. This might violate mesh quality preconditions.",
+        "failure_interpretation": "Indicates the model relies on absolute length scales rather than dimensionless groups, or the mesh generation logic introduces artifacts upon scaling.",
+        "expected_difficulty": "approximate"
+      },
+      {
+        "name": "Wall_NoSlip_Invariance",
+        "source_transformation": "Input V(t). Identify wall nodes. Force their velocity to exactly zero in the input (if they weren't already). Ensure the mesh topology includes the wall edges. Predict V(t+1).",
+        "expected_relation": "The predicted velocity at wall nodes in V(t+1) must be zero (or extremely close). ||V_pred(wall_nodes)|| < epsilon.",
+        "tolerance_rationale": "Tolerance should be machine epsilon or slightly higher to account for floating point accumulation in the final layer. < 1e-9.",
+        "physical_basis": "No-slip boundary condition for viscous fluids at solid walls.",
+        "preconditions": "The model must be trained with no-slip enforcement or the architecture must inherently preserve it (e.g., masking). The wall nodes must be correctly identified in the input features.",
+        "failure_interpretation": "Indicates the model fails to enforce boundary conditions, leading to unphysical slip at walls, which destroys solution validity near boundaries.",
+        "expected_difficulty": "exact"
+      },
+      {
+        "name": "Small_Time_Step_Linearity",
+        "source_transformation": "Run the model twice. First, predict V(t+1) from V(t). Second, treat V(t+1) as input and predict V(t+2). Compare this two-step prediction with a hypothetical single-step prediction if the model could take a larger time step? No. Compare: Predict V(t+dt) then V(t+2dt). vs Predict V(t+2dt) directly? The model is fixed to t->t+1. Let's use: **Superposition of Small Perturbations**.",
+        "physical_basis": "Differentiability of the flow map. For small perturbations, the system behaves linearly.",
+        "revised_name": "Perturbation_Linearity",
+        "revised_source_transformation": "Create two inputs: V_base(t) and V_pert(t) = V_base(t) + delta * u_random, where u_random is a small random noise field (zero mean). Run the model on both. Compute Output(V_base) and Output(V_pert).",
+        "expected_relation": "Output(V_pert) - Output(V_base) ≈ delta * (Linear Response Operator applied to u_random). Specifically, the difference should be proportional to delta. Ratio = (Diff) / delta should be constant for small delta.",
+        "tolerance_rationale": "Tolerance for the linearity check should be O(delta^2). As delta -> 0, the ratio should converge. Check for delta=1e-4 and delta=1e-5.",
+        "preconditions": "Delta must be small enough to stay in the linear regime but large enough to avoid numerical noise. Flow must be smooth (not chaotic/turbulent yet).",
+        "failure_interpretation": "Indicates the model has high-order non-linearities that are not physically consistent with the local linearization of Navier-Stokes, or the GNN is overly sensitive to noise.",
+        "expected_difficulty": "approximate"
+      }
+    ],
+    "raw_finish_reason": "stop",
+    "model": "qwen3-max",
+    "timestamp": "2026-06-11T05:47:55.681656+00:00"
+  }
+}

@@ -39,9 +39,14 @@ claims:
     blocked_reason: null
 
   - claim_id: "C3-baseline-comparison"
-    status: "partially-observed"
-    scope: "LLM-MR baseline (one gpt-5.5 generator, eight candidates, three vendor-disjoint raters) and generic-MR baseline (13-template domain-blind catalogue) both executed and scored by the predicate; expert-MR baseline remains blocked at artifacts."
+    status: "observed"
+    scope: "Expert-MR baseline (3 expert-LLMs, 25 candidates, 3-rater majority vote, 76% rejection/deferral, 0 novel retained), LLM-MR baseline (one gpt-5.5 generator, eight candidates, three vendor-disjoint raters), and generic-MR baseline (13-template domain-blind catalogue) all executed and scored by the predicate."
     evidence:
+      - "tools/run_expert_mr_baseline.py"
+      - "tools/patch_expert_rater.py"
+      - "research_assets/runs/expert-mr-baseline/expert_proposals.json"
+      - "research_assets/runs/expert-mr-baseline/expert_rated_candidates.json"
+      - "research_assets/runs/expert-mr-baseline/expert_baseline_report.json"
       - "tools/run_llm_mr_baseline.py"
       - "tools/rate_llm_mr_baseline.py"
       - "tools/score_llm_mr_baseline.py"
@@ -90,10 +95,10 @@ claims:
       the rubric-value question, not a claim that generic generation is useless.
     wording_forbidden:
       - "The proposed protocol outperforms any baseline."
-      - "Expert-MR or generic-MR comparison results are available."
       - "An LLM-vs-method superiority or general LLM-MR-generation quality claim."
       - "A generative-model benchmark or LLM-quality ranking."
-    blocked_reason: "Expert-MR and generic-MR-generation baselines remain protocol commitments without committed pipelines. The LLM-MR baseline has produced one bounded execution; cross-LLM, multi-sample, or larger-K generalizations are not in scope."
+      - "The expert-MR baseline proves the rubric is necessary (it shows an admissibility gap, not necessity)."
+    blocked_reason: null
 
   - claim_id: "C4-rubric-decision-coverage"
     status: "qualified"
