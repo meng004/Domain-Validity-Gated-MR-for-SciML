@@ -77,13 +77,19 @@
     },
     "majority_verdict": "reject",
     "verdict_distribution": {
-      "reject": 1,
+      "reject": 2,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "mirror_y",
       "node_permutation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -161,9 +167,16 @@
     "majority_verdict": "reject",
     "verdict_distribution": {
       "reject": 1,
+      "downgrade_ood_stress": 1,
       "retain": 1
     },
-    "overlaps_paper_mr_union": []
+    "overlaps_paper_mr_union": [],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": "no 2-of-3 majority; resolved by deterministic configured-rater order"
   },
   {
     "candidate": {
@@ -247,11 +260,17 @@
     "majority_verdict": "retain",
     "verdict_distribution": {
       "reject": 1,
-      "retain": 1
+      "retain": 2
     },
     "overlaps_paper_mr_union": [
       "node_permutation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -334,12 +353,18 @@
     },
     "majority_verdict": "reject",
     "verdict_distribution": {
-      "reject": 1,
+      "reject": 2,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "mirror_y"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -423,11 +448,18 @@
     "majority_verdict": "reject",
     "verdict_distribution": {
       "reject": 1,
+      "downgrade_ood_stress": 1,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "mirror_y"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": "no 2-of-3 majority; resolved by deterministic configured-rater order"
   },
   {
     "candidate": {
@@ -508,12 +540,18 @@
     },
     "majority_verdict": "reject",
     "verdict_distribution": {
-      "reject": 1,
+      "reject": 2,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "node_permutation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -597,11 +635,18 @@
     "majority_verdict": "defer",
     "verdict_distribution": {
       "defer": 1,
+      "reject": 1,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "divergence_conservation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": "no 2-of-3 majority; resolved by deterministic configured-rater order"
   },
   {
     "candidate": {
@@ -681,11 +726,18 @@
     "majority_verdict": "reject",
     "verdict_distribution": {
       "reject": 1,
+      "downgrade_ood_stress": 1,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "divergence_conservation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": "no 2-of-3 majority; resolved by deterministic configured-rater order"
   },
   {
     "candidate": {
@@ -762,10 +814,16 @@
     },
     "majority_verdict": "reject",
     "verdict_distribution": {
-      "reject": 1,
+      "reject": 2,
       "retain": 1
     },
-    "overlaps_paper_mr_union": []
+    "overlaps_paper_mr_union": [],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -847,11 +905,18 @@
     "majority_verdict": "reject",
     "verdict_distribution": {
       "reject": 1,
+      "retain": 1,
       "downgrade_ood_stress": 1
     },
     "overlaps_paper_mr_union": [
       "node_permutation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": "no 2-of-3 majority; resolved by deterministic configured-rater order"
   },
   {
     "candidate": {
@@ -934,11 +999,17 @@
     },
     "majority_verdict": "retain",
     "verdict_distribution": {
-      "retain": 2
+      "retain": 3
     },
     "overlaps_paper_mr_union": [
       "node_permutation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -1022,11 +1093,18 @@
     "majority_verdict": "downgrade_ood_stress",
     "verdict_distribution": {
       "downgrade_ood_stress": 1,
+      "reject": 1,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "mirror_y"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": "no 2-of-3 majority; resolved by deterministic configured-rater order"
   },
   {
     "candidate": {
@@ -1103,10 +1181,16 @@
     },
     "majority_verdict": "defer",
     "verdict_distribution": {
-      "defer": 1,
+      "defer": 2,
       "retain": 1
     },
-    "overlaps_paper_mr_union": []
+    "overlaps_paper_mr_union": [],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -1186,11 +1270,17 @@
     "majority_verdict": "retain",
     "verdict_distribution": {
       "defer": 1,
-      "retain": 1
+      "retain": 2
     },
     "overlaps_paper_mr_union": [
       "node_permutation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -1274,11 +1364,18 @@
     "majority_verdict": "defer",
     "verdict_distribution": {
       "defer": 1,
+      "reject": 1,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "divergence_conservation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": "no 2-of-3 majority; resolved by deterministic configured-rater order"
   },
   {
     "candidate": {
@@ -1357,12 +1454,18 @@
     },
     "majority_verdict": "defer",
     "verdict_distribution": {
-      "defer": 1,
+      "defer": 2,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "divergence_conservation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -1446,11 +1549,18 @@
     "majority_verdict": "defer",
     "verdict_distribution": {
       "defer": 1,
+      "downgrade_ood_stress": 1,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "divergence_conservation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": "no 2-of-3 majority; resolved by deterministic configured-rater order"
   },
   {
     "candidate": {
@@ -1534,11 +1644,17 @@
     "majority_verdict": "downgrade_ood_stress",
     "verdict_distribution": {
       "reject": 1,
-      "downgrade_ood_stress": 1
+      "downgrade_ood_stress": 2
     },
     "overlaps_paper_mr_union": [
       "mirror_y"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -1618,13 +1734,19 @@
     },
     "majority_verdict": "reject",
     "verdict_distribution": {
-      "reject": 1,
+      "reject": 2,
       "downgrade_ood_stress": 1
     },
     "overlaps_paper_mr_union": [
       "mirror_y",
       "node_permutation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -1707,12 +1829,18 @@
     },
     "majority_verdict": "reject",
     "verdict_distribution": {
-      "reject": 2
+      "reject": 3
     },
     "overlaps_paper_mr_union": [
       "mirror_y",
       "node_permutation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -1796,11 +1924,18 @@
     "majority_verdict": "defer",
     "verdict_distribution": {
       "defer": 1,
+      "reject": 1,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "divergence_conservation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": "no 2-of-3 majority; resolved by deterministic configured-rater order"
   },
   {
     "candidate": {
@@ -1884,11 +2019,17 @@
     },
     "majority_verdict": "retain",
     "verdict_distribution": {
-      "retain": 2
+      "retain": 3
     },
     "overlaps_paper_mr_union": [
       "node_permutation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -1969,11 +2110,17 @@
     },
     "majority_verdict": "reject",
     "verdict_distribution": {
-      "reject": 2
+      "reject": 3
     },
     "overlaps_paper_mr_union": [
       "Edge_Length_Scaling_Equivariance"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -2052,12 +2199,18 @@
     },
     "majority_verdict": "reject",
     "verdict_distribution": {
-      "reject": 1,
+      "reject": 2,
       "retain": 1
     },
     "overlaps_paper_mr_union": [
       "divergence_conservation"
-    ]
+    ],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   },
   {
     "candidate": {
@@ -2136,9 +2289,15 @@
     },
     "majority_verdict": "reject",
     "verdict_distribution": {
-      "reject": 1,
+      "reject": 2,
       "retain": 1
     },
-    "overlaps_paper_mr_union": []
+    "overlaps_paper_mr_union": [],
+    "active_rater_models": [
+      "claude-opus-4-8",
+      "MiniMax-M3",
+      "glm-4"
+    ],
+    "vote_note": null
   }
 ]

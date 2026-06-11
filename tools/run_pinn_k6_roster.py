@@ -6,7 +6,7 @@ B=2000 bootstrap 95% CIs over the seed-replica families — the same pattern as
 the MGN E1 multi-checkpoint replication.
 
 Usage:
-  python3 tools/run_pinn_k6_roster.py [--iters 8000] [--skip-existing]
+  python3 tools/run_pinn_k6_roster.py [--iters 8000] [--batch-size 512] [--skip-existing]
 
 Outputs:
   research_assets/runs/pinn-k6-roster/
@@ -46,7 +46,14 @@ def relative_l2(a: np.ndarray, b: np.ndarray) -> float:
     return float(np.linalg.norm(a - b) / (np.linalg.norm(b) + 1e-12))
 
 
-def train_burgers(seed: int, outdir: Path, iters: int) -> dict:
+def _batch(t: torch.Tensor, rng: np.random.Generator, batch_size: int) -> torch.Tensor:
+    if batch_size <= 0 or batch_size >= len(t):
+        return t
+    idx = rng.choice(len(t), size=batch_size, replace=False)
+    return t[torch.as_tensor(idx, dtype=torch.long)]
+
+
+def train_burgers(seed: int, outdir: Path, iters: int, batch_size: int) -> dict:
     torch.manual_seed(seed)
     np.random.seed(seed)
     rng = np.random.default_rng(seed)
@@ -82,19 +89,25 @@ def train_burgers(seed: int, outdir: Path, iters: int) -> dict:
     Lp = torch.tensor(float("nan"))
     for it in range(iters):
         opt.zero_grad()
-        Lp = burgers_pde_residual(model, coll_t)
+        coll_b = _batch(coll_t, rng, batch_size)
+        ic_b = _batch(ic_t, rng, max(1, batch_size // 4))
+        bc_b = _batch(bc_t, rng, max(1, batch_size // 4))
+        Lp = burgers_pde_residual(model, coll_b)
         from train_pinn_burgers2d import ic_loss as b_ic_loss, bc_loss as b_bc_loss
-        Lic = b_ic_loss(model, ic_t)
-        Lbc = b_bc_loss(model, bc_t)
+        Lic = b_ic_loss(model, ic_b)
+        Lbc = b_bc_loss(model, bc_b)
         L = Lp + 10.0 * Lic + 10.0 * Lbc
         L.backward()
         opt.step()
         sched.step()
 
+    # Measure the final PDE residual on the full collocation grid once for the manifest.
+    Lp = burgers_pde_residual(model, coll_t)
     elapsed = time.time() - t0
     ckpt_path = outdir / "checkpoint.pt"
     torch.save({"state_dict": model.state_dict(),
-                "config": {"seed": seed, "hidden": 50, "layers": 5, "iters": iters}},
+                "config": {"seed": seed, "hidden": 50, "layers": 5,
+                           "iters": iters, "batch_size": batch_size}},
                ckpt_path)
     sha = hashlib.sha256(ckpt_path.read_bytes()).hexdigest()
     final_res = float(Lp.item() ** 0.5)
@@ -104,12 +117,14 @@ def train_burgers(seed: int, outdir: Path, iters: int) -> dict:
         "checkpoint_sha256": sha,
         "final_pde_residual_l2": final_res,
         "num_parameters": sum(p.numel() for p in model.parameters()),
+        "train_iters": iters,
+        "batch_size": batch_size,
         "elapsed_s": elapsed,
     }
     return manifest
 
 
-def train_diffusion(seed: int, outdir: Path, iters: int) -> dict:
+def train_diffusion(seed: int, outdir: Path, iters: int, batch_size: int) -> dict:
     torch.manual_seed(seed)
     np.random.seed(seed)
     rng = np.random.default_rng(seed)
@@ -151,19 +166,28 @@ def train_diffusion(seed: int, outdir: Path, iters: int) -> dict:
     Lp = torch.tensor(float("nan"))
     for it in range(iters):
         opt.zero_grad()
-        Lp = diffusion_pde_residual(model, coll_t)
+        coll_b = _batch(coll_t, rng, batch_size)
+        ic_b = _batch(ic_t, rng, max(1, batch_size // 4))
+        bc_idx = rng.choice(len(bc_t), size=min(max(1, batch_size // 4), len(bc_t)),
+                            replace=False)
+        bc_b = bc_t[torch.as_tensor(bc_idx, dtype=torch.long)]
+        axis_b = axis_t[torch.as_tensor(bc_idx, dtype=torch.long)]
+        Lp = diffusion_pde_residual(model, coll_b)
         from train_pinn_diffusion2d import ic_loss as d_ic_loss, neumann_bc_loss
-        Lic = d_ic_loss(model, ic_t)
-        Lbc = neumann_bc_loss(model, bc_t, axis_t)
+        Lic = d_ic_loss(model, ic_b)
+        Lbc = neumann_bc_loss(model, bc_b, axis_b)
         L = Lp + 10.0 * Lic + 10.0 * Lbc
         L.backward()
         opt.step()
         sched.step()
 
+    # Measure the final PDE residual on the full collocation grid once for the manifest.
+    Lp = diffusion_pde_residual(model, coll_t)
     elapsed = time.time() - t0
     ckpt_path = outdir / "checkpoint.pt"
     torch.save({"state_dict": model.state_dict(),
-                "config": {"seed": seed, "hidden": 50, "layers": 5, "iters": iters}},
+                "config": {"seed": seed, "hidden": 50, "layers": 5,
+                           "iters": iters, "batch_size": batch_size}},
                ckpt_path)
     sha = hashlib.sha256(ckpt_path.read_bytes()).hexdigest()
     final_res = float(Lp.item() ** 0.5)
@@ -173,6 +197,8 @@ def train_diffusion(seed: int, outdir: Path, iters: int) -> dict:
         "checkpoint_sha256": sha,
         "final_pde_residual_l2": final_res,
         "num_parameters": sum(p.numel() for p in model.parameters()),
+        "train_iters": iters,
+        "batch_size": batch_size,
         "elapsed_s": elapsed,
     }
     return manifest
@@ -307,6 +333,8 @@ def bootstrap_ci(values: list[float], n_boot: int = N_BOOTSTRAP,
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--iters", type=int, default=8000)
+    p.add_argument("--batch-size", type=int, default=512,
+                   help="Stochastic training batch size; <=0 means full batch")
     p.add_argument("--skip-existing", action="store_true")
     args = p.parse_args(argv)
 
@@ -321,20 +349,27 @@ def main(argv: list[str] | None = None) -> int:
 
             if args.skip_existing and ckpt_path.exists():
                 print(f"[{tag}] skip training (checkpoint exists)")
-                state = torch.load(ckpt_path, map_location="cpu", weights_only=False)
-                sha = hashlib.sha256(ckpt_path.read_bytes()).hexdigest()
-                manifest = {
-                    "sut_id": f"pinn_{pde}2d_s{seed}", "pde": f"{pde}2d",
-                    "seed": seed, "checkpoint_sha256": sha,
-                    "final_pde_residual_l2": 0.0,
-                    "num_parameters": 0, "elapsed_s": 0,
-                }
+                manifest_path = ROSTER_DIR / tag / "manifest.json"
+                if manifest_path.exists():
+                    manifest = json.loads(manifest_path.read_text())
+                else:
+                    state = torch.load(ckpt_path, map_location="cpu", weights_only=False)
+                    cfg = state.get("config", {})
+                    sha = hashlib.sha256(ckpt_path.read_bytes()).hexdigest()
+                    manifest = {
+                        "sut_id": f"pinn_{pde}2d_s{seed}", "pde": f"{pde}2d",
+                        "seed": seed, "checkpoint_sha256": sha,
+                        "final_pde_residual_l2": float("nan"),
+                        "num_parameters": 0, "elapsed_s": 0,
+                        "train_iters": cfg.get("iters"),
+                        "batch_size": cfg.get("batch_size", args.batch_size),
+                    }
             else:
                 print(f"[{tag}] training ...", flush=True)
                 if pde == "burgers":
-                    manifest = train_burgers(seed, sut_dir, args.iters)
+                    manifest = train_burgers(seed, sut_dir, args.iters, args.batch_size)
                 else:
-                    manifest = train_diffusion(seed, sut_dir, args.iters)
+                    manifest = train_diffusion(seed, sut_dir, args.iters, args.batch_size)
                 print(f"  done: residual_l2={manifest['final_pde_residual_l2']:.4e} "
                       f"({manifest['elapsed_s']:.1f}s)")
 
@@ -364,6 +399,8 @@ def main(argv: list[str] | None = None) -> int:
         "record_type": "pinn-k6-roster-aggregate",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "n_seeds": len(SEEDS), "seeds": SEEDS,
+        "train_iters": args.iters,
+        "train_batch_size": args.batch_size,
         "n_bootstrap": N_BOOTSTRAP,
         "per_sut": results,
         "per_pde_family": {},
@@ -379,16 +416,27 @@ def main(argv: list[str] | None = None) -> int:
         mr_c_mean, mr_c_lo, mr_c_hi = bootstrap_ci(mr_c_medians)
         roll_mean, roll_lo, roll_hi = bootstrap_ci(rollouts)
 
+        mr_b_verdict_counts = {lab: sum(1 for r in family if r["mr_b_verdict"] == lab)
+                               for lab in sorted({r["mr_b_verdict"] for r in family})}
+        mr_c_verdict_counts = {lab: sum(1 for r in family if r["mr_c_verdict"] == lab)
+                               for lab in sorted({r["mr_c_verdict"] for r in family})}
+        mr_b_same = len(mr_b_verdict_counts) == 1
+        mr_c_same = len(mr_c_verdict_counts) == 1
+
         aggregate["per_pde_family"][pde] = {
             "mr_a_all_pass": all(r["mr_a_verdict"] == "pass" for r in family),
             "mr_b_ratio_mean": mr_b_mean,
             "mr_b_ratio_95ci": [mr_b_lo, mr_b_hi],
-            "mr_b_all_same_verdict": len(set(r["mr_b_verdict"] for r in family)) == 1,
-            "mr_b_verdict": family[0]["mr_b_verdict"],
+            "mr_b_verdict_counts": mr_b_verdict_counts,
+            "mr_b_pass_rate": mr_b_verdict_counts.get("pass", 0) / len(family),
+            "mr_b_all_same_verdict": mr_b_same,
+            "mr_b_verdict": family[0]["mr_b_verdict"] if mr_b_same else "mixed",
             "mr_c_median_mean": mr_c_mean,
             "mr_c_median_95ci": [mr_c_lo, mr_c_hi],
-            "mr_c_all_same_verdict": len(set(r["mr_c_verdict"] for r in family)) == 1,
-            "mr_c_verdict": family[0]["mr_c_verdict"],
+            "mr_c_verdict_counts": mr_c_verdict_counts,
+            "mr_c_pass_rate": mr_c_verdict_counts.get("pass", 0) / len(family),
+            "mr_c_all_same_verdict": mr_c_same,
+            "mr_c_verdict": family[0]["mr_c_verdict"] if mr_c_same else "mixed",
             "rollout_mean": roll_mean,
             "rollout_95ci": [roll_lo, roll_hi],
         }

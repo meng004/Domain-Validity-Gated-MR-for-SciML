@@ -2,7 +2,7 @@
 to fill in for a rate-limited model (e.g. Kimi-K2-Instruct → MiniMax-M3).
 
 Usage:
-  OPENAI_API_KEY=... OPENAI_BASE_URL=https://llm-api.net/v1 \
+  API_KEY=... BASE_URL=https://llm-api.net/v1 \
     python3 tools/patch_expert_rater.py \
       --failed-rater "Kimi-K2-Instruct" \
       --replacement-rater "MiniMax-M3"
@@ -11,14 +11,18 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import sys
 import time
 import urllib.request
-from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+
+from run_expert_mr_baseline import (
+    RATER_MODELS,
+    _gateway_credentials,
+    _strict_three_rater_majority,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTDIR = ROOT / "research_assets" / "runs" / "expert-mr-baseline"
@@ -143,10 +147,14 @@ def main():
     p.add_argument("--replacement-rater", required=True)
     args = p.parse_args()
 
-    api_key = os.environ.get("OPENAI_API_KEY")
-    base_url = os.environ.get("OPENAI_BASE_URL")
+    api_key, base_url, api_key_env, base_url_env = _gateway_credentials()
     if not api_key or not base_url:
-        sys.exit("Set OPENAI_API_KEY and OPENAI_BASE_URL")
+        sys.exit(
+            "Set one API-key env var (OPENAI_API_KEY, API_KEY, or "
+            "LLM_GATEWAY_API_KEY) and one base-url env var (OPENAI_BASE_URL, "
+            "BASE_URL, or LLM_GATEWAY_BASE_URL)"
+        )
+    print(f"Gateway credentials: api_key_env={api_key_env}; base_url_env={base_url_env}")
 
     rated_path = OUTDIR / "expert_rated_candidates.json"
     if not rated_path.exists():
@@ -173,10 +181,14 @@ def main():
                 votes[args.replacement_rater] = {"error": str(e), "overall_verdict": "error"}
             time.sleep(1)
 
-            # Recompute majority
-            verdicts = [v.get("overall_verdict", "error") for v in votes.values() if v.get("overall_verdict") != "error"]
-            if verdicts:
-                entry["majority_verdict"] = Counter(verdicts).most_common(1)[0][0]
+            # Recompute the active three-rater vote; inactive historical raters
+            # remain in per_rater_votes for audit but do not affect the verdict.
+            verdict, distribution, active, note = _strict_three_rater_majority(
+                votes, RATER_MODELS)
+            entry["majority_verdict"] = verdict
+            entry["verdict_distribution"] = distribution
+            entry["active_rater_models"] = active
+            entry["vote_note"] = note
             overlap_sets = []
             for v in votes.values():
                 overlap_sets.extend(v.get("overlaps_paper_mr", []))
@@ -217,11 +229,13 @@ def main():
 
     report = {
         "record_type": "expert-mr-baseline-report",
-        "schema_version": "0.2.0",
+        "schema_version": "0.3.0",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "protocol": "3-expert-proposal × 3-rater-majority-vote (patched)",
         "expert_models": list(proposals.keys()),
-        "rater_models": all_raters,
+        "rater_models": RATER_MODELS,
+        "rater_vote_rule": "exactly 3 successful distinct configured LLM raters; 2-of-3 majority, with deterministic configured-rater-order tie resolution",
+        "inactive_audit_trail_raters": [r for r in all_raters if r not in RATER_MODELS],
         "patch_applied": f"{args.failed_rater} -> {args.replacement_rater} ({patched} entries)",
         "n_total_candidates": n_total,
         "n_unique_candidates": n_unique,

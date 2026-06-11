@@ -107,24 +107,26 @@ class TestManuscriptSyncedToReport(unittest.TestCase):
         self.assertIn("Cross-family PINN extension", self.l)
 
     def test_headline_numbers_present(self):
-        # Both Burgers (0.74 / 1.004) and Diffusion (0.46 / 0.995) cited.
+        # K=6 PINN roster headline values must stay synchronized.
         for txt in (self.m, self.l):
-            self.assertTrue(re.search(r"0\.74", txt),
-                            "MR-B Burgers ratio 0.74 must be cited")
-            self.assertTrue(re.search(r"0\.46", txt),
-                            "MR-B heat ratio 0.46 must be cited")
-            self.assertTrue(re.search(r"1\.004", txt),
-                            "MR-C Burgers median 1.004 must be cited")
-            self.assertTrue(re.search(r"0\.995", txt),
-                            "MR-C heat median 0.995 must be cited")
-            self.assertTrue(re.search(r"two bounded points", txt),
-                            "subsection must frame as two bounded points")
+            self.assertTrue(re.search(r"K=6 roster|K=6 PINN roster", txt),
+                            "subsection must frame the executed PINN roster")
+            self.assertTrue(re.search(r"0\.615", txt),
+                            "MR-B Burgers K=6 mean ratio 0.615 must be cited")
+            self.assertTrue(re.search(r"1\.682", txt),
+                            "MR-B heat K=6 mean ratio 1.682 must be cited")
+            self.assertTrue(re.search(r"1\.007", txt),
+                            "MR-C Burgers K=6 mean median 1.007 must be cited")
+            self.assertTrue(re.search(r"0\.992", txt),
+                            "MR-C heat K=6 mean median 0.992 must be cited")
+            self.assertTrue(re.search(r"mixed", txt),
+                            "heat MR-B must stay reported as mixed")
             # MR-A must stay flagged as evidentially vacuous for the PINN, so a
             # future edit cannot silently re-inflate the cross-family MR count.
             self.assertTrue(re.search(r"vacuous by construction", txt),
                             "MR-A must be marked vacuous-by-construction for the PINN")
             self.assertTrue(re.search(r"two non-trivial MR", txt),
-                            "cross-family transfer must be attributed to the two "
+                            "cross-family evidence must be attributed to the two "
                             "non-trivial MRs (MR-B, MR-C), not all three")
 
     def test_ledger_C14_observed(self):

@@ -95,11 +95,11 @@ class TestManuscriptAndLedgerInSync(unittest.TestCase):
 
     def test_ledger_promoted_from_blocked(self):
         self.assertIn('claim_id: "C3-baseline-comparison"', self.l)
-        # The status line for C3 should now be partially-observed, not blocked.
+        # The status line for C3 should now be observed: expert, LLM, and generic baselines are all committed.
         m = re.search(r'claim_id: "C3-baseline-comparison"\s*\n\s*status:\s*"([^"]+)"',
                       self.l)
         self.assertIsNotNone(m)
-        self.assertEqual(m.group(1), "partially-observed")
+        self.assertEqual(m.group(1), "observed")
 
 
 if __name__ == "__main__":
