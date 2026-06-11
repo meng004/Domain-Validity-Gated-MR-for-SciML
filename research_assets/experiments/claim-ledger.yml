@@ -352,7 +352,7 @@ claims:
 
   - claim_id: "C14-cross-family-pinn-extension"
     status: "observed"
-    scope: "two PINNs (5-layer x 50-neuron MLP each) / two PDEs (2D viscous Burgers nu=0.05 Dirichlet-zero-BC vector field; 2D heat alpha=0.1 Neumann-zero-flux scalar field) / one seed each (20260607) / three MRs rewritten for the PINN family + rollout-accuracy baseline against 129x129 FD references"
+    scope: "PINN K=6 roster (3 training seeds x 2 PDEs) / 5-layer x 50-neuron MLP PINNs / 2D viscous Burgers nu=0.05 Dirichlet-zero-BC vector field and 2D heat alpha=0.1 Neumann-zero-flux scalar field / three MRs rewritten for the PINN family + rollout-accuracy baseline against 129x129 FD references / stochastic mini-batch training for 2000 iterations"
     evidence:
       - "tools/train_pinn_burgers2d.py"
       - "tools/compute_burgers2d_reference.py"
@@ -360,29 +360,32 @@ claims:
       - "tools/train_pinn_diffusion2d.py"
       - "tools/compute_diffusion2d_reference.py"
       - "tools/run_pinn_diffusion_mr_extension.py"
+      - "tools/run_pinn_k6_roster.py"
       - "research_assets/runs/pinn-cross-family/sut/checkpoint.pt"
       - "research_assets/runs/pinn-cross-family/pinn_mr_report.json"
       - "research_assets/runs/pinn-cross-family-diffusion/sut/checkpoint.pt"
       - "research_assets/runs/pinn-cross-family-diffusion/pinn_mr_report.json"
       - "research_assets/runs/pinn-cross-family-diffusion/reference_solution.npz"
+      - "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
     wording_allowed: >
       To check whether the four-condition admissibility predicate and the three MR rewrites
-      are MeshGraphNets-specific, the predicate was applied to two separately trained PINNs on
-      two different PDEs: 2D viscous Burgers (Dirichlet zero BC, near-conservation) and the 2D
-      heat equation (Neumann zero-flux BC, strict mass conservation). All three MR rewrites
-pass on both. MR-A collocation-point permutation is VACUOUS BY CONSTRUCTION for a
-      pointwise MLP (the permute-and-invert commutes with row-independent evaluation, so the
-      near-zero violation 0.0 / 9.9e-9 confirms only that the rewrite is well-defined and
-      carries no evidential weight, unlike the MGN graph-aggregation case); the two
-      non-trivial MRs do the cross-family work. MR-B mirror-y equivariance, scored against the
-      PINN's own PDE residual as a self-reported floor (not an independently calibrated one),
-      gives violation/floor ratio 0.74 (Burgers) and 0.46 (heat), both < 1; MR-C
-      reference-relative conservation ratio is 1.004 and 0.995 (both under the 1.5x gate); the
-      rollout-accuracy baseline is median relative L2 1.0e-2 and 1.6e-2. Magnitudes are
-      comparable to the K=6 MGN roster (MR-C CI [1.007, 1.011], rollout 0.022). These
-      are two bounded points on the cross-architecture-family applicability map; NOT a
-      PINN-vs-MGN benchmark, NOT a claim of generalization across PINN architectures or PDEs,
-      and NOT a baseline-superiority claim.
+      are MeshGraphNets-specific, the predicate was applied to a K=6 roster of PINNs: three
+      training seeds for 2D viscous Burgers (Dirichlet zero BC, near-conservation) and three
+      training seeds for the 2D heat equation (Neumann zero-flux BC, strict mass conservation).
+      MR-A collocation-point permutation is VACUOUS BY CONSTRUCTION for a pointwise MLP (the
+      permute-and-invert commutes with row-independent evaluation, so the near-zero violation
+      confirms only that the rewrite is well-defined and carries no evidential weight, unlike
+      the MGN graph-aggregation case); the two non-trivial MRs do the cross-family work. In
+      the K=6 roster, Burgers MR-B mirror-y equivariance passes on all 3/3 seeds with
+      violation/floor ratio mean 0.615 and bootstrap 95% CI [0.446, 0.890], while heat MR-B is
+      mixed (1/3 pass, 2/3 fail; mean 1.682, CI [0.853, 2.795]) under the PINN's own PDE
+      residual floor, which remains a self-reported rather than independently calibrated floor.
+      MR-C reference-relative conservation passes on all 6/6 PINNs: Burgers median ratio mean
+      1.007 (CI [1.000, 1.011]) and heat median ratio mean 0.992 (CI [0.971, 1.012]). Rollout
+      mean relative L2 is 0.024 for Burgers (CI [0.018, 0.031]) and 0.038 for heat (CI [0.035,
+      0.042]). This is a two-PDE PINN seed roster, not a PINN-vs-MGN benchmark, not a claim of
+      generalization across PINN architectures or PDEs beyond the roster, and not a
+      baseline-superiority claim.
     wording_forbidden:
       - "A general cross-architecture-family generalization claim."
       - "A PINN-vs-MGN benchmark or superiority claim."
@@ -411,6 +414,31 @@ pass on both. MR-A collocation-point permutation is VACUOUS BY CONSTRUCTION for 
     wording_forbidden:
       - "A calibrated domain-violation score across all MR classes."
       - "A general or SUT-independent domain-violation metric."
+    blocked_reason: null
+
+  - claim_id: "C16-unified-fault-catalog-statistics"
+    status: "observed"
+    scope: "Phase-3 36-entry unified fault catalogue: 10 executed canonical MGN mutants, 2 executed adversarial MGN mutants, and 24 closed-form output-level PINN probes; by-detector localization precision/recall with Wilson 95% CIs; Wilcoxon and Cliff effect-size tests"
+    evidence:
+      - "tools/build_phase3_unified_fault_catalog.py"
+      - "research_assets/runs/phase3-unified-fault-catalog/phase3_unified_fault_catalog.json"
+      - "research_assets/runs/fault-robustness-e3/fault_robustness_report.json"
+      - "research_assets/runs/adversarial-mutants-e3-extra/adversarial_mutants_report.json"
+      - "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
+    wording_allowed: >
+      Phase 3 compiles the existing executed MGN mutant reports and committed PINN roster into
+      a 36-entry unified fault catalogue for inferential reporting. The catalogue contains 10
+      executed canonical MGN mutants, 2 executed adversarial MGN mutants, and 24 closed-form
+      output-level PINN probes (12 mutation templates for each of the Burgers and heat PINN
+      families). On this unified catalogue, by-detector localization precision/recall with
+      Wilson 95% CIs is reported as node-permutation 1.00/1.00, conservation 1.00/0.78, and
+      mirror-y 0.92/0.49. The same artifact reports non-parametric comparisons, including a
+      large Cliff's delta (0.78) for diffusion-vs-Burgers PINN MR-B violation/floor ratios,
+      while exact paired Wilcoxon is non-significant at n=3 (p=0.5).
+    wording_forbidden:
+      - "The 24 PINN probes are retrained mutant checkpoints."
+      - "A real-world fault-detection rate or general localization-accuracy claim."
+      - "Cross-architecture-family generalization or baseline superiority."
     blocked_reason: null
 
 speculative_claims:

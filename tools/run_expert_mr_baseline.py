@@ -22,18 +22,19 @@ Honest scope:
   - The rubric is this paper's own predicate, not an independent standard.
 
 Credentials (env vars):
-  OPENAI_API_KEY   (required)
-  OPENAI_BASE_URL  (required)  e.g. https://llm-api.net/v1
+  OPENAI_API_KEY / API_KEY / LLM_GATEWAY_API_KEY        (required)
+  OPENAI_BASE_URL / BASE_URL / LLM_GATEWAY_BASE_URL      (required)
+  GITHUB_TOKEN is used by Phase 0 orchestration outside this runner; it is
+  intentionally recorded only as present/absent, never as a value.
 """
 from __future__ import annotations
 
-import hashlib
+from collections import Counter
 import json
 import os
 import re
 import sys
 import time
-import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -49,11 +50,93 @@ EXPERT_MODELS = [
 
 RATER_MODELS = [
     "claude-opus-4-8",
-    "Kimi-K2-Instruct",
+    "MiniMax-M3",
     "glm-4",
 ]
 
-TOKEN_LADDER = (12000, 24000)
+TOKEN_LADDER = tuple(int(x) for x in
+                     os.environ.get("LLM_TOKEN_LADDER", "12000,24000").split(","))
+
+API_KEY_ENV_NAMES = ("OPENAI_API_KEY", "API_KEY", "LLM_GATEWAY_API_KEY")
+BASE_URL_ENV_NAMES = ("OPENAI_BASE_URL", "BASE_URL", "LLM_GATEWAY_BASE_URL")
+GATEWAY_ENV_PAIRS = (
+    ("OPENAI_API_KEY", "OPENAI_BASE_URL"),
+    ("API_KEY", "BASE_URL"),
+    ("LLM_GATEWAY_API_KEY", "LLM_GATEWAY_BASE_URL"),
+)
+VALID_RATER_VERDICTS = {"retain", "downgrade_ood_stress", "reject", "defer"}
+
+
+def _first_env(names: tuple[str, ...]) -> tuple[str | None, str | None]:
+    """Return the first populated env value and the env var name it came from."""
+    for name in names:
+        value = os.environ.get(name)
+        if value:
+            return value, name
+    return None, None
+
+
+def _gateway_credentials() -> tuple[str | None, str | None, str | None, str | None]:
+    """Read a matched API-key/base-url pair, with gateway aliases supported."""
+    for api_name, base_name in GATEWAY_ENV_PAIRS:
+        api_key = os.environ.get(api_name)
+        base_url = os.environ.get(base_name)
+        if api_key and base_url:
+            return api_key, base_url, api_name, base_name
+    api_key, api_key_env = _first_env(API_KEY_ENV_NAMES)
+    base_url, base_url_env = _first_env(BASE_URL_ENV_NAMES)
+    return api_key, base_url, api_key_env, base_url_env
+
+
+def fail_closed_missing_credentials(api_key_env: str | None,
+                                    base_url_env: str | None) -> int:
+    sys.stderr.write(
+        "BLOCKED_NO_LLM_CREDENTIALS: "
+        f"api_key_env={api_key_env or 'unset'}; "
+        f"base_url_env={base_url_env or 'unset'}.\n")
+    sys.stderr.write(
+        "Set one API-key env var (OPENAI_API_KEY, API_KEY, or "
+        "LLM_GATEWAY_API_KEY) and one base-url env var (OPENAI_BASE_URL, "
+        "BASE_URL, or LLM_GATEWAY_BASE_URL). No output written.\n")
+    return 2
+
+
+def _strict_three_rater_majority(votes: dict,
+                                 expected_raters: list[str]) -> tuple[str, dict, list[str], str | None]:
+    """Vote with exactly three successful, distinct configured raters.
+
+    Every candidate must have three parsable LLM-rater verdicts from three
+    different configured models. A 2-of-3 winner is the normal majority case.
+    If the three raters emit three different labels, the protocol still records
+    a final plurality winner using configured rater order as a deterministic
+    tie-break and stores that caveat in the returned note.
+    """
+    active = []
+    labels = []
+    for rater in expected_raters:
+        vote = votes.get(rater, {})
+        label = vote.get("overall_verdict")
+        if label in VALID_RATER_VERDICTS and "error" not in vote:
+            active.append(rater)
+            labels.append(label)
+    if len(active) != 3:
+        return (
+            "error",
+            dict(Counter(labels)),
+            active,
+            f"expected exactly 3 successful rater votes, got {len(active)}",
+        )
+    counts = Counter(labels)
+    winner, winner_count = counts.most_common(1)[0]
+    if winner_count < 2:
+        return (
+            winner,
+            dict(counts),
+            active,
+            "no 2-of-3 majority; resolved by deterministic configured-rater order",
+        )
+    return winner, dict(counts), active, None
+
 
 EXPERT_PROMPT = """You are a senior software-testing researcher with 10+ years of experience
 in metamorphic testing for scientific computing. You also have strong domain
@@ -293,13 +376,9 @@ def phase_b_rate(api_key, base_url, all_candidates: list[dict]):
                 votes[rater] = {"error": str(e), "overall_verdict": "error"}
             time.sleep(1)
 
-        verdicts = [v.get("overall_verdict", "error") for v in votes.values() if v.get("overall_verdict") != "error"]
-        if verdicts:
-            from collections import Counter
-            vc = Counter(verdicts)
-            majority_verdict = vc.most_common(1)[0][0]
-        else:
-            majority_verdict = "error"
+        majority_verdict, verdict_distribution, active_raters, vote_note = (
+            _strict_three_rater_majority(votes, RATER_MODELS)
+        )
 
         overlap_sets = []
         for v in votes.values():
@@ -310,7 +389,9 @@ def phase_b_rate(api_key, base_url, all_candidates: list[dict]):
             "candidate": cand,
             "per_rater_votes": votes,
             "majority_verdict": majority_verdict,
-            "verdict_distribution": dict(Counter(verdicts)) if verdicts else {},
+            "verdict_distribution": verdict_distribution,
+            "active_rater_models": active_raters,
+            "vote_note": vote_note,
             "overlaps_paper_mr_union": overlap_union,
         })
     return results
@@ -359,11 +440,12 @@ def phase_c_synthesize(proposals: dict, rated: list[dict]) -> dict:
 
     return {
         "record_type": "expert-mr-baseline-report",
-        "schema_version": "0.1.0",
+        "schema_version": "0.3.0",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "protocol": "3-expert-proposal × 3-rater-majority-vote",
         "expert_models": EXPERT_MODELS,
         "rater_models": RATER_MODELS,
+        "rater_vote_rule": "exactly 3 successful distinct configured LLM raters; 2-of-3 majority, with deterministic configured-rater-order tie resolution",
         "n_total_candidates": n_total,
         "n_unique_candidates": n_unique,
         "n_duplicates": n_duplicate,
@@ -379,12 +461,17 @@ def phase_c_synthesize(proposals: dict, rated: list[dict]) -> dict:
 
 
 def main():
-    api_key = os.environ.get("OPENAI_API_KEY")
-    base_url = os.environ.get("OPENAI_BASE_URL")
+    api_key, base_url, api_key_env, base_url_env = _gateway_credentials()
     if not api_key or not base_url:
-        return 2
+        return fail_closed_missing_credentials(api_key_env, base_url_env)
 
     OUTDIR.mkdir(parents=True, exist_ok=True)
+
+    print(
+        f"Gateway credentials: api_key_env={api_key_env}; "
+        f"base_url_env={base_url_env}; "
+        f"github_token_present={bool(os.environ.get('GITHUB_TOKEN'))}"
+    )
 
     proposals = phase_a_propose(api_key, base_url)
     (OUTDIR / "expert_proposals.json").write_text(

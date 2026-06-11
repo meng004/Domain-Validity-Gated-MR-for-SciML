@@ -28,7 +28,7 @@ We propose a domain-validity rubric for screening candidate MRs, an MR-card and 
 
 ### Results
 
-Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.3): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this asymmetric mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. Two further within-SUT runs sharpen the interpretation: a same-trajectory one-step rollout-accuracy diagnostic gives median relative L2 0.0216, so the mirror-y violation is about 34 times the surrogate's in-distribution accuracy; and on a synthetic mesh that is provably symmetric about the centerline — where the rubric admits the exact mirror-y relation rather than downgrading it — the surrogate still violates exact mirror-y equivariance (relative L2 1.10), which removes the out-of-relation-domain objection to the mirror-y finding. Used as detectors against a 10-mutant injected-fault catalogue, the MRs catch 5 of 10 faults and, in a suggestive, single-SUT test, localize them by MR class (continuity to boundary/scale faults, symmetry to physical-channel/adjacency faults). To address a single-checkpoint objection, the five within-SUT measurements are replicated across a roster of K=6 MeshGraphNets cylinder-flow checkpoints (four base-config seed replicas plus one wider and one deeper configuration variant, all from the same read-only trainer on the same DeepMind dataset; Section 5.4): node-permutation equivariance is exact on every checkpoint; mirror-y OOD-stress median relative L2 has bootstrap 95% CI [0.74, 0.80] over the seed family with the configuration variants within the same band; the synthetic symmetric-mesh exact-mirror-y test fails on every checkpoint; the reference-relative conservation ratio sits in CI [1.007, 1.011]; and the one-step rollout median relative L2 sits in CI [0.0217, 0.0224], so the mirror-y violation is about 35x the in-distribution accuracy on every checkpoint. The P1 discrete-divergence operator that underwrites the continuity-MR admissibility predicate is empirically O(h) on the symmetric-mesh family (log–log slope 0.988, R² = 1.000; Section 5.5), confirming the numerical-decidability gate has a measurable basis. This draft makes no claims about cross-SUT (cross-architecture-family) pass rates, general or real-world fault-detection rates, comparative baseline superiority, validated localization accuracy, model accuracy, or SUT reliability.
+Full cross-SUT results remain blocked pending cross-SUT artifacts. Only strictly scoped, within-SUT pilot evidence on a single MeshGraphNets checkpoint is reported (Section 5.3): node-permutation equivariance holds to machine precision; an approximate mirror-y OOD-stress probe — the exact relation being out-of-relation-domain for this asymmetric mesh — failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); and an absolute mass-conservation relation stays deferred while a reference-relative divergence diagnostic passes. Two further within-SUT runs sharpen the interpretation: a same-trajectory one-step rollout-accuracy diagnostic gives median relative L2 0.0216, so the mirror-y violation is about 34 times the surrogate's in-distribution accuracy; and on a synthetic mesh that is provably symmetric about the centerline — where the rubric admits the exact mirror-y relation rather than downgrading it — the surrogate still violates exact mirror-y equivariance (relative L2 1.10), which removes the out-of-relation-domain objection to the mirror-y finding. Used as detectors against a 10-mutant injected-fault catalogue, the MRs catch 5 of 10 faults and, in a suggestive, single-SUT test, localize them by MR class (continuity to boundary/scale faults, symmetry to physical-channel/adjacency faults). To address a single-checkpoint objection, the five within-SUT measurements are replicated across a roster of K=6 MeshGraphNets cylinder-flow checkpoints (four base-config seed replicas plus one wider and one deeper configuration variant, all from the same read-only trainer on the same DeepMind dataset; Section 5.4): node-permutation equivariance is exact on every checkpoint; mirror-y OOD-stress median relative L2 has bootstrap 95% CI [0.74, 0.80] over the seed family with the configuration variants within the same band; the synthetic symmetric-mesh exact-mirror-y test fails on every checkpoint; the reference-relative conservation ratio sits in CI [1.007, 1.011]; and the one-step rollout median relative L2 sits in CI [0.0217, 0.0224], so the mirror-y violation is about 35x the in-distribution accuracy on every checkpoint. The P1 discrete-divergence operator that underwrites the continuity-MR admissibility predicate is empirically O(h) on the symmetric-mesh family (log–log slope 0.988, R² = 1.000; Section 5.5), confirming the numerical-decidability gate has a measurable basis. As a bounded cross-family extension, a K=6 PINN roster (3 Burgers seeds and 3 heat-equation seeds) shows MR-C conservation passes on all 6/6 PINNs, while MR-B symmetry is stable on Burgers but mixed on heat under a self-reported PDE-residual floor. This draft makes no claims about general cross-SUT pass rates, general or real-world fault-detection rates, comparative baseline superiority, validated localization accuracy, model accuracy, or SUT reliability.
 
 ### Conclusion
 
@@ -349,7 +349,7 @@ artifacts are committed and validated.
 |---|---|---|---|
 | PC1-domain-validity-rubric | Supported method claim | `research_assets/rubric/domain_validity_rubric.json` | Does not prove physical validity by itself. |
 | PC2-mr-card-executable-assets | Supported asset/workflow claim | `research_assets/mr_cards/`; validators | Not every card has cross-SUT evidence. |
-| PC3-baseline-comparison-blocked | Blocked | `claim-ledger.yml`; `experiment-ledger.yml` | No baseline superiority, seeded-fault, localization, or runtime claim. |
+| PC3-baseline-comparison | Observed | `expert-mr-baseline/`; `llm-mr-baseline/`; `generic-mr-baseline/`; `claim-ledger.yml` | Expert-LLM, LLM, and generic baselines executed as scoped admissibility-gap comparators; no baseline superiority claim. |
 | PC4-node-permutation-sanity | Observed pilot | `real-sut-node-permutation-pilot/raw/metric_ledger.json` | One SUT and one pilot case only. |
 | PC5-conservation-diagnostic-deferred | Observed diagnostic; absolute claim deferred | `conservation-diagnostic-pilot/raw/metric_ledger.json`; `conservation_report.json` | absolute conservation remains deferred. |
 | PC6-mirror-y-ood-stress | Observed bounded pilot | `mirror-y-rate-upgrade/raw/metric_ledger.json`; `claim-ledger.yml` | failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. |
@@ -359,9 +359,9 @@ artifacts are committed and validated.
 | PC10-seeded-fault-detection | Observed | `seeded-fault-detection/raw/metric_ledger.json` | MRs as detectors catch 5/10 injected mutants, localizing by MR class; not a general or real-world fault-detection rate. |
 | PC11-multicheckpoint-replication | Observed | `multicheckpoint/e1_aggregate.json`; per-SUT manifests under `multicheckpoint/S0..S5/` | K=6 checkpoints of one MeshGraphNets architecture family on one dataset (S0-S3 seed-replica family + S4 wider + S5 deeper); cross-checkpoint replication, not cross-architecture-family generalization. |
 | PC12-operator-floor-resolution | Observed | `operator-floor-sweep/operator_floor_report.json` | Log-log slope 0.988 (all)/0.995 (interior), R² = 1.0 over four resolutions on one symmetric structured mesh family with one analytic field; calibrates the admissibility predicate, does not generalize across mesh geometries. |
-| PC13-fault-detection-robustness | Observed | `fault-robustness-e3/fault_robustness_report.json` | 30-trial Wilson CIs per (mutant, detector) across the K=6 roster; NS_double_scale undetected across {1.1, 1.25, 1.5, 2, 4}; PC_zero_vy non-monotone (partial detected, full undetected because uniform-zero is mirror-symmetric); MA_permute_edges configuration-sensitive. Within-family robustness; not a real-world or cross-family fault-detection-rate claim. |
+| PC13-fault-detection-robustness | Observed | `fault-robustness-e3/fault_robustness_report.json`; `phase3-unified-fault-catalog/phase3_unified_fault_catalog.json` | 30-trial Wilson CIs per MGN mutant plus a Phase-3 36-entry unified fault catalogue (10 canonical MGN + 2 adversarial MGN + 24 closed-form PINN output-level probes), by-detector precision/recall with Wilson CIs, and Wilcoxon/Cliff effect-size tests. Within-family/catalogue-only; PINN probes are not retrained mutant checkpoints. |
 
-The PC# identifiers above are paper-level claims. The single source of truth for runtime-evidence claims is the runtime claim ledger (`research_assets/experiments/claim-ledger.yml`, claims C1–C13); each paper claim maps to it as: PC1→C4-rubric-decision-coverage; PC2→C1-fixture-asset-path and C4-rubric-decision-coverage; PC3→C3-baseline-comparison; PC4→C2-real-sut-verdicts; PC5→C7-conservation-diagnostic; PC6→C6-mirror-y-ood-stress; PC7→ no runtime-evidence claim (a method/ethics process boundary); PC8→C8-rollout-accuracy-baseline; PC9→C9-mirror-y-exact-symmetric-mesh; PC10→C10-seeded-fault-detection; PC11→C11-multicheckpoint-replication; PC12→C12-operator-floor-resolution; PC13→C13-fault-detection-robustness. The ledger's C5-precondition-check underlies the precondition gate described in the method section.
+The PC# identifiers above are paper-level claims. The single source of truth for runtime-evidence claims is the runtime claim ledger (`research_assets/experiments/claim-ledger.yml`, claims C1–C16); each paper claim maps to it as: PC1→C4-rubric-decision-coverage; PC2→C1-fixture-asset-path and C4-rubric-decision-coverage; PC3→C3-baseline-comparison; PC4→C2-real-sut-verdicts; PC5→C7-conservation-diagnostic; PC6→C6-mirror-y-ood-stress; PC7→ no runtime-evidence claim (a method/ethics process boundary); PC8→C8-rollout-accuracy-baseline; PC9→C9-mirror-y-exact-symmetric-mesh; PC10→C10-seeded-fault-detection; PC11→C11-multicheckpoint-replication; PC12→C12-operator-floor-resolution; PC13→C13-fault-detection-robustness and C16-unified-fault-catalog-statistics. The ledger's C5-precondition-check underlies the precondition gate described in the method section.
 
 ### 5.2 MR-Card-to-Verdict Map
 
@@ -678,7 +678,7 @@ the false-reassurance risk against this MR suite and motivates an explicit
 symmetry-breaking score in future work; it is not a real-world fault-detection-rate
 claim or a baseline-superiority claim.
 
-**Aggregate reading.** The 5-of-10 union detection rate from C10 reproduces tightly
+**Aggregate reading and Phase-3 unified catalogue.** The 5-of-10 union detection rate from C10 reproduces tightly
 across the seed-replica family (5/10 on each of S0–S3) and drops by one to 4/10 on the
 capacity (S4) and depth (S5) variants because MA_permute_edges crosses below the
 mirror-y relative-change threshold there. The by-class localization mapping
@@ -686,10 +686,23 @@ mirror-y relative-change threshold there. The by-class localization mapping
 → none of these faults) replicates across the full roster. The catalogue's
 insensitivity regions — multiplicative output scaling at any swept severity, and a
 detection blind region at the most severe PC_zero_vy fraction caused by the
-fault's residual mirror-y symmetry — are now bounded with Wilson 95% CIs. This is a
-robustness and structural-insight result within one architecture family on one dataset
-against one fixed 10-mutant catalogue; it is not a real-world fault-detection rate, a
-cross-architecture-family generalization, or a baseline-superiority claim.
+fault's residual mirror-y symmetry — are now bounded with Wilson 95% CIs.
+Phase 3 compiles these results into a 36-entry unified fault catalogue at
+`research_assets/runs/phase3-unified-fault-catalog/phase3_unified_fault_catalog.json`:
+10 executed canonical MGN mutants, 2 executed adversarial MGN mutants, and 24
+closed-form output-level PINN probes (12 mutation templates for each of the Burgers and
+heat PINN families). The PINN probes are algebraic detector checks over the committed
+three-seed families, not retrained mutant checkpoints. On this unified catalogue, the
+by-detector localization precision/recall summary is: node-permutation 1.00/1.00
+(Wilson lower bound 0.82 for both, n=18), conservation 1.00/0.78 (precision CI lower
+0.97; recall CI [0.71, 0.84]), and mirror-y 0.92/0.49 (precision CI [0.83, 0.96];
+recall CI [0.41, 0.58]). Non-parametric statistics are reported in the same artifact:
+for the PINN MR-B violation/floor ratios, diffusion dominates Burgers with Cliff's
+δ = 0.78 (large), while exact paired Wilcoxon remains non-significant at n=3
+(p=0.5; minimum attainable two-sided p=0.25). This is a robustness and structural-
+insight result within fixed catalogues and families; it is not a real-world
+fault-detection rate, a cross-architecture-family generalization, or a
+baseline-superiority claim.
 
 Table 5.6 summarizes the per-mutant Wilson 95% CIs.
 
@@ -760,30 +773,31 @@ admissible, and ratifies the paper's downgrade of the cylinder-flow mirror-y MR
 through independent reasoning. The expert-MR and generic-MR-generation baselines
 remain blocked at the artifact level.
 
-### 5.6.5 Cross-family PINN extension (two bounded points)
+### 5.6.5 Cross-family PINN extension (K=6 roster)
 
-To check whether the workflow is MeshGraphNets-specific, two 5×50 MLP PINNs were trained
-from scratch and put through the same three MRs. SUT 1 is 2D viscous Burgers (ν=0.05,
-vector field, Dirichlet zero BC, IC u_x=exp(-5(x²+y²)) and u_y=0 symmetric under y→-y;
-PDE residual L2 1.07×10⁻²); SUT 2 is the 2D heat equation (α=0.1, scalar field, Neumann
-zero-flux BC so mass is strictly conserved; residual L2 1.17×10⁻²). Checkpoints and
-129×129 FD references are committed under `research_assets/runs/pinn-cross-family/` and
-`research_assets/runs/pinn-cross-family-diffusion/`. The MR rewrites parallel Section 5.3.
-**MR-A** (collocation-point permutation) is *vacuous by construction* for a pointwise MLP:
-permuting input rows and inverting commutes with row-independent evaluation, so the
-near-zero violation (0.0 / 9.9×10⁻⁹) confirms only that the rewrite is well-defined, not a
-model property — unlike the MGN graph-aggregation case it carries no evidential weight
-here. The two non-trivial MRs do the cross-family work. **MR-B** (mirror-y equivariance,
-scored against the PINN's own PDE residual as a self-reported floor, not an independently
-calibrated one) gives violation/floor ratio 0.74 (Burgers) and 0.46 (heat) — both pass,
-the learned symmetry being tighter than the PDE solution. **MR-C** (reference-relative
-conservation ratio) gives median 1.004 and 0.995 (both pass at the 1.5× gate).
-Rollout-accuracy median relative L2 is 1.0×10⁻² and 1.6×10⁻². Magnitudes match the
-MGN roster (MR-C CI [1.007, 1.011]; rollout 0.022), so the admissibility predicate and the
-two non-trivial MR rewrites transfer to two architectures and PDEs (Dirichlet
-near-conservation and Neumann strict conservation) without re-engineering. Two PINNs, one
-seed each — two bounded points on the cross-architecture-family applicability map, not a
-PINN-vs-MGN benchmark or a generality claim.
+To check whether the workflow is MeshGraphNets-specific, we extended the PINN check from
+two bounded one-seed points to a K=6 roster: three 5×50 MLP PINN seeds for 2D viscous
+Burgers (ν=0.05, vector field, Dirichlet zero BC, y-reflection-symmetric IC) and three
+seeds for the 2D heat equation (α=0.1, scalar field, Neumann zero-flux BC so mass is
+strictly conserved). Checkpoints, per-SUT MR reports, the aggregate bootstrap report, and
+129×129 FD references are committed under `research_assets/runs/pinn-k6-roster/`,
+`research_assets/runs/pinn-cross-family/`, and `research_assets/runs/pinn-cross-family-diffusion/`.
+The MR rewrites parallel Section 5.3. **MR-A** (collocation-point permutation) remains
+*vacuous by construction* for a pointwise MLP: permuting input rows and inverting commutes
+with row-independent evaluation, so near-zero violation confirms only that the rewrite is
+well-defined, not a model property. The two non-trivial MRs do the cross-family work.
+**MR-B** (mirror-y equivariance, scored against the PINN's own PDE residual as a
+self-reported floor rather than an independently calibrated one) passes on all 3/3 Burgers
+seeds with violation/floor ratio mean 0.615 and bootstrap 95% CI [0.446, 0.890], but is
+mixed on heat (1/3 pass, 2/3 fail; mean 1.682, CI [0.853, 2.795]). **MR-C**
+(reference-relative conservation ratio) passes on all 6/6 PINNs: Burgers mean median ratio
+1.007 (CI [1.000, 1.011]) and heat mean median ratio 0.992 (CI [0.971, 1.012]).
+Rollout-accuracy mean relative L2 is 0.024 for Burgers (CI [0.018, 0.031]) and 0.038 for
+heat (CI [0.035, 0.042]). Thus the admissibility predicate and conservation rewrite
+transfer across two PDE families and three seeds each, while the heat symmetry result also
+shows the self-reported-floor version of MR-B is not uniformly stable. This is a two-PDE
+PINN seed roster, not a PINN-vs-MGN benchmark or a generality claim across PINN
+architectures, PDEs, or training regimes.
 
 ### 5.7 Still blocked
 
@@ -829,7 +843,7 @@ In that sense the workflow is aimed at producing, over many controlled transform
 
 **Internal validity.** SUT setup, checkpoint differences, random seeds, mesh preprocessing, and runtime nondeterminism may affect verdicts. The experiment ledger must record these details.
 
-**External validity.** The empirical evidence covers one MeshGraphNets architecture family on one DeepMind cylinder-flow dataset, replicated across a K=6 checkpoint roster (four base-config training-seed replicas plus one wider and one deeper configuration variant; Section 5.4). Within that family the within-SUT verdicts are stable (CIs in Sections 5.4 and 5.6) and the operator-floor that gates the continuity-MR admissibility predicate has the expected O(h) rate on the symmetric mesh family (Section 5.5). The replication should not be read as a cross-architecture-family generalization: cross-SUT artifacts spanning distinct architecture families (e.g. PINNs, neural operators, other mesh-based simulators) remain blocked, and the seed-replica family standardises only training seed, so it shares more variance than independent SUTs would. Generalization to all neural operators, PINNs, or fluid surrogates without further evidence is not supported.
+**External validity.** The empirical evidence covers one MeshGraphNets architecture family on one DeepMind cylinder-flow dataset, replicated across a K=6 checkpoint roster (four base-config training-seed replicas plus one wider and one deeper configuration variant; Section 5.4), plus a bounded K=6 PINN roster over two PDE families (Section 5.6.5). Within the MGN family the within-SUT verdicts are stable (CIs in Sections 5.4 and 5.6), and the operator-floor that gates the continuity-MR admissibility predicate has the expected O(h) rate on the symmetric mesh family (Section 5.5). The PINN roster is a cross-family applicability check for the predicate and MR rewrites, not a general cross-SUT pass-rate estimate: it spans only one MLP PINN architecture, two PDEs, and three seeds per PDE. Generalization to all neural operators, PINNs, or fluid surrogates without further evidence is not supported.
 
 **Baseline fairness.** Generic MR-generation and LLM baselines may not be designed for SciML. They should be interpreted as scope contrasts and candidate-generation comparators, not as defeated competitors.
 
@@ -839,7 +853,7 @@ In that sense the workflow is aimed at producing, over many controlled transform
 
 ## 8. Conclusion
 
-This paper presents domain-validity-gated MR identification as an auditable oracle-free testing workflow for MeshGraphNets-family cylinder-flow surrogates. The current evidence supports the scoped within-SUT pilots of Section 5.3 (node-permutation, mirror-y OOD-stress, conservation diagnostic, rollout-accuracy comparator, exact mirror-y on a symmetric admissible mesh, and seeded-fault detection over a 10-mutant catalogue), replicated across a K=6 multi-checkpoint roster of one MeshGraphNets architecture family on one dataset (Section 5.4) — the verdicts reproduce with tight Wilson and bootstrap 95% confidence intervals — together with an empirical calibration of the P1 discrete-divergence operator floor that gates the admissibility predicate (slope 0.988, R² = 1.000; Section 5.5), and a within-family fault-detection robustness study with severity sweeps that bound where the present MR set is structurally insensitive (Section 5.6). It does not support cross-architecture-family generalization, real-world or general fault-detection rates, baseline-superiority claims, reliability conclusions, accuracy conclusions, exact-mirror-y claims beyond the bounded results above, or absolute conservation claims. The central claim remains methodological: physically meaningful SciML MRs require explicit validity conditions, executable assets, raw evidence records, and relation-level verdicts; the K=6 replication and the operator-floor calibration are the present study's bounded evidence that the workflow's verdicts hold beyond a single checkpoint and that the admissibility-predicate gate it relies on has a measurable basis.
+This paper presents domain-validity-gated MR identification as an auditable oracle-free testing workflow for MeshGraphNets-family cylinder-flow surrogates. The current evidence supports the scoped within-SUT pilots of Section 5.3 (node-permutation, mirror-y OOD-stress, conservation diagnostic, rollout-accuracy comparator, exact mirror-y on a symmetric admissible mesh, and seeded-fault detection over a 10-mutant catalogue), replicated across a K=6 multi-checkpoint roster of one MeshGraphNets architecture family on one dataset (Section 5.4) — the verdicts reproduce with tight Wilson and bootstrap 95% confidence intervals — together with an empirical calibration of the P1 discrete-divergence operator floor that gates the admissibility predicate (slope 0.988, R² = 1.000; Section 5.5), a within-family fault-detection robustness study with severity sweeps that bound where the present MR set is structurally insensitive (Section 5.6), and a K=6 PINN roster that checks the predicate and two non-trivial MR rewrites across Burgers and heat-equation PINNs. It does not support general cross-architecture-family pass rates, real-world or general fault-detection rates, baseline-superiority claims, reliability conclusions, accuracy conclusions, exact-mirror-y claims beyond the bounded results above, or absolute conservation claims. The central claim remains methodological: physically meaningful SciML MRs require explicit validity conditions, executable assets, raw evidence records, and relation-level verdicts; the K=6 MGN replication, PINN roster, and operator-floor calibration are the present study's bounded evidence that the workflow's verdicts hold beyond a single checkpoint and that the admissibility-predicate gate it relies on has a measurable basis.
 
 ## References
 

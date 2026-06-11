@@ -1,0 +1,1686 @@
+{
+  "record_type": "phase3-unified-fault-catalog-and-statistics",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-11T08:24:22Z",
+  "catalogue_size": 36,
+  "catalogue_breakdown": {
+    "mgn_canonical_executed_mutants": 10,
+    "mgn_adversarial_executed_mutants": 2,
+    "pinn_output_level_closed_form_probes": 24
+  },
+  "trial_count": 384,
+  "entries": [
+    {
+      "entry_id": "MGN_CANON_BC_zero_inflow",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/fault-robustness-e3/fault_robustness_report.json",
+      "evaluation_basis": "executed mutant across K=6 checkpoints x 5 input-permutation seeds",
+      "fault_class": "boundary_condition_fault",
+      "mutant": "BC_zero_inflow",
+      "n_trials": 30,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "conservation": {
+          "k": 30,
+          "n": 30,
+          "rate": 1.0,
+          "ci_lo": 0.8864829086095221,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "any": {
+          "k": 30,
+          "n": 30,
+          "rate": 1.0,
+          "ci_lo": 0.8864829086095221,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_CANON_BC_nonzero_wall",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/fault-robustness-e3/fault_robustness_report.json",
+      "evaluation_basis": "executed mutant across K=6 checkpoints x 5 input-permutation seeds",
+      "fault_class": "boundary_condition_fault",
+      "mutant": "BC_nonzero_wall",
+      "n_trials": 30,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "conservation": {
+          "k": 30,
+          "n": 30,
+          "rate": 1.0,
+          "ci_lo": 0.8864829086095221,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "any": {
+          "k": 30,
+          "n": 30,
+          "rate": 1.0,
+          "ci_lo": 0.8864829086095221,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_CANON_MA_drop_edges",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/fault-robustness-e3/fault_robustness_report.json",
+      "evaluation_basis": "executed mutant across K=6 checkpoints x 5 input-permutation seeds",
+      "fault_class": "mesh_adjacency_fault",
+      "mutant": "MA_drop_edges",
+      "n_trials": 30,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "conservation": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "any": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_CANON_MA_permute_edges",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/fault-robustness-e3/fault_robustness_report.json",
+      "evaluation_basis": "executed mutant across K=6 checkpoints x 5 input-permutation seeds",
+      "fault_class": "mesh_adjacency_fault",
+      "mutant": "MA_permute_edges",
+      "n_trials": 30,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "conservation": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "mirror_y": {
+          "k": 20,
+          "n": 30,
+          "rate": 0.6666666666666666,
+          "ci_lo": 0.48779725813830266,
+          "ci_hi": 0.807697044731538
+        },
+        "any": {
+          "k": 20,
+          "n": 30,
+          "rate": 0.6666666666666666,
+          "ci_lo": 0.48779725813830266,
+          "ci_hi": 0.807697044731538
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_CANON_NS_skip_denorm",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/fault-robustness-e3/fault_robustness_report.json",
+      "evaluation_basis": "executed mutant across K=6 checkpoints x 5 input-permutation seeds",
+      "fault_class": "normalization_scale_fault",
+      "mutant": "NS_skip_denorm",
+      "n_trials": 30,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "conservation": {
+          "k": 30,
+          "n": 30,
+          "rate": 1.0,
+          "ci_lo": 0.8864829086095221,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "any": {
+          "k": 30,
+          "n": 30,
+          "rate": 1.0,
+          "ci_lo": 0.8864829086095221,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_CANON_NS_double_scale",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/fault-robustness-e3/fault_robustness_report.json",
+      "evaluation_basis": "executed mutant across K=6 checkpoints x 5 input-permutation seeds",
+      "fault_class": "normalization_scale_fault",
+      "mutant": "NS_double_scale",
+      "n_trials": 30,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "conservation": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "any": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_CANON_TR_sign_flip",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/fault-robustness-e3/fault_robustness_report.json",
+      "evaluation_basis": "executed mutant across K=6 checkpoints x 5 input-permutation seeds",
+      "fault_class": "temporal_rollout_fault",
+      "mutant": "TR_sign_flip",
+      "n_trials": 30,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "conservation": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "any": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_CANON_TR_double_step",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/fault-robustness-e3/fault_robustness_report.json",
+      "evaluation_basis": "executed mutant across K=6 checkpoints x 5 input-permutation seeds",
+      "fault_class": "temporal_rollout_fault",
+      "mutant": "TR_double_step",
+      "n_trials": 30,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "conservation": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "any": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_CANON_PC_swap_xy",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/fault-robustness-e3/fault_robustness_report.json",
+      "evaluation_basis": "executed mutant across K=6 checkpoints x 5 input-permutation seeds",
+      "fault_class": "physical_channel_fault",
+      "mutant": "PC_swap_xy",
+      "n_trials": 30,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "conservation": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "mirror_y": {
+          "k": 30,
+          "n": 30,
+          "rate": 1.0,
+          "ci_lo": 0.8864829086095221,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 30,
+          "n": 30,
+          "rate": 1.0,
+          "ci_lo": 0.8864829086095221,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_CANON_PC_zero_vy",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/fault-robustness-e3/fault_robustness_report.json",
+      "evaluation_basis": "executed mutant across K=6 checkpoints x 5 input-permutation seeds",
+      "fault_class": "physical_channel_fault",
+      "mutant": "PC_zero_vy",
+      "n_trials": 30,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "conservation": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        },
+        "any": {
+          "k": 0,
+          "n": 30,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.113517091390478
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_ADV_ADV_uniform_vx_offset",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/adversarial-mutants-e3-extra/adversarial_mutants_report.json",
+      "evaluation_basis": "executed adversarial output mutant across K=6 checkpoints",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "ADV_uniform_vx_offset",
+      "description": "uniform constant offset to vx (node-perm / mirror-y / conservation invariant)",
+      "n_trials": 6,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "conservation": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "mirror_y": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        },
+        "any": {
+          "k": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci_lo": 0.6096569663469354,
+          "ci_hi": 0.9999999999999999
+        }
+      }
+    },
+    {
+      "entry_id": "MGN_ADV_ADV_vx_plus_squared_vy",
+      "source_family": "MeshGraphNets",
+      "source_artifact": "research_assets/runs/adversarial-mutants-e3-extra/adversarial_mutants_report.json",
+      "evaluation_basis": "executed adversarial output mutant across K=6 checkpoints",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "ADV_vx_plus_squared_vy",
+      "description": "add c * vy^2 to vx (node-perm / mirror-y / conservation invariant)",
+      "n_trials": 6,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "conservation": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        },
+        "any": {
+          "k": 0,
+          "n": 6,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.3903430336530645
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_PERM_row_shuffle_output",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "sampling_order_fault",
+      "mutant": "PINN_PERM_row_shuffle_output",
+      "description": "shuffle the returned rows after a collocation-point permutation",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_PERM_duplicate_row_output",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "sampling_order_fault",
+      "mutant": "PINN_PERM_duplicate_row_output",
+      "description": "duplicate one returned row after permutation inversion",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_PERM_drop_row_output",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "sampling_order_fault",
+      "mutant": "PINN_PERM_drop_row_output",
+      "description": "drop one returned row and pad with a stale value",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_SYM_odd_y_bias",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "PINN_SYM_odd_y_bias",
+      "description": "add an odd-in-y bias so R(model(Rx)) no longer maps back to model(x)",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_SYM_output_sign_flip",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "PINN_SYM_output_sign_flip",
+      "description": "flip the reflected component/sign convention in the mirror relation",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_SYM_y_dependent_gain",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "PINN_SYM_y_dependent_gain",
+      "description": "multiply predictions by a y-dependent asymmetric gain",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_CONS_global_scale_2x",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "PINN_CONS_global_scale_2x",
+      "description": "scale the predicted conserved quantity by 2x",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_CONS_uniform_mass_offset",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "PINN_CONS_uniform_mass_offset",
+      "description": "add a uniform offset that shifts the integral mass/flux",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_CONS_linear_spatial_drift",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "PINN_CONS_linear_spatial_drift",
+      "description": "add a spatial drift with non-zero integral under the grid quadrature",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_BLIND_even_small_bias",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "PINN_BLIND_even_small_bias",
+      "description": "small even-in-y bias kept below the MR-B floor and mass-ratio gate",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_BLIND_zero_mean_oscillation",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "PINN_BLIND_zero_mean_oscillation",
+      "description": "zero-mean oscillation preserving the integral and row order",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_burgers_PINN_BLIND_time_localized_noise",
+      "source_family": "PINN-burgers",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "PINN_BLIND_time_localized_noise",
+      "description": "time-localized perturbation below the declared MR thresholds",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_PERM_row_shuffle_output",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "sampling_order_fault",
+      "mutant": "PINN_PERM_row_shuffle_output",
+      "description": "shuffle the returned rows after a collocation-point permutation",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_PERM_duplicate_row_output",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "sampling_order_fault",
+      "mutant": "PINN_PERM_duplicate_row_output",
+      "description": "duplicate one returned row after permutation inversion",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_PERM_drop_row_output",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "sampling_order_fault",
+      "mutant": "PINN_PERM_drop_row_output",
+      "description": "drop one returned row and pad with a stale value",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_SYM_odd_y_bias",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "PINN_SYM_odd_y_bias",
+      "description": "add an odd-in-y bias so R(model(Rx)) no longer maps back to model(x)",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_SYM_output_sign_flip",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "PINN_SYM_output_sign_flip",
+      "description": "flip the reflected component/sign convention in the mirror relation",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_SYM_y_dependent_gain",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "PINN_SYM_y_dependent_gain",
+      "description": "multiply predictions by a y-dependent asymmetric gain",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_CONS_global_scale_2x",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "PINN_CONS_global_scale_2x",
+      "description": "scale the predicted conserved quantity by 2x",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_CONS_uniform_mass_offset",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "PINN_CONS_uniform_mass_offset",
+      "description": "add a uniform offset that shifts the integral mass/flux",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_CONS_linear_spatial_drift",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "PINN_CONS_linear_spatial_drift",
+      "description": "add a spatial drift with non-zero integral under the grid quadrature",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_BLIND_even_small_bias",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "PINN_BLIND_even_small_bias",
+      "description": "small even-in-y bias kept below the MR-B floor and mass-ratio gate",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_BLIND_zero_mean_oscillation",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "PINN_BLIND_zero_mean_oscillation",
+      "description": "zero-mean oscillation preserving the integral and row order",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    },
+    {
+      "entry_id": "PINN_diffusion_PINN_BLIND_time_localized_noise",
+      "source_family": "PINN-diffusion",
+      "source_artifact": "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level PINN mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "PINN_BLIND_time_localized_noise",
+      "description": "time-localized perturbation below the declared MR thresholds",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    }
+  ],
+  "by_fault_class": {
+    "boundary_condition_fault": {
+      "entries": 2,
+      "trials": 60,
+      "any_detected": 60,
+      "any_detection_rate": {
+        "k": 60,
+        "n": 60,
+        "rate": 1.0,
+        "ci_lo": 0.9398260695220669,
+        "ci_hi": 1.0
+      }
+    },
+    "conservation_fault": {
+      "entries": 6,
+      "trials": 18,
+      "any_detected": 18,
+      "any_detection_rate": {
+        "k": 18,
+        "n": 18,
+        "rate": 1.0,
+        "ci_lo": 0.8241154494176252,
+        "ci_hi": 1.0
+      }
+    },
+    "detector_invariant_fault": {
+      "entries": 8,
+      "trials": 30,
+      "any_detected": 6,
+      "any_detection_rate": {
+        "k": 6,
+        "n": 30,
+        "rate": 0.2,
+        "ci_lo": 0.09504978102401235,
+        "ci_hi": 0.37306047381027446
+      }
+    },
+    "mesh_adjacency_fault": {
+      "entries": 2,
+      "trials": 60,
+      "any_detected": 20,
+      "any_detection_rate": {
+        "k": 20,
+        "n": 60,
+        "rate": 0.3333333333333333,
+        "ci_lo": 0.2272909421592783,
+        "ci_hi": 0.459433701333366
+      }
+    },
+    "normalization_scale_fault": {
+      "entries": 2,
+      "trials": 60,
+      "any_detected": 30,
+      "any_detection_rate": {
+        "k": 30,
+        "n": 60,
+        "rate": 0.5,
+        "ci_lo": 0.37734812427246284,
+        "ci_hi": 0.6226518757275372
+      }
+    },
+    "physical_channel_fault": {
+      "entries": 2,
+      "trials": 60,
+      "any_detected": 30,
+      "any_detection_rate": {
+        "k": 30,
+        "n": 60,
+        "rate": 0.5,
+        "ci_lo": 0.37734812427246284,
+        "ci_hi": 0.6226518757275372
+      }
+    },
+    "sampling_order_fault": {
+      "entries": 6,
+      "trials": 18,
+      "any_detected": 18,
+      "any_detection_rate": {
+        "k": 18,
+        "n": 18,
+        "rate": 1.0,
+        "ci_lo": 0.8241154494176252,
+        "ci_hi": 1.0
+      }
+    },
+    "symmetry_fault": {
+      "entries": 6,
+      "trials": 18,
+      "any_detected": 18,
+      "any_detection_rate": {
+        "k": 18,
+        "n": 18,
+        "rate": 1.0,
+        "ci_lo": 0.8241154494176252,
+        "ci_hi": 1.0
+      }
+    },
+    "temporal_rollout_fault": {
+      "entries": 2,
+      "trials": 60,
+      "any_detected": 0,
+      "any_detection_rate": {
+        "k": 0,
+        "n": 60,
+        "rate": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.06017393047793289
+      }
+    }
+  },
+  "by_detector_localization_precision_recall": {
+    "node_perm": {
+      "relevant_fault_classes": [
+        "representation_fault",
+        "sampling_order_fault"
+      ],
+      "tp": 18,
+      "fp": 0,
+      "fn": 0,
+      "precision": {
+        "value": 1.0,
+        "ci_lo": 0.8241154494176252,
+        "ci_hi": 1.0,
+        "denominator": 18
+      },
+      "recall": {
+        "value": 1.0,
+        "ci_lo": 0.8241154494176252,
+        "ci_hi": 1.0,
+        "denominator": 18
+      }
+    },
+    "conservation": {
+      "relevant_fault_classes": [
+        "boundary_condition_fault",
+        "conservation_fault",
+        "normalization_scale_fault"
+      ],
+      "tp": 108,
+      "fp": 0,
+      "fn": 30,
+      "precision": {
+        "value": 1.0,
+        "ci_lo": 0.9656514212958325,
+        "ci_hi": 1.0,
+        "denominator": 108
+      },
+      "recall": {
+        "value": 0.782608695652174,
+        "ci_lo": 0.7066435171434168,
+        "ci_hi": 0.843265677338315,
+        "denominator": 138
+      }
+    },
+    "mirror_y": {
+      "relevant_fault_classes": [
+        "mesh_adjacency_fault",
+        "physical_channel_fault",
+        "symmetry_fault"
+      ],
+      "tp": 68,
+      "fp": 6,
+      "fn": 70,
+      "precision": {
+        "value": 0.918918918918919,
+        "ci_lo": 0.8341786176052062,
+        "ci_hi": 0.9623106631906666,
+        "denominator": 74
+      },
+      "recall": {
+        "value": 0.4927536231884058,
+        "ci_lo": 0.4106726096746112,
+        "ci_hi": 0.575227154569447,
+        "denominator": 138
+      }
+    }
+  },
+  "effect_size_and_nonparametric_tests": {
+    "mgn_existing_effect_size_report": "research_assets/runs/multicheckpoint/effect_size_report.json",
+    "mgn_mirror_ood_vs_rollout": {
+      "group_a": "mirror_ood",
+      "group_b": "rollout",
+      "a_values": [
+        0.7493719699474907,
+        0.8217584445440408,
+        0.736343283297829,
+        0.7863585484138412,
+        0.7641165162954794,
+        0.8317907752608924
+      ],
+      "b_values": [
+        0.02162959373432519,
+        0.021785567115404535,
+        0.022605647656860167,
+        0.02220901832598942,
+        0.022601764659358814,
+        0.022059216917158
+      ],
+      "cliffs_delta": {
+        "delta": 1.0,
+        "magnitude": "large",
+        "gt_pairs": 36,
+        "lt_pairs": 0,
+        "total_pairs": 36
+      },
+      "wilcoxon_signed_rank": {
+        "n": 6,
+        "W_plus": 21.0,
+        "p_two_sided": 0.03125,
+        "exact_min_two_sided_p": 0.03125
+      }
+    },
+    "pinn_diffusion_vs_burgers_mr_b_ratio": {
+      "group_a": "PINN-diffusion MR-B violation/floor ratios",
+      "group_b": "PINN-burgers MR-B violation/floor ratios",
+      "a_values": [
+        0.8533572161705272,
+        1.3985681820178573,
+        2.7946307497085083
+      ],
+      "b_values": [
+        0.8896689677021489,
+        0.4458710100275047,
+        0.5098211235579608
+      ],
+      "cliffs_delta": {
+        "delta": 0.7777777777777778,
+        "magnitude": "large",
+        "gt_pairs": 8,
+        "lt_pairs": 1,
+        "total_pairs": 9
+      },
+      "wilcoxon_signed_rank": {
+        "n": 3,
+        "W_plus": 5.0,
+        "p_two_sided": 0.5,
+        "exact_min_two_sided_p": 0.25
+      },
+      "note": "paired by training seed index (s0,s1,s2); exact Wilcoxon is low-powered at n=3"
+    }
+  },
+  "honesty_boundary": "Unified Phase-3 catalogue for inferential reporting. The 12 MeshGraphNets entries are executed mutants from committed reports. The 24 PINN entries are closed-form output-level mutation probes over the three committed seeds per PDE family; they are not retrained PINN mutant checkpoints and must not be described as real-world fault rates or cross-architecture generalization."
+}
