@@ -3,15 +3,13 @@
 > Last updated: 2026-06-11 by claude-code (Phase 4/5 session)
 
 ## 🔴 Blockers（阻塞项，必须先解决）
-- [ ] 重跑五厂商评审面板 v5（owner: user → claude）
-  - context: Phase 5 验收门槛（empirical ≥8.0 ∧ overall ≥7.8 ∧ accept ≥0.65 ∧ clarity ≥7.0；用户追加目标 novelty/clarity/empirical/technical 均 ≥8.0）。本地环境缺少 `OPENAI_API_KEY`/`OPENAI_BASE_URL` 网关凭据，`tools/run_academic_review_panel.py` fail-closed。今日 09:35 UTC 的 v4 在另一环境跑通过，说明凭据存在于该环境。
-  - next-action: 用户在本地 export 凭据，或在有凭据的环境执行 `python3 tools/run_academic_review_panel.py`
-  - artifact: v4 结果 `research_assets/runs/academic-review-panel-phase5-baseurl-v1/review_panel_report.json`（empirical 6.6 / novelty 6.4 / technical 7.4 / clarity 7.0 / accept 0.452，major_revision）
+- [ ] 平台期已确认（v4 7.34 / v5 7.80 / v6 7.49，accept 0.45–0.62 振荡），按 32 号计划 Phase 5 预设出口停止 prose-only 迭代，等用户战略拍板（见 Open Questions）
+  - artifact: paper/34_phase5_v5_v6_panel_outcome.md（三轮对比 + 判读）
 
 ## 🟡 In Progress（进行中）
-- [ ] 把 v4 四项收敛关切修完后验收（status: 1/4 已关闭）
-  - 已关闭：D-score 仅 mirror-y 量化（5/5 关切）→ 全 MR 类逐关系操作化，commit bbbf4f5
-  - next-action: 见 Backlog 三项（均需新证据或用户拍板，纯改文字救不了，详见 paper/33_phase5_review_panel_triage.md）
+- [ ] v4/v5 收敛关切修复（status: 3/5 已关闭）
+  - 已关闭：D-score 全 MR 类操作化（bbbf4f5）；operator-floor 9 分辨率 + slope CI、去防御化手术（2ab58d4）
+  - 未关闭（结构性）：窄实证基座、新颖性定位；v6 新增"rubric 验证部分循环"（glm，可先写作承认）
 
 ## 🟢 Backlog（待启动，按优先级排序）
 - [ ] P0: 增加一个真正不同的 SUT/架构家族产物（v4 5/5 关切"单家族单数据集"；候选：Geo-FNO on cylinder，27/32 号文档标记为 stretch、风险高）
