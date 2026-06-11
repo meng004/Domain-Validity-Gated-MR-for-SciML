@@ -141,12 +141,18 @@ points"，需要的是 rate 不是 point。E1 的全部工程模式（orchestrat
 Phase 1–3 的新增内容会把 clarity 进一步压低、对冲掉实证涨分——所以它是实证分的保护性
 配套，不是可选美化。
 
-### Phase 5 — 重跑面板 + §11 提交前流水线（2 天）
+### Phase 5 — 重跑面板 + §11 提交前流水线（v4 已执行，未达标）
 
-- 重跑五厂商面板 v4：门槛 = empirical ≥8.0 ∧ overall ≥7.8 ∧ accept ≥0.65 ∧ clarity ≥7.0。
-- 未达标 → 按 v4 收敛关切做一轮定向修复后 v5；连续两轮平台期则触发 27 号文档 Path B
-  （JSS）决策点，交用户拍板。
-- 达标 → 走 CLAUDE.md §11 五步流水线（bib 审计、proofread、humanizer、构建验证）。
+- **已执行（panel v4）**：通过 OpenAI-compatible 网关运行五角色 panel，输出
+  `research_assets/runs/academic-review-panel-phase5-baseurl-v1/review_panel_report.json`。
+- **Gate 结果**：empirical rigor 6.6 < 8.0，overall 7.34 < 7.8，accept probability
+  0.452 < 0.65，clarity 7.0 = 7.0；多数 verdict = major_revision。
+- **已执行（review triage）**：`paper/33_phase5_review_panel_triage.md` 记录四个收敛关切：
+  empirical base 仍窄、domain-violation axis 仅 mirror-y 数值化、fault catalogue 仍偏 synthetic/gross、
+  以及 prose/ledger 仍需继续压缩。
+- **诚实状态**：Phase 5 未通过提交门槛；§11 final submission pipeline 不应启动。下一轮 v5 需要
+  新证据（不同 SUT/架构、非几何 MR 的 D-score、真实/更强 fault evidence 或 DOI 归档），
+  不能仅靠改写措辞声称达标。
 
 **理由**：用同一把尺子验收，避免自由心证；预设平台期出口防止无限强化循环。
 
