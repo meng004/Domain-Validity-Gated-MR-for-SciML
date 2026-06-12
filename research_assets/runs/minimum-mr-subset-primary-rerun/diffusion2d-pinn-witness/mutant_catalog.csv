@@ -1,0 +1,13 @@
+mutant_id,fault_class
+M_COORD_XY_SWAP,coordinate_semantics
+M_COORD_X_NEG,coordinate_semantics
+M_TIME_OFFSET,time_semantics
+M_TIME_NEG,time_semantics
+M_ACT_SCALE_OUT,activation_semantics
+M_ACT_BIAS_OUT,activation_semantics
+M_WEIGHT_ZERO_L0,weight_semantics
+M_WEIGHT_SCALE_L2,weight_semantics
+M_NORM_SHIFT,normalization_semantics
+M_NORM_SCALE,normalization_semantics
+M_BOUNDARY_INSIDE_FLIP,neumann_boundary_semantics
+M_BOUNDARY_MASS_LOSS,neumann_boundary_semantics

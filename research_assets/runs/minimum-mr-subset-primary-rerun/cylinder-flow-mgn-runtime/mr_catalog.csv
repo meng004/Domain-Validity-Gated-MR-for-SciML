@@ -1,0 +1,8 @@
+mr_id,mr_meta_pattern
+mr_channel_energy,m_order
+mr_inflow_dirichlet,m_inv
+mr_rollout_direction,m_traj
+mr_swap_signature,m_inv
+mr_update_magnitude,m_order
+mr_update_smoothness,m_conv
+mr_wall_noslip,m_inv

@@ -1,0 +1,28 @@
+{
+  "record_type": "abd-witness-diffusion2d-pinn",
+  "status": "PASS_WITNESS",
+  "solver_status": "optimal",
+  "sut_id": "diffusion2d_pinn",
+  "generated_at": "2026-06-12T00:59:41Z",
+  "submodule": "external/dvgmr",
+  "submodule_commit": "0912fef",
+  "checkpoint_sha256_prefix": "b54a6b529aa0",
+  "kind": "real",
+  "label_scope": "true_fault_class",
+  "fault_classes_active": 5,
+  "max_fault_class_signature_rank": 2,
+  "kstar": 1,
+  "sms_rank": 3,
+  "collapse": 1,
+  "n_R": 5,
+  "m_raw": 12,
+  "m_dedup": 10,
+  "phi_active": 5,
+  "heterogeneous_mr_classes": 2,
+  "heterogeneous_fault_classes": 2,
+  "max_pure_class_rank": 2,
+  "selected_mrs": [
+    "DIFFUSION_PINN_MR_SNAPSHOT_REFERENCE"
+  ],
+  "honesty_boundary": "One PINN, one PDE (2D heat, alpha=0.1, Neumann zero-flux), one seed (20260607), one set of hyperparameters. Not a generalization across PINN architectures or PDEs."
+}

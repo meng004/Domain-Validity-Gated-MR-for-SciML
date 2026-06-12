@@ -1,0 +1,29 @@
+[
+  {
+    "relation_id": "fno-periodic-translation",
+    "relation_name": "periodic integer-translation MR",
+    "admissibility": "admitted",
+    "predicate": "periodic boundary condition and integer grid shift",
+    "source_followup_transform": "roll input by (2, 2) cells",
+    "expected_output_relation": "rolled follow-up output maps back to source output",
+    "tolerance_rule": "relative L2 < 1e-05"
+  },
+  {
+    "relation_id": "fno-periodic-discrete-conservation",
+    "relation_name": "periodic discrete-conservation MR",
+    "admissibility": "admitted-with-reference-floor",
+    "predicate": "periodic finite-difference target has a measured channel-sum drift floor",
+    "source_followup_transform": "one periodic finite-difference evolution step",
+    "expected_output_relation": "output channel sums should not exceed the calibrated reference floor",
+    "tolerance_rule": "relative channel-sum drift <= max(1e-5, 10 * reference_floor + 1e-6)"
+  },
+  {
+    "relation_id": "fno-dirichlet-translation",
+    "relation_name": "Dirichlet-boundary translation candidate",
+    "admissibility": "rejected",
+    "predicate": "non-periodic boundary condition changes the boundary-value problem",
+    "source_followup_transform": "roll input by (2, 2) cells",
+    "expected_output_relation": null,
+    "tolerance_rule": "not executed as an exact MR"
+  }
+]

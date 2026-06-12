@@ -1,0 +1,14 @@
+{
+  "solver": "deterministic_bruteforce_exact_cover",
+  "solver_status": "optimal",
+  "objective": 6,
+  "selected_mrs": [
+    "mr_channel_energy",
+    "mr_inflow_dirichlet",
+    "mr_rollout_direction",
+    "mr_swap_signature",
+    "mr_update_magnitude",
+    "mr_wall_noslip"
+  ],
+  "universe": "real MGN inference: (mutant x trial) columns killed by MR probes"
+}

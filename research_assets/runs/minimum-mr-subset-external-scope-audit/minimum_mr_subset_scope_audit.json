@@ -1,0 +1,92 @@
+{
+  "analysis_artifacts": {
+    "instances_csv": "runs/abd-analysis/instances.csv",
+    "report": "runs/abd-analysis/REPORT.md"
+  },
+  "csv_cross_check": {
+    "csv_pilot_instances": 14,
+    "csv_real_instances": 70,
+    "csv_real_true_fault_class_instances": 20,
+    "csv_total_instances": 97
+  },
+  "external_real_rows": 70,
+  "external_true_fault_class_rows": 20,
+  "honesty_boundary": "The audit reads committed reports from the sibling Minimum-MR-SubSet repository. It widens empirical scope by showing comparable true-fault-class witness rows exist for a held-out cylinder-flow MGN runtime and two one-seed PINN PDE witnesses, but it is secondary provenance rather than a new experiment executed in this manuscript.",
+  "manuscript_use": "external witness evidence only; this audit does not add new primary SUT executions to this paper and must not be described as a cross-SUT pass-rate estimate",
+  "primary_sci_ml_witnesses": [
+    {
+      "collapse": false,
+      "eval_split": "test",
+      "fault_classes_active": 4,
+      "honesty_boundary": "External held-out-test MeshGraphNet cylinder-flow runtime witness from Minimum-MR-SubSet; it records true-fault-class ABD structure for the sibling repository and does not add a new primary SUT execution to this paper.",
+      "kind": "real",
+      "kstar": 6,
+      "label_scope": "true_fault_class",
+      "max_fault_class_signature_rank": 2,
+      "real_runtime_output": true,
+      "record_path": "runs/abd-witness-cylinder-flow-mgn-runtime-20260605T021457Z/abd_witness_report.json",
+      "selected_mrs": [
+        "mr_channel_energy",
+        "mr_inflow_dirichlet",
+        "mr_rollout_direction",
+        "mr_swap_signature",
+        "mr_update_magnitude",
+        "mr_wall_noslip"
+      ],
+      "status": "PASS_WITNESS",
+      "sut_id": "cylinder_flow_meshgraphnet"
+    },
+    {
+      "checkpoint_sha256_prefix": "ff3eae5b40eb",
+      "collapse": true,
+      "fault_classes_active": 5,
+      "honesty_boundary": "One PINN, one PDE (2D viscous Burgers, nu=0.05), one seed (20260607), one set of hyperparameters. Not a generalization across PINN architectures or PDEs.",
+      "kind": "real",
+      "kstar": 1,
+      "label_scope": "true_fault_class",
+      "m_dedup": 9,
+      "m_raw": 12,
+      "max_fault_class_signature_rank": 2,
+      "n_R": 4,
+      "record_path": "runs/abd-witness-burgers2d-pinn-20260607T161215Z/abd_witness_report.json",
+      "selected_mrs": [
+        "PINN_MR_INITIAL_REFERENCE"
+      ],
+      "status": "PASS_WITNESS",
+      "submodule": "external/dvgmr",
+      "submodule_commit": "6ea488a",
+      "sut_id": "burgers2d_pinn"
+    },
+    {
+      "checkpoint_sha256_prefix": "b54a6b529aa0",
+      "collapse": true,
+      "fault_classes_active": 5,
+      "honesty_boundary": "One PINN, one PDE (2D heat, alpha=0.1, Neumann zero-flux), one seed (20260607), one set of hyperparameters. Not a generalization across PINN architectures or PDEs.",
+      "kind": "real",
+      "kstar": 1,
+      "label_scope": "true_fault_class",
+      "m_dedup": 10,
+      "m_raw": 12,
+      "max_fault_class_signature_rank": 2,
+      "n_R": 5,
+      "record_path": "runs/abd-witness-diffusion2d-pinn-20260608T032704Z/abd_witness_report.json",
+      "selected_mrs": [
+        "DIFFUSION_PINN_MR_SNAPSHOT_REFERENCE"
+      ],
+      "status": "PASS_WITNESS",
+      "submodule": "external/dvgmr",
+      "submodule_commit": "0912fef",
+      "sut_id": "diffusion2d_pinn"
+    }
+  ],
+  "record_type": "minimum-mr-subset-external-scope-audit",
+  "report_counts": {
+    "report_pilot_instances": 14,
+    "report_real_instances": 70,
+    "report_real_true_fault_class_instances": 20,
+    "report_total_instances": 97
+  },
+  "source_checkout": "/private/tmp/minimum-mr-subset-audit",
+  "source_head": "9ef862ec37335b4834d0a1fb38b4b613af702f34",
+  "source_repo": "https://github.com/meng004/Minimum-MR-SubSet"
+}

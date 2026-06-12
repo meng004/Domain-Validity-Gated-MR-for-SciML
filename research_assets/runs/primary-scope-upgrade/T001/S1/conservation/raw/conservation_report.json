@@ -1,0 +1,8 @@
+{
+  "characteristic_length": 0.018957323269706165,
+  "absolute_relation_decision": "deferred-uncalibrated-absolute-tolerance",
+  "absolute_divergence_tol": 1e-06,
+  "mean_reference_nondim_divergence": 0.029607629521486975,
+  "regression_threshold": 1.5,
+  "operator": "P1 constant-per-cell divergence, area-weighted RMS"
+}

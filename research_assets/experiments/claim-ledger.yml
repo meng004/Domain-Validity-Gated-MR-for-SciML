@@ -57,11 +57,11 @@ claims:
       - "research_assets/runs/llm-mr-baseline/llm_baseline_report.json"
       - "research_assets/runs/generic-mr-baseline/generic_mr_report.json"
     wording_allowed: >
-      The comparative baselines remain protocol commitments: Manual expert MR design,
-      Generic automatic MR generation scope contrast, and LLM-generated candidate MRs.
-      The rollout-accuracy diagnostic is no longer a commitment only: it has been executed
-      (see C8-rollout-accuracy-baseline) and is reported as a same-SUT diagnostic
-      comparator, not as a defeated competitor. For the LLM-generated-MR baseline the
+      The comparative baselines are secondary scope contrasts: LLM-simulated expert MR
+      elicitation, Generic automatic MR generation scope contrast, and LLM-generated
+      candidate MRs. The rollout-accuracy diagnostic has been executed (see
+      C8-rollout-accuracy-baseline) and is reported as a same-SUT diagnostic comparator,
+      not as a defeated competitor. For the LLM-generated-MR baseline the
       execution pipeline is now committed and reproducible-by-protocol in three stages
       with vendor-disjoint LLMs: tools/run_llm_mr_baseline.py asks one generator
       (claude-opus-4-8 with gpt-5.5 fallback, via the bltcy OpenAI-compatible
@@ -294,6 +294,71 @@ claims:
       - "The base-config seed family stands in for an independent SUT sample."
     blocked_reason: null
 
+  - claim_id: "C22-primary-empirical-scope-upgrade"
+    status: "observed"
+    scope: "Minimum-MR-SubSet-based primary MGN scope upgrade / K=6 checkpoints / three official DeepMind cylinder-flow held-out test trajectories / mirror-y frames 0-9 / conservation transitions 0-8 / three exact-symmetric input seeds"
+    evidence:
+      - "tools/run_primary_scope_upgrade.py"
+      - "research_assets/runs/primary-scope-upgrade/primary_scope_report.json"
+      - "research_assets/runs/primary-scope-upgrade/source_cases/"
+      - "research_assets/runs/primary-scope-upgrade/T000/"
+      - "research_assets/runs/primary-scope-upgrade/T001/"
+      - "research_assets/runs/primary-scope-upgrade/T002/"
+      - "research_assets/runs/primary-scope-upgrade/exact_symmetric_mesh/"
+    wording_allowed: >
+      The primary empirical scope upgrade reruns the weakest MGN denominators on
+      the same Minimum-MR-SubSet-derived K=6 checkpoint roster and three official
+      DeepMind held-out test trajectories. The K=6 x 3 trajectories x 10
+      mirror-y OOD-stress grid fails on 180/180 checkpoint-trajectory-frame cells
+      (descriptive cell-level Wilson lower bound 0.98, not an independence claim;
+      median relative L2 0.828; median V/floor 5.28); the K=6 x 3 trajectories x
+      9 conservation-transition grid passes the reference-relative diagnostic on
+      162/162 cells (max ratio 1.287, max interior ratio 1.049; absolute
+      conservation remains deferred); and the K=6 x 3 exact-symmetric-mesh input
+      grid fails on 18/18 checkpoint-input cells (median relative L2 1.097).
+      The trajectory-dependent cells are clustered by checkpoint, held-out test
+      trajectory, and frame. This is not a single-source-trajectory estimate, but
+      it remains one architecture family and one dataset.
+    wording_forbidden:
+      - "A cross-SUT, cross-dataset, or geometry-independent pass/fail rate."
+      - "A reliability, model-accuracy, or baseline-superiority claim."
+      - "Absolute conservation has been established."
+      - "The three held-out trajectories stand in for broad neural-simulator generalization."
+    blocked_reason: null
+
+  - claim_id: "C21-primary-empirical-volume-upgrade"
+    status: "observed"
+    scope: "Minimum-MR-SubSet-based primary MGN volume upgrade / K=6 checkpoints / one DeepMind cylinder-flow eval source trajectory / mirror-y frames 0-9 / conservation transitions 0-8 / three exact-symmetric input seeds"
+    evidence:
+      - "tools/run_primary_volume_upgrade.py"
+      - "research_assets/runs/primary-volume-upgrade/primary_volume_report.json"
+      - "research_assets/runs/primary-volume-upgrade/S0/"
+      - "research_assets/runs/primary-volume-upgrade/S1/"
+      - "research_assets/runs/primary-volume-upgrade/S2/"
+      - "research_assets/runs/primary-volume-upgrade/S3/"
+      - "research_assets/runs/primary-volume-upgrade/S4/"
+      - "research_assets/runs/primary-volume-upgrade/S5/"
+    wording_allowed: >
+      The primary empirical volume upgrade reruns the weakest MGN denominators on
+      the same Minimum-MR-SubSet-derived K=6 checkpoint roster. The K=6 x 10
+      mirror-y OOD-stress grid fails on 60/60 checkpoint-frame cells
+      (descriptive cell-level Wilson lower bound 0.94, not an independence
+      claim; median relative L2 0.782; median V/floor 4.06);
+      the K=6 x 9 conservation-transition grid passes the reference-relative
+      diagnostic on 54/54 checkpoint-transition cells (max ratio 1.025, max
+      interior ratio 1.044; absolute conservation remains deferred); and the
+      K=6 x 3 exact-symmetric-mesh input grid fails on 18/18 checkpoint-input
+      cells (median relative L2 1.097). These cells are clustered by checkpoint
+      and frame over one source trajectory and three synthetic input seeds, so
+      they remove the literal 10-frame, 2-frame, and one-input pilot denominators
+      but are not independent multi-trajectory estimates.
+    wording_forbidden:
+      - "A cross-SUT, cross-trajectory, or geometry-independent pass/fail rate."
+      - "A reliability, model-accuracy, or baseline-superiority claim."
+      - "Absolute conservation has been established."
+      - "The synthetic symmetric-mesh magnitude is calibrated in-distribution cylinder-flow severity."
+    blocked_reason: null
+
   - claim_id: "C12-operator-floor-resolution"
     status: "observed"
     scope: "one mesh family (y=0-symmetric structured triangular channel), nine resolutions h0*2..h0/16, one smooth analytic stream-function field"
@@ -425,32 +490,91 @@ claims:
 
   - claim_id: "C16-unified-fault-catalog-statistics"
     status: "observed"
-    scope: "Phase-3 36-entry unified fault catalogue: 10 executed canonical MGN mutants, 2 executed adversarial MGN mutants, and 24 closed-form output-level PINN probes; by-detector localization precision/recall with Wilson 95% CIs; Wilcoxon and Cliff effect-size tests"
+    scope: "Phase-3 60-entry unified fault catalogue: 10 executed canonical MGN mutants, 2 executed adversarial MGN mutants, 24 closed-form output-level PINN probes, and 24 closed-form output-level FNO probes; by-detector localization precision/recall with Wilson 95% CIs; Wilcoxon and Cliff effect-size tests"
     evidence:
       - "tools/build_phase3_unified_fault_catalog.py"
       - "research_assets/runs/phase3-unified-fault-catalog/phase3_unified_fault_catalog.json"
       - "research_assets/runs/fault-robustness-e3/fault_robustness_report.json"
       - "research_assets/runs/adversarial-mutants-e3-extra/adversarial_mutants_report.json"
       - "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
+      - "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json"
     wording_allowed: >
-      Phase 3 compiles the existing executed MGN mutant reports and committed PINN roster into
-      a 36-entry unified fault catalogue for inferential reporting. The catalogue contains 10
-      executed canonical MGN mutants, 2 executed adversarial MGN mutants, and 24 closed-form
-      output-level PINN probes (12 mutation templates for each of the Burgers and heat PINN
-      families). On this unified catalogue, by-detector localization precision/recall with
-      Wilson 95% CIs is reported as node-permutation 1.00/1.00, conservation 1.00/0.78, and
-      mirror-y 0.92/0.49. The same artifact reports non-parametric comparisons, including a
+      Phase 3 compiles the existing executed MGN mutant reports, the committed PINN roster, and
+      the committed FNO roster into a 60-entry unified fault catalogue for inferential reporting.
+      The catalogue contains 10 executed canonical MGN mutants, 2 executed adversarial MGN
+      mutants, 24 closed-form output-level PINN probes, and 24 closed-form output-level FNO
+      probes (12 mutation templates for each of the Burgers and heat families). On this unified
+      catalogue, by-detector localization precision/recall with Wilson 95% CIs is reported as
+      node-permutation 1.00/1.00, conservation 1.00/0.81, and mirror-y 0.94/0.55. The same
+      artifact reports non-parametric comparisons, including a
       large Cliff's delta (0.78) for diffusion-vs-Burgers PINN MR-B violation/floor ratios,
       while exact paired Wilcoxon is non-significant at n=3 (p=0.5).
     wording_forbidden:
-      - "The 24 PINN probes are retrained mutant checkpoints."
+      - "The PINN or FNO probes are retrained mutant checkpoints."
       - "A real-world fault-detection rate or general localization-accuracy claim."
       - "Cross-architecture-family generalization or baseline superiority."
     blocked_reason: null
 
+  - claim_id: "C19-third-family-fno-roster"
+    status: "observed"
+    scope: "FNO-2D K=6 roster (3 seeds x 2 PDEs) / small torch FNO-2D checkpoints / closed-form synthetic 2D Burgers and heat FD data with periodic and Dirichlet boundary-condition variants / admissibility-gated translation, mirror, conservation, and output-probe evidence"
+    evidence:
+      - "tools/gen_fd_dataset_2d.py"
+      - "tools/fno2d.py"
+      - "tools/train_fno_2d.py"
+      - "tools/run_fno_k6_roster.py"
+      - "research_assets/runs/fno-k6-roster/smoke_manifest.json"
+      - "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json"
+      - "research_assets/runs/fno-k6-roster/burgers_s0/manifest.json"
+      - "research_assets/runs/fno-k6-roster/heat_s0/manifest.json"
+    wording_allowed: >
+      A third architecture family was added as a bounded evidence point: six torch FNO-2D
+      checkpoints over closed-form synthetic 2D Burgers and heat data (three seeds per PDE).
+      The admissibility gate makes a non-trivial decision on this family: periodic integer
+      translations are admitted for all 6/6 SUTs and exhibit near-machine-precision violations
+      (Burgers mean 2.12e-08, 95% CI [1.88e-08, 2.34e-08]; heat mean 2.10e-07, 95% CI
+      [3.90e-08, 5.15e-07]), while the corresponding Dirichlet-boundary translation candidate
+      is rejected or downgraded on all 6/6 SUTs because the transformation changes the
+      boundary-value problem. This is third-family admissibility evidence on closed-form
+      synthetic data; it is not cylinder-flow evidence, not a FNO-vs-MGN/PINN performance
+      benchmark, and not a general neural-operator reliability claim.
+    wording_forbidden:
+      - "Cylinder-flow FNO evidence."
+      - "FNO-vs-MGN or FNO-vs-PINN performance superiority."
+      - "Generalization across neural operators, PDEs, grids, or training regimes."
+    blocked_reason: null
+
+  - claim_id: "C23-fno-primary-workflow-upgrade"
+    status: "observed"
+    scope: "FNO-2D K=6 primary workflow upgrade / 3 seeds x 2 PDEs / trained checkpoints from C19 / four generated periodic finite-difference evaluation cases per SUT / periodic translation MR / periodic discrete-conservation MR admitted with a reference floor / Dirichlet translation rejection"
+    evidence:
+      - "tools/run_fno_primary_workflow.py"
+      - "research_assets/runs/fno-primary-workflow/smoke_manifest.json"
+      - "research_assets/runs/fno-primary-workflow/fno_primary_workflow_report.json"
+      - "research_assets/runs/fno-primary-workflow/burgers_s0/metric_ledger.json"
+      - "research_assets/runs/fno-primary-workflow/heat_s0/metric_ledger.json"
+      - "research_assets/runs/fno-primary-workflow/burgers_s0/raw/case_00.npz"
+      - "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_00.npz"
+    wording_allowed: >
+      The FNO primary workflow upgrade is a full rubric-to-verdict trained-FNO execution.
+      Six FNO-2D checkpoints over Burgers and heat reuse the committed C19 roster.
+      Across four held-out generated periodic finite-difference cases per SUT, periodic
+      integer translation is admitted and passes on 24/24 case cells (maximum violation
+      below 1e-5). The periodic discrete-conservation MR is admitted with a measured
+      reference floor, and the trained FNO outputs exceed that floor on 24/24 case cells.
+      The Dirichlet translation candidate is rejected for all 6/6 SUTs because it changes
+      the boundary-value problem. This is trained FNO evidence with rubric decisions,
+      source/follow-up outputs, metric ledgers, and relation verdicts.
+    wording_forbidden:
+      - "Cylinder-flow FNO evidence."
+      - "FNO-vs-MGN or FNO-vs-PINN performance superiority."
+      - "General neural-operator reliability or external-validity rate."
+      - "The FNO conservation failures transfer to MeshGraphNets cylinder flow."
+    blocked_reason: null
+
   - claim_id: "C17-domain-violation-score-all"
     status: "observed"
-    scope: "multi-relation extension of C15: per-relation domain-violation scores D = m/(m+1) for every executed MR class (MGN node-permutation, mirror-y on two meshes, absolute-conservation precondition, operator-floor diagnostic; PINN MR-A/B/C on Burgers and heat), each computed from already-committed artifacts only; one entry (PINN MR-C per-K=6-seed) explicitly marked not-operationalizable-from-committed-data"
+    scope: "multi-relation extension of C15 for the MGN/PINN executed MR classes available before C19: per-relation domain-violation scores D = m/(m+1) for MGN node-permutation, mirror-y on two meshes, absolute-conservation precondition, operator-floor diagnostic, and PINN MR-A/B/C on Burgers and heat; one entry (PINN MR-C per-K=6-seed) explicitly marked not-operationalizable-from-committed-data; FNO translation admissibility is recorded separately in C19"
     evidence:
       - "tools/compute_domain_violation_scores_all.py"
       - "research_assets/runs/domain-violation-score-all/domain_violation_scores_all.json"
@@ -485,6 +609,77 @@ claims:
       - "A domain-violation score calibrated or validated across domains or MR classes."
       - "A general or SUT-independent domain-violation metric."
       - "Any wording implying the per-relation D values are mutually comparable on a common scale."
+    blocked_reason: null
+
+  - claim_id: "C20-minimum-mr-subset-external-scope-audit"
+    status: "observed-secondary-audit"
+    scope: "read-only audit of sibling Minimum-MR-SubSet repository at commit 9ef862ec37335b4834d0a1fb38b4b613af702f34; no new primary SUT execution in this paper"
+    evidence:
+      - "tools/audit_minimum_mr_subset_scope.py"
+      - "research_assets/runs/minimum-mr-subset-external-scope-audit/minimum_mr_subset_scope_audit.json"
+    wording_allowed: >
+      The Minimum-MR-SubSet external-scope audit records external witness evidence from
+      70 real ABD instances, including 20 real true-fault-class rows. The three SciML/PDE
+      witness rows most relevant to this paper are cylinder_flow_meshgraphnet,
+      burgers2d_pinn, and diffusion2d_pinn; each is a PASS_WITNESS row with
+      true_fault_class label scope. This widens empirical context as secondary provenance
+      only: it does not add new primary SUT executions to this paper.
+    wording_forbidden:
+      - "A new primary experiment executed by this manuscript."
+      - "A cross-SUT pass-rate estimate."
+      - "A generalization claim across neural operators, PINNs, or fluid surrogates."
+      - "A baseline-superiority or method-ranking claim."
+    blocked_reason: null
+
+  - claim_id: "C24-minimum-mr-subset-primary-rerun"
+    status: "observed"
+    scope: "Local rerun of the Minimum-MR-SubSet held-out cylinder-flow MeshGraphNet runtime witness / committed sibling checkpoint and DeepMind eval data / witness_stage_b pipeline / five held-out test timesteps / ABD true-fault-class witness"
+    evidence:
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/abd_witness_report.json"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/kill_matrix.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/residuals_by_trial.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/mr_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/mutant_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/PROVENANCE.md"
+    wording_allowed: >
+      The Minimum-MR-SubSet primary rerun executes the sibling repository's
+      held-out cylinder-flow MeshGraphNet witness from its committed checkpoint,
+      DeepMind eval data, and witness_stage_b pipeline. The local rerun returns
+      PASS_WITNESS with kstar = 6, four active true fault classes, maximum
+      fault-class signature rank 2, and collapse false over held-out test
+      timesteps 0, 2, 4, 6, and 8.
+    wording_forbidden:
+      - "A second architecture or dataset has been added."
+      - "Cross-SUT or cross-dataset pass-rate evidence."
+      - "The Minimum-MR-SubSet rerun validates broad external generalization."
+    blocked_reason: null
+
+  - claim_id: "C25-minimum-mr-subset-pinn-primary-reruns"
+    status: "observed"
+    scope: "Local reruns of the Minimum-MR-SubSet trained Burgers2D PINN and Diffusion2D PINN ABD true-fault-class witnesses / committed DVGMR checkpoints and reference solutions / one seed per PDE / 12 semantic mutants per witness"
+    evidence:
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/abd_witness_report.json"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/kill_matrix.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/mr_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/mutant_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/PROVENANCE.md"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/abd_witness_report.json"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/kill_matrix.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/mr_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/mutant_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/PROVENANCE.md"
+    wording_allowed: >
+      The Minimum-MR-SubSet PINN primary reruns execute two trained PINN witnesses
+      locally: Burgers2D PINN at external/dvgmr commit 6ea488a and Diffusion2D
+      PINN at external/dvgmr commit 0912fef. Both return PASS_WITNESS with
+      kstar = 1, five active true fault classes, maximum fault-class signature
+      rank 2, and collapse true. Diffusion2D includes a Neumann mass-conservation
+      MR among its five relation checks.
+    wording_forbidden:
+      - "A general PINN/PDE pass rate."
+      - "Cross-SUT or cross-dataset statistical evidence."
+      - "A reliability, accuracy, or model-superiority claim."
+      - "Generalization across PINN architectures, PDEs, or training regimes."
     blocked_reason: null
 
 speculative_claims:

@@ -220,6 +220,276 @@ runs:
       establishes no absolute conservation, conservation rate, reliability, accuracy, or
       baseline result.
 
+  - run_id: "fno-k6-third-family-roster"
+    status: "completed"
+    sut_execution: "synthetic-fno-roster"
+    subject: "FNO-2D on closed-form synthetic 2D Burgers and heat data"
+    command: "python3 tools/run_fno_k6_roster.py --epochs 6 --samples 12 --n 16"
+    output_artifacts:
+      - "research_assets/runs/fno-k6-roster/smoke_manifest.json"
+      - "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json"
+      - "research_assets/runs/fno-k6-roster/burgers_s0/mr_report.json"
+      - "research_assets/runs/fno-k6-roster/heat_s0/mr_report.json"
+    config:
+      architecture_family: "FNO-2D"
+      pdes: ["burgers", "heat"]
+      seeds: [0, 1, 2]
+      grid_n: 16
+      train_samples: 12
+      train_epochs: 6
+      boundary_condition_variants: ["periodic", "dirichlet"]
+    output_summary:
+      primary: >
+        Periodic translation is admitted on all 6/6 FNO SUTs and has near-machine-precision
+        violations; the corresponding Dirichlet-boundary translation candidate is rejected
+        on all 6/6 because the transformation changes the boundary-value problem.
+    claim_limit: >
+      Third-family admissibility evidence on closed-form synthetic data only. Not cylinder-flow
+      evidence, not a cross-family performance benchmark, and not a neural-operator
+      generalization or reliability claim.
+
+  - run_id: "fno-primary-workflow-upgrade-001"
+    status: "completed"
+    sut_execution: "trained-fno-primary-workflow"
+    subject: "FNO-2D rubric-to-verdict workflow on generated periodic Burgers and heat data"
+    command: "python3 tools/run_fno_primary_workflow.py --n-eval 4"
+    output_artifacts:
+      - "research_assets/runs/fno-primary-workflow/smoke_manifest.json"
+      - "research_assets/runs/fno-primary-workflow/fno_primary_workflow_report.json"
+      - "research_assets/runs/fno-primary-workflow/burgers_s0/metric_ledger.json"
+      - "research_assets/runs/fno-primary-workflow/heat_s0/metric_ledger.json"
+      - "research_assets/runs/fno-primary-workflow/burgers_s0/raw/case_00.npz"
+      - "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_00.npz"
+    config:
+      architecture_family: "FNO-2D"
+      pdes: ["burgers", "heat"]
+      seeds: [0, 1, 2]
+      n_eval_per_sut: 4
+      total_case_cells: 24
+      boundary_condition_variants: ["periodic", "dirichlet"]
+      translation_shift: [2, 2]
+      conservation_threshold_rule: "max(1e-5, 10 * reference_floor + 1e-6)"
+    output_summary:
+      primary: >
+        The FNO primary workflow upgrade records full rubric-to-verdict evidence on six
+        trained FNO-2D checkpoints: periodic translation is admitted and passes on 24/24
+        case cells; the periodic discrete-conservation MR is admitted with a measured
+        reference floor and fails on 24/24 case cells; the Dirichlet-boundary translation
+        candidate is rejected on all 6/6 SUTs.
+      allowed_observation: >
+        This is trained FNO evidence with rubric decisions, raw source/follow-up tensors,
+        mapped outputs, per-case metric ledgers, and relation verdicts.
+    claim_limit: >
+      FNO Burgers/heat primary-workflow evidence only. It does not add cylinder-flow FNO
+      evidence, performance benchmarking, reliability rates, or broad neural-operator
+      generalization.
+
+  - run_id: "minimum-mr-subset-external-scope-audit-001"
+    status: "observed-secondary-audit"
+    sut_execution: "not-run-by-this-paper"
+    subject: "Read-only audit of sibling Minimum-MR-SubSet ABD witness reports"
+    source_repo: "https://github.com/meng004/Minimum-MR-SubSet"
+    source_commit: "9ef862ec37335b4834d0a1fb38b4b613af702f34"
+    command: "python3 tools/audit_minimum_mr_subset_scope.py --repo /private/tmp/minimum-mr-subset-audit"
+    output_artifacts:
+      - "research_assets/runs/minimum-mr-subset-external-scope-audit/minimum_mr_subset_scope_audit.json"
+    output_summary:
+      primary: >
+        The audit reads the sibling repository's ABD analysis table and three SciML/PDE
+        PASS_WITNESS reports: cylinder_flow_meshgraphnet, burgers2d_pinn, and
+        diffusion2d_pinn. The source contains 70 real instances and 20 real
+        true-fault-class instances.
+      allowed_observation: >
+        External witness evidence exists in a sibling repository for one held-out
+        cylinder-flow MeshGraphNet runtime witness and two one-seed PINN PDE witnesses.
+    claim_limit: >
+      Secondary provenance only. This audit does not add new primary SUT executions to
+      this paper, does not estimate cross-SUT pass rates, and does not support
+      neural-operator or PINN generalization.
+
+  - run_id: "primary-empirical-volume-upgrade-001"
+    status: "observed"
+    sut_execution: "run"
+    evidence_level: "real-sut-mgn-k6-primary-volume-upgrade"
+    subject: "Minimum-MR-SubSet-derived MeshGraphNets cylinder-flow K=6 checkpoint roster"
+    source_repo: "https://github.com/meng004/Minimum-MR-SubSet"
+    source_commit: "9ef862ec37335b4834d0a1fb38b4b613af702f34"
+    command: "python3 tools/run_primary_volume_upgrade.py --sut-repo /private/tmp/minimum-mr-subset-audit"
+    output_artifacts:
+      - "research_assets/runs/primary-volume-upgrade/primary_volume_report.json"
+      - "research_assets/runs/primary-volume-upgrade/S0/"
+      - "research_assets/runs/primary-volume-upgrade/S1/"
+      - "research_assets/runs/primary-volume-upgrade/S2/"
+      - "research_assets/runs/primary-volume-upgrade/S3/"
+      - "research_assets/runs/primary-volume-upgrade/S4/"
+      - "research_assets/runs/primary-volume-upgrade/S5/"
+    config:
+      checkpoints: ["S0", "S1", "S2", "S3", "S4", "S5"]
+      mirror_y_frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      conservation_transition_frames: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+      exact_symmetric_input_seeds: [20260606, 20260607, 20260608]
+      source_case: "research_assets/runs/real-sut-node-permutation-pilot/source_case.npz"
+    output_summary:
+      primary: >
+        The primary empirical volume upgrade expands the weakest MGN denominators:
+        K=6 x 10 mirror-y OOD-stress grid, 60/60 fail (Wilson lower bound 0.94);
+        K=6 x 9 conservation-transition grid, 54/54 reference-relative pass
+        (max ratio 1.025, absolute relation deferred); and K=6 x 3
+        exact-symmetric-mesh input grid, 18/18 fail.
+      allowed_observation: >
+        These are real-SUT checkpoint-frame or checkpoint-input cells backed by
+        per-checkpoint manifests and raw metric ledgers under primary-volume-upgrade/.
+    claim_limit: >
+      The cells are clustered by checkpoint and frame over one source trajectory
+      and three synthetic exact-symmetry input seeds. They remove the literal
+      10-frame, 2-frame, and one-input pilot denominators, but they are not
+      independent multi-trajectory estimates, cross-SUT rates, reliability claims,
+      accuracy claims, or absolute conservation evidence.
+
+  - run_id: "primary-empirical-scope-upgrade-001"
+    status: "observed"
+    sut_execution: "run"
+    evidence_level: "real-sut-mgn-k6-primary-scope-upgrade"
+    subject: "Minimum-MR-SubSet-derived MeshGraphNets cylinder-flow K=6 checkpoint roster over three held-out test trajectories"
+    source_repo: "https://github.com/meng004/Minimum-MR-SubSet"
+    source_commit: "9ef862ec37335b4834d0a1fb38b4b613af702f34"
+    command: "python3 tools/run_primary_scope_upgrade.py --sut-repo /private/tmp/minimum-mr-subset-audit --force-download"
+    output_artifacts:
+      - "research_assets/runs/primary-scope-upgrade/primary_scope_report.json"
+      - "research_assets/runs/primary-scope-upgrade/source_cases/"
+      - "research_assets/runs/primary-scope-upgrade/T000/"
+      - "research_assets/runs/primary-scope-upgrade/T001/"
+      - "research_assets/runs/primary-scope-upgrade/T002/"
+      - "research_assets/runs/primary-scope-upgrade/exact_symmetric_mesh/"
+    config:
+      checkpoints: ["S0", "S1", "S2", "S3", "S4", "S5"]
+      heldout_test_trajectories: [0, 1, 2]
+      mirror_y_frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      conservation_transition_frames: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+      exact_symmetric_input_seeds: [20260606, 20260607, 20260608]
+      source_cases:
+        - "research_assets/runs/primary-scope-upgrade/source_cases/test_traj000_frames000_009.npz"
+        - "research_assets/runs/primary-scope-upgrade/source_cases/test_traj001_frames000_009.npz"
+        - "research_assets/runs/primary-scope-upgrade/source_cases/test_traj002_frames000_009.npz"
+    output_summary:
+      primary: >
+        The primary empirical scope upgrade expands the weakest MGN denominators
+        across three official held-out test trajectories: K=6 x 3 trajectories x
+        10 mirror-y OOD-stress grid, 180/180 fail (descriptive cell-level Wilson
+        lower bound 0.98); K=6 x 3 trajectories x 9 conservation-transition grid,
+        162/162 reference-relative pass (max ratio 1.287, absolute relation
+        deferred); and K=6 x 3 exact-symmetric-mesh input grid, 18/18 fail.
+      allowed_observation: >
+        These are real-SUT checkpoint-trajectory-frame or checkpoint-input cells
+        backed by per-trajectory/checkpoint manifests and raw metric ledgers under
+        primary-scope-upgrade/.
+    claim_limit: >
+      The trajectory-dependent cells are clustered by checkpoint, held-out test
+      trajectory, and frame. They are not a single-source-trajectory estimate, but
+      they remain one architecture family and one dataset, not cross-SUT rates,
+      cross-dataset rates, reliability claims, accuracy claims, or absolute
+      conservation evidence.
+
+  - run_id: "minimum-mr-subset-primary-rerun-cylinder-flow-mgn-001"
+    status: "completed"
+    sut_execution: "external-runtime-rerun"
+    subject: "Minimum-MR-SubSet held-out cylinder-flow MeshGraphNet ABD witness rerun"
+    source_repo: "https://github.com/meng004/Minimum-MR-SubSet"
+    source_commit: "9ef862ec37335b4834d0a1fb38b4b613af702f34"
+    command: "PYTHONPATH=/private/tmp/minimum-mr-subset-audit/scripts python -m mcmr.cylinder_flow.witness_stage_b --checkpoint /private/tmp/minimum-mr-subset-audit/runs/cylinder-flow-mgn-training-20260605T021147Z/checkpoint.pt --data-npz /private/tmp/minimum-mr-subset-audit/data/raw/cylinder_flow_deepmind/cylinder_flow_eval.npz --training-run /private/tmp/minimum-mr-subset-audit/runs/cylinder-flow-mgn-training-20260605T021147Z --trials 0,2,4,6,8 --outdir research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime"
+    output_artifacts:
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/abd_witness_report.json"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/kill_matrix.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/residuals_by_trial.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/mr_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/mutant_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/minimize.json"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/PROVENANCE.md"
+    config:
+      runtime_boundary: "cylinder_flow_mgn_runtime"
+      dataset: "cylinder-flow-mgn-deepmind"
+      eval_split: "test"
+      trials: [0, 2, 4, 6, 8]
+      real_runtime_output: true
+    output_summary:
+      primary: >
+        The local rerun returns PASS_WITNESS with kstar = 6, four active true
+        fault classes, maximum fault-class signature rank 2, and collapse false.
+        Kill decisions are computed from real trained MeshGraphNet inference on
+        held-out DeepMind cylinder-flow test data.
+      allowed_observation: >
+        This is reproducibility-backed external runtime evidence for the sibling
+        witness, with local kill matrix, residuals, catalogues, and provenance.
+    claim_limit: >
+      The rerun remains MeshGraphNet-family cylinder-flow evidence. It is not a
+      second architecture or dataset, not a cross-SUT rate, and not a broad
+      external-validity claim.
+
+  - run_id: "minimum-mr-subset-primary-rerun-burgers2d-pinn-001"
+    status: "completed"
+    sut_execution: "external-trained-pinn-rerun"
+    subject: "Minimum-MR-SubSet trained Burgers2D PINN ABD witness rerun"
+    source_repo: "https://github.com/meng004/Minimum-MR-SubSet"
+    source_commit: "9ef862ec37335b4834d0a1fb38b4b613af702f34"
+    command: "PYTHONPATH=/private/tmp/minimum-mr-subset-audit/scripts python -m mcmr.abd_burgers2d_pinn_witness --outdir research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness"
+    output_artifacts:
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/abd_witness_report.json"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/kill_matrix.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/mr_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/mutant_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/minimize.json"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/PROVENANCE.md"
+    config:
+      sut_id: "burgers2d_pinn"
+      pde: "2D viscous Burgers"
+      seed: 20260607
+      mutants: 12
+      mrs: 4
+      checkpoint_sha256_prefix: "ff3eae5b40eb"
+    output_summary:
+      primary: >
+        The local rerun returns PASS_WITNESS with kstar = 1, five active true
+        fault classes, maximum fault-class signature rank 2, and collapse true.
+      allowed_observation: >
+        This is second trained-SUT/PDE witness evidence for a one-seed Burgers2D
+        PINN, with local kill matrix, catalogues, and provenance.
+    claim_limit: >
+      The rerun is one trained PINN over one Burgers2D setup. It is not a general
+      PINN/PDE rate, not a reliability claim, and not model-superiority evidence.
+
+  - run_id: "minimum-mr-subset-primary-rerun-diffusion2d-pinn-001"
+    status: "completed"
+    sut_execution: "external-trained-pinn-rerun"
+    subject: "Minimum-MR-SubSet trained Diffusion2D PINN ABD witness rerun"
+    source_repo: "https://github.com/meng004/Minimum-MR-SubSet"
+    source_commit: "9ef862ec37335b4834d0a1fb38b4b613af702f34"
+    command: "PYTHONPATH=/private/tmp/minimum-mr-subset-audit/scripts python -m mcmr.abd_diffusion2d_pinn_witness --outdir research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness"
+    output_artifacts:
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/abd_witness_report.json"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/kill_matrix.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/mr_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/mutant_catalog.csv"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/minimize.json"
+      - "research_assets/runs/minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/PROVENANCE.md"
+    config:
+      sut_id: "diffusion2d_pinn"
+      pde: "2D heat with Neumann zero-flux"
+      seed: 20260607
+      mutants: 12
+      mrs: 5
+      checkpoint_sha256_prefix: "b54a6b529aa0"
+    output_summary:
+      primary: >
+        The local rerun returns PASS_WITNESS with kstar = 1, five active true
+        fault classes, maximum fault-class signature rank 2, and collapse true.
+        The MR catalogue includes a Neumann mass-conservation relation.
+      allowed_observation: >
+        This is second trained-SUT/PDE witness evidence for a one-seed Diffusion2D
+        PINN, with local kill matrix, catalogues, and provenance.
+    claim_limit: >
+      The rerun is one trained PINN over one Diffusion2D setup. It is not a general
+      PINN/PDE rate, not a reliability claim, and not model-superiority evidence.
+
   - run_id: "real-sut-echowve-blocked"
     status: "blocked"
     sut_execution: "not-run"

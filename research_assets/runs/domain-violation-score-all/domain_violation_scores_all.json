@@ -1,7 +1,7 @@
 {
   "record_type": "domain-violation-score-all",
   "schema_version": "0.1.0",
-  "generated_at": "2026-06-11T13:26:01Z",
+  "generated_at": "2026-06-12T03:25:29Z",
   "definition": "Per-relation domain-violation score D = m/(m+1) in [0,1), where m is a dimensionless, relation-specific measure of precondition violation computed from already-committed artifacts only; see m_definition per entry.",
   "relations": [
     {

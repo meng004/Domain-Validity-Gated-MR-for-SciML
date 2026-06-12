@@ -1,0 +1,14 @@
+{
+  "method": "exact_enumeration",
+  "selected_mrs": [
+    "DIFFUSION_PINN_MR_SNAPSHOT_REFERENCE"
+  ],
+  "k_star": 1,
+  "n_R": 5,
+  "n_mutants_admitted": 10,
+  "n_mutants_killed_by_selection": 10,
+  "collapse": 1,
+  "fault_classes_active": 5,
+  "max_fault_class_signature_rank": 2,
+  "sms_rank": 3
+}

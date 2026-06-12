@@ -1,0 +1,7 @@
+{
+  "record_type": "fno-roster-smoke-manifest",
+  "generated_at": "2026-06-11T14:41:14Z",
+  "command": "python3 tools/run_fno_k6_roster.py --epochs 6 --samples 12 --n 16",
+  "aggregate": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+  "sut_count": 6
+}

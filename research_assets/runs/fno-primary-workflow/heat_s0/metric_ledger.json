@@ -1,0 +1,116 @@
+{
+  "record_type": "fno-primary-sut-ledger",
+  "generated_at": "2026-06-11T23:01:55Z",
+  "sut_id": "fno_heat_s0",
+  "architecture_family": "FNO-2D",
+  "pde": "heat",
+  "seed": 0,
+  "checkpoint_sha256": "9a9ebfaeb249e5b099d83c5f328893216d4c03f3b2f3815d30ce7b73cf95c0f6",
+  "checkpoint": "research_assets/runs/fno-k6-roster/heat_s0/sut/checkpoint.pt",
+  "rubric_decisions": [
+    {
+      "relation_id": "fno-periodic-translation",
+      "relation_name": "periodic integer-translation MR",
+      "admissibility": "admitted",
+      "predicate": "periodic boundary condition and integer grid shift",
+      "source_followup_transform": "roll input by (2, 2) cells",
+      "expected_output_relation": "rolled follow-up output maps back to source output",
+      "tolerance_rule": "relative L2 < 1e-05"
+    },
+    {
+      "relation_id": "fno-periodic-discrete-conservation",
+      "relation_name": "periodic discrete-conservation MR",
+      "admissibility": "admitted-with-reference-floor",
+      "predicate": "periodic finite-difference target has a measured channel-sum drift floor",
+      "source_followup_transform": "one periodic finite-difference evolution step",
+      "expected_output_relation": "output channel sums should not exceed the calibrated reference floor",
+      "tolerance_rule": "relative channel-sum drift <= max(1e-5, 10 * reference_floor + 1e-6)"
+    },
+    {
+      "relation_id": "fno-dirichlet-translation",
+      "relation_name": "Dirichlet-boundary translation candidate",
+      "admissibility": "rejected",
+      "predicate": "non-periodic boundary condition changes the boundary-value problem",
+      "source_followup_transform": "roll input by (2, 2) cells",
+      "expected_output_relation": null,
+      "tolerance_rule": "not executed as an exact MR"
+    }
+  ],
+  "source_followup_outputs": [
+    "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_00.npz",
+    "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_01.npz",
+    "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_02.npz",
+    "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_03.npz"
+  ],
+  "relations": {
+    "periodic_translation": [
+      {
+        "case_id": "fno_heat_s0:translation:0",
+        "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_00.npz",
+        "violation": 5.312459165907057e-07,
+        "threshold": 1e-05,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "fno_heat_s0:translation:1",
+        "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_01.npz",
+        "violation": 4.830229727303958e-07,
+        "threshold": 1e-05,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "fno_heat_s0:translation:2",
+        "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_02.npz",
+        "violation": 4.020450035113754e-07,
+        "threshold": 1e-05,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "fno_heat_s0:translation:3",
+        "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_03.npz",
+        "violation": 6.225634479051223e-07,
+        "threshold": 1e-05,
+        "verdict": "pass"
+      }
+    ],
+    "periodic_discrete_conservation": [
+      {
+        "case_id": "fno_heat_s0:conservation:0",
+        "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_00.npz",
+        "reference_floor": 0.0,
+        "model_relative_channel_sum_drift": 0.8846480250358582,
+        "threshold": 1e-05,
+        "verdict": "fail"
+      },
+      {
+        "case_id": "fno_heat_s0:conservation:1",
+        "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_01.npz",
+        "reference_floor": 6.240585292971446e-08,
+        "model_relative_channel_sum_drift": 0.9249226450920105,
+        "threshold": 1e-05,
+        "verdict": "fail"
+      },
+      {
+        "case_id": "fno_heat_s0:conservation:2",
+        "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_02.npz",
+        "reference_floor": 0.0,
+        "model_relative_channel_sum_drift": 0.8637086153030396,
+        "threshold": 1e-05,
+        "verdict": "fail"
+      },
+      {
+        "case_id": "fno_heat_s0:conservation:3",
+        "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_03.npz",
+        "reference_floor": 1.0915930914734417e-07,
+        "model_relative_channel_sum_drift": 0.8741523027420044,
+        "threshold": 1e-05,
+        "verdict": "fail"
+      }
+    ],
+    "dirichlet_translation_rejection": {
+      "admissibility": "rejected",
+      "executed_as_exact_mr": false,
+      "reason": "Dirichlet translation changes the boundary-value problem."
+    }
+  }
+}

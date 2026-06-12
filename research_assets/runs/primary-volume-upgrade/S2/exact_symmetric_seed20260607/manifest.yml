@@ -1,0 +1,19 @@
+run_id: phase11-primary-volume-S2-exact-sym-20260607
+sut_id: cylinder_flow_meshgraphnet
+sut_repo: /private/tmp/minimum-mr-subset-audit
+sut_commit: 9ef862ec37335b4834d0a1fb38b4b613af702f34
+checkpoint_path: research_assets/runs/multicheckpoint/S2/checkpoint.pt
+checkpoint_sha256: e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562
+dataset_root: /private/tmp/minimum-mr-subset-audit/data/raw/cylinder_flow_deepmind
+source_case_path: research_assets/runs/real-sut-node-permutation-pilot/source_case.npz
+mr_id: mirror_y_exact_symmetric_mesh
+command: python3 tools/run_mirror_y_symmetric_mesh.py --manifest research_assets/runs/primary-volume-upgrade/S2/exact_symmetric_seed20260607/manifest.yml
+raw_output_dir: research_assets/runs/primary-volume-upgrade/S2/exact_symmetric_seed20260607/raw
+seed: 20260607
+device: cpu
+python_version: 3.14.5
+framework_version: torch 2.12.0
+nx: 48
+half_rows: 20
+Lx: 1.6
+Ly: 0.4

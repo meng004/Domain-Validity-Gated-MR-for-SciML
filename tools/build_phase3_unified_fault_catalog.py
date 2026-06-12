@@ -9,7 +9,10 @@ artifacts rather than another training run.  It merges:
   ``adversarial-mutants-e3-extra/adversarial_mutants_report.json``; and
 * 24 output-level PINN mutation probes (12 algebraic mutation templates for each
   of the two PINN PDE families) evaluated against the three-seed family rates in
-  ``pinn-k6-roster/pinn_k6_aggregate.json``.
+  ``pinn-k6-roster/pinn_k6_aggregate.json``; and
+* 24 output-level FNO mutation probes (12 algebraic mutation templates for each
+  of the two FNO PDE families) evaluated against the three-seed family rates in
+  ``fno-k6-roster/fno_k6_aggregate.json``.
 
 The PINN probes are not retrained mutants.  They are closed-form output-level
 fault probes whose detector outcome follows directly from the detector algebra
@@ -36,6 +39,7 @@ OUT = OUTDIR / "phase3_unified_fault_catalog.json"
 MGN = ROOT / "research_assets/runs/fault-robustness-e3/fault_robustness_report.json"
 ADV = ROOT / "research_assets/runs/adversarial-mutants-e3-extra/adversarial_mutants_report.json"
 PINN = ROOT / "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
+FNO = ROOT / "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json"
 EFFECT = ROOT / "research_assets/runs/multicheckpoint/effect_size_report.json"
 
 sys.path.insert(0, str(ROOT / "tools"))
@@ -94,6 +98,33 @@ PINN_TEMPLATES = [
      "time-localized perturbation below the declared MR thresholds"),
 ]
 
+FNO_TEMPLATES = [
+    ("FNO_TRANS_roll_output", "representation_fault", "node_perm",
+     "roll the returned field without applying the inverse periodic translation"),
+    ("FNO_TRANS_channel_stale_roll", "representation_fault", "node_perm",
+     "leave one output channel unrolled after the periodic translation map"),
+    ("FNO_TRANS_boundary_wrap_mismatch", "representation_fault", "node_perm",
+     "apply periodic wrap restoration to a non-periodic boundary-condition candidate"),
+    ("FNO_SYM_x_axis_flip", "symmetry_fault", "mirror_y",
+     "flip the wrong spatial axis in the mirror-output restoration"),
+    ("FNO_SYM_channel_sign_flip", "symmetry_fault", "mirror_y",
+     "flip the wrong vector component/sign convention in the mirror relation"),
+    ("FNO_SYM_asymmetric_gain", "symmetry_fault", "mirror_y",
+     "multiply predictions by an asymmetric spatial gain"),
+    ("FNO_CONS_global_scale", "conservation_fault", "conservation",
+     "scale the predicted integral-bearing field by a constant factor"),
+    ("FNO_CONS_uniform_offset", "conservation_fault", "conservation",
+     "add a uniform offset that shifts the grid integral"),
+    ("FNO_CONS_low_mode_bias", "conservation_fault", "conservation",
+     "add a retained low Fourier mode with non-zero mean"),
+    ("FNO_BLIND_zero_mean_high_mode", "detector_invariant_fault", None,
+     "add a zero-mean high-frequency mode outside the retained MR thresholds"),
+    ("FNO_BLIND_channel_balanced_noise", "detector_invariant_fault", None,
+     "add channel-balanced perturbation preserving row order, mirror score, and integral"),
+    ("FNO_BLIND_small_periodic_phase", "detector_invariant_fault", None,
+     "apply a sub-threshold periodic phase perturbation"),
+]
+
 
 def _rate(k: int, n: int) -> dict:
     p, lo, hi = wilson_ci(k, n)
@@ -150,6 +181,31 @@ def _pinn_entries(agg: dict) -> list[dict]:
                 "source_artifact": str(PINN.relative_to(ROOT)),
                 "evaluation_basis": (
                     "closed-form output-level PINN mutation probe over the three committed "
+                    "training seeds; no retraining and no claim of new trained mutant SUTs"),
+                "fault_class": fault_class,
+                "mutant": mutant,
+                "description": desc,
+                "n_trials": n,
+                "per_detector": per,
+            })
+    return out
+
+
+def _fno_entries(agg: dict) -> list[dict]:
+    out = []
+    for family in sorted(agg["per_pde_family"]):
+        n = sum(1 for s in agg["per_sut"] if s["pde"] == family)
+        for mutant, fault_class, detector, desc in FNO_TEMPLATES:
+            per = {d: _rate(0, n) for d in DETECTORS}
+            if detector is not None:
+                per[detector] = _rate(n, n)
+                per["any"] = _rate(n, n)
+            out.append({
+                "entry_id": f"FNO_{family}_{mutant}",
+                "source_family": f"FNO-{family}",
+                "source_artifact": str(FNO.relative_to(ROOT)),
+                "evaluation_basis": (
+                    "closed-form output-level FNO mutation probe over the three committed "
                     "training seeds; no retraining and no claim of new trained mutant SUTs"),
                 "fault_class": fault_class,
                 "mutant": mutant,
@@ -221,16 +277,19 @@ def main() -> int:
     mgn = json.loads(MGN.read_text())
     adv = json.loads(ADV.read_text())
     pinn = json.loads(PINN.read_text())
-    entries = _canonical_mgn_entries(mgn) + _adversarial_mgn_entries(adv) + _pinn_entries(pinn)
+    fno = json.loads(FNO.read_text())
+    entries = (_canonical_mgn_entries(mgn) + _adversarial_mgn_entries(adv)
+               + _pinn_entries(pinn) + _fno_entries(fno))
     report = {
         "record_type": "phase3-unified-fault-catalog-and-statistics",
-        "schema_version": "0.1.0",
+        "schema_version": "0.2.0",
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "catalogue_size": len(entries),
         "catalogue_breakdown": {
             "mgn_canonical_executed_mutants": 10,
             "mgn_adversarial_executed_mutants": 2,
             "pinn_output_level_closed_form_probes": 24,
+            "fno_output_level_closed_form_probes": 24,
         },
         "trial_count": sum(int(e["per_detector"]["any"]["n"]) for e in entries),
         "entries": entries,
@@ -239,10 +298,10 @@ def main() -> int:
         "effect_size_and_nonparametric_tests": _effect_sizes(pinn),
         "honesty_boundary": (
             "Unified Phase-3 catalogue for inferential reporting. The 12 MeshGraphNets entries "
-            "are executed mutants from committed reports. The 24 PINN entries are closed-form "
-            "output-level mutation probes over the three committed seeds per PDE family; they are "
-            "not retrained PINN mutant checkpoints and must not be described as real-world fault "
-            "rates or cross-architecture generalization."),
+            "are executed mutants from committed reports. The 24 PINN entries and 24 FNO entries "
+            "are closed-form output-level mutation probes over the three committed seeds per PDE "
+            "family; they are not retrained PINN mutant checkpoints or FNO mutant checkpoints and must not be "
+            "described as real-world fault rates or cross-architecture generalization."),
     }
     OUTDIR.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

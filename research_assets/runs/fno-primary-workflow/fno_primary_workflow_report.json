@@ -1,0 +1,528 @@
+{
+  "record_type": "fno-primary-workflow",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-11T23:01:55Z",
+  "architecture_family": "FNO-2D",
+  "pdes": [
+    "burgers",
+    "heat"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "trained_sut_count": 6,
+  "n_eval_per_sut": 4,
+  "full_workflow_flags": {
+    "trained_checkpoints": true,
+    "rubric_decisions": true,
+    "source_followup_outputs": true,
+    "metric_ledgers": true,
+    "relation_verdicts": true
+  },
+  "periodic_translation": {
+    "admissibility": "admitted",
+    "total_case_cells": 24,
+    "pass_count": 24,
+    "fail_count": 0,
+    "max_violation": 6.225634479051223e-07,
+    "threshold": 1e-05,
+    "summary": "24/24 translation passes"
+  },
+  "periodic_discrete_conservation": {
+    "admissibility": "admitted-with-reference-floor",
+    "total_case_cells": 24,
+    "pass_count": 0,
+    "fail_count": 24,
+    "reference_floor_max": 0.020350119099020958,
+    "reference_floor_mean": 0.00478187673700899,
+    "model_drift_min": 0.04695555567741394,
+    "model_drift_max": 3.448723793029785,
+    "threshold_rule": "max(1e-5, 10 * reference_floor + 1e-6)",
+    "summary": "24/24 conservation failures",
+    "honesty_boundary": "The periodic discrete-conservation MR is executable and not deferred for this FNO roster because the FD reference floor is measured case by case; the observed failures are FNO channel-sum drift relative to that floor."
+  },
+  "dirichlet_translation_rejection": {
+    "admissibility": "rejected",
+    "rejected_count": 6,
+    "executed_as_exact_mr_count": 0,
+    "reason": "Dirichlet translation changes the boundary-value problem."
+  },
+  "per_sut": [
+    {
+      "sut_id": "fno_burgers_s0",
+      "pde": "burgers",
+      "seed": 0,
+      "checkpoint_sha256": "3221c8cc561825cb88a86163acbac5b7c83c123d4fa9a5552b25732986ff89ac",
+      "metric_ledger": "research_assets/runs/fno-primary-workflow/burgers_s0/metric_ledger.json",
+      "rubric_decisions": "research_assets/runs/fno-primary-workflow/burgers_s0/rubric_decisions.json",
+      "raw_output_dir": "research_assets/runs/fno-primary-workflow/burgers_s0/raw",
+      "translation_cases": [
+        {
+          "case_id": "fno_burgers_s0:translation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s0/raw/case_00.npz",
+          "violation": 1.5203990955114932e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_burgers_s0:translation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s0/raw/case_01.npz",
+          "violation": 2.2065776761337474e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_burgers_s0:translation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s0/raw/case_02.npz",
+          "violation": 2.669516341313738e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_burgers_s0:translation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s0/raw/case_03.npz",
+          "violation": 1.9332292211515778e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        }
+      ],
+      "conservation_cases": [
+        {
+          "case_id": "fno_burgers_s0:conservation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s0/raw/case_00.npz",
+          "reference_floor": 0.0004968071007169783,
+          "model_relative_channel_sum_drift": 3.448723793029785,
+          "threshold": 0.004969071007169783,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_burgers_s0:conservation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s0/raw/case_01.npz",
+          "reference_floor": 0.01726347766816616,
+          "model_relative_channel_sum_drift": 3.3262522220611572,
+          "threshold": 0.1726357766816616,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_burgers_s0:conservation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s0/raw/case_02.npz",
+          "reference_floor": 0.006232990883290768,
+          "model_relative_channel_sum_drift": 2.1841623783111572,
+          "threshold": 0.06233090883290768,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_burgers_s0:conservation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s0/raw/case_03.npz",
+          "reference_floor": 0.017917752265930176,
+          "model_relative_channel_sum_drift": 3.0072851181030273,
+          "threshold": 0.17917852265930176,
+          "verdict": "fail"
+        }
+      ],
+      "dirichlet_translation_rejection": {
+        "admissibility": "rejected",
+        "executed_as_exact_mr": false,
+        "reason": "Dirichlet translation changes the boundary-value problem."
+      }
+    },
+    {
+      "sut_id": "fno_burgers_s1",
+      "pde": "burgers",
+      "seed": 1,
+      "checkpoint_sha256": "f3ff09ced2a56197952a0bc33a6f8ad1f94c13e8630a58ba36215b9966556d9b",
+      "metric_ledger": "research_assets/runs/fno-primary-workflow/burgers_s1/metric_ledger.json",
+      "rubric_decisions": "research_assets/runs/fno-primary-workflow/burgers_s1/rubric_decisions.json",
+      "raw_output_dir": "research_assets/runs/fno-primary-workflow/burgers_s1/raw",
+      "translation_cases": [
+        {
+          "case_id": "fno_burgers_s1:translation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s1/raw/case_00.npz",
+          "violation": 2.3823142569767697e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_burgers_s1:translation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s1/raw/case_01.npz",
+          "violation": 2.024742862261064e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_burgers_s1:translation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s1/raw/case_02.npz",
+          "violation": 2.3667151793915764e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_burgers_s1:translation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s1/raw/case_03.npz",
+          "violation": 2.5602998832141566e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        }
+      ],
+      "conservation_cases": [
+        {
+          "case_id": "fno_burgers_s1:conservation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s1/raw/case_00.npz",
+          "reference_floor": 0.020350119099020958,
+          "model_relative_channel_sum_drift": 0.3794107735157013,
+          "threshold": 0.20350219099020958,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_burgers_s1:conservation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s1/raw/case_01.npz",
+          "reference_floor": 0.011177429929375648,
+          "model_relative_channel_sum_drift": 0.8667889833450317,
+          "threshold": 0.11177529929375649,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_burgers_s1:conservation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s1/raw/case_02.npz",
+          "reference_floor": 0.00033359130611643195,
+          "model_relative_channel_sum_drift": 1.7880302667617798,
+          "threshold": 0.0033369130611643196,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_burgers_s1:conservation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s1/raw/case_03.npz",
+          "reference_floor": 0.014757451601326466,
+          "model_relative_channel_sum_drift": 2.4088973999023438,
+          "threshold": 0.14757551601326466,
+          "verdict": "fail"
+        }
+      ],
+      "dirichlet_translation_rejection": {
+        "admissibility": "rejected",
+        "executed_as_exact_mr": false,
+        "reason": "Dirichlet translation changes the boundary-value problem."
+      }
+    },
+    {
+      "sut_id": "fno_burgers_s2",
+      "pde": "burgers",
+      "seed": 2,
+      "checkpoint_sha256": "92dc29c39b1427e511d0f3053140e192aaef0aee709b376de46be070b2953276",
+      "metric_ledger": "research_assets/runs/fno-primary-workflow/burgers_s2/metric_ledger.json",
+      "rubric_decisions": "research_assets/runs/fno-primary-workflow/burgers_s2/rubric_decisions.json",
+      "raw_output_dir": "research_assets/runs/fno-primary-workflow/burgers_s2/raw",
+      "translation_cases": [
+        {
+          "case_id": "fno_burgers_s2:translation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s2/raw/case_00.npz",
+          "violation": 1.4617442367637068e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_burgers_s2:translation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s2/raw/case_01.npz",
+          "violation": 2.2765071605590492e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_burgers_s2:translation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s2/raw/case_02.npz",
+          "violation": 1.768023594195256e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_burgers_s2:translation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s2/raw/case_03.npz",
+          "violation": 1.9339553958275246e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        }
+      ],
+      "conservation_cases": [
+        {
+          "case_id": "fno_burgers_s2:conservation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s2/raw/case_00.npz",
+          "reference_floor": 0.005080768838524818,
+          "model_relative_channel_sum_drift": 1.785361409187317,
+          "threshold": 0.050808688385248185,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_burgers_s2:conservation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s2/raw/case_01.npz",
+          "reference_floor": 0.0036004229914397,
+          "model_relative_channel_sum_drift": 0.8406283259391785,
+          "threshold": 0.036005229914397,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_burgers_s2:conservation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s2/raw/case_02.npz",
+          "reference_floor": 0.010705296881496906,
+          "model_relative_channel_sum_drift": 0.9539440274238586,
+          "threshold": 0.10705396881496906,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_burgers_s2:conservation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/burgers_s2/raw/case_03.npz",
+          "reference_floor": 0.006848209071904421,
+          "model_relative_channel_sum_drift": 2.3123130798339844,
+          "threshold": 0.06848309071904421,
+          "verdict": "fail"
+        }
+      ],
+      "dirichlet_translation_rejection": {
+        "admissibility": "rejected",
+        "executed_as_exact_mr": false,
+        "reason": "Dirichlet translation changes the boundary-value problem."
+      }
+    },
+    {
+      "sut_id": "fno_heat_s0",
+      "pde": "heat",
+      "seed": 0,
+      "checkpoint_sha256": "9a9ebfaeb249e5b099d83c5f328893216d4c03f3b2f3815d30ce7b73cf95c0f6",
+      "metric_ledger": "research_assets/runs/fno-primary-workflow/heat_s0/metric_ledger.json",
+      "rubric_decisions": "research_assets/runs/fno-primary-workflow/heat_s0/rubric_decisions.json",
+      "raw_output_dir": "research_assets/runs/fno-primary-workflow/heat_s0/raw",
+      "translation_cases": [
+        {
+          "case_id": "fno_heat_s0:translation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_00.npz",
+          "violation": 5.312459165907057e-07,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_heat_s0:translation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_01.npz",
+          "violation": 4.830229727303958e-07,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_heat_s0:translation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_02.npz",
+          "violation": 4.020450035113754e-07,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_heat_s0:translation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_03.npz",
+          "violation": 6.225634479051223e-07,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        }
+      ],
+      "conservation_cases": [
+        {
+          "case_id": "fno_heat_s0:conservation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_00.npz",
+          "reference_floor": 0.0,
+          "model_relative_channel_sum_drift": 0.8846480250358582,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_heat_s0:conservation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_01.npz",
+          "reference_floor": 6.240585292971446e-08,
+          "model_relative_channel_sum_drift": 0.9249226450920105,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_heat_s0:conservation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_02.npz",
+          "reference_floor": 0.0,
+          "model_relative_channel_sum_drift": 0.8637086153030396,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_heat_s0:conservation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s0/raw/case_03.npz",
+          "reference_floor": 1.0915930914734417e-07,
+          "model_relative_channel_sum_drift": 0.8741523027420044,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        }
+      ],
+      "dirichlet_translation_rejection": {
+        "admissibility": "rejected",
+        "executed_as_exact_mr": false,
+        "reason": "Dirichlet translation changes the boundary-value problem."
+      }
+    },
+    {
+      "sut_id": "fno_heat_s1",
+      "pde": "heat",
+      "seed": 1,
+      "checkpoint_sha256": "5076396c29332e57ccacaaace872ec89737518698cb54e61dae19dd6d89972e7",
+      "metric_ledger": "research_assets/runs/fno-primary-workflow/heat_s1/metric_ledger.json",
+      "rubric_decisions": "research_assets/runs/fno-primary-workflow/heat_s1/rubric_decisions.json",
+      "raw_output_dir": "research_assets/runs/fno-primary-workflow/heat_s1/raw",
+      "translation_cases": [
+        {
+          "case_id": "fno_heat_s1:translation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s1/raw/case_00.npz",
+          "violation": 7.751266650757316e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_heat_s1:translation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s1/raw/case_01.npz",
+          "violation": 8.1776285298929e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_heat_s1:translation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s1/raw/case_02.npz",
+          "violation": 8.03733328780254e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_heat_s1:translation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s1/raw/case_03.npz",
+          "violation": 6.151893217065663e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        }
+      ],
+      "conservation_cases": [
+        {
+          "case_id": "fno_heat_s1:conservation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s1/raw/case_00.npz",
+          "reference_floor": 1.1134812183399845e-07,
+          "model_relative_channel_sum_drift": 0.7125756740570068,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_heat_s1:conservation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s1/raw/case_01.npz",
+          "reference_floor": 1.194810721472095e-07,
+          "model_relative_channel_sum_drift": 0.3806697726249695,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_heat_s1:conservation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s1/raw/case_02.npz",
+          "reference_floor": 0.0,
+          "model_relative_channel_sum_drift": 0.7438997030258179,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_heat_s1:conservation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s1/raw/case_03.npz",
+          "reference_floor": 1.0058768395992956e-07,
+          "model_relative_channel_sum_drift": 0.4789348840713501,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        }
+      ],
+      "dirichlet_translation_rejection": {
+        "admissibility": "rejected",
+        "executed_as_exact_mr": false,
+        "reason": "Dirichlet translation changes the boundary-value problem."
+      }
+    },
+    {
+      "sut_id": "fno_heat_s2",
+      "pde": "heat",
+      "seed": 2,
+      "checkpoint_sha256": "fefd4920d31fe9873d5596e84f25cd4ed1b286370af2a5f0fc2f8189944dd813",
+      "metric_ledger": "research_assets/runs/fno-primary-workflow/heat_s2/metric_ledger.json",
+      "rubric_decisions": "research_assets/runs/fno-primary-workflow/heat_s2/rubric_decisions.json",
+      "raw_output_dir": "research_assets/runs/fno-primary-workflow/heat_s2/raw",
+      "translation_cases": [
+        {
+          "case_id": "fno_heat_s2:translation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s2/raw/case_00.npz",
+          "violation": 4.235043249423143e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_heat_s2:translation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s2/raw/case_01.npz",
+          "violation": 3.1714208148514444e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_heat_s2:translation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s2/raw/case_02.npz",
+          "violation": 3.366844580909856e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        },
+        {
+          "case_id": "fno_heat_s2:translation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s2/raw/case_03.npz",
+          "violation": 4.6257387253945126e-08,
+          "threshold": 1e-05,
+          "verdict": "pass"
+        }
+      ],
+      "conservation_cases": [
+        {
+          "case_id": "fno_heat_s2:conservation:0",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s2/raw/case_00.npz",
+          "reference_floor": 0.0,
+          "model_relative_channel_sum_drift": 0.16195616126060486,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_heat_s2:conservation:1",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s2/raw/case_01.npz",
+          "reference_floor": 0.0,
+          "model_relative_channel_sum_drift": 0.04695555567741394,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_heat_s2:conservation:2",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s2/raw/case_02.npz",
+          "reference_floor": 1.1850688963477296e-07,
+          "model_relative_channel_sum_drift": 0.31969839334487915,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        },
+        {
+          "case_id": "fno_heat_s2:conservation:3",
+          "raw_output": "research_assets/runs/fno-primary-workflow/heat_s2/raw/case_03.npz",
+          "reference_floor": 1.025619766892305e-07,
+          "model_relative_channel_sum_drift": 0.14253243803977966,
+          "threshold": 1e-05,
+          "verdict": "fail"
+        }
+      ],
+      "dirichlet_translation_rejection": {
+        "admissibility": "rejected",
+        "executed_as_exact_mr": false,
+        "reason": "Dirichlet translation changes the boundary-value problem."
+      }
+    }
+  ],
+  "honesty_boundary": "This is full rubric-to-verdict primary workflow evidence on trained FNO-2D checkpoints over finite-difference Burgers/heat data; it is not only admissibility evidence, and it remains outside cylinder-flow, performance benchmarking, reliability, and broad neural-operator generalization claims.",
+  "claim_limitations": [
+    "No cylinder-flow FNO evidence is claimed.",
+    "No FNO-vs-MGN or FNO-vs-PINN performance superiority is claimed.",
+    "No broad neural-operator reliability or external-validity rate is claimed."
+  ]
+}

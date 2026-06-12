@@ -1,0 +1,40 @@
+{
+  "ledger_id": "real-sut-mirror-y-symmetric-mesh-exact",
+  "evidence_level": "real-sut-single-mr-exact-symmetry-on-synthetic-symmetric-mesh",
+  "schema_version": "0.1.0",
+  "sut_repo": "/private/tmp/minimum-mr-subset-audit",
+  "sut_commit": "9ef862ec37335b4834d0a1fb38b4b613af702f34",
+  "checkpoint_path": "research_assets/runs/multicheckpoint/S1/checkpoint.pt",
+  "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+  "precondition_report": {
+    "mesh": "synthetic-symmetric-structured-channel-no-obstacle",
+    "num_nodes": 1968,
+    "num_cells": 3760,
+    "bijection": true,
+    "involution": true,
+    "node_type_match_rate": 1.0,
+    "reflection_offset_max": 3.469446951953614e-17,
+    "edge_set_invariant_under_reflection": true,
+    "exact_relation_admissible": true
+  },
+  "normalizer_equivariance_control": {
+    "vel_norm_mean_vy": -0.0039393100887537,
+    "vel_norm_std_vy": 0.1552189588546753,
+    "relative_l2_with_vy_mean_zeroed": 1.0720830148168423,
+    "normalizer_induced_share": 0.003565200078593418,
+    "note": "Zeroing vel_norm's vy-mean makes the input normalizer exactly equivariant in vy; the tiny change in relative L2 shows the violation is dominated by learned weights, not the normalizer."
+  },
+  "claim_limitations": "One SUT, one checkpoint, one synthetic symmetric mesh, one input state. The geometry is out-of-distribution for the cylinder-trained surrogate; this is an exact-equivariance structural test, not an accuracy, reliability, baseline, or cross-SUT claim.",
+  "metric_name": "exact_mirror_y_equivariance_relative_l2",
+  "metric_value": 1.0682744028319067,
+  "tolerance": {
+    "metric": "relative_l2",
+    "threshold": 1e-06,
+    "assertion": "less_or_equal",
+    "provenance": "machine-precision floor for an exact equivariance relation"
+  },
+  "verdict": "fail",
+  "generated_at": "2026-06-11T16:59:31Z",
+  "device": "cpu",
+  "framework_version": "torch 2.12.0"
+}

@@ -1,0 +1,28 @@
+{
+  "record_type": "abd-witness-burgers2d-pinn",
+  "status": "PASS_WITNESS",
+  "solver_status": "optimal",
+  "sut_id": "burgers2d_pinn",
+  "generated_at": "2026-06-12T00:59:41Z",
+  "submodule": "external/dvgmr",
+  "submodule_commit": "6ea488a",
+  "checkpoint_sha256_prefix": "ff3eae5b40eb",
+  "kind": "real",
+  "label_scope": "true_fault_class",
+  "fault_classes_active": 5,
+  "max_fault_class_signature_rank": 2,
+  "kstar": 1,
+  "sms_rank": 2,
+  "collapse": 1,
+  "n_R": 4,
+  "m_raw": 12,
+  "m_dedup": 9,
+  "phi_active": 5,
+  "heterogeneous_mr_classes": 1,
+  "heterogeneous_fault_classes": 1,
+  "max_pure_class_rank": 2,
+  "selected_mrs": [
+    "PINN_MR_INITIAL_REFERENCE"
+  ],
+  "honesty_boundary": "One PINN, one PDE (2D viscous Burgers, nu=0.05), one seed (20260607), one set of hyperparameters. Not a generalization across PINN architectures or PDEs."
+}

@@ -1,14 +1,15 @@
 {
   "record_type": "phase3-unified-fault-catalog-and-statistics",
-  "schema_version": "0.1.0",
-  "generated_at": "2026-06-11T08:24:22Z",
-  "catalogue_size": 36,
+  "schema_version": "0.2.0",
+  "generated_at": "2026-06-11T14:47:05Z",
+  "catalogue_size": 60,
   "catalogue_breakdown": {
     "mgn_canonical_executed_mutants": 10,
     "mgn_adversarial_executed_mutants": 2,
-    "pinn_output_level_closed_form_probes": 24
+    "pinn_output_level_closed_form_probes": 24,
+    "fno_output_level_closed_form_probes": 24
   },
-  "trial_count": 384,
+  "trial_count": 456,
   "entries": [
     {
       "entry_id": "MGN_CANON_BC_zero_inflow",
@@ -1439,6 +1440,966 @@
           "ci_hi": 0.5615060804490177
         }
       }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_TRANS_roll_output",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "representation_fault",
+      "mutant": "FNO_TRANS_roll_output",
+      "description": "roll the returned field without applying the inverse periodic translation",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_TRANS_channel_stale_roll",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "representation_fault",
+      "mutant": "FNO_TRANS_channel_stale_roll",
+      "description": "leave one output channel unrolled after the periodic translation map",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_TRANS_boundary_wrap_mismatch",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "representation_fault",
+      "mutant": "FNO_TRANS_boundary_wrap_mismatch",
+      "description": "apply periodic wrap restoration to a non-periodic boundary-condition candidate",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_SYM_x_axis_flip",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "FNO_SYM_x_axis_flip",
+      "description": "flip the wrong spatial axis in the mirror-output restoration",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_SYM_channel_sign_flip",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "FNO_SYM_channel_sign_flip",
+      "description": "flip the wrong vector component/sign convention in the mirror relation",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_SYM_asymmetric_gain",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "FNO_SYM_asymmetric_gain",
+      "description": "multiply predictions by an asymmetric spatial gain",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_CONS_global_scale",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "FNO_CONS_global_scale",
+      "description": "scale the predicted integral-bearing field by a constant factor",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_CONS_uniform_offset",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "FNO_CONS_uniform_offset",
+      "description": "add a uniform offset that shifts the grid integral",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_CONS_low_mode_bias",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "FNO_CONS_low_mode_bias",
+      "description": "add a retained low Fourier mode with non-zero mean",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_BLIND_zero_mean_high_mode",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "FNO_BLIND_zero_mean_high_mode",
+      "description": "add a zero-mean high-frequency mode outside the retained MR thresholds",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_BLIND_channel_balanced_noise",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "FNO_BLIND_channel_balanced_noise",
+      "description": "add channel-balanced perturbation preserving row order, mirror score, and integral",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_burgers_FNO_BLIND_small_periodic_phase",
+      "source_family": "FNO-burgers",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "FNO_BLIND_small_periodic_phase",
+      "description": "apply a sub-threshold periodic phase perturbation",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_TRANS_roll_output",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "representation_fault",
+      "mutant": "FNO_TRANS_roll_output",
+      "description": "roll the returned field without applying the inverse periodic translation",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_TRANS_channel_stale_roll",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "representation_fault",
+      "mutant": "FNO_TRANS_channel_stale_roll",
+      "description": "leave one output channel unrolled after the periodic translation map",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_TRANS_boundary_wrap_mismatch",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "representation_fault",
+      "mutant": "FNO_TRANS_boundary_wrap_mismatch",
+      "description": "apply periodic wrap restoration to a non-periodic boundary-condition candidate",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_SYM_x_axis_flip",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "FNO_SYM_x_axis_flip",
+      "description": "flip the wrong spatial axis in the mirror-output restoration",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_SYM_channel_sign_flip",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "FNO_SYM_channel_sign_flip",
+      "description": "flip the wrong vector component/sign convention in the mirror relation",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_SYM_asymmetric_gain",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "symmetry_fault",
+      "mutant": "FNO_SYM_asymmetric_gain",
+      "description": "multiply predictions by an asymmetric spatial gain",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_CONS_global_scale",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "FNO_CONS_global_scale",
+      "description": "scale the predicted integral-bearing field by a constant factor",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_CONS_uniform_offset",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "FNO_CONS_uniform_offset",
+      "description": "add a uniform offset that shifts the grid integral",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_CONS_low_mode_bias",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "conservation_fault",
+      "mutant": "FNO_CONS_low_mode_bias",
+      "description": "add a retained low Fourier mode with non-zero mean",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci_lo": 0.43849391955098227,
+          "ci_hi": 1.0
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_BLIND_zero_mean_high_mode",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "FNO_BLIND_zero_mean_high_mode",
+      "description": "add a zero-mean high-frequency mode outside the retained MR thresholds",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_BLIND_channel_balanced_noise",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "FNO_BLIND_channel_balanced_noise",
+      "description": "add channel-balanced perturbation preserving row order, mirror score, and integral",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
+    },
+    {
+      "entry_id": "FNO_heat_FNO_BLIND_small_periodic_phase",
+      "source_family": "FNO-heat",
+      "source_artifact": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
+      "evaluation_basis": "closed-form output-level FNO mutation probe over the three committed training seeds; no retraining and no claim of new trained mutant SUTs",
+      "fault_class": "detector_invariant_fault",
+      "mutant": "FNO_BLIND_small_periodic_phase",
+      "description": "apply a sub-threshold periodic phase perturbation",
+      "n_trials": 3,
+      "per_detector": {
+        "node_perm": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "conservation": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "mirror_y": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        },
+        "any": {
+          "k": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.5615060804490177
+        }
+      }
     }
   ],
   "by_fault_class": {
@@ -1455,27 +2416,27 @@
       }
     },
     "conservation_fault": {
-      "entries": 6,
-      "trials": 18,
-      "any_detected": 18,
+      "entries": 12,
+      "trials": 36,
+      "any_detected": 36,
       "any_detection_rate": {
-        "k": 18,
-        "n": 18,
+        "k": 36,
+        "n": 36,
         "rate": 1.0,
-        "ci_lo": 0.8241154494176252,
+        "ci_lo": 0.9035781695514236,
         "ci_hi": 1.0
       }
     },
     "detector_invariant_fault": {
-      "entries": 8,
-      "trials": 30,
+      "entries": 14,
+      "trials": 48,
       "any_detected": 6,
       "any_detection_rate": {
         "k": 6,
-        "n": 30,
-        "rate": 0.2,
-        "ci_lo": 0.09504978102401235,
-        "ci_hi": 0.37306047381027446
+        "n": 48,
+        "rate": 0.125,
+        "ci_lo": 0.05856971750400845,
+        "ci_hi": 0.2470072708605482
       }
     },
     "mesh_adjacency_fault": {
@@ -1514,6 +2475,18 @@
         "ci_hi": 0.6226518757275372
       }
     },
+    "representation_fault": {
+      "entries": 6,
+      "trials": 18,
+      "any_detected": 18,
+      "any_detection_rate": {
+        "k": 18,
+        "n": 18,
+        "rate": 1.0,
+        "ci_lo": 0.8241154494176252,
+        "ci_hi": 1.0
+      }
+    },
     "sampling_order_fault": {
       "entries": 6,
       "trials": 18,
@@ -1527,14 +2500,14 @@
       }
     },
     "symmetry_fault": {
-      "entries": 6,
-      "trials": 18,
-      "any_detected": 18,
+      "entries": 12,
+      "trials": 36,
+      "any_detected": 36,
       "any_detection_rate": {
-        "k": 18,
-        "n": 18,
+        "k": 36,
+        "n": 36,
         "rate": 1.0,
-        "ci_lo": 0.8241154494176252,
+        "ci_lo": 0.9035781695514236,
         "ci_hi": 1.0
       }
     },
@@ -1557,20 +2530,20 @@
         "representation_fault",
         "sampling_order_fault"
       ],
-      "tp": 18,
+      "tp": 36,
       "fp": 0,
       "fn": 0,
       "precision": {
         "value": 1.0,
-        "ci_lo": 0.8241154494176252,
+        "ci_lo": 0.9035781695514236,
         "ci_hi": 1.0,
-        "denominator": 18
+        "denominator": 36
       },
       "recall": {
         "value": 1.0,
-        "ci_lo": 0.8241154494176252,
+        "ci_lo": 0.9035781695514236,
         "ci_hi": 1.0,
-        "denominator": 18
+        "denominator": 36
       }
     },
     "conservation": {
@@ -1579,20 +2552,20 @@
         "conservation_fault",
         "normalization_scale_fault"
       ],
-      "tp": 108,
+      "tp": 126,
       "fp": 0,
       "fn": 30,
       "precision": {
         "value": 1.0,
-        "ci_lo": 0.9656514212958325,
+        "ci_lo": 0.9704131803674632,
         "ci_hi": 1.0,
-        "denominator": 108
+        "denominator": 126
       },
       "recall": {
-        "value": 0.782608695652174,
-        "ci_lo": 0.7066435171434168,
-        "ci_hi": 0.843265677338315,
-        "denominator": 138
+        "value": 0.8076923076923077,
+        "ci_lo": 0.7387526287757789,
+        "ci_hi": 0.8618419598669775,
+        "denominator": 156
       }
     },
     "mirror_y": {
@@ -1601,20 +2574,20 @@
         "physical_channel_fault",
         "symmetry_fault"
       ],
-      "tp": 68,
+      "tp": 86,
       "fp": 6,
       "fn": 70,
       "precision": {
-        "value": 0.918918918918919,
-        "ci_lo": 0.8341786176052062,
-        "ci_hi": 0.9623106631906666,
-        "denominator": 74
+        "value": 0.9347826086956522,
+        "ci_lo": 0.8649403972069417,
+        "ci_hi": 0.9697702086260162,
+        "denominator": 92
       },
       "recall": {
-        "value": 0.4927536231884058,
-        "ci_lo": 0.4106726096746112,
-        "ci_hi": 0.575227154569447,
-        "denominator": 138
+        "value": 0.5512820512820513,
+        "ci_lo": 0.4729342964563181,
+        "ci_hi": 0.627164801650808,
+        "denominator": 156
       }
     }
   },
@@ -1682,5 +2655,5 @@
       "note": "paired by training seed index (s0,s1,s2); exact Wilcoxon is low-powered at n=3"
     }
   },
-  "honesty_boundary": "Unified Phase-3 catalogue for inferential reporting. The 12 MeshGraphNets entries are executed mutants from committed reports. The 24 PINN entries are closed-form output-level mutation probes over the three committed seeds per PDE family; they are not retrained PINN mutant checkpoints and must not be described as real-world fault rates or cross-architecture generalization."
+  "honesty_boundary": "Unified Phase-3 catalogue for inferential reporting. The 12 MeshGraphNets entries are executed mutants from committed reports. The 24 PINN entries and 24 FNO entries are closed-form output-level mutation probes over the three committed seeds per PDE family; they are not retrained PINN mutant checkpoints or FNO mutant checkpoints and must not be described as real-world fault rates or cross-architecture generalization."
 }

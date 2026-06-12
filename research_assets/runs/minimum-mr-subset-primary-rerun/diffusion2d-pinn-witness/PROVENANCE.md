@@ -1,0 +1,9 @@
+timestamp: 2026-06-12T00:59:41Z
+submodule: external/dvgmr@0912fef
+checkpoint: /private/tmp/minimum-mr-subset-audit/external/dvgmr/research_assets/runs/pinn-cross-family-diffusion/sut/checkpoint.pt
+checkpoint_sha256_prefix: b54a6b529aa0
+reference_solution: /private/tmp/minimum-mr-subset-audit/external/dvgmr/research_assets/runs/pinn-cross-family-diffusion/reference_solution.npz
+n_mutants: 12
+n_mr: 5
+seed: 20260607
+status: PASS_WITNESS

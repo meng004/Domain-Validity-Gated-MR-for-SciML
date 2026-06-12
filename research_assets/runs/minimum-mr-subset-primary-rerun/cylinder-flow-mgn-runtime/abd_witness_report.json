@@ -1,0 +1,65 @@
+{
+  "status": "PASS_WITNESS",
+  "label_scope": "true_fault_class",
+  "solver_status": "optimal",
+  "runtime_boundary": "cylinder_flow_mgn_runtime",
+  "dataset": "cylinder-flow-mgn-deepmind",
+  "benchmark_equivalence_claim": true,
+  "real_runtime_output": true,
+  "sut_scope": [
+    "cylinder_flow_meshgraphnet"
+  ],
+  "trials": [
+    0,
+    2,
+    4,
+    6,
+    8
+  ],
+  "training_run": "runs/cylinder-flow-mgn-training-20260605T021147Z",
+  "eval_split": "test",
+  "data_split_separation": "model trained on the DeepMind train split; this witness evaluates the held-out test split (separate trajectory and mesh) -- no train/test leakage",
+  "train_provenance": {
+    "train_split": "train",
+    "train_trajectory_index": 5,
+    "train_npz": "data/raw/cylinder_flow_deepmind/cylinder_flow_train.npz",
+    "train_npz_sha256": "2b36285e73e5b7c670b733397759c1acf7957c340fe1a38ad63a4c733be7f493"
+  },
+  "source_artifacts": [
+    "scripts/mcmr/cylinder_flow/mgn.py",
+    "scripts/mcmr/cylinder_flow/dm_dataset.py",
+    "scripts/mcmr/cylinder_flow/witness_stage_b.py",
+    "runs/cylinder-flow-mgn-training-20260605T021147Z/checkpoint.pt",
+    "data/raw/cylinder_flow_deepmind/cylinder_flow_eval.npz",
+    "data/raw/cylinder_flow_deepmind/meta.json",
+    "data/raw/cylinder_flow_deepmind/cylinder_flow_train.npz",
+    "runs/cylinder-flow-mgn-training-20260605T021147Z/data_manifest.json"
+  ],
+  "runtime_output_artifacts": [
+    "kill_matrix.csv",
+    "minimize.json",
+    "abd_witness_report.json"
+  ],
+  "fault_class_source": "localized inference-pipeline corruptions grouped by physical fault class; labels are not copied from MR meta-patterns",
+  "kstar": 6,
+  "fault_classes_active": 4,
+  "max_fault_class_signature_rank": 2,
+  "collapse": false,
+  "active_fault_classes": [
+    "boundary_condition_fault",
+    "normalization_scale_fault",
+    "physical_channel_fault",
+    "temporal_rollout_fault"
+  ],
+  "inactive_fault_classes": [
+    "mesh_adjacency_fault"
+  ],
+  "selected_mrs": [
+    "mr_channel_energy",
+    "mr_inflow_dirichlet",
+    "mr_rollout_direction",
+    "mr_swap_signature",
+    "mr_update_magnitude",
+    "mr_wall_noslip"
+  ]
+}

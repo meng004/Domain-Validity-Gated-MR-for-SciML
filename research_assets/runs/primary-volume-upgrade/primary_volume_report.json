@@ -1,0 +1,1827 @@
+{
+  "record_type": "primary-empirical-volume-upgrade",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-11T16:59:38Z",
+  "source_repo": "https://github.com/meng004/Minimum-MR-SubSet",
+  "source_head": "9ef862ec37335b4834d0a1fb38b4b613af702f34",
+  "sut_repo_local_path": "/private/tmp/minimum-mr-subset-audit",
+  "source_case": "research_assets/runs/real-sut-node-permutation-pilot/source_case.npz",
+  "mgn_checkpoints": [
+    "S0",
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5"
+  ],
+  "manifests": [
+    "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S0/conservation/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S0/exact_symmetric_seed20260606/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S0/exact_symmetric_seed20260607/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S0/exact_symmetric_seed20260608/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S1/conservation/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S1/exact_symmetric_seed20260606/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S1/exact_symmetric_seed20260607/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S1/exact_symmetric_seed20260608/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S2/conservation/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S2/exact_symmetric_seed20260606/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S2/exact_symmetric_seed20260607/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S2/exact_symmetric_seed20260608/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S3/conservation/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S3/exact_symmetric_seed20260606/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S3/exact_symmetric_seed20260607/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S3/exact_symmetric_seed20260608/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S4/conservation/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S4/exact_symmetric_seed20260606/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S4/exact_symmetric_seed20260607/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S4/exact_symmetric_seed20260608/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S5/conservation/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S5/exact_symmetric_seed20260606/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S5/exact_symmetric_seed20260607/manifest.yml",
+    "research_assets/runs/primary-volume-upgrade/S5/exact_symmetric_seed20260608/manifest.yml"
+  ],
+  "mirror_ood": {
+    "n_checkpoints": 6,
+    "frames_per_checkpoint": 10,
+    "total_frame_cells": 60,
+    "fail_count": 60,
+    "pass_count": 0,
+    "inconclusive_count": 0,
+    "fail_rate": 1.0,
+    "wilson_fail_rate_ci95": [
+      0.93982814785791,
+      0.9999999999999998
+    ],
+    "median_violation_rel_l2": 0.7821489651441603,
+    "median_violation_over_floor": 4.063705260016487,
+    "frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "honesty_boundary": "OOD-stress frame cells are clustered by checkpoint and frame over one source trajectory; this removes the literal 10-frame denominator but is not a geometry-independent or multi-trajectory rate estimate. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+  },
+  "conservation": {
+    "n_checkpoints": 6,
+    "transition_frames_per_checkpoint": 9,
+    "total_transition_cells": 54,
+    "pass_count": 54,
+    "fail_count": 0,
+    "pass_rate": 1.0,
+    "wilson_pass_rate_ci95": [
+      0.9335864119091037,
+      1.0
+    ],
+    "max_ratio": 1.0253952401662854,
+    "median_ratio": 1.0104293455958726,
+    "max_ratio_interior": 1.0441981749696925,
+    "transition_frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+    "honesty_boundary": "Reference-relative conservation-transition cells are clustered by checkpoint and frame over one source trajectory. The absolute mass-conservation relation remains deferred; this is a non-regression diagnostic, not proof of divergence-free flow. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+  },
+  "exact_symmetric_mesh": {
+    "n_checkpoints": 6,
+    "input_seeds_per_checkpoint": 3,
+    "total_input_cells": 18,
+    "fail_count": 18,
+    "pass_count": 0,
+    "fail_rate": 1.0,
+    "wilson_fail_rate_ci95": [
+      0.8241207763533425,
+      1.0
+    ],
+    "median_rel_l2": 1.096991314622654,
+    "input_seeds": [
+      20260606,
+      20260607,
+      20260608
+    ],
+    "honesty_boundary": "Exact-symmetric-mesh cells use synthetic no-obstacle channel inputs. They test structural mirror equivariance on an admissible relation, not in-distribution accuracy or calibrated cylinder-flow severity. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+  },
+  "per_checkpoint": {
+    "S0": {
+      "mirror_ood": {
+        "n_checkpoints": 1,
+        "frames_per_checkpoint": 10,
+        "total_frame_cells": 10,
+        "fail_count": 10,
+        "pass_count": 0,
+        "inconclusive_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.7224672001371107,
+          0.9999999999999999
+        ],
+        "median_violation_rel_l2": 0.7367751632294717,
+        "median_violation_over_floor": 3.955645595837228,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "honesty_boundary": "OOD-stress frame cells are clustered by checkpoint and frame over one source trajectory; this removes the literal 10-frame denominator but is not a geometry-independent or multi-trajectory rate estimate. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "conservation": {
+        "n_checkpoints": 1,
+        "transition_frames_per_checkpoint": 9,
+        "total_transition_cells": 9,
+        "pass_count": 9,
+        "fail_count": 0,
+        "pass_rate": 1.0,
+        "wilson_pass_rate_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "max_ratio": 1.024809903412899,
+        "median_ratio": 1.011430295885285,
+        "max_ratio_interior": 1.0417589093716588,
+        "transition_frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "honesty_boundary": "Reference-relative conservation-transition cells are clustered by checkpoint and frame over one source trajectory. The absolute mass-conservation relation remains deferred; this is a non-regression diagnostic, not proof of divergence-free flow. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "exact_symmetric_mesh": {
+        "n_checkpoints": 1,
+        "input_seeds_per_checkpoint": 3,
+        "total_input_cells": 3,
+        "fail_count": 3,
+        "pass_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.4385029682449546,
+          1.0
+        ],
+        "median_rel_l2": 1.1031948737960298,
+        "input_seeds": [
+          20260606,
+          20260607,
+          20260608
+        ],
+        "honesty_boundary": "Exact-symmetric-mesh cells use synthetic no-obstacle channel inputs. They test structural mirror equivariance on an admissible relation, not in-distribution accuracy or calibrated cylinder-flow severity. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      }
+    },
+    "S1": {
+      "mirror_ood": {
+        "n_checkpoints": 1,
+        "frames_per_checkpoint": 10,
+        "total_frame_cells": 10,
+        "fail_count": 10,
+        "pass_count": 0,
+        "inconclusive_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.7224672001371107,
+          0.9999999999999999
+        ],
+        "median_violation_rel_l2": 0.8174049233073307,
+        "median_violation_over_floor": 4.3660997524659315,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "honesty_boundary": "OOD-stress frame cells are clustered by checkpoint and frame over one source trajectory; this removes the literal 10-frame denominator but is not a geometry-independent or multi-trajectory rate estimate. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "conservation": {
+        "n_checkpoints": 1,
+        "transition_frames_per_checkpoint": 9,
+        "total_transition_cells": 9,
+        "pass_count": 9,
+        "fail_count": 0,
+        "pass_rate": 1.0,
+        "wilson_pass_rate_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "max_ratio": 1.0244322215965593,
+        "median_ratio": 1.010289779670914,
+        "max_ratio_interior": 1.0410551903827594,
+        "transition_frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "honesty_boundary": "Reference-relative conservation-transition cells are clustered by checkpoint and frame over one source trajectory. The absolute mass-conservation relation remains deferred; this is a non-regression diagnostic, not proof of divergence-free flow. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "exact_symmetric_mesh": {
+        "n_checkpoints": 1,
+        "input_seeds_per_checkpoint": 3,
+        "total_input_cells": 3,
+        "fail_count": 3,
+        "pass_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.4385029682449546,
+          1.0
+        ],
+        "median_rel_l2": 1.094750810794183,
+        "input_seeds": [
+          20260606,
+          20260607,
+          20260608
+        ],
+        "honesty_boundary": "Exact-symmetric-mesh cells use synthetic no-obstacle channel inputs. They test structural mirror equivariance on an admissible relation, not in-distribution accuracy or calibrated cylinder-flow severity. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      }
+    },
+    "S2": {
+      "mirror_ood": {
+        "n_checkpoints": 1,
+        "frames_per_checkpoint": 10,
+        "total_frame_cells": 10,
+        "fail_count": 10,
+        "pass_count": 0,
+        "inconclusive_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.7224672001371107,
+          0.9999999999999999
+        ],
+        "median_violation_rel_l2": 0.7157964712852258,
+        "median_violation_over_floor": 3.1753890925967823,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "honesty_boundary": "OOD-stress frame cells are clustered by checkpoint and frame over one source trajectory; this removes the literal 10-frame denominator but is not a geometry-independent or multi-trajectory rate estimate. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "conservation": {
+        "n_checkpoints": 1,
+        "transition_frames_per_checkpoint": 9,
+        "total_transition_cells": 9,
+        "pass_count": 9,
+        "fail_count": 0,
+        "pass_rate": 1.0,
+        "wilson_pass_rate_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "max_ratio": 1.0253952401662854,
+        "median_ratio": 1.0105615951009574,
+        "max_ratio_interior": 1.0427421730430286,
+        "transition_frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "honesty_boundary": "Reference-relative conservation-transition cells are clustered by checkpoint and frame over one source trajectory. The absolute mass-conservation relation remains deferred; this is a non-regression diagnostic, not proof of divergence-free flow. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "exact_symmetric_mesh": {
+        "n_checkpoints": 1,
+        "input_seeds_per_checkpoint": 3,
+        "total_input_cells": 3,
+        "fail_count": 3,
+        "pass_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.4385029682449546,
+          1.0
+        ],
+        "median_rel_l2": 0.631653184960162,
+        "input_seeds": [
+          20260606,
+          20260607,
+          20260608
+        ],
+        "honesty_boundary": "Exact-symmetric-mesh cells use synthetic no-obstacle channel inputs. They test structural mirror equivariance on an admissible relation, not in-distribution accuracy or calibrated cylinder-flow severity. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      }
+    },
+    "S3": {
+      "mirror_ood": {
+        "n_checkpoints": 1,
+        "frames_per_checkpoint": 10,
+        "total_frame_cells": 10,
+        "fail_count": 10,
+        "pass_count": 0,
+        "inconclusive_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.7224672001371107,
+          0.9999999999999999
+        ],
+        "median_violation_rel_l2": 0.798932569124502,
+        "median_violation_over_floor": 4.181221130528427,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "honesty_boundary": "OOD-stress frame cells are clustered by checkpoint and frame over one source trajectory; this removes the literal 10-frame denominator but is not a geometry-independent or multi-trajectory rate estimate. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "conservation": {
+        "n_checkpoints": 1,
+        "transition_frames_per_checkpoint": 9,
+        "total_transition_cells": 9,
+        "pass_count": 9,
+        "fail_count": 0,
+        "pass_rate": 1.0,
+        "wilson_pass_rate_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "max_ratio": 1.0248506879257604,
+        "median_ratio": 1.0107221802567505,
+        "max_ratio_interior": 1.041852024152906,
+        "transition_frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "honesty_boundary": "Reference-relative conservation-transition cells are clustered by checkpoint and frame over one source trajectory. The absolute mass-conservation relation remains deferred; this is a non-regression diagnostic, not proof of divergence-free flow. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "exact_symmetric_mesh": {
+        "n_checkpoints": 1,
+        "input_seeds_per_checkpoint": 3,
+        "total_input_cells": 3,
+        "fail_count": 3,
+        "pass_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.4385029682449546,
+          1.0
+        ],
+        "median_rel_l2": 1.1643813637848048,
+        "input_seeds": [
+          20260606,
+          20260607,
+          20260608
+        ],
+        "honesty_boundary": "Exact-symmetric-mesh cells use synthetic no-obstacle channel inputs. They test structural mirror equivariance on an admissible relation, not in-distribution accuracy or calibrated cylinder-flow severity. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      }
+    },
+    "S4": {
+      "mirror_ood": {
+        "n_checkpoints": 1,
+        "frames_per_checkpoint": 10,
+        "total_frame_cells": 10,
+        "fail_count": 10,
+        "pass_count": 0,
+        "inconclusive_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.7224672001371107,
+          0.9999999999999999
+        ],
+        "median_violation_rel_l2": 0.7621994484471113,
+        "median_violation_over_floor": 4.171314693672636,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "honesty_boundary": "OOD-stress frame cells are clustered by checkpoint and frame over one source trajectory; this removes the literal 10-frame denominator but is not a geometry-independent or multi-trajectory rate estimate. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "conservation": {
+        "n_checkpoints": 1,
+        "transition_frames_per_checkpoint": 9,
+        "total_transition_cells": 9,
+        "pass_count": 9,
+        "fail_count": 0,
+        "pass_rate": 1.0,
+        "wilson_pass_rate_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "max_ratio": 1.0252751910912379,
+        "median_ratio": 1.009607052886133,
+        "max_ratio_interior": 1.0424636885025176,
+        "transition_frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "honesty_boundary": "Reference-relative conservation-transition cells are clustered by checkpoint and frame over one source trajectory. The absolute mass-conservation relation remains deferred; this is a non-regression diagnostic, not proof of divergence-free flow. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "exact_symmetric_mesh": {
+        "n_checkpoints": 1,
+        "input_seeds_per_checkpoint": 3,
+        "total_input_cells": 3,
+        "fail_count": 3,
+        "pass_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.4385029682449546,
+          1.0
+        ],
+        "median_rel_l2": 1.1039015575487419,
+        "input_seeds": [
+          20260606,
+          20260607,
+          20260608
+        ],
+        "honesty_boundary": "Exact-symmetric-mesh cells use synthetic no-obstacle channel inputs. They test structural mirror equivariance on an admissible relation, not in-distribution accuracy or calibrated cylinder-flow severity. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      }
+    },
+    "S5": {
+      "mirror_ood": {
+        "n_checkpoints": 1,
+        "frames_per_checkpoint": 10,
+        "total_frame_cells": 10,
+        "fail_count": 10,
+        "pass_count": 0,
+        "inconclusive_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.7224672001371107,
+          0.9999999999999999
+        ],
+        "median_violation_rel_l2": 0.8286568174528903,
+        "median_violation_over_floor": 3.9217094938042942,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "honesty_boundary": "OOD-stress frame cells are clustered by checkpoint and frame over one source trajectory; this removes the literal 10-frame denominator but is not a geometry-independent or multi-trajectory rate estimate. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "conservation": {
+        "n_checkpoints": 1,
+        "transition_frames_per_checkpoint": 9,
+        "total_transition_cells": 9,
+        "pass_count": 9,
+        "fail_count": 0,
+        "pass_rate": 1.0,
+        "wilson_pass_rate_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "max_ratio": 1.025203601925001,
+        "median_ratio": 1.0102970960907875,
+        "max_ratio_interior": 1.0441981749696925,
+        "transition_frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "honesty_boundary": "Reference-relative conservation-transition cells are clustered by checkpoint and frame over one source trajectory. The absolute mass-conservation relation remains deferred; this is a non-regression diagnostic, not proof of divergence-free flow. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      },
+      "exact_symmetric_mesh": {
+        "n_checkpoints": 1,
+        "input_seeds_per_checkpoint": 3,
+        "total_input_cells": 3,
+        "fail_count": 3,
+        "pass_count": 0,
+        "fail_rate": 1.0,
+        "wilson_fail_rate_ci95": [
+          0.4385029682449546,
+          1.0
+        ],
+        "median_rel_l2": 0.9969486321693309,
+        "input_seeds": [
+          20260606,
+          20260607,
+          20260608
+        ],
+        "honesty_boundary": "Exact-symmetric-mesh cells use synthetic no-obstacle channel inputs. They test structural mirror equivariance on an admissible relation, not in-distribution accuracy or calibrated cylinder-flow severity. Wilson bounds are descriptive cell-level summaries, not independent-trial inference."
+      }
+    }
+  },
+  "rows": {
+    "mirror_ood": [
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 0,
+        "metric_value": 0.6913759032932841,
+        "mapping_error_floor": 0.19429194768450136,
+        "violation_over_floor": 3.5584382756611537,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 1,
+        "metric_value": 0.6863314985298726,
+        "mapping_error_floor": 0.20806893425139225,
+        "violation_over_floor": 3.2985774690451186,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 2,
+        "metric_value": 0.7364042455515567,
+        "mapping_error_floor": 0.21944826198767511,
+        "violation_over_floor": 3.3557078050265687,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 3,
+        "metric_value": 0.7493271809260981,
+        "mapping_error_floor": 0.2478599196592403,
+        "violation_over_floor": 3.023188186118509,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 4,
+        "metric_value": 0.7493719837168722,
+        "mapping_error_floor": 0.19518080159940332,
+        "violation_over_floor": 3.839373430051345,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 5,
+        "metric_value": 0.7334653415411935,
+        "mapping_error_floor": 0.1726833141007039,
+        "violation_over_floor": 4.2474592600965355,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 6,
+        "metric_value": 0.725512331061549,
+        "mapping_error_floor": 0.13078049064364217,
+        "violation_over_floor": 5.547557800792052,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 7,
+        "metric_value": 0.7371460809073868,
+        "mapping_error_floor": 0.15022479234748867,
+        "violation_over_floor": 4.906953568637832,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 8,
+        "metric_value": 0.7595915718098403,
+        "mapping_error_floor": 0.18654393734785515,
+        "violation_over_floor": 4.071917761623111,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 9,
+        "metric_value": 0.7835494276456633,
+        "mapping_error_floor": 0.18832490719708667,
+        "violation_over_floor": 4.160625587488857,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 0,
+        "metric_value": 0.8217584070972122,
+        "mapping_error_floor": 0.1982070566210228,
+        "violation_over_floor": 4.145959387654075,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 1,
+        "metric_value": 0.8170398169471643,
+        "mapping_error_floor": 0.2003106396916926,
+        "violation_over_floor": 4.078863799769739,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 2,
+        "metric_value": 0.8096332852025996,
+        "mapping_error_floor": 0.23352981376389173,
+        "violation_over_floor": 3.4669375706400047,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 3,
+        "metric_value": 0.8177700296674971,
+        "mapping_error_floor": 0.23918609632126847,
+        "violation_over_floor": 3.418969757209842,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 4,
+        "metric_value": 0.8193110511819586,
+        "mapping_error_floor": 0.20262816072228043,
+        "violation_over_floor": 4.0434214487338505,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 5,
+        "metric_value": 0.8120885052654422,
+        "mapping_error_floor": 0.17707064708758988,
+        "violation_over_floor": 4.586240117277789,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 6,
+        "metric_value": 0.7926825102243225,
+        "mapping_error_floor": 0.13812147638164052,
+        "violation_over_floor": 5.739024306647854,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 7,
+        "metric_value": 0.7883547902142048,
+        "mapping_error_floor": 0.16372269035066245,
+        "violation_over_floor": 4.815183457623991,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 8,
+        "metric_value": 0.8380643686516053,
+        "mapping_error_floor": 0.17488372959774756,
+        "violation_over_floor": 4.792123147071763,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 9,
+        "metric_value": 0.870336766214505,
+        "mapping_error_floor": 0.1733606397658238,
+        "violation_over_floor": 5.020382754644648,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 0,
+        "metric_value": 0.7363433178526776,
+        "mapping_error_floor": 0.2664731724173185,
+        "violation_over_floor": 2.7632924964750467,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 1,
+        "metric_value": 0.7481079782833263,
+        "mapping_error_floor": 0.26025695206842125,
+        "violation_over_floor": 2.8744975776349273,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 2,
+        "metric_value": 0.7142392564507392,
+        "mapping_error_floor": 0.25484790829264675,
+        "violation_over_floor": 2.8026098437918687,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 3,
+        "metric_value": 0.7173536861197125,
+        "mapping_error_floor": 0.2457141832136641,
+        "violation_over_floor": 2.919463893933741,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 4,
+        "metric_value": 0.6706676644519539,
+        "mapping_error_floor": 0.22678404469305116,
+        "violation_over_floor": 2.9572965124583286,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 5,
+        "metric_value": 0.6830451428924101,
+        "mapping_error_floor": 0.20128151814707096,
+        "violation_over_floor": 3.393481672735236,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 6,
+        "metric_value": 0.6979606159351756,
+        "mapping_error_floor": 0.143335617994878,
+        "violation_over_floor": 4.869415053278081,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 7,
+        "metric_value": 0.709876684778908,
+        "mapping_error_floor": 0.1533052020865142,
+        "violation_over_floor": 4.630480082328229,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 8,
+        "metric_value": 0.7386308290153932,
+        "mapping_error_floor": 0.1821309697776421,
+        "violation_over_floor": 4.055492758409864,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 9,
+        "metric_value": 0.7605918946224592,
+        "mapping_error_floor": 0.18526287397936161,
+        "violation_over_floor": 4.105473904648536,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 0,
+        "metric_value": 0.766812016316345,
+        "mapping_error_floor": 0.22302120647567422,
+        "violation_over_floor": 3.4382919383945856,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 1,
+        "metric_value": 0.7666029725250872,
+        "mapping_error_floor": 0.2322497305026429,
+        "violation_over_floor": 3.3007701273365466,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 2,
+        "metric_value": 0.7959365533106806,
+        "mapping_error_floor": 0.248908141186956,
+        "violation_over_floor": 3.1977120134164236,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 3,
+        "metric_value": 0.7905480403423947,
+        "mapping_error_floor": 0.21752381700180345,
+        "violation_over_floor": 3.6343056647256256,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 4,
+        "metric_value": 0.7863585645789781,
+        "mapping_error_floor": 0.19623984949091913,
+        "violation_over_floor": 4.007129880189631,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 5,
+        "metric_value": 0.8019285849383232,
+        "mapping_error_floor": 0.18412653670059928,
+        "violation_over_floor": 4.355312380867223,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 6,
+        "metric_value": 0.8281456832210293,
+        "mapping_error_floor": 0.13499353633099018,
+        "violation_over_floor": 6.134706192083907,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 7,
+        "metric_value": 0.8191860518166686,
+        "mapping_error_floor": 0.15393806057812687,
+        "violation_over_floor": 5.32153028783232,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 8,
+        "metric_value": 0.8251321179393667,
+        "mapping_error_floor": 0.16397858169073964,
+        "violation_over_floor": 5.031950572029886,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 9,
+        "metric_value": 0.852799576679414,
+        "mapping_error_floor": 0.1507795274385431,
+        "violation_over_floor": 5.655937454950642,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 0,
+        "metric_value": 0.7586946574741555,
+        "mapping_error_floor": 0.23398941742426377,
+        "violation_over_floor": 3.2424314989361647,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 1,
+        "metric_value": 0.749351911862382,
+        "mapping_error_floor": 0.23434178369443628,
+        "violation_over_floor": 3.1976880095761304,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 2,
+        "metric_value": 0.7604927463848716,
+        "mapping_error_floor": 0.23364255417886706,
+        "violation_over_floor": 3.2549410746583,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 3,
+        "metric_value": 0.7573244474614279,
+        "mapping_error_floor": 0.22408621426230751,
+        "violation_over_floor": 3.379611949599587,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 4,
+        "metric_value": 0.7641165343323801,
+        "mapping_error_floor": 0.2007918582640889,
+        "violation_over_floor": 3.805515527065772,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 5,
+        "metric_value": 0.7826434532227218,
+        "mapping_error_floor": 0.17249808519782409,
+        "violation_over_floor": 4.537113860279501,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 6,
+        "metric_value": 0.7734348187156502,
+        "mapping_error_floor": 0.13820971289155598,
+        "violation_over_floor": 5.596095980045291,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 7,
+        "metric_value": 0.7610367219246322,
+        "mapping_error_floor": 0.1509192640058101,
+        "violation_over_floor": 5.042674485182579,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 8,
+        "metric_value": 0.7633621749695904,
+        "mapping_error_floor": 0.16039814041817388,
+        "violation_over_floor": 4.759170979036473,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 9,
+        "metric_value": 0.7816544770655989,
+        "mapping_error_floor": 0.16566430965037884,
+        "violation_over_floor": 4.71830340955887,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 0,
+        "metric_value": 0.8160720759289781,
+        "mapping_error_floor": 0.2542036815723711,
+        "violation_over_floor": 3.210307855815395,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 1,
+        "metric_value": 0.795007003254496,
+        "mapping_error_floor": 0.2637912676579179,
+        "violation_over_floor": 3.0137730119461494,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 2,
+        "metric_value": 0.8072234575291605,
+        "mapping_error_floor": 0.2540486554144176,
+        "violation_over_floor": 3.177436448984053,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 3,
+        "metric_value": 0.8268719451114278,
+        "mapping_error_floor": 0.24022492244644972,
+        "violation_over_floor": 3.442073939250628,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 4,
+        "metric_value": 0.831790774700555,
+        "mapping_error_floor": 0.22980734472006978,
+        "violation_over_floor": 3.6195134481613986,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 5,
+        "metric_value": 0.8338645041211117,
+        "mapping_error_floor": 0.19741551896310758,
+        "violation_over_floor": 4.223905539447189,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 6,
+        "metric_value": 0.830441689794353,
+        "mapping_error_floor": 0.14896576076478144,
+        "violation_over_floor": 5.574715193148508,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 7,
+        "metric_value": 0.8210000528575871,
+        "mapping_error_floor": 0.1762432982767429,
+        "violation_over_floor": 4.658333456563134,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 8,
+        "metric_value": 0.8473424774198338,
+        "mapping_error_floor": 0.18871059167358173,
+        "violation_over_floor": 4.4901691521666525,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 9,
+        "metric_value": 0.8824423723917497,
+        "mapping_error_floor": 0.202240835668135,
+        "violation_over_floor": 4.3633243972537,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/mirror_ood/raw/metric_ledger.json"
+      }
+    ],
+    "conservation": [
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 0,
+        "metric_value": 1.0025474096818165,
+        "ratio_interior": 1.004157528619356,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 1,
+        "metric_value": 1.0121389434804027,
+        "ratio_interior": 1.0230687993446432,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 2,
+        "metric_value": 1.0084791595429825,
+        "ratio_interior": 1.013988841465543,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 3,
+        "metric_value": 1.0210538810976924,
+        "ratio_interior": 1.0390842056025629,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 4,
+        "metric_value": 1.0043623459122542,
+        "ratio_interior": 1.0075129028899543,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 5,
+        "metric_value": 1.002752689468552,
+        "ratio_interior": 1.0067369521044425,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 6,
+        "metric_value": 1.0125883765589758,
+        "ratio_interior": 1.020705719469155,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 7,
+        "metric_value": 1.024809903412899,
+        "ratio_interior": 1.0417589093716588,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "frame": 8,
+        "metric_value": 1.011430295885285,
+        "ratio_interior": 1.0192276342722708,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 0,
+        "metric_value": 1.0008396100754702,
+        "ratio_interior": 1.0013649386456134,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 1,
+        "metric_value": 1.010289779670914,
+        "ratio_interior": 1.0200446546196507,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 2,
+        "metric_value": 1.0090962827838519,
+        "ratio_interior": 1.0149275499402197,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 3,
+        "metric_value": 1.0216414488238053,
+        "ratio_interior": 1.0399956022400296,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 4,
+        "metric_value": 1.0043436735393798,
+        "ratio_interior": 1.0074281719332718,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 5,
+        "metric_value": 1.0030172201245002,
+        "ratio_interior": 1.0071239861023122,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 6,
+        "metric_value": 1.012059938780714,
+        "ratio_interior": 1.0197630854440554,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 7,
+        "metric_value": 1.0244322215965593,
+        "ratio_interior": 1.0410551903827594,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "frame": 8,
+        "metric_value": 1.012574635318794,
+        "ratio_interior": 1.0211453286840309,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 0,
+        "metric_value": 1.0021982950025305,
+        "ratio_interior": 1.0035587132580273,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 1,
+        "metric_value": 1.0109853024279418,
+        "ratio_interior": 1.0211723007941127,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 2,
+        "metric_value": 1.0097328294102739,
+        "ratio_interior": 1.0159374055161052,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 3,
+        "metric_value": 1.0231081763979657,
+        "ratio_interior": 1.04237524474892,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 4,
+        "metric_value": 1.007135202236661,
+        "ratio_interior": 1.012034202079999,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 5,
+        "metric_value": 1.0043992798508112,
+        "ratio_interior": 1.0093985754654686,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 6,
+        "metric_value": 1.0132526973066631,
+        "ratio_interior": 1.0217946029883176,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 7,
+        "metric_value": 1.0253952401662854,
+        "ratio_interior": 1.0427421730430286,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "frame": 8,
+        "metric_value": 1.0105615951009574,
+        "ratio_interior": 1.017678439048111,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 0,
+        "metric_value": 1.000761099643677,
+        "ratio_interior": 1.0013128889145828,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 1,
+        "metric_value": 1.0099634669139474,
+        "ratio_interior": 1.0195944420427778,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 2,
+        "metric_value": 1.0107221802567505,
+        "ratio_interior": 1.0176400596812083,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 3,
+        "metric_value": 1.022513932309232,
+        "ratio_interior": 1.041517355314381,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 4,
+        "metric_value": 1.0051923911642824,
+        "ratio_interior": 1.0089313140948062,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 5,
+        "metric_value": 1.003699550447387,
+        "ratio_interior": 1.008355280551374,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 6,
+        "metric_value": 1.0124307173704115,
+        "ratio_interior": 1.0204659754466607,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 7,
+        "metric_value": 1.0248506879257604,
+        "ratio_interior": 1.041852024152906,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "frame": 8,
+        "metric_value": 1.0110770556610533,
+        "ratio_interior": 1.018636934386085,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 0,
+        "metric_value": 1.0010419741139687,
+        "ratio_interior": 1.0016846653349947,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 1,
+        "metric_value": 1.009607052886133,
+        "ratio_interior": 1.0189412365224266,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 2,
+        "metric_value": 1.008919926652931,
+        "ratio_interior": 1.0146243078655253,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 3,
+        "metric_value": 1.0226868854868516,
+        "ratio_interior": 1.04168883504408,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 4,
+        "metric_value": 1.0049490698326269,
+        "ratio_interior": 1.00837000501537,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 5,
+        "metric_value": 1.003121089424091,
+        "ratio_interior": 1.0072333755519323,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 6,
+        "metric_value": 1.014215671975027,
+        "ratio_interior": 1.0233373194249076,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 7,
+        "metric_value": 1.0252751910912379,
+        "ratio_interior": 1.0424636885025176,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "frame": 8,
+        "metric_value": 1.0111867002811135,
+        "ratio_interior": 1.0187335910596544,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 0,
+        "metric_value": 1.0001011846876957,
+        "ratio_interior": 1.0002734117801582,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 1,
+        "metric_value": 1.0095814648524482,
+        "ratio_interior": 1.0190003593291497,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 2,
+        "metric_value": 1.0102970960907875,
+        "ratio_interior": 1.016969170208741,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 3,
+        "metric_value": 1.0241323393421364,
+        "ratio_interior": 1.0441981749696925,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 4,
+        "metric_value": 1.005581306570258,
+        "ratio_interior": 1.0095816134906495,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 5,
+        "metric_value": 1.0041153195301875,
+        "ratio_interior": 1.009064942279125,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 6,
+        "metric_value": 1.0137712300964197,
+        "ratio_interior": 1.0227574104237722,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 7,
+        "metric_value": 1.025203601925001,
+        "ratio_interior": 1.0424910165585863,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/conservation/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "frame": 8,
+        "metric_value": 1.0107253855892997,
+        "ratio_interior": 1.0180412973486537,
+        "verdict": "pass",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/conservation/raw/metric_ledger.json"
+      }
+    ],
+    "exact_symmetric_mesh": [
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "seed": 20260606,
+        "metric_value": 1.1031948737960298,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/exact_symmetric_seed20260606/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "seed": 20260607,
+        "metric_value": 1.1075692530966337,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/exact_symmetric_seed20260607/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S0",
+        "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+        "seed": 20260608,
+        "metric_value": 1.099231818451125,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S0/exact_symmetric_seed20260608/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "seed": 20260606,
+        "metric_value": 1.094750810794183,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/exact_symmetric_seed20260606/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "seed": 20260607,
+        "metric_value": 1.1119481603334067,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/exact_symmetric_seed20260607/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S1",
+        "checkpoint_sha256": "dd69cbcce7a1474322ee03ac339093d8a75a537f41581f99988c8776a4b1b339",
+        "seed": 20260608,
+        "metric_value": 1.0682744028319067,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S1/exact_symmetric_seed20260608/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "seed": 20260606,
+        "metric_value": 0.6347359177911256,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/exact_symmetric_seed20260606/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "seed": 20260607,
+        "metric_value": 0.631653184960162,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/exact_symmetric_seed20260607/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S2",
+        "checkpoint_sha256": "e41ebaf14ce19b0c5ba8e51c0826ba8ba3b44e449b8bf24586fda8155cecf562",
+        "seed": 20260608,
+        "metric_value": 0.6294994700470053,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S2/exact_symmetric_seed20260608/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "seed": 20260606,
+        "metric_value": 1.1669999055604217,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/exact_symmetric_seed20260606/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "seed": 20260607,
+        "metric_value": 1.1643813637848048,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/exact_symmetric_seed20260607/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S3",
+        "checkpoint_sha256": "85eafaf1240b19342d701fa80357ef82c5695e12f21846f6e7e0397af62da96e",
+        "seed": 20260608,
+        "metric_value": 1.1535403305462646,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S3/exact_symmetric_seed20260608/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "seed": 20260606,
+        "metric_value": 1.1039015575487419,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/exact_symmetric_seed20260606/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "seed": 20260607,
+        "metric_value": 1.1189615474695096,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/exact_symmetric_seed20260607/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S4",
+        "checkpoint_sha256": "e71dda0a28bf3962b39c03fd1dfd130c4ef23c85f7de1cf6d5de46571e724d3e",
+        "seed": 20260608,
+        "metric_value": 1.0860712503295276,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S4/exact_symmetric_seed20260608/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "seed": 20260606,
+        "metric_value": 0.9969486321693309,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/exact_symmetric_seed20260606/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "seed": 20260607,
+        "metric_value": 0.9800425179128603,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/exact_symmetric_seed20260607/raw/metric_ledger.json"
+      },
+      {
+        "checkpoint": "S5",
+        "checkpoint_sha256": "bb75b1fafe3d795f73a8172fd767f6818b7db1b581461aea71599e22a785b0ca",
+        "seed": 20260608,
+        "metric_value": 0.9976415406305694,
+        "verdict": "fail",
+        "ledger": "research_assets/runs/primary-volume-upgrade/S5/exact_symmetric_seed20260608/raw/metric_ledger.json"
+      }
+    ]
+  },
+  "honesty_boundary": "The upgraded cells are clustered by checkpoint and frame over one source trajectory from the DeepMind cylinder-flow eval artifact. They remove the literal 10-frame mirror-y, 2-frame conservation, and 1-input exact-symmetry pilot denominators, but they are not independent multi-trajectory estimates, not cross-SUT rates, and not reliability or accuracy claims. Report-level Wilson intervals are descriptive cell-count summaries, not independent-trial inference."
+}

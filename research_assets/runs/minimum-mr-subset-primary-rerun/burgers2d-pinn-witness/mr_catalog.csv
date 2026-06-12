@@ -1,0 +1,5 @@
+mr_id,mr_meta_pattern,domain,description
+PINN_MR_INITIAL_REFERENCE,reference,Burgers2D/PINN,"At t=0, predicted velocity (u, v) on the committed 129x129 grid must match the reference initial snapshot within the configured tolerance derived from the reference manifest."
+PINN_MR_SNAPSHOT_REFERENCE,reference,Burgers2D/PINN,"At each committed snapshot time in {0.1, 0.2, 0.3, 0.4, 0.5}, the predicted velocity field must remain inside a robust reference-error envelope computed from the reference solution."
+PINN_MR_LOCAL_SMOOTHNESS,smoothness,Burgers2D/PINN,"Small spatial perturbations of grid coordinates (Delta x or Delta y of one grid spacing) must not produce outlier jumps in (u, v); the local Lipschitz proxy must remain within the committed envelope."
+PINN_MR_TEMPORAL_SMOOTHNESS,smoothness,Burgers2D/PINN,"Small temporal perturbations (one snapshot step) between adjacent reference times must not produce outlier jumps in (u, v); the temporal Lipschitz proxy must remain within the committed envelope."
