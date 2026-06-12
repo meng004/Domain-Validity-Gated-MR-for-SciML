@@ -1,0 +1,16 @@
+{
+  "record_type": "same-domain-variant-primary-workflow-smoke-manifest",
+  "generated_at": "2026-06-12T05:19:45Z",
+  "command": "python3 tools/run_same_domain_variant_primary_workflow.py",
+  "report": "research_assets/runs/same-domain-variant-primary-workflow/same_domain_variant_primary_workflow_report.json",
+  "checkpoints": [
+    "S4",
+    "S5"
+  ],
+  "case_cells": {
+    "node_permutation": 2,
+    "mirror_ood_stress": 60,
+    "conservation_reference_relative": 54,
+    "exact_symmetric_mesh": 6
+  }
+}
