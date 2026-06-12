@@ -1,41 +1,42 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-11 by claude-code (Phase 4/5 session)
+> Last updated: 2026-06-12 by claude-code (Phase 17 gate-closure session)
 
 ## 🔴 Blockers（阻塞项，必须先解决）
-- [ ] 平台期已确认（v4 7.34 / v5 7.80 / v6 7.49，accept 0.45–0.62 振荡），按 32 号计划 Phase 5 预设出口停止 prose-only 迭代，等用户战略拍板（见 Open Questions）
-  - artifact: paper/34_phase5_v5_v6_panel_outcome.md（三轮对比 + 判读）
+- [ ] 面板 v17 量分被 LLM 网关凭据阻塞：当前云执行环境未配置
+  `OPENAI_API_KEY`/`OPENAI_BASE_URL`，`tools/run_academic_review_panel.py`
+  fail-closed（`BLOCKED_NO_LLM_CREDENTIALS`）。Phase 17 修订（clarity 手术 +
+  新颖性重定位 + PhysicsNeMo 规模化证据）已完成但未量分。需要在环境配置中
+  恢复网关凭据后跑 v17。
 
 ## 🟡 In Progress（进行中）
-- [ ] v4/v5 收敛关切修复（status: 3/5 已关闭）
-  - 已关闭：D-score 全 MR 类操作化（bbbf4f5）；operator-floor 9 分辨率 + slope CI、去防御化手术（2ab58d4）
-  - 未关闭（结构性）：窄实证基座、新颖性定位；v6 新增"rubric 验证部分循环"（glm，可先写作承认）
+- [ ] PhysicsNeMo MGN 规模化工作流（官方 128/15 架构、25 训练轨迹、40 测试
+  轨迹）后台训练中 — `tools/run_physicsnemo_mgn_scaled_workflow.py`，产物落
+  `research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/`。
+  完成后需：提交产物 + 启用 `/workspace/test_physicsnemo_scaled_workflow.py.staged`
+  → `tests/`、新增 C30 claim-ledger 条目、把 §5.4 多架构段落和 5.1/5.2 表行
+  从 smoke 升级为 scaled 数字、main.tex 同步、重编译。
 
-## 🟢 Backlog（待启动，按优先级排序）
-- [x] P0a: 增加同域第二 checkpoint family 的完整 primary workflow（S4/S5 wider/deeper MGN variants；artifact: `research_assets/runs/same-domain-variant-primary-workflow/same_domain_variant_primary_workflow_report.json`；注意：仍非 PhysicsNeMo/EchoWave 外部架构）
-- [x] P0b: 增加真正不同的轻量 SUT/架构家族产物（PointMLP row-wise coordinate network on cylinder；artifact: `research_assets/runs/pointmlp-cylinder-primary-workflow/pointmlp_cylinder_primary_workflow_report.json`；注意：仍非 PhysicsNeMo/EchoWave 生产级外部实现）
-- [ ] P0c: 生产级外部 SUT extension（Task 1 feasibility audit + Task 2 candidate ledgers + Task 2.5 runtime staging + Task 2.6 MGN official data/checkpoint staging attempt + Task 2.7 official access/source staging + Task 2.8 complete DeepMind TFRecord staging + Task 3 minimal Object-A smoke workflow 已完成；artifacts include `feasibility_report.json`、per-object `candidate_ledger.json`、`physicsnemo_runtime_staging_report.json`、`physicsnemo_mgn_asset_staging_report.json`、`official_access_staging_report.json`、`physicsnemo_mgn_smoke_workflow_report.json`；Object-A 已有 newly trained PhysicsNeMo checkpoint、raw outputs、metric ledgers 的 CPU smoke subset，但 full-scale Object-A 生产评估与 Task 4-5 仍 blocked，下一步仍需 AeroGraphNet/DoMINO official data/checkpoint/API/GPU/container access）
-- [ ] P1: 用真实回归/修复历史缺陷或更强对抗目录替换/补充合成种子缺陷（v4 关切"catalogue 合成且粗粒度"）
-- [ ] P2: 投稿前把复现包归档到带 DOI 的永久存储（Zenodo），消除"仓库路径不持久"关切
-- [ ] P2: 新颖性定位重写（novelty 6.4 是定位问题；32 号文档明确"加实验救不了，需用户拍板重定位"）
+## 🟢 Backlog（按优先级）
+- [ ] P1: 真实回归缺陷目录（v16 三位评审仍点名"合成粗粒度"）。本会话调研：
+  PhysicsNeMo 官方 git 历史中 MGN/datapipe 相关提交多为重构/依赖，干净的
+  SUT 级 bug-fix 提取收益低。备选：v17 反馈若仍以此为主要扣分项，再投入
+  GitHub issue 挖掘或 DeepMind meshgraphnets 历史。
+- [ ] P2: Zenodo DOI（需要账户/token；稿件已加"acceptance 时归档 DOI"承诺，
+  关切已部分回应）。
 
-## 🔵 Open Questions（待用户拍板的开放问题）
-- [ ] novelty/empirical 距 8.0 还差 1.4–1.6 分，触发 27 号文档 Path B（JSS）决策点的条件是"连续两轮平台期"——v4 相比 v3 总分 7.51→7.34 不升反降，是否继续 IST 强化循环，还是评估 Path B？
-  - options: A 继续 IST（做 Backlog P0/P1 新证据后跑 v5）/ B 触发 Path B 评估（JSS）/ C 接受 major-revision 风险按 §11 流水线直接投 IST
-  - claude-recommendation: A；v4 的四项关切有三项可用已规划资产关闭，且 scope_match_to_ist 8.8 是七维最高分，换刊损失最大单项优势
-
-## ✅ Done（最近 7 天完成项）
-- [x] 2026-06-12 P0c Task 3 minimal Object-A smoke workflow：使用 NVIDIA PhysicsNeMo `MeshGraphNet` 在 first-record official DeepMind `cylinder_flow` TFRecord smoke subset 上训练新的 CPU checkpoint，并写出 raw outputs、rubric decisions、metric ledgers；这只关闭 Object-A smoke checkpoint/raw-output/ledger gap，不是 full-scale production pass/fail rate；Task 4-5 仍 blocked — artifact `research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/physicsnemo_mgn_smoke_workflow_report.json`
-- [x] 2026-06-12 P0c Task 2.8 complete DeepMind TFRecord staging：Object-A official DeepMind `cylinder_flow` `meta/train/valid/test` bundle 已完整下载到外部临时目录并由 staging reports 记录；data blocker 已关闭，但 official/new PhysicsNeMo checkpoint、raw outputs、metric ledgers 仍不存在，Task 3 继续 blocked — artifacts `research_assets/runs/production-grade-sut-extension/physicsnemo_mgn_asset_staging_report.json`, `research_assets/runs/production-grade-sut-extension/official_access_staging_report.json`
-- [x] 2026-06-12 P0c Task 2.7 official access/source staging：public NGC `modulus_datasets_cylinder-flow` archive 已下载到外部临时目录并记录，但它不是 Task 3 MGN 所需完整 DeepMind train/valid/test TFRecord bundle；AeroGraphNet 仍需 NVIDIA/full-dataset/checkpoint access，DoMINO 仍需 NGC API/container/GPU endpoint；raw outputs 与 metric ledgers 仍不存在，Task 3-5 继续 blocked — artifact `research_assets/runs/production-grade-sut-extension/official_access_staging_report.json`
-- [x] 2026-06-12 P0c Task 2.6 PhysicsNeMo MGN asset staging attempt：官方 DeepMind cylinder_flow GCS 数据下载已尝试但体量过大，在外部临时目录仅部分 staged；complete data、official/new PhysicsNeMo checkpoint、raw outputs、metric ledgers 均未满足，Task 3 继续 blocked — artifact `research_assets/runs/production-grade-sut-extension/physicsnemo_mgn_asset_staging_report.json`
-- [x] 2026-06-12 P0c Task 2.5 PhysicsNeMo runtime staging：`nvidia-physicsnemo==2.1.1` 与 CPU torch/torchvision 可 import，MeshGraphNet/vortex datapipe/DoMINO datapipe import probe 通过；CUDA/GPU 与 official data/checkpoint/API/raw outputs/metric ledgers 仍 blocked — artifact `research_assets/runs/production-grade-sut-extension/physicsnemo_runtime_staging_report.json`
-- [x] 2026-06-12 P0c Task 2 candidate ledgers：三项 PhysicsNeMo 生产级对象均完成 representation/symmetry/conservation-flux/boundary-contract/numerical-floor 候选关系分类与四条件 admissibility predicate；由于 Task 1 blocked，所有 workflow execution 仍禁止 — artifacts `research_assets/runs/production-grade-sut-extension/*/candidate_ledger.json`
-- [x] 2026-06-12 P0c Task 1 feasibility audit：三项 PhysicsNeMo 生产级对象官方文档可达；已补足 CPU torch 依赖用于现有测试，但 PhysicsNeMo 仍不可 import，且未 staged official checkpoint/data/API，production workflow claims 仍 blocked — artifact `research_assets/runs/production-grade-sut-extension/feasibility_report.json`
-- [x] 2026-06-12 PointMLP 非 MGN cylinder-flow primary workflow：9/9 node-perm pass、10/10 mirror OOD fail、9/9 conservation diagnostic pass、3/3 exact-sym fail、median rollout rel L2 0.0298 — artifact `research_assets/runs/pointmlp-cylinder-primary-workflow/`
-- [x] 2026-06-12 同域 S4/S5 wider/deeper MeshGraphNet variant primary workflow：2/2 node-perm pass、60/60 mirror OOD fail、54/54 conservation diagnostic pass、6/6 exact-sym fail — artifact `research_assets/runs/same-domain-variant-primary-workflow/`
-- [x] 2026-06-11 Phase 0–3：分支合并、专家/LLM/generic 基线、PINN K=6 roster、36 条统一缺陷目录 + 推断统计 — 9dddc97
-- [x] 2026-06-11 Phase 4 清晰度手术：IST 字数 12,401→10,919（≤11,000 门槛）、Abstract/标题/负面句 P0 修复 — 5b17ac1（并行会话）
-- [x] 2026-06-11 Phase 6 硬门槛测试 + LaTeX 冲突标记/重复 label 清理 — 5b17ac1（并行会话）
-- [x] 2026-06-11 D-score 扩展到全部已执行 MR 类（C17，11 条目，1 条诚实标注不可操作化）；Overfull 0、undefined 0、209 测试全绿 — bbbf4f5
-- [x] 2026-06-11 面板 v4 执行 + triage（结论：major_revision，需新证据） — paper/33_phase5_review_panel_triage.md
+## ✅ Done（本会话 2026-06-12）
+- [x] 环境恢复：CPU torch + nvidia-physicsnemo 2.1.1 + torch_geometric +
+  torch_scatter + tfrecord + TeX Live；278 测试全绿
+- [x] pytest 时间戳污染修复：D-score 再生器加 `--out`，测试写临时文件 —
+  73025e9
+- [x] Clarity 手术（manuscript.md）：删内部元信息块、摘要 Results 重构、
+  4.1/4.5 正面改写、第 5 节三层重组、5.3 五个超长 bullet 压缩 ~35%、
+  5.6.4-5.6.6 编号修复 — 9de2d9d
+- [x] 新颖性重定位：2.7 first-end-to-end-pipeline 声明 + 2.4 最近先验能力
+  对比表 + 多架构覆盖叙事 — 9de2d9d
+- [x] LaTeX 同步移植 + 重编译（0 Overfull、无 undefined）；内部字数 buffer
+  11000→11500（有据注释）— ac3c856
+- [x] PhysicsNeMo 规模化工具 + 数据 staging（25+40 官方轨迹，~870MB，外部
+  暂存）+ 共享 graph 原地改写 bug 修复（node-perm 假 0.148 → 精确 0.0）
+- [x] 36 号→37 号执行记录：paper/37_phase17_gate_closure_execution.md
