@@ -1,0 +1,15 @@
+{
+  "admitted_relations": [
+    "node_permutation_equivariance"
+  ],
+  "downgraded_relations": [
+    "mirror_y_ood_stress",
+    "reference_relative_conservation_diagnostic"
+  ],
+  "execution_boundary": "PhysicsNeMo MeshGraphNet CPU smoke workflow on first-record official DeepMind cylinder_flow subset",
+  "object_id": "physicsnemo-mgn-vortex-shedding",
+  "rejected_relations": [
+    "boundary-changing transforms",
+    "geometry-independent validity claims"
+  ]
+}

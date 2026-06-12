@@ -1,0 +1,9 @@
+{
+  "denominator": 1,
+  "max_relative_l2": 0.0,
+  "metric": "relative_l2(unpermuted_followup_prediction, source_prediction)",
+  "passes": 1,
+  "relation": "node_permutation_equivariance",
+  "threshold": 1e-05,
+  "verdict": "pass"
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "relation_id": "pointmlp-node-permutation-equivariance",
+    "admissibility": "admitted",
+    "basis": "row-wise point network shares weights across nodes and ignores node order",
+    "tolerance_rule": "relative L2 <= 1e-06"
+  },
+  {
+    "relation_id": "pointmlp-mirror-y-ood-stress",
+    "admissibility": "downgraded-to-ood-stress",
+    "basis": "official cylinder-flow held-out meshes are not exact mirror-y domains",
+    "tolerance_rule": "relative L2 <= 1e-06; mapping floor recorded"
+  },
+  {
+    "relation_id": "pointmlp-conservation-reference-relative",
+    "admissibility": "diagnostic-not-absolute-mr",
+    "basis": "absolute divergence-free tolerance remains uncalibrated on these cells",
+    "tolerance_rule": "pred/reference divergence RMS ratio <= 1.5"
+  },
+  {
+    "relation_id": "pointmlp-mirror-y-exact-symmetric-mesh",
+    "admissibility": "admitted-on-synthetic-symmetric-input",
+    "basis": "synthetic structured channel input has exact y-reflection pairs",
+    "tolerance_rule": "relative L2 <= 1e-06"
+  }
+]

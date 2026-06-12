@@ -1,0 +1,148 @@
+{
+  "aggregate_status": "partial-runtime-staged",
+  "generated_on": "2026-06-12",
+  "honesty_boundary": "PhysicsNeMo package/runtime imports are partially staged, but official data/checkpoints/API credentials, raw production outputs, and metric ledgers are still absent. Do not execute or claim Task 3--5 production workflows yet.",
+  "import_probes": [
+    {
+      "module": "physicsnemo",
+      "returncode": 0,
+      "status": "ok",
+      "stderr_tail": "",
+      "stdout": "ok"
+    },
+    {
+      "module": "physicsnemo.models.meshgraphnet",
+      "returncode": 0,
+      "status": "ok",
+      "stderr_tail": "Warp CUDA warning: Could not find or load the NVIDIA CUDA driver. GPU execution will not be available.\n",
+      "stdout": "ok"
+    },
+    {
+      "module": "physicsnemo.datapipes.gnn.vortex_shedding_dataset",
+      "returncode": 0,
+      "status": "ok",
+      "stderr_tail": "Warp CUDA warning: Could not find or load the NVIDIA CUDA driver. GPU execution will not be available.\n",
+      "stdout": "ok"
+    },
+    {
+      "module": "physicsnemo.datapipes.cae.domino_datapipe",
+      "returncode": 0,
+      "status": "ok",
+      "stderr_tail": "Warp CUDA warning: Could not find or load the NVIDIA CUDA driver. GPU execution will not be available.\n",
+      "stdout": "ok"
+    }
+  ],
+  "objects": [
+    {
+      "api_credentials_staged": false,
+      "expected_local_checkpoint": "research_assets/runs/production-grade-sut-extension/staged_assets/physicsnemo-mgn-vortex-shedding/checkpoint.pt",
+      "expected_local_data_dir": "research_assets/runs/production-grade-sut-extension/staged_assets/physicsnemo-mgn-vortex-shedding/data",
+      "github_example_url": "https://github.com/NVIDIA/physicsnemo/tree/main/examples/cfd/vortex_shedding_mgn",
+      "github_raw_probe_url": "https://raw.githubusercontent.com/NVIDIA/physicsnemo/main/examples/cfd/vortex_shedding_mgn/inference.py",
+      "github_source_probe": {
+        "checked": true,
+        "final_url": "https://raw.githubusercontent.com/NVIDIA/physicsnemo/main/examples/cfd/vortex_shedding_mgn/inference.py",
+        "reachable": true,
+        "status_code": 200
+      },
+      "metric_ledgers_available": false,
+      "missing_for_workflow": [
+        "official_data",
+        "official_checkpoint",
+        "raw_outputs",
+        "metric_ledgers"
+      ],
+      "object_id": "physicsnemo-mgn-vortex-shedding",
+      "official_checkpoint_note": "No committed official PhysicsNeMo MGN checkpoint is staged in this repository.",
+      "official_checkpoint_staged": false,
+      "official_data_note": "DeepMind cylinder_flow dataset must be downloaded through raw_dataset/download_dataset.sh before PhysicsNeMo inference/training.",
+      "official_data_staged": false,
+      "official_doc_url": "https://docs.nvidia.com/physicsnemo/latest/physicsnemo/examples/cfd/vortex_shedding_mgn/README.html",
+      "raw_outputs_available": false,
+      "runtime_import_ready": true,
+      "workflow_execution_allowed": false
+    },
+    {
+      "api_credentials_staged": false,
+      "expected_local_checkpoint": "research_assets/runs/production-grade-sut-extension/staged_assets/physicsnemo-aerographnet-external-aero/checkpoint.pt",
+      "expected_local_data_dir": "research_assets/runs/production-grade-sut-extension/staged_assets/physicsnemo-aerographnet-external-aero/data",
+      "github_example_url": "https://github.com/NVIDIA/physicsnemo/tree/main/examples/cfd/external_aerodynamics/aero_graph_net",
+      "github_raw_probe_url": "https://raw.githubusercontent.com/NVIDIA/physicsnemo/main/examples/cfd/external_aerodynamics/aero_graph_net/inference.py",
+      "github_source_probe": {
+        "checked": true,
+        "final_url": "https://raw.githubusercontent.com/NVIDIA/physicsnemo/main/examples/cfd/external_aerodynamics/aero_graph_net/inference.py",
+        "reachable": true,
+        "status_code": 200
+      },
+      "metric_ledgers_available": false,
+      "missing_for_workflow": [
+        "official_data",
+        "official_checkpoint",
+        "raw_outputs",
+        "metric_ledgers"
+      ],
+      "object_id": "physicsnemo-aerographnet-external-aero",
+      "official_checkpoint_note": "No official AeroGraphNet checkpoint is staged in this repository.",
+      "official_checkpoint_staged": false,
+      "official_data_note": "Ahmed Body data requires NVIDIA PhysicsNeMo team access; DrivAerNet data must be obtained through the documented external dataset instructions.",
+      "official_data_staged": false,
+      "official_doc_url": "https://docs.nvidia.com/physicsnemo/latest/physicsnemo/examples/cfd/external_aerodynamics/aero_graph_net/README.html",
+      "raw_outputs_available": false,
+      "runtime_import_ready": true,
+      "workflow_execution_allowed": false
+    },
+    {
+      "api_credentials_staged": false,
+      "expected_local_checkpoint": "research_assets/runs/production-grade-sut-extension/staged_assets/physicsnemo-domino-external-aero/checkpoint.pt",
+      "expected_local_data_dir": "research_assets/runs/production-grade-sut-extension/staged_assets/physicsnemo-domino-external-aero/data",
+      "github_example_url": "https://github.com/NVIDIA/physicsnemo/tree/main/examples/cfd/external_aerodynamics/domino",
+      "github_raw_probe_url": "https://raw.githubusercontent.com/NVIDIA/physicsnemo/main/examples/cfd/external_aerodynamics/domino/test.py",
+      "github_source_probe": {
+        "checked": true,
+        "error": "HTTP Error 404: Not Found",
+        "reachable": false,
+        "status_code": 404
+      },
+      "metric_ledgers_available": false,
+      "missing_for_workflow": [
+        "official_data",
+        "official_checkpoint",
+        "api_credentials_or_pretrained_checkpoint_route",
+        "raw_outputs",
+        "metric_ledgers"
+      ],
+      "object_id": "physicsnemo-domino-external-aero",
+      "official_checkpoint_note": "No DoMINO pre-trained checkpoint, scaling parameters, or API credential bundle is staged in this repository.",
+      "official_checkpoint_staged": false,
+      "official_data_note": "DoMINO requires DrivAerML/CAE data curation, scaling factors, and raw STL/VTP/VTU test inputs or a documented pre-trained checkpoint route.",
+      "official_data_staged": false,
+      "official_doc_url": "https://docs.nvidia.com/physicsnemo/latest/physicsnemo/examples/cfd/external_aerodynamics/domino/README.html",
+      "raw_outputs_available": false,
+      "runtime_import_ready": true,
+      "workflow_execution_allowed": false
+    }
+  ],
+  "record_type": "physicsnemo-runtime-staging-report",
+  "runtime": {
+    "cuda_available": false,
+    "gpu_runtime_available": false,
+    "nvidia_physicsnemo_version": "2.1.1",
+    "physicsnemo_importable": true,
+    "torch_importable": true,
+    "torch_probe": {
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout": "2.12.0+cpu\nFalse"
+    },
+    "torch_version": "2.12.0+cpu",
+    "torchvision_importable": true,
+    "torchvision_probe": {
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout": "0.27.0+cpu"
+    },
+    "torchvision_version": "0.27.0+cpu"
+  },
+  "schema_version": "0.1.0",
+  "workflow_execution_allowed": false
+}

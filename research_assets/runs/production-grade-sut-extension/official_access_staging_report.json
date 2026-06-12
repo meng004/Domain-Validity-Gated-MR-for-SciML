@@ -1,0 +1,286 @@
+{
+  "aggregate_status": "blocked-official-access-incomplete",
+  "generated_on": "2026-06-12",
+  "honesty_boundary": "This report records official source/access staging only. It is not a production workflow execution and contains no production MR verdicts.",
+  "objects": [
+    {
+      "access_status": "partial-data-staged-but-workflow-blocked",
+      "blocker_reason": "Official NGC cylinder-flow archive and complete DeepMind TFRecord bundle are staged externally, but the MGN example still lacks a PhysicsNeMo checkpoint, raw outputs, and metric ledgers.",
+      "checkpoint_or_api_staged": false,
+      "deepmind_tfrecord_bundle": {
+        "external_stage_dir": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow",
+        "files": {
+          "meta.json": {
+            "bytes": 883,
+            "exists": true,
+            "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/meta.json",
+            "sha256_prefix": "2a3e39429a55a0cf"
+          },
+          "test.tfrecord": {
+            "bytes": 1355376404,
+            "exists": true,
+            "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/test.tfrecord",
+            "sha256_prefix": "8522932a23da6ccd"
+          },
+          "train.tfrecord": {
+            "bytes": 13645805387,
+            "exists": true,
+            "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/train.tfrecord",
+            "sha256_prefix": "ea63bf985ef131d5"
+          },
+          "valid.tfrecord": {
+            "bytes": 1363987289,
+            "exists": true,
+            "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/valid.tfrecord",
+            "sha256_prefix": "79171fa282fcd4fd"
+          }
+        },
+        "required_files": [
+          "meta.json",
+          "train.tfrecord",
+          "valid.tfrecord",
+          "test.tfrecord"
+        ],
+        "source_prefix": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow/"
+      },
+      "deepmind_tfrecord_bundle_complete": true,
+      "deepmind_tfrecord_observed_bytes": 16365169963,
+      "metric_ledgers_available": false,
+      "missing_for_workflow": [
+        "official_or_new_physicsnemo_checkpoint",
+        "raw_outputs",
+        "metric_ledgers"
+      ],
+      "ngc_cylinder_flow_archive": {
+        "dataset_entries_preview": [
+          "dataset/",
+          "dataset/meshPosition_all.txt",
+          "dataset/meshPosition_pivotal.txt",
+          "dataset/rawData.npy",
+          "dataset/edge_stats.json",
+          "dataset/node_stats.json",
+          "dataset/latent_train.pt",
+          "dataset/latent_test.pt"
+        ],
+        "dataset_zip_bytes": 1693967107,
+        "dataset_zip_exists": true,
+        "dataset_zip_sha256_prefix": "e64b7f62a4478808",
+        "local_archive_bytes": 1694483180,
+        "local_archive_exists": true,
+        "local_archive_sha256_prefix": "e9f8c222de860369",
+        "nested_entries": [
+          "dataset.zip"
+        ],
+        "resource_probe": {
+          "checked": true,
+          "reachable": true,
+          "status_chain": [
+            200,
+            302,
+            200,
+            200
+          ],
+          "status_code": 200,
+          "stderr_tail": "                Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n\n  0 1615M    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"
+        },
+        "resource_url": "https://api.ngc.nvidia.com/v2/resources/nvidia/modulus/modulus_datasets_cylinder-flow/versions/v1/zip",
+        "sufficiency_note": "This NGC archive is official cylinder-flow data for a PhysicsNeMo vortex-shedding example, but it is not the DeepMind train/valid/test TFRecord bundle required by vortex_shedding_mgn Task 3."
+      },
+      "object_id": "physicsnemo-mgn-vortex-shedding",
+      "official_doc_reachable": true,
+      "official_doc_url": "https://docs.nvidia.com/physicsnemo/latest/physicsnemo/examples/cfd/vortex_shedding_mgn/README.html",
+      "raw_outputs_available": false,
+      "workflow_execution_allowed": false
+    },
+    {
+      "access_status": "blocked-access-request-required",
+      "blocker_reason": "Full dataset/checkpoint access has not been granted by the NVIDIA PhysicsNeMo team, and no raw AeroGraphNet production outputs or ledgers exist.",
+      "checkpoint_or_api_staged": false,
+      "dataset_access_note": "The official docs state that full Ahmed Body dataset access must be requested from the NVIDIA PhysicsNeMo team; DrivAerNet has separate external download instructions.",
+      "metric_ledgers_available": false,
+      "missing_for_workflow": [
+        "dataset_access",
+        "checkpoint",
+        "raw_outputs",
+        "metric_ledgers"
+      ],
+      "object_id": "physicsnemo-aerographnet-external-aero",
+      "official_doc_reachable": true,
+      "official_doc_url": "https://docs.nvidia.com/deeplearning/physicsnemo/physicsnemo-core/examples/cfd/external_aerodynamics/aero_graph_net/README.html",
+      "raw_outputs_available": false,
+      "workflow_execution_allowed": false
+    },
+    {
+      "access_status": "blocked-ngc-auth-and-gpu-container-required",
+      "blocker_reason": "NGC API key/container access and GPU-capable runtime are not staged, so no DoMINO production endpoint/checkpoint/raw outputs/ledgers exist.",
+      "checkpoint_or_api_staged": false,
+      "metric_ledgers_available": false,
+      "missing_for_workflow": [
+        "ngc_api_key",
+        "gpu_container_runtime",
+        "checkpoint_or_service_endpoint",
+        "raw_outputs",
+        "metric_ledgers"
+      ],
+      "ngc_container_tag_probe": {
+        "checked": true,
+        "reachable": false,
+        "status_chain": [
+          200,
+          401
+        ],
+        "status_code": 401,
+        "stderr_tail": "ceived % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"
+      },
+      "nim_access_note": "DoMINO-Automotive-Aero NIM is a pre-trained containerized model, but pulling/running it requires NGC/API access, a large container, and GPU-capable runtime not staged here.",
+      "object_id": "physicsnemo-domino-external-aero",
+      "official_doc_reachable": true,
+      "official_doc_url": "https://docs.nvidia.com/physicsnemo/26.03/physicsnemo/examples/cfd/external_aerodynamics/domino/README.html",
+      "official_nim_url": "https://catalog.ngc.nvidia.com/orgs/nim/teams/nvidia/containers/domino-automotive-aero",
+      "raw_outputs_available": false,
+      "workflow_execution_allowed": false
+    }
+  ],
+  "objects_by_id": {
+    "physicsnemo-aerographnet-external-aero": {
+      "access_status": "blocked-access-request-required",
+      "blocker_reason": "Full dataset/checkpoint access has not been granted by the NVIDIA PhysicsNeMo team, and no raw AeroGraphNet production outputs or ledgers exist.",
+      "checkpoint_or_api_staged": false,
+      "dataset_access_note": "The official docs state that full Ahmed Body dataset access must be requested from the NVIDIA PhysicsNeMo team; DrivAerNet has separate external download instructions.",
+      "metric_ledgers_available": false,
+      "missing_for_workflow": [
+        "dataset_access",
+        "checkpoint",
+        "raw_outputs",
+        "metric_ledgers"
+      ],
+      "object_id": "physicsnemo-aerographnet-external-aero",
+      "official_doc_reachable": true,
+      "official_doc_url": "https://docs.nvidia.com/deeplearning/physicsnemo/physicsnemo-core/examples/cfd/external_aerodynamics/aero_graph_net/README.html",
+      "raw_outputs_available": false,
+      "workflow_execution_allowed": false
+    },
+    "physicsnemo-domino-external-aero": {
+      "access_status": "blocked-ngc-auth-and-gpu-container-required",
+      "blocker_reason": "NGC API key/container access and GPU-capable runtime are not staged, so no DoMINO production endpoint/checkpoint/raw outputs/ledgers exist.",
+      "checkpoint_or_api_staged": false,
+      "metric_ledgers_available": false,
+      "missing_for_workflow": [
+        "ngc_api_key",
+        "gpu_container_runtime",
+        "checkpoint_or_service_endpoint",
+        "raw_outputs",
+        "metric_ledgers"
+      ],
+      "ngc_container_tag_probe": {
+        "checked": true,
+        "reachable": false,
+        "status_chain": [
+          200,
+          401
+        ],
+        "status_code": 401,
+        "stderr_tail": "ceived % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"
+      },
+      "nim_access_note": "DoMINO-Automotive-Aero NIM is a pre-trained containerized model, but pulling/running it requires NGC/API access, a large container, and GPU-capable runtime not staged here.",
+      "object_id": "physicsnemo-domino-external-aero",
+      "official_doc_reachable": true,
+      "official_doc_url": "https://docs.nvidia.com/physicsnemo/26.03/physicsnemo/examples/cfd/external_aerodynamics/domino/README.html",
+      "official_nim_url": "https://catalog.ngc.nvidia.com/orgs/nim/teams/nvidia/containers/domino-automotive-aero",
+      "raw_outputs_available": false,
+      "workflow_execution_allowed": false
+    },
+    "physicsnemo-mgn-vortex-shedding": {
+      "access_status": "partial-data-staged-but-workflow-blocked",
+      "blocker_reason": "Official NGC cylinder-flow archive and complete DeepMind TFRecord bundle are staged externally, but the MGN example still lacks a PhysicsNeMo checkpoint, raw outputs, and metric ledgers.",
+      "checkpoint_or_api_staged": false,
+      "deepmind_tfrecord_bundle": {
+        "external_stage_dir": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow",
+        "files": {
+          "meta.json": {
+            "bytes": 883,
+            "exists": true,
+            "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/meta.json",
+            "sha256_prefix": "2a3e39429a55a0cf"
+          },
+          "test.tfrecord": {
+            "bytes": 1355376404,
+            "exists": true,
+            "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/test.tfrecord",
+            "sha256_prefix": "8522932a23da6ccd"
+          },
+          "train.tfrecord": {
+            "bytes": 13645805387,
+            "exists": true,
+            "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/train.tfrecord",
+            "sha256_prefix": "ea63bf985ef131d5"
+          },
+          "valid.tfrecord": {
+            "bytes": 1363987289,
+            "exists": true,
+            "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/valid.tfrecord",
+            "sha256_prefix": "79171fa282fcd4fd"
+          }
+        },
+        "required_files": [
+          "meta.json",
+          "train.tfrecord",
+          "valid.tfrecord",
+          "test.tfrecord"
+        ],
+        "source_prefix": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow/"
+      },
+      "deepmind_tfrecord_bundle_complete": true,
+      "deepmind_tfrecord_observed_bytes": 16365169963,
+      "metric_ledgers_available": false,
+      "missing_for_workflow": [
+        "official_or_new_physicsnemo_checkpoint",
+        "raw_outputs",
+        "metric_ledgers"
+      ],
+      "ngc_cylinder_flow_archive": {
+        "dataset_entries_preview": [
+          "dataset/",
+          "dataset/meshPosition_all.txt",
+          "dataset/meshPosition_pivotal.txt",
+          "dataset/rawData.npy",
+          "dataset/edge_stats.json",
+          "dataset/node_stats.json",
+          "dataset/latent_train.pt",
+          "dataset/latent_test.pt"
+        ],
+        "dataset_zip_bytes": 1693967107,
+        "dataset_zip_exists": true,
+        "dataset_zip_sha256_prefix": "e64b7f62a4478808",
+        "local_archive_bytes": 1694483180,
+        "local_archive_exists": true,
+        "local_archive_sha256_prefix": "e9f8c222de860369",
+        "nested_entries": [
+          "dataset.zip"
+        ],
+        "resource_probe": {
+          "checked": true,
+          "reachable": true,
+          "status_chain": [
+            200,
+            302,
+            200,
+            200
+          ],
+          "status_code": 200,
+          "stderr_tail": "                Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n\n  0 1615M    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"
+        },
+        "resource_url": "https://api.ngc.nvidia.com/v2/resources/nvidia/modulus/modulus_datasets_cylinder-flow/versions/v1/zip",
+        "sufficiency_note": "This NGC archive is official cylinder-flow data for a PhysicsNeMo vortex-shedding example, but it is not the DeepMind train/valid/test TFRecord bundle required by vortex_shedding_mgn Task 3."
+      },
+      "object_id": "physicsnemo-mgn-vortex-shedding",
+      "official_doc_reachable": true,
+      "official_doc_url": "https://docs.nvidia.com/physicsnemo/latest/physicsnemo/examples/cfd/vortex_shedding_mgn/README.html",
+      "raw_outputs_available": false,
+      "workflow_execution_allowed": false
+    }
+  },
+  "record_type": "production-sut-official-access-staging-report",
+  "schema_version": "0.1.0",
+  "task3_to_task5_workflows_allowed": false
+}
