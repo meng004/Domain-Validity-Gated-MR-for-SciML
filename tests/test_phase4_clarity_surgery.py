@@ -21,11 +21,16 @@ from ist_wordcount import ist_word_count  # noqa: E402
 
 class Phase4ClaritySurgeryTest(unittest.TestCase):
     def test_ist_word_count_keeps_phase4_clarity_buffer(self) -> None:
+        # Buffer raised 11000 -> 11500 in the Phase-17 revision: the same-task
+        # multi-architecture replication and scaled PhysicsNeMo evidence add
+        # primary-results prose that reviewers explicitly requested. The IST
+        # hard limit is 15000 (conservative count), so 11500 keeps a 3.5k
+        # safety margin while preserving the clarity-discipline intent.
         counts = ist_word_count()
         self.assertLessEqual(
             counts["total"],
-            11000,
-            f"Phase 4 clarity surgery should keep IST-counted text <=11000; got {counts}",
+            11500,
+            f"Phase 4/17 clarity buffer requires IST-counted text <=11500; got {counts}",
         )
 
     def test_abstract_results_and_conclusion_are_not_number_dump(self) -> None:

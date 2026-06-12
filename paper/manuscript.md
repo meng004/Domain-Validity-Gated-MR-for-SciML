@@ -494,7 +494,7 @@ To address the single-checkpoint, single-trajectory, and thin-denominator object
 
 The compact reading is: node-permutation equivariance is exact on all six checkpoints; the primary empirical scope upgrade gives a K=6 x 3 trajectories x 10 mirror-y OOD-stress grid with 180/180 failures (median relative L2 0.828, median V/floor 5.28); the K=6 x 3 trajectories x 9 conservation-transition grid passes the reference-relative diagnostic on 162/162 cells (max ratio 1.287, max interior ratio 1.049), while absolute conservation remains deferred; and the K=6 x 3 exact-symmetric-mesh input grid fails on 18/18 cells (median relative L2 1.097). Rollout relative L2 stays near 0.022 (CI [0.0217, 0.0224]), so the mirror-y violation remains much larger than the in-distribution one-step error across the roster. The trajectory-dependent cells are clustered by checkpoint, held-out test trajectory, and frame; the upgrade removes the single-source-trajectory denominator while remaining within one architecture family and one dataset. It is outside any cross-SUT or cross-dataset rate claim. The report's Wilson bounds are therefore descriptive cell-count summaries, not independent-trial inference.
 
-**Same-task multi-architecture replication.** Three further cylinder-flow executions test whether the verdict pattern is an artifact of one implementation. A same-domain S4/S5 wider/deeper MeshGraphNet variant package reproduces the pattern (2/2 node-permutation passes, 60/60 mirror OOD failures, 54/54 conservation-diagnostic passes, 6/6 exact-symmetry failures). A newly trained PointMLP coordinate network — a different architecture class with no message passing — reproduces it as well (9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, 3/3 exact-symmetry failures, median rollout relative L2 0.0298). Third, the NVIDIA PhysicsNeMo `MeshGraphNet` production implementation, trained and evaluated on official DeepMind cylinder_flow TFRecords, reproduces the node-permutation pass and the mirror-y OOD-stress failure within a production framework rather than a research codebase. The same admissibility predicate, applied unchanged, produced the same typed decisions on all three; this replicates the verdict pattern across architectures on one task and dataset, and is not a cross-dataset claim.
+**Same-task multi-architecture replication.** Three further cylinder-flow executions test whether the verdict pattern is an artifact of one implementation. A same-domain S4/S5 wider/deeper MeshGraphNet variant package reproduces the pattern (2/2 node-permutation passes, 60/60 mirror OOD failures, 54/54 conservation-diagnostic passes, 6/6 exact-symmetry failures). A newly trained PointMLP coordinate network — a different architecture class with no message passing — reproduces it as well (9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, 3/3 exact-symmetry failures, median rollout relative L2 0.0298). Third, the NVIDIA PhysicsNeMo `MeshGraphNet` production implementation, trained and evaluated on official DeepMind cylinder_flow TFRecords, reproduces the node-permutation pass and the mirror-y OOD-stress failure within a production framework rather than a research codebase. The same admissibility predicate, applied unchanged, produced the same typed decisions on all three; this replicates the verdict pattern across architectures on one task and dataset, and asserts no cross-dataset rate.
 
 ### 5.5 Operator-floor resolution sweep (calibration of numerical decidability)
 
@@ -579,6 +579,16 @@ In that sense the workflow is aimed at producing, over many controlled transform
 ## 8. Conclusion
 
 This paper presents domain-validity-gated MR identification as an auditable oracle-free testing workflow for SciML surrogates. The evidence supports the scoped pilots of Section 5.3; expands them across K=6 MGN checkpoints and three held-out trajectories with 180 mirror-y, 162 conservation-transition, and 18 exact-symmetry cells; replicates the verdict pattern across same-task architectures, including wider/deeper MGN variants, a non-message-passing PointMLP network, and the NVIDIA PhysicsNeMo production implementation; calibrates the P1 operator floor (slope 0.984, 95% CI [0.975, 0.992]); and adds bounded PINN/FNO cross-family executions plus two primary trained-PINN witness reruns. The central claim remains methodological: physically meaningful SciML MRs require explicit validity conditions, executable assets, raw evidence records, and relation-level verdicts.
+
+## Data Availability
+
+All MR cards, executable assets, run manifests, raw outputs, metric ledgers,
+and the claim ledger that backs every empirical statement in this paper are
+maintained in a version-controlled replication package. The package — including
+the trained checkpoints, the seeded-fault catalogue, and the per-trajectory
+ledgers referenced by relative path throughout Section 5 — will be archived
+with a DOI on Zenodo upon acceptance; until then it is available to reviewers
+on request through the editor.
 
 ## References
 
