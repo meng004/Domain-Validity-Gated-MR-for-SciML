@@ -370,6 +370,22 @@ Acceptance:
 
 Task 2 execution note (2026-06-12): `tools/build_production_sut_candidate_ledgers.py` wrote per-object candidate ledgers for PhysicsNeMo MGN vortex shedding, AeroGraphNet, and DoMINO. Each ledger covers representation, symmetry, conservation/flux, boundary/contract, and numerical-floor candidates with the four-part admissibility predicate. Because Task 1 remains blocked, selected candidates are a future subset only; no production MR has been executed and Task 3--5 workflow claims remain blocked.
 
+### Task 2.5 — PhysicsNeMo runtime staging preflight
+
+- [x] Install/stage the Python package/runtime import gate for `nvidia-physicsnemo==2.1.1` with CPU-compatible `torch`/`torchvision` in this environment.
+- [x] Create `tools/stage_physicsnemo_runtime.py`.
+- [x] Create `tests/test_physicsnemo_runtime_staging.py`.
+- [x] Write `research_assets/runs/production-grade-sut-extension/physicsnemo_runtime_staging_report.json`.
+- [x] Probe PhysicsNeMo core, MeshGraphNet, vortex-shedding datapipe, and DoMINO datapipe imports.
+- [x] Record official example source reachability and remaining per-object data/checkpoint/API blockers.
+
+Acceptance:
+
+- PhysicsNeMo package/runtime import gate is now partially staged.
+- Task 3--5 workflow execution remains blocked until official data, checkpoint/API artifacts, raw outputs, and metric ledgers exist.
+
+Task 2.5 execution note (2026-06-12): `tools/stage_physicsnemo_runtime.py` wrote `research_assets/runs/production-grade-sut-extension/physicsnemo_runtime_staging_report.json`. PhysicsNeMo package/runtime import gate is now partially staged: `physicsnemo`, MeshGraphNet modules, the vortex-shedding datapipe, and the DoMINO datapipe import under CPU `torch`/`torchvision`; CUDA/GPU is unavailable and all three objects still lack staged official data, checkpoints/API credentials, raw outputs, and metric ledgers. Therefore Task 3--5 production workflows remain blocked.
+
 ### Task 3 — PhysicsNeMo MeshGraphNet workflow
 
 - [ ] Implement `tools/run_physicsnemo_mgn_primary_workflow.py`.

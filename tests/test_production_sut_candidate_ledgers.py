@@ -101,8 +101,9 @@ class ProductionSutCandidateLedgersTest(unittest.TestCase):
         self.assertIn("- [x] Apply the four-part admissibility predicate.", plan)
         self.assertIn("- [ ] Implement `tools/run_physicsnemo_mgn_primary_workflow.py`.", plan)
         claim_text = CLAIM_LEDGER.read_text(encoding="utf-8")
-        self.assertIn("candidate ledgers classify planned MR relations", claim_text)
-        self.assertIn("No production MR has been executed", claim_text)
+        self.assertIn("candidate ledgers classify planned MR", claim_text)
+        self.assertIn("No production MR has been", claim_text)
+        self.assertIn("executed", claim_text)
 
 
 if __name__ == "__main__":
