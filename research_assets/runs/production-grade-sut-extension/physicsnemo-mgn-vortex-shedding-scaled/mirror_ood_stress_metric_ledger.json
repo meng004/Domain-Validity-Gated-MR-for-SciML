@@ -1,0 +1,253 @@
+{
+  "denominator": 40,
+  "max_relative_l2": 0.9004598896506362,
+  "median_relative_l2": 0.31115397613626256,
+  "metric": "relative_l2(mirror_prediction, mirrored_source_prediction)",
+  "min_relative_l2": 0.18974878338787743,
+  "passes": 0,
+  "relation": "mirror_y_ood_stress",
+  "rows": [
+    {
+      "passes": 0,
+      "relative_l2": 0.1920049814771483,
+      "snapshot": 74,
+      "trajectory": 0
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.24077842641306993,
+      "snapshot": 74,
+      "trajectory": 1
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.23075704052698612,
+      "snapshot": 74,
+      "trajectory": 2
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.490445682262618,
+      "snapshot": 74,
+      "trajectory": 3
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.2593187100944669,
+      "snapshot": 74,
+      "trajectory": 4
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.26636564787946665,
+      "snapshot": 74,
+      "trajectory": 5
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.21087873099306573,
+      "snapshot": 74,
+      "trajectory": 6
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.8844326365538623,
+      "snapshot": 74,
+      "trajectory": 7
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.7851530987192955,
+      "snapshot": 74,
+      "trajectory": 8
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.2876852796065986,
+      "snapshot": 74,
+      "trajectory": 9
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.24771240437007747,
+      "snapshot": 74,
+      "trajectory": 10
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.25417885291295095,
+      "snapshot": 74,
+      "trajectory": 11
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.2490380655891865,
+      "snapshot": 74,
+      "trajectory": 12
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.27160154069891207,
+      "snapshot": 74,
+      "trajectory": 13
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.2733290903552206,
+      "snapshot": 74,
+      "trajectory": 14
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.367024463798831,
+      "snapshot": 74,
+      "trajectory": 15
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.22682616052324303,
+      "snapshot": 74,
+      "trajectory": 16
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.2618258459109087,
+      "snapshot": 74,
+      "trajectory": 17
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.3503289137511617,
+      "snapshot": 74,
+      "trajectory": 18
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.33751736026789136,
+      "snapshot": 74,
+      "trajectory": 19
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.28473093559949786,
+      "snapshot": 74,
+      "trajectory": 20
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.2885301703039595,
+      "snapshot": 74,
+      "trajectory": 21
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.3348057453638088,
+      "snapshot": 74,
+      "trajectory": 22
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.652877721078068,
+      "snapshot": 74,
+      "trajectory": 23
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.476513262683968,
+      "snapshot": 74,
+      "trajectory": 24
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.4370340774196704,
+      "snapshot": 74,
+      "trajectory": 25
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.2177948523045799,
+      "snapshot": 74,
+      "trajectory": 26
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.5918621189515922,
+      "snapshot": 74,
+      "trajectory": 27
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.3337777819685656,
+      "snapshot": 74,
+      "trajectory": 28
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.6865395367797433,
+      "snapshot": 74,
+      "trajectory": 29
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.3497192047132513,
+      "snapshot": 74,
+      "trajectory": 30
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.3814346028050598,
+      "snapshot": 74,
+      "trajectory": 31
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.26053437257277673,
+      "snapshot": 74,
+      "trajectory": 32
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.40375118857093667,
+      "snapshot": 74,
+      "trajectory": 33
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.9004598896506362,
+      "snapshot": 74,
+      "trajectory": 34
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.18974878338787743,
+      "snapshot": 74,
+      "trajectory": 35
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.36327114708344116,
+      "snapshot": 74,
+      "trajectory": 36
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.5378261205690694,
+      "snapshot": 74,
+      "trajectory": 37
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.2175695302117526,
+      "snapshot": 74,
+      "trajectory": 38
+    },
+    {
+      "passes": 0,
+      "relative_l2": 0.5096456039877325,
+      "snapshot": 74,
+      "trajectory": 39
+    }
+  ],
+  "threshold": 0.1,
+  "verdict": "fail-as-ood-stress"
+}

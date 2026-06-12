@@ -1,0 +1,105 @@
+{
+  "architecture": {
+    "hidden_dim": 128,
+    "n_parameters": 2332419,
+    "official_default": true,
+    "processor_size": 15
+  },
+  "artifacts": {
+    "checkpoint": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/physicsnemo_mgn_scaled_checkpoint.pt",
+    "metric_ledgers": {
+      "conservation_reference_relative_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/conservation_reference_relative_metric_ledger.json",
+      "mirror_ood_stress_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/mirror_ood_stress_metric_ledger.json",
+      "node_permutation_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/node_permutation_metric_ledger.json",
+      "rollout_accuracy_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/rollout_accuracy_metric_ledger.json"
+    },
+    "raw_outputs_dir": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/raw_outputs",
+    "rubric_decisions": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/physicsnemo_mgn_scaled_rubric_decisions.json"
+  },
+  "data": {
+    "meta": {
+      "bytes": 883,
+      "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow_scaled/meta.json",
+      "sha256_prefix": "2a3e39429a55a0cf"
+    },
+    "records": [
+      {
+        "bytes": 336327821,
+        "n_records": 25,
+        "sha256_prefix": "aa0ccbe2436855a2",
+        "source_url": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow/train.tfrecord",
+        "split": "train",
+        "staged_at": "2026-06-12T16:03:49Z"
+      },
+      {
+        "bytes": 541898744,
+        "n_records": 40,
+        "sha256_prefix": "42bff3171b34973e",
+        "source_url": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow/test.tfrecord",
+        "split": "test",
+        "staged_at": "2026-06-12T16:04:02Z"
+      }
+    ],
+    "source_url_prefix": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow",
+    "stage_dir": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow_scaled",
+    "subset_boundary": "first 25 official train trajectories and first 40 official test trajectories; CPU-scale evaluation of the official architecture, not the full 1000/100-trajectory production benchmark",
+    "valid_record_reused_from_test_for_datapipe_completeness": true
+  },
+  "domain": "DeepMind cylinder_flow / vortex shedding",
+  "evaluation": {
+    "mid_snapshot": 74,
+    "n_test_trajectories": 40,
+    "snapshots_per_trajectory": [
+      0,
+      37,
+      74,
+      111,
+      148
+    ]
+  },
+  "forbidden_claims": [
+    "official-checkpoint behaviour",
+    "full production-benchmark pass/fail rate",
+    "closed-loop rollout accuracy",
+    "AeroGraphNet workflow result",
+    "DoMINO workflow result",
+    "cross-dataset reliability",
+    "geometry-independent validity"
+  ],
+  "generated_at": "2026-06-12T17:27:55Z",
+  "honesty_boundary": "This is a CPU-scale evaluation of the official PhysicsNeMo MeshGraphNet production architecture trained for 2 epochs on the first 25 official DeepMind cylinder_flow train trajectories and evaluated per-trajectory on the first 40 official test trajectories. It is an independent production-framework implementation on the same task as the in-repo primary workflow, but it is NOT the official 10M-step training schedule, NOT an official NVIDIA checkpoint, and NOT the full 1000/100-trajectory benchmark; rollout accuracy is one-step, not closed-loop.",
+  "metrics": {
+    "conservation_median_ratio": 1.1738176981700117,
+    "mirror_ood_stress_median_relative_l2": 0.31115397613626256,
+    "mirror_ood_stress_passes": "0/40",
+    "node_permutation_max_relative_l2": 0.0,
+    "node_permutation_passes": "40/40",
+    "rollout_median_relative_l2": 0.5053839237596375
+  },
+  "object_id": "physicsnemo-mgn-vortex-shedding-scaled",
+  "production_framework": "nvidia-physicsnemo",
+  "record_type": "physicsnemo-mgn-scaled-primary-workflow",
+  "relation_verdicts": {
+    "conservation_reference_relative": "diagnostic-recorded",
+    "mirror_ood_stress": "fail-as-ood-stress",
+    "node_permutation": "pass",
+    "rollout_accuracy": "diagnostic-recorded"
+  },
+  "schema_version": "0.1.0",
+  "sut_name": "NVIDIA PhysicsNeMo MeshGraphNet (official production architecture)",
+  "training": {
+    "epochs": 2,
+    "final_loss": 0.16381850717951787,
+    "losses": [
+      0.4378535297252988,
+      0.16381850717951787
+    ],
+    "lr": 0.001,
+    "lr_decay": 0.3,
+    "n_train_trajectories": 25,
+    "noise_std": 0.02,
+    "num_steps": 150,
+    "seed": 20260612
+  },
+  "workflow_status": "completed-scaled-cpu-subset"
+}

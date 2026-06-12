@@ -1,0 +1,1410 @@
+{
+  "denominator": 200,
+  "median_ratio": 1.1738176981700117,
+  "metric": "abs_sum_velocity_delta_ratio_vs_reference_target",
+  "p90_ratio": 2.957451164175864,
+  "relation": "reference_relative_conservation_diagnostic",
+  "rows": [
+    {
+      "ratio": 0.9444512201362568,
+      "reference_mean_abs_sum_velocity_delta": 2290.0234375,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 2162.8154296875,
+      "trajectory": 0
+    },
+    {
+      "ratio": 2.1347154470791834,
+      "reference_mean_abs_sum_velocity_delta": 37.074039459228516,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 79.14252471923828,
+      "trajectory": 0
+    },
+    {
+      "ratio": 4.062334705662294,
+      "reference_mean_abs_sum_velocity_delta": 20.241031646728516,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 82.22584533691406,
+      "trajectory": 0
+    },
+    {
+      "ratio": 1.8690348482587082,
+      "reference_mean_abs_sum_velocity_delta": 37.085636138916016,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 69.31434631347656,
+      "trajectory": 0
+    },
+    {
+      "ratio": 0.9858301731249581,
+      "reference_mean_abs_sum_velocity_delta": 53.14070129394531,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 52.3877067565918,
+      "trajectory": 0
+    },
+    {
+      "ratio": 1.2534473358713933,
+      "reference_mean_abs_sum_velocity_delta": 1316.54541015625,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1650.2203369140625,
+      "trajectory": 1
+    },
+    {
+      "ratio": 2.9313180521267275,
+      "reference_mean_abs_sum_velocity_delta": 8.682036399841309,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 25.449810028076172,
+      "trajectory": 1
+    },
+    {
+      "ratio": 0.47511243016905497,
+      "reference_mean_abs_sum_velocity_delta": 23.765056610107422,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 11.2910737991333,
+      "trajectory": 1
+    },
+    {
+      "ratio": 0.3257874124924112,
+      "reference_mean_abs_sum_velocity_delta": 33.35881423950195,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 10.867881774902344,
+      "trajectory": 1
+    },
+    {
+      "ratio": 0.5129642228753833,
+      "reference_mean_abs_sum_velocity_delta": 42.24269104003906,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 21.668989181518555,
+      "trajectory": 1
+    },
+    {
+      "ratio": 1.218138966845173,
+      "reference_mean_abs_sum_velocity_delta": 1402.333984375,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1708.2376708984375,
+      "trajectory": 2
+    },
+    {
+      "ratio": 4.485249510633153,
+      "reference_mean_abs_sum_velocity_delta": 5.201813697814941,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 23.331432342529297,
+      "trajectory": 2
+    },
+    {
+      "ratio": 1.5884627016489208,
+      "reference_mean_abs_sum_velocity_delta": 31.496013641357422,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 50.030242919921875,
+      "trajectory": 2
+    },
+    {
+      "ratio": 1.5568002040352602,
+      "reference_mean_abs_sum_velocity_delta": 37.57201385498047,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 58.49211883544922,
+      "trajectory": 2
+    },
+    {
+      "ratio": 1.0382143123291498,
+      "reference_mean_abs_sum_velocity_delta": 48.93681335449219,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 50.80690002441406,
+      "trajectory": 2
+    },
+    {
+      "ratio": 1.1090440822096903,
+      "reference_mean_abs_sum_velocity_delta": 1239.577392578125,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1374.7459716796875,
+      "trajectory": 3
+    },
+    {
+      "ratio": 2.0761417230198185,
+      "reference_mean_abs_sum_velocity_delta": 13.115743637084961,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 27.23014259338379,
+      "trajectory": 3
+    },
+    {
+      "ratio": 1.2059589633352998,
+      "reference_mean_abs_sum_velocity_delta": 23.60210418701172,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 28.46316909790039,
+      "trajectory": 3
+    },
+    {
+      "ratio": 0.8254610080471373,
+      "reference_mean_abs_sum_velocity_delta": 31.42508888244629,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 25.940185546875,
+      "trajectory": 3
+    },
+    {
+      "ratio": 0.5573020284577203,
+      "reference_mean_abs_sum_velocity_delta": 35.296417236328125,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 19.670764923095703,
+      "trajectory": 3
+    },
+    {
+      "ratio": 1.1506200994628082,
+      "reference_mean_abs_sum_velocity_delta": 1485.2491455078125,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1708.95751953125,
+      "trajectory": 4
+    },
+    {
+      "ratio": 2.8905786332959704,
+      "reference_mean_abs_sum_velocity_delta": 41.15930938720703,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 118.9742202758789,
+      "trajectory": 4
+    },
+    {
+      "ratio": 3.2351850679592333,
+      "reference_mean_abs_sum_velocity_delta": 21.513484954833984,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 69.60010528564453,
+      "trajectory": 4
+    },
+    {
+      "ratio": 1.4343572740300359,
+      "reference_mean_abs_sum_velocity_delta": 32.38011169433594,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 46.44464874267578,
+      "trajectory": 4
+    },
+    {
+      "ratio": 0.7363819006861995,
+      "reference_mean_abs_sum_velocity_delta": 43.22085189819336,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 31.82705307006836,
+      "trajectory": 4
+    },
+    {
+      "ratio": 1.2047262223401591,
+      "reference_mean_abs_sum_velocity_delta": 1157.412841796875,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1394.3656005859375,
+      "trajectory": 5
+    },
+    {
+      "ratio": 5.842598018151751,
+      "reference_mean_abs_sum_velocity_delta": 6.152103424072266,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 35.94426727294922,
+      "trajectory": 5
+    },
+    {
+      "ratio": 0.19162383284816825,
+      "reference_mean_abs_sum_velocity_delta": 24.84868621826172,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 4.761600494384766,
+      "trajectory": 5
+    },
+    {
+      "ratio": 0.36713493088519467,
+      "reference_mean_abs_sum_velocity_delta": 36.406272888183594,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 13.36601448059082,
+      "trajectory": 5
+    },
+    {
+      "ratio": 0.5720373066015104,
+      "reference_mean_abs_sum_velocity_delta": 39.3014030456543,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 22.481868743896484,
+      "trajectory": 5
+    },
+    {
+      "ratio": 0.9865475623277253,
+      "reference_mean_abs_sum_velocity_delta": 2078.884521484375,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 2050.91845703125,
+      "trajectory": 6
+    },
+    {
+      "ratio": 1.6983042952762115,
+      "reference_mean_abs_sum_velocity_delta": 26.07628631591797,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 44.28546905517578,
+      "trajectory": 6
+    },
+    {
+      "ratio": 3.2280129647166254,
+      "reference_mean_abs_sum_velocity_delta": 16.926856994628906,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 54.640113830566406,
+      "trajectory": 6
+    },
+    {
+      "ratio": 1.2884428914899417,
+      "reference_mean_abs_sum_velocity_delta": 33.9869270324707,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 43.79021453857422,
+      "trajectory": 6
+    },
+    {
+      "ratio": 0.5910663693069252,
+      "reference_mean_abs_sum_velocity_delta": 49.383113861083984,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 29.188697814941406,
+      "trajectory": 6
+    },
+    {
+      "ratio": 1.0037199467155393,
+      "reference_mean_abs_sum_velocity_delta": 313.580810546875,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 314.747314453125,
+      "trajectory": 7
+    },
+    {
+      "ratio": 1.512514237133585,
+      "reference_mean_abs_sum_velocity_delta": 27.209304809570312,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 41.15446090698242,
+      "trajectory": 7
+    },
+    {
+      "ratio": 1.526289642994872,
+      "reference_mean_abs_sum_velocity_delta": 34.11690139770508,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 52.07227325439453,
+      "trajectory": 7
+    },
+    {
+      "ratio": 1.3529793101612906,
+      "reference_mean_abs_sum_velocity_delta": 36.69512939453125,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 49.64775085449219,
+      "trajectory": 7
+    },
+    {
+      "ratio": 1.2216960821337413,
+      "reference_mean_abs_sum_velocity_delta": 38.04175567626953,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 46.4754638671875,
+      "trajectory": 7
+    },
+    {
+      "ratio": 1.0209343940911504,
+      "reference_mean_abs_sum_velocity_delta": 324.12982177734375,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 330.915283203125,
+      "trajectory": 8
+    },
+    {
+      "ratio": 1.2243340315682272,
+      "reference_mean_abs_sum_velocity_delta": 23.367631912231445,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 28.609786987304688,
+      "trajectory": 8
+    },
+    {
+      "ratio": 1.3724341498374717,
+      "reference_mean_abs_sum_velocity_delta": 31.97625160217285,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 43.88529968261719,
+      "trajectory": 8
+    },
+    {
+      "ratio": 1.4176452065500744,
+      "reference_mean_abs_sum_velocity_delta": 35.035179138183594,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 49.66745376586914,
+      "trajectory": 8
+    },
+    {
+      "ratio": 1.5934308332277398,
+      "reference_mean_abs_sum_velocity_delta": 36.21657943725586,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 57.708614349365234,
+      "trajectory": 8
+    },
+    {
+      "ratio": 1.2142503369940412,
+      "reference_mean_abs_sum_velocity_delta": 1092.5848388671875,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1326.6715087890625,
+      "trajectory": 9
+    },
+    {
+      "ratio": 10.222001789757957,
+      "reference_mean_abs_sum_velocity_delta": 4.303304672241211,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 43.98838806152344,
+      "trajectory": 9
+    },
+    {
+      "ratio": 0.8332711546541333,
+      "reference_mean_abs_sum_velocity_delta": 19.366329193115234,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 16.13740348815918,
+      "trajectory": 9
+    },
+    {
+      "ratio": 0.9726464301222673,
+      "reference_mean_abs_sum_velocity_delta": 31.34442138671875,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 30.48703956604004,
+      "trajectory": 9
+    },
+    {
+      "ratio": 1.6524497288839475,
+      "reference_mean_abs_sum_velocity_delta": 32.142303466796875,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 53.11354064941406,
+      "trajectory": 9
+    },
+    {
+      "ratio": 1.292549112734104,
+      "reference_mean_abs_sum_velocity_delta": 1164.8167724609375,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1505.5828857421875,
+      "trajectory": 10
+    },
+    {
+      "ratio": 2.935571708620229,
+      "reference_mean_abs_sum_velocity_delta": 9.20378589630127,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 27.018373489379883,
+      "trajectory": 10
+    },
+    {
+      "ratio": 0.8675040098039101,
+      "reference_mean_abs_sum_velocity_delta": 29.14200210571289,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 25.280803680419922,
+      "trajectory": 10
+    },
+    {
+      "ratio": 0.9617570604482573,
+      "reference_mean_abs_sum_velocity_delta": 34.536216735839844,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 33.215450286865234,
+      "trajectory": 10
+    },
+    {
+      "ratio": 0.9302473123724879,
+      "reference_mean_abs_sum_velocity_delta": 39.09506607055664,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 36.368080139160156,
+      "trajectory": 10
+    },
+    {
+      "ratio": 1.178671445841148,
+      "reference_mean_abs_sum_velocity_delta": 1230.517822265625,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1450.376220703125,
+      "trajectory": 11
+    },
+    {
+      "ratio": 2.62702232532493,
+      "reference_mean_abs_sum_velocity_delta": 16.70052719116211,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 43.872657775878906,
+      "trajectory": 11
+    },
+    {
+      "ratio": 0.3168885216002112,
+      "reference_mean_abs_sum_velocity_delta": 33.98332214355469,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 10.768924713134766,
+      "trajectory": 11
+    },
+    {
+      "ratio": 0.4381239070218329,
+      "reference_mean_abs_sum_velocity_delta": 36.83237075805664,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 16.137142181396484,
+      "trajectory": 11
+    },
+    {
+      "ratio": 0.6669359880225688,
+      "reference_mean_abs_sum_velocity_delta": 42.275146484375,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 28.19481658935547,
+      "trajectory": 11
+    },
+    {
+      "ratio": 0.9543292366682062,
+      "reference_mean_abs_sum_velocity_delta": 2081.57275390625,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1986.5057373046875,
+      "trajectory": 12
+    },
+    {
+      "ratio": 2.290611232618658,
+      "reference_mean_abs_sum_velocity_delta": 64.61385345458984,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 148.00521850585938,
+      "trajectory": 12
+    },
+    {
+      "ratio": 7.471313277011783,
+      "reference_mean_abs_sum_velocity_delta": 13.11220932006836,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 97.96542358398438,
+      "trajectory": 12
+    },
+    {
+      "ratio": 1.7045308932301524,
+      "reference_mean_abs_sum_velocity_delta": 47.3519401550293,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 80.71284484863281,
+      "trajectory": 12
+    },
+    {
+      "ratio": 1.8231480782593446,
+      "reference_mean_abs_sum_velocity_delta": 54.9866943359375,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 100.24888610839844,
+      "trajectory": 12
+    },
+    {
+      "ratio": 0.9590289038467535,
+      "reference_mean_abs_sum_velocity_delta": 2129.53515625,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 2042.2857666015625,
+      "trajectory": 13
+    },
+    {
+      "ratio": 1.9862262630014917,
+      "reference_mean_abs_sum_velocity_delta": 47.730323791503906,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 94.80322265625,
+      "trajectory": 13
+    },
+    {
+      "ratio": 2.6105816539818885,
+      "reference_mean_abs_sum_velocity_delta": 17.70449447631836,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 46.21902847290039,
+      "trajectory": 13
+    },
+    {
+      "ratio": 1.2300770682433022,
+      "reference_mean_abs_sum_velocity_delta": 44.76171875,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 55.06036376953125,
+      "trajectory": 13
+    },
+    {
+      "ratio": 1.6689565405074755,
+      "reference_mean_abs_sum_velocity_delta": 34.623477935791016,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 57.78507995605469,
+      "trajectory": 13
+    },
+    {
+      "ratio": 1.2589846749378522,
+      "reference_mean_abs_sum_velocity_delta": 1049.4180908203125,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1321.2012939453125,
+      "trajectory": 14
+    },
+    {
+      "ratio": 4.066455091359952,
+      "reference_mean_abs_sum_velocity_delta": 6.157236099243164,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 25.038124084472656,
+      "trajectory": 14
+    },
+    {
+      "ratio": 0.423448819554349,
+      "reference_mean_abs_sum_velocity_delta": 27.397363662719727,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 11.601381301879883,
+      "trajectory": 14
+    },
+    {
+      "ratio": 0.8188738359028143,
+      "reference_mean_abs_sum_velocity_delta": 31.469444274902344,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 25.76950454711914,
+      "trajectory": 14
+    },
+    {
+      "ratio": 1.1622064134523045,
+      "reference_mean_abs_sum_velocity_delta": 39.44010543823242,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 45.83754348754883,
+      "trajectory": 14
+    },
+    {
+      "ratio": 1.1444676010370982,
+      "reference_mean_abs_sum_velocity_delta": 901.6339721679688,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1031.890869140625,
+      "trajectory": 15
+    },
+    {
+      "ratio": 26.19241070162731,
+      "reference_mean_abs_sum_velocity_delta": 1.4798774719238281,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 38.761558532714844,
+      "trajectory": 15
+    },
+    {
+      "ratio": 0.48019503487752774,
+      "reference_mean_abs_sum_velocity_delta": 21.90926742553711,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 10.520721435546875,
+      "trajectory": 15
+    },
+    {
+      "ratio": 1.3900639022330843,
+      "reference_mean_abs_sum_velocity_delta": 27.568134307861328,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 38.321468353271484,
+      "trajectory": 15
+    },
+    {
+      "ratio": 1.8229129957837393,
+      "reference_mean_abs_sum_velocity_delta": 31.949281692504883,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 58.240760803222656,
+      "trajectory": 15
+    },
+    {
+      "ratio": 1.175164003197815,
+      "reference_mean_abs_sum_velocity_delta": 1462.6380615234375,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1718.839599609375,
+      "trajectory": 16
+    },
+    {
+      "ratio": 2.710931454633302,
+      "reference_mean_abs_sum_velocity_delta": 19.88426399230957,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 53.904876708984375,
+      "trajectory": 16
+    },
+    {
+      "ratio": 2.7656588364774004,
+      "reference_mean_abs_sum_velocity_delta": 23.39778709411621,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 64.71029663085938,
+      "trajectory": 16
+    },
+    {
+      "ratio": 0.7368750305565911,
+      "reference_mean_abs_sum_velocity_delta": 45.41069793701172,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 33.46200942993164,
+      "trajectory": 16
+    },
+    {
+      "ratio": 1.2948332901545103,
+      "reference_mean_abs_sum_velocity_delta": 41.43450164794922,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 53.65077209472656,
+      "trajectory": 16
+    },
+    {
+      "ratio": 1.1160357449920617,
+      "reference_mean_abs_sum_velocity_delta": 1611.0347900390625,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1797.972412109375,
+      "trajectory": 17
+    },
+    {
+      "ratio": 1.1281335625156415,
+      "reference_mean_abs_sum_velocity_delta": 26.59841537475586,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 30.00656509399414,
+      "trajectory": 17
+    },
+    {
+      "ratio": 0.8689692088862602,
+      "reference_mean_abs_sum_velocity_delta": 26.727684020996094,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 23.225534439086914,
+      "trajectory": 17
+    },
+    {
+      "ratio": 0.9907455314755623,
+      "reference_mean_abs_sum_velocity_delta": 32.18977355957031,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 31.891874313354492,
+      "trajectory": 17
+    },
+    {
+      "ratio": 1.2167325140005396,
+      "reference_mean_abs_sum_velocity_delta": 46.30250930786133,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 56.3377685546875,
+      "trajectory": 17
+    },
+    {
+      "ratio": 1.1115899847022068,
+      "reference_mean_abs_sum_velocity_delta": 886.0151977539062,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 984.8856201171875,
+      "trajectory": 18
+    },
+    {
+      "ratio": 14.4916313229661,
+      "reference_mean_abs_sum_velocity_delta": 2.527451276779175,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 36.62689208984375,
+      "trajectory": 18
+    },
+    {
+      "ratio": 0.7070923450787954,
+      "reference_mean_abs_sum_velocity_delta": 25.189868927001953,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 17.81156349182129,
+      "trajectory": 18
+    },
+    {
+      "ratio": 1.3508194646915606,
+      "reference_mean_abs_sum_velocity_delta": 29.302513122558594,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 39.58240509033203,
+      "trajectory": 18
+    },
+    {
+      "ratio": 2.0488273943904116,
+      "reference_mean_abs_sum_velocity_delta": 31.169450759887695,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 63.86082458496094,
+      "trajectory": 18
+    },
+    {
+      "ratio": 1.0557662742053247,
+      "reference_mean_abs_sum_velocity_delta": 751.5191650390625,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 793.4285888671875,
+      "trajectory": 19
+    },
+    {
+      "ratio": 2.9642246189760084,
+      "reference_mean_abs_sum_velocity_delta": 12.522256851196289,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 37.11878204345703,
+      "trajectory": 19
+    },
+    {
+      "ratio": 1.0768596548115104,
+      "reference_mean_abs_sum_velocity_delta": 26.446502685546875,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 28.479171752929688,
+      "trajectory": 19
+    },
+    {
+      "ratio": 0.7224525818126226,
+      "reference_mean_abs_sum_velocity_delta": 31.090930938720703,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 22.46172332763672,
+      "trajectory": 19
+    },
+    {
+      "ratio": 0.881857309738337,
+      "reference_mean_abs_sum_velocity_delta": 34.25548553466797,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 30.208450317382812,
+      "trajectory": 19
+    },
+    {
+      "ratio": 1.2049016418959804,
+      "reference_mean_abs_sum_velocity_delta": 1373.1995849609375,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1654.5704345703125,
+      "trajectory": 20
+    },
+    {
+      "ratio": 2.641809666676383,
+      "reference_mean_abs_sum_velocity_delta": 28.137836456298828,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 74.33480834960938,
+      "trajectory": 20
+    },
+    {
+      "ratio": 12.173657554819608,
+      "reference_mean_abs_sum_velocity_delta": 7.246071815490723,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 88.21119689941406,
+      "trajectory": 20
+    },
+    {
+      "ratio": 4.794399212909353,
+      "reference_mean_abs_sum_velocity_delta": 16.321340560913086,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 78.25102233886719,
+      "trajectory": 20
+    },
+    {
+      "ratio": 0.8346873663533061,
+      "reference_mean_abs_sum_velocity_delta": 37.623435974121094,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 31.403806686401367,
+      "trajectory": 20
+    },
+    {
+      "ratio": 1.1754783955378405,
+      "reference_mean_abs_sum_velocity_delta": 963.4401245117188,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1132.5030517578125,
+      "trajectory": 21
+    },
+    {
+      "ratio": 4.641326822222258,
+      "reference_mean_abs_sum_velocity_delta": 6.3330159187316895,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 29.393596649169922,
+      "trajectory": 21
+    },
+    {
+      "ratio": 0.14280611901254947,
+      "reference_mean_abs_sum_velocity_delta": 24.523609161376953,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 3.5021214485168457,
+      "trajectory": 21
+    },
+    {
+      "ratio": 0.7247038102927784,
+      "reference_mean_abs_sum_velocity_delta": 31.39474868774414,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 22.751893997192383,
+      "trajectory": 21
+    },
+    {
+      "ratio": 0.6443044304838451,
+      "reference_mean_abs_sum_velocity_delta": 35.53187561035156,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 22.89334487915039,
+      "trajectory": 21
+    },
+    {
+      "ratio": 1.1724713931422084,
+      "reference_mean_abs_sum_velocity_delta": 1010.2363891601562,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1184.4732666015625,
+      "trajectory": 22
+    },
+    {
+      "ratio": 5.110841378773211,
+      "reference_mean_abs_sum_velocity_delta": 6.661130905151367,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 34.043983459472656,
+      "trajectory": 22
+    },
+    {
+      "ratio": 0.837839307413571,
+      "reference_mean_abs_sum_velocity_delta": 19.854219436645508,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 16.634645462036133,
+      "trajectory": 22
+    },
+    {
+      "ratio": 1.8704307800959876,
+      "reference_mean_abs_sum_velocity_delta": 26.59661102294922,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 49.74711990356445,
+      "trajectory": 22
+    },
+    {
+      "ratio": 1.9239100690313824,
+      "reference_mean_abs_sum_velocity_delta": 30.068805694580078,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 57.84967803955078,
+      "trajectory": 22
+    },
+    {
+      "ratio": 0.9191432286937713,
+      "reference_mean_abs_sum_velocity_delta": 571.0540161132812,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 524.8804321289062,
+      "trajectory": 23
+    },
+    {
+      "ratio": 1.1763946441265076,
+      "reference_mean_abs_sum_velocity_delta": 21.637451171875,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 25.454181671142578,
+      "trajectory": 23
+    },
+    {
+      "ratio": 0.448203905281415,
+      "reference_mean_abs_sum_velocity_delta": 35.784263610839844,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 16.038646697998047,
+      "trajectory": 23
+    },
+    {
+      "ratio": 0.7164158844408677,
+      "reference_mean_abs_sum_velocity_delta": 37.06714630126953,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 26.555492401123047,
+      "trajectory": 23
+    },
+    {
+      "ratio": 0.9575536106662098,
+      "reference_mean_abs_sum_velocity_delta": 38.11732482910156,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 36.49938201904297,
+      "trajectory": 23
+    },
+    {
+      "ratio": 1.0221135390427778,
+      "reference_mean_abs_sum_velocity_delta": 1061.201416015625,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1084.6683349609375,
+      "trajectory": 24
+    },
+    {
+      "ratio": 5.433977986459434,
+      "reference_mean_abs_sum_velocity_delta": 10.506319046020508,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 57.09110641479492,
+      "trajectory": 24
+    },
+    {
+      "ratio": 0.783508934458815,
+      "reference_mean_abs_sum_velocity_delta": 37.528690338134766,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 29.404064178466797,
+      "trajectory": 24
+    },
+    {
+      "ratio": 0.7257926263970615,
+      "reference_mean_abs_sum_velocity_delta": 35.89671325683594,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 26.053569793701172,
+      "trajectory": 24
+    },
+    {
+      "ratio": 0.5043021335771328,
+      "reference_mean_abs_sum_velocity_delta": 37.94051742553711,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 19.13348388671875,
+      "trajectory": 24
+    },
+    {
+      "ratio": 1.0639144916982062,
+      "reference_mean_abs_sum_velocity_delta": 1054.356689453125,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1121.745361328125,
+      "trajectory": 25
+    },
+    {
+      "ratio": 0.6389594289675244,
+      "reference_mean_abs_sum_velocity_delta": 16.388771057128906,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 10.471759796142578,
+      "trajectory": 25
+    },
+    {
+      "ratio": 0.5715731686457128,
+      "reference_mean_abs_sum_velocity_delta": 26.5944766998291,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 15.200689315795898,
+      "trajectory": 25
+    },
+    {
+      "ratio": 1.0709865679096262,
+      "reference_mean_abs_sum_velocity_delta": 33.94239807128906,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 36.35185241699219,
+      "trajectory": 25
+    },
+    {
+      "ratio": 1.1621436005142767,
+      "reference_mean_abs_sum_velocity_delta": 37.248207092285156,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 43.28776550292969,
+      "trajectory": 25
+    },
+    {
+      "ratio": 1.159714678536053,
+      "reference_mean_abs_sum_velocity_delta": 1549.85546875,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1797.39013671875,
+      "trajectory": 26
+    },
+    {
+      "ratio": 2.7718870901249444,
+      "reference_mean_abs_sum_velocity_delta": 8.66107177734375,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 24.00751304626465,
+      "trajectory": 26
+    },
+    {
+      "ratio": 1.7392823070217214,
+      "reference_mean_abs_sum_velocity_delta": 24.11090850830078,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 41.93567657470703,
+      "trajectory": 26
+    },
+    {
+      "ratio": 1.241763344599738,
+      "reference_mean_abs_sum_velocity_delta": 49.109161376953125,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 60.981956481933594,
+      "trajectory": 26
+    },
+    {
+      "ratio": 1.0334292384751047,
+      "reference_mean_abs_sum_velocity_delta": 54.77781295776367,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 56.60899353027344,
+      "trajectory": 26
+    },
+    {
+      "ratio": 0.9704263331071756,
+      "reference_mean_abs_sum_velocity_delta": 631.8759765625,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 613.1890869140625,
+      "trajectory": 27
+    },
+    {
+      "ratio": 2.956698558086959,
+      "reference_mean_abs_sum_velocity_delta": 19.917518615722656,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 58.890098571777344,
+      "trajectory": 27
+    },
+    {
+      "ratio": 0.8429624588306306,
+      "reference_mean_abs_sum_velocity_delta": 38.89925003051758,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 32.79060745239258,
+      "trajectory": 27
+    },
+    {
+      "ratio": 0.5894084666527594,
+      "reference_mean_abs_sum_velocity_delta": 39.644561767578125,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 23.366840362548828,
+      "trajectory": 27
+    },
+    {
+      "ratio": 0.5817383891908559,
+      "reference_mean_abs_sum_velocity_delta": 39.41653060913086,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 22.93010902404785,
+      "trajectory": 27
+    },
+    {
+      "ratio": 1.1319398798737055,
+      "reference_mean_abs_sum_velocity_delta": 957.6408081054688,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1083.9918212890625,
+      "trajectory": 28
+    },
+    {
+      "ratio": 3.6257609821555183,
+      "reference_mean_abs_sum_velocity_delta": 5.652548313140869,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 20.494789123535156,
+      "trajectory": 28
+    },
+    {
+      "ratio": 0.19705290672352752,
+      "reference_mean_abs_sum_velocity_delta": 28.159198760986328,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 5.54885196685791,
+      "trajectory": 28
+    },
+    {
+      "ratio": 0.4205332027200133,
+      "reference_mean_abs_sum_velocity_delta": 37.76924514770508,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 15.883221626281738,
+      "trajectory": 28
+    },
+    {
+      "ratio": 0.5959299210689996,
+      "reference_mean_abs_sum_velocity_delta": 39.55239486694336,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 23.57045555114746,
+      "trajectory": 28
+    },
+    {
+      "ratio": 0.9861476849077352,
+      "reference_mean_abs_sum_velocity_delta": 398.1647033691406,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 392.6492004394531,
+      "trajectory": 29
+    },
+    {
+      "ratio": 0.7898310014145136,
+      "reference_mean_abs_sum_velocity_delta": 25.104755401611328,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 19.828514099121094,
+      "trajectory": 29
+    },
+    {
+      "ratio": 0.3304866214922621,
+      "reference_mean_abs_sum_velocity_delta": 36.35529708862305,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 12.014939308166504,
+      "trajectory": 29
+    },
+    {
+      "ratio": 0.5167539431149059,
+      "reference_mean_abs_sum_velocity_delta": 37.3566780090332,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 19.304210662841797,
+      "trajectory": 29
+    },
+    {
+      "ratio": 0.6557650342757415,
+      "reference_mean_abs_sum_velocity_delta": 38.762718200683594,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 25.419235229492188,
+      "trajectory": 29
+    },
+    {
+      "ratio": 1.2088494843361397,
+      "reference_mean_abs_sum_velocity_delta": 1248.745849609375,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1509.5457763671875,
+      "trajectory": 30
+    },
+    {
+      "ratio": 0.6180756454406157,
+      "reference_mean_abs_sum_velocity_delta": 18.161373138427734,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 11.225102424621582,
+      "trajectory": 30
+    },
+    {
+      "ratio": 1.6434543541711433,
+      "reference_mean_abs_sum_velocity_delta": 21.54349708557129,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 35.40575408935547,
+      "trajectory": 30
+    },
+    {
+      "ratio": 2.132026019051823,
+      "reference_mean_abs_sum_velocity_delta": 29.14229965209961,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 62.13214111328125,
+      "trajectory": 30
+    },
+    {
+      "ratio": 1.6924546657189616,
+      "reference_mean_abs_sum_velocity_delta": 37.70265579223633,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 63.810035705566406,
+      "trajectory": 30
+    },
+    {
+      "ratio": 1.165526079228028,
+      "reference_mean_abs_sum_velocity_delta": 1400.1781005859375,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1631.944091796875,
+      "trajectory": 31
+    },
+    {
+      "ratio": 1.9903188211989227,
+      "reference_mean_abs_sum_velocity_delta": 6.104545593261719,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 12.149991989135742,
+      "trajectory": 31
+    },
+    {
+      "ratio": 1.7974007845239859,
+      "reference_mean_abs_sum_velocity_delta": 19.380695343017578,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 34.834877014160156,
+      "trajectory": 31
+    },
+    {
+      "ratio": 1.8913296747662103,
+      "reference_mean_abs_sum_velocity_delta": 28.36041831970215,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 53.63890075683594,
+      "trajectory": 31
+    },
+    {
+      "ratio": 1.6244704133098076,
+      "reference_mean_abs_sum_velocity_delta": 35.69255447387695,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 57.98149871826172,
+      "trajectory": 31
+    },
+    {
+      "ratio": 1.2686131982002593,
+      "reference_mean_abs_sum_velocity_delta": 1125.867431640625,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1428.290283203125,
+      "trajectory": 32
+    },
+    {
+      "ratio": 7.599233123403394,
+      "reference_mean_abs_sum_velocity_delta": 4.713177680969238,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 35.81653594970703,
+      "trajectory": 32
+    },
+    {
+      "ratio": 1.332215926082108,
+      "reference_mean_abs_sum_velocity_delta": 20.40363883972168,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 27.182052612304688,
+      "trajectory": 32
+    },
+    {
+      "ratio": 1.0285600720270691,
+      "reference_mean_abs_sum_velocity_delta": 33.954994201660156,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 34.92475128173828,
+      "trajectory": 32
+    },
+    {
+      "ratio": 0.9004411838152896,
+      "reference_mean_abs_sum_velocity_delta": 42.08512496948242,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 37.895179748535156,
+      "trajectory": 32
+    },
+    {
+      "ratio": 1.0845587530168033,
+      "reference_mean_abs_sum_velocity_delta": 983.3380737304688,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 1066.4879150390625,
+      "trajectory": 33
+    },
+    {
+      "ratio": 1.8033743460463727,
+      "reference_mean_abs_sum_velocity_delta": 9.943197250366211,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 17.931306838989258,
+      "trajectory": 33
+    },
+    {
+      "ratio": 0.5067067033676796,
+      "reference_mean_abs_sum_velocity_delta": 27.103351593017578,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 13.733449935913086,
+      "trajectory": 33
+    },
+    {
+      "ratio": 0.7220733030542146,
+      "reference_mean_abs_sum_velocity_delta": 33.66639709472656,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 24.309606552124023,
+      "trajectory": 33
+    },
+    {
+      "ratio": 0.9311256278146355,
+      "reference_mean_abs_sum_velocity_delta": 37.74277877807617,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 35.14326858520508,
+      "trajectory": 33
+    },
+    {
+      "ratio": 1.0489181224267186,
+      "reference_mean_abs_sum_velocity_delta": 268.9193420410156,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 282.0743713378906,
+      "trajectory": 34
+    },
+    {
+      "ratio": 1.3479915228671329,
+      "reference_mean_abs_sum_velocity_delta": 27.33831024169922,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 36.851810455322266,
+      "trajectory": 34
+    },
+    {
+      "ratio": 1.4417019715104171,
+      "reference_mean_abs_sum_velocity_delta": 35.51161575317383,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 51.197166442871094,
+      "trajectory": 34
+    },
+    {
+      "ratio": 1.4400673333985377,
+      "reference_mean_abs_sum_velocity_delta": 37.364356994628906,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 53.80718994140625,
+      "trajectory": 34
+    },
+    {
+      "ratio": 1.518018198633228,
+      "reference_mean_abs_sum_velocity_delta": 38.055091857910156,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 57.7683219909668,
+      "trajectory": 34
+    },
+    {
+      "ratio": 0.9599925486891219,
+      "reference_mean_abs_sum_velocity_delta": 2213.589111328125,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 2125.029052734375,
+      "trajectory": 35
+    },
+    {
+      "ratio": 3.677033571400812,
+      "reference_mean_abs_sum_velocity_delta": 22.82160758972168,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 83.91581726074219,
+      "trajectory": 35
+    },
+    {
+      "ratio": 2.921723750529821,
+      "reference_mean_abs_sum_velocity_delta": 33.74087905883789,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 98.58152770996094,
+      "trajectory": 35
+    },
+    {
+      "ratio": 1.8422331429335097,
+      "reference_mean_abs_sum_velocity_delta": 51.15118408203125,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 94.23240661621094,
+      "trajectory": 35
+    },
+    {
+      "ratio": 1.3810878524761232,
+      "reference_mean_abs_sum_velocity_delta": 56.947547912597656,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 78.64956665039062,
+      "trajectory": 35
+    },
+    {
+      "ratio": 1.0603208277236467,
+      "reference_mean_abs_sum_velocity_delta": 711.028564453125,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 753.9183959960938,
+      "trajectory": 36
+    },
+    {
+      "ratio": 1.5651346407404667,
+      "reference_mean_abs_sum_velocity_delta": 14.575221061706543,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 22.812183380126953,
+      "trajectory": 36
+    },
+    {
+      "ratio": 0.9430202978032068,
+      "reference_mean_abs_sum_velocity_delta": 27.799467086791992,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 26.21546173095703,
+      "trajectory": 36
+    },
+    {
+      "ratio": 0.8700366040229011,
+      "reference_mean_abs_sum_velocity_delta": 32.529747009277344,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 28.30207061767578,
+      "trajectory": 36
+    },
+    {
+      "ratio": 0.8590220573630846,
+      "reference_mean_abs_sum_velocity_delta": 34.91643524169922,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 29.993988037109375,
+      "trajectory": 36
+    },
+    {
+      "ratio": 0.8993731174293855,
+      "reference_mean_abs_sum_velocity_delta": 749.09130859375,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 673.7125854492188,
+      "trajectory": 37
+    },
+    {
+      "ratio": 1.461090936914356,
+      "reference_mean_abs_sum_velocity_delta": 21.0391845703125,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 30.740161895751953,
+      "trajectory": 37
+    },
+    {
+      "ratio": 0.30104969859008096,
+      "reference_mean_abs_sum_velocity_delta": 30.461835861206055,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 9.170526504516602,
+      "trajectory": 37
+    },
+    {
+      "ratio": 0.5752554593985651,
+      "reference_mean_abs_sum_velocity_delta": 35.08772659301758,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 20.184406280517578,
+      "trajectory": 37
+    },
+    {
+      "ratio": 0.5515530572525952,
+      "reference_mean_abs_sum_velocity_delta": 37.46236038208008,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 20.662479400634766,
+      "trajectory": 37
+    },
+    {
+      "ratio": 0.9673174210327614,
+      "reference_mean_abs_sum_velocity_delta": 2182.525634765625,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 2111.195068359375,
+      "trajectory": 38
+    },
+    {
+      "ratio": 0.8332837777562145,
+      "reference_mean_abs_sum_velocity_delta": 47.764949798583984,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 39.8017578125,
+      "trajectory": 38
+    },
+    {
+      "ratio": 2.8947116477408974,
+      "reference_mean_abs_sum_velocity_delta": 17.101444244384766,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 49.50374984741211,
+      "trajectory": 38
+    },
+    {
+      "ratio": 1.9755375655518888,
+      "reference_mean_abs_sum_velocity_delta": 43.08432388305664,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 85.11470031738281,
+      "trajectory": 38
+    },
+    {
+      "ratio": 2.596926228261914,
+      "reference_mean_abs_sum_velocity_delta": 31.36127471923828,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 81.44291687011719,
+      "trajectory": 38
+    },
+    {
+      "ratio": 0.959759794707528,
+      "reference_mean_abs_sum_velocity_delta": 767.8165283203125,
+      "snapshot": 0,
+      "source_mean_abs_sum_velocity_delta": 736.91943359375,
+      "trajectory": 39
+    },
+    {
+      "ratio": 3.059757410958194,
+      "reference_mean_abs_sum_velocity_delta": 8.260859489440918,
+      "snapshot": 37,
+      "source_mean_abs_sum_velocity_delta": 25.276226043701172,
+      "trajectory": 39
+    },
+    {
+      "ratio": 1.0974700746760377,
+      "reference_mean_abs_sum_velocity_delta": 27.2335205078125,
+      "snapshot": 74,
+      "source_mean_abs_sum_velocity_delta": 29.88797378540039,
+      "trajectory": 39
+    },
+    {
+      "ratio": 1.5972545363588189,
+      "reference_mean_abs_sum_velocity_delta": 32.140865325927734,
+      "snapshot": 111,
+      "source_mean_abs_sum_velocity_delta": 51.33714294433594,
+      "trajectory": 39
+    },
+    {
+      "ratio": 1.662144050230424,
+      "reference_mean_abs_sum_velocity_delta": 35.0678825378418,
+      "snapshot": 148,
+      "source_mean_abs_sum_velocity_delta": 58.287872314453125,
+      "trajectory": 39
+    }
+  ],
+  "verdict": "diagnostic-recorded"
+}

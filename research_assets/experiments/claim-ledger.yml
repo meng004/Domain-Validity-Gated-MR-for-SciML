@@ -821,6 +821,49 @@ claims:
       compute/runtime constraints, and Object-B/Object-C remain blocked by official
       AeroGraphNet/DoMINO data, checkpoint/API, GPU/container, and access requirements.
 
+  - claim_id: "C30-physicsnemo-mgn-scaled-workflow"
+    status: "observed"
+    scope: "NVIDIA PhysicsNeMo MeshGraphNet official production architecture (processor_size=15, hidden_dim=128, 2.33M params) / Object-A vortex shedding / first 25 official DeepMind cylinder_flow train trajectories and first 40 official test trajectories / newly trained CPU checkpoint / per-trajectory metric ledgers and bounded raw outputs"
+    evidence:
+      - "tools/run_physicsnemo_mgn_scaled_workflow.py"
+      - "tests/test_physicsnemo_scaled_workflow.py"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/physicsnemo_mgn_scaled_workflow_report.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/physicsnemo_mgn_scaled_rubric_decisions.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/physicsnemo_mgn_scaled_checkpoint.pt"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/node_permutation_metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/mirror_ood_stress_metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/conservation_reference_relative_metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/rollout_accuracy_metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/raw_outputs/"
+    wording_allowed: >
+      The PhysicsNeMo Object-A workflow is upgraded from a single-trajectory
+      smoke subset to a multi-trajectory CPU evaluation of the OFFICIAL
+      production MeshGraphNet architecture (processor_size=15, hidden_dim=128,
+      2.33M parameters): trained on the first 25 official DeepMind cylinder_flow
+      train trajectories and evaluated per-trajectory on the first 40 official
+      test trajectories. Node-permutation equivariance is exact on all 40
+      trajectories (max relative L2 0.0); mirror-y is recorded as an OOD-stress
+      failure on all 40 trajectories (median relative L2 0.31); the
+      reference-relative conservation diagnostic and one-step rollout accuracy
+      are recorded per trajectory. This replicates the node-permutation-exact /
+      mirror-y-OOD-failure verdict pattern on the official production
+      architecture with real multi-trajectory denominators, within a production
+      framework rather than a research codebase. It is a CPU-scale evaluation,
+      NOT the official 10M-step training schedule, NOT an official NVIDIA
+      checkpoint, and NOT the full 1000/100-trajectory production benchmark;
+      one-step rollout error is not a closed-loop accuracy claim.
+    wording_forbidden:
+      - "This reproduces an official NVIDIA PhysicsNeMo checkpoint."
+      - "A full production-scale PhysicsNeMo MGN pass/fail rate has been established."
+      - "Closed-loop or production-grade rollout accuracy."
+      - "AeroGraphNet workflow result."
+      - "DoMINO workflow result."
+      - "Cross-dataset reliability or geometry-independent validity."
+    blocked_reason: >
+      Full-scale Object-A production evaluation (official 10M-step schedule,
+      official checkpoint, full 1000/100-trajectory benchmark) remains blocked
+      by production-scale GPU/runtime constraints; Object-B/Object-C remain
+      blocked by AeroGraphNet/DoMINO data, checkpoint/API, and access.
 
 
 speculative_claims:

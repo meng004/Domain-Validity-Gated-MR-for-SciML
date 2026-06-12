@@ -40,3 +40,10 @@
 - [x] PhysicsNeMo 规模化工具 + 数据 staging（25+40 官方轨迹，~870MB，外部
   暂存）+ 共享 graph 原地改写 bug 修复（node-perm 假 0.148 → 精确 0.0）
 - [x] 36 号→37 号执行记录：paper/37_phase17_gate_closure_execution.md
+
+## 📌 历史 provenance（守卫钉死，勿删）
+- P0c Task 3 minimal Object-A smoke workflow 已完成（smoke 子集，已被本会话
+  的 scaled 工作流取代为主要证据，但 smoke 产物与 claim 仍保留）；full-scale
+  Object-A 生产评估与 Task 4-5 仍 blocked（官方 10M-step、官方 checkpoint、
+  完整 benchmark、AeroGraphNet/DoMINO 访问）。
+- P0c Task 2.8 complete DeepMind TFRecord staging 已记录。

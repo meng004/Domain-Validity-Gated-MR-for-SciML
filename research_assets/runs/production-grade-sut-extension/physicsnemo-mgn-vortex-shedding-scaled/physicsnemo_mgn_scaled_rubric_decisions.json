@@ -1,0 +1,15 @@
+{
+  "admitted_relations": [
+    "node_permutation_equivariance"
+  ],
+  "downgraded_relations": [
+    "mirror_y_ood_stress",
+    "reference_relative_conservation_diagnostic"
+  ],
+  "execution_boundary": "PhysicsNeMo MeshGraphNet official architecture (processor_size=15, hidden=128) trained on CPU for 2 epochs over the first 25 official DeepMind cylinder_flow train trajectories; evaluated on the first 40 official test trajectories",
+  "object_id": "physicsnemo-mgn-vortex-shedding-scaled",
+  "rejected_relations": [
+    "boundary-changing transforms",
+    "geometry-independent validity claims"
+  ]
+}
