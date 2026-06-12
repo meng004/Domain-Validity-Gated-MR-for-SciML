@@ -5,34 +5,34 @@
   "objects": [
     {
       "access_status": "partial-data-staged-but-workflow-blocked",
-      "blocker_reason": "Official NGC cylinder-flow archive is staged externally, but the MGN example still lacks the complete DeepMind TFRecord bundle, a PhysicsNeMo checkpoint, raw outputs, and metric ledgers.",
+      "blocker_reason": "Official NGC cylinder-flow archive and complete DeepMind TFRecord bundle are staged externally, but the MGN example still lacks a PhysicsNeMo checkpoint, raw outputs, and metric ledgers.",
       "checkpoint_or_api_staged": false,
       "deepmind_tfrecord_bundle": {
         "external_stage_dir": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow",
         "files": {
           "meta.json": {
-            "bytes": 0,
-            "exists": false,
+            "bytes": 883,
+            "exists": true,
             "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/meta.json",
-            "sha256_prefix": null
+            "sha256_prefix": "2a3e39429a55a0cf"
           },
           "test.tfrecord": {
-            "bytes": 0,
-            "exists": false,
+            "bytes": 1355376404,
+            "exists": true,
             "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/test.tfrecord",
-            "sha256_prefix": null
+            "sha256_prefix": "8522932a23da6ccd"
           },
           "train.tfrecord": {
-            "bytes": 0,
-            "exists": false,
+            "bytes": 13645805387,
+            "exists": true,
             "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/train.tfrecord",
-            "sha256_prefix": null
+            "sha256_prefix": "ea63bf985ef131d5"
           },
           "valid.tfrecord": {
-            "bytes": 0,
-            "exists": false,
+            "bytes": 1363987289,
+            "exists": true,
             "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/valid.tfrecord",
-            "sha256_prefix": null
+            "sha256_prefix": "79171fa282fcd4fd"
           }
         },
         "required_files": [
@@ -43,10 +43,10 @@
         ],
         "source_prefix": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow/"
       },
-      "deepmind_tfrecord_bundle_complete": false,
+      "deepmind_tfrecord_bundle_complete": true,
+      "deepmind_tfrecord_observed_bytes": 16365169963,
       "metric_ledgers_available": false,
       "missing_for_workflow": [
-        "complete_deepmind_tfrecord_bundle",
         "official_or_new_physicsnemo_checkpoint",
         "raw_outputs",
         "metric_ledgers"
@@ -130,7 +130,7 @@
           401
         ],
         "status_code": 401,
-        "stderr_tail": "                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"
+        "stderr_tail": "ceived % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"
       },
       "nim_access_note": "DoMINO-Automotive-Aero NIM is a pre-trained containerized model, but pulling/running it requires NGC/API access, a large container, and GPU-capable runtime not staged here.",
       "object_id": "physicsnemo-domino-external-aero",
@@ -180,7 +180,7 @@
           401
         ],
         "status_code": 401,
-        "stderr_tail": "                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"
+        "stderr_tail": "ceived % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"
       },
       "nim_access_note": "DoMINO-Automotive-Aero NIM is a pre-trained containerized model, but pulling/running it requires NGC/API access, a large container, and GPU-capable runtime not staged here.",
       "object_id": "physicsnemo-domino-external-aero",
@@ -192,34 +192,34 @@
     },
     "physicsnemo-mgn-vortex-shedding": {
       "access_status": "partial-data-staged-but-workflow-blocked",
-      "blocker_reason": "Official NGC cylinder-flow archive is staged externally, but the MGN example still lacks the complete DeepMind TFRecord bundle, a PhysicsNeMo checkpoint, raw outputs, and metric ledgers.",
+      "blocker_reason": "Official NGC cylinder-flow archive and complete DeepMind TFRecord bundle are staged externally, but the MGN example still lacks a PhysicsNeMo checkpoint, raw outputs, and metric ledgers.",
       "checkpoint_or_api_staged": false,
       "deepmind_tfrecord_bundle": {
         "external_stage_dir": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow",
         "files": {
           "meta.json": {
-            "bytes": 0,
-            "exists": false,
+            "bytes": 883,
+            "exists": true,
             "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/meta.json",
-            "sha256_prefix": null
+            "sha256_prefix": "2a3e39429a55a0cf"
           },
           "test.tfrecord": {
-            "bytes": 0,
-            "exists": false,
+            "bytes": 1355376404,
+            "exists": true,
             "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/test.tfrecord",
-            "sha256_prefix": null
+            "sha256_prefix": "8522932a23da6ccd"
           },
           "train.tfrecord": {
-            "bytes": 0,
-            "exists": false,
+            "bytes": 13645805387,
+            "exists": true,
             "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/train.tfrecord",
-            "sha256_prefix": null
+            "sha256_prefix": "ea63bf985ef131d5"
           },
           "valid.tfrecord": {
-            "bytes": 0,
-            "exists": false,
+            "bytes": 1363987289,
+            "exists": true,
             "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow/valid.tfrecord",
-            "sha256_prefix": null
+            "sha256_prefix": "79171fa282fcd4fd"
           }
         },
         "required_files": [
@@ -230,10 +230,10 @@
         ],
         "source_prefix": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow/"
       },
-      "deepmind_tfrecord_bundle_complete": false,
+      "deepmind_tfrecord_bundle_complete": true,
+      "deepmind_tfrecord_observed_bytes": 16365169963,
       "metric_ledgers_available": false,
       "missing_for_workflow": [
-        "complete_deepmind_tfrecord_bundle",
         "official_or_new_physicsnemo_checkpoint",
         "raw_outputs",
         "metric_ledgers"

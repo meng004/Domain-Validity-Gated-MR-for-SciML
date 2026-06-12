@@ -31,15 +31,17 @@ class ProductionSutOfficialAccessStagingTest(unittest.TestCase):
         )
         self.assertFalse(self.report["task3_to_task5_workflows_allowed"])
 
-    def test_mgn_ngc_archive_is_staged_but_not_sufficient_for_task3(self) -> None:
+    def test_mgn_official_data_archives_are_staged_but_checkpoint_is_missing(self) -> None:
         mgn = self.report["objects_by_id"]["physicsnemo-mgn-vortex-shedding"]
         self.assertTrue(mgn["official_doc_reachable"])
         self.assertTrue(mgn["ngc_cylinder_flow_archive"]["local_archive_exists"])
         self.assertGreater(mgn["ngc_cylinder_flow_archive"]["local_archive_bytes"], 1_000_000_000)
         self.assertEqual(mgn["ngc_cylinder_flow_archive"]["nested_entries"], ["dataset.zip"])
-        self.assertFalse(mgn["deepmind_tfrecord_bundle_complete"])
+        self.assertTrue(mgn["deepmind_tfrecord_bundle_complete"])
+        self.assertGreater(mgn["deepmind_tfrecord_observed_bytes"], 16_000_000_000)
         self.assertFalse(mgn["checkpoint_or_api_staged"])
-        self.assertIn("complete_deepmind_tfrecord_bundle", mgn["missing_for_workflow"])
+        self.assertNotIn("complete_deepmind_tfrecord_bundle", mgn["missing_for_workflow"])
+        self.assertIn("official_or_new_physicsnemo_checkpoint", mgn["missing_for_workflow"])
 
     def test_external_aero_objects_record_access_blockers_not_results(self) -> None:
         aero = self.report["objects_by_id"]["physicsnemo-aerographnet-external-aero"]
@@ -55,9 +57,9 @@ class ProductionSutOfficialAccessStagingTest(unittest.TestCase):
         plan = PLAN.read_text(encoding="utf-8")
         next_steps = NEXT.read_text(encoding="utf-8")
         claims = CLAIM_LEDGER.read_text(encoding="utf-8")
-        self.assertIn("Task 2.7", plan)
-        self.assertIn("official access staging", plan)
-        self.assertIn("Task 2.7 official access/source staging", next_steps)
+        self.assertIn("Task 2.8", plan)
+        self.assertIn("complete official DeepMind TFRecord data", plan)
+        self.assertIn("Task 2.8 complete DeepMind TFRecord staging", next_steps)
         self.assertIn("official_access_staging_report.json", claims)
         self.assertIn("No production MR has been executed", claims)
         self.assertIn("Do not claim PhysicsNeMo/AeroGraphNet/DoMINO primary workflow results", claims)

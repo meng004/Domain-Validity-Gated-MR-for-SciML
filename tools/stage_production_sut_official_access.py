@@ -80,6 +80,7 @@ def http_probe(url: str) -> dict[str, Any]:
 def build_report() -> dict[str, Any]:
     deepmind_files = {name: file_record(DEEPMIND_TFRECORD_DIR / name) for name in REQUIRED_DEEPMIND}
     deepmind_complete = all(rec["exists"] for rec in deepmind_files.values())
+    deepmind_observed_bytes = sum(rec["bytes"] for rec in deepmind_files.values())
     mgn_checkpoint_staged = Path("/workspace/physicsnemo_staged_assets/mgn/checkpoints/checkpoint.pt").exists()
 
     ngc_archive = file_record(NGC_ARCHIVE)
@@ -113,6 +114,7 @@ def build_report() -> dict[str, Any]:
                 "files": deepmind_files,
             },
             "deepmind_tfrecord_bundle_complete": deepmind_complete,
+            "deepmind_tfrecord_observed_bytes": deepmind_observed_bytes,
             "checkpoint_or_api_staged": mgn_checkpoint_staged,
             "raw_outputs_available": False,
             "metric_ledgers_available": False,
@@ -127,7 +129,7 @@ def build_report() -> dict[str, Any]:
                 )
                 if not ok
             ],
-            "blocker_reason": "Official NGC cylinder-flow archive is staged externally, but the MGN example still lacks the complete DeepMind TFRecord bundle, a PhysicsNeMo checkpoint, raw outputs, and metric ledgers.",
+            "blocker_reason": "Official NGC cylinder-flow archive and complete DeepMind TFRecord bundle are staged externally, but the MGN example still lacks a PhysicsNeMo checkpoint, raw outputs, and metric ledgers.",
         },
         {
             "object_id": "physicsnemo-aerographnet-external-aero",

@@ -1,6 +1,6 @@
 {
   "aggregate_status": "blocked-assets-incomplete",
-  "blocker_reason": "Official cylinder_flow data is public but large and incomplete in this environment; official/new PhysicsNeMo checkpoint, raw outputs, and metric ledgers are absent. Task 3 must remain blocked.",
+  "blocker_reason": "Official cylinder_flow data is now complete in external staging, but official/new PhysicsNeMo checkpoint, raw outputs, and metric ledgers are absent. Task 3 must remain blocked.",
   "checkpoint_staging": {
     "checkpoint_file": {
       "bytes": 0,
@@ -12,7 +12,7 @@
     "official_checkpoint_staged": false
   },
   "data_staging": {
-    "all_required_files_present": false,
+    "all_required_files_present": true,
     "external_stage_dir": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow",
     "files": {
       "meta.json": {
@@ -21,41 +21,39 @@
         "sha256_prefix": "2a3e39429a55a0cf"
       },
       "test.tfrecord": {
-        "bytes": 0,
-        "exists": false,
-        "sha256_prefix": null
+        "bytes": 1355376404,
+        "exists": true,
+        "sha256_prefix": "8522932a23da6ccd"
       },
       "train.tfrecord": {
-        "bytes": 1392903120,
+        "bytes": 13645805387,
         "exists": true,
-        "sha256_prefix": "dc6dda92edda54a6"
+        "sha256_prefix": "ea63bf985ef131d5"
       },
       "valid.tfrecord": {
-        "bytes": 0,
-        "exists": false,
-        "sha256_prefix": null
+        "bytes": 1363987289,
+        "exists": true,
+        "sha256_prefix": "79171fa282fcd4fd"
       }
     },
-    "missing_required_files": [
-      "valid.tfrecord",
-      "test.tfrecord"
-    ],
-    "observed_bytes": 1392904003,
-    "official_data_staged": false,
+    "missing_required_files": [],
+    "observed_bytes": 16365169963,
+    "official_data_staged": true,
     "present_required_files": [
       "meta.json",
-      "train.tfrecord"
+      "train.tfrecord",
+      "valid.tfrecord",
+      "test.tfrecord"
     ]
   },
   "datapipe_smoke_attempted": false,
-  "datapipe_smoke_reason": "Skipped because the required train/valid/test TFRecord bundle is incomplete; instantiating the PhysicsNeMo datapipe on a partial TFRecord would not be a valid smoke test.",
-  "download_attempt_note": "Official cylinder_flow data download was attempted in /workspace/physicsnemo_staged_assets. The full TFRecord bundle is large; the attempt was stopped after partial train.tfrecord staging to avoid wasting time/storage in this coding container.",
+  "datapipe_smoke_reason": "Skipped because Task 3 still lacks an official/new PhysicsNeMo checkpoint and production raw-output/metric-ledger workflow; data completeness alone is not a valid production MR execution.",
+  "download_attempt_note": "Official DeepMind cylinder_flow train/valid/test TFRecord bundle is completely staged in /workspace/physicsnemo_staged_assets; data is no longer the Task 3 blocker.",
   "download_attempted": true,
   "generated_on": "2026-06-12",
   "honesty_boundary": "This artifact records an official data/checkpoint staging attempt only. It is not a PhysicsNeMo MGN workflow execution and provides no production MR verdict.",
   "metric_ledgers_available": false,
   "missing_for_task3": [
-    "complete_official_data",
     "official_checkpoint",
     "raw_outputs",
     "metric_ledgers"

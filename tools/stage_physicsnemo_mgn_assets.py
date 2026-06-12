@@ -39,6 +39,14 @@ def build_report() -> dict[str, Any]:
     checkpoint = file_record(CHECKPOINT)
     complete_data = not missing
     complete_checkpoint = checkpoint["exists"]
+    if complete_data:
+        download_note = "Official DeepMind cylinder_flow train/valid/test TFRecord bundle is completely staged in /workspace/physicsnemo_staged_assets; data is no longer the Task 3 blocker."
+        datapipe_reason = "Skipped because Task 3 still lacks an official/new PhysicsNeMo checkpoint and production raw-output/metric-ledger workflow; data completeness alone is not a valid production MR execution."
+        blocker_reason = "Official cylinder_flow data is now complete in external staging, but official/new PhysicsNeMo checkpoint, raw outputs, and metric ledgers are absent. Task 3 must remain blocked."
+    else:
+        download_note = "Official cylinder_flow data download was attempted in /workspace/physicsnemo_staged_assets. The full TFRecord bundle is large and remains incomplete in this coding container."
+        datapipe_reason = "Skipped because the required train/valid/test TFRecord bundle is incomplete; instantiating the PhysicsNeMo datapipe on a partial TFRecord would not be a valid smoke test."
+        blocker_reason = "Official cylinder_flow data is public but large and incomplete in this environment; official/new PhysicsNeMo checkpoint, raw outputs, and metric ledgers are absent. Task 3 must remain blocked."
     return {
         "record_type": "physicsnemo-mgn-asset-staging-report",
         "schema_version": "0.1.0",
@@ -51,7 +59,7 @@ def build_report() -> dict[str, Any]:
             "license_context": "DeepMind MeshGraphNets dataset download script; external data staged outside git due size.",
         },
         "download_attempted": True,
-        "download_attempt_note": "Official cylinder_flow data download was attempted in /workspace/physicsnemo_staged_assets. The full TFRecord bundle is large; the attempt was stopped after partial train.tfrecord staging to avoid wasting time/storage in this coding container.",
+        "download_attempt_note": download_note,
         "data_staging": {
             "external_stage_dir": str(STAGE_DIR),
             "official_data_staged": complete_data,
@@ -68,7 +76,7 @@ def build_report() -> dict[str, Any]:
             "note": "No official PhysicsNeMo MGN checkpoint or newly trained PhysicsNeMo checkpoint is staged yet.",
         },
         "datapipe_smoke_attempted": False,
-        "datapipe_smoke_reason": "Skipped because the required train/valid/test TFRecord bundle is incomplete; instantiating the PhysicsNeMo datapipe on a partial TFRecord would not be a valid smoke test.",
+        "datapipe_smoke_reason": datapipe_reason,
         "raw_outputs_available": False,
         "metric_ledgers_available": False,
         "task3_workflow_execution_allowed": False,
@@ -82,7 +90,7 @@ def build_report() -> dict[str, Any]:
             )
             if not ok
         ],
-        "blocker_reason": "Official cylinder_flow data is public but large and incomplete in this environment; official/new PhysicsNeMo checkpoint, raw outputs, and metric ledgers are absent. Task 3 must remain blocked.",
+        "blocker_reason": blocker_reason,
         "honesty_boundary": "This artifact records an official data/checkpoint staging attempt only. It is not a PhysicsNeMo MGN workflow execution and provides no production MR verdict.",
     }
 

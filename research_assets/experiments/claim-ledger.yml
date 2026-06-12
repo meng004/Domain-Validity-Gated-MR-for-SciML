@@ -774,8 +774,8 @@ claims:
       planned MR relations for those objects, the PhysicsNeMo package/runtime import
       gate is partially staged, PhysicsNeMo MGN data/checkpoint staging was
       attempted, and official source/access staging for all three objects was recorded. Official documentation URLs were reachable and core PhysicsNeMo/
-      MeshGraphNet/DoMINO modules import under CPU PyTorch, but CUDA/GPU, complete
-      official datasets, official/new PhysicsNeMo checkpoints, API credentials,
+      MeshGraphNet/DoMINO modules import under CPU PyTorch, but CUDA/GPU, Object-A complete official DeepMind TFRecord data is now externally staged; complete
+      official datasets for the external-aero objects, official/new PhysicsNeMo checkpoints, API credentials,
       source/follow-up production outputs, and metric ledgers have not been staged.
       No production MR has been executed. Production workflows have not produced raw
       outputs yet, so the three objects remain blocked rather than replaced by local
@@ -785,7 +785,7 @@ claims:
       - "Do not claim production SUT pass/fail rates."
       - "Do not claim production CFD surrogate reliability, model accuracy, or geometry-independent validity."
       - "Do not substitute PointMLP, local FNO, or local MGN variants for these production objects."
-    blocked_reason: "Production workflows have not produced raw outputs yet; PhysicsNeMo package/runtime, complete checkpoint/data/API staging, and metric-ledger artifacts remain unresolved."
+    blocked_reason: "Production workflows have not produced raw outputs yet; Object-A official data is staged, but official/new PhysicsNeMo checkpoints/API, external-aero data access, raw outputs, and metric-ledger artifacts remain unresolved."
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"

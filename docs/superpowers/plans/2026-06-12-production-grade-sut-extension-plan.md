@@ -416,6 +416,20 @@ Acceptance:
 
 Task 2.7 execution note (2026-06-12): `tools/stage_production_sut_official_access.py` wrote `research_assets/runs/production-grade-sut-extension/official_access_staging_report.json`. The public NGC `modulus_datasets_cylinder-flow` zip was downloaded to external workspace storage and its nested `dataset.zip` was inspected; this is official cylinder-flow data, but it is not the complete DeepMind train/valid/test TFRecord bundle required for the selected PhysicsNeMo MGN Task 3 workflow. AeroGraphNet remains blocked by NVIDIA/full-dataset access and checkpoint availability, while DoMINO remains blocked by NGC API key/container/GPU endpoint requirements. No production raw outputs or metric ledgers exist, so Task 3--5 workflows remain blocked.
 
+### Task 2.8 — complete official DeepMind TFRecord data staging for Object A
+
+- [x] Download complete official DeepMind `cylinder_flow` `meta.json`, `train.tfrecord`, `valid.tfrecord`, and `test.tfrecord` to external workspace storage.
+- [x] Re-run `tools/stage_physicsnemo_mgn_assets.py` so the report distinguishes closed data blocker from remaining checkpoint/raw-output/ledger blockers.
+- [x] Re-run `tools/stage_production_sut_official_access.py` so the all-object official access report records the complete Object-A TFRecord bundle.
+- [x] Keep Task 3 blocked until a PhysicsNeMo checkpoint/API plus raw outputs and metric ledgers exist.
+
+Acceptance:
+
+- `physicsnemo_mgn_asset_staging_report.json` records `official_data_staged: true` and no `complete_official_data` blocker.
+- Task 3 remains unchecked because checkpoint/API, raw outputs, and metric ledgers are still absent.
+
+Task 2.8 execution note (2026-06-12): the complete DeepMind TFRecord bundle; the complete official DeepMind TFRecord data bundle for Object A is staged externally under `/workspace/physicsnemo_staged_assets/mgn/cylinder_flow` and totals more than 16 GB. This closes the Object-A data-staging blocker only. No official/new PhysicsNeMo MGN checkpoint, GPU-backed workflow execution, production raw outputs, or metric ledgers exist, so Task 3 remains blocked.
+
 ### Task 3 — PhysicsNeMo MeshGraphNet workflow
 
 - [ ] Implement `tools/run_physicsnemo_mgn_primary_workflow.py`.
