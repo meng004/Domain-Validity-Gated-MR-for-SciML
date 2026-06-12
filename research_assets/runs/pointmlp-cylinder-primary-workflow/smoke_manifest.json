@@ -1,0 +1,7 @@
+{
+  "record_type": "pointmlp-cylinder-primary-workflow-smoke-manifest",
+  "generated_at": "2026-06-12T06:47:57Z",
+  "command": "python3 tools/run_pointmlp_cylinder_primary_workflow.py --epochs 300 --hidden 64 --lr 0.002",
+  "report": "research_assets/runs/pointmlp-cylinder-primary-workflow/pointmlp_cylinder_primary_workflow_report.json",
+  "checkpoint": "research_assets/runs/pointmlp-cylinder-primary-workflow/sut/checkpoint.pt"
+}

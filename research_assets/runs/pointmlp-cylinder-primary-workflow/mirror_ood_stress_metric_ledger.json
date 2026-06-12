@@ -1,0 +1,121 @@
+{
+  "ledger_id": "pointmlp-cylinder-mirror_ood_stress-metric-ledger",
+  "schema_version": "0.1.0",
+  "sut_id": "pointmlp-cylinder-sut-v1",
+  "relation_id": "pointmlp-mirror-y-ood-stress",
+  "evidence_level": "different-architecture-cylinder-flow-primary-workflow",
+  "entries": [
+    {
+      "frame": 0,
+      "metric_value": 0.16246439407700686,
+      "threshold": 1e-06,
+      "mapping_error_floor": 0.9376899583162069,
+      "violation_over_floor": 0.17326024730897327,
+      "verdict": "fail",
+      "exact_relation_verdict": "out-of-relation-domain",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame00.npz"
+    },
+    {
+      "frame": 1,
+      "metric_value": 0.15567052580720744,
+      "threshold": 1e-06,
+      "mapping_error_floor": 0.9376899583162069,
+      "violation_over_floor": 0.1660149225515246,
+      "verdict": "fail",
+      "exact_relation_verdict": "out-of-relation-domain",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame01.npz"
+    },
+    {
+      "frame": 2,
+      "metric_value": 0.15158296759454398,
+      "threshold": 1e-06,
+      "mapping_error_floor": 0.9376899583162069,
+      "violation_over_floor": 0.1616557437244383,
+      "verdict": "fail",
+      "exact_relation_verdict": "out-of-relation-domain",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame02.npz"
+    },
+    {
+      "frame": 3,
+      "metric_value": 0.14843368953578848,
+      "threshold": 1e-06,
+      "mapping_error_floor": 0.9376899583162069,
+      "violation_over_floor": 0.15829719431178318,
+      "verdict": "fail",
+      "exact_relation_verdict": "out-of-relation-domain",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame03.npz"
+    },
+    {
+      "frame": 4,
+      "metric_value": 0.14597114013841736,
+      "threshold": 1e-06,
+      "mapping_error_floor": 0.9376899583162069,
+      "violation_over_floor": 0.15567100707843254,
+      "verdict": "fail",
+      "exact_relation_verdict": "out-of-relation-domain",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame04.npz"
+    },
+    {
+      "frame": 5,
+      "metric_value": 0.14403454897416712,
+      "threshold": 1e-06,
+      "mapping_error_floor": 0.9376899583162069,
+      "violation_over_floor": 0.15360572830790187,
+      "verdict": "fail",
+      "exact_relation_verdict": "out-of-relation-domain",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame05.npz"
+    },
+    {
+      "frame": 6,
+      "metric_value": 0.14257143762374214,
+      "threshold": 1e-06,
+      "mapping_error_floor": 0.9376899583162069,
+      "violation_over_floor": 0.15204539235949066,
+      "verdict": "fail",
+      "exact_relation_verdict": "out-of-relation-domain",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame06.npz"
+    },
+    {
+      "frame": 7,
+      "metric_value": 0.14136703247541704,
+      "threshold": 1e-06,
+      "mapping_error_floor": 0.9376899583162069,
+      "violation_over_floor": 0.1507609537903843,
+      "verdict": "fail",
+      "exact_relation_verdict": "out-of-relation-domain",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame07.npz"
+    },
+    {
+      "frame": 8,
+      "metric_value": 0.14052532436927723,
+      "threshold": 1e-06,
+      "mapping_error_floor": 0.9376899583162069,
+      "violation_over_floor": 0.14986331369231684,
+      "verdict": "fail",
+      "exact_relation_verdict": "out-of-relation-domain",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame08.npz"
+    },
+    {
+      "frame": 9,
+      "metric_value": 0.13993883361747028,
+      "threshold": 1e-06,
+      "mapping_error_floor": 0.9376899583162069,
+      "violation_over_floor": 0.14923785028982922,
+      "verdict": "fail",
+      "exact_relation_verdict": "out-of-relation-domain",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame09.npz"
+    }
+  ],
+  "raw_outputs": [
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame00.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame01.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame02.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame03.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame04.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame05.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame06.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame07.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame08.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame09.npz"
+  ]
+}

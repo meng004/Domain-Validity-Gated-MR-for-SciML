@@ -1,0 +1,9 @@
+{
+  "denominator": 1,
+  "metric": "abs_sum_velocity_delta_ratio_vs_reference_target",
+  "ratio": 0.05510891338914223,
+  "reference_mean_abs_sum_velocity_delta": 1753.3765869140625,
+  "relation": "reference_relative_conservation_diagnostic",
+  "source_mean_abs_sum_velocity_delta": 96.62667846679688,
+  "verdict": "diagnostic-recorded"
+}
