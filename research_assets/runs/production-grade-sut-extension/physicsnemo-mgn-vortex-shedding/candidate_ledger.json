@@ -1,0 +1,163 @@
+{
+  "candidates": [
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": true,
+        "numerical_floor_defined": true,
+        "output_mapping_defined": true,
+        "semantic_invariance": true
+      },
+      "basis": "MeshGraphNet-style graph predictions should be equivariant to a pure node-row permutation when edge indices and node features are permuted consistently.",
+      "candidate_id": "physicsnemo-mgn-vortex-shedding:node-order-permutation",
+      "decision": "admitted",
+      "decision_reason": "Pure graph-row relabeling is an admissible exact representation relation once production graph tensors are available.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": true,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Pure graph-row relabeling is an admissible exact representation relation once production graph tensors are available."
+      },
+      "metric": "relative L2 between source output and inverse-mapped follow-up output",
+      "output_mapping": "Inverse-permute follow-up node predictions to source node order.",
+      "preconditions": [
+        "Graph connectivity is explicitly accessible",
+        "Permutation preserves node and edge attributes",
+        "Output is node-indexed"
+      ],
+      "relation_class": "representation",
+      "source_category": "graph-representation contract",
+      "tolerance_floor_status": "defined"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": false,
+        "numerical_floor_defined": false,
+        "output_mapping_defined": true,
+        "semantic_invariance": false
+      },
+      "basis": "Cylinder/vortex-shedding geometry may appear mirror-like, but inflow, boundary encoding, rollout state, and trained preprocessing must be audited before exact mirror-y is valid.",
+      "candidate_id": "physicsnemo-mgn-vortex-shedding:mirror-y-vortex-domain",
+      "decision": "downgraded",
+      "decision_reason": "Treat as OOD stress until boundary/preprocessing symmetry and numerical floor are verified from official artifacts.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Treat as OOD stress until boundary/preprocessing symmetry and numerical floor are verified from official artifacts."
+      },
+      "metric": "mapped-field relative L2 over velocity/pressure channels",
+      "output_mapping": "Reflect coordinates and flip transverse velocity components before comparing mapped fields.",
+      "preconditions": [
+        "Geometry and boundary conditions are mirror symmetric",
+        "Vector components are sign-mapped correctly",
+        "Training normalization does not encode an orientation"
+      ],
+      "relation_class": "symmetry",
+      "source_category": "physics/geometry symmetry",
+      "tolerance_floor_status": "needs_calibration"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": true,
+        "numerical_floor_defined": false,
+        "output_mapping_defined": true,
+        "semantic_invariance": true
+      },
+      "basis": "A learned transient surrogate can be checked against reference-relative divergence/flux drift, but absolute conservation is not implied by a black-box checkpoint.",
+      "candidate_id": "physicsnemo-mgn-vortex-shedding:reference-relative-divergence",
+      "decision": "deferred",
+      "decision_reason": "Diagnostic is plausible, but tolerance/floor and reference mapping require production raw outputs.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Diagnostic is plausible, but tolerance/floor and reference mapping require production raw outputs."
+      },
+      "metric": "relative change in divergence/flux diagnostic versus reference/source baseline",
+      "output_mapping": "Compute source and follow-up divergence/flux diagnostics in the same physical coordinates.",
+      "preconditions": [
+        "Mesh cells/areas or graph stencils are accessible",
+        "Reference or source-step baseline is available",
+        "Velocity channels are mapped unambiguously"
+      ],
+      "relation_class": "conservation_flux",
+      "source_category": "diagnostic conservation contract",
+      "tolerance_floor_status": "needs_calibration"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": false,
+        "numerical_floor_defined": true,
+        "output_mapping_defined": false,
+        "semantic_invariance": false
+      },
+      "basis": "Perturbations that alter inlet, wall, or obstacle boundary semantics are not exact MRs for a trained vortex-shedding surrogate.",
+      "candidate_id": "physicsnemo-mgn-vortex-shedding:boundary-condition-contract",
+      "decision": "rejected",
+      "decision_reason": "Boundary-changing transforms violate the SUT input contract and must not be executed as exact MRs.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Boundary-changing transforms violate the SUT input contract and must not be executed as exact MRs."
+      },
+      "metric": "rubric decision only before execution",
+      "output_mapping": "No output mapping unless the transformed input is contract-preserving.",
+      "preconditions": [
+        "Boundary node types are identifiable",
+        "Perturbation preserves boundary labels and physical units"
+      ],
+      "relation_class": "boundary_contract",
+      "source_category": "input contract audit",
+      "tolerance_floor_status": "not_applicable"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": true,
+        "numerical_floor_defined": false,
+        "output_mapping_defined": true,
+        "semantic_invariance": true
+      },
+      "basis": "Estimate relation-specific floating-point/operator floor from repeated production inference before assigning tolerances.",
+      "candidate_id": "physicsnemo-mgn-vortex-shedding:numeric-floor-calibration",
+      "decision": "deferred",
+      "decision_reason": "Numerical floor cannot be calibrated before official runtime and raw repeated outputs exist.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Numerical floor cannot be calibrated before official runtime and raw repeated outputs exist."
+      },
+      "metric": "repeat-run relative L2 / max absolute difference by output channel",
+      "output_mapping": "Compare repeated source-output tensors or surface fields in the model's native output schema.",
+      "preconditions": [
+        "Official runtime is installed",
+        "At least two repeated source inferences can be saved as raw outputs"
+      ],
+      "relation_class": "numerical_floor",
+      "source_category": "protocol-calibration",
+      "tolerance_floor_status": "needs_calibration"
+    }
+  ],
+  "current_result_claim": "none",
+  "feasibility_report": "research_assets/runs/production-grade-sut-extension/feasibility_report.json",
+  "honesty_boundary": "This is a candidate ledger only. No production MR has been executed; Task 3--5 workflow results remain blocked until official runtime/checkpoints/data/API plus raw outputs and metric ledgers exist.",
+  "metric_ledgers_available": false,
+  "object_feasibility_status": "blocked",
+  "object_id": "physicsnemo-mgn-vortex-shedding",
+  "object_name": "PhysicsNeMo MeshGraphNet transient vortex shedding",
+  "official_url": "https://docs.nvidia.com/physicsnemo/latest/physicsnemo/examples/cfd/vortex_shedding_mgn/README.html",
+  "raw_outputs_available": false,
+  "record_type": "production-sut-mr-candidate-ledger",
+  "schema_version": "0.1.0",
+  "selected_future_subset": [
+    "physicsnemo-mgn-vortex-shedding:node-order-permutation",
+    "physicsnemo-mgn-vortex-shedding:numeric-floor-calibration"
+  ],
+  "workflow_execution_allowed": false
+}

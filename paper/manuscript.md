@@ -28,7 +28,7 @@ We propose a domain-validity rubric for screening candidate MRs, an MR-card and 
 
 ### Results
 
-The case-study evidence is scoped and artifact-backed. On the original MeshGraphNets checkpoint, node permutation holds to machine precision; mirror-y is a bounded within-SUT frame-level OOD-stress result that failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); absolute conservation remains deferred while the reference-relative non-regression guard passes. The primary empirical scope upgrade expands the weakest MGN denominators across the K=6 roster and three official held-out test trajectories: mirror-y fails on 180/180 checkpoint-trajectory-frame cells, conservation passes the reference-relative diagnostic on 162/162 transition cells, and the exact symmetric-mesh check fails on 18/18 checkpoint-input cells. Two controls calibrate the interpretation: rollout accuracy has median relative L2 0.0216, so mirror-y is about 34 times the in-distribution error, and a provably symmetric out-of-sample mesh still violates exact mirror-y (relative L2 about 1.10). The P1 divergence operator has measured O(h) behavior; a K=6 PINN roster transfers the conservation rewrite while heat-equation mirror-y remains mixed; the **FNO primary workflow upgrade** adds a trained FNO rubric-to-verdict execution where translation passes, conservation fails under a periodic discrete-conservation MR, and Dirichlet-boundary translation is rejected; and a 60-entry unified fault catalogue reports detector precision/recall and effect-size statistics. The evidence remains one bounded within-SUT/cross-family artifact package.
+The case-study evidence is scoped and artifact-backed. On the original MeshGraphNets checkpoint, node permutation holds to machine precision; mirror-y is a bounded within-SUT frame-level OOD-stress result that failed on 10 of 10 recorded eval frames (median relative L2 0.737, median V/floor 3.96); absolute conservation remains deferred while the reference-relative non-regression guard passes. The primary empirical scope upgrade expands the weakest MGN denominators across the K=6 roster and three official held-out test trajectories: mirror-y fails on 180/180 checkpoint-trajectory-frame cells, conservation passes the reference-relative diagnostic on 162/162 transition cells, and the exact symmetric-mesh check fails on 18/18 checkpoint-input cells. Two controls calibrate the interpretation: rollout accuracy has median relative L2 0.0216, so mirror-y is about 34 times the in-distribution error, and a provably symmetric out-of-sample mesh still violates exact mirror-y (relative L2 about 1.10). The P1 divergence operator has measured O(h) behavior; a K=6 PINN roster transfers the conservation rewrite while heat-equation mirror-y remains mixed; a same-domain S4/S5 MeshGraphNet variant workflow adds a second real cylinder-flow checkpoint-family package; a newly trained non-MGN PointMLP cylinder-flow SUT adds 9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, and 3/3 exact-symmetry failures; the **FNO primary workflow upgrade** adds a trained FNO rubric-to-verdict execution where translation passes, conservation fails under a periodic discrete-conservation MR, and Dirichlet-boundary translation is rejected; and a 60-entry unified fault catalogue reports detector precision/recall and effect-size statistics. The cylinder-flow evidence remains one MeshGraphNet architecture family and one dataset, not PhysicsNeMo/EchoWave or a cross-dataset reliability package.
 
 ### Conclusion
 
@@ -245,12 +245,13 @@ We use this hierarchy as a predeclared interpretation protocol that maps represe
 
 ### 4.1 Subject Systems
 
-The current evidence uses one trained MeshGraphNets-family implementation and
-checkpoint. The broader protocol names three intended implementation families,
-but they remain blocked until matched artifacts exist:
+The current evidence now includes the local MeshGraphNets-family implementation,
+a different local PointMLP architecture, and a minimal NVIDIA PhysicsNeMo
+MeshGraphNet Object-A smoke workflow. Full production-scale external SUT claims
+remain blocked until matched artifacts exist:
 
 1. an echowve MeshGraphNets PyTorch/PyG implementation;
-2. NVIDIA PhysicsNeMo `vortex_shedding_mgn`;
+2. full-scale NVIDIA PhysicsNeMo `vortex_shedding_mgn` beyond the smoke subset;
 3. DeepMind TF1 MeshGraphNets, or a third same-family configuration if runtime feasibility requires substitution.
 
 For any future SUT admitted into the study, the experiment ledger must record
@@ -342,7 +343,7 @@ Third-party code, datasets, and model checkpoints will be used according to thei
 Cross-SUT and broad generalization claims remain **blocked** (see
 5.7). Primary evidence here is the executed pilots, the primary empirical scope upgrade, K=6 MGN/PINN rosters, the FNO primary workflow,
 operator-floor sweep, unified fault catalogue, and the Minimum-MR-SubSet
-MGN/PINN primary reruns; LLM/generic baselines and the read-only audit remain
+MGN/PINN primary reruns, and the minimal PhysicsNeMo MGN Object-A smoke workflow; LLM/generic baselines and the read-only audit remain
 secondary scope/provenance checks.
 
 ### 5.1 Claim-to-Evidence Map
@@ -366,6 +367,9 @@ secondary scope/provenance checks.
 | Multicheckpoint replication | Observed | `multicheckpoint/e1_aggregate.json`; per-SUT manifests under `multicheckpoint/S0..S5/` | K=6 checkpoints of one MeshGraphNets architecture family on one dataset; within-family replication. |
 | Operator-floor resolution | Observed | `operator-floor-sweep-extended/operator_floor_extended_report.json` | Log-log slope 0.984, 95% CI [0.975, 0.992] (interior 0.989, CI [0.982, 0.997]), R² = 0.9999 over nine resolutions on one symmetric structured mesh family with one analytic field; calibrates the admissibility predicate on one mesh family. |
 | Fault-detection robustness | Observed | `fault-robustness-e3/fault_robustness_report.json`; `phase3-unified-fault-catalog/phase3_unified_fault_catalog.json` | 30-trial Wilson CIs per MGN mutant plus a Phase-3 60-entry unified fault catalogue (10 canonical MGN + 2 adversarial MGN + 24 closed-form PINN output-level probes + 24 closed-form FNO output-level probes), by-detector precision/recall with Wilson CIs, and Wilcoxon/Cliff effect-size tests; PINN/FNO probes are closed-form output-level probes. |
+| S4/S5 variant primary workflow | Observed | `same-domain-variant-primary-workflow/same_domain_variant_primary_workflow_report.json`; raw ledgers | Same-domain wider/deeper MGN variants: 2/2 node-permutation passes, 60/60 mirror OOD failures, 54/54 conservation-diagnostic passes, 6/6 exact-symmetric failures; not PhysicsNeMo/EchoWave or cross-dataset reliability evidence. |
+| PointMLP cylinder primary workflow | Observed | `pointmlp-cylinder-primary-workflow/pointmlp_cylinder_primary_workflow_report.json`; checkpoint and raw ledgers | Newly trained non-MGN row-wise coordinate network on cylinder-flow source cases: 9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, 3/3 exact-symmetric failures, median rollout rel L2 0.0298; not PhysicsNeMo/EchoWave or production CFD evidence. |
+| PhysicsNeMo MGN Object-A smoke workflow | Observed smoke-subset production-framework execution | `production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/physicsnemo_mgn_smoke_workflow_report.json`; newly trained checkpoint, raw outputs, metric ledgers | NVIDIA PhysicsNeMo `MeshGraphNet` executes on a first-record official DeepMind `cylinder_flow` smoke subset: node permutation passes (relative L2 0.0), mirror-y is recorded as OOD stress, and conservation is reference-relative diagnostic only; not yet a full production-scale PhysicsNeMo benchmark and not AeroGraphNet/DoMINO evidence. |
 | FNO primary workflow upgrade | Observed | `fno-primary-workflow/fno_primary_workflow_report.json`; per-SUT ledgers and raw `.npz` source/follow-up outputs | Six trained FNO-2D checkpoints over Burgers/heat: 24/24 translation passes, 24/24 conservation failures under a periodic discrete-conservation MR, and 6/6 Dirichlet-boundary translation rejections; not only admissibility evidence, while still outside cylinder-flow, performance, reliability, or broad neural-operator claims. |
 
 The table uses reviewer-facing claim names. The authoritative runtime mapping remains in `claim-ledger.yml`; this keeps the results readable while preserving a complete evidence ledger.
@@ -378,6 +382,9 @@ The table uses reviewer-facing claim names. The authoritative runtime mapping re
 | Mirror-y equivariance (asymmetric eval mesh) | Exact relation out-of-relation-domain; downgraded to approximate OOD-stress | S0 pilot: fail on 10 of 10 recorded eval frames; primary upgrade: 180/180 fail across K=6 x 3 trajectories x 10 | Shows bounded within-family OOD-stress violation across three held-out trajectories; not by itself exact symmetry, cross-SUT, or geometry-independent evidence. |
 | Mirror-y equivariance (synthetic symmetric mesh) | Exact relation admissible (bijection verified, offset < 1e-12, type-match 1.0) | S0 pilot: fail, relative L2 1.10; primary upgrade: 18/18 fail across K=6 x 3 input seeds | Shows exact-symmetry failure where the relation is admissible; synthetic no-obstacle OOD meshes, not accuracy or cross-SUT evidence. |
 | Discrete divergence / conservation | Absolute mass-conservation MR deferred; reference-relative diagnostic retained | S0 pilot inconclusive: reference-relative non-regression guard; primary upgrade: 162/162 pass across K=6 x 3 trajectories x 9 | Reference-relative diagnostic only; the absolute conservation relation remains deferred. |
+| MGN S4/S5 variant workflow | Node permutation admitted; mirror OOD/conservation diagnostic/exact-symmetry decisions recorded | 2/2 node-permutation passes; 60/60 mirror OOD failures; 54/54 conservation-diagnostic passes; 6/6 exact-symmetry failures | Same-domain MGN variant evidence, not an external SUT family. |
+| PointMLP cylinder workflow | Node permutation admitted; mirror OOD/conservation diagnostic/exact-symmetry decisions recorded | 9/9 node-permutation passes; 10/10 mirror OOD failures; 9/9 conservation-diagnostic passes; 3/3 exact-symmetry failures | Different non-MGN cylinder SUT; not PhysicsNeMo/EchoWave or production CFD evidence. |
+| PhysicsNeMo MGN Object-A smoke workflow | Node permutation admitted; mirror OOD/conservation diagnostic decisions recorded | Node permutation passes on the smoke subset (relative L2 0.0); rollout, mirror OOD, and conservation diagnostic ledgers recorded | Production-framework artifact-chain smoke evidence only; no full-scale production pass/fail rate and not external-aerodynamics evidence. |
 | FNO periodic translation and conservation | Translation admitted; periodic discrete-conservation MR admitted-with-reference-floor; Dirichlet translation rejected | FNO primary workflow upgrade: 24/24 translation passes, 24/24 conservation failures, and 6/6 rejected Dirichlet exact-MR executions | Full rubric-to-verdict FNO evidence with raw source/follow-up outputs and per-case ledgers; outside cylinder-flow and broad neural-operator claims. |
 
 ### 5.3 Within-SUT pilot evidence (single SUT, single checkpoint)
@@ -535,13 +542,14 @@ LLM baselines are secondary exploratory scope contrasts. Three expert-LLMs propo
 
 The PINN extension checks whether the predicate and MR rewrites can be carried outside MeshGraphNets. The K=6 PINN roster contains three Burgers and three heat-equation seeds. MR-A remains vacuous by construction for pointwise MLP PINNs; the two non-trivial MR checks are mirror-y and reference-relative conservation. MR-B passes on Burgers (mean 0.615, CI [0.446, 0.890]) but is mixed on heat (mean 1.682, CI [0.853, 2.795]). MR-C passes on all six PINNs: Burgers mean 1.007 (CI [1.000, 1.011]) and heat mean 0.992 (CI [0.971, 1.012]). This is a two-PDE seed roster rather than a PINN-vs-MGN benchmark or a general claim across PINN architectures, PDEs, or training regimes.
 
+
 ### 5.6.6 FNO primary workflow upgrade (K=6)
 
 The **FNO primary workflow upgrade** converts the earlier FNO roster into a second trained primary execution. Six torch FNO-2D checkpoints cover Burgers and heat. For each checkpoint and four held-out generated periodic finite-difference cases, the workflow records rubric decisions, source and follow-up tensors, mapped outputs, metric ledgers, and relation verdicts. Periodic integer translation is admitted and yields **24/24 translation passes** (maximum relative-L2 violation below 1e-5). The **periodic discrete-conservation MR** is admitted-with-reference-floor because the finite-difference target supplies a case-level channel-sum drift floor; the trained FNO outputs exceed that calibrated floor on **24/24 conservation failures**. The Dirichlet translation candidate is rejected for 6/6 SUTs because it changes the boundary-value problem and is not executed as an exact MR. This is **not only admissibility evidence**: it is a full rubric-to-verdict FNO execution with raw source/follow-up outputs and per-case ledgers, while remaining outside cylinder-flow evidence, performance benchmarking, reliability, and broad neural-operator generalization.
 
 ### 5.7 Still blocked
 
-The canonical block list is unchanged: cross-SUT or geometry-independent pass/fail rates; comparative superiority over baselines; general or real-world fault-detection rates; validated localization; runtime; reliability; model accuracy; and broad external validity. The executed comparators are scoped diagnostics, the external-scope audit is secondary provenance, and the K=6 MGN/PINN/FNO plus PINN witness reruns do not lift the cross-SUT block.
+The canonical block list is narrowed but still active: external-SUT, cross-dataset, or geometry-independent pass/fail rates; comparative superiority over baselines; general or real-world fault-detection rates; validated localization; runtime; reliability; model accuracy; and broad external validity. The executed comparators are scoped diagnostics, the external-scope audit is secondary provenance, and the K=6 MGN/PINN/FNO plus PINN witness reruns do not lift the cross-SUT block.
 
 ## 6. Discussion
 

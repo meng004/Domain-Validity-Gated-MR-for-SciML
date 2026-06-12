@@ -1,0 +1,448 @@
+{
+  "record_type": "pointmlp-cylinder-primary-workflow",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-12T06:47:57Z",
+  "domain": "DeepMind cylinder_flow",
+  "architecture_family": "PointMLP row-wise coordinate network",
+  "sut_id": "pointmlp-cylinder-sut-v1",
+  "checkpoint_path": "research_assets/runs/pointmlp-cylinder-primary-workflow/sut/checkpoint.pt",
+  "checkpoint_sha256": "76c0c6c76149f076722ae98a787a061546d0a487cde08673b2cfedae3e01201e",
+  "train_meta": {
+    "train_samples": 33120,
+    "train_trajectories": [
+      0,
+      1
+    ],
+    "eval_trajectories": [
+      2
+    ],
+    "epochs": 300,
+    "hidden": 64,
+    "learning_rate": 0.002,
+    "batch_size": 4096,
+    "final_train_mse_normalized_delta": 0.8839666843414307
+  },
+  "source_cases": {
+    "0": "research_assets/runs/primary-scope-upgrade/source_cases/test_traj000_frames000_009.npz",
+    "1": "research_assets/runs/primary-scope-upgrade/source_cases/test_traj001_frames000_009.npz",
+    "2": "research_assets/runs/primary-scope-upgrade/source_cases/test_traj002_frames000_009.npz"
+  },
+  "full_workflow_flags": {
+    "trained_checkpoint": true,
+    "rubric_decisions": true,
+    "source_followup_outputs": true,
+    "metric_ledgers": true,
+    "relation_verdicts": true,
+    "different_architecture_from_mgn": true,
+    "same_domain_real_dataset": true
+  },
+  "rubric_decisions": "research_assets/runs/pointmlp-cylinder-primary-workflow/rubric_decisions.json",
+  "metric_ledgers": {
+    "node_permutation": "research_assets/runs/pointmlp-cylinder-primary-workflow/node_permutation_metric_ledger.json",
+    "mirror_ood_stress": "research_assets/runs/pointmlp-cylinder-primary-workflow/mirror_ood_stress_metric_ledger.json",
+    "conservation_reference_relative": "research_assets/runs/pointmlp-cylinder-primary-workflow/conservation_reference_relative_metric_ledger.json",
+    "exact_symmetric_mesh": "research_assets/runs/pointmlp-cylinder-primary-workflow/exact_symmetric_mesh_metric_ledger.json",
+    "rollout_accuracy": "research_assets/runs/pointmlp-cylinder-primary-workflow/rollout_accuracy_metric_ledger.json"
+  },
+  "rollout_accuracy": {
+    "transition_cells": 9,
+    "median_relative_l2": 0.02975835263724644,
+    "max_relative_l2": 0.09275380284264478,
+    "rows": [
+      {
+        "frame": 0,
+        "relative_l2": 0.09275380284264478,
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame00.npz"
+      },
+      {
+        "frame": 1,
+        "relative_l2": 0.048137472969906635,
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame01.npz"
+      },
+      {
+        "frame": 2,
+        "relative_l2": 0.03649526119779215,
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame02.npz"
+      },
+      {
+        "frame": 3,
+        "relative_l2": 0.03179660487258127,
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame03.npz"
+      },
+      {
+        "frame": 4,
+        "relative_l2": 0.02975835263724644,
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame04.npz"
+      },
+      {
+        "frame": 5,
+        "relative_l2": 0.02896718040944055,
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame05.npz"
+      },
+      {
+        "frame": 6,
+        "relative_l2": 0.028605257642534618,
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame06.npz"
+      },
+      {
+        "frame": 7,
+        "relative_l2": 0.028619536076798794,
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame07.npz"
+      },
+      {
+        "frame": 8,
+        "relative_l2": 0.028637551019675717,
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame08.npz"
+      }
+    ]
+  },
+  "node_permutation": {
+    "admissibility": "admitted",
+    "total_case_cells": 9,
+    "pass_count": 9,
+    "other_count": 0,
+    "pass_rate_wilson_ci95": [
+      0.7008549515804559,
+      1.0
+    ],
+    "median_metric_value": 0.0,
+    "max_metric_value": 0.0,
+    "rows": [
+      {
+        "frame": 0,
+        "metric_value": 0.0,
+        "threshold": 1e-06,
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame00.npz"
+      },
+      {
+        "frame": 1,
+        "metric_value": 0.0,
+        "threshold": 1e-06,
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame01.npz"
+      },
+      {
+        "frame": 2,
+        "metric_value": 0.0,
+        "threshold": 1e-06,
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame02.npz"
+      },
+      {
+        "frame": 3,
+        "metric_value": 0.0,
+        "threshold": 1e-06,
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame03.npz"
+      },
+      {
+        "frame": 4,
+        "metric_value": 0.0,
+        "threshold": 1e-06,
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame04.npz"
+      },
+      {
+        "frame": 5,
+        "metric_value": 0.0,
+        "threshold": 1e-06,
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame05.npz"
+      },
+      {
+        "frame": 6,
+        "metric_value": 0.0,
+        "threshold": 1e-06,
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame06.npz"
+      },
+      {
+        "frame": 7,
+        "metric_value": 0.0,
+        "threshold": 1e-06,
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame07.npz"
+      },
+      {
+        "frame": 8,
+        "metric_value": 0.0,
+        "threshold": 1e-06,
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame08.npz"
+      }
+    ]
+  },
+  "mirror_ood_stress": {
+    "admissibility": "downgraded-to-ood-stress",
+    "total_case_cells": 10,
+    "fail_count": 10,
+    "other_count": 0,
+    "fail_rate_wilson_ci95": [
+      0.7224672001371107,
+      0.9999999999999999
+    ],
+    "median_metric_value": 0.14500284455629225,
+    "max_metric_value": 0.16246439407700686,
+    "median_violation_over_floor": 0.1546383676931672,
+    "precondition_report": {
+      "mirror_axis": 0.20499999821186066,
+      "reflection_floor_median_edge_units": 15.04877758026123,
+      "domain_violation_score": 0.9376899583162069,
+      "decision": "downgraded-to-ood-stress"
+    },
+    "rows": [
+      {
+        "frame": 0,
+        "metric_value": 0.16246439407700686,
+        "threshold": 1e-06,
+        "mapping_error_floor": 0.9376899583162069,
+        "violation_over_floor": 0.17326024730897327,
+        "verdict": "fail",
+        "exact_relation_verdict": "out-of-relation-domain",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame00.npz"
+      },
+      {
+        "frame": 1,
+        "metric_value": 0.15567052580720744,
+        "threshold": 1e-06,
+        "mapping_error_floor": 0.9376899583162069,
+        "violation_over_floor": 0.1660149225515246,
+        "verdict": "fail",
+        "exact_relation_verdict": "out-of-relation-domain",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame01.npz"
+      },
+      {
+        "frame": 2,
+        "metric_value": 0.15158296759454398,
+        "threshold": 1e-06,
+        "mapping_error_floor": 0.9376899583162069,
+        "violation_over_floor": 0.1616557437244383,
+        "verdict": "fail",
+        "exact_relation_verdict": "out-of-relation-domain",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame02.npz"
+      },
+      {
+        "frame": 3,
+        "metric_value": 0.14843368953578848,
+        "threshold": 1e-06,
+        "mapping_error_floor": 0.9376899583162069,
+        "violation_over_floor": 0.15829719431178318,
+        "verdict": "fail",
+        "exact_relation_verdict": "out-of-relation-domain",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame03.npz"
+      },
+      {
+        "frame": 4,
+        "metric_value": 0.14597114013841736,
+        "threshold": 1e-06,
+        "mapping_error_floor": 0.9376899583162069,
+        "violation_over_floor": 0.15567100707843254,
+        "verdict": "fail",
+        "exact_relation_verdict": "out-of-relation-domain",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame04.npz"
+      },
+      {
+        "frame": 5,
+        "metric_value": 0.14403454897416712,
+        "threshold": 1e-06,
+        "mapping_error_floor": 0.9376899583162069,
+        "violation_over_floor": 0.15360572830790187,
+        "verdict": "fail",
+        "exact_relation_verdict": "out-of-relation-domain",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame05.npz"
+      },
+      {
+        "frame": 6,
+        "metric_value": 0.14257143762374214,
+        "threshold": 1e-06,
+        "mapping_error_floor": 0.9376899583162069,
+        "violation_over_floor": 0.15204539235949066,
+        "verdict": "fail",
+        "exact_relation_verdict": "out-of-relation-domain",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame06.npz"
+      },
+      {
+        "frame": 7,
+        "metric_value": 0.14136703247541704,
+        "threshold": 1e-06,
+        "mapping_error_floor": 0.9376899583162069,
+        "violation_over_floor": 0.1507609537903843,
+        "verdict": "fail",
+        "exact_relation_verdict": "out-of-relation-domain",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame07.npz"
+      },
+      {
+        "frame": 8,
+        "metric_value": 0.14052532436927723,
+        "threshold": 1e-06,
+        "mapping_error_floor": 0.9376899583162069,
+        "violation_over_floor": 0.14986331369231684,
+        "verdict": "fail",
+        "exact_relation_verdict": "out-of-relation-domain",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame08.npz"
+      },
+      {
+        "frame": 9,
+        "metric_value": 0.13993883361747028,
+        "threshold": 1e-06,
+        "mapping_error_floor": 0.9376899583162069,
+        "violation_over_floor": 0.14923785028982922,
+        "verdict": "fail",
+        "exact_relation_verdict": "out-of-relation-domain",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/mirror_ood/frame09.npz"
+      }
+    ]
+  },
+  "conservation_reference_relative": {
+    "admissibility": "diagnostic-not-absolute-mr",
+    "total_case_cells": 9,
+    "pass_count": 9,
+    "other_count": 0,
+    "pass_rate_wilson_ci95": [
+      0.7008549515804559,
+      1.0
+    ],
+    "median_metric_value": 1.0610474941534462,
+    "max_metric_value": 1.2709238748037204,
+    "max_ratio_interior": 1.097399101347129,
+    "honesty_boundary": "Absolute mass conservation remains deferred; this is a reference-relative diagnostic.",
+    "rows": [
+      {
+        "frame": 0,
+        "metric_value": 1.2709238748037204,
+        "threshold": 1.5,
+        "ratio_interior": 0.9368411730777099,
+        "divergence_pred_rms": 1.7385090530128355,
+        "divergence_reference_rms": 1.3679096659359935,
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame00.npz"
+      },
+      {
+        "frame": 1,
+        "metric_value": 1.1101941823116948,
+        "threshold": 1.5,
+        "ratio_interior": 1.087764873347384,
+        "divergence_pred_rms": 1.3793645188857282,
+        "divergence_reference_rms": 1.2424533841580354,
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame01.npz"
+      },
+      {
+        "frame": 2,
+        "metric_value": 1.075304972206258,
+        "threshold": 1.5,
+        "ratio_interior": 1.095650389960052,
+        "divergence_pred_rms": 1.2689293882705897,
+        "divergence_reference_rms": 1.1800646524186182,
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame02.npz"
+      },
+      {
+        "frame": 3,
+        "metric_value": 1.0610474941534462,
+        "threshold": 1.5,
+        "ratio_interior": 1.09449648838983,
+        "divergence_pred_rms": 1.2152694999164138,
+        "divergence_reference_rms": 1.1453488242635295,
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame03.npz"
+      },
+      {
+        "frame": 4,
+        "metric_value": 1.056632321165119,
+        "threshold": 1.5,
+        "ratio_interior": 1.0948042635790733,
+        "divergence_pred_rms": 1.1883193896316184,
+        "divergence_reference_rms": 1.1246290368264449,
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame04.npz"
+      },
+      {
+        "frame": 5,
+        "metric_value": 1.055459620603197,
+        "threshold": 1.5,
+        "ratio_interior": 1.0946426158575844,
+        "divergence_pred_rms": 1.1739118613794148,
+        "divergence_reference_rms": 1.1122281122498294,
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame05.npz"
+      },
+      {
+        "frame": 6,
+        "metric_value": 1.0575602070222265,
+        "threshold": 1.5,
+        "ratio_interior": 1.0957866201415225,
+        "divergence_pred_rms": 1.1667971758985387,
+        "divergence_reference_rms": 1.103291489364838,
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame06.npz"
+      },
+      {
+        "frame": 7,
+        "metric_value": 1.0590345516591575,
+        "threshold": 1.5,
+        "ratio_interior": 1.0965886346785465,
+        "divergence_pred_rms": 1.162713785576964,
+        "divergence_reference_rms": 1.097899765173266,
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame07.npz"
+      },
+      {
+        "frame": 8,
+        "metric_value": 1.0612135302682684,
+        "threshold": 1.5,
+        "ratio_interior": 1.097399101347129,
+        "divergence_pred_rms": 1.1612173732136433,
+        "divergence_reference_rms": 1.0942353636596533,
+        "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+        "verdict": "pass",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame08.npz"
+      }
+    ]
+  },
+  "exact_symmetric_mesh": {
+    "admissibility": "admitted-on-synthetic-symmetric-input",
+    "total_case_cells": 3,
+    "fail_count": 3,
+    "other_count": 0,
+    "fail_rate_wilson_ci95": [
+      0.4385029682449546,
+      1.0
+    ],
+    "median_metric_value": 0.013577989639631126,
+    "max_metric_value": 0.013601005659864537,
+    "rows": [
+      {
+        "seed": 20260612,
+        "metric_value": 0.013601005659864537,
+        "threshold": 1e-06,
+        "verdict": "fail",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/exact_symmetric_mesh/seed20260612.npz"
+      },
+      {
+        "seed": 20260613,
+        "metric_value": 0.013565398043931571,
+        "threshold": 1e-06,
+        "verdict": "fail",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/exact_symmetric_mesh/seed20260613.npz"
+      },
+      {
+        "seed": 20260614,
+        "metric_value": 0.013577989639631126,
+        "threshold": 1e-06,
+        "verdict": "fail",
+        "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/exact_symmetric_mesh/seed20260614.npz"
+      }
+    ]
+  },
+  "honesty_boundary": "This is a newly trained non-MGN PointMLP SUT on committed DeepMind cylinder_flow source-case trajectories. It is a different architecture family from MeshGraphNet because it is row-wise and uses no graph message passing. It is not PhysicsNeMo, not EchoWave, not a production-quality CFD surrogate, and not a cross-dataset or geometry-independent reliability estimate."
+}
