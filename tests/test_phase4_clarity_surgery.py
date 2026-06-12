@@ -58,8 +58,8 @@ class Phase4ClaritySurgeryTest(unittest.TestCase):
         ]:
             with self.subTest(stale=stale):
                 self.assertNotIn(stale, text)
-        self.assertIn("The canonical block list is unchanged", text)
-        self.assertIn("The canonical blocked list is unchanged", text)
+        self.assertIn("The canonical block list is narrowed but still active", text)
+        self.assertIn("The canonical blocked list is narrowed but still active", text)
 
 
 if __name__ == "__main__":
