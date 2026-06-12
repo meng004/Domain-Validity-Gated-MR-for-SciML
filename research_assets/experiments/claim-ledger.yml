@@ -682,6 +682,108 @@ claims:
       - "Generalization across PINN architectures, PDEs, or training regimes."
     blocked_reason: null
 
+  - claim_id: "C26-same-domain-variant-primary-workflow"
+    status: "observed"
+    scope: "same-domain real cylinder-flow MeshGraphNet configuration-variant checkpoint family / S4 hidden=128 and S5 num_layers=6 / three official DeepMind held-out test trajectories for trajectory-dependent checks / full rubric-to-verdict artifact bundle"
+    evidence:
+      - "tools/run_same_domain_variant_primary_workflow.py"
+      - "tests/test_same_domain_variant_primary_workflow.py"
+      - "research_assets/runs/same-domain-variant-primary-workflow/same_domain_variant_primary_workflow_report.json"
+      - "research_assets/runs/same-domain-variant-primary-workflow/rubric_decisions.json"
+      - "research_assets/runs/same-domain-variant-primary-workflow/smoke_manifest.json"
+      - "research_assets/runs/primary-scope-upgrade/T000/"
+      - "research_assets/runs/primary-scope-upgrade/T001/"
+      - "research_assets/runs/primary-scope-upgrade/T002/"
+      - "research_assets/runs/multicheckpoint/S4/"
+      - "research_assets/runs/multicheckpoint/S5/"
+    wording_allowed: >
+      A second same-domain real cylinder-flow checkpoint-family package is now
+      available for the wider/deeper MeshGraphNet variants S4 and S5. The package
+      records full rubric-to-verdict evidence: rubric decisions, committed
+      source/follow-up raw outputs, metric ledgers, and relation verdicts. Node
+      permutation passes on 2/2 variant checkpoints; mirror-y OOD-stress fails on
+      60/60 S4/S5 checkpoint-trajectory-frame cells over the first three official
+      DeepMind held-out test trajectories; the reference-relative conservation
+      diagnostic passes on 54/54 transition cells while absolute conservation remains
+      deferred; and exact mirror-y on synthetic admissible symmetric inputs fails on
+      6/6 checkpoint-input cells. This addresses the same-domain second-checkpoint-family
+      gap but remains one external domain/dataset and one MeshGraphNet architecture
+      family, not PhysicsNeMo/EchoWave or a cross-dataset reliability result.
+    wording_forbidden:
+      - "A new external architecture-family result such as PhysicsNeMo or EchoWave."
+      - "A cross-dataset, geometry-independent, or reliability pass/fail rate."
+      - "Absolute mass conservation has been established."
+      - "S4/S5 are independent SUT families rather than configuration variants of MeshGraphNet."
+    blocked_reason: null
+
+  - claim_id: "C27-pointmlp-cylinder-primary-workflow"
+    status: "observed"
+    scope: "newly trained non-MGN PointMLP row-wise coordinate network / committed DeepMind cylinder_flow source-case trajectories / train trajectories 0-1 / held-out trajectory 2 / full rubric-to-verdict artifact bundle"
+    evidence:
+      - "tools/run_pointmlp_cylinder_primary_workflow.py"
+      - "tests/test_pointmlp_cylinder_primary_workflow.py"
+      - "research_assets/runs/pointmlp-cylinder-primary-workflow/pointmlp_cylinder_primary_workflow_report.json"
+      - "research_assets/runs/pointmlp-cylinder-primary-workflow/rubric_decisions.json"
+      - "research_assets/runs/pointmlp-cylinder-primary-workflow/smoke_manifest.json"
+      - "research_assets/runs/pointmlp-cylinder-primary-workflow/sut/checkpoint.pt"
+      - "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/"
+    wording_allowed: >
+      A newly trained non-MGN PointMLP row-wise coordinate network provides a
+      different architecture-family cylinder-flow SUT on the committed DeepMind
+      source-case data. It trains on trajectories 0 and 1, evaluates on held-out
+      trajectory 2, and records a full rubric-to-verdict package: node permutation
+      passes on 9/9 transition frames, mirror-y OOD-stress fails on 10/10 frames,
+      reference-relative conservation passes on 9/9 transitions while absolute
+      conservation remains deferred, exact synthetic symmetric-mesh mirror-y fails
+      on 3/3 inputs, and median one-step relative L2 is 0.0298 over nine transitions.
+      This is a different architecture from MeshGraphNet, but it is not PhysicsNeMo,
+      not EchoWave, not a production CFD surrogate, and not cross-dataset evidence.
+    wording_forbidden:
+      - "PhysicsNeMo/EchoWave has been evaluated."
+      - "A production-quality external cylinder-flow implementation has been added."
+      - "A cross-dataset, geometry-independent, or reliability pass/fail rate."
+      - "Absolute mass conservation has been established."
+      - "PointMLP performance is superior to MeshGraphNet or FNO."
+    blocked_reason: null
+
+  - claim_id: "C28-production-sut-feasibility-audit"
+    status: blocked
+    scope: "P0c feasibility audit for the three selected production-grade PhysicsNeMo objects: MeshGraphNet transient vortex shedding, AeroGraphNet external aerodynamic evaluation, and DoMINO external aerodynamics"
+    evidence:
+      - "tools/audit_production_sut_feasibility.py"
+      - "tests/test_production_sut_feasibility_plan.py"
+      - "research_assets/runs/production-grade-sut-extension/feasibility_report.json"
+      - "docs/superpowers/plans/2026-06-12-production-grade-sut-extension-plan.md"
+      - "tools/build_production_sut_candidate_ledgers.py"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/candidate_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-aerographnet-external-aero/candidate_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-domino-external-aero/candidate_ledger.json"
+      - "tools/stage_physicsnemo_runtime.py"
+      - "tests/test_physicsnemo_runtime_staging.py"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo_runtime_staging_report.json"
+      - "tools/stage_physicsnemo_mgn_assets.py"
+      - "tests/test_physicsnemo_mgn_asset_staging.py"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo_mgn_asset_staging_report.json"
+    wording_allowed: >
+      The P0c production-grade extension has completed its first two artifact
+      gates plus runtime and Object-A asset-staging attempts: a feasibility audit
+      of three selected NVIDIA PhysicsNeMo objects, candidate ledgers classify
+      planned MR relations for those objects, the PhysicsNeMo package/runtime import
+      gate is partially staged, and PhysicsNeMo MGN data/checkpoint staging was
+      attempted. Official documentation URLs were reachable and core PhysicsNeMo/
+      MeshGraphNet/DoMINO modules import under CPU PyTorch, but CUDA/GPU, complete
+      official datasets, official/new PhysicsNeMo checkpoints, API credentials,
+      source/follow-up production outputs, and metric ledgers have not been staged.
+      No production MR has been executed. Production workflows have not produced raw
+      outputs yet, so the three objects remain blocked rather than replaced by local
+      toy or same-family surrogates.
+    wording_forbidden:
+      - "Do not claim PhysicsNeMo/AeroGraphNet/DoMINO primary workflow results."
+      - "Do not claim production SUT pass/fail rates."
+      - "Do not claim production CFD surrogate reliability, model accuracy, or geometry-independent validity."
+      - "Do not substitute PointMLP, local FNO, or local MGN variants for these production objects."
+    blocked_reason: "Production workflows have not produced raw outputs yet; PhysicsNeMo package/runtime, checkpoint/data/API staging, and metric-ledger artifacts remain unresolved."
+
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
     status: "partially-observed"

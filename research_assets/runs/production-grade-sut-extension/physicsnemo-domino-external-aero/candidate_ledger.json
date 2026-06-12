@@ -1,0 +1,164 @@
+{
+  "candidates": [
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": true,
+        "numerical_floor_defined": true,
+        "output_mapping_defined": true,
+        "semantic_invariance": true
+      },
+      "basis": "DoMINO-style point/query outputs may be order equivariant only if query order is semantically pure and outputs are query-indexed.",
+      "candidate_id": "physicsnemo-domino-external-aero:query-order-permutation",
+      "decision": "admitted",
+      "decision_reason": "Admissible only after official API confirms query order is not semantically meaningful.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": true,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Admissible only after official API confirms query order is not semantically meaningful."
+      },
+      "metric": "relative L2 by query-output channel",
+      "output_mapping": "Inverse-permute follow-up query outputs to source query order.",
+      "preconditions": [
+        "Query points are exposed",
+        "Order has no batching/window semantics",
+        "Output rows correspond one-to-one to query rows"
+      ],
+      "relation_class": "representation",
+      "source_category": "point-cloud/query representation contract",
+      "tolerance_floor_status": "defined"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": false,
+        "numerical_floor_defined": false,
+        "output_mapping_defined": true,
+        "semantic_invariance": false
+      },
+      "basis": "Mirroring a production external-aero point cloud can alter geometry, normals, flow direction, or conditioning metadata.",
+      "candidate_id": "physicsnemo-domino-external-aero:point-cloud-mirror",
+      "decision": "downgraded",
+      "decision_reason": "Keep as OOD/domain-violation stress until geometry and conditioning symmetry are established.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Keep as OOD/domain-violation stress until geometry and conditioning symmetry are established."
+      },
+      "metric": "mapped query-field relative L2 and coefficient drift if available",
+      "output_mapping": "Reflect query coordinates and vector outputs; compare mapped scalar/vector fields.",
+      "preconditions": [
+        "Geometry and flow metadata are exactly symmetric",
+        "Normals/vectors are reflected consistently",
+        "Conditioning variables preserve semantics"
+      ],
+      "relation_class": "symmetry",
+      "source_category": "external-aero point-cloud geometry symmetry",
+      "tolerance_floor_status": "needs_calibration"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": true,
+        "numerical_floor_defined": false,
+        "output_mapping_defined": true,
+        "semantic_invariance": true
+      },
+      "basis": "Surface/volume predictions may support flux diagnostics, but the operator contract does not guarantee exact conservation without reference data and integration geometry.",
+      "candidate_id": "physicsnemo-domino-external-aero:volume-surface-flux-diagnostic",
+      "decision": "deferred",
+      "decision_reason": "Requires official output semantics, integration weights, and numerical floor calibration.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Requires official output semantics, integration weights, and numerical floor calibration."
+      },
+      "metric": "relative flux or divergence-diagnostic drift",
+      "output_mapping": "Map source/follow-up query outputs into a common physical coordinate/integration frame.",
+      "preconditions": [
+        "Volume/surface output semantics are known",
+        "Integration geometry or sampling weights are available",
+        "Reference/source baseline is defined"
+      ],
+      "relation_class": "conservation_flux",
+      "source_category": "operator-output physics diagnostic",
+      "tolerance_floor_status": "needs_calibration"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": false,
+        "numerical_floor_defined": true,
+        "output_mapping_defined": false,
+        "semantic_invariance": false
+      },
+      "basis": "If DoMINO is accessed through a container/API, request schema, authentication, batching, and preprocessing are part of the SUT contract.",
+      "candidate_id": "physicsnemo-domino-external-aero:nim-api-contract",
+      "decision": "rejected",
+      "decision_reason": "Schema/API-changing requests are invalid exact MRs and must fail closed.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Schema/API-changing requests are invalid exact MRs and must fail closed."
+      },
+      "metric": "contract decision before numeric metric",
+      "output_mapping": "No numeric mapping until request/response schema and metadata preservation are verified.",
+      "preconditions": [
+        "Official endpoint/container is available",
+        "Request schema is documented",
+        "Transform preserves all required metadata"
+      ],
+      "relation_class": "boundary_contract",
+      "source_category": "API/container contract audit",
+      "tolerance_floor_status": "not_applicable"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": true,
+        "numerical_floor_defined": false,
+        "output_mapping_defined": true,
+        "semantic_invariance": true
+      },
+      "basis": "Estimate relation-specific floating-point/operator floor from repeated production inference before assigning tolerances.",
+      "candidate_id": "physicsnemo-domino-external-aero:numeric-floor-calibration",
+      "decision": "deferred",
+      "decision_reason": "Numerical floor cannot be calibrated before official runtime and raw repeated outputs exist.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Numerical floor cannot be calibrated before official runtime and raw repeated outputs exist."
+      },
+      "metric": "repeat-run relative L2 / max absolute difference by output channel",
+      "output_mapping": "Compare repeated source-output tensors or surface fields in the model's native output schema.",
+      "preconditions": [
+        "Official runtime is installed",
+        "At least two repeated source inferences can be saved as raw outputs"
+      ],
+      "relation_class": "numerical_floor",
+      "source_category": "protocol-calibration",
+      "tolerance_floor_status": "needs_calibration"
+    }
+  ],
+  "current_result_claim": "none",
+  "feasibility_report": "research_assets/runs/production-grade-sut-extension/feasibility_report.json",
+  "honesty_boundary": "This is a candidate ledger only. No production MR has been executed; Task 3--5 workflow results remain blocked until official runtime/checkpoints/data/API plus raw outputs and metric ledgers exist.",
+  "metric_ledgers_available": false,
+  "object_feasibility_status": "blocked",
+  "object_id": "physicsnemo-domino-external-aero",
+  "object_name": "PhysicsNeMo DoMINO external aerodynamics",
+  "official_url": "https://docs.nvidia.com/physicsnemo/latest/physicsnemo/examples/cfd/external_aerodynamics/domino/README.html",
+  "raw_outputs_available": false,
+  "record_type": "production-sut-mr-candidate-ledger",
+  "schema_version": "0.1.0",
+  "selected_future_subset": [
+    "physicsnemo-domino-external-aero:query-order-permutation",
+    "physicsnemo-domino-external-aero:numeric-floor-calibration"
+  ],
+  "workflow_execution_allowed": false
+}

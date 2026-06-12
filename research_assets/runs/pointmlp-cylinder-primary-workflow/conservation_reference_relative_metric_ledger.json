@@ -1,0 +1,119 @@
+{
+  "ledger_id": "pointmlp-cylinder-conservation_reference_relative-metric-ledger",
+  "schema_version": "0.1.0",
+  "sut_id": "pointmlp-cylinder-sut-v1",
+  "relation_id": "pointmlp-conservation-reference-relative",
+  "evidence_level": "different-architecture-cylinder-flow-primary-workflow",
+  "entries": [
+    {
+      "frame": 0,
+      "metric_value": 1.2709238748037204,
+      "threshold": 1.5,
+      "ratio_interior": 0.9368411730777099,
+      "divergence_pred_rms": 1.7385090530128355,
+      "divergence_reference_rms": 1.3679096659359935,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame00.npz"
+    },
+    {
+      "frame": 1,
+      "metric_value": 1.1101941823116948,
+      "threshold": 1.5,
+      "ratio_interior": 1.087764873347384,
+      "divergence_pred_rms": 1.3793645188857282,
+      "divergence_reference_rms": 1.2424533841580354,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame01.npz"
+    },
+    {
+      "frame": 2,
+      "metric_value": 1.075304972206258,
+      "threshold": 1.5,
+      "ratio_interior": 1.095650389960052,
+      "divergence_pred_rms": 1.2689293882705897,
+      "divergence_reference_rms": 1.1800646524186182,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame02.npz"
+    },
+    {
+      "frame": 3,
+      "metric_value": 1.0610474941534462,
+      "threshold": 1.5,
+      "ratio_interior": 1.09449648838983,
+      "divergence_pred_rms": 1.2152694999164138,
+      "divergence_reference_rms": 1.1453488242635295,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame03.npz"
+    },
+    {
+      "frame": 4,
+      "metric_value": 1.056632321165119,
+      "threshold": 1.5,
+      "ratio_interior": 1.0948042635790733,
+      "divergence_pred_rms": 1.1883193896316184,
+      "divergence_reference_rms": 1.1246290368264449,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame04.npz"
+    },
+    {
+      "frame": 5,
+      "metric_value": 1.055459620603197,
+      "threshold": 1.5,
+      "ratio_interior": 1.0946426158575844,
+      "divergence_pred_rms": 1.1739118613794148,
+      "divergence_reference_rms": 1.1122281122498294,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame05.npz"
+    },
+    {
+      "frame": 6,
+      "metric_value": 1.0575602070222265,
+      "threshold": 1.5,
+      "ratio_interior": 1.0957866201415225,
+      "divergence_pred_rms": 1.1667971758985387,
+      "divergence_reference_rms": 1.103291489364838,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame06.npz"
+    },
+    {
+      "frame": 7,
+      "metric_value": 1.0590345516591575,
+      "threshold": 1.5,
+      "ratio_interior": 1.0965886346785465,
+      "divergence_pred_rms": 1.162713785576964,
+      "divergence_reference_rms": 1.097899765173266,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame07.npz"
+    },
+    {
+      "frame": 8,
+      "metric_value": 1.0612135302682684,
+      "threshold": 1.5,
+      "ratio_interior": 1.097399101347129,
+      "divergence_pred_rms": 1.1612173732136433,
+      "divergence_reference_rms": 1.0942353636596533,
+      "exact_relation_status": "deferred-uncalibrated-absolute-tolerance",
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame08.npz"
+    }
+  ],
+  "raw_outputs": [
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame00.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame01.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame02.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame03.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame04.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame05.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame06.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame07.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/conservation/frame08.npz"
+  ]
+}
