@@ -132,11 +132,13 @@ class P3DomainViolationAllTest(unittest.TestCase):
         import subprocess, sys, tempfile, os
         before = self.report
         env = dict(os.environ)
-        proc = subprocess.run(
-            [sys.executable, str(TOOL)], cwd=ROOT, env=env,
-            capture_output=True, text=True)
-        self.assertEqual(proc.returncode, 0, proc.stderr)
-        after = json.loads(REPORT.read_text())
+        with tempfile.TemporaryDirectory() as td:
+            out = Path(td) / "regen.json"
+            proc = subprocess.run(
+                [sys.executable, str(TOOL), "--out", str(out)], cwd=ROOT,
+                env=env, capture_output=True, text=True)
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            after = json.loads(out.read_text())
         b = {k: v for k, v in before.items() if k != "generated_at"}
         a = {k: v for k, v in after.items() if k != "generated_at"}
         self.assertEqual(a, b)

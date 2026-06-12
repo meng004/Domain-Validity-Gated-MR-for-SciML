@@ -79,6 +79,7 @@ domains, and no claim of a validated cross-domain score is made.
 from __future__ import annotations
 
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -317,9 +318,10 @@ def main() -> int:
             "not-operationalizable-from-committed-data."),
     }
 
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(report, indent=2), encoding="utf-8")
-    print(f"wrote {OUT}")
+    out = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else OUT
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    print(f"wrote {out}")
     for e in relations:
         d = "  None" if e["D"] is None else f"{e['D']:.4f}"
         m = "None" if e["m"] is None else f"{e['m']:.4g}"
