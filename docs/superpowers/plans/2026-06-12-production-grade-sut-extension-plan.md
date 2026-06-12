@@ -357,16 +357,18 @@ Task 1 execution note (2026-06-12): `tools/audit_production_sut_feasibility.py` 
 
 ### Task 2 — MR candidate ledgers
 
-- [ ] Create per-object candidate ledgers under `research_assets/runs/production-grade-sut-extension/<object>/candidate_ledger.json`.
-- [ ] List candidate relations by class: representation, symmetry, conservation/flux, boundary/contract, numerical floor.
-- [ ] Apply the four-part admissibility predicate.
-- [ ] Select executable relation subset per object.
-- [ ] Record rejected/deferred candidates with reasons.
+- [x] Create per-object candidate ledgers under `research_assets/runs/production-grade-sut-extension/<object>/candidate_ledger.json`.
+- [x] List candidate relations by class: representation, symmetry, conservation/flux, boundary/contract, numerical floor.
+- [x] Apply the four-part admissibility predicate.
+- [x] Select executable relation subset per object.
+- [x] Record rejected/deferred candidates with reasons.
 
 Acceptance:
 
 - Each candidate has source category, basis, preconditions, output mapping, metric, tolerance/floor status, and decision.
 - Tests fail if an exact MR is executed after a rejected/downgraded decision.
+
+Task 2 execution note (2026-06-12): `tools/build_production_sut_candidate_ledgers.py` wrote per-object candidate ledgers for PhysicsNeMo MGN vortex shedding, AeroGraphNet, and DoMINO. Each ledger covers representation, symmetry, conservation/flux, boundary/contract, and numerical-floor candidates with the four-part admissibility predicate. Because Task 1 remains blocked, selected candidates are a future subset only; no production MR has been executed and Task 3--5 workflow claims remain blocked.
 
 ### Task 3 — PhysicsNeMo MeshGraphNet workflow
 

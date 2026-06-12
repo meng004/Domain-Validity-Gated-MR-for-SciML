@@ -1,0 +1,164 @@
+{
+  "candidates": [
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": true,
+        "numerical_floor_defined": true,
+        "output_mapping_defined": true,
+        "semantic_invariance": true
+      },
+      "basis": "AeroGraphNet surface graph outputs should be invariant/equivariant to row ordering if all graph tensors and surface attributes are permuted consistently.",
+      "candidate_id": "physicsnemo-aerographnet-external-aero:surface-node-permutation",
+      "decision": "admitted",
+      "decision_reason": "Pure representation relabeling is exact if official graph tensors expose row-order semantics.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": true,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Pure representation relabeling is exact if official graph tensors expose row-order semantics."
+      },
+      "metric": "relative L2 by surface field channel",
+      "output_mapping": "Inverse-permute follow-up surface pressure/wall-shear predictions to source node order.",
+      "preconditions": [
+        "Surface graph tensors are exposed",
+        "Faces/edges and node features are permuted consistently",
+        "Output fields are node-indexed"
+      ],
+      "relation_class": "representation",
+      "source_category": "surface graph representation contract",
+      "tolerance_floor_status": "defined"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": false,
+        "numerical_floor_defined": false,
+        "output_mapping_defined": true,
+        "semantic_invariance": false
+      },
+      "basis": "Vehicle geometries and yaw/inlet conventions are often not exactly mirror symmetric; a mirror transform can invalidate geometry or flow orientation.",
+      "candidate_id": "physicsnemo-aerographnet-external-aero:vehicle-mirror-y",
+      "decision": "downgraded",
+      "decision_reason": "Use only as a domain-violation/OOD-stress candidate unless exact geometry and flow symmetry are certified.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Use only as a domain-violation/OOD-stress candidate unless exact geometry and flow symmetry are certified."
+      },
+      "metric": "mapped surface pressure/wall-shear relative L2 plus integrated coefficient drift",
+      "output_mapping": "Reflect surface coordinates/normals and map vector wall-shear components if geometry supports it.",
+      "preconditions": [
+        "Geometry is mirror symmetric",
+        "Flow direction/yaw and boundary metadata are transformed consistently",
+        "Surface normals and vector outputs are mapped correctly"
+      ],
+      "relation_class": "symmetry",
+      "source_category": "external-aero geometry symmetry",
+      "tolerance_floor_status": "needs_calibration"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": true,
+        "numerical_floor_defined": false,
+        "output_mapping_defined": true,
+        "semantic_invariance": true
+      },
+      "basis": "If pressure/wall-shear and surface normals are available, integrated force/drag consistency can check output aggregation but not solver truth.",
+      "candidate_id": "physicsnemo-aerographnet-external-aero:integrated-drag-consistency",
+      "decision": "deferred",
+      "decision_reason": "Requires official output semantics, mesh areas, and calibrated integration floor before execution.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Requires official output semantics, mesh areas, and calibrated integration floor before execution."
+      },
+      "metric": "absolute/relative drift in drag or force coefficient",
+      "output_mapping": "Integrate mapped surface quantities over the same mesh and compare coefficient drift.",
+      "preconditions": [
+        "Pressure or wall-shear output semantics are documented",
+        "Surface normals/areas are available",
+        "Drag direction and units are known"
+      ],
+      "relation_class": "conservation_flux",
+      "source_category": "integrated aerodynamic quantity diagnostic",
+      "tolerance_floor_status": "needs_calibration"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": false,
+        "numerical_floor_defined": true,
+        "output_mapping_defined": false,
+        "semantic_invariance": false
+      },
+      "basis": "Changing tessellation or geometry without preserving the model's preprocessing contract can create a new design case rather than a metamorphic follow-up.",
+      "candidate_id": "physicsnemo-aerographnet-external-aero:mesh-resolution-boundary-contract",
+      "decision": "rejected",
+      "decision_reason": "Uncontrolled geometry/preprocessing changes are contract violations, not exact MRs.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Uncontrolled geometry/preprocessing changes are contract violations, not exact MRs."
+      },
+      "metric": "contract decision before numeric metric",
+      "output_mapping": "Only compare after the official preprocessing map defines correspondence between source and follow-up surfaces.",
+      "preconditions": [
+        "Preprocessing accepts transformed mesh",
+        "Geometry identity is preserved",
+        "Boundary and feature normalization contracts are unchanged"
+      ],
+      "relation_class": "boundary_contract",
+      "source_category": "production geometry/input contract",
+      "tolerance_floor_status": "not_applicable"
+    },
+    {
+      "admissibility_predicate": {
+        "domain_preconditions": true,
+        "numerical_floor_defined": false,
+        "output_mapping_defined": true,
+        "semantic_invariance": true
+      },
+      "basis": "Estimate relation-specific floating-point/operator floor from repeated production inference before assigning tolerances.",
+      "candidate_id": "physicsnemo-aerographnet-external-aero:numeric-floor-calibration",
+      "decision": "deferred",
+      "decision_reason": "Numerical floor cannot be calibrated before official runtime and raw repeated outputs exist.",
+      "execution_gate": {
+        "blocked_by": "P0c Task 1 feasibility gate",
+        "executable_as_exact_mr": false,
+        "object_status": "blocked",
+        "planned_workflow_execution": false,
+        "reason": "No raw production outputs or metric ledgers exist yet; Numerical floor cannot be calibrated before official runtime and raw repeated outputs exist."
+      },
+      "metric": "repeat-run relative L2 / max absolute difference by output channel",
+      "output_mapping": "Compare repeated source-output tensors or surface fields in the model's native output schema.",
+      "preconditions": [
+        "Official runtime is installed",
+        "At least two repeated source inferences can be saved as raw outputs"
+      ],
+      "relation_class": "numerical_floor",
+      "source_category": "protocol-calibration",
+      "tolerance_floor_status": "needs_calibration"
+    }
+  ],
+  "current_result_claim": "none",
+  "feasibility_report": "research_assets/runs/production-grade-sut-extension/feasibility_report.json",
+  "honesty_boundary": "This is a candidate ledger only. No production MR has been executed; Task 3--5 workflow results remain blocked until official runtime/checkpoints/data/API plus raw outputs and metric ledgers exist.",
+  "metric_ledgers_available": false,
+  "object_feasibility_status": "blocked",
+  "object_id": "physicsnemo-aerographnet-external-aero",
+  "object_name": "PhysicsNeMo AeroGraphNet external aerodynamic evaluation",
+  "official_url": "https://docs.nvidia.com/physicsnemo/latest/physicsnemo/examples/cfd/external_aerodynamics/aero_graph_net/README.html",
+  "raw_outputs_available": false,
+  "record_type": "production-sut-mr-candidate-ledger",
+  "schema_version": "0.1.0",
+  "selected_future_subset": [
+    "physicsnemo-aerographnet-external-aero:surface-node-permutation",
+    "physicsnemo-aerographnet-external-aero:numeric-floor-calibration"
+  ],
+  "workflow_execution_allowed": false
+}
