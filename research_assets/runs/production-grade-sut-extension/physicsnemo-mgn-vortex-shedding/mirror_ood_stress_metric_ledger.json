@@ -1,0 +1,9 @@
+{
+  "denominator": 1,
+  "max_relative_l2": 0.4020297280763484,
+  "metric": "relative_l2(mirror_prediction, mirrored_source_prediction)",
+  "passes": 0,
+  "relation": "mirror_y_ood_stress",
+  "threshold": 0.1,
+  "verdict": "fail-as-ood-stress"
+}

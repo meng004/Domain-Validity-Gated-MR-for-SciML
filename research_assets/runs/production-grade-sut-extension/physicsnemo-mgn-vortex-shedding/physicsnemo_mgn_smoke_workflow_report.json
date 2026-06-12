@@ -1,0 +1,81 @@
+{
+  "artifacts": {
+    "checkpoint": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/physicsnemo_mgn_smoke_checkpoint.pt",
+    "metric_ledgers": {
+      "conservation_reference_relative_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/conservation_reference_relative_metric_ledger.json",
+      "mirror_ood_stress_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/mirror_ood_stress_metric_ledger.json",
+      "node_permutation_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/node_permutation_metric_ledger.json",
+      "rollout_accuracy_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/rollout_accuracy_metric_ledger.json"
+    },
+    "raw_outputs": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/raw_outputs/source_followup_outputs.npz",
+    "rubric_decisions": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/physicsnemo_mgn_smoke_rubric_decisions.json",
+    "smoke_manifest": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/physicsnemo_mgn_smoke_manifest.json"
+  },
+  "data": {
+    "meta": {
+      "bytes": 883,
+      "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow_smoke/meta.json",
+      "sha256_prefix": "2a3e39429a55a0cf"
+    },
+    "records": [
+      {
+        "bytes": 13572077,
+        "downloaded": false,
+        "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow_smoke/train.tfrecord",
+        "sha256_prefix": "7b067317f6cf3f72",
+        "split": "train"
+      },
+      {
+        "bytes": 13912169,
+        "downloaded": false,
+        "path": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow_smoke/test.tfrecord",
+        "sha256_prefix": "c3c0cbab09a44cd0",
+        "split": "test"
+      }
+    ],
+    "source_url_prefix": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow",
+    "stage_dir": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow_smoke",
+    "subset_boundary": "first complete TFRecord trajectory for train and test only; used for CPU smoke workflow, not full production-scale evaluation",
+    "valid_record_reused_from_test_for_datapipe_completeness": true
+  },
+  "domain": "DeepMind cylinder_flow / vortex shedding",
+  "forbidden_claims": [
+    "production-scale PhysicsNeMo MGN pass/fail rate",
+    "AeroGraphNet workflow result",
+    "DoMINO workflow result",
+    "cross-dataset reliability",
+    "geometry-independent validity"
+  ],
+  "generated_on": "2026-06-12",
+  "honesty_boundary": "This is an executable PhysicsNeMo Object-A smoke workflow with a newly trained checkpoint, raw outputs, and metric ledgers on the first official TFRecord trajectory. It is not a full production-scale PhysicsNeMo benchmark and does not cover AeroGraphNet or DoMINO.",
+  "metrics": {
+    "mirror_ood_stress_relative_l2": 0.4020297280763484,
+    "node_permutation_relative_l2": 0.0,
+    "reference_relative_conservation_ratio": 0.05510891338914223,
+    "rollout_relative_l2": 0.9918143801304302
+  },
+  "object_id": "physicsnemo-mgn-vortex-shedding",
+  "production_framework": "nvidia-physicsnemo",
+  "record_type": "physicsnemo-mgn-smoke-primary-workflow",
+  "relation_verdicts": {
+    "conservation_reference_relative": "diagnostic-recorded",
+    "mirror_ood_stress": "fail-as-ood-stress",
+    "node_permutation": "pass",
+    "rollout_accuracy": "diagnostic-recorded"
+  },
+  "schema_version": "0.1.0",
+  "sut_name": "NVIDIA PhysicsNeMo MeshGraphNet",
+  "task3_full_scale_workflow_completed": false,
+  "task3_minimal_workflow_completed": true,
+  "training": {
+    "epochs": 2,
+    "final_loss": 1.012645999590556,
+    "losses": [
+      1.0230874121189117,
+      1.012645999590556
+    ],
+    "lr": 0.001,
+    "seed": 20260612
+  },
+  "workflow_status": "completed-smoke-subset"
+}

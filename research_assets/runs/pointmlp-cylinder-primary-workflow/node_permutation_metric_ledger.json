@@ -1,0 +1,83 @@
+{
+  "ledger_id": "pointmlp-cylinder-node_permutation-metric-ledger",
+  "schema_version": "0.1.0",
+  "sut_id": "pointmlp-cylinder-sut-v1",
+  "relation_id": "pointmlp-node-permutation-equivariance",
+  "evidence_level": "different-architecture-cylinder-flow-primary-workflow",
+  "entries": [
+    {
+      "frame": 0,
+      "metric_value": 0.0,
+      "threshold": 1e-06,
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame00.npz"
+    },
+    {
+      "frame": 1,
+      "metric_value": 0.0,
+      "threshold": 1e-06,
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame01.npz"
+    },
+    {
+      "frame": 2,
+      "metric_value": 0.0,
+      "threshold": 1e-06,
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame02.npz"
+    },
+    {
+      "frame": 3,
+      "metric_value": 0.0,
+      "threshold": 1e-06,
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame03.npz"
+    },
+    {
+      "frame": 4,
+      "metric_value": 0.0,
+      "threshold": 1e-06,
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame04.npz"
+    },
+    {
+      "frame": 5,
+      "metric_value": 0.0,
+      "threshold": 1e-06,
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame05.npz"
+    },
+    {
+      "frame": 6,
+      "metric_value": 0.0,
+      "threshold": 1e-06,
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame06.npz"
+    },
+    {
+      "frame": 7,
+      "metric_value": 0.0,
+      "threshold": 1e-06,
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame07.npz"
+    },
+    {
+      "frame": 8,
+      "metric_value": 0.0,
+      "threshold": 1e-06,
+      "verdict": "pass",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame08.npz"
+    }
+  ],
+  "raw_outputs": [
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame00.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame01.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame02.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame03.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame04.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame05.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame06.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame07.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/node_permutation/frame08.npz"
+  ]
+}

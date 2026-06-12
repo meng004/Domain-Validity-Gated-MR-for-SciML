@@ -1,0 +1,13 @@
+{
+  "checkpoint_path": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/physicsnemo_mgn_smoke_checkpoint.pt",
+  "cuda_available": false,
+  "metric_ledgers": [
+    "conservation_reference_relative_metric_ledger.json",
+    "mirror_ood_stress_metric_ledger.json",
+    "node_permutation_metric_ledger.json",
+    "rollout_accuracy_metric_ledger.json"
+  ],
+  "physicsnemo_imported": true,
+  "raw_outputs": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-vortex-shedding/raw_outputs/source_followup_outputs.npz",
+  "torch_version": "2.7.1+cpu"
+}

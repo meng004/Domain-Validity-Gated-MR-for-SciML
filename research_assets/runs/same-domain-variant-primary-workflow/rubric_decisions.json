@@ -1,0 +1,38 @@
+[
+  {
+    "relation_id": "mgn-node-permutation-equivariance",
+    "relation_name": "node-permutation equivariance",
+    "admissibility": "admitted",
+    "predicate": "MeshGraphNets message passing is invariant to node relabeling when node features and edge endpoints are relabelled consistently.",
+    "source_followup_transform": "apply a bijective node permutation and consistently relabel edge_index",
+    "expected_output_relation": "inverse-mapped follow-up output equals the source output",
+    "tolerance_rule": "relative L2 <= 1e-6"
+  },
+  {
+    "relation_id": "mirror_y_ood_stress",
+    "relation_name": "mirror-y OOD stress probe",
+    "admissibility": "downgraded-to-ood-stress",
+    "predicate": "the held-out asymmetric cylinder-flow meshes do not satisfy exact mirror-y preconditions",
+    "source_followup_transform": "reflect y-coordinates/velocity channels through the measured channel midline",
+    "expected_output_relation": "reported only as out-of-relation-domain stress, not as exact-MR inconsistency",
+    "tolerance_rule": "relative L2 <= 1e-6 with mapping-floor ratio recorded"
+  },
+  {
+    "relation_id": "conservation_reference_relative",
+    "relation_name": "reference-relative discrete-divergence diagnostic",
+    "admissibility": "diagnostic-not-absolute-mr",
+    "predicate": "absolute incompressibility tolerance is not calibrated on these unstructured cells; reference-relative regression threshold is executable",
+    "source_followup_transform": "one predicted transition compared with the reference next-state transition",
+    "expected_output_relation": "predicted divergence should not exceed 1.5x the reference divergence diagnostic",
+    "tolerance_rule": "divergence_pred_over_reference_ratio <= 1.5"
+  },
+  {
+    "relation_id": "mirror_y_exact_symmetric_mesh",
+    "relation_name": "exact mirror-y on synthetic symmetric mesh",
+    "admissibility": "admitted-on-synthetic-symmetric-input",
+    "predicate": "synthetic no-obstacle channel mesh has an exact reflection bijection and symmetric node types",
+    "source_followup_transform": "reflect a deterministic symmetric input through the channel midline",
+    "expected_output_relation": "inverse-mapped reflected output equals the source output with vy sign mapping",
+    "tolerance_rule": "relative L2 <= 1e-6"
+  }
+]

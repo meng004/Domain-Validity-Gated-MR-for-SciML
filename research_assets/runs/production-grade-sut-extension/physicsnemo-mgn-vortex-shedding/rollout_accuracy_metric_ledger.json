@@ -1,0 +1,7 @@
+{
+  "denominator": 1,
+  "median_relative_l2": 0.9918143801304302,
+  "metric": "relative_l2(predicted_normalized_velocity_pressure_delta, target)",
+  "relation": "one_step_rollout_accuracy_smoke",
+  "verdict": "diagnostic-recorded"
+}
