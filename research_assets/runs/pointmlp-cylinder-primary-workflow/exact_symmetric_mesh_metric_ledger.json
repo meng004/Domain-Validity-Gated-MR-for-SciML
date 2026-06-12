@@ -1,0 +1,35 @@
+{
+  "ledger_id": "pointmlp-cylinder-exact_symmetric_mesh-metric-ledger",
+  "schema_version": "0.1.0",
+  "sut_id": "pointmlp-cylinder-sut-v1",
+  "relation_id": "pointmlp-mirror-y-exact-symmetric-mesh",
+  "evidence_level": "different-architecture-cylinder-flow-primary-workflow",
+  "entries": [
+    {
+      "seed": 20260612,
+      "metric_value": 0.013601005659864537,
+      "threshold": 1e-06,
+      "verdict": "fail",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/exact_symmetric_mesh/seed20260612.npz"
+    },
+    {
+      "seed": 20260613,
+      "metric_value": 0.013565398043931571,
+      "threshold": 1e-06,
+      "verdict": "fail",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/exact_symmetric_mesh/seed20260613.npz"
+    },
+    {
+      "seed": 20260614,
+      "metric_value": 0.013577989639631126,
+      "threshold": 1e-06,
+      "verdict": "fail",
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/exact_symmetric_mesh/seed20260614.npz"
+    }
+  ],
+  "raw_outputs": [
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/exact_symmetric_mesh/seed20260612.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/exact_symmetric_mesh/seed20260613.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/exact_symmetric_mesh/seed20260614.npz"
+  ]
+}

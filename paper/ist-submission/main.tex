@@ -110,7 +110,7 @@ This paper makes three scoped contributions, each repositioned narrowly with res
 
 \textbf{Seeded-fault diagnostic stress test.} The paper's own MRs are used as fault detectors against an independently re-implemented 10-mutant seeded-fault catalogue, reporting a by-class stress-test pattern: continuity responds to boundary-condition/normalization faults; symmetry responds to physical-channel/adjacency faults; node-permutation responds to none because the tested faults preserve relabeling invariance. This is suggestive evidence for a typed MR-class-to-fault-class diagnostic, but it remains a stress test over seeded faults rather than a localization model.
 
-The evidence comprises three scoped relation pilots, a same-SUT rollout-accuracy comparator, exact mirror-y tests on provably symmetric synthetic meshes, a primary empirical scope upgrade across K=6 checkpoints and three held-out trajectories, a K=6 PINN roster, the FNO primary workflow upgrade, a Minimum-MR-SubSet primary rerun, and secondary generic-MR / LLM-candidate baselines; cross-SUT comparisons remain protocol commitments until matched artifacts exist.
+The evidence comprises three scoped relation pilots, a same-SUT rollout-accuracy comparator, exact mirror-y tests on provably symmetric synthetic meshes, a primary empirical scope upgrade across K=6 checkpoints and three held-out trajectories, a K=6 PINN roster, the same-domain S4/S5 MeshGraphNet variant primary workflow, a newly trained non-MGN PointMLP cylinder-flow workflow, the FNO primary workflow upgrade, a Minimum-MR-SubSet primary rerun, and secondary generic-MR / LLM-candidate baselines; cross-SUT comparisons remain protocol commitments until matched artifacts exist.
 
 \section{Background and Related Work}
 \label{sec:related}
@@ -362,6 +362,8 @@ PC10-seeded-fault-detection & Observed & Seeded-fault metric ledger & Detector s
 Multicheckpoint replication & Observed & E1 aggregate and per-SUT manifests in \texttt{multicheckpoint/} & K=6 checkpoints of one MeshGraphNets family; within-family replication. \\
 Operator-floor resolution & Observed & Operator-floor sweep report & Log--log slope 0.984, 95\% CI $[0.975, 0.992]$ (interior 0.989), $R^2 = 0.9999$ over nine resolutions; calibrates the admissibility predicate on one mesh family. \\
 Fault-detection robustness & Observed & E3 robustness report; Phase-3 unified catalogue & 30-trial Wilson CIs per MGN mutant plus a 60-entry unified fault catalogue (10 canonical MGN + 2 adversarial MGN + 24 closed-form PINN output-level probes + 24 closed-form FNO output-level probes), by-detector precision/recall with Wilson CIs, and Wilcoxon/Cliff effect-size tests; PINN/FNO probes are closed-form output-level probes. \\
+S4/S5 variant primary workflow & Observed & Variant report and raw ledgers & Same-domain wider/deeper MGN variants: 2/2 node-permutation passes, 60/60 mirror OOD failures, 54/54 conservation-diagnostic passes, 6/6 exact-symmetric failures; not PhysicsNeMo/EchoWave or cross-dataset reliability evidence. \\
+PointMLP cylinder primary workflow & Observed & PointMLP report, checkpoint, and raw ledgers & Newly trained non-MGN row-wise coordinate network: 9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, 3/3 exact-symmetric failures, median rollout rel L2 0.0298; not PhysicsNeMo/EchoWave or production CFD evidence. \\
 FNO primary workflow upgrade & Observed & FNO workflow report, per-SUT ledgers, and raw source/follow-up outputs & Six trained FNO-2D checkpoints over Burgers/heat: 24/24 translation passes, 24/24 conservation failures under a periodic discrete-conservation MR, and 6/6 Dirichlet-boundary translation rejections; not only admissibility evidence. \\
 \bottomrule
 \end{tabularx}
@@ -387,6 +389,8 @@ Node permutation equivariance & Retained as representation MR & pass sanity; rel
 Mirror-y equivariance (asymmetric eval mesh) & Exact relation out-of-relation-domain; downgraded to approximate OOD-stress & S0 pilot: 10/10 fail; primary upgrade: 180/180 fail across K=6 x 3 trajectories x 10 & Bounded within-family OOD-stress violation across held-out trajectories; not by itself exact symmetry, cross-SUT, or geometry-independent evidence. \\
 Mirror-y equivariance (synthetic symmetric mesh) & Exact relation admissible (bijection verified, offset $<10^{-12}$, type-match 1.0) & S0 pilot: fail, rel L2 1.10; primary upgrade: 18/18 fail across K=6 x 3 input seeds & Exact-symmetry failure where the relation is admissible; synthetic no-obstacle OOD meshes, not accuracy or cross-SUT evidence. \\
 Discrete divergence / conservation & Absolute mass-conservation MR deferred; reference-relative diagnostic retained & S0 pilot inconclusive: reference-relative non-regression guard; primary upgrade: 162/162 pass across K=6 x 3 trajectories x 9 & Reference-relative diagnostic only; the absolute conservation relation remains deferred. \\
+MGN S4/S5 variant workflow & Node permutation admitted; mirror OOD/conservation diagnostic/exact-symmetry decisions recorded & 2/2 node-permutation passes; 60/60 mirror OOD failures; 54/54 conservation-diagnostic passes; 6/6 exact-symmetry failures & Same-domain MGN variant evidence, not an external SUT family. \\
+PointMLP cylinder workflow & Node permutation admitted; mirror OOD/conservation diagnostic/exact-symmetry decisions recorded & 9/9 node-permutation passes; 10/10 mirror OOD failures; 9/9 conservation-diagnostic passes; 3/3 exact-symmetry failures & Different non-MGN cylinder SUT; not PhysicsNeMo/EchoWave or production CFD evidence. \\
 FNO periodic translation and conservation & Translation admitted; periodic discrete-conservation MR admitted-with-reference-floor; Dirichlet translation rejected & FNO primary workflow upgrade: 24/24 translation passes, 24/24 conservation failures, and 6/6 rejected Dirichlet exact-MR executions & Full rubric-to-verdict FNO evidence with raw source/follow-up outputs and per-case ledgers; outside cylinder-flow and broad neural-operator claims. \\
 \bottomrule
 \end{tabularx}
@@ -488,6 +492,7 @@ The Minimum-MR-SubSet audit records 70 real ABD instances, 20 real true-fault-cl
 
 To check whether the workflow is MeshGraphNets-specific, we use a K=6 PINN roster: three Burgers and three heat seeds. \textbf{MR-A} remains \emph{vacuous by construction} for a pointwise MLP. The two non-trivial MRs do the cross-family work: \textbf{MR-B} passes on Burgers (mean 0.615, CI [0.446, 0.890]) but is mixed on heat (mean 1.682, CI [0.853, 2.795]); \textbf{MR-C} passes on all six PINNs, with Burgers mean 1.007 (CI [1.000, 1.011]) and heat mean 0.992 (CI [0.971, 1.012]). This is a two-PDE PINN seed roster rather than a PINN-vs-MGN benchmark or a generality claim across PINN architectures, PDEs, or training regimes.
 
+
 \subsection{FNO primary workflow upgrade (K=6)}
 \label{subsec:fno-extension}
 
@@ -496,7 +501,7 @@ The \textbf{FNO primary workflow upgrade} converts the earlier FNO roster into a
 \subsection{Still blocked}
 \label{subsec:still-blocked}
 
-The canonical blocked list is unchanged: cross-SUT or geometry-independent pass/fail rates; comparative superiority over baselines; general or real-world fault-detection rates; validated localization; runtime; reliability; model accuracy; and broad external validity. The three METBENCH-planned SUTs stay blocked pending artifacts. Executed comparators are scoped diagnostics, the external-scope audit is secondary provenance, and the K=6 MGN/PINN/FNO plus PINN witness reruns do not lift the cross-SUT block.
+The canonical blocked list is narrowed but still active: production external-SUT (PhysicsNeMo/EchoWave), cross-dataset, or geometry-independent pass/fail rates; comparative superiority over baselines; general or real-world fault-detection rates; validated localization; runtime; reliability; model accuracy; and broad external validity. The three METBENCH-planned SUTs stay blocked pending artifacts. Executed comparators are scoped diagnostics, the external-scope audit is secondary provenance, and the K=6 MGN/PINN/FNO plus PINN witness reruns do not lift the cross-SUT block.
 
 \section{Discussion}
 \label{sec:discussion}
