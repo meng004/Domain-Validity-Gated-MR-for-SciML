@@ -1,0 +1,65 @@
+{
+  "ledger_id": "pointmlp-cylinder-rollout_accuracy-metric-ledger",
+  "schema_version": "0.1.0",
+  "sut_id": "pointmlp-cylinder-sut-v1",
+  "relation_id": "pointmlp-rollout-accuracy-diagnostic",
+  "evidence_level": "different-architecture-cylinder-flow-primary-workflow",
+  "entries": [
+    {
+      "frame": 0,
+      "relative_l2": 0.09275380284264478,
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame00.npz"
+    },
+    {
+      "frame": 1,
+      "relative_l2": 0.048137472969906635,
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame01.npz"
+    },
+    {
+      "frame": 2,
+      "relative_l2": 0.03649526119779215,
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame02.npz"
+    },
+    {
+      "frame": 3,
+      "relative_l2": 0.03179660487258127,
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame03.npz"
+    },
+    {
+      "frame": 4,
+      "relative_l2": 0.02975835263724644,
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame04.npz"
+    },
+    {
+      "frame": 5,
+      "relative_l2": 0.02896718040944055,
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame05.npz"
+    },
+    {
+      "frame": 6,
+      "relative_l2": 0.028605257642534618,
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame06.npz"
+    },
+    {
+      "frame": 7,
+      "relative_l2": 0.028619536076798794,
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame07.npz"
+    },
+    {
+      "frame": 8,
+      "relative_l2": 0.028637551019675717,
+      "raw_output": "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame08.npz"
+    }
+  ],
+  "raw_outputs": [
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame00.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame01.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame02.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame03.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame04.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame05.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame06.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame07.npz",
+    "research_assets/runs/pointmlp-cylinder-primary-workflow/raw/rollout/frame08.npz"
+  ]
+}
