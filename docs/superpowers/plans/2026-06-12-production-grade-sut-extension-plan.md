@@ -401,6 +401,21 @@ Acceptance:
 
 Task 2.6 execution note (2026-06-12): official cylinder_flow data download was attempted from the public DeepMind MeshGraphNets GCS source. The download proved large in this environment and was stopped after partial external staging to avoid wasting time/storage; no staged official/new PhysicsNeMo MGN checkpoint, raw outputs, or metric ledgers exist. `tools/stage_physicsnemo_mgn_assets.py` wrote `research_assets/runs/production-grade-sut-extension/physicsnemo_mgn_asset_staging_report.json`; Task 3 remains blocked.
 
+### Task 2.7 — official access/source staging for all three production objects
+
+- [x] Probe/stage official source access for Object A/B/C after runtime and Object-A asset attempts.
+- [x] Download the public NGC cylinder-flow archive for the PhysicsNeMo vortex-shedding family into external workspace storage.
+- [x] Record why the NGC archive is not sufficient for Task 3 MGN workflow execution by itself.
+- [x] Record AeroGraphNet full-dataset access and DoMINO NIM/API/container blockers.
+- [x] Write `research_assets/runs/production-grade-sut-extension/official_access_staging_report.json`.
+
+Acceptance:
+
+- The report distinguishes staged official source archives from complete workflow prerequisites, and records the official access staging boundary.
+- Task 3--5 remain unchecked unless complete official data, checkpoint/API artifacts, raw outputs, and metric ledgers exist.
+
+Task 2.7 execution note (2026-06-12): `tools/stage_production_sut_official_access.py` wrote `research_assets/runs/production-grade-sut-extension/official_access_staging_report.json`. The public NGC `modulus_datasets_cylinder-flow` zip was downloaded to external workspace storage and its nested `dataset.zip` was inspected; this is official cylinder-flow data, but it is not the complete DeepMind train/valid/test TFRecord bundle required for the selected PhysicsNeMo MGN Task 3 workflow. AeroGraphNet remains blocked by NVIDIA/full-dataset access and checkpoint availability, while DoMINO remains blocked by NGC API key/container/GPU endpoint requirements. No production raw outputs or metric ledgers exist, so Task 3--5 workflows remain blocked.
+
 ### Task 3 — PhysicsNeMo MeshGraphNet workflow
 
 - [ ] Implement `tools/run_physicsnemo_mgn_primary_workflow.py`.

@@ -764,13 +764,16 @@ claims:
       - "tools/stage_physicsnemo_mgn_assets.py"
       - "tests/test_physicsnemo_mgn_asset_staging.py"
       - "research_assets/runs/production-grade-sut-extension/physicsnemo_mgn_asset_staging_report.json"
+      - "tools/stage_production_sut_official_access.py"
+      - "tests/test_production_sut_official_access_staging.py"
+      - "research_assets/runs/production-grade-sut-extension/official_access_staging_report.json"
     wording_allowed: >
       The P0c production-grade extension has completed its first two artifact
-      gates plus runtime and Object-A asset-staging attempts: a feasibility audit
+      gates plus runtime, Object-A asset-staging, and official access staging attempts: a feasibility audit
       of three selected NVIDIA PhysicsNeMo objects, candidate ledgers classify
       planned MR relations for those objects, the PhysicsNeMo package/runtime import
-      gate is partially staged, and PhysicsNeMo MGN data/checkpoint staging was
-      attempted. Official documentation URLs were reachable and core PhysicsNeMo/
+      gate is partially staged, PhysicsNeMo MGN data/checkpoint staging was
+      attempted, and official source/access staging for all three objects was recorded. Official documentation URLs were reachable and core PhysicsNeMo/
       MeshGraphNet/DoMINO modules import under CPU PyTorch, but CUDA/GPU, complete
       official datasets, official/new PhysicsNeMo checkpoints, API credentials,
       source/follow-up production outputs, and metric ledgers have not been staged.
@@ -782,7 +785,7 @@ claims:
       - "Do not claim production SUT pass/fail rates."
       - "Do not claim production CFD surrogate reliability, model accuracy, or geometry-independent validity."
       - "Do not substitute PointMLP, local FNO, or local MGN variants for these production objects."
-    blocked_reason: "Production workflows have not produced raw outputs yet; PhysicsNeMo package/runtime, checkpoint/data/API staging, and metric-ledger artifacts remain unresolved."
+    blocked_reason: "Production workflows have not produced raw outputs yet; PhysicsNeMo package/runtime, complete checkpoint/data/API staging, and metric-ledger artifacts remain unresolved."
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
