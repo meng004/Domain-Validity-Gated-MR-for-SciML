@@ -80,7 +80,7 @@ class TestManuscriptAndLedgerInSync(unittest.TestCase):
         cls.l = LEDGER.read_text()
 
     def test_subsection_present(self):
-        self.assertIn("5.6.4 LLM and generic-MR baselines", self.m)
+        self.assertIn("5.7 LLM and generic-MR baselines", self.m)
 
     def test_subsection_carries_headline_numbers(self):
         self.assertIn("7/8", self.m)
