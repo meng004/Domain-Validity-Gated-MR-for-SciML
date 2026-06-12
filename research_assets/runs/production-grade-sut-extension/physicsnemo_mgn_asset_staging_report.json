@@ -1,0 +1,78 @@
+{
+  "aggregate_status": "blocked-assets-incomplete",
+  "blocker_reason": "Official cylinder_flow data is public but large and incomplete in this environment; official/new PhysicsNeMo checkpoint, raw outputs, and metric ledgers are absent. Task 3 must remain blocked.",
+  "checkpoint_staging": {
+    "checkpoint_file": {
+      "bytes": 0,
+      "exists": false,
+      "sha256_prefix": null
+    },
+    "expected_checkpoint_path": "/workspace/physicsnemo_staged_assets/mgn/checkpoints/checkpoint.pt",
+    "note": "No official PhysicsNeMo MGN checkpoint or newly trained PhysicsNeMo checkpoint is staged yet.",
+    "official_checkpoint_staged": false
+  },
+  "data_staging": {
+    "all_required_files_present": false,
+    "external_stage_dir": "/workspace/physicsnemo_staged_assets/mgn/cylinder_flow",
+    "files": {
+      "meta.json": {
+        "bytes": 883,
+        "exists": true,
+        "sha256_prefix": "2a3e39429a55a0cf"
+      },
+      "test.tfrecord": {
+        "bytes": 0,
+        "exists": false,
+        "sha256_prefix": null
+      },
+      "train.tfrecord": {
+        "bytes": 1392903120,
+        "exists": true,
+        "sha256_prefix": "dc6dda92edda54a6"
+      },
+      "valid.tfrecord": {
+        "bytes": 0,
+        "exists": false,
+        "sha256_prefix": null
+      }
+    },
+    "missing_required_files": [
+      "valid.tfrecord",
+      "test.tfrecord"
+    ],
+    "observed_bytes": 1392904003,
+    "official_data_staged": false,
+    "present_required_files": [
+      "meta.json",
+      "train.tfrecord"
+    ]
+  },
+  "datapipe_smoke_attempted": false,
+  "datapipe_smoke_reason": "Skipped because the required train/valid/test TFRecord bundle is incomplete; instantiating the PhysicsNeMo datapipe on a partial TFRecord would not be a valid smoke test.",
+  "download_attempt_note": "Official cylinder_flow data download was attempted in /workspace/physicsnemo_staged_assets. The full TFRecord bundle is large; the attempt was stopped after partial train.tfrecord staging to avoid wasting time/storage in this coding container.",
+  "download_attempted": true,
+  "generated_on": "2026-06-12",
+  "honesty_boundary": "This artifact records an official data/checkpoint staging attempt only. It is not a PhysicsNeMo MGN workflow execution and provides no production MR verdict.",
+  "metric_ledgers_available": false,
+  "missing_for_task3": [
+    "complete_official_data",
+    "official_checkpoint",
+    "raw_outputs",
+    "metric_ledgers"
+  ],
+  "object_id": "physicsnemo-mgn-vortex-shedding",
+  "official_data_source": {
+    "license_context": "DeepMind MeshGraphNets dataset download script; external data staged outside git due size.",
+    "public_gcs_url_prefix": "https://storage.googleapis.com/dm-meshgraphnets/cylinder_flow/",
+    "required_files": [
+      "meta.json",
+      "train.tfrecord",
+      "valid.tfrecord",
+      "test.tfrecord"
+    ]
+  },
+  "raw_outputs_available": false,
+  "record_type": "physicsnemo-mgn-asset-staging-report",
+  "schema_version": "0.1.0",
+  "task3_workflow_execution_allowed": false
+}

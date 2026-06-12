@@ -761,18 +761,22 @@ claims:
       - "tools/stage_physicsnemo_runtime.py"
       - "tests/test_physicsnemo_runtime_staging.py"
       - "research_assets/runs/production-grade-sut-extension/physicsnemo_runtime_staging_report.json"
+      - "tools/stage_physicsnemo_mgn_assets.py"
+      - "tests/test_physicsnemo_mgn_asset_staging.py"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo_mgn_asset_staging_report.json"
     wording_allowed: >
       The P0c production-grade extension has completed its first two artifact
-      gates and an intermediate runtime staging gate: a feasibility audit of three
-      selected NVIDIA PhysicsNeMo objects, candidate ledgers classify planned MR
-      relations for those objects, and the PhysicsNeMo package/runtime import gate
-      is now partially staged. Official documentation URLs were reachable and core
-      PhysicsNeMo/MeshGraphNet/DoMINO modules import under CPU PyTorch, but CUDA/GPU,
-      official checkpoints, datasets, API credentials, source/follow-up production
-      outputs, and metric ledgers have not been staged. No production MR has been
-      executed. Production workflows have not produced raw outputs yet, so the
-      three objects remain blocked rather than replaced by local toy or same-family
-      surrogates.
+      gates plus runtime and Object-A asset-staging attempts: a feasibility audit
+      of three selected NVIDIA PhysicsNeMo objects, candidate ledgers classify
+      planned MR relations for those objects, the PhysicsNeMo package/runtime import
+      gate is partially staged, and PhysicsNeMo MGN data/checkpoint staging was
+      attempted. Official documentation URLs were reachable and core PhysicsNeMo/
+      MeshGraphNet/DoMINO modules import under CPU PyTorch, but CUDA/GPU, complete
+      official datasets, official/new PhysicsNeMo checkpoints, API credentials,
+      source/follow-up production outputs, and metric ledgers have not been staged.
+      No production MR has been executed. Production workflows have not produced raw
+      outputs yet, so the three objects remain blocked rather than replaced by local
+      toy or same-family surrogates.
     wording_forbidden:
       - "Do not claim PhysicsNeMo/AeroGraphNet/DoMINO primary workflow results."
       - "Do not claim production SUT pass/fail rates."

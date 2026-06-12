@@ -386,6 +386,21 @@ Acceptance:
 
 Task 2.5 execution note (2026-06-12): `tools/stage_physicsnemo_runtime.py` wrote `research_assets/runs/production-grade-sut-extension/physicsnemo_runtime_staging_report.json`. PhysicsNeMo package/runtime import gate is now partially staged: `physicsnemo`, MeshGraphNet modules, the vortex-shedding datapipe, and the DoMINO datapipe import under CPU `torch`/`torchvision`; CUDA/GPU is unavailable and all three objects still lack staged official data, checkpoints/API credentials, raw outputs, and metric ledgers. Therefore Task 3--5 production workflows remain blocked.
 
+### Task 2.6 — PhysicsNeMo MGN official data/checkpoint staging attempt
+
+- [x] Attempt official DeepMind/PhysicsNeMo `cylinder_flow` data staging for Object A.
+- [x] Create `tools/stage_physicsnemo_mgn_assets.py`.
+- [x] Create `tests/test_physicsnemo_mgn_asset_staging.py`.
+- [x] Write `research_assets/runs/production-grade-sut-extension/physicsnemo_mgn_asset_staging_report.json`.
+- [x] Record complete-data, checkpoint, raw-output, and metric-ledger blockers before Task 3.
+
+Acceptance:
+
+- The report distinguishes public-data reachability from complete staged data.
+- Task 3 remains unchecked unless complete official data, checkpoint, raw outputs, and metric ledgers exist.
+
+Task 2.6 execution note (2026-06-12): official cylinder_flow data download was attempted from the public DeepMind MeshGraphNets GCS source. The download proved large in this environment and was stopped after partial external staging to avoid wasting time/storage; no staged official/new PhysicsNeMo MGN checkpoint, raw outputs, or metric ledgers exist. `tools/stage_physicsnemo_mgn_assets.py` wrote `research_assets/runs/production-grade-sut-extension/physicsnemo_mgn_asset_staging_report.json`; Task 3 remains blocked.
+
 ### Task 3 — PhysicsNeMo MeshGraphNet workflow
 
 - [ ] Implement `tools/run_physicsnemo_mgn_primary_workflow.py`.

@@ -71,8 +71,9 @@ class PhysicsNeMoRuntimeStagingTest(unittest.TestCase):
         self.assertIn("PhysicsNeMo package/runtime import gate is now partially staged", plan)
         self.assertIn("- [ ] Implement `tools/run_physicsnemo_mgn_primary_workflow.py`.", plan)
         claim_text = CLAIM_LEDGER.read_text(encoding="utf-8")
-        self.assertIn("PhysicsNeMo package/runtime import gate", claim_text)
-        self.assertIn("is now partially staged", claim_text)
+        self.assertIn("PhysicsNeMo package/runtime import", claim_text)
+        self.assertIn("gate", claim_text)
+        self.assertIn("partially staged", claim_text)
         self.assertIn("No production MR has been", claim_text)
         self.assertIn("executed", claim_text)
 
