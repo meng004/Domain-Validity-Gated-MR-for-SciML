@@ -1,0 +1,61 @@
+{
+  "denominator": 10,
+  "median_density_max_over_min": 2.2502022981643677,
+  "median_reference_incompressible_div_u_rms": 1.3213109773444023,
+  "rejection_basis": "Condition (i) physical-basis gate fails: the SU2 airfoil flow is compressible (median density max/min = 2.25x across the field, n=10 trajectories), so the incompressible continuity assumption div(u)=0 is physically false for this SUT. On cylinder flow the same relation passes condition (i) and is only deferred at condition (iv); here it is rejected on physical grounds.",
+  "relation": "incompressible_divergence_free_continuity",
+  "rows": [
+    {
+      "density_max_over_min": 1.0907782316207886,
+      "ref_incompressible_div_u_rms": 0.6304463114766685,
+      "trajectory": 0
+    },
+    {
+      "density_max_over_min": 2.584249258041382,
+      "ref_incompressible_div_u_rms": 1.4447440291890992,
+      "trajectory": 1
+    },
+    {
+      "density_max_over_min": 2.115614652633667,
+      "ref_incompressible_div_u_rms": 1.2473047326610756,
+      "trajectory": 2
+    },
+    {
+      "density_max_over_min": 2.3847899436950684,
+      "ref_incompressible_div_u_rms": 1.3953172220277288,
+      "trajectory": 3
+    },
+    {
+      "density_max_over_min": 1.3458107709884644,
+      "ref_incompressible_div_u_rms": 0.9925991730825399,
+      "trajectory": 4
+    },
+    {
+      "density_max_over_min": 4.218989849090576,
+      "ref_incompressible_div_u_rms": 6.046509872054288,
+      "trajectory": 5
+    },
+    {
+      "density_max_over_min": 4.449163913726807,
+      "ref_incompressible_div_u_rms": 8.650853539688645,
+      "trajectory": 6
+    },
+    {
+      "density_max_over_min": 1.1852456331253052,
+      "ref_incompressible_div_u_rms": 0.8231489713080298,
+      "trajectory": 7
+    },
+    {
+      "density_max_over_min": 6.608397960662842,
+      "ref_incompressible_div_u_rms": 7.817385155514776,
+      "trajectory": 8
+    },
+    {
+      "density_max_over_min": 1.9946249723434448,
+      "ref_incompressible_div_u_rms": 1.2270068865839572,
+      "trajectory": 9
+    }
+  ],
+  "rubric_decision": "rejected-domain-invalid-physical-basis",
+  "verdict": "rejected-domain-invalid"
+}

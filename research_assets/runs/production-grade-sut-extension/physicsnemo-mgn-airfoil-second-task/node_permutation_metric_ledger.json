@@ -1,0 +1,62 @@
+{
+  "denominator": 10,
+  "max_relative_l2": 0.0,
+  "metric": "relative_l2(unpermuted_followup, source)",
+  "passes": 10,
+  "relation": "node_permutation_equivariance",
+  "rows": [
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 9
+    }
+  ],
+  "rubric_decision": "admitted",
+  "threshold": 1e-05,
+  "verdict": "pass"
+}

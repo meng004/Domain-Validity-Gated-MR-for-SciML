@@ -1,0 +1,71 @@
+{
+  "denominator": 10,
+  "honesty_boundary": "The absolute compressible-continuity residual has a large discrete operator floor on this coarse transonic mesh (uncalibratable, as for cylinder incompressible continuity), so only a reference-relative diagnostic is reported; this asserts no absolute mass conservation.",
+  "median_pred_over_ref_residual_ratio": 1.472377681103904,
+  "metric": "rms(drho/dt + div(rho u)) surrogate vs reference, interior cells",
+  "relation": "compressible_unsteady_mass_conservation",
+  "rows": [
+    {
+      "pred_residual_rms": 4.0410164280056105,
+      "ratio": 4.805847406192489,
+      "ref_residual_rms": 0.8408540859617454,
+      "trajectory": 0
+    },
+    {
+      "pred_residual_rms": 6.2975891505637485,
+      "ratio": 1.3102808472055996,
+      "ref_residual_rms": 4.806289555399093,
+      "trajectory": 1
+    },
+    {
+      "pred_residual_rms": 4.552189199434661,
+      "ratio": 1.6344745150022084,
+      "ref_residual_rms": 2.7851087047561034,
+      "trajectory": 2
+    },
+    {
+      "pred_residual_rms": 6.634624932652963,
+      "ratio": 1.2521120622554864,
+      "ref_residual_rms": 5.2987469194264545,
+      "trajectory": 3
+    },
+    {
+      "pred_residual_rms": 4.242384623318264,
+      "ratio": 2.639731222839198,
+      "ref_residual_rms": 1.6071274933647641,
+      "trajectory": 4
+    },
+    {
+      "pred_residual_rms": 15.454356667292531,
+      "ratio": 1.0206071311013327,
+      "ref_residual_rms": 15.142316956590145,
+      "trajectory": 5
+    },
+    {
+      "pred_residual_rms": 16.124794660539525,
+      "ratio": 1.1001614637314696,
+      "ref_residual_rms": 14.65675284230398,
+      "trajectory": 6
+    },
+    {
+      "pred_residual_rms": 4.260431735572373,
+      "ratio": 3.448003587831357,
+      "ref_residual_rms": 1.2356227675076168,
+      "trajectory": 7
+    },
+    {
+      "pred_residual_rms": 13.965982076966842,
+      "ratio": 1.0901384803823235,
+      "ref_residual_rms": 12.811199978986908,
+      "trajectory": 8
+    },
+    {
+      "pred_residual_rms": 4.006088444394933,
+      "ratio": 1.6635239196301765,
+      "ref_residual_rms": 2.4081940735096494,
+      "trajectory": 9
+    }
+  ],
+  "rubric_decision": "deferred-uncalibratable-absolute-then-reference-relative-diagnostic",
+  "verdict": "reference-relative-diagnostic-recorded"
+}

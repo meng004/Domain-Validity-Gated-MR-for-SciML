@@ -865,6 +865,48 @@ claims:
       by production-scale GPU/runtime constraints; Object-B/Object-C remain
       blocked by AeroGraphNet/DoMINO data, checkpoint/API, and access.
 
+  - claim_id: "C31-physicsnemo-mgn-airfoil-second-task"
+    status: "observed"
+    scope: "NVIDIA PhysicsNeMo MeshGraphNet official architecture / DeepMind airfoil (SU2 compressible transonic flow) / second CFD task and second official dataset / first 6 official train + first 10 official test trajectories / newly trained CPU checkpoint / typed rubric decisions, per-trajectory ledgers, bounded raw outputs"
+    evidence:
+      - "tools/run_physicsnemo_mgn_airfoil_workflow.py"
+      - "tests/test_physicsnemo_airfoil_workflow.py"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/physicsnemo_mgn_airfoil_workflow_report.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/physicsnemo_mgn_airfoil_rubric_decisions.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/physicsnemo_mgn_airfoil_checkpoint.pt"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/node_permutation_metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/incompressible_continuity_rejection_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/compressible_conservation_metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/mirror_y_symmetry_rejection_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/raw_outputs/"
+    wording_allowed: >
+      The same four-condition admissibility predicate, applied to a genuinely
+      second CFD task (DeepMind airfoil, SU2 compressible transonic flow) on a
+      second official dataset, produces a different but physically correct typed
+      inadmissibility structure: node-permutation equivariance is admitted and
+      exact (10/10 trajectories, relative L2 0.0); incompressible divergence-free
+      continuity is rejected at the physical-basis gate because the density
+      varies by a median factor of 2.25x across the field (the flow is
+      compressible), whereas the same relation is only deferred on cylinder flow;
+      compressible unsteady mass conservation is the physically-correct
+      replacement, its absolute discrete form deferred and a reference-relative
+      diagnostic recorded; mirror-y chord symmetry is rejected at the
+      boundary-precondition gate (non-zero angle of attack). The typed verdicts
+      are training-independent (representation contract plus physical/numerical
+      reasoning), which is why they transfer and discriminate across tasks. This
+      is a bounded CPU-scale second-task case study.
+    wording_forbidden:
+      - "This is a full-scale production airfoil benchmark."
+      - "An airfoil pass/fail rate or reliability rate has been established."
+      - "This reproduces an official NVIDIA PhysicsNeMo airfoil checkpoint."
+      - "Absolute compressible mass conservation is verified."
+      - "Closed-loop airfoil rollout accuracy."
+    blocked_reason: >
+      Full-scale airfoil production evaluation (official training schedule,
+      official checkpoint, full benchmark) remains blocked by production-scale
+      GPU/runtime constraints; the one-step rollout error is large at this
+      bounded CPU budget and is reported only as a training-state diagnostic.
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"

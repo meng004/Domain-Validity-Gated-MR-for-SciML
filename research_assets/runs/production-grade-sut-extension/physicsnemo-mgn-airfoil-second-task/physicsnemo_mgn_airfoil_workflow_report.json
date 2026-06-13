@@ -1,0 +1,93 @@
+{
+  "architecture": {
+    "hidden_dim": 64,
+    "n_parameters": 326147,
+    "processor_size": 8
+  },
+  "artifacts": {
+    "checkpoint": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/physicsnemo_mgn_airfoil_checkpoint.pt",
+    "metric_ledgers": {
+      "compressible_conservation_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/compressible_conservation_metric_ledger.json",
+      "incompressible_continuity_rejection_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/incompressible_continuity_rejection_ledger.json",
+      "mirror_y_symmetry_rejection_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/mirror_y_symmetry_rejection_ledger.json",
+      "node_permutation_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/node_permutation_metric_ledger.json",
+      "rollout_accuracy_metric_ledger": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/rollout_accuracy_metric_ledger.json"
+    },
+    "raw_outputs_dir": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/raw_outputs",
+    "rubric_decisions": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task/physicsnemo_mgn_airfoil_rubric_decisions.json"
+  },
+  "data": {
+    "meta": {
+      "path": "/workspace/airfoil_staged/meta.json",
+      "sha256_prefix": "48441775d99fc822"
+    },
+    "records": [
+      {
+        "bytes": 303036612,
+        "n_records": 6,
+        "sha256_prefix": "8a93ddb19ddc39d4",
+        "source_url": "https://storage.googleapis.com/dm-meshgraphnets/airfoil/train.tfrecord",
+        "split": "train",
+        "staged_at": "2026-06-13T15:05:28Z"
+      },
+      {
+        "bytes": 505061020,
+        "n_records": 10,
+        "sha256_prefix": "56c8cbeb98dc8805",
+        "source_url": "https://storage.googleapis.com/dm-meshgraphnets/airfoil/test.tfrecord",
+        "split": "test",
+        "staged_at": "2026-06-13T15:05:43Z"
+      }
+    ],
+    "simulator": "su2",
+    "source_url_prefix": "https://storage.googleapis.com/dm-meshgraphnets/airfoil",
+    "stage_dir": "/workspace/airfoil_staged",
+    "subset_boundary": "first 6 official train and 10 official test airfoil trajectories; CPU-scale second-task evaluation, not the full SU2 airfoil production benchmark"
+  },
+  "evaluation": {
+    "n_test_trajectories": 10
+  },
+  "forbidden_claims": [
+    "production-scale airfoil pass/fail rate",
+    "official NVIDIA checkpoint behaviour",
+    "closed-loop rollout accuracy",
+    "cross-dataset reliability",
+    "absolute compressible mass conservation"
+  ],
+  "generated_at": "2026-06-13T15:07:47Z",
+  "headline_typed_verdict_structure": {
+    "compressible_mass_conservation": "deferred-absolute / reference-relative-diagnostic",
+    "incompressible_continuity": "rejected-domain-invalid (physical-basis, condition i)",
+    "mirror_y_symmetry": "rejected-domain-invalid (boundary-precondition, condition iii)",
+    "node_permutation_equivariance": "admitted (exact-by-construction)"
+  },
+  "honesty_boundary": "A bounded CPU-scale second-task evaluation of the official PhysicsNeMo MeshGraphNet architecture on official DeepMind airfoil (SU2 compressible) trajectories. The contribution is the cross-task demonstration that the same admissibility predicate yields a different typed inadmissibility structure, NOT a production-scale airfoil benchmark, NOT an official NVIDIA checkpoint, and NOT a cross-dataset reliability rate. One-step rollout only.",
+  "metrics": {
+    "median_compressible_residual_ratio": 1.472377681103904,
+    "median_density_max_over_min": 2.2502022981643677,
+    "median_one_step_rollout_relative_l2": 3.8805915117263794,
+    "median_reference_incompressible_div_u_rms": 1.3213109773444023,
+    "node_permutation_max_relative_l2": 0.0,
+    "node_permutation_passes": "10/10"
+  },
+  "object_id": "physicsnemo-mgn-airfoil-second-task",
+  "production_framework": "nvidia-physicsnemo",
+  "record_type": "physicsnemo-mgn-airfoil-second-task-workflow",
+  "schema_version": "0.1.0",
+  "second_task_contrast_to_cylinder": "compressible vs incompressible; second official dataset",
+  "sut_name": "NVIDIA PhysicsNeMo MeshGraphNet (official architecture)",
+  "task": "DeepMind airfoil / SU2 compressible transonic flow over an aerofoil",
+  "training": {
+    "epochs": 2,
+    "final_loss": 1.001969433612491,
+    "losses": [
+      1.0139753300560794,
+      1.001969433612491
+    ],
+    "lr": 0.001,
+    "n_train_trajectories": 6,
+    "seed": 20260613,
+    "snaps_per_traj_train": 20
+  },
+  "workflow_status": "completed-second-task-cpu-subset"
+}
