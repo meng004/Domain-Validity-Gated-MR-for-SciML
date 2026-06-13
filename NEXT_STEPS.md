@@ -4,21 +4,26 @@
 
 ## 🎯 里程碑：Phase-5 四项门槛全部达标（v18，2026-06-12）
 
-| 维度 | v16 | v17 | v18 | 门槛 | 状态 |
-|---|---:|---:|---:|---:|:--:|
-| overall | 7.31 | 7.66 | **7.83** | ≥7.8 | ✅ |
-| accept | 0.572 | 0.666 | **0.686** | ≥0.65 | ✅ |
-| clarity | 6.0 | 7.0 | **7.2** | ≥7.0 | ✅ |
-| empirical | 7.2 | 7.6 | **8.0** | ≥8.0 | ✅ |
-| novelty | 6.8 | 7.0 | 7.2 | — | — |
+| 维度 | v16 | v17 | v18 | v19(B轮,已回退) | 门槛 | 状态 |
+|---|---:|---:|---:|---:|---:|:--:|
+| overall | 7.31 | 7.66 | **7.83** | 7.54 | ≥7.8 | ✅(v18) |
+| accept | 0.572 | 0.666 | **0.686** | 0.548 | ≥0.65 | ✅(v18) |
+| clarity | 6.0 | 7.0 | **7.2** | 6.4 | ≥7.0 | ✅(v18) |
+| empirical | 7.2 | 7.6 | **8.0** | 7.2 | ≥8.0 | ✅(v18) |
+| novelty | 6.8 | 7.0 | 7.2 | 7.4 | — | — |
 
-裁决 4×minor / 1×major(EIC)。平台期（v7–v16 卡在 ~7.3）已突破。
-artifact: `research_assets/runs/academic-review-panel-v18/review_panel_report.json`
+裁决 v18: 4×minor/1×major。**B 轮（v19，commit 486fa1b）尝试用 novelty 重定位
+再加码，结果四项门槛全回退、裁决翻成多数 major**：novelty +0.2（噪声内），
+但加长的"类别区分"论证段拉低 clarity（EIC/kimi 给 5），且把理论 distinction
+拉满反招"floor 实为经验估计"的反击。已 revert 到 v18 达标 prose（commit
+9446634），保留 v19 报告为证据。
+**结论坐实：prose-only 加码已到天花板（32/34 号文档预判），门槛是被
+PhysicsNeMo 规模化实证 + v17 clarity 工作清掉的，不是 prose 挤出来的。**
 
 ## 🟡 待用户拍板：是否投稿
-v18 已达到自定义 Phase-5 出口门槛。建议路径：
-- A（推荐）：按当前 v18 稿件走 §11 投稿流水线投 IST（accept≈0.69，预期 minor revision）
-- B：再做一轮 v19 把 novelty(7.2)/EIC(major) 往上推后再投（边际收益递减）
+当前 HEAD 稿件 = v18 达标版（overall 7.83、四项全过、accept≈0.69）。建议：
+- A（推荐）：按当前稿件走投稿流水线投 IST，预期 minor revision
+- B 已验证为负收益，不再重试 prose 加码
 
 ## 🟢 Backlog（投稿前可选项）
 - [ ] v18 残余共性意见（非门槛阻塞，可在 minor-revision 阶段回应）：
