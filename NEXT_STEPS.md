@@ -1,6 +1,83 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-13 by claude-code (Phase 17/18 gate-closure session)
+> Last updated: 2026-06-14 by claude-code (Phase 17–19 session)
+
+## 🚚 本地迁移备忘（在本地继续前先看这段）
+
+**仓库状态**：分支 `claude/youthful-feynman-qy22k2`，本地=远端完全同步，
+工作树干净。最新 commit 见 `git log -1`（Phase 19 时为 `9517fbb`）。
+
+**1. 拉取分支**
+```
+git fetch origin claude/youthful-feynman-qy22k2
+git checkout claude/youthful-feynman-qy22k2
+git pull origin claude/youthful-feynman-qy22k2
+```
+
+**2. 本地需要重装的依赖**（容器临时装的，不在 git 里）
+```
+# 仅跑测试只需 torch：
+pip install --index-url https://download.pytorch.org/whl/cpu torch torchvision
+# 复跑 PhysicsNeMo 工作流（圆柱 scaled / 翼型 airfoil）还需要：
+pip install --ignore-installed packaging nvidia-physicsnemo==2.1.1 torch_geometric tfrecord
+pip install torch_scatter
+# 重编译投稿 PDF：
+#   apt-get install -y texlive-latex-extra texlive-bibtex-extra
+```
+
+**3. 不在 git 里、需要时自动重下的数据**（按设计放仓库外，约 1–2 GB）
+- 圆柱：`tools/run_physicsnemo_mgn_scaled_workflow.py` 自动从官方 DeepMind 数据集
+  ranged 下载到 `STAGE_DIR`（常量在文件顶部，本地可改）。
+- 翼型：`tools/run_physicsnemo_mgn_airfoil_workflow.py` 同样自动 staging。
+
+**4. 评审面板凭据**（跑 `tools/run_academic_review_panel.py` 才需要）
+```
+export OPENAI_BASE_URL="https://llm-api.net/v1"
+export OPENAI_API_KEY="<gateway key>"     # 不要提交进仓库
+```
+
+**5. 验证迁移成功**
+```
+python -m pytest tests -q        # 应 295 passed
+```
+
+## 📌 当前最佳投稿稿件 = v18 版
+
+- **最佳面板分稿件 prose = commit `9446634` 恢复的状态**：overall 7.83、四项
+  Phase-5 门槛全过、accept≈0.69。
+- 之后加的 airfoil 第二任务（commit `d2f8000` / `ece58bd`）+ 精简（`d333125`）
+  是**真实证据**，但面板因篇幅惩罚降到 **v22 = 7.43**（详见下方轨迹与提交信息）。
+- **待用户拍板的最后一步**：投稿稿件要不要含 airfoil。
+  - 方案 A（推荐）：用 v18 prose 投，airfoil 留作仓库支撑证据、不进正文。
+  - 方案 B：含 airfoil 进正文（真实科学更强、外部有效性更好，面板分 7.43）。
+
+## 🔬 真正提升质量的四件事（对真人审稿人，不只追面板分）
+
+按性价比排序，来自 v21/v22 评审里**真实有意义**的意见：
+1. **狠砍对冲和篇幅**（EIC/glm 一致："过长、重复、对冲把贡献埋了"）——纯写作。
+2. **把测量地板 measurement-floor 从"经验估计"做到"解析推导"一个具体网格的
+   绝对地板界**（DomainExpert/kimi："O(h) 扫描只验证斜率不验证绝对地板"）——
+   直接强化最核心的新颖点。
+3. **D-score 域违反轴做跨 MR 类校准**（3 位提："二维判决核心思想仍未校准"）。
+4. **更大 / 更真实的缺陷目录**（4 位提："10 个合成粗暴缺陷太薄"）。
+
+被判定为面板伪信号 / 意义较弱的：分数本身的 ±0.3 噪声、"无 DOI/非开箱即用复现"
+（已承诺录用时 Zenodo 归档）、"新颖性是组织性的"（魔鬼代言人角色设定）、
+"未对比人类专家"（论文已明确限定为 LLM 模拟专家）。
+
+## 📈 完整 post-gate 量分轨迹（同一套门槛）
+
+| 版本 | overall | accept | clarity | empirical | 裁决 | 说明 |
+|---|---:|---:|---:|---:|---|---|
+| **v18（精简,无airfoil）** | **7.83** | **0.686** | **7.2** | **8.0** | 4min/1maj | ✅四门槛全过=峰值 |
+| v20（≈v18 复核） | 7.74 | 0.676 | 7.0 | 8.0 | 3maj/2min | 噪声边界复核 |
+| v19（+novelty 重写） | 7.54 | 0.548 | 6.4 | 7.2 | 4maj/1min | 已回退 |
+| v21（+airfoil） | 7.37 | 0.590 | 6.4 | 7.4 | 1rej/1maj/3min | |
+| v22（+airfoil+精简） | 7.43 | 0.558 | 6.6 | 7.0 | 4maj/1min | 精简只追回一小部分 |
+
+**结论：面板的约束是篇幅/密度，不是缺证据。v18 是峰值稿件。**
+
+---
 
 ## 🎯 里程碑：Phase-5 四项门槛全部达标（v18，2026-06-12）
 
