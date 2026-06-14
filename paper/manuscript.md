@@ -225,7 +225,7 @@ In the present study the relation-violation axis is quantitative — mirror-y re
 
 ### 3.6 Hierarchical Interpretation Protocol
 
-We organize retained MRs into a three-level hierarchy inspired by MR classification for scientific computing: physical-model relations, computational-model relations, and code-model relations. For learned mesh surrogates, the computational-model level includes graph representation and message-passing discretization assumptions.
+We organize retained MRs using the four-level classification of metamorphic relations for scientific-computing programs of Yang et al. [yang2020hierarchical]: mathematical-physical-equation, computational-model, code-model, and likelihood relations. The deterministic MRs studied here populate the first three levels — physical-equation symmetries and conservation, computational-model discretization assumptions, and code-model representation contracts — while the likelihood level is outside the scope of the relations exercised in this study. For learned mesh surrogates, the computational-model level includes graph representation and message-passing discretization assumptions.
 
 We use this hierarchy as a predeclared interpretation protocol that maps representation-level MRs to possible graph encoding or adapter problems, physical-model MRs to possible continuity, symmetry, or similarity violations, and code-model MRs to possible determinism, rollout, or implementation issues. At this stage, this is a localization protocol, not a validated localization model. It becomes validated only if seeded faults or mutants with known layers are used to evaluate the inference rule. Section 5.3 reports a first bounded test of this protocol: against an injected-fault catalogue the continuity MR responded to boundary and normalization-scale faults while the symmetry MR responded to physical-channel and mesh-adjacency faults, which is suggestive evidence for the protocol's direction but not, on one SUT and one catalogue, a validated localization model.
 
@@ -349,31 +349,22 @@ are *secondary* context. Section 5.9 states the boundary of the evidence.
 
 ### 5.1 Claim-to-Evidence Map
 
-| Claim | Current status | Evidence | Boundary |
-|---|---|---|---|
-| Domain-validity rubric | Supported method claim | `research_assets/rubric/domain_validity_rubric.json` | Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. |
-| MR-card executable assets | Supported asset/workflow claim | `research_assets/mr_cards/`; validators | Some cards remain protocol assets pending matched SUT evidence. |
-| Baseline admissibility contrast | Observed | `expert-mr-baseline/`; `llm-mr-baseline/`; `generic-mr-baseline/`; `claim-ledger.yml` | Expert-LLM, LLM, and generic baselines executed as scoped admissibility-gap comparators without ranking methods as competitors. |
-| Minimum-MR-SubSet external-scope audit | Observed secondary audit | `minimum-mr-subset-external-scope-audit/minimum_mr_subset_scope_audit.json` | external witness evidence from 70 real rows and three SciML/PDE true-fault-class PASS_WITNESS rows; does not add new primary SUT executions to this paper. |
-| Minimum-MR-SubSet primary rerun | Observed external runtime rerun | `minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/abd_witness_report.json` | `PASS_WITNESS`, kstar = 6, four active true fault classes, max signature rank 2, collapse false; real held-out cylinder-flow MGN runtime, not a second architecture or dataset. |
-| Minimum-MR-SubSet PINN primary reruns | Observed second-SUT/PDE reruns | `minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/`; `minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/` | trained Burgers2D and Diffusion2D PINN witnesses, `PASS_WITNESS`, kstar = 1 each, five active true fault classes each; one-seed witnesses, no cross-SUT rate. |
-| Node-permutation sanity check | Observed pilot | `real-sut-node-permutation-pilot/raw/metric_ledger.json` | One representation-contract path on one pilot case. |
-| Conservation diagnostic | Observed diagnostic; absolute claim deferred | `conservation-diagnostic-pilot/raw/metric_ledger.json`; `conservation_report.json` | Reference-relative guard only; absolute conservation remains deferred. |
-| Mirror-y OOD stress (PC6-mirror-y-ood-stress) | Observed bounded pilot | `mirror-y-rate-upgrade/raw/metric_ledger.json`; `claim-ledger.yml` | Failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. |
-| Primary empirical scope upgrade | Observed | `primary-scope-upgrade/primary_scope_report.json`; per-trajectory/checkpoint manifests | K=6 x 3 trajectories x 10 mirror-y OOD-stress grid fails 180/180; K=6 x 3 trajectories x 9 conservation-transition grid passes 162/162 as reference-relative diagnostic; K=6 x 3 exact-symmetric-mesh input grid fails 18/18; trajectory-dependent cells are clustered by checkpoint, held-out test trajectory, and frame; not a single-source-trajectory estimate, not a cross-SUT rate. |
-| LLM role boundary | Supported process boundary | Method and ethics sections | LLMs organize candidates; the rubric decides validity. |
-| Rollout-accuracy diagnostic | Observed | `rollout-accuracy-baseline/raw/metric_ledger.json` | Same-SUT one-step median relative L2 0.0216; mirror-y is ~34x larger. |
-| Exact mirror-y symmetric mesh | Observed | `mirror-y-symmetric-mesh/raw/metric_ledger.json` | Exact relation admissible and fails (rel L2 1.10) on a synthetic OOD symmetric mesh; binary equivariance evidence. |
-| PC10-seeded-fault-detection | Observed | `seeded-fault-detection/raw/metric_ledger.json` | Detector stress test: MRs catch 5/10 injected mutants with class-specific response patterns. |
-| Multicheckpoint replication | Observed | `multicheckpoint/e1_aggregate.json`; per-SUT manifests under `multicheckpoint/S0..S5/` | K=6 checkpoints of one MeshGraphNets architecture family on one dataset; within-family replication. |
-| Operator-floor resolution | Observed | `operator-floor-sweep-extended/operator_floor_extended_report.json` | Log-log slope 0.984, 95% CI [0.975, 0.992] (interior 0.989, CI [0.982, 0.997]), R² = 0.9999 over nine resolutions on one symmetric structured mesh family with one analytic field; calibrates the admissibility predicate on one mesh family. |
-| Fault-detection robustness | Observed | `fault-robustness-e3/fault_robustness_report.json`; `phase3-unified-fault-catalog/phase3_unified_fault_catalog.json` | 30-trial Wilson CIs per MGN mutant plus the Phase-3 60-entry unified fault catalogue (composition in §5.6), with by-detector precision/recall (Wilson CIs) and Wilcoxon/Cliff effect sizes. |
-| S4/S5 variant primary workflow | Observed | `same-domain-variant-primary-workflow/same_domain_variant_primary_workflow_report.json`; raw ledgers | Same-domain wider/deeper MGN variants: 2/2 node-permutation passes, 60/60 mirror OOD failures, 54/54 conservation-diagnostic passes, 6/6 exact-symmetric failures; not PhysicsNeMo/EchoWave or cross-dataset reliability evidence. |
-| PointMLP cylinder primary workflow | Observed | `pointmlp-cylinder-primary-workflow/pointmlp_cylinder_primary_workflow_report.json`; checkpoint and raw ledgers | Newly trained non-MGN row-wise coordinate network on cylinder-flow source cases: 9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, 3/3 exact-symmetric failures, median rollout rel L2 0.0298; not PhysicsNeMo/EchoWave or production CFD evidence. |
-| PhysicsNeMo MGN scaled workflow | Observed multi-trajectory production-framework execution | `production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/physicsnemo_mgn_scaled_workflow_report.json`; newly trained checkpoint, per-trajectory ledgers, raw outputs | NVIDIA PhysicsNeMo `MeshGraphNet` in its official architecture (2.33M params) trained on 25 and evaluated on 40 official DeepMind `cylinder_flow` trajectories: node permutation exact on 40/40 (relative L2 0.0), mirror-y fails as OOD stress on 40/40 (median 0.31), conservation reference-relative diagnostic only; CPU-scale, not the official 10M-step schedule, NVIDIA checkpoint, or production benchmark, and not AeroGraphNet/DoMINO evidence. |
-| FNO primary workflow upgrade | Observed | `fno-primary-workflow/fno_primary_workflow_report.json`; per-SUT ledgers and raw `.npz` source/follow-up outputs | Six trained FNO-2D checkpoints over Burgers/heat: 24/24 translation passes, 24/24 conservation failures under a periodic discrete-conservation MR, and 6/6 Dirichlet-boundary translation rejections; full rubric-to-verdict evidence, outside cylinder-flow and broad neural-operator claims. |
+The contribution claims and the controls that calibrate them are below. The
+architecture-replication, cross-family, baseline, and external-witness rows —
+with their committed evidence paths — are in Appendix A; the authoritative
+runtime mapping is `claim-ledger.yml`.
 
-The table uses reviewer-facing claim names. The authoritative runtime mapping remains in `claim-ledger.yml`; this keeps the results readable while preserving a complete evidence ledger.
+| Claim | Status | Boundary |
+|---|---|---|
+| Domain-validity rubric | Supported method claim | Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. |
+| MR-card executable assets | Supported asset/workflow claim | Some cards remain protocol assets pending matched SUT evidence. |
+| Node-permutation sanity check | Observed pilot | One representation-contract path on one pilot case. |
+| Conservation diagnostic | Observed; absolute deferred | Reference-relative guard only; absolute conservation remains deferred. |
+| Mirror-y OOD stress (PC6-mirror-y-ood-stress) | Observed bounded pilot | Failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. |
+| Exact mirror-y symmetric mesh | Observed control | Exact relation admissible and fails (rel L2 1.10) on a synthetic OOD symmetric mesh; binary equivariance evidence. |
+| Rollout-accuracy diagnostic | Observed control | Same-SUT one-step median relative L2 0.0216; mirror-y is ~34x larger. |
+| Operator-floor resolution | Observed | Log-log slope 0.984, 95% CI [0.975, 0.992], R² = 0.9999 over nine resolutions; closed-form floor for the deployed mesh (predictor within 0.5% plus a-priori bound, §5.5). |
+| PC10-seeded-fault-detection | Observed | Detector stress test: MRs catch 5/10 injected mutants with class-specific response patterns. |
 
 ### 5.2 MR-Card-to-Verdict Map
 
@@ -497,7 +488,7 @@ Beyond the slope, the *absolute* floor is closed-form for the concrete deployed-
 
 The seeded-fault experiment is a detector stress test rather than a real-world defect-rate estimate. Against the 10-mutant injected-fault catalogue (PC10-seeded-fault-detection), the MR set catches 5 of 10 mutants and repeats the by-class pattern across the K=6 roster: continuity catches boundary/scale faults, symmetry catches physical-channel/adjacency faults, and node permutation catches representation-ordering faults. The refined R3 sweep shows the blind region is a knife-edge / measure-zero blind subspace: the node-permutation detector catches the injected edge-ordering fault at fractions through 0.99, while the full replacement remains invisible to the intended detector.
 
-**Adversarial mutants (R4).** Two additional mutants probe whether the blind spot is a subspace, not a point. A1 is detected by mirror-y through magnitude shift, with node-permutation 0/6 and conservation 0/6, so it is not evidence that the node-permutation or conservation detectors cover the blind subspace. A2 escapes every detector, confirming the subspace boundary that the catalogue must disclose.
+**Adversarial mutants (R4).** Two additional mutants probe whether the blind spot is a subspace, not a point. A1 is detected by mirror-y through magnitude shift, with node-permutation 0/6 and conservation 0/6, so it is not evidence that the node-permutation or conservation detectors cover the blind subspace. A2 escapes every detector, confirming the subspace boundary that the catalogue must disclose. The pattern reflects the detectors' coverage geometry: each MR scores a single invariant (relabeling equivariance, the divergence ratio, or y-symmetry), so a fault is caught only when it perturbs a measured invariant and is structurally invisible when it preserves all of them — closing the blind region therefore calls for additional MRs that probe the uncovered directions, not for more mutants of the same kind.
 
 **Unified catalogue and statistics.** Phase 3 merges 10 executed canonical MGN mutants, 2 executed adversarial MGN mutants, 24 closed-form output-level PINN probes, and 24 closed-form output-level FNO probes into a 60-entry unified fault catalogue (see §5.1). The artifact reports precision/recall with Wilson intervals: node-permutation 1.00/1.00, conservation 1.00/0.81, and mirror-y 0.94/0.55; it also reports Wilcoxon and Cliff's δ effect-size summaries, including PINN MR-B diffusion-vs-Burgers δ = 0.78 (large) with paired Wilcoxon p = 0.5 at n = 3. The PINN and FNO entries are closed-form probes with no retraining, not retrained mutant checkpoints.
 
@@ -584,6 +575,30 @@ the trained checkpoints, the seeded-fault catalogue, and the per-trajectory
 ledgers referenced by relative path throughout Section 5 — will be archived
 with a DOI on Zenodo upon acceptance; until then it is available to reviewers
 on request through the editor.
+
+## Appendix A. Full claim-to-evidence ledger
+
+The complete per-claim ledger backing Section 5, including the
+architecture-replication, cross-family, baseline, and external-witness rows
+summarized compactly in §5.1. Each row gives the committed evidence path; the
+authoritative runtime mapping is `claim-ledger.yml`.
+
+| Claim | Current status | Evidence | Boundary |
+|---|---|---|---|
+| Domain-validity rubric | Supported method claim | `research_assets/rubric/domain_validity_rubric.json` | Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. |
+| MR-card executable assets | Supported asset/workflow claim | `research_assets/mr_cards/`; validators | Some cards remain protocol assets pending matched SUT evidence. |
+| Baseline admissibility contrast | Observed | `expert-mr-baseline/`; `llm-mr-baseline/`; `generic-mr-baseline/`; `claim-ledger.yml` | Expert-LLM, LLM, and generic baselines executed as scoped admissibility-gap comparators without ranking methods as competitors. |
+| Minimum-MR-SubSet external-scope audit | Observed secondary audit | `minimum-mr-subset-external-scope-audit/minimum_mr_subset_scope_audit.json` | external witness evidence from 70 real rows and three SciML/PDE true-fault-class PASS_WITNESS rows; does not add new primary SUT executions to this paper. |
+| Minimum-MR-SubSet primary rerun | Observed external runtime rerun | `minimum-mr-subset-primary-rerun/cylinder-flow-mgn-runtime/abd_witness_report.json` | `PASS_WITNESS`, kstar = 6, four active true fault classes, max signature rank 2, collapse false; real held-out cylinder-flow MGN runtime, not a second architecture or dataset. |
+| Minimum-MR-SubSet PINN primary reruns | Observed second-SUT/PDE reruns | `minimum-mr-subset-primary-rerun/burgers2d-pinn-witness/`; `minimum-mr-subset-primary-rerun/diffusion2d-pinn-witness/` | trained Burgers2D and Diffusion2D PINN witnesses, `PASS_WITNESS`, kstar = 1 each, five active true fault classes each; one-seed witnesses, no cross-SUT rate. |
+| Primary empirical scope upgrade | Observed | `primary-scope-upgrade/primary_scope_report.json`; per-trajectory/checkpoint manifests | K=6 x 3 trajectories x 10 mirror-y OOD-stress grid fails 180/180; K=6 x 3 trajectories x 9 conservation-transition grid passes 162/162 as reference-relative diagnostic; K=6 x 3 exact-symmetric-mesh input grid fails 18/18; trajectory-dependent cells are clustered by checkpoint, held-out test trajectory, and frame; not a single-source-trajectory estimate, not a cross-SUT rate. |
+| LLM role boundary | Supported process boundary | Method and ethics sections | LLMs organize candidates; the rubric decides validity. |
+| Multicheckpoint replication | Observed | `multicheckpoint/e1_aggregate.json`; per-SUT manifests under `multicheckpoint/S0..S5/` | K=6 checkpoints of one MeshGraphNets architecture family on one dataset; within-family replication. |
+| Fault-detection robustness | Observed | `fault-robustness-e3/fault_robustness_report.json`; `phase3-unified-fault-catalog/phase3_unified_fault_catalog.json` | 30-trial Wilson CIs per MGN mutant plus the Phase-3 60-entry unified fault catalogue (composition in §5.6), with by-detector precision/recall (Wilson CIs) and Wilcoxon/Cliff effect sizes. |
+| S4/S5 variant primary workflow | Observed | `same-domain-variant-primary-workflow/same_domain_variant_primary_workflow_report.json`; raw ledgers | Same-domain wider/deeper MGN variants: 2/2 node-permutation passes, 60/60 mirror OOD failures, 54/54 conservation-diagnostic passes, 6/6 exact-symmetric failures; not PhysicsNeMo/EchoWave or cross-dataset reliability evidence. |
+| PointMLP cylinder primary workflow | Observed | `pointmlp-cylinder-primary-workflow/pointmlp_cylinder_primary_workflow_report.json`; checkpoint and raw ledgers | Newly trained non-MGN row-wise coordinate network on cylinder-flow source cases: 9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, 3/3 exact-symmetric failures, median rollout rel L2 0.0298; not PhysicsNeMo/EchoWave or production CFD evidence. |
+| PhysicsNeMo MGN scaled workflow | Observed multi-trajectory production-framework execution | `production-grade-sut-extension/physicsnemo-mgn-vortex-shedding-scaled/physicsnemo_mgn_scaled_workflow_report.json`; newly trained checkpoint, per-trajectory ledgers, raw outputs | NVIDIA PhysicsNeMo `MeshGraphNet` in its official architecture (2.33M params) trained on 25 and evaluated on 40 official DeepMind `cylinder_flow` trajectories: node permutation exact on 40/40 (relative L2 0.0), mirror-y fails as OOD stress on 40/40 (median 0.31), conservation reference-relative diagnostic only; CPU-scale, not the official 10M-step schedule, NVIDIA checkpoint, or production benchmark, and not AeroGraphNet/DoMINO evidence. |
+| FNO primary workflow upgrade | Observed | `fno-primary-workflow/fno_primary_workflow_report.json`; per-SUT ledgers and raw `.npz` source/follow-up outputs | Six trained FNO-2D checkpoints over Burgers/heat: 24/24 translation passes, 24/24 conservation failures under a periodic discrete-conservation MR, and 6/6 Dirichlet-boundary translation rejections; full rubric-to-verdict evidence, outside cylinder-flow and broad neural-operator claims. |
 
 ## References
 

@@ -29,7 +29,26 @@
   - 诚实边界：仅该结构网格 + 解析场；任意非结构网格的一般界仍 future work。
   - **待办**：跑 v25 面板验证 C32 是否抬 technical_soundness/clarity（凭据在手）。
 
-- **未 commit**：本会话全部改动停在工作树（用户未要求提交）。
+- **Phase 21 续（已 commit ad70ff3：压缩两轮 + C32）**。
+
+- **(a) §5.1 表格结构性瘦身（已做）**：21 行 ledger 表拆为正文 9 行 headline（无文件路径）
+  + Appendix A 完整表。直击 EIC/DomainExpert"artifact references obscure contribution"。
+  - **v26 = overall 7.80**（v25 7.60→7.80，clarity 7.0→7.2，accept 0.668）：**airfoil 版追平
+    v18 峰值 7.83，且保住 airfoil**。表格瘦身真实有效。
+
+- **(b) B1+B2 扩展缺陷目录 + 真实 bug 见证（C33，已做）**：
+  - B1：11 个真实分级工程缺陷注入真实 MeshGraphNet 前向（图构造/归一化/边特征/输出尺度/符号/timestep）。
+  - B2：重建 PhysicsNeMo `VortexSheddingDataset.__getitem__` 原地改图真实 bug（doc 37），
+    **被 node-perm MR 捕获**（rel L2 1.44）。
+  - 诚实结果：11 个真实缺陷只检出 3（union 3/11，Wilson [0.10,0.57]）——均匀幅值缺陷被结构性漏掉。
+    框定为"MR 是**结构检测器**"而非灌水 recall（未调阈值，守 §10.3）。目录总量 60→71。
+  - 工具 `tools/run_seeded_fault_catalog_v2.py`、产物 `research_assets/runs/seeded-fault-catalog-v2/`、
+    claim **C33**、guard `tests/test_seeded_fault_catalog_v2.py`（308 测试全绿）。
+  - phase4 clarity buffer 按既定政策 11800→12000（C32+C33 load-bearing；真实上限 15000，余量 3192）。
+  - **待办**：v27 面板验证 C33 是否撬动 5/5"目录薄"关切（凭据在手，本地真实 SUT 可跑：
+    `PYTHONPATH=../最小完备MR子集/scripts` + torch 2.12）。
+
+- **未 commit**：(a)+(b) 改动停在工作树（commit ad70ff3 之后的新改动）。
 
 ## 🚚 本地迁移备忘（在本地继续前先看这段）
 

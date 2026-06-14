@@ -40,7 +40,7 @@ Decision rule:
 | `baral2025xrepit` | VERIFIED_WITH_LIMITS | ScienceDirect page and DOI `10.1016/j.compfluid.2026.107075`. | Hybrid ML-CFD trust/switching context; not MT or relation-level violation statistics. |
 | `wang2025deeponetfe` | VERIFIED_WITH_LIMITS | ScienceDirect page and DOI `10.1016/j.cma.2025.118319`. | Hybrid neural-operator/FE coupling context; not MT evidence. |
 | `zhao2026noether` | VERIFIED_WITH_LIMITS | arXiv `2605.17390` and DOI `10.48550/arXiv.2605.17390`. | Preprint-level candidate pattern organization context only; not peer-reviewed validation of this paper's MRs. |
-| `yang2020hierarchical` | VERIFIED_WITH_LIMITS | Existing local BibTeX DOI `10.11896/jsjkx.200200015`. | Prior scientific-computing MR classification context; exact English metadata should be rechecked before final camera-ready submission. |
+| `yang2020hierarchical` | VERIFIED_WITH_LIMITS | Publisher page jsjkx.com for DOI `10.11896/jsjkx.200200015`: 计算机科学 (Computer Science) 2020, 47(11A): 557-561. Authors verified as YANG Xiao-hua, YAN Shi-yu, LIU Jie, LI Meng (the prior BibTeX authors "Zhang Jian / Tsong Yueh Chen / Liu Huai / Yang Fan" were fabricated and have been corrected). | Prior scientific-computing MR classification. NOTE: the public abstract page lists three levels (physical-model / computing-model / code-model); the author reports a fourth "likelihood" (似然) level in the full text. Recheck the full text and the exact English level names (esp. the likelihood level) before camera-ready. |
 
 ## Excluded or Non-Cited Leads
 

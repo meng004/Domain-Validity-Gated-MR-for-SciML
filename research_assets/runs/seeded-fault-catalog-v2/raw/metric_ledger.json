@@ -1,0 +1,224 @@
+{
+  "ledger_id": "seeded-fault-catalog-v2",
+  "schema_version": "0.1.0",
+  "evidence_level": "real-sut-single-checkpoint-expanded-fault-catalogue",
+  "experiment": "B1 realistic graded faults + B2 real production-bug witness",
+  "sut_repo": "../最小完备MR子集",
+  "sut_commit": "8c0b7ef3605fd9452884d701e2a191a2b14a5a35",
+  "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+  "num_frames": 9,
+  "detectors": {
+    "node_permutation_equivariance": {
+      "tolerance": 1e-05
+    },
+    "conservation_divergence": {
+      "reference_relative_regression_threshold": 1.5
+    },
+    "mirror_y_ood_stress": {
+      "baseline_violation": 0.7354229305978729,
+      "relative_change_detection_threshold": 0.5
+    }
+  },
+  "num_new_mutants": 11,
+  "detection_matrix": [
+    {
+      "mutant": "MA_self_loops",
+      "fault_class": "mesh_adjacency_fault",
+      "realism": "graph-construction bug (self-loops)",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0088437612359216,
+      "mirror_y_violation_median": 0.9622614990465359,
+      "mirror_y_relative_change_from_baseline": 0.3084464177153835,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "MA_missing_reverse",
+      "fault_class": "mesh_adjacency_fault",
+      "realism": "directed/undirected edge confusion",
+      "node_perm_relative_l2_median": 1.160645070603058,
+      "conservation_ratio_median": 1.0105351885549279,
+      "mirror_y_violation_median": 1.028560845394425,
+      "mirror_y_relative_change_from_baseline": 0.3985977355346282,
+      "node_permutation_MR_detects": true,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": true
+    },
+    {
+      "mutant": "EF_abs_position",
+      "fault_class": "mesh_adjacency_fault",
+      "realism": "absolute vs relative edge-feature bug",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0137692477752167,
+      "mirror_y_violation_median": 1.0822001435492488,
+      "mirror_y_relative_change_from_baseline": 0.4715344035702806,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "NS_skip_edge_norm",
+      "fault_class": "normalization_scale_fault",
+      "realism": "missing edge normalization",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.023963205306618,
+      "mirror_y_violation_median": 1.7305233514540213,
+      "mirror_y_relative_change_from_baseline": 1.353099528793815,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": true,
+      "detected_by_any": true
+    },
+    {
+      "mutant": "NS_no_input_norm",
+      "fault_class": "normalization_scale_fault",
+      "realism": "missing input normalization",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0043935882893271,
+      "mirror_y_violation_median": 0.7449454993050716,
+      "mirror_y_relative_change_from_baseline": 0.012948425064006619,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "NS_half_denorm",
+      "fault_class": "normalization_scale_fault",
+      "realism": "output denormalization scale error",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0065565825239589,
+      "mirror_y_violation_median": 0.7354229305978729,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "PC_vx_sign",
+      "fault_class": "physical_channel_fault",
+      "realism": "velocity-component sign / frame bug",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0173746270837656,
+      "mirror_y_violation_median": 0.7354229305978729,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "PC_scale_vx",
+      "fault_class": "physical_channel_fault",
+      "realism": "anisotropic output scale bug",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0201322436862368,
+      "mirror_y_violation_median": 0.7427792804895713,
+      "mirror_y_relative_change_from_baseline": 0.010002883491432567,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "TR_half_step",
+      "fault_class": "temporal_rollout_fault",
+      "realism": "wrong integration timestep",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0065565825239589,
+      "mirror_y_violation_median": 0.7354229305978729,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "TR_frozen",
+      "fault_class": "temporal_rollout_fault",
+      "realism": "dropped state update",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0027395010283526,
+      "mirror_y_violation_median": 0.7354229305978729,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false
+    },
+    {
+      "mutant": "REAL_graph_cache",
+      "fault_class": "representation_fault",
+      "realism": "documented PhysicsNeMo in-place graph-mutation bug (paper/37)",
+      "node_perm_relative_l2_median": 1.4404182919665205,
+      "conservation_ratio_median": 1.0114302951680494,
+      "mirror_y_violation_median": 0.7354229305978729,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": true,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": true
+    }
+  ],
+  "summary": {
+    "union_detected": 3,
+    "union_rate": 0.2727272727272727,
+    "union_rate_wilson95": [
+      0.09745880573921469,
+      0.5656502930102462
+    ],
+    "node_permutation_rate": 0.18181818181818182,
+    "conservation_rate": 0.0,
+    "mirror_y_rate": 0.09090909090909091,
+    "by_class": {
+      "mesh_adjacency_fault": {
+        "n": 3,
+        "detected": 1,
+        "rate": 0.3333333333333333
+      },
+      "normalization_scale_fault": {
+        "n": 3,
+        "detected": 1,
+        "rate": 0.3333333333333333
+      },
+      "physical_channel_fault": {
+        "n": 2,
+        "detected": 0,
+        "rate": 0.0
+      },
+      "temporal_rollout_fault": {
+        "n": 2,
+        "detected": 0,
+        "rate": 0.0
+      },
+      "representation_fault": {
+        "n": 1,
+        "detected": 1,
+        "rate": 1.0
+      }
+    }
+  },
+  "real_bug_witness": {
+    "mutant": "REAL_graph_cache",
+    "source": "PhysicsNeMo VortexSheddingDataset.__getitem__ in-place graph mutation (paper/37_phase17_gate_closure_execution.md)",
+    "detected_by_node_permutation": true,
+    "node_perm_relative_l2_median": 1.4404182919665205,
+    "note": "A correct equivariant pipeline reads ~0; the stale-graph bug makes the node-permutation MR read non-zero, which is how the bug was caught during scaled-workflow bring-up."
+  },
+  "combined_catalogue_size": {
+    "original_canonical_mgn": 10,
+    "adversarial_mgn": 2,
+    "new_realistic_mgn": 10,
+    "real_bug_witness": 1,
+    "pinn_closed_form_probes": 24,
+    "fno_closed_form_probes": 24,
+    "total": 71
+  },
+  "claim_limitations": "One SUT, one checkpoint, one eval trajectory. Realistic faults are hand-constructed; REAL_graph_cache reconstructs a documented real bug's signature. Detection rates are for this catalogue only; not a real-world rate, reliability, or cross-SUT claim.",
+  "generated_at": "2026-06-14T13:52:50Z"
+}

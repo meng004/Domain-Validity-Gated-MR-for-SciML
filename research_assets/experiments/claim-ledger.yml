@@ -938,6 +938,38 @@ claims:
       - "Any model-accuracy, reliability, or fault-detection claim."
     blocked_reason: null
 
+  - claim_id: "C33-expanded-fault-catalogue-and-real-bug-witness"
+    status: "observed"
+    scope: "one MeshGraphNet checkpoint / one eval trajectory / 11 hand-constructed realistic graded faults plus one documented real-bug witness / three domain-validity MR detectors"
+    evidence:
+      - "tools/run_seeded_fault_catalog_v2.py"
+      - "tools/run_seeded_fault_detection.py"
+      - "tests/test_seeded_fault_catalog_v2.py"
+      - "research_assets/runs/seeded-fault-catalog-v2/raw/metric_ledger.json"
+      - "research_assets/runs/seeded-fault-catalog-v2/manifest.yml"
+      - "paper/37_phase17_gate_closure_execution.md"
+    wording_allowed: >
+      An expanded real-SUT seeded-fault catalogue adds 11 hand-constructed realistic
+      graded engineering faults (graph-construction, normalization, edge-feature,
+      output-scale, sign, and timestep errors) plus a real-bug witness that
+      reconstructs the documented PhysicsNeMo VortexSheddingDataset.__getitem__
+      in-place graph-mutation bug found during the scaled-workflow bring-up. On the
+      same single MeshGraphNet checkpoint and eval trajectory, the three
+      domain-validity MRs detect the faults that break the invariants they measure:
+      the node-permutation MR catches a graph-structure fault (missing reverse edges,
+      relative L2 1.16) and the real cached-graph bug (relative L2 1.44 versus a
+      machine-precision baseline), which is how that bug was caught during bring-up.
+      Uniform output-magnitude faults that preserve equivariance, symmetry, and the
+      divergence ratio (sign flip, channel scaling, half-timestep, frozen update) are
+      by construction not detected (union 3 of 11, Wilson 95% CI [0.10, 0.57]). This
+      sharpens the structural-insensitivity characterization of the detectors and adds
+      a documented real-bug detection witness.
+    wording_forbidden:
+      - "A high or general fault-detection recall or rate."
+      - "A real-world fault-detection rate, reliability, or baseline-superiority claim."
+      - "Cross-SUT, cross-checkpoint, or cross-architecture generalization of detection."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"

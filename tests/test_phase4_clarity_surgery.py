@@ -22,11 +22,11 @@ from ist_wordcount import ist_word_count  # noqa: E402
 class Phase4ClaritySurgeryTest(unittest.TestCase):
     def test_ist_word_count_keeps_phase4_clarity_buffer(self) -> None:
         # Buffer history: 11000 (Phase 4) -> 11500 (Phase 17, scaled PhysicsNeMo) ->
-        # 11800 (Phase 18, second CFD task). The compressible-airfoil second-task
-        # case study is primary evidence that the reviewers explicitly requested
-        # (the recurring 'single task/dataset' concern); its ~280 words are
-        # load-bearing. The IST hard limit is 15000 (conservative count), so 11800
-        # still keeps a >3.2k safety margin while preserving the clarity discipline.
+        # 11800 (Phase 18, second CFD task). Phase 21 adds the closed-form
+        # operator-floor bound (C32, ~80 words, kept in body) but reverts the
+        # expanded-fault-catalogue prose (C33) to the repo after it did not help the
+        # review panel, so the buffer stays at 11800. The IST hard limit is 15000
+        # (conservative count), leaving a >3k margin.
         counts = ist_word_count()
         self.assertLessEqual(
             counts["total"],
