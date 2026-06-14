@@ -1,0 +1,70 @@
+{
+  "experiment_id": "E2b-operator-floor-analytic-bound",
+  "schema_version": "0.1.0",
+  "extends": "research_assets/runs/operator-floor-sweep-extended/operator_floor_extended_report.json",
+  "motivation": "Upgrade the measurement-floor gate from an empirically estimated floor to a closed-form leading-order predictor plus a rigorous a-priori upper bound, for the concrete deployed-scale structured mesh. Answers the DomainExpert/DevilsAdvocate concern that the O(h) sweep validates the slope but not the absolute floor.",
+  "operator": "P1 constant-per-cell divergence (tools.conservation_rubric.cell_divergence)",
+  "analytic_reference": {
+    "stream_function": "psi(x,y) = sin(KX x) sin(KY y); KX=pi/Lx, KY=pi/Ly",
+    "velocity": "u = (psi_y, -psi_x); div(u) = 0 analytically",
+    "Lx": 1.6,
+    "Ly": 0.4
+  },
+  "global_hessian_spectral_bound_M2": 514.7526402002899,
+  "method": "div_h is exact on affine fields; div(u)==0 so the affine Taylor part contributes 0 and div_h(u_sampled) equals the geometry-weighted sum of the second-order Lagrange remainders, EXACTLY. Predictor uses the centroid Hessian (leading order); bound uses the global spectral-norm sup M2 (strict).",
+  "levels": [
+    {
+      "nx": 24,
+      "half_rows": 10,
+      "interior_cells": 794,
+      "h_rms_edge": 0.06552007056721593,
+      "measured_floor_rms": 1.3374320442477088,
+      "predicted_floor_rms": 1.3429242104843218,
+      "bound_rms": 23.598343390959045,
+      "bound_max": 23.59834339095933,
+      "measured_max_abs": 2.40250763825371,
+      "predictor_ratio_meas_over_pred": 0.9959102932289587,
+      "bound_dominates_rms": true,
+      "bound_dominates_pointwise": true,
+      "headroom_bound_over_measured_rms": 17.64451771023092
+    },
+    {
+      "nx": 48,
+      "half_rows": 20,
+      "interior_cells": 3498,
+      "h_rms_edge": 0.032237611861461686,
+      "measured_floor_rms": 0.6637758959013456,
+      "predicted_floor_rms": 0.6644502428911709,
+      "bound_rms": 11.430348283278581,
+      "bound_max": 11.430348283278871,
+      "measured_max_abs": 1.2086943356192283,
+      "predictor_ratio_meas_over_pred": 0.9989851053603485,
+      "bound_dominates_rms": true,
+      "bound_dominates_pointwise": true,
+      "headroom_bound_over_measured_rms": 17.22019186574595
+    },
+    {
+      "nx": 96,
+      "half_rows": 40,
+      "interior_cells": 14666,
+      "h_rms_edge": 0.01599284235098712,
+      "measured_floor_rms": 0.3300999745927822,
+      "predicted_floor_rms": 0.33018343507788467,
+      "bound_rms": 5.627062095356618,
+      "bound_max": 5.627062095356859,
+      "measured_max_abs": 0.6052801060921488,
+      "predictor_ratio_meas_over_pred": 0.999747229944825,
+      "bound_dominates_rms": true,
+      "bound_dominates_pointwise": true,
+      "headroom_bound_over_measured_rms": 17.04653901381929
+    }
+  ],
+  "deployed_level": "h0",
+  "verdict": {
+    "predictor_matches_measured": true,
+    "bound_dominates_measured": true,
+    "closed_form_floor_available_for_concrete_mesh": true,
+    "general_unstructured_bound": "future work"
+  },
+  "honesty_boundary": "Closed-form floor for one structured mesh family and one analytic field. Not a general a-priori bound for arbitrary unstructured cylinder meshes, and not a model-accuracy or reliability claim."
+}

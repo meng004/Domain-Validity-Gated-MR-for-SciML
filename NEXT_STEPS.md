@@ -1,6 +1,35 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-14 by claude-code (Phase 17–19 session)
+> Last updated: 2026-06-14 by claude-code (Phase 20 compression session)
+
+## 🟡 进行中：方案 B（airfoil 进正文）+ 聚焦压缩（用户拍板，本会话）
+
+- **决策已定**：用户选 B —— airfoil 进正文（main.tex §445 与 manuscript.md §5.4.1 均已含），
+  目标把 airfoil 版密度压回 v18 紧度以追回篇幅惩罚分。
+- **本会话已做（manuscript.md，面板复评读此文件）**：12329→11944 词（削 385）；
+  固定论点不漂移、未改任何数字、数字前缀术语集不变、295 测试全绿。手术点：
+  §2.7 novelty run-on 去膨胀（290→165 词）、§6.2 去 3× "must not claim" 重复、
+  §5.4 去 §4.1 roster 复述、§5.3 各 bullet 去嵌套对冲、§5.1 表 4 个最长 Boundary 单元、
+  §2.4 去过程性叙事("our debates could not pre-empt")、§2.1/2.5/2.6 背景去 throat-clearing。
+  pinned 锚点（[0.69,1.00]、calibrated in-distribution magnitude 等）逐字保留。
+- **面板复评结果（用户提供网关凭据后跑）**：
+  - v23（第一轮压缩）：overall 7.60、accept 0.636、clarity 7.0、**major→minor**（真实增益）。
+  - v24（第二轮压缩）：overall 7.54、clarity 6.4——平台/噪声，EIC+MethodologyRigor clarity 仍卡 6，
+    坐实"prose-only 已到天花板"。
+  - **结论**：压缩第一轮有效（v22 7.43→v23 7.60，保住 airfoil 同时达 minor），第二轮平台。
+
+- **C32 实质增强（measurement-floor 解析地板界，本会话 Phase 21）**：
+  - 回应 DevilsAdvocate/EIC/DomainExpert 核心技术质疑"O(h) 扫描只验证斜率不验证绝对地板"。
+  - 推导：P1 散度算子对仿射场精确 + 解析场 div≡0 ⇒ 测得地板 = 二阶 Lagrange 余项的几何加权和（精确）。
+  - 闭式预测（格心 Hessian）在部署网格 h0 匹配测得地板到 0.5%（1.337 vs 1.343，ratio 0.996），
+    细化后 ratio→1.000；严格 a-priori 上界（Hessian 全局谱范数）RMS+pointwise 全 dominate。
+  - 产物 `research_assets/runs/operator-floor-analytic-bound/`、工具 `tools/run_operator_floor_analytic_bound.py`、
+    claim **C32**、guard `tests/test_operator_floor_analytic_bound.py`（302 测试全绿）。
+  - 正文集成：§5.5 新段 + §1.2/§2.4 措辞从"经验估计/future work"改为"具体网格闭式"，main.tex 同步。
+  - 诚实边界：仅该结构网格 + 解析场；任意非结构网格的一般界仍 future work。
+  - **待办**：跑 v25 面板验证 C32 是否抬 technical_soundness/clarity（凭据在手）。
+
+- **未 commit**：本会话全部改动停在工作树（用户未要求提交）。
 
 ## 🚚 本地迁移备忘（在本地继续前先看这段）
 

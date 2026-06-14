@@ -385,7 +385,7 @@ claims:
     wording_forbidden:
       - "Generalization across mesh families, geometries, or analytic fields."
       - "An absolute divergence-free tolerance claim on the real DeepMind eval mesh."
-      - "A closed-form bound or any analytically derived guarantee on the operator floor."
+      - "A closed-form bound for arbitrary unstructured meshes (the concrete-mesh closed-form floor is C32-operator-floor-analytic-bound; a general unstructured guarantee remains future work)."
     blocked_reason: null
 
   - claim_id: "C13-fault-detection-robustness"
@@ -906,6 +906,37 @@ claims:
       official checkpoint, full benchmark) remains blocked by production-scale
       GPU/runtime constraints; the one-step rollout error is large at this
       bounded CPU budget and is reported only as a training-state diagnostic.
+
+  - claim_id: "C32-operator-floor-analytic-bound"
+    status: "observed"
+    scope: "one mesh family (y=0-symmetric structured triangular channel), deployed-scale level h0 plus two finer levels, one smooth analytic stream-function field; closed-form predictor and rigorous a-priori upper bound for the P1 constant-per-cell divergence operator floor"
+    evidence:
+      - "tools/run_operator_floor_analytic_bound.py"
+      - "tools/conservation_rubric.py"
+      - "tests/test_operator_floor_analytic_bound.py"
+      - "research_assets/runs/operator-floor-analytic-bound/operator_floor_analytic_bound_report.json"
+    wording_allowed: >
+      For the concrete y=0-symmetric structured triangular channel mesh at the
+      deployed scale (level h0), the P1 constant-per-cell divergence operator's
+      truncation floor is given in closed form: because the operator is exact on
+      affine velocity fields and the analytic reference field is divergence-free,
+      the measured floor equals the geometry-weighted sum of the second-order
+      Lagrange remainders exactly. A closed-form leading-order predictor built
+      from the analytic Hessian at each cell centroid matches the area-weighted
+      RMS measured floor to within 0.5 percent at h0 (measured RMS 1.337 vs
+      predicted 1.343, ratio 0.996), and the ratio tends to 1 as the mesh
+      refines (0.999 at h0/2, 1.000 at h0/4), confirming the floor is governed by
+      the closed-form truncation expansion rather than by an unexplained
+      empirical artifact. A rigorous closed-form a-priori upper bound, using the
+      global spectral-norm bound of the analytic Hessian, dominates the measured
+      floor both in area-weighted RMS and pointwise at every level. This upgrades
+      the numerical-decidability gate from an empirically estimated floor to a
+      closed-form predicted and bounded floor for this concrete mesh.
+    wording_forbidden:
+      - "A closed-form a-priori bound for arbitrary unstructured cylinder meshes or general fields."
+      - "An absolute divergence-free tolerance claim on the real DeepMind eval mesh."
+      - "Any model-accuracy, reliability, or fault-detection claim."
+    blocked_reason: null
 
 
 speculative_claims:
