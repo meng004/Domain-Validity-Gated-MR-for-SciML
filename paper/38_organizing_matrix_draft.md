@@ -41,20 +41,18 @@ L≈linearity/superposition、E≈equivariance/commutation（平移·旋转·反
 C≈conservation（散度形式/积分不变量）、H≈homogeneity/scaling（无量纲相似）、
 M≈order/monotonicity（正性·最大值原理）、A≈adjoint/idempotence。
 
-**四层（有效性裁决，行）= Yang 等 2020 的科学计算程序 MR 四层分类**
-（`yang2020hierarchical`，已核实作者 YANG Xiao-hua / YAN Shi-yu / LIU Jie / LI Meng；
-公开摘要列三层，作者确认全文为四层含"似然"层——见 citation_audit，camera-ready 复核全文）：
-**数学物理方程 MR / 计算模型 MR / 代码模型 MR / 似然 MR**。本文确定性 MR 落在前三层；
-似然层（统计/概率型关系）本文未涉。
-> 注意：早前草案曾自造"方程/数值算法/代码实现/运行轨迹"四层——**作废**，一律以 Yang 实际四层为准。
-> 数值算法/离散格式性质并入"计算模型"层；rollout/时序关系若需要，归入"代码模型"或单列讨论，不杜撰新层。
+**三层（有效性裁决，行）= Yang 等 2020 的科学计算程序 MR 三层分类**（`yang2020hierarchical`，
+已核实：作者 YANG Xiao-hua / YAN Shi-yu / LIU Jie / LI Meng；jsjkx.com 全文摘要明确"3 类"、
+无"似然"层——见 citation_audit，已 VERIFIED）：**物理模型 MR / 计算模型 MR / 代码模型 MR**。
+> 订正记录：早前草案曾自造"方程/数值算法/代码实现/运行轨迹"四层，又一度误写 Yang 为四层（含似然）——
+> 二者均**作废**。一律以 Yang 已发表**三层**为准。数值算法/离散格式性质作为**计算模型层的子维度**；
+> rollout/时序关系归入**代码模型层**；不杜撰新层。
 
 | 层 \ 性质 | E 等变 | C 守恒 | L 线性 | H 标度 | M 序/单调 |
 |---|---|---|---|---|---|
-| **数学物理方程 MR**（PDE 数学性质） | mirror-y（反射）✓ | div-free ✓ | superposition ✗缺 | Re–St 相似（议未执行） | 最大值原理 ○ |
-| **计算模型 MR**（离散格式/数值性质） | 离散对称 ○ | 离散守恒 + **O(h) 地板**✓（C32 闭式） | 离散线性 ✗缺 | 网格细化收敛 ○ | 离散正性 ○ |
-| **代码模型 MR**（软件契约/执行） | **节点/边置换**✓ · rollout 前缀 ○ | 通量记账一致 ○ · restart 等价 ○ | — | — | 半群/复合 ○ |
-| **似然 MR**（统计/概率型，本文未涉） | — | — | — | — | — |
+| **物理模型 MR**（PDE 数学性质） | mirror-y（反射）✓ | div-free ✓ | superposition ✗缺 | Re–St 相似（议未执行） | 最大值原理 ○ |
+| **计算模型 MR**（离散格式/数值性质，含数值算法子维度） | 离散对称 ○ | 离散守恒 + **O(h) 地板**✓（C32 闭式） | 离散线性 ✗缺 | 网格细化收敛 ○ | 离散正性 ○ |
+| **代码模型 MR**（软件契约/执行，含 rollout/时序子维度） | **节点/边置换**✓ · rollout 前缀 ○ | 通量记账一致 ○ · restart 等价 ○ | — | — | 半群/复合 ○ |
 
 图例：✓已执行 · ○已具备可补 · ✗缺（高价值补点）· "议"=讨论未执行。
 

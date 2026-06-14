@@ -142,23 +142,23 @@ The proposed method is a five-stage workflow:
 4. convert retained relations into executable MR assets;
 5. execute the assets and record relation-level verdicts.
 
-The method deliberately separates candidate generation from validity judgment. NOETHER-style patterns may help organize or generate candidate relation structures, but they do not certify that a relation is physically valid for a particular SUT, dataset, mesh, boundary condition, or numerical tolerance. Validity is determined by the rubric and by executable evidence.
+The method deliberately separates candidate generation from validity judgment: the algebraic properties of the governing and discrete operators (and NOETHER-style pattern organization) generate candidates, but none of them certifies that a relation is physically valid for a particular SUT, dataset, mesh, boundary condition, or numerical tolerance. Validity is determined by the rubric and by executable evidence.
 
 ### 3.2 Candidate Relation Sources
 
-For cylinder-flow surrogates, candidate MRs may come from six sources.
+Candidate MRs are read off the algebraic properties of the governing and discrete operators, and each candidate is located in one of the three classification levels of §3.6. For cylinder-flow surrogates the recurring meta-patterns are:
 
-**Physical equations and constraints.** Incompressible continuity, boundary behavior, and conservation-like expectations can suggest relation measurements such as discrete divergence or boundary-condition consistency.
+**Equivariance** (commutation with a group action). The equations commute with reflections, rigid motions, and frame changes — physical-model symmetry MRs, admissible only under compatible geometry and boundary labels; the representation commutes with node permutation, face ordering, and edge encoding — code-model representation MRs, which are training-independent software contracts.
 
-**Geometric and symmetry assumptions.** Mirroring, rigid transformations, and coordinate-frame changes may suggest equivariance or invariance checks, but only under compatible geometry and boundary labels.
+**Conservation.** Continuity and balance laws yield discrete-divergence and boundary-flux relations (physical-model); their decidability is set at the computational-model level by the measuring operator's error floor (§3.3, §5.5).
 
-**Nondimensional similarity.** Reynolds-number and Strouhal-number relations may suggest follow-up transformations over flow parameters or extracted wake behavior, but only within regimes where the empirical or theoretical relation is meaningful.
+**Homogeneity and scaling.** Reynolds- and Strouhal-number similarity yields nondimensional follow-up transformations, valid only within regimes where the relation is meaningful.
 
-**Mesh and graph representation.** Node permutations, face ordering, edge encoding, and mesh refinement may suggest representation-level MRs.
+**Composition.** Autoregressive rollouts yield determinism, prefix-consistency, and semigroup-like checks — implementation and numerical-consistency relations, not physical laws.
 
-**Temporal rollout behavior.** Autoregressive rollouts may suggest determinism, prefix consistency, or semigroup-like sanity checks. These are useful implementation or numerical-consistency checks, but should not be overstated as physical laws.
+**Cross-implementation comparison.** Outputs from different implementations support method-comparison checks only when units, state variables, meshes, rollout horizons, boundary conditions, and checkpoints are comparable; otherwise they are triangulation evidence rather than retained MRs.
 
-**Cross-implementation comparison.** Outputs from different implementations may support method-comparison checks only if units, state variables, meshes, rollout horizons, boundary conditions, and checkpoints are comparable. Otherwise they are triangulation evidence rather than retained MRs.
+Linearity (superposition) and order/monotonicity are further meta-patterns available for linear operators and positivity-preserving schemes; they are not exercised by the deterministic relations studied here. The same algebraic property can hold at the physical-model level yet fail at the computational or code level — an asymmetric mesh breaks reflection-equivariance, an uncalibratable operator floor blocks conservation decidability — so the admissibility gate (§3.3) locates where each property survives, and the typed verdict (§3.5) records that location.
 
 ### 3.3 Domain-Validity Rubric
 
@@ -225,7 +225,7 @@ In the present study the relation-violation axis is quantitative — mirror-y re
 
 ### 3.6 Hierarchical Interpretation Protocol
 
-We organize retained MRs using the four-level classification of metamorphic relations for scientific-computing programs of Yang et al. [yang2020hierarchical]: mathematical-physical-equation, computational-model, code-model, and likelihood relations. The deterministic MRs studied here populate the first three levels — physical-equation symmetries and conservation, computational-model discretization assumptions, and code-model representation contracts — while the likelihood level is outside the scope of the relations exercised in this study. For learned mesh surrogates, the computational-model level includes graph representation and message-passing discretization assumptions.
+We organize retained MRs using the three-level classification of metamorphic relations for scientific-computing programs of Yang et al. [yang2020hierarchical]: physical-model, computational-model, and code-model relations. For learned mesh surrogates, the computational-model level includes graph representation and message-passing discretization assumptions.
 
 We use this hierarchy as a predeclared interpretation protocol that maps representation-level MRs to possible graph encoding or adapter problems, physical-model MRs to possible continuity, symmetry, or similarity violations, and code-model MRs to possible determinism, rollout, or implementation issues. At this stage, this is a localization protocol, not a validated localization model. It becomes validated only if seeded faults or mutants with known layers are used to evaluate the inference rule. Section 5.3 reports a first bounded test of this protocol: against an injected-fault catalogue the continuity MR responded to boundary and normalization-scale faults while the symmetry MR responded to physical-channel and mesh-adjacency faults, which is suggestive evidence for the protocol's direction but not, on one SUT and one catalogue, a validated localization model.
 

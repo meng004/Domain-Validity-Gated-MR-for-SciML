@@ -184,7 +184,7 @@ The proposed method is a five-stage workflow: (1)~identify candidate relation so
 \subsection{Candidate relation sources}
 \label{subsec:candidate-sources}
 
-For cylinder-flow surrogates, candidates may come from six sources: (1)~\textbf{physical equations and constraints} (incompressible continuity, boundary behavior); (2)~\textbf{geometric and symmetry assumptions} (mirroring, rigid transforms, coordinate-frame changes---only under compatible geometry and boundary labels); (3)~\textbf{nondimensional similarity} (Reynolds/Strouhal relations, within applicable regimes); (4)~\textbf{mesh and graph representation} (node permutations, face ordering, edge encoding); (5)~\textbf{temporal rollout behavior} (determinism, prefix consistency---implementation sanity checks, not physical laws); (6)~\textbf{cross-implementation comparison} (method-comparison checks only when units, meshes, rollout horizons, and checkpoints are comparable).
+Candidate MRs are read off the algebraic properties of the governing and discrete operators, each located in one of three levels (physical-model, computational-model, code-model): \textbf{equivariance} (reflections/rigid motions give physical-model symmetry MRs under compatible geometry; node/face permutation gives code-model representation contracts); \textbf{conservation} (discrete-divergence/boundary-flux relations, decidable only when the operator floor permits, Sec.~\ref{subsec:operator-floor-sweep}); \textbf{homogeneity/scaling} (Reynolds/Strouhal, within regime); \textbf{composition} (rollout determinism/prefix-consistency---implementation checks, not physical laws); and \textbf{cross-implementation comparison} (only when units, meshes, rollout horizons, and checkpoints are comparable). The same property can hold at the physical-model level yet fail at the computational or code level---an asymmetric mesh breaks reflection-equivariance, an uncalibratable operator floor blocks conservation decidability---so the admissibility gate locates where each property survives and the typed verdict records it.
 
 \subsection{Domain-validity rubric}
 \label{subsec:rubric}
@@ -274,7 +274,7 @@ In the present study the relation-violation axis is quantitative (mirror-y repor
 \label{fig:verdict-2d}
 \end{figure}
 
-Retained MRs are organized using the four-level metamorphic-relation classification for scientific-computing programs of Yang et al.~\citep{yang2020hierarchical} --- mathematical-physical-equation, computational-model, code-model, and likelihood relations --- of which the deterministic MRs here populate the first three, used as a predeclared interpretation protocol mapping each MR class to its candidate fault layer. This is a localization protocol, not a validated localization model; Section~\ref{subsec:within-sut-pilot} reports a first bounded test against an injected-fault catalogue.
+Retained MRs are organized using the three-level metamorphic-relation classification for scientific-computing programs of Yang et al.~\citep{yang2020hierarchical} --- physical-model, computational-model, and code-model relations --- used as a predeclared interpretation protocol mapping each MR class to its candidate fault layer. This is a localization protocol, not a validated localization model; Section~\ref{subsec:within-sut-pilot} reports a first bounded test against an injected-fault catalogue.
 
 \section{Empirical Design}
 \label{sec:empirical-design}
