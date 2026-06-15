@@ -107,18 +107,20 @@ class TestManuscriptSyncedToReport(unittest.TestCase):
         self.assertIn("Cross-family PINN extension", self.l)
 
     def test_headline_numbers_present(self):
-        # K=6 PINN roster headline values must stay synchronized.
+        # K=15 PINN roster headline values must stay synchronized.
+        # Numbers updated from n=3 to n=15 seeds per PDE (pinn_k6_aggregate.json
+        # generated 2026-06-15; old 0.615/1.682/0.992 were n=3 means, now superseded).
         for txt in (self.m, self.l):
-            self.assertTrue(re.search(r"K=6 roster|K=6 PINN roster", txt),
+            self.assertTrue(re.search(r"K=6 roster|K=6 PINN roster|K=15 PINN roster|K=15 roster", txt),
                             "subsection must frame the executed PINN roster")
-            self.assertTrue(re.search(r"0\.615", txt),
-                            "MR-B Burgers K=6 mean ratio 0.615 must be cited")
-            self.assertTrue(re.search(r"1\.682", txt),
-                            "MR-B heat K=6 mean ratio 1.682 must be cited")
+            self.assertTrue(re.search(r"0\.712", txt),
+                            "MR-B Burgers K=15 mean ratio 0.712 must be cited")
+            self.assertTrue(re.search(r"1\.495", txt),
+                            "MR-B heat K=15 mean ratio 1.495 must be cited")
             self.assertTrue(re.search(r"1\.007", txt),
-                            "MR-C Burgers K=6 mean median 1.007 must be cited")
-            self.assertTrue(re.search(r"0\.992", txt),
-                            "MR-C heat K=6 mean median 0.992 must be cited")
+                            "MR-C Burgers K=15 mean ratio 1.007 must be cited")
+            self.assertTrue(re.search(r"1\.006", txt),
+                            "MR-C heat K=15 mean ratio 1.006 must be cited")
             self.assertTrue(re.search(r"mixed", txt),
                             "heat MR-B must stay reported as mixed")
             # MR-A must stay flagged as evidentially vacuous for the PINN, so a

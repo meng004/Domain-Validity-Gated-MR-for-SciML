@@ -424,7 +424,7 @@ claims:
 
   - claim_id: "C14-cross-family-pinn-extension"
     status: "observed"
-    scope: "PINN K=6 roster (3 training seeds x 2 PDEs) / 5-layer x 50-neuron MLP PINNs / 2D viscous Burgers nu=0.05 Dirichlet-zero-BC vector field and 2D heat alpha=0.1 Neumann-zero-flux scalar field / three MRs rewritten for the PINN family + rollout-accuracy baseline against 129x129 FD references / stochastic mini-batch training for 2000 iterations"
+    scope: "PINN K=15 roster (15 training seeds x 2 PDEs) / 5-layer x 50-neuron MLP PINNs / 2D viscous Burgers nu=0.05 Dirichlet-zero-BC vector field and 2D heat alpha=0.1 Neumann-zero-flux scalar field / three MRs rewritten for the PINN family + rollout-accuracy baseline against 129x129 FD references / stochastic mini-batch training for 2000 iterations"
     evidence:
       - "tools/train_pinn_burgers2d.py"
       - "tools/compute_burgers2d_reference.py"
@@ -441,23 +441,28 @@ claims:
       - "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
     wording_allowed: >
       To check whether the four-condition admissibility predicate and the three MR rewrites
-      are MeshGraphNets-specific, the predicate was applied to a K=6 roster of PINNs: three
-      training seeds for 2D viscous Burgers (Dirichlet zero BC, near-conservation) and three
+      are MeshGraphNets-specific, the predicate was applied to a K=15 roster of PINNs: fifteen
+      training seeds for 2D viscous Burgers (Dirichlet zero BC, near-conservation) and fifteen
       training seeds for the 2D heat equation (Neumann zero-flux BC, strict mass conservation).
       MR-A collocation-point permutation is VACUOUS BY CONSTRUCTION for a pointwise MLP (the
       permute-and-invert commutes with row-independent evaluation, so the near-zero violation
       confirms only that the rewrite is well-defined and carries no evidential weight, unlike
-      the MGN graph-aggregation case); the two non-trivial MRs do the cross-family work. In
-      the K=6 roster, Burgers MR-B mirror-y equivariance passes on all 3/3 seeds with
-      violation/floor ratio mean 0.615 and bootstrap 95% CI [0.446, 0.890], while heat MR-B is
-      mixed (1/3 pass, 2/3 fail; mean 1.682, CI [0.853, 2.795]) under the PINN's own PDE
-      residual floor, which remains a self-reported rather than independently calibrated floor.
-      MR-C reference-relative conservation passes on all 6/6 PINNs: Burgers median ratio mean
-      1.007 (CI [1.000, 1.011]) and heat median ratio mean 0.992 (CI [0.971, 1.012]). Rollout
-      mean relative L2 is 0.024 for Burgers (CI [0.018, 0.031]) and 0.038 for heat (CI [0.035,
-      0.042]). This is a two-PDE PINN seed roster, not a PINN-vs-MGN benchmark, not a claim of
-      generalization across PINN architectures or PDEs beyond the roster, and not a
-      baseline-superiority claim.
+      the MGN graph-aggregation case); the two non-trivial MRs do the cross-family work.
+      In the K=15 roster, Burgers MR-B mirror-y equivariance passes on 13/15 seeds (Wilson
+      95% CI [0.62, 0.96]; violation/floor ratio mean 0.712, bootstrap CI [0.583, 0.875]);
+      two seeds near the residual-floor boundary fail. Heat MR-B is mixed with 7/15 passing
+      (Wilson CI [0.25, 0.70]; mean 1.495, bootstrap CI [1.142, 1.897]) under the PINN's own
+      PDE residual floor, which remains a self-reported rather than independently calibrated
+      floor; the lower heat pass rate is expected by construction because Neumann-zero-flux BCs
+      permit larger boundary residuals than Dirichlet-zero BCs. MR-C reference-relative
+      conservation passes on all 15/15 of both PDEs (Wilson CI [0.80, 1.00]): Burgers mean
+      ratio 1.007 (bootstrap CI [0.997, 1.017]) and heat mean ratio 1.006 (bootstrap CI
+      [0.988, 1.022]). The inter-PDE Wilcoxon signed-rank test on MR-B ratios (Burgers vs
+      diffusion, n=15 each) gives p=0.0084 and Cliff delta=0.73 (large); this is a
+      physics-magnitude comparison reflecting the BC physics difference, NOT a gate-reliability
+      test; the valid reliability statistic is the per-PDE Wilson CI on the pass rate. This is
+      a two-PDE PINN seed roster, not a PINN-vs-MGN benchmark, not a claim of generalization
+      across PINN architectures or PDEs beyond the roster, and not a baseline-superiority claim.
     wording_forbidden:
       - "A general cross-architecture-family generalization claim."
       - "A PINN-vs-MGN benchmark or superiority claim."
@@ -502,17 +507,21 @@ claims:
       Phase 3 compiles the existing executed MGN mutant reports, the committed PINN roster, and
       the committed FNO roster into a 60-entry unified fault catalogue for inferential reporting.
       The catalogue contains 10 executed canonical MGN mutants, 2 executed adversarial MGN
-      mutants, 24 closed-form output-level PINN probes, and 24 closed-form output-level FNO
-      probes (12 mutation templates for each of the Burgers and heat families). On this unified
-      catalogue, by-detector localization precision/recall with Wilson 95% CIs is reported as
-      node-permutation 1.00/1.00, conservation 1.00/0.81, and mirror-y 0.94/0.55. The same
-      artifact reports non-parametric comparisons, including a
-      large Cliff's delta (0.78) for diffusion-vs-Burgers PINN MR-B violation/floor ratios,
-      while exact paired Wilcoxon is non-significant at n=3 (p=0.5).
+      mutants, 24 closed-form output-level PINN probes (n=15 per probe entry), and 24
+      closed-form output-level FNO probes (12 mutation templates for each of the Burgers and
+      heat families). On this unified catalogue, by-detector localization precision/recall with
+      Wilson 95% CIs is reported as node-permutation 1.00/1.00, conservation 1.00/0.81, and
+      mirror-y 0.94/0.55. The same artifact reports non-parametric comparisons for PINN MR-B
+      ratios at n=15 per PDE: Cliff's delta=0.73 (large) and Wilcoxon signed-rank p=0.0084 for
+      diffusion-vs-Burgers MR-B violation/floor ratios. This inter-PDE test reflects a
+      physics-magnitude difference due to different BC physics (NOT a gate-reliability test);
+      the valid reliability statistic is the per-PDE Wilson CI on the MR-B pass rate:
+      Burgers 13/15 ([0.62, 0.96]) and diffusion 7/15 ([0.25, 0.70]).
     wording_forbidden:
       - "The PINN or FNO probes are retrained mutant checkpoints."
       - "A real-world fault-detection rate or general localization-accuracy claim."
       - "Cross-architecture-family generalization or baseline superiority."
+      - "The inter-PDE Wilcoxon p-value is evidence of gate reliability or significance."
     blocked_reason: null
 
   - claim_id: "C19-third-family-fno-roster"
@@ -884,18 +893,19 @@ claims:
       The same four-condition admissibility predicate, applied to a genuinely
       second CFD task (DeepMind airfoil, SU2 compressible transonic flow) on a
       second official dataset, produces a different but physically correct typed
-      inadmissibility structure: node-permutation equivariance is admitted and
-      exact (10/10 trajectories, relative L2 0.0); incompressible divergence-free
-      continuity is rejected at the physical-basis gate because the density
-      varies by a median factor of 2.25x across the field (the flow is
-      compressible), whereas the same relation is only deferred on cylinder flow;
-      compressible unsteady mass conservation is the physically-correct
-      replacement, its absolute discrete form deferred and a reference-relative
-      diagnostic recorded; mirror-y chord symmetry is rejected at the
-      boundary-precondition gate (non-zero angle of attack). The typed verdicts
+      inadmissibility structure across a K=6 checkpoint roster (60 checkpoint-by-
+      trajectory pairs): node-permutation equivariance is admitted and exact
+      (60/60, relative L2 0.0); incompressible divergence-free continuity is
+      rejected at the physical-basis gate because the density varies by a median
+      factor of 2.25x across the field (the flow is compressible), whereas the
+      same relation is only deferred on cylinder flow; compressible unsteady mass
+      conservation is the physically-correct replacement, its absolute discrete
+      form deferred and a reference-relative diagnostic recorded (median residual
+      ratio 1.19 across the K=6 roster); mirror-y chord symmetry is rejected at
+      the boundary-precondition gate (non-zero angle of attack). The typed verdicts
       are training-independent (representation contract plus physical/numerical
       reasoning), which is why they transfer and discriminate across tasks. This
-      is a bounded CPU-scale second-task case study.
+      is a bounded MPS-scale K=6 roster second-task case study.
     wording_forbidden:
       - "This is a full-scale production airfoil benchmark."
       - "An airfoil pass/fail rate or reliability rate has been established."

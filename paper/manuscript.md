@@ -508,7 +508,7 @@ The cross-family executions are not decoration: they test the two claims that th
 
 #### 5.8.1 Cross-family PINN extension (K=6 roster)
 
-The PINN extension checks whether the predicate and MR rewrites can be carried outside MeshGraphNets. The K=6 PINN roster contains three Burgers and three heat-equation seeds. MR-A remains vacuous by construction for pointwise MLP PINNs; the two non-trivial MR checks are mirror-y and reference-relative conservation. MR-B passes on Burgers (mean 0.615, CI [0.446, 0.890]) but is mixed on heat (mean 1.682, CI [0.853, 2.795]). MR-C passes on all six PINNs: Burgers mean 1.007 (CI [1.000, 1.011]) and heat mean 0.992 (CI [0.971, 1.012]). This is a two-PDE seed roster rather than a PINN-vs-MGN benchmark.
+The PINN extension checks whether the predicate and MR rewrites can be carried outside MeshGraphNets. The K=15 PINN roster contains fifteen Burgers and fifteen heat-equation seeds. MR-A remains vacuous by construction for pointwise MLP PINNs; the two non-trivial MR checks are mirror-y and reference-relative conservation. MR-B passes on 13/15 Burgers seeds (mean 0.712, CI [0.583, 0.875]; Wilson pass-rate CI [0.62, 0.96]) but is mixed on heat with 7/15 passing (mean 1.495, CI [1.142, 1.897]; Wilson pass-rate CI [0.25, 0.70]). MR-C passes on all 15/15 of both PDEs (Wilson CI [0.80, 1.00]): Burgers mean 1.007 (CI [0.997, 1.017]) and heat mean 1.006 (CI [0.988, 1.022]). This is a two-PDE seed roster rather than a PINN-vs-MGN benchmark.
 
 
 #### 5.8.2 FNO primary workflow upgrade (K=6)
