@@ -1,68 +1,368 @@
 {
-  "denominator": 10,
+  "denominator": 60,
   "honesty_boundary": "The absolute compressible-continuity residual has a large discrete operator floor on this coarse transonic mesh (uncalibratable, as for cylinder incompressible continuity), so only a reference-relative diagnostic is reported; this asserts no absolute mass conservation.",
-  "median_pred_over_ref_residual_ratio": 1.472377681103904,
+  "median_pred_over_ref_residual_ratio": 1.1923304644192467,
   "metric": "rms(drho/dt + div(rho u)) surrogate vs reference, interior cells",
   "relation": "compressible_unsteady_mass_conservation",
   "rows": [
     {
-      "pred_residual_rms": 4.0410164280056105,
-      "ratio": 4.805847406192489,
-      "ref_residual_rms": 0.8408540859617454,
+      "pred_residual_rms": 4.280047150465464,
+      "ratio": 5.090118751780893,
+      "ref_residual_rms": 0.8408540859617455,
       "trajectory": 0
     },
     {
-      "pred_residual_rms": 6.2975891505637485,
-      "ratio": 1.3102808472055996,
-      "ref_residual_rms": 4.806289555399093,
+      "pred_residual_rms": 6.0593417372757035,
+      "ratio": 1.2607109221018542,
+      "ref_residual_rms": 4.806289555399094,
       "trajectory": 1
     },
     {
-      "pred_residual_rms": 4.552189199434661,
-      "ratio": 1.6344745150022084,
-      "ref_residual_rms": 2.7851087047561034,
+      "pred_residual_rms": 5.362719202287932,
+      "ratio": 1.9254972680707463,
+      "ref_residual_rms": 2.785108704756104,
       "trajectory": 2
     },
     {
-      "pred_residual_rms": 6.634624932652963,
-      "ratio": 1.2521120622554864,
+      "pred_residual_rms": 6.505570260137265,
+      "ratio": 1.2277563656203907,
       "ref_residual_rms": 5.2987469194264545,
       "trajectory": 3
     },
     {
-      "pred_residual_rms": 4.242384623318264,
-      "ratio": 2.639731222839198,
+      "pred_residual_rms": 4.55307338626999,
+      "ratio": 2.833050523413947,
       "ref_residual_rms": 1.6071274933647641,
       "trajectory": 4
     },
     {
-      "pred_residual_rms": 15.454356667292531,
-      "ratio": 1.0206071311013327,
+      "pred_residual_rms": 15.117067818974425,
+      "ratio": 0.9983325446371183,
       "ref_residual_rms": 15.142316956590145,
       "trajectory": 5
     },
     {
-      "pred_residual_rms": 16.124794660539525,
-      "ratio": 1.1001614637314696,
-      "ref_residual_rms": 14.65675284230398,
+      "pred_residual_rms": 15.815050844279112,
+      "ratio": 1.0790282823513213,
+      "ref_residual_rms": 14.656752842303982,
       "trajectory": 6
     },
     {
-      "pred_residual_rms": 4.260431735572373,
-      "ratio": 3.448003587831357,
-      "ref_residual_rms": 1.2356227675076168,
+      "pred_residual_rms": 4.316323612226101,
+      "ratio": 3.4932373583019887,
+      "ref_residual_rms": 1.235622767507617,
       "trajectory": 7
     },
     {
-      "pred_residual_rms": 13.965982076966842,
-      "ratio": 1.0901384803823235,
-      "ref_residual_rms": 12.811199978986908,
+      "pred_residual_rms": 13.632303968063217,
+      "ratio": 1.0640926681671579,
+      "ref_residual_rms": 12.81119997898691,
       "trajectory": 8
     },
     {
-      "pred_residual_rms": 4.006088444394933,
-      "ratio": 1.6635239196301765,
-      "ref_residual_rms": 2.4081940735096494,
+      "pred_residual_rms": 5.394336155333075,
+      "ratio": 2.2399922891062873,
+      "ref_residual_rms": 2.40819407350965,
+      "trajectory": 9
+    },
+    {
+      "pred_residual_rms": 3.0232229143627483,
+      "ratio": 3.5954191872717964,
+      "ref_residual_rms": 0.8408540859617455,
+      "trajectory": 0
+    },
+    {
+      "pred_residual_rms": 5.69798998133738,
+      "ratio": 1.185527820506903,
+      "ref_residual_rms": 4.806289555399094,
+      "trajectory": 1
+    },
+    {
+      "pred_residual_rms": 4.039917055704145,
+      "ratio": 1.4505419658504592,
+      "ref_residual_rms": 2.785108704756104,
+      "trajectory": 2
+    },
+    {
+      "pred_residual_rms": 6.016823113877723,
+      "ratio": 1.1355181150129348,
+      "ref_residual_rms": 5.2987469194264545,
+      "trajectory": 3
+    },
+    {
+      "pred_residual_rms": 3.34495459805003,
+      "ratio": 2.0813249800405456,
+      "ref_residual_rms": 1.6071274933647641,
+      "trajectory": 4
+    },
+    {
+      "pred_residual_rms": 15.409499735387085,
+      "ratio": 1.0176447752059936,
+      "ref_residual_rms": 15.142316956590145,
+      "trajectory": 5
+    },
+    {
+      "pred_residual_rms": 16.102217939425792,
+      "ratio": 1.0986211006403646,
+      "ref_residual_rms": 14.656752842303982,
+      "trajectory": 6
+    },
+    {
+      "pred_residual_rms": 3.213682940403137,
+      "ratio": 2.600860897768563,
+      "ref_residual_rms": 1.235622767507617,
+      "trajectory": 7
+    },
+    {
+      "pred_residual_rms": 13.90533623446297,
+      "ratio": 1.085404666016507,
+      "ref_residual_rms": 12.81119997898691,
+      "trajectory": 8
+    },
+    {
+      "pred_residual_rms": 3.770528559692233,
+      "ratio": 1.565707930755409,
+      "ref_residual_rms": 2.40819407350965,
+      "trajectory": 9
+    },
+    {
+      "pred_residual_rms": 3.353876855697847,
+      "ratio": 3.9886550017316926,
+      "ref_residual_rms": 0.8408540859617455,
+      "trajectory": 0
+    },
+    {
+      "pred_residual_rms": 5.786462741700108,
+      "ratio": 1.203935525524039,
+      "ref_residual_rms": 4.806289555399094,
+      "trajectory": 1
+    },
+    {
+      "pred_residual_rms": 4.350833478612017,
+      "ratio": 1.5621772576352728,
+      "ref_residual_rms": 2.785108704756104,
+      "trajectory": 2
+    },
+    {
+      "pred_residual_rms": 6.183158067184596,
+      "ratio": 1.1669094903392503,
+      "ref_residual_rms": 5.2987469194264545,
+      "trajectory": 3
+    },
+    {
+      "pred_residual_rms": 3.6544848206216956,
+      "ratio": 2.2739234041541283,
+      "ref_residual_rms": 1.6071274933647641,
+      "trajectory": 4
+    },
+    {
+      "pred_residual_rms": 15.538519211543743,
+      "ratio": 1.0261652332393667,
+      "ref_residual_rms": 15.142316956590145,
+      "trajectory": 5
+    },
+    {
+      "pred_residual_rms": 16.274718205541557,
+      "ratio": 1.1103904378170053,
+      "ref_residual_rms": 14.656752842303982,
+      "trajectory": 6
+    },
+    {
+      "pred_residual_rms": 3.4617836847568584,
+      "ratio": 2.801650937316124,
+      "ref_residual_rms": 1.235622767507617,
+      "trajectory": 7
+    },
+    {
+      "pred_residual_rms": 14.017548962375571,
+      "ratio": 1.0941636213131736,
+      "ref_residual_rms": 12.81119997898691,
+      "trajectory": 8
+    },
+    {
+      "pred_residual_rms": 4.158578255351313,
+      "ratio": 1.7268451496895725,
+      "ref_residual_rms": 2.40819407350965,
+      "trajectory": 9
+    },
+    {
+      "pred_residual_rms": 2.5754271454298396,
+      "ratio": 3.062870465193896,
+      "ref_residual_rms": 0.8408540859617455,
+      "trajectory": 0
+    },
+    {
+      "pred_residual_rms": 5.275267545389199,
+      "ratio": 1.0975758918776093,
+      "ref_residual_rms": 4.806289555399094,
+      "trajectory": 1
+    },
+    {
+      "pred_residual_rms": 3.8661894031949373,
+      "ratio": 1.388164633068965,
+      "ref_residual_rms": 2.785108704756104,
+      "trajectory": 2
+    },
+    {
+      "pred_residual_rms": 6.110420140695862,
+      "ratio": 1.1531821076967503,
+      "ref_residual_rms": 5.2987469194264545,
+      "trajectory": 3
+    },
+    {
+      "pred_residual_rms": 3.028355072436622,
+      "ratio": 1.8843278364283989,
+      "ref_residual_rms": 1.6071274933647641,
+      "trajectory": 4
+    },
+    {
+      "pred_residual_rms": 15.29099343690332,
+      "ratio": 1.0098186083899445,
+      "ref_residual_rms": 15.142316956590145,
+      "trajectory": 5
+    },
+    {
+      "pred_residual_rms": 15.95560565309536,
+      "ratio": 1.0886180469007078,
+      "ref_residual_rms": 14.656752842303982,
+      "trajectory": 6
+    },
+    {
+      "pred_residual_rms": 2.7475570046008477,
+      "ratio": 2.2236212190739764,
+      "ref_residual_rms": 1.235622767507617,
+      "trajectory": 7
+    },
+    {
+      "pred_residual_rms": 13.719406754511763,
+      "ratio": 1.0708916242830107,
+      "ref_residual_rms": 12.81119997898691,
+      "trajectory": 8
+    },
+    {
+      "pred_residual_rms": 3.8382015844366966,
+      "ratio": 1.593809081525969,
+      "ref_residual_rms": 2.40819407350965,
+      "trajectory": 9
+    },
+    {
+      "pred_residual_rms": 1.0082959737526263,
+      "ratio": 1.1991331083315906,
+      "ref_residual_rms": 0.8408540859617455,
+      "trajectory": 0
+    },
+    {
+      "pred_residual_rms": 4.8383846172104015,
+      "ratio": 1.0066777212320164,
+      "ref_residual_rms": 4.806289555399094,
+      "trajectory": 1
+    },
+    {
+      "pred_residual_rms": 2.925145247577612,
+      "ratio": 1.0502804585624859,
+      "ref_residual_rms": 2.785108704756104,
+      "trajectory": 2
+    },
+    {
+      "pred_residual_rms": 5.7359548490340195,
+      "ratio": 1.0825115704251995,
+      "ref_residual_rms": 5.2987469194264545,
+      "trajectory": 3
+    },
+    {
+      "pred_residual_rms": 1.8267242675334787,
+      "ratio": 1.13663929904463,
+      "ref_residual_rms": 1.6071274933647641,
+      "trajectory": 4
+    },
+    {
+      "pred_residual_rms": 15.165552736299835,
+      "ratio": 1.0015344930221908,
+      "ref_residual_rms": 15.142316956590145,
+      "trajectory": 5
+    },
+    {
+      "pred_residual_rms": 15.828600691750086,
+      "ratio": 1.0799527604821024,
+      "ref_residual_rms": 14.656752842303982,
+      "trajectory": 6
+    },
+    {
+      "pred_residual_rms": 1.5117172740493792,
+      "ratio": 1.2234456290399005,
+      "ref_residual_rms": 1.235622767507617,
+      "trajectory": 7
+    },
+    {
+      "pred_residual_rms": 13.582268493745358,
+      "ratio": 1.0601870641331932,
+      "ref_residual_rms": 12.81119997898691,
+      "trajectory": 8
+    },
+    {
+      "pred_residual_rms": 2.497681238128574,
+      "ratio": 1.0371594489012703,
+      "ref_residual_rms": 2.40819407350965,
+      "trajectory": 9
+    },
+    {
+      "pred_residual_rms": 2.5211644408163276,
+      "ratio": 2.9983376223149225,
+      "ref_residual_rms": 0.8408540859617455,
+      "trajectory": 0
+    },
+    {
+      "pred_residual_rms": 5.19277052574621,
+      "ratio": 1.0804115036958117,
+      "ref_residual_rms": 4.806289555399094,
+      "trajectory": 1
+    },
+    {
+      "pred_residual_rms": 3.671527503744854,
+      "ratio": 1.3182708084158514,
+      "ref_residual_rms": 2.785108704756104,
+      "trajectory": 2
+    },
+    {
+      "pred_residual_rms": 5.754953665374984,
+      "ratio": 1.0860971004816191,
+      "ref_residual_rms": 5.2987469194264545,
+      "trajectory": 3
+    },
+    {
+      "pred_residual_rms": 2.940700278530367,
+      "ratio": 1.8297865543781886,
+      "ref_residual_rms": 1.6071274933647641,
+      "trajectory": 4
+    },
+    {
+      "pred_residual_rms": 15.169941182560526,
+      "ratio": 1.001824306415562,
+      "ref_residual_rms": 15.142316956590145,
+      "trajectory": 5
+    },
+    {
+      "pred_residual_rms": 15.862782306104322,
+      "ratio": 1.0822849014905511,
+      "ref_residual_rms": 14.656752842303982,
+      "trajectory": 6
+    },
+    {
+      "pred_residual_rms": 2.7374406694174485,
+      "ratio": 2.2154339830911,
+      "ref_residual_rms": 1.235622767507617,
+      "trajectory": 7
+    },
+    {
+      "pred_residual_rms": 13.634549515110018,
+      "ratio": 1.0642679481604829,
+      "ref_residual_rms": 12.81119997898691,
+      "trajectory": 8
+    },
+    {
+      "pred_residual_rms": 3.333750460991153,
+      "ratio": 1.3843362948454638,
+      "ref_residual_rms": 2.40819407350965,
       "trajectory": 9
     }
   ],

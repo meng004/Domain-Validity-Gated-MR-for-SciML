@@ -1,0 +1,16 @@
+{
+  "mr_a_violation": 7.447083395451539e-09,
+  "mr_a_verdict": "pass",
+  "mr_b_violation": 0.03143077335272542,
+  "mr_b_floor": 0.03267754022158572,
+  "mr_b_ratio": 0.9618463672183449,
+  "mr_b_verdict": "pass",
+  "mr_c_median_ratio": 1.0131997285192529,
+  "mr_c_verdict": "pass",
+  "rollout_median_rel_l2": 0.031765944528522064,
+  "sut_id": "pinn_diffusion2d_s12",
+  "pde": "diffusion",
+  "seed": 12,
+  "checkpoint_sha256": "4250d2733373b7b95134131b7aecdaa836058be562ee9d59aa2929661cc4def6",
+  "final_pde_residual_l2": 0.03267754022158572
+}

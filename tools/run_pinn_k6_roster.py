@@ -1,24 +1,26 @@
-"""P2: PINN K=6 roster — 3 seeds x 2 PDEs with MR evaluation and bootstrap CIs.
+"""P2: PINN roster — N seeds x 2 PDEs with MR evaluation, bootstrap CIs, and Wilson CIs.
 
-Trains 6 PINN checkpoints (Burgers2D seeds {0,1,2} + Diffusion2D seeds {0,1,2}),
+Trains PINN checkpoints (Burgers2D seeds {0..N-1} + Diffusion2D seeds {0..N-1}),
 runs MR-A/B/C + rollout accuracy on each, and produces an aggregate report with
-B=2000 bootstrap 95% CIs over the seed-replica families — the same pattern as
-the MGN E1 multi-checkpoint replication.
+B=2000 bootstrap 95% CIs and Wilson 95% CIs over the seed-replica families —
+the same pattern as the FNO K=6 roster deepening (b5abdaa).
 
 Usage:
-  python3 tools/run_pinn_k6_roster.py [--iters 8000] [--batch-size 512] [--skip-existing]
+  python3 tools/run_pinn_k6_roster.py [--iters 2000] [--batch-size 512] [--skip-existing]
+  python3 tools/run_pinn_k6_roster.py --seeds 0 1 2  # explicit seed list
 
 Outputs:
   research_assets/runs/pinn-k6-roster/
-    burgers_s0/ burgers_s1/ burgers_s2/     (each: sut/checkpoint.pt + mr_report.json)
-    diffusion_s0/ diffusion_s1/ diffusion_s2/
-    pinn_k6_aggregate.json                   (aggregate with bootstrap CIs)
+    burgers_s0/ ... burgers_s{N-1}/     (each: sut/checkpoint.pt + mr_report.json)
+    diffusion_s0/ ... diffusion_s{N-1}/
+    pinn_k6_aggregate.json               (aggregate with bootstrap CIs + Wilson CIs)
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import math
 import sys
 import time
 from datetime import datetime, timezone
@@ -32,7 +34,6 @@ ROSTER_DIR = ROOT / "research_assets/runs/pinn-k6-roster"
 BURGERS_REF = ROOT / "research_assets/runs/pinn-cross-family/reference_solution.npz"
 DIFFUSION_REF = ROOT / "research_assets/runs/pinn-cross-family-diffusion/reference_solution.npz"
 
-SEEDS = [0, 1, 2]
 N_BOOTSTRAP = 2000
 EVAL_SEED = 42
 N_EVAL = 5000
@@ -330,19 +331,43 @@ def bootstrap_ci(values: list[float], n_boot: int = N_BOOTSTRAP,
     return float(np.mean(arr)), lo, hi
 
 
+def wilson_ci(k: int, n: int, z: float = 1.96) -> list[float]:
+    """Wilson score 95% CI for a binomial proportion k/n.
+
+    Returns [lo, hi] as floats. Valid for k=0..n. z=1.96 gives nominal 95%.
+    """
+    if n == 0:
+        return [float("nan"), float("nan")]
+    p_hat = k / n
+    denom = 1.0 + z * z / n
+    centre = (p_hat + z * z / (2 * n)) / denom
+    margin = z * math.sqrt(p_hat * (1 - p_hat) / n + z * z / (4 * n * n)) / denom
+    lo = max(0.0, centre - margin)
+    hi = min(1.0, centre + margin)
+    return [float(lo), float(hi)]
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--iters", type=int, default=8000)
     p.add_argument("--batch-size", type=int, default=512,
                    help="Stochastic training batch size; <=0 means full batch")
     p.add_argument("--skip-existing", action="store_true")
+    p.add_argument(
+        "--seeds",
+        type=int,
+        nargs="+",
+        default=list(range(15)),
+        help="List of random seeds to train/evaluate (default: 0..14).",
+    )
     args = p.parse_args(argv)
+    seeds = args.seeds
 
     ROSTER_DIR.mkdir(parents=True, exist_ok=True)
     results = []
 
     for pde in ["burgers", "diffusion"]:
-        for seed in SEEDS:
+        for seed in seeds:
             tag = f"{pde}_s{seed}"
             sut_dir = ROSTER_DIR / tag / "sut"
             ckpt_path = sut_dir / "checkpoint.pt"
@@ -394,20 +419,32 @@ def main(argv: list[str] | None = None) -> int:
                   f"MR-C={mr['mr_c_median_ratio']:.4f} rollout={mr['rollout_median_rel_l2']:.3e}")
             results.append(mr)
 
-    # Aggregate with bootstrap CIs per PDE family
+    # Aggregate with bootstrap CIs and Wilson CIs per PDE family
+    n_seeds = len(seeds)
     aggregate = {
         "record_type": "pinn-k6-roster-aggregate",
+        "schema_version": "0.2.0",
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "n_seeds": len(SEEDS), "seeds": SEEDS,
+        "n_seeds": n_seeds, "seeds": seeds,
         "train_iters": args.iters,
         "train_batch_size": args.batch_size,
         "n_bootstrap": N_BOOTSTRAP,
+        "honesty_boundary": (
+            f"PINN roster on closed-form synthetic data with K={n_seeds} seeds per PDE; "
+            "not a cylinder-flow experiment, not a cross-family performance benchmark, "
+            "and not a generalization claim across PINN architectures, PDEs, or training "
+            "regimes. The inter-PDE Wilcoxon (diffusion-vs-Burgers MR-B ratios) is a "
+            "physics-magnitude test, not a gate-reliability test: different BCs predict "
+            "different MR-B behaviour by construction. The valid statistic for gate "
+            "reliability is the per-PDE Wilson CI on the MR-B pass rate."
+        ),
         "per_sut": results,
         "per_pde_family": {},
     }
 
     for pde in ["burgers", "diffusion"]:
         family = [r for r in results if r["pde"] == pde]
+        n_fam = len(family)
         mr_b_ratios = [r["mr_b_ratio"] for r in family]
         mr_c_medians = [r["mr_c_median_ratio"] for r in family]
         rollouts = [r["rollout_median_rel_l2"] for r in family]
@@ -422,19 +459,27 @@ def main(argv: list[str] | None = None) -> int:
                                for lab in sorted({r["mr_c_verdict"] for r in family})}
         mr_b_same = len(mr_b_verdict_counts) == 1
         mr_c_same = len(mr_c_verdict_counts) == 1
+        mr_b_pass_count = mr_b_verdict_counts.get("pass", 0)
+        mr_c_pass_count = mr_c_verdict_counts.get("pass", 0)
 
         aggregate["per_pde_family"][pde] = {
             "mr_a_all_pass": all(r["mr_a_verdict"] == "pass" for r in family),
             "mr_b_ratio_mean": mr_b_mean,
             "mr_b_ratio_95ci": [mr_b_lo, mr_b_hi],
             "mr_b_verdict_counts": mr_b_verdict_counts,
-            "mr_b_pass_rate": mr_b_verdict_counts.get("pass", 0) / len(family),
+            "mr_b_pass_count": mr_b_pass_count,
+            "mr_b_n": n_fam,
+            "mr_b_pass_rate": mr_b_pass_count / n_fam if n_fam else float("nan"),
+            "mr_b_pass_rate_wilson95_ci": wilson_ci(mr_b_pass_count, n_fam),
             "mr_b_all_same_verdict": mr_b_same,
             "mr_b_verdict": family[0]["mr_b_verdict"] if mr_b_same else "mixed",
             "mr_c_median_mean": mr_c_mean,
             "mr_c_median_95ci": [mr_c_lo, mr_c_hi],
             "mr_c_verdict_counts": mr_c_verdict_counts,
-            "mr_c_pass_rate": mr_c_verdict_counts.get("pass", 0) / len(family),
+            "mr_c_pass_count": mr_c_pass_count,
+            "mr_c_n": n_fam,
+            "mr_c_pass_rate": mr_c_pass_count / n_fam if n_fam else float("nan"),
+            "mr_c_pass_rate_wilson95_ci": wilson_ci(mr_c_pass_count, n_fam),
             "mr_c_all_same_verdict": mr_c_same,
             "mr_c_verdict": family[0]["mr_c_verdict"] if mr_c_same else "mixed",
             "rollout_mean": roll_mean,
@@ -445,10 +490,14 @@ def main(argv: list[str] | None = None) -> int:
     out.write_text(json.dumps(aggregate, indent=2), encoding="utf-8")
     print(f"\n=== Aggregate written to {out} ===")
     for pde, fam in aggregate["per_pde_family"].items():
+        ci_b = fam["mr_b_pass_rate_wilson95_ci"]
+        ci_c = fam["mr_c_pass_rate_wilson95_ci"]
         print(f"  {pde}: MR-A all_pass={fam['mr_a_all_pass']}  "
-              f"MR-B ratio={fam['mr_b_ratio_mean']:.3f} CI{fam['mr_b_ratio_95ci']}  "
-              f"MR-C={fam['mr_c_median_mean']:.4f} CI{fam['mr_c_median_95ci']}  "
-              f"rollout={fam['rollout_mean']:.3e} CI{fam['rollout_95ci']}")
+              f"MR-B pass {fam['mr_b_pass_count']}/{fam['mr_b_n']} "
+              f"(Wilson 95% CI [{ci_b[0]:.3f}, {ci_b[1]:.3f}])  "
+              f"MR-C pass {fam['mr_c_pass_count']}/{fam['mr_c_n']} "
+              f"(Wilson 95% CI [{ci_c[0]:.3f}, {ci_c[1]:.3f}])  "
+              f"rollout={fam['rollout_mean']:.3e}")
     return 0
 
 

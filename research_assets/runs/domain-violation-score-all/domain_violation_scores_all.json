@@ -1,7 +1,7 @@
 {
   "record_type": "domain-violation-score-all",
   "schema_version": "0.1.0",
-  "generated_at": "2026-06-12T03:25:29Z",
+  "generated_at": "2026-06-15T14:35:11Z",
   "definition": "Per-relation domain-violation score D = m/(m+1) in [0,1), where m is a dimensionless, relation-specific measure of precondition violation computed from already-committed artifacts only; see m_definition per entry.",
   "relations": [
     {
@@ -84,8 +84,8 @@
       "sources": [
         "research_assets/runs/pinn-k6-roster/pinn_k6_aggregate.json"
       ],
-      "honesty_boundary": "Construction argument; committed K=6 measured violations (max 6.67e-09) are well-definedness checks only and carry no evidential weight.",
-      "measured_relation_violation_max": 6.6680101440397266e-09
+      "honesty_boundary": "Construction argument; committed K=6 measured violations (max 7.61e-09) are well-definedness checks only and carry no evidential weight.",
+      "measured_relation_violation_max": 7.609781935631437e-09
     },
     {
       "relation_id": "pinn-mr-b-mirror-y-burgers",

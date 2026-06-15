@@ -1,0 +1,16 @@
+{
+  "mr_a_violation": 0.0,
+  "mr_a_verdict": "pass",
+  "mr_b_violation": 0.03266215478844384,
+  "mr_b_floor": 0.03888098744912501,
+  "mr_b_ratio": 0.8400546624578802,
+  "mr_b_verdict": "pass",
+  "mr_c_median_ratio": 0.9910012153992036,
+  "mr_c_verdict": "pass",
+  "rollout_median_rel_l2": 0.027321663258438877,
+  "sut_id": "pinn_burgers2d_s11",
+  "pde": "burgers",
+  "seed": 11,
+  "checkpoint_sha256": "23429b4e433e4273820b26d69836db5805aeb9afc916b5ef53399b9251c4e920",
+  "final_pde_residual_l2": 0.03888098744912501
+}

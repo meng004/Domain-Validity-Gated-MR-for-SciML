@@ -50,7 +50,12 @@ class TestPhase3UnifiedFaultCatalog(unittest.TestCase):
         eff = self.r["effect_size_and_nonparametric_tests"]
         self.assertIn("mgn_mirror_ood_vs_rollout", eff)
         pinn = eff["pinn_diffusion_vs_burgers_mr_b_ratio"]
-        self.assertEqual(pinn["wilcoxon_signed_rank"]["n"], 3)
+        # n pinned to >=15 after PINN roster deepening (was 3 before b5abdaa-mirror);
+        # the Wilcoxon here is an inter-PDE physics-magnitude test (diffusion Neumann BC
+        # vs Burgers Dirichlet BC), not a gate-reliability test -- significance at n=15
+        # reflects the physics difference, not gate reliability. The valid statistic is
+        # the per-PDE Wilson CI in pinn_k6_aggregate.json.
+        self.assertGreaterEqual(pinn["wilcoxon_signed_rank"]["n"], 15)
         self.assertEqual(pinn["cliffs_delta"]["magnitude"], "large")
         self.assertGreater(pinn["cliffs_delta"]["delta"], 0.0)
 

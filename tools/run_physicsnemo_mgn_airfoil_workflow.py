@@ -52,15 +52,53 @@ from conservation_rubric import cell_divergence  # noqa: E402
 
 OUT_DIR = ROOT / "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-second-task"
 RAW_DIR = OUT_DIR / "raw_outputs"
-STAGE_DIR = Path("/workspace/airfoil_staged")
+# STAGE_DIR is overridable: env var METBENCH_AIRFOIL_STAGE_DIR or --stage-dir CLI arg.
+# Default is a local cache path outside the git tree so macOS runs do not crash.
+_DEFAULT_STAGE_DIR = Path.home() / ".cache" / "dvgmr" / "airfoil_staged"
+STAGE_DIR = Path(os.environ.get("METBENCH_AIRFOIL_STAGE_DIR", str(_DEFAULT_STAGE_DIR)))
 BASE_URL = "https://storage.googleapis.com/dm-meshgraphnets/airfoil"
 CHECKPOINT = OUT_DIR / "physicsnemo_mgn_airfoil_checkpoint.pt"
 REPORT = OUT_DIR / "physicsnemo_mgn_airfoil_workflow_report.json"
 RUBRIC = OUT_DIR / "physicsnemo_mgn_airfoil_rubric_decisions.json"
-RESUME = STAGE_DIR / "resume_checkpoint.pt"
 
 NODE_PERM_THRESHOLD = 1e-5
 NODE_TYPES = (0, 2, 4)  # observed airfoil node types: NORMAL, OUTFLOW, AIRFOIL/WALL
+
+
+# ---------------------------------------------------------------------------
+# Device selection: prefer MPS when available; fall back to CPU if any op
+# raises at runtime.  torch_scatter's scatter_add_ is used internally by
+# PhysicsNeMo MeshGraphNet; in torch 2.12 + torch-scatter 2.1.2 MPS is
+# supported, but we wrap placement defensively so future regressions are
+# caught rather than crashing the whole run.
+# ---------------------------------------------------------------------------
+def _select_device() -> torch.device:
+    if torch.backends.mps.is_available():
+        # Quick probe: build a tiny model and run one forward pass on MPS.
+        try:
+            from physicsnemo.models.meshgraphnet import MeshGraphNet as _MGN
+            _m = _MGN(input_dim_nodes=6, input_dim_edges=3, output_dim=3,
+                      processor_size=1, hidden_dim_processor=8,
+                      hidden_dim_node_encoder=8, hidden_dim_edge_encoder=8,
+                      hidden_dim_node_decoder=8, num_layers_node_processor=1,
+                      num_layers_edge_processor=1, num_layers_node_encoder=1,
+                      num_layers_edge_encoder=1, num_layers_node_decoder=1,
+                      aggregation="sum").to("mps")
+            _x = torch.randn(4, 6, device="mps")
+            _ea = torch.randn(6, 3, device="mps")
+            _ei = torch.randint(0, 4, (2, 6), device="mps")
+            _g = Data(x=_x, edge_index=_ei, edge_attr=_ea)
+            _m(_x, _ea, _g)
+            del _m, _x, _ea, _ei, _g
+            return torch.device("mps")
+        except Exception as _e:
+            print(f"[device] MPS probe failed ({type(_e).__name__}: {_e}); "
+                  "falling back to CPU.", flush=True)
+    return torch.device("cpu")
+
+
+DEVICE = _select_device()
+print(f"[device] using {DEVICE}", flush=True)
 
 
 def utc_now() -> str:
@@ -95,9 +133,11 @@ def count_complete_records(blob: bytes) -> tuple[int, int]:
     return n, off
 
 
-def stage_split(split: str, n_records: int) -> dict[str, Any]:
-    target = STAGE_DIR / f"{split}.tfrecord"
-    marker = STAGE_DIR / f"{split}.records.json"
+def stage_split(split: str, n_records: int, stage_dir: Path = None) -> dict[str, Any]:
+    if stage_dir is None:
+        stage_dir = STAGE_DIR
+    target = stage_dir / f"{split}.tfrecord"
+    marker = stage_dir / f"{split}.records.json"
     if target.exists() and marker.exists():
         st = json.loads(marker.read_text())
         if st.get("n_records") == n_records:
@@ -137,7 +177,7 @@ def stage_data(n_train: int, n_test: int) -> dict[str, Any]:
     train_st = stage_split("train", n_train)
     test_st = stage_split("test", n_test)
     return {
-        "stage_dir": str(STAGE_DIR), "source_url_prefix": BASE_URL,
+        "stage_dir": str(STAGE_DIR).replace(str(Path.home()), "~"), "source_url_prefix": BASE_URL,
         "meta": {"path": str(meta_path), "sha256_prefix": sha256_prefix(meta_path)},
         "records": [train_st, test_st],
         "simulator": json.loads(meta_path.read_text()).get("simulator"),
@@ -157,10 +197,12 @@ def decode_record(rec_bytes: dict, meta: dict) -> dict:
     return out
 
 
-def iter_trajectories(split: str, meta: dict, limit: int):
+def iter_trajectories(split: str, meta: dict, limit: int, stage_dir: Path = None):
     from tfrecord.torch.dataset import TFRecordDataset
+    if stage_dir is None:
+        stage_dir = STAGE_DIR
     desc = {k: "byte" for k in meta["field_names"]}
-    ds = TFRecordDataset(str(STAGE_DIR / f"{split}.tfrecord"), None, desc,
+    ds = TFRecordDataset(str(stage_dir / f"{split}.tfrecord"), None, desc,
                          transform=lambda rec: decode_record(rec, meta))
     for i, rec in enumerate(ds):
         if i >= limit:
@@ -238,19 +280,36 @@ def build_model(hidden: int, processor_size: int):
         num_layers_node_decoder=2, aggregation="sum")
 
 
-def to_data(feat, edge_index, edge_attr, tgt=None):
-    d = Data(x=torch.as_tensor(feat), edge_index=torch.as_tensor(edge_index, dtype=torch.long),
-             edge_attr=torch.as_tensor(edge_attr))
+def to_data(feat, edge_index, edge_attr, tgt=None, device: torch.device = None):
+    dev = device or DEVICE
+    d = Data(x=torch.as_tensor(feat).to(dev),
+             edge_index=torch.as_tensor(edge_index, dtype=torch.long).to(dev),
+             edge_attr=torch.as_tensor(edge_attr).to(dev))
     if tgt is not None:
-        d.y = torch.as_tensor(tgt)
+        d.y = torch.as_tensor(tgt).to(dev)
     return d
 
 
-def predict(model, feat, edge_index, edge_attr):
+def predict(model, feat, edge_index, edge_attr, device: torch.device = None):
+    dev = device or DEVICE
     model.eval()
-    with torch.no_grad():
-        g = to_data(feat, edge_index, edge_attr)
-        return model(g.x.float(), g.edge_attr.float(), g).cpu().numpy()
+    # Move model to device if it is not already there
+    try:
+        model.to(dev)
+        with torch.no_grad():
+            g = to_data(feat, edge_index, edge_attr, device=dev)
+            out = model(g.x.float(), g.edge_attr.float(), g)
+            return out.cpu().numpy()
+    except Exception as _e:
+        if str(dev) != "cpu":
+            # MPS op failed at runtime; fall back to CPU for this call
+            print(f"[predict] device={dev} op failed ({type(_e).__name__}); "
+                  "retrying on CPU.", flush=True)
+            model.to("cpu")
+            with torch.no_grad():
+                g = to_data(feat, edge_index, edge_attr, device=torch.device("cpu"))
+                return model(g.x.float(), g.edge_attr.float(), g).cpu().numpy()
+        raise
 
 
 def relative_l2(a, b):
@@ -265,7 +324,139 @@ def div_rms_masked(pos, cells, field, mask_cells=None):
     return float(np.sqrt(np.sum(area * div ** 2) / tot)) if tot > 0 else float("nan")
 
 
+def _train_one_checkpoint(args, train_cache, fm, fs, tm, ts, ckpt_seed: int,
+                          stage_dir: Path) -> tuple:
+    """Train one checkpoint from scratch with a given seed. Returns (model, losses, wall_clock_s)."""
+    import time
+    torch.manual_seed(ckpt_seed); np.random.seed(ckpt_seed)
+
+    def nf(feat): return (feat - fm) / fs
+    def nt_(tgt): return (tgt - tm) / ts
+
+    model = build_model(args.hidden, args.processor_size)
+    # Move model to training device (MPS if available; fall back to CPU on error)
+    try:
+        model.to(DEVICE)
+    except Exception as _e:
+        print(f"[train] model.to({DEVICE}) failed: {_e}; using cpu", flush=True)
+    opt = torch.optim.Adam(model.parameters(), lr=args.lr)
+
+    # Resume support per-seed checkpoint
+    resume_path = stage_dir / f"resume_ckpt_seed{ckpt_seed}.pt"
+    losses = []
+    start_epoch = 0
+    if resume_path.exists():
+        st = torch.load(resume_path, map_location="cpu", weights_only=True)
+        if st.get("completed_epochs", 0) > 0:
+            model.load_state_dict(st["model_state_dict"])
+            start_epoch = st["completed_epochs"]; losses = st["losses"]
+            print(f"  [ckpt seed={ckpt_seed}] resuming from epoch {start_epoch}", flush=True)
+
+    order = np.arange(len(train_cache))
+    t_start = time.time()
+    for epoch in range(start_epoch, args.epochs):
+        rng = np.random.default_rng(ckpt_seed + epoch); rng.shuffle(order)
+        model.train(); eloss = 0.0
+        for step, idx in enumerate(order):
+            feat, tgt, ei, ea = train_cache[int(idx)]
+            try:
+                g = to_data(nf(feat), ei, ea, nt_(tgt))
+                opt.zero_grad(set_to_none=True)
+                pred = model(g.x.float(), g.edge_attr.float(), g)
+                loss = torch.mean((pred - g.y.float()) ** 2)
+                loss.backward(); opt.step()
+            except Exception as _e:
+                if str(DEVICE) != "cpu":
+                    # MPS failure during training: fall back to CPU for this checkpoint
+                    print(f"  [ckpt seed={ckpt_seed}] device={DEVICE} step failed: "
+                          f"{type(_e).__name__}; falling back to CPU for this checkpoint.",
+                          flush=True)
+                    model.to("cpu")
+                    g = to_data(nf(feat), ei, ea, nt_(tgt), device=torch.device("cpu"))
+                    opt.zero_grad(set_to_none=True)
+                    pred = model(g.x.float(), g.edge_attr.float(), g)
+                    loss = torch.mean((pred - g.y.float()) ** 2)
+                    loss.backward(); opt.step()
+                else:
+                    raise
+            eloss += float(loss.detach())
+            if (step + 1) % 200 == 0:
+                print(f"  [ckpt seed={ckpt_seed}] epoch {epoch} "
+                      f"step {step+1}/{len(order)} loss {eloss/(step+1):.4f}", flush=True)
+        losses.append(eloss / max(len(order), 1))
+        torch.save({"model_state_dict": model.state_dict(),
+                    "completed_epochs": epoch + 1, "losses": losses}, resume_path)
+        print(f"  [ckpt seed={ckpt_seed}] epoch {epoch} done: {losses[-1]:.4f}", flush=True)
+
+    wall_clock = time.time() - t_start
+    return model, losses, wall_clock
+
+
+def _eval_one_checkpoint(model, args, meta, test_records: list, nf, nt_, ts, tm,
+                         ckpt_idx: int) -> dict:
+    """Run the full MR battery on all pre-fetched test records for one checkpoint."""
+    perm_rows, cons_rows, incompr_rows, rollout_rows = [], [], [], []
+    density_var = []
+    dt = float(meta["dt"])
+
+    for ti, rec in enumerate(test_records):
+        mid = args.traj_len // 2
+        pos, cells, nt, feat, tgt, ei, ea, vel, rho = build_graph(rec, mid)
+        interior = np.isin(nt[cells], [0]).all(axis=1)
+
+        src = predict(model, nf(feat), ei, ea)
+        src_delta = src * ts + tm
+        pred_vel = vel + src_delta[:, :2]
+        pred_rho = rho[:, 0] + src_delta[:, 2]
+        rollout_rows.append({"trajectory": ti, "snapshot": mid,
+                             "relative_l2": relative_l2(src, nt_(tgt))})
+
+        rng = np.random.default_rng(args.seed + 1000 + ti + ckpt_idx * 10000)
+        p = rng.permutation(feat.shape[0]); inv = np.empty_like(p); inv[p] = np.arange(len(p))
+        ei_p = inv[ei]
+        out_p = predict(model, nf(feat)[p], ei_p, ea)
+        unperm = np.empty_like(out_p); unperm[p] = out_p
+        perm_rel = relative_l2(unperm, src)
+        perm_rows.append({"trajectory": ti, "relative_l2": perm_rel,
+                          "passes": int(perm_rel <= NODE_PERM_THRESHOLD)})
+
+        rho_var = float(rho.max() / max(rho.min(), 1e-12))
+        density_var.append(rho_var)
+        ref_div_u = div_rms_masked(pos, cells, vel, interior)
+        incompr_rows.append({"trajectory": ti, "density_max_over_min": rho_var,
+                             "ref_incompressible_div_u_rms": ref_div_u})
+
+        rho_next = rec["density"][mid + 1, :, 0]
+        drho_dt = ((rho_next - rho[:, 0])[cells].mean(axis=1)) / dt
+        div_rhou_ref, area = cell_divergence(pos, cells, vel * rho)
+        resid_ref = drho_dt + div_rhou_ref
+        drho_dt_pred = ((pred_rho - rho[:, 0])[cells].mean(axis=1)) / dt
+        div_rhou_pred, _ = cell_divergence(pos, cells, pred_vel * pred_rho[:, None])
+        resid_pred = drho_dt_pred + div_rhou_pred
+        def rms(x, m=interior):
+            xx, aa = x[m], area[m]; tot = float(aa.sum())
+            return float(np.sqrt(np.sum(aa * xx ** 2) / tot)) if tot > 0 else float("nan")
+        ref_rms = rms(resid_ref); pred_rms = rms(resid_pred)
+        cons_rows.append({"trajectory": ti, "ref_residual_rms": ref_rms,
+                          "pred_residual_rms": pred_rms,
+                          "ratio": pred_rms / max(ref_rms, 1e-12)})
+
+        print(f"    [ckpt {ckpt_idx} traj {ti}] perm={perm_rel:.2e} "
+              f"rho_var={rho_var:.2f}x div_u={ref_div_u:.2e} "
+              f"cons_ratio={cons_rows[-1]['ratio']:.3f}", flush=True)
+
+    return {"perm_rows": perm_rows, "cons_rows": cons_rows,
+            "incompr_rows": incompr_rows, "rollout_rows": rollout_rows,
+            "density_var": density_var}
+
+
 def run(args):
+    import time as _time
+    # Update module-level STAGE_DIR if --stage-dir was provided via CLI
+    global STAGE_DIR
+    if hasattr(args, "stage_dir") and args.stage_dir:
+        STAGE_DIR = Path(args.stage_dir)
+
     torch.manual_seed(args.seed); np.random.seed(args.seed)
     torch.set_num_threads(args.threads)
     OUT_DIR.mkdir(parents=True, exist_ok=True); RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -283,115 +474,128 @@ def run(args):
             train_cache.append((feat, tgt, ei, ea))
     fm, fs, tm, ts = stats.finalize()
 
-    def nf(feat):  # normalize node features
-        return (feat - fm) / fs
+    def nf(feat): return (feat - fm) / fs
+    def nt_(tgt): return (tgt - tm) / ts
 
-    def nt_(tgt):  # normalize targets
-        return (tgt - tm) / ts
+    # Pre-fetch test records (they are re-used across all K checkpoints)
+    print(f"pre-fetching {args.n_test} test trajectories...", flush=True)
+    test_records = list(iter_trajectories("test", meta, args.n_test))
+    print(f"  cached {len(test_records)} test trajectories.", flush=True)
 
-    model = build_model(args.hidden, args.processor_size)
-    opt = torch.optim.Adam(model.parameters(), lr=args.lr)
-    losses = []
-    start_epoch = 0
-    if RESUME.exists():
-        st = torch.load(RESUME, map_location="cpu", weights_only=True)
-        if st.get("completed_epochs", 0) > 0:
-            model.load_state_dict(st["model_state_dict"]); start_epoch = st["completed_epochs"]; losses = st["losses"]
-            print(f"resuming from epoch {start_epoch}", flush=True)
+    # --- K-checkpoint roster ---
+    # Seeds are deterministically derived from the base seed so the roster
+    # is reproducible and each checkpoint is independently initialised.
+    k = args.k_checkpoints
+    ckpt_seeds = [args.seed + i * 7919 for i in range(k)]
+    roster = []      # list of per-checkpoint result dicts
+    ckpt_wall_clocks = []
+    t_roster_start = _time.time()
 
-    order = np.arange(len(train_cache))
-    for epoch in range(start_epoch, args.epochs):
-        rng = np.random.default_rng(args.seed + epoch); rng.shuffle(order)
-        model.train(); eloss = 0.0
-        for step, idx in enumerate(order):
-            feat, tgt, ei, ea = train_cache[int(idx)]
-            g = to_data(nf(feat), ei, ea, nt_(tgt))
-            opt.zero_grad(set_to_none=True)
-            pred = model(g.x.float(), g.edge_attr.float(), g)
-            loss = torch.mean((pred - g.y.float()) ** 2)
-            loss.backward(); opt.step(); eloss += float(loss.detach())
-            if (step + 1) % 100 == 0:
-                print(f"epoch {epoch} step {step+1}/{len(order)} loss {eloss/(step+1):.4f}", flush=True)
-        losses.append(eloss / max(len(order), 1))
-        torch.save({"model_state_dict": model.state_dict(), "completed_epochs": epoch + 1, "losses": losses}, RESUME)
-        print(f"epoch {epoch} done: {losses[-1]:.4f}", flush=True)
+    for ckpt_idx, ckpt_seed in enumerate(ckpt_seeds):
+        print(f"\n=== checkpoint {ckpt_idx+1}/{k} (seed={ckpt_seed}) ===", flush=True)
+        t_ckpt_start = _time.time()
+        model, losses, train_wc = _train_one_checkpoint(
+            args, train_cache, fm, fs, tm, ts, ckpt_seed, STAGE_DIR)
 
-    # --- evaluation: MR battery per test trajectory ---
-    perm_rows, cons_rows, incompr_rows, rollout_rows = [], [], [], []
-    density_var = []
-    raw_saved = 0
-    dt = float(meta["dt"])
-    for ti, rec in enumerate(iter_trajectories("test", meta, args.n_test)):
-        mid = args.traj_len // 2
-        pos, cells, nt, feat, tgt, ei, ea, vel, rho = build_graph(rec, mid)
-        interior = np.isin(nt[cells], [0]).all(axis=1)  # NORMAL-only interior cells
+        print(f"  evaluating MR battery on {len(test_records)} test trajectories...", flush=True)
+        eval_result = _eval_one_checkpoint(model, args, meta, test_records, nf, nt_, ts, tm, ckpt_idx)
+        ckpt_wc = _time.time() - t_ckpt_start
+        ckpt_wall_clocks.append(ckpt_wc)
 
-        src = predict(model, nf(feat), ei, ea)  # normalized-delta prediction
-        # de-normalize predicted delta and form next-state velocity for diagnostics
-        src_delta = src * ts + tm
-        pred_vel = vel + src_delta[:, :2]
-        pred_rho = rho[:, 0] + src_delta[:, 2]
-        rollout_rows.append({"trajectory": ti, "snapshot": mid,
-                             "relative_l2": relative_l2(src, nt_(tgt))})
+        # Save individual checkpoint file
+        ckpt_path = OUT_DIR / f"checkpoint_k{ckpt_idx+1:02d}_seed{ckpt_seed}.pt"
+        torch.save({"model_state_dict": model.state_dict(),
+                    "constructor": {"input_dim_nodes": 6, "input_dim_edges": 3, "output_dim": 3,
+                                    "hidden": args.hidden, "processor_size": args.processor_size},
+                    "normalization": {"feat_mean": fm.tolist(), "feat_std": fs.tolist(),
+                                      "tgt_mean": tm.tolist(), "tgt_std": ts.tolist()},
+                    "training": {"epochs": args.epochs, "losses": losses, "seed": ckpt_seed},
+                    "data": data_record}, ckpt_path)
 
-        # node-permutation equivariance (ADMITTED)
-        rng = np.random.default_rng(args.seed + 1000 + ti)
-        p = rng.permutation(feat.shape[0]); inv = np.empty_like(p); inv[p] = np.arange(len(p))
-        ei_p = inv[ei]
-        out_p = predict(model, nf(feat)[p], ei_p, ea)
-        unperm = np.empty_like(out_p); unperm[p] = out_p
-        perm_rel = relative_l2(unperm, src)
-        perm_rows.append({"trajectory": ti, "relative_l2": perm_rel,
-                          "passes": int(perm_rel <= NODE_PERM_THRESHOLD)})
+        # Save raw outputs for first trajectory of each checkpoint
+        if test_records:
+            ti0 = 0
+            _, _, nt_type, feat0, tgt0, ei0, ea0, vel0, rho0 = build_graph(test_records[ti0], args.traj_len // 2)
+            src0 = predict(model, nf(feat0), ei0, ea0)
+            rng0 = np.random.default_rng(ckpt_seed + 1000)
+            p0 = rng0.permutation(feat0.shape[0])
+            inv0 = np.empty_like(p0); inv0[p0] = np.arange(len(p0))
+            out_p0 = predict(model, nf(feat0)[p0], inv0[ei0], ea0)
+            unperm0 = np.empty_like(out_p0); unperm0[p0] = out_p0
+            np.savez_compressed(
+                RAW_DIR / f"airfoil_ckpt{ckpt_idx+1:02d}_test_{ti0:03d}.npz",
+                source_prediction=src0, target=nt_(tgt0),
+                permutation_unpermuted_prediction=unperm0,
+                permutation=p0,
+                ref_div_u=eval_result["incompr_rows"][ti0]["ref_incompressible_div_u_rms"],
+                density_max_over_min=eval_result["density_var"][ti0])
 
-        # incompressible divergence-free (REJECTED at physical-basis gate): measure ref div(u) and density variation
-        rho_var = float(rho.max() / max(rho.min(), 1e-12))
-        density_var.append(rho_var)
-        ref_div_u = div_rms_masked(pos, cells, vel, interior)
-        incompr_rows.append({"trajectory": ti, "density_max_over_min": rho_var,
-                             "ref_incompressible_div_u_rms": ref_div_u})
+        roster.append({
+            "checkpoint_index": ckpt_idx + 1,
+            "seed": ckpt_seed,
+            "checkpoint_file": ckpt_path.name,
+            "train_wall_clock_s": train_wc,
+            "total_wall_clock_s": ckpt_wc,
+            "losses": losses,
+            **eval_result})
 
-        # compressible mass conservation (DEFERRED absolute; reference-relative diagnostic)
-        rho_next = rec["density"][mid + 1, :, 0]
-        drho_dt = ((rho_next - rho[:, 0])[cells].mean(axis=1)) / dt
-        div_rhou_ref, area = cell_divergence(pos, cells, vel * rho)
-        resid_ref = drho_dt + div_rhou_ref
-        # surrogate predicted next-state compressible residual
-        drho_dt_pred = ((pred_rho - rho[:, 0])[cells].mean(axis=1)) / dt
-        div_rhou_pred, _ = cell_divergence(pos, cells, pred_vel * pred_rho[:, None])
-        resid_pred = drho_dt_pred + div_rhou_pred
-        def rms(x, m=interior):
-            xx, aa = x[m], area[m]; tot = float(aa.sum())
-            return float(np.sqrt(np.sum(aa * xx ** 2) / tot)) if tot > 0 else float("nan")
-        ref_rms = rms(resid_ref); pred_rms = rms(resid_pred)
-        cons_rows.append({"trajectory": ti, "ref_residual_rms": ref_rms,
-                          "pred_residual_rms": pred_rms,
-                          "ratio": pred_rms / max(ref_rms, 1e-12)})
+        print(f"  checkpoint {ckpt_idx+1}/{k} done in {ckpt_wc:.1f}s "
+              f"(train {train_wc:.1f}s)", flush=True)
 
-        if raw_saved < args.raw_trajectories:
-            np.savez_compressed(RAW_DIR / f"airfoil_test_{ti:03d}.npz",
-                                source_prediction=src, target=nt_(tgt),
-                                permutation_unpermuted_prediction=unperm,
-                                permutation=p, ref_div_u=ref_div_u,
-                                density_max_over_min=rho_var)
-            raw_saved += 1
-        print(f"test traj {ti}: perm={perm_rel:.2e} rho_var={rho_var:.2f}x div_u={ref_div_u:.2e} cons_ratio={cons_rows[-1]['ratio']:.3f}", flush=True)
+    total_wall_clock = _time.time() - t_roster_start
 
-    torch.save({"model_state_dict": model.state_dict(),
+    # Aggregate metrics across all checkpoints (aggregate rows from all checkpoints for ledgers)
+    all_perm = [r for ckpt in roster for r in ckpt["perm_rows"]]
+    all_cons = [r for ckpt in roster for r in ckpt["cons_rows"]]
+    all_incompr = [r for ckpt in roster for r in ckpt["incompr_rows"]]
+    all_rollout = [r for ckpt in roster for r in ckpt["rollout_rows"]]
+    all_density_var = [v for ckpt in roster for v in ckpt["density_var"]]
+
+    # Also save the canonical single-checkpoint artifact (last checkpoint) for backward
+    # compatibility with the existing guard test (test_physicsnemo_airfoil_workflow.py)
+    last_model_state = torch.load(
+        OUT_DIR / roster[-1]["checkpoint_file"], map_location="cpu", weights_only=True
+    )["model_state_dict"]
+    last_model = build_model(args.hidden, args.processor_size)
+    last_model.load_state_dict(last_model_state)
+    torch.save({"model_state_dict": last_model_state,
                 "constructor": {"input_dim_nodes": 6, "input_dim_edges": 3, "output_dim": 3,
                                 "hidden": args.hidden, "processor_size": args.processor_size},
                 "normalization": {"feat_mean": fm.tolist(), "feat_std": fs.tolist(),
                                   "tgt_mean": tm.tolist(), "tgt_std": ts.tolist()},
-                "training": {"epochs": args.epochs, "losses": losses, "seed": args.seed},
+                "training": {"epochs": args.epochs, "losses": roster[-1]["losses"],
+                             "seed": args.seed},
                 "data": data_record}, CHECKPOINT)
 
-    write_outputs(args, data_record, losses, perm_rows, incompr_rows, cons_rows,
-                  rollout_rows, density_var, model)
+    # Save raw outputs for backward compat (first 3 test trajectories from last checkpoint)
+    raw_saved = 0
+    for ti, rec in enumerate(test_records[:args.raw_trajectories]):
+        pos, cells, nt_type, feat, tgt, ei, ea, vel, rho = build_graph(rec, args.traj_len // 2)
+        src = predict(last_model, nf(feat), ei, ea)
+        rng = np.random.default_rng(args.seed + 1000 + ti)
+        p = rng.permutation(feat.shape[0]); inv = np.empty_like(p); inv[p] = np.arange(len(p))
+        out_p = predict(last_model, nf(feat)[p], inv[ei], ea)
+        unperm = np.empty_like(out_p); unperm[p] = out_p
+        np.savez_compressed(RAW_DIR / f"airfoil_test_{ti:03d}.npz",
+                            source_prediction=src, target=nt_(tgt),
+                            permutation_unpermuted_prediction=unperm,
+                            permutation=p,
+                            ref_div_u=all_incompr[ti]["ref_incompressible_div_u_rms"],
+                            density_max_over_min=all_density_var[ti % len(all_density_var)])
+        raw_saved += 1
+
+    write_outputs(args, data_record, roster[-1]["losses"], all_perm, all_incompr,
+                  all_cons, all_rollout, all_density_var, last_model,
+                  roster=roster, k_checkpoints=k,
+                  ckpt_wall_clocks=ckpt_wall_clocks,
+                  total_wall_clock=total_wall_clock)
     return REPORT
 
 
 def write_outputs(args, data_record, losses, perm_rows, incompr_rows, cons_rows,
-                  rollout_rows, density_var, model):
+                  rollout_rows, density_var, model,
+                  roster=None, k_checkpoints=1, ckpt_wall_clocks=None,
+                  total_wall_clock=None):
     perm_pass = sum(r["passes"] for r in perm_rows)
     n = len(perm_rows)
     med_density_var = float(np.median(density_var))
@@ -465,15 +669,34 @@ def write_outputs(args, data_record, losses, perm_rows, incompr_rows, cons_rows,
     RUBRIC.write_text(json.dumps(rubric, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     n_params = sum(p.numel() for p in model.parameters())
+    # Roster summary: per-checkpoint timing and pass counts
+    roster_summary = []
+    if roster:
+        for ckpt in roster:
+            ckpt_perm_pass = sum(r["passes"] for r in ckpt["perm_rows"])
+            ckpt_n = len(ckpt["perm_rows"])
+            roster_summary.append({
+                "checkpoint_index": ckpt["checkpoint_index"],
+                "seed": ckpt["seed"],
+                "checkpoint_file": ckpt["checkpoint_file"],
+                "train_wall_clock_s": round(ckpt["train_wall_clock_s"], 1),
+                "total_wall_clock_s": round(ckpt["total_wall_clock_s"], 1),
+                "final_loss": ckpt["losses"][-1] if ckpt["losses"] else None,
+                "node_perm_passes": f"{ckpt_perm_pass}/{ckpt_n}",
+                "median_density_max_over_min": float(np.median(ckpt["density_var"])),
+                "median_cons_ratio": float(np.median([r["ratio"] for r in ckpt["cons_rows"]])),
+            })
+
     report = {
         "record_type": "physicsnemo-mgn-airfoil-second-task-workflow",
-        "schema_version": "0.1.0", "generated_at": utc_now(),
+        "schema_version": "0.2.0", "generated_at": utc_now(),
         "object_id": "physicsnemo-mgn-airfoil-second-task",
         "sut_name": "NVIDIA PhysicsNeMo MeshGraphNet (official architecture)",
         "task": "DeepMind airfoil / SU2 compressible transonic flow over an aerofoil",
         "second_task_contrast_to_cylinder": "compressible vs incompressible; second official dataset",
         "production_framework": "nvidia-physicsnemo",
-        "workflow_status": "completed-second-task-cpu-subset",
+        "workflow_status": "completed-second-task-mps-or-cpu-subset",
+        "device_used": str(DEVICE),
         "architecture": {"processor_size": args.processor_size, "hidden_dim": args.hidden,
                          "n_parameters": int(n_params)},
         "data": data_record,
@@ -482,6 +705,13 @@ def write_outputs(args, data_record, losses, perm_rows, incompr_rows, cons_rows,
                      "epochs": args.epochs, "lr": args.lr, "seed": args.seed,
                      "losses": losses, "final_loss": losses[-1] if losses else None},
         "evaluation": {"n_test_trajectories": args.n_test},
+        "roster": {
+            "k_checkpoints": k_checkpoints,
+            "k_checkpoints_completed": len(roster) if roster else 1,
+            "ckpt_wall_clocks_s": [round(w, 1) for w in (ckpt_wall_clocks or [])],
+            "total_wall_clock_s": round(total_wall_clock, 1) if total_wall_clock else None,
+            "per_checkpoint_summary": roster_summary,
+        },
         "headline_typed_verdict_structure": {
             "node_permutation_equivariance": "admitted (exact-by-construction)",
             "incompressible_continuity": "rejected-domain-invalid (physical-basis, condition i)",
@@ -500,7 +730,7 @@ def write_outputs(args, data_record, losses, perm_rows, incompr_rows, cons_rows,
             "raw_outputs_dir": str(RAW_DIR.relative_to(ROOT)),
             "metric_ledgers": {k.removesuffix(".json"): str((OUT_DIR / k).relative_to(ROOT)) for k in ledgers}},
         "honesty_boundary": (
-            "A bounded CPU-scale second-task evaluation of the official PhysicsNeMo "
+            "A bounded MPS/CPU-scale second-task evaluation of the official PhysicsNeMo "
             "MeshGraphNet architecture on official DeepMind airfoil (SU2 compressible) "
             "trajectories. The contribution is the cross-task demonstration that the same "
             "admissibility predicate yields a different typed inadmissibility structure, "
@@ -518,6 +748,9 @@ def write_outputs(args, data_record, losses, perm_rows, incompr_rows, cons_rows,
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--stage-dir", type=str, default=None,
+                    help="Override STAGE_DIR (also overridden by METBENCH_AIRFOIL_STAGE_DIR env var). "
+                         "Defaults to ~/.cache/dvgmr/airfoil_staged (outside git tree).")
     ap.add_argument("--n-train", type=int, default=6)
     ap.add_argument("--n-test", type=int, default=10)
     ap.add_argument("--traj-len", type=int, default=600)
@@ -529,7 +762,14 @@ def main():
     ap.add_argument("--seed", type=int, default=20260613)
     ap.add_argument("--threads", type=int, default=4)
     ap.add_argument("--raw-trajectories", type=int, default=3)
+    ap.add_argument("--k-checkpoints", type=int, default=6,
+                    help="Number of independently-seeded checkpoints for the roster (default 6). "
+                         "Each is trained from scratch with the same architecture and data.")
     args = ap.parse_args()
+    # --stage-dir overrides env var; env var overrides default
+    if args.stage_dir:
+        global STAGE_DIR
+        STAGE_DIR = Path(args.stage_dir)
     run(args)
 
 

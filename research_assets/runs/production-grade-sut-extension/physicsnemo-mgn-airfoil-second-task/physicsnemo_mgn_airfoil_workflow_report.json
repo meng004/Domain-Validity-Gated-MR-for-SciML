@@ -18,7 +18,7 @@
   },
   "data": {
     "meta": {
-      "path": "/workspace/airfoil_staged/meta.json",
+      "path": "~/.cache/dvgmr/airfoil_staged/meta.json",
       "sha256_prefix": "48441775d99fc822"
     },
     "records": [
@@ -28,7 +28,7 @@
         "sha256_prefix": "8a93ddb19ddc39d4",
         "source_url": "https://storage.googleapis.com/dm-meshgraphnets/airfoil/train.tfrecord",
         "split": "train",
-        "staged_at": "2026-06-13T15:05:28Z"
+        "staged_at": "2026-06-15T14:26:36Z"
       },
       {
         "bytes": 505061020,
@@ -36,14 +36,15 @@
         "sha256_prefix": "56c8cbeb98dc8805",
         "source_url": "https://storage.googleapis.com/dm-meshgraphnets/airfoil/test.tfrecord",
         "split": "test",
-        "staged_at": "2026-06-13T15:05:43Z"
+        "staged_at": "2026-06-15T14:27:16Z"
       }
     ],
     "simulator": "su2",
     "source_url_prefix": "https://storage.googleapis.com/dm-meshgraphnets/airfoil",
-    "stage_dir": "/workspace/airfoil_staged",
+    "stage_dir": "~/.cache/dvgmr/airfoil_staged",
     "subset_boundary": "first 6 official train and 10 official test airfoil trajectories; CPU-scale second-task evaluation, not the full SU2 airfoil production benchmark"
   },
+  "device_used": "mps",
   "evaluation": {
     "n_test_trajectories": 10
   },
@@ -54,40 +55,121 @@
     "cross-dataset reliability",
     "absolute compressible mass conservation"
   ],
-  "generated_at": "2026-06-13T15:07:47Z",
+  "generated_at": "2026-06-15T14:30:37Z",
   "headline_typed_verdict_structure": {
     "compressible_mass_conservation": "deferred-absolute / reference-relative-diagnostic",
     "incompressible_continuity": "rejected-domain-invalid (physical-basis, condition i)",
     "mirror_y_symmetry": "rejected-domain-invalid (boundary-precondition, condition iii)",
     "node_permutation_equivariance": "admitted (exact-by-construction)"
   },
-  "honesty_boundary": "A bounded CPU-scale second-task evaluation of the official PhysicsNeMo MeshGraphNet architecture on official DeepMind airfoil (SU2 compressible) trajectories. The contribution is the cross-task demonstration that the same admissibility predicate yields a different typed inadmissibility structure, NOT a production-scale airfoil benchmark, NOT an official NVIDIA checkpoint, and NOT a cross-dataset reliability rate. One-step rollout only.",
+  "honesty_boundary": "A bounded MPS/CPU-scale second-task evaluation of the official PhysicsNeMo MeshGraphNet architecture on official DeepMind airfoil (SU2 compressible) trajectories. The contribution is the cross-task demonstration that the same admissibility predicate yields a different typed inadmissibility structure, NOT a production-scale airfoil benchmark, NOT an official NVIDIA checkpoint, and NOT a cross-dataset reliability rate. One-step rollout only.",
   "metrics": {
-    "median_compressible_residual_ratio": 1.472377681103904,
+    "median_compressible_residual_ratio": 1.1923304644192467,
     "median_density_max_over_min": 2.2502022981643677,
-    "median_one_step_rollout_relative_l2": 3.8805915117263794,
+    "median_one_step_rollout_relative_l2": 2.664621114730835,
     "median_reference_incompressible_div_u_rms": 1.3213109773444023,
-    "node_permutation_max_relative_l2": 0.0,
-    "node_permutation_passes": "10/10"
+    "node_permutation_max_relative_l2": 4.96480708989111e-07,
+    "node_permutation_passes": "60/60"
   },
   "object_id": "physicsnemo-mgn-airfoil-second-task",
   "production_framework": "nvidia-physicsnemo",
   "record_type": "physicsnemo-mgn-airfoil-second-task-workflow",
-  "schema_version": "0.1.0",
+  "roster": {
+    "ckpt_wall_clocks_s": [
+      29.3,
+      28.7,
+      28.7,
+      28.8,
+      30.3,
+      25.2
+    ],
+    "k_checkpoints": 6,
+    "k_checkpoints_completed": 6,
+    "per_checkpoint_summary": [
+      {
+        "checkpoint_file": "checkpoint_k01_seed20260613.pt",
+        "checkpoint_index": 1,
+        "final_loss": 1.0011558915760057,
+        "median_cons_ratio": 1.5931040950863002,
+        "median_density_max_over_min": 2.2502022981643677,
+        "node_perm_passes": "10/10",
+        "seed": 20260613,
+        "total_wall_clock_s": 29.3,
+        "train_wall_clock_s": 27.6
+      },
+      {
+        "checkpoint_file": "checkpoint_k02_seed20268532.pt",
+        "checkpoint_index": 2,
+        "final_loss": 1.0042646559886634,
+        "median_cons_ratio": 1.3180348931786812,
+        "median_density_max_over_min": 2.2502022981643677,
+        "node_perm_passes": "10/10",
+        "seed": 20268532,
+        "total_wall_clock_s": 28.7,
+        "train_wall_clock_s": 27.0
+      },
+      {
+        "checkpoint_file": "checkpoint_k03_seed20276451.pt",
+        "checkpoint_index": 3,
+        "final_loss": 1.002743760094745,
+        "median_cons_ratio": 1.3830563915796559,
+        "median_density_max_over_min": 2.2502022981643677,
+        "node_perm_passes": "10/10",
+        "seed": 20276451,
+        "total_wall_clock_s": 28.7,
+        "train_wall_clock_s": 27.0
+      },
+      {
+        "checkpoint_file": "checkpoint_k04_seed20284370.pt",
+        "checkpoint_index": 4,
+        "final_loss": 1.0075321947206854,
+        "median_cons_ratio": 1.2706733703828577,
+        "median_density_max_over_min": 2.2502022981643677,
+        "node_perm_passes": "10/10",
+        "seed": 20284370,
+        "total_wall_clock_s": 28.8,
+        "train_wall_clock_s": 27.1
+      },
+      {
+        "checkpoint_file": "checkpoint_k05_seed20292289.pt",
+        "checkpoint_index": 5,
+        "final_loss": 1.0041042094293515,
+        "median_cons_ratio": 1.0700699123076478,
+        "median_density_max_over_min": 2.2502022981643677,
+        "node_perm_passes": "10/10",
+        "seed": 20292289,
+        "total_wall_clock_s": 30.3,
+        "train_wall_clock_s": 28.6
+      },
+      {
+        "checkpoint_file": "checkpoint_k06_seed20300208.pt",
+        "checkpoint_index": 6,
+        "final_loss": 1.0012541442771787,
+        "median_cons_ratio": 1.2021839544487354,
+        "median_density_max_over_min": 2.2502022981643677,
+        "node_perm_passes": "10/10",
+        "seed": 20300208,
+        "total_wall_clock_s": 25.2,
+        "train_wall_clock_s": 23.7
+      }
+    ],
+    "total_wall_clock_s": 172.2
+  },
+  "schema_version": "0.2.0",
   "second_task_contrast_to_cylinder": "compressible vs incompressible; second official dataset",
   "sut_name": "NVIDIA PhysicsNeMo MeshGraphNet (official architecture)",
   "task": "DeepMind airfoil / SU2 compressible transonic flow over an aerofoil",
   "training": {
     "epochs": 2,
-    "final_loss": 1.001969433612491,
+    "final_loss": 1.0012541442771787,
     "losses": [
-      1.0139753300560794,
-      1.001969433612491
+      1.0103430460553986,
+      1.0012541442771787
     ],
     "lr": 0.001,
     "n_train_trajectories": 6,
     "seed": 20260613,
     "snaps_per_traj_train": 20
   },
-  "workflow_status": "completed-second-task-cpu-subset"
+  "workflow_status": "completed-second-task-mps-or-cpu-subset"
 }

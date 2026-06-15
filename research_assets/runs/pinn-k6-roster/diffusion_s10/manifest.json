@@ -1,0 +1,11 @@
+{
+  "sut_id": "pinn_diffusion2d_s10",
+  "pde": "diffusion2d",
+  "seed": 10,
+  "checkpoint_sha256": "3e1427df59103d7177e2a1a5a4b8046fae6296388e1955fb8ad4fe9a66ae9436",
+  "final_pde_residual_l2": 0.03067579075492421,
+  "num_parameters": 10451,
+  "train_iters": 2000,
+  "batch_size": 512,
+  "elapsed_s": 20.04927372932434
+}

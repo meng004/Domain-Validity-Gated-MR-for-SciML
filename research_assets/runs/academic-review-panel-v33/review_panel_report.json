@@ -1,0 +1,331 @@
+{
+  "record_type": "academic-review-panel",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-15T14:20:02Z",
+  "venue": "Elsevier IST regular track",
+  "paper": "paper/ist-submission/main.tex",
+  "panel": [
+    {
+      "role": "EIC",
+      "model": "gpt-5.5"
+    },
+    {
+      "role": "MethodologyRigor",
+      "model": "glm-5.1"
+    },
+    {
+      "role": "DomainExpert",
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "role": "Perspective",
+      "model": "qwen3-max"
+    },
+    {
+      "role": "DevilsAdvocate",
+      "model": "kimi-k2.6"
+    }
+  ],
+  "reviewers_succeeded": [
+    "EIC",
+    "MethodologyRigor",
+    "DomainExpert",
+    "Perspective",
+    "DevilsAdvocate"
+  ],
+  "review_failures": [],
+  "per_dimension_mean": {
+    "novelty_contribution": 7.2,
+    "technical_soundness": 7.8,
+    "empirical_rigor": 8.2,
+    "related_work": 8.2,
+    "clarity": 6.8,
+    "reproducibility": 8.6,
+    "scope_match_to_ist": 9.0
+  },
+  "overall_dimension_mean": 7.97,
+  "accept_probability_mean": 0.744,
+  "accept_probability_range": [
+    0.62,
+    0.85
+  ],
+  "verdict_distribution": {
+    "major_revision": 1,
+    "minor_revision": 4
+  },
+  "panel_majority_verdict": "minor_revision",
+  "per_reviewer": {
+    "EIC": {
+      "model": "gpt-5.5",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 7,
+          "empirical_rigor": 8,
+          "related_work": 8,
+          "clarity": 6,
+          "reproducibility": 9,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.62,
+        "verdict": "major_revision",
+        "top_concerns": [
+          "Contribution is partly an integration/formalization of known MT applicability, relaxation, and bug-vs-inapplicability ideas",
+          "Empirical story is dense and fragmented, with many bounded pilots, smoke runs, synthetic cases, and seeded faults",
+          "Some technical claims, especially operator-floor derivations and verdict-score calibration, need sharper justification",
+          "External validity remains limited despite many within-task and small cross-family checks"
+        ],
+        "top_strengths": [
+          "Strong fit to software V&V for SciML oracle problems",
+          "Careful validity gating separates genuine MR violations from out-of-domain or numerical-floor effects",
+          "Unusually strong artifact discipline with ledgers, committed outputs, and explicit claim boundaries"
+        ]
+      }
+    },
+    "MethodologyRigor": {
+      "model": "glm-5.1",
+      "review": {
+        "scores": {
+          "novelty_contribution": 8,
+          "technical_soundness": 8,
+          "empirical_rigor": 9,
+          "related_work": 9,
+          "clarity": 7,
+          "reproducibility": 9,
+          "scope_match_to_ist": 10
+        },
+        "accept_probability": 0.85,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "Clarity and density: the manuscript is extremely dense and heavily laden with self-referential jargon (e.g., 'K=6 roster', 'PC10', 'OOD-stress probe', 'fail-closed claim ledger') which makes it difficult to parse for even a specialist reader; significant streamlining and clearer terminology are needed.",
+          "Generalizability of the operator-floor gate: the admissibility gate relies on a closed-form error floor for a specific P1 operator on a concrete mesh, while explicitly deferring the general unstructured-mesh bound; the paper should more clearly delineate how this gate can be operationalized by practitioners on arbitrary meshes without such a closed-form.",
+          "Seeded-fault catalogue limitations: the 10-mutant catalogue is author-implemented and consists of gross corruptions; while acknowledged as a stress test rather than a localization model, the manuscript should more explicitly bound what the 5/10 detection rate implies for real-world fault detection to avoid over-interpretation."
+        ],
+        "top_strengths": [
+          "Exceptional empirical rigor and honesty: the paper meticulously defines its scope, uses appropriate statistics (Wilson CIs, Wilcoxon, Cliff's delta), explicitly defers claims where evidence is insufficient (e.g., absolute conservation), and maintains a fail-closed claim ledger tying every result to an artifact.",
+          "Novel and well-justified domain-validity rubric: the measurement-floor admissibility gate is a significant methodological contribution that addresses a real gap in SciML metamorphic testing by grounding tolerances in the intrinsic error of the discrete operator.",
+          "Comprehensive within-scope evaluation: the multi-checkpoint, multi-architecture, and cross-family replications (including the compressible airfoil task showing correct predicate rejection) provide strong evidence for the method's internal validity and transferability within the stated boundaries."
+        ]
+      }
+    },
+    "DomainExpert": {
+      "model": "deepseek-v4-flash",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 8,
+          "empirical_rigor": 8,
+          "related_work": 8,
+          "clarity": 7,
+          "reproducibility": 8,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.75,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "Novelty claims relative to closest prior (Duque-Torres, Reichert, Eniser) could be more precisely delineated.",
+          "Two-dimensional verdict's domain-violation score D is per-relation and not cross-calibrated, limiting interpretability.",
+          "Primary evidence limited to one task (cylinder-flow) plus cross-family pilots; broader generalization remains future work."
+        ],
+        "top_strengths": [
+          "Comprehensive empirical evaluation with multi-checkpoint, multi-architecture, and multi-task coverage.",
+          "Clear methodological contribution: domain-validity rubric and MR card format for auditable SciML testing.",
+          "Strong reproducibility commitment with committed artifacts, claim-ledger, and external witness reruns."
+        ]
+      }
+    },
+    "Perspective": {
+      "model": "qwen3-max",
+      "review": {
+        "scores": {
+          "novelty_contribution": 8,
+          "technical_soundness": 9,
+          "empirical_rigor": 8,
+          "related_work": 8,
+          "clarity": 7,
+          "reproducibility": 9,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.85,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "Writing is dense and occasionally hard to parse due to overloaded terminology",
+          "Limited generalizability beyond studied tasks/architectures acknowledged but still narrow",
+          "Verdict typing per MR class lacks cross-relation calibration"
+        ],
+        "top_strengths": [
+          "Novel domain-validity rubric grounded in operator error floors",
+          "Strong empirical rigor with artifact-ledger traceability and threat-aware design",
+          "Reproducible workflow spanning multiple architectures and PDE families"
+        ]
+      }
+    },
+    "DevilsAdvocate": {
+      "model": "kimi-k2.6",
+      "review": {
+        "scores": {
+          "novelty_contribution": 6,
+          "technical_soundness": 7,
+          "empirical_rigor": 8,
+          "related_work": 8,
+          "clarity": 7,
+          "reproducibility": 8,
+          "scope_match_to_ist": 8
+        },
+        "accept_probability": 0.65,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "Contribution is incremental over existing MT constraint and relaxation work",
+          "Empirical evidence remains heavily concentrated on one fluid task",
+          "Fault-detection stress test uses only 10 author-implemented mutants",
+          "Small-sample cross-family statistics lack inferential power"
+        ],
+        "top_strengths": [
+          "Exemplary honesty in scoping and claim-tracking",
+          "Clean two-dimensional verdict framework",
+          "Strong reproducibility artifacts and claim ledger"
+        ]
+      }
+    }
+  },
+  "raw_responses": {
+    "EIC": {
+      "id": "resp_0a986fcbb7922dcb016a30094a1fd48190a6325b40556eeb3b",
+      "object": "chat.completion",
+      "created": 1781533012,
+      "model": "gpt-5.5",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 7,\n    \"empirical_rigor\": 8,\n    \"related_work\": 8,\n    \"clarity\": 6,\n    \"reproducibility\": 9,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.62,\n  \"verdict\": \"major_revision\",\n  \"top_concerns\": [\n    \"Contribution is partly an integration/formalization of known MT applicability, relaxation, and bug-vs-inapplicability ideas\",\n    \"Empirical story is dense and fragmented, with many bounded pilots, smoke runs, synthetic cases, and seeded faults\",\n    \"Some technical claims, especially operator-floor derivations and verdict-score calibration, need sharper justification\",\n    \"External validity remains limited despite many within-task and small cross-family checks\"\n  ],\n  \"top_strengths\": [\n    \"Strong fit to software V&V for SciML oracle problems\",\n    \"Careful validity gating separates genuine MR violations from out-of-domain or numerical-floor effects\",\n    \"Unusually strong artifact discipline with ledgers, committed outputs, and explicit claim boundaries\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 19748,
+        "completion_tokens": 510,
+        "total_tokens": 20258
+      }
+    },
+    "MethodologyRigor": {
+      "id": "021781533014629e5a28e690e46fb89f5282dc2ed6e94ab7a790e",
+      "object": "chat.completion",
+      "created": 1781533037,
+      "model": "glm-5.1",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"scores\": {\n    \"novelty_contribution\": 8,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 9,\n    \"related_work\": 9,\n    \"clarity\": 7,\n    \"reproducibility\": 9,\n    \"scope_match_to_ist\": 10\n  },\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Clarity and density: the manuscript is extremely dense and heavily laden with self-referential jargon (e.g., 'K=6 roster', 'PC10', 'OOD-stress probe', 'fail-closed claim ledger') which makes it difficult to parse for even a specialist reader; significant streamlining and clearer terminology are needed.\",\n    \"Generalizability of the operator-floor gate: the admissibility gate relies on a closed-form error floor for a specific P1 operator on a concrete mesh, while explicitly deferring the general unstructured-mesh bound; the paper should more clearly delineate how this gate can be operationalized by practitioners on arbitrary meshes without such a closed-form.\",\n    \"Seeded-fault catalogue limitations: the 10-mutant catalogue is author-implemented and consists of gross corruptions; while acknowledged as a stress test rather than a localization model, the manuscript should more explicitly bound what the 5/10 detection rate implies for real-world fault detection to avoid over-interpretation.\"\n  ],\n  \"top_strengths\": [\n    \"Exceptional empirical rigor and honesty: the paper meticulously defines its scope, uses appropriate statistics (Wilson CIs, Wilcoxon, Cliff's delta), explicitly defers claims where evidence is insufficient (e.g., absolute conservation), and maintains a fail-closed claim ledger tying every result to an artifact.\",\n    \"Novel and well-justified domain-validity rubric: the measurement-floor admissibility gate is a significant methodological contribution that addresses a real gap in SciML metamorphic testing by grounding tolerances in the intrinsic error of the discrete operator.\",\n    \"Comprehensive within-scope evaluation: the multi-checkpoint, multi-architecture, and cross-family replications (including the compressible airfoil task showing correct predicate rejection) provide strong evidence for the method's internal validity and transferability within the stated boundaries.\"\n  ]\n}\n```",
+            "reasoning_content": "```json\n{\n  \"scores\": {\n    \"novelty_contribution\": 8,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 9,\n    \"related_work\": 9,\n    \"clarity\": 7,\n    \"reproducibility\": 9,\n    \"scope_match_to_ist\": 10\n  },\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Clarity and density: the manuscript is extremely dense and heavily laden with self-referential jargon (e.g., 'K=6 roster', 'PC10', 'OOD-stress probe', 'fail-closed claim ledger') which makes it difficult to parse for even a specialist reader; significant streamlining and clearer terminology are needed.\",\n    \"Generalizability of the operator-floor gate: the admissibility gate relies on a closed-form error floor for a specific P1 operator on a concrete mesh, while explicitly deferring the general unstructured-mesh bound; the paper should more clearly delineate how this gate can be operationalized by practitioners on arbitrary meshes without such a closed-form.\",\n    \"Seeded-fault catalogue limitations: the 10-mutant catalogue is author-implemented and consists of gross corruptions; while acknowledged as a stress test rather than a localization model, the manuscript should more explicitly bound what the 5/10 detection rate implies for real-world fault detection to avoid over-interpretation.\"\n  ],\n  \"top_strengths\": [\n    \"Exceptional empirical rigor and honesty: the paper meticulously defines its scope, uses appropriate statistics (Wilson CIs, Wilcoxon, Cliff's delta), explicitly defers claims where evidence is insufficient (e.g., absolute conservation), and maintains a fail-closed claim ledger tying every result to an artifact.\",\n    \"Novel and well-justified domain-validity rubric: the measurement-floor admissibility gate is a significant methodological contribution that addresses a real gap in SciML metamorphic testing by grounding tolerances in the intrinsic error of the discrete operator.\",\n    \"Comprehensive within-scope evaluation: the multi-checkpoint, multi-architecture, and cross-family replications (including the compressible airfoil task showing correct predicate rejection) provide strong evidence for the method's internal validity and transferability within the stated boundaries.\"\n  ]\n}\n```"
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 19746,
+        "completion_tokens": 986,
+        "total_tokens": 20732,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 492
+        }
+      },
+      "service_tier": "default"
+    },
+    "DomainExpert": {
+      "id": "8223c00f6a6fafc0af207e5b7d51ad70",
+      "object": "chat.completion",
+      "created": 1781533044,
+      "model": "deepseek-v4-flash",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 8,\n    \"related_work\": 8,\n    \"clarity\": 7,\n    \"reproducibility\": 8,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.75,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Novelty claims relative to closest prior (Duque-Torres, Reichert, Eniser) could be more precisely delineated.\",\n    \"Two-dimensional verdict's domain-violation score D is per-relation and not cross-calibrated, limiting interpretability.\",\n    \"Primary evidence limited to one task (cylinder-flow) plus cross-family pilots; broader generalization remains future work.\"\n  ],\n  \"top_strengths\": [\n    \"Comprehensive empirical evaluation with multi-checkpoint, multi-architecture, and multi-task coverage.\",\n    \"Clear methodological contribution: domain-validity rubric and MR card format for auditable SciML testing.\",\n    \"Strong reproducibility commitment with committed artifacts, claim-ledger, and external witness reruns.\"\n  ]\n}",
+            "reasoning_content": "We need to evaluate the manuscript on seven dimensions (novelty_contribution, technical_soundness, empirical_rigor, related_work, clarity, reproducibility, scope_match_to_ist) on a 1-10 scale, then provide accept_probability, verdict, top_concerns, top_strengths.\n\nThe paper is about domain-validity-gated metamorphic testing for SciML surrogates. It proposes a rubric to screen candidate MRs, an MR card format, a two-dimensional verdict scheme, and provides empirical evidence on MeshGraphNets cylinder-flow, airfoil, PINN, FNO, etc.\n\nLet's assess each dimension.\n\nNovelty contribution: The paper claims a measurement-floor admissibility gate, typed domain-inadmissibility verdict, and seeded-fault diagnostic stress test. The idea of grounding MR tolerance in the operator's numerical floor and separating domain violation from model violation seems novel in SciML testing. However, similar ideas exist in prior work (Duque-Torres, Reichert, Eniser). The paper acknowledges these and positions itself as combining and extending them. The contribution is scoped narrowly. I'd rate it around 7: clearly a contribution but incremental.\n\nTechnical soundness: The method is well-defined: four-condition rubric, MR cards, two-dimensional verdict. The admissibility predicate is logical. The operator-floor calibration is sound (O(h) slope, closed-form bound). The two-dimensional verdict uses domain-violation score D, but the paper admits D values are per-relation and not calibrated across classes. That's a limitation but not unsound. The seeded-fault stress test is appropriate. However, some claims might be overstated: \"to our knowledge the first end-to-end validity-gated metamorphic-testing pipeline\" - but similar pipelines exist (e.g., MetaTrimmer). The paper is careful to bound claims. Overall, technical soundness is good: 8.\n\nEmpirical rigor: The experiments are extensive: primary MGN cylinder-flow with K=6 checkpoints, multi-trajectory, multi-architecture (PointMLP, PhysicsNeMo), second task airfoil, cross-family PINN/FNO, operator-floor sweep, fault-detection robustness with severity sweeps, baseline comparisons, external witness audit. The paper acknowledges limitations: single dataset, small samples, not real-world fault rates, not calibrated D scores. Statistical methods: Wilson CIs, Wilcoxon, Cliff's delta, bootstrap intervals. The narrow evidence boundary is honest. Rigor is high: 8.\n\nRelated work: The paper reviews MT, SciML V&V, MR identification, relaxation-based MR, violation-attribution, and positions itself closely. It clearly differentiates from Reichert, Eniser, Duque-Torres. It also cites relevant PINN gradient-flow literature. However, there might be gaps in very recent work on MR for SciML (e.g., from 2025). But within the manuscript's scope, related work is adequate: 8.\n\nClarity: The paper is well-structured, with clear research questions, method, results organized in three tiers. The writing is dense but precise. The figures (workflow, verdict 2D, etc.) are helpful. However, there is a lot of self-referential terminology (e.g., \"primary empirical scope upgrade\", \"C10\", \"Phase-3\"). Some parts are heavy on jargon. I'd rate clarity 7.\n\nReproducibility: The paper commits to artifacts: claim-ledger, MR cards, transformation code, metric ledgers, Zenodo archive. It records SUT versions, datasets, checkpoints, scripts. The Minimum-MR-SubSet audit and reruns are included. This is strong: 8.\n\nScope match to IST: The paper is about software verification and validation (metamorphic testing) for scientific software (SciML surrogates). This fits IST's V&V remit. The paper is within the regular research track word limit? The manuscript is long (many pages) but likely within 15000 words. Yes, scope matches: 9.\n\nAccept probability: Given the quality, I'd estimate around 0.7-0.8. The paper is solid but might face pushback on novelty claims and limited generalization. I'd say 0.75.\n\nVerdict: minor_revision? The paper is well-done but could benefit from minor clarifications (e.g., clearer explanation of D score limitations, reducing jargon). Major revision if reviewers find the novelty insufficient. I think minor revision.\n\nTop concerns: \n1. The paper's novelty claims might be overstated relative to prior work (Duque-Torres et al., Reichert et al.). The paper needs to more clearly delineate what is truly new.\n2. The two-dimensional verdict D score is not calibrated across MR classes, limiting its utility. The paper acknowledges this but it's a significant limitation.\n3. The evidence is limited to one primary task (cylinder-flow) with additional tasks but still within CFD and simple PDEs. Generalization to other SciML domains is not demonstrated.\n\nTop strengths:\n1. Comprehensive and rigorous empirical evaluation with multi-checkpoint, multi-architecture, multi-task evidence, and statistical analysis.\n2. Clear methodological contribution: domain-validity rubric and MR card format for auditable SciML testing.\n3. Excellent reproducibility practices with committed artifacts and claim-ledger.\n\nNow produce JSON."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 19353,
+        "completion_tokens": 1384,
+        "total_tokens": 20737,
+        "prompt_tokens_details": {},
+        "completion_tokens_details": {
+          "reasoning_tokens": 1118,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0,
+          "image_tokens": 0,
+          "text_tokens": 0,
+          "video_tokens": 0
+        }
+      },
+      "system_fingerprint": ""
+    },
+    "Perspective": {
+      "id": "chatcmpl-f30d8726-7f82-9bf2-a63d-87a91f4762e6",
+      "object": "chat.completion",
+      "created": 1781533063,
+      "model": "qwen3-max",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 8,\n    \"technical_soundness\": 9,\n    \"empirical_rigor\": 8,\n    \"related_work\": 8,\n    \"clarity\": 7,\n    \"reproducibility\": 9,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Writing is dense and occasionally hard to parse due to overloaded terminology\",\n    \"Limited generalizability beyond studied tasks/architectures acknowledged but still narrow\",\n    \"Verdict typing per MR class lacks cross-relation calibration\"\n  ],\n  \"top_strengths\": [\n    \"Novel domain-validity rubric grounded in operator error floors\",\n    \"Strong empirical rigor with artifact-ledger traceability and threat-aware design\",\n    \"Reproducible workflow spanning multiple architectures and PDE families\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 20171,
+        "completion_tokens": 206,
+        "total_tokens": 20377,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    "DevilsAdvocate": {
+      "id": "chatcmpl-ebaYQA3xAQtIxYrDEaMI1TupiedN8",
+      "object": "chat.completion",
+      "created": 1781533201,
+      "model": "kimi-k2.6",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\"novelty_contribution\": 6, \"technical_soundness\": 7, \"empirical_rigor\": 8, \"related_work\": 8, \"clarity\": 7, \"reproducibility\": 8, \"scope_match_to_ist\": 8},\n  \"accept_probability\": 0.65,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\"Contribution is incremental over existing MT constraint and relaxation work\", \"Empirical evidence remains heavily concentrated on one fluid task\", \"Fault-detection stress test uses only 10 author-implemented mutants\", \"Small-sample cross-family statistics lack inferential power\"],\n  \"top_strengths\": [\"Exemplary honesty in scoping and claim-tracking\", \"Clean two-dimensional verdict framework\", \"Strong reproducibility artifacts and claim ledger\"]\n}",
+            "reasoning_content": "The user wants me to act as an adversarial, skeptical reviewer for a manuscript submitted to Elsevier Information and Software Technology (IST). I need to evaluate the manuscript across several dimensions, provide scores (1-10), an accept probability, a verdict, and lists of top concerns and strengths.\n\nLet me analyze the manuscript carefully as a skeptical reviewer would.\n\n**Novelty and Contribution:**\nThe paper proposes a domain-validity rubric for screening metamorphic relations (MRs) for scientific ML surrogates, MR cards as executable assets, and a case study on MeshGraphNets. The novelty seems somewhat incremental - metamorphic testing is well-established, and the idea of validating MRs before using them isn't entirely new (they cite Duque-Torres et al. on bug-vs-inapplicability, Eniser et al. on relaxations, etc.). However, the specific application to SciML surrogates with operator error floors and the two-dimensional verdict space is a non-trivial contribution. The paper is very careful about scope, which is good but might make the contribution seem narrow. I'd rate this around 6-7.\n\n**Technical Soundness:**\nThe paper is very careful with its claims and boundaries. The operator floor calibration with O(h) slope is solid. The two-dimensional verdict (relation violation vs domain violation) is logically sound. The MR card structure is well-defined. However, there are some concerns: the \"domain validity\" concept, while useful, is somewhat manually engineered per relation. The claim that tolerance must dominate the operator's numerical floor is sound in principle but the general unstructured mesh bound is left as future work. The seeded fault detection is limited (10 mutants, 5 classes). I'd rate this around 7.\n\n**Empirical Rigor:**\nThe paper is actually quite rigorous within its deliberately narrow scope. It uses Wilson CIs, bootstrap intervals, Wilcoxon tests, Cliff's delta. It reports effect sizes. It has K=6 checkpoints, multiple trajectories. It carefully labels descriptive vs inferential statistics. It includes a second task (airfoil) and cross-family (PINN, FNO). The threats section is thorough. However, the sample sizes for some inferential claims are small (e.g., PINN n=3 for Wilcoxon). The fault catalogue is author-implemented, which is a bias threat they acknowledge. The exact mirror-y symmetric mesh result is on synthetic OOD geometry. I'd rate this around 7-8 because within the narrow boundary, it's honest and well-designed.\n\n**Related Work:**\nThe related work section is quite thorough. It positions against Reichert et al., Eniser et al., Duque-Torres et al./MetaTrimmer, and others. It clearly states what is new vs what is not new. It covers mesh-based neural simulation, MT background, MR identification, physics-based MT, SciML V&V, and hybrid trust regions. This is a strength. I'd rate this around 8.\n\n**Clarity:**\nThe paper is very well-written but extremely dense. The abstract is packed. The methodology is clearly structured. The use of tables for claim-to-evidence mapping is excellent. However, the sheer density of qualifiers and boundary statements might make it hard to follow for some readers. The structure (RQ decomposition, contributions, method, empirical design, results, discussion, threats) is standard and clear. I'd rate this around 7-8.\n\n**Reproducibility:**\nThe paper mentions a replication package on Zenodo with DOI, claim ledgers, tracked artifacts, and deterministic re-runs. It mentions commit hashes for Minimum-MR-SubSet. It has detailed MR cards and ledgers. This seems exemplary. However, I need to be skeptical: are the artifacts actually available and complete? The paper says \"when licensing permits\" which is a caveat. But the commitment to reproducibility artifacts is strong. I'd rate this around 8-9.\n\n**Scope Match to IST:**\nIST focuses on software V&V. This paper is about testing scientific ML surrogates (software systems) using metamorphic testing. It fits well within the software testing and V&V remit. The focus on executable test assets, oracles, and software testing methodology is appropriate. I'd rate this around 8.\n\n**Top Concerns:**\n1. The contribution might be too narrow/incremental - it's essentially adding a validation layer and record-keeping format to existing MT practices for a specific domain. Is this enough for a full IST paper?\n2. The empirical evidence, while carefully bounded, is very specific to cylinder flow and a few PDE families. Generalization is explicitly future work.\n3. The seeded fault detection is limited (10 mutants, author-implemented) and the \"localization\" is more of a stress test than a validated model.\n4. Some statistical claims are based on very small samples (e.g., n=3 for PINN Wilcoxon tests), though the paper is honest about this.\n\n**Top Strengths:**\n1. Exceptional intellectual honesty and careful scoping - the paper is a model of how to avoid overclaiming.\n2. The domain-validity rubric and two-dimensional verdict space are conceptually clean contributions.\n3. Strong reproducibility infrastructure with claim ledgers and artifact tracking.\n\n**Verdict:**\nThe paper is technically sound, well-written, and carefully scoped. It makes a methodological contribution that is non-trivial but narrow. For IST regular track, this would likely require minor revision to address concerns about the breadth of contribution and some statistical power issues, but the core is publishable. However, as an adversarial reviewer, I might push for major revision if I think the contribution is too narrow or the empirical base too limited. But given the quality and rigor, minor revision is more appropriate. Let me think about whether to be harsher.\n\nActually, looking at it adversarially:\n- The novelty is somewhat limited: \"validity gating\" of MRs is not entirely new (they cite Duque-Torres on bug-vs-inapplicability, Eniser on relaxations). The MR card is essentially a structured test case template.\n- The empirical evaluation is very narrow: one main task (cylinder flow), with some cross-family checks. The \"second task\" (airfoil) is described as \"bounded CPU-scale study\" and not full-scale.\n- The fault detection results are weak: 5/10 detected, and the mutants are gross corruptions.\n- Some of the statistical analysis is on tiny samples (n=3).\n\nBut the paper is so careful about its boundaries that it's hard to reject it on these grounds - it openly admits all these limitations. This is a \"honest scope\" paper as noted in the instructions.\n\nAs a skeptical reviewer, I might still argue that the contribution is more of a solid methodological refinement than a major breakthrough, and the empirical evidence is thin for a 15,000-word research paper. But the rigor and reproducibility are high.\n\nLet me settle on scores:\n- novelty_contribution: 6 (solid but narrow, incremental over Duque-Torres and others)\n- technical_soundness: 7 (sound within scope, but some small-sample stats and manual per-relation engineering)\n- empirical_rigor: 7 (honest and well-designed within narrow scope, but limited breadth and some small n)\n- related_work: 8 (thorough positioning)\n- clarity: 7 (dense but clear, excellent structure)\n- reproducibility: 8 (strong artifact commitment, though some licensing caveats)\n- scope_match_to_ist: 8 (fits software V&V well)\n\nAccept probability: 0.65 (good chance after minor revision to address skepticism about breadth and sample sizes)\nVerdict: minor_revision\n\nTop concerns:\n- \"Contribution is incremental: validity gating and MR cards refine existing MT practices rather than constituting a major conceptual advance\"\n- \"Empirical breadth is narrow despite length: heavy reliance on one cylinder-flow task with limited cross-family statistical power\"\n- \"Seeded-fault detection is thin (10 gross mutants) and localization claims are stress-test evidence only\"\n- \"Some inferential statistics (e.g., PINN n=3) are underpowered and should be framed purely as descriptive\"\n\nTop strengths:\n- \"Exemplary intellectual honesty and boundary-setting; every claim is carefully scoped and tracked to artifacts\"\n- \"Clean conceptual framework: the two-dimensional verdict space and operator-floor admissibility gate are well-articulated\"\n- \"Strong reproducibility infrastructure with claim ledgers and committed artifacts\"\n\nWait, I need to make sure my JSON is valid and exactly in the requested shape. Let me double-check the format.\n\n{\n  \"scores\": {\"novelty_contribution\": 6, \"technical_soundness\": 7, \"empirical_rigor\": 7, \"related_work\": 8, \"clarity\": 7, \"reproducibility\": 8, \"scope_match_to_ist\": 8},\n  \"accept_probability\": 0.65,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\"Contribution is incremental: validity gating and MR cards refine existing MT practices rather than constituting a major conceptual advance\", \"Empirical breadth is narrow despite length: heavy reliance on one cylinder-flow task with limited cross-family statistical power\", \"Seeded-fault detection is thin (10 gross mutants) and localization claims are stress-test evidence only\", \"Some inferential statistics (e.g., PINN n=3) are underpowered and should be framed purely as descriptive\"],\n  \"top_strengths\": [\"Exemplary intellectual honesty and boundary-setting; every claim is carefully scoped and tracked to artifacts\", \"Clean conceptual framework: the two-dimensional verdict space and operator-floor admissibility gate are well-articulated\", \"Strong reproducibility infrastructure with claim ledgers and committed artifacts\"]\n}\n\nActually, looking again at the empirical rigor - the paper deliberately keeps a narrow boundary and the instructions say \"judge rigor, not breadth\". Given that, maybe empirical_rigor should be higher, like 8. They use Wilson CIs, bootstrap, Wilcoxon, Cliff's delta, they have K=6 rosters, they carefully separate descriptive from inferential. The small n=3 is honestly reported. The 10 mutants are a stress test, not a full evaluation. Given the instruction to judge rigor not breadth, 8 seems fair.\n\nTechnical soundness: the operator floor O(h) sweep is solid. The two-dimensional verdict is logically consistent. The MR card format is complete. I'd say 7 or 8. The \"general unstructured-mesh bound is future work\" is a gap but honestly disclosed. I'll keep it at 7 because some of the fault detection logic is thin.\n\nNovelty: Is it really a 6? The paper claims \"to our knowledge, grounding an MR tolerance in the measurement operator's own error floor is new in the SciML setting.\" The typed domain-inadmissibility verdict is an instantiation of Duque-Torres with added sub-dimensions. The MR card is a structured format. This is incremental but non-trivial. In IST, which publishes practical software engineering research, this is probably a 6-7. I'll stick with 6 to be adversarial.\n\nClarity: 7 or 8? The paper is very clear in structure but extremely dense. The tables are excellent. I'll say 7 because the density might impede readability for practitioners.\n\nReproducibility: 8 or 9? They have Zenodo DOI, claim ledgers, commit hashes, detailed artifact descriptions. But there are licensing caveats and some non-redistributable artifacts. I'll say 8.\n\nScope match: 8. It's clearly software V&V.\n\nLet me reconsider the verdict. As an adversarial reviewer, would I recommend major revision? The main issues are:\n1. Incremental contribution\n2. Narrow empirical base\n3. Some underpowered statistics\n\nBut the paper is well-crafted and the contribution is solid. Minor revision is the right call. The authors need to better justify why this specific packaging (rubric + card + verdict) constitutes a publishable whole rather than a collection of sensible but incremental practices. They also need to address the statistical power issue in the PINN/FNO cross-family work.\n\nActually, looking at the \"top_concerns\" - I should make them short strings as requested.\n\nLet me refine:\n- \"Contribution is incremental over existing MT constraint and relaxation work\"\n- \"Empirical evidence remains heavily concentrated on one fluid task\"\n- \"Fault-detection stress test uses only 10 author-implemented mutants\"\n- \"Small-sample cross-family statistics (n=3) lack power\"\n\nAnd strengths:\n- \"Exemplary honesty in scoping and claim-tracking\"\n- \"Clean two-dimensional verdict framework\"\n- \"Strong reproducibility artifacts and claim ledger\"\n\nThese are short enough.\n\nFinal check: JSON only, no prose, no fences. Exactly the requested shape.\n\nOne more thought: should novelty be 5 (borderline)? The paper is very careful to say what's not new. In a competitive venue, an adversarial reviewer might argue that packaging existing ideas (MT + validity constraints + structured test cards) is not sufficiently novel. But the operator-floor grounding and the specific SciML application do add something. I'll keep it at 6.\n\nActually, looking at the instructions again: \"1 = unacceptable, 5 = borderline, 8 = clearly publishable, 10 = exemplary\". A 6 is \"above borderline but not clearly publishable without revision\". That fits minor_revision. An 8 would be \"clearly publishable\". Since I'm adversarial, I shouldn't give 8s across the board. My scores seem appropriately skeptical.\n\nLet me finalize."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 19198,
+        "completion_tokens": 3026,
+        "total_tokens": 22224,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {},
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_details": null
+      }
+    }
+  },
+  "honesty_boundary": "Five single-call temperature-0 LLM reviews via one gateway; an automated panel estimate, NOT a substitute for human peer review and NOT a prediction of an actual IST editorial decision."
+}

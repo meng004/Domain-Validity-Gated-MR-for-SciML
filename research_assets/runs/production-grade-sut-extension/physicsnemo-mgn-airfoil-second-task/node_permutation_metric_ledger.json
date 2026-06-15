@@ -1,58 +1,308 @@
 {
-  "denominator": 10,
-  "max_relative_l2": 0.0,
+  "denominator": 60,
+  "max_relative_l2": 4.96480708989111e-07,
   "metric": "relative_l2(unpermuted_followup, source)",
-  "passes": 10,
+  "passes": 60,
   "relation": "node_permutation_equivariance",
   "rows": [
     {
       "passes": 1,
-      "relative_l2": 0.0,
+      "relative_l2": 3.688959111514123e-07,
       "trajectory": 0
     },
     {
       "passes": 1,
-      "relative_l2": 0.0,
+      "relative_l2": 4.0412899693365034e-07,
       "trajectory": 1
     },
     {
       "passes": 1,
-      "relative_l2": 0.0,
+      "relative_l2": 3.594846873511415e-07,
       "trajectory": 2
     },
     {
       "passes": 1,
-      "relative_l2": 0.0,
+      "relative_l2": 4.623326788077975e-07,
       "trajectory": 3
     },
     {
       "passes": 1,
-      "relative_l2": 0.0,
+      "relative_l2": 3.7410111985991534e-07,
       "trajectory": 4
     },
     {
       "passes": 1,
-      "relative_l2": 0.0,
+      "relative_l2": 4.1456053168076323e-07,
       "trajectory": 5
     },
     {
       "passes": 1,
-      "relative_l2": 0.0,
+      "relative_l2": 4.531370336735563e-07,
       "trajectory": 6
     },
     {
       "passes": 1,
-      "relative_l2": 0.0,
+      "relative_l2": 3.874403091685963e-07,
       "trajectory": 7
     },
     {
       "passes": 1,
-      "relative_l2": 0.0,
+      "relative_l2": 4.1207090362149756e-07,
       "trajectory": 8
     },
     {
       "passes": 1,
-      "relative_l2": 0.0,
+      "relative_l2": 3.396643251107889e-07,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.724456630356144e-07,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.827866177947726e-07,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.7301068661909085e-07,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.605233812071674e-07,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.6497075345541816e-07,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.928248245050781e-07,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.929185024593608e-07,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.5735754383713356e-07,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.96480708989111e-07,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.793998300556268e-07,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.5867654446519737e-07,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.6413166526472196e-07,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.4361764278401097e-07,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.0768208603149105e-07,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.4182542663074855e-07,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.4101478263437457e-07,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.267392685302184e-07,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.490007145501295e-07,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.203119547379174e-07,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.453639010331244e-07,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.5238269308356394e-07,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.5545036186922516e-07,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.5183892893874145e-07,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.593359221871651e-07,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.5006225946053746e-07,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.467278813535813e-07,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.4545024024955637e-07,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.5393315417641134e-07,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.393080814679706e-07,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 4.428116255894565e-07,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.7272732811288734e-07,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.7495132687581645e-07,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.599870979087427e-07,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.379508086709393e-07,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.5807565268441977e-07,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.4815354865713743e-07,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.6588065199794073e-07,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.7291039234332857e-07,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.345126913245622e-07,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 3.638105852132867e-07,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 1.9399053030610958e-07,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 1.7971764521007572e-07,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 1.82347406507688e-07,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 1.650081600246267e-07,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 1.8488566411178908e-07,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 1.6979076633560908e-07,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 1.7069936575353495e-07,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 1.786944778814359e-07,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 1.6125002844091796e-07,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 1.9029805287118506e-07,
       "trajectory": 9
     }
   ],

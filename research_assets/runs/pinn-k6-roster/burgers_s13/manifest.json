@@ -1,0 +1,11 @@
+{
+  "sut_id": "pinn_burgers2d_s13",
+  "pde": "burgers2d",
+  "seed": 13,
+  "checkpoint_sha256": "a25274c3377e59593e93ac4f4c212820e4434a0aec1ae0ef0cdddcbcda6cfcca",
+  "final_pde_residual_l2": 0.056122124874944286,
+  "num_parameters": 10502,
+  "train_iters": 2000,
+  "batch_size": 512,
+  "elapsed_s": 45.515363931655884
+}

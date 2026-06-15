@@ -1,7 +1,7 @@
 {
   "record_type": "phase3-unified-fault-catalog-and-statistics",
   "schema_version": "0.2.0",
-  "generated_at": "2026-06-11T14:47:05Z",
+  "generated_at": "2026-06-15T14:34:13Z",
   "catalogue_size": 60,
   "catalogue_breakdown": {
     "mgn_canonical_executed_mutants": 10,
@@ -9,7 +9,7 @@
     "pinn_output_level_closed_form_probes": 24,
     "fno_output_level_closed_form_probes": 24
   },
-  "trial_count": 456,
+  "trial_count": 1032,
   "entries": [
     {
       "entry_id": "MGN_CANON_BC_zero_inflow",
@@ -489,34 +489,34 @@
       "fault_class": "sampling_order_fault",
       "mutant": "PINN_PERM_row_shuffle_output",
       "description": "shuffle the returned rows after a collocation-point permutation",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -529,34 +529,34 @@
       "fault_class": "sampling_order_fault",
       "mutant": "PINN_PERM_duplicate_row_output",
       "description": "duplicate one returned row after permutation inversion",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -569,34 +569,34 @@
       "fault_class": "sampling_order_fault",
       "mutant": "PINN_PERM_drop_row_output",
       "description": "drop one returned row and pad with a stale value",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -609,34 +609,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "PINN_SYM_odd_y_bias",
       "description": "add an odd-in-y bias so R(model(Rx)) no longer maps back to model(x)",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -649,34 +649,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "PINN_SYM_output_sign_flip",
       "description": "flip the reflected component/sign convention in the mirror relation",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -689,34 +689,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "PINN_SYM_y_dependent_gain",
       "description": "multiply predictions by a y-dependent asymmetric gain",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -729,34 +729,34 @@
       "fault_class": "conservation_fault",
       "mutant": "PINN_CONS_global_scale_2x",
       "description": "scale the predicted conserved quantity by 2x",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -769,34 +769,34 @@
       "fault_class": "conservation_fault",
       "mutant": "PINN_CONS_uniform_mass_offset",
       "description": "add a uniform offset that shifts the integral mass/flux",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -809,34 +809,34 @@
       "fault_class": "conservation_fault",
       "mutant": "PINN_CONS_linear_spatial_drift",
       "description": "add a spatial drift with non-zero integral under the grid quadrature",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -849,35 +849,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "PINN_BLIND_even_small_bias",
       "description": "small even-in-y bias kept below the MR-B floor and mass-ratio gate",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -889,35 +889,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "PINN_BLIND_zero_mean_oscillation",
       "description": "zero-mean oscillation preserving the integral and row order",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -929,35 +929,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "PINN_BLIND_time_localized_noise",
       "description": "time-localized perturbation below the declared MR thresholds",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -969,34 +969,34 @@
       "fault_class": "sampling_order_fault",
       "mutant": "PINN_PERM_row_shuffle_output",
       "description": "shuffle the returned rows after a collocation-point permutation",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1009,34 +1009,34 @@
       "fault_class": "sampling_order_fault",
       "mutant": "PINN_PERM_duplicate_row_output",
       "description": "duplicate one returned row after permutation inversion",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1049,34 +1049,34 @@
       "fault_class": "sampling_order_fault",
       "mutant": "PINN_PERM_drop_row_output",
       "description": "drop one returned row and pad with a stale value",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1089,34 +1089,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "PINN_SYM_odd_y_bias",
       "description": "add an odd-in-y bias so R(model(Rx)) no longer maps back to model(x)",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1129,34 +1129,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "PINN_SYM_output_sign_flip",
       "description": "flip the reflected component/sign convention in the mirror relation",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1169,34 +1169,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "PINN_SYM_y_dependent_gain",
       "description": "multiply predictions by a y-dependent asymmetric gain",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1209,34 +1209,34 @@
       "fault_class": "conservation_fault",
       "mutant": "PINN_CONS_global_scale_2x",
       "description": "scale the predicted conserved quantity by 2x",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1249,34 +1249,34 @@
       "fault_class": "conservation_fault",
       "mutant": "PINN_CONS_uniform_mass_offset",
       "description": "add a uniform offset that shifts the integral mass/flux",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1289,34 +1289,34 @@
       "fault_class": "conservation_fault",
       "mutant": "PINN_CONS_linear_spatial_drift",
       "description": "add a spatial drift with non-zero integral under the grid quadrature",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1329,35 +1329,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "PINN_BLIND_even_small_bias",
       "description": "small even-in-y bias kept below the MR-B floor and mass-ratio gate",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -1369,35 +1369,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "PINN_BLIND_zero_mean_oscillation",
       "description": "zero-mean oscillation preserving the integral and row order",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -1409,35 +1409,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "PINN_BLIND_time_localized_noise",
       "description": "time-localized perturbation below the declared MR thresholds",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -1449,34 +1449,34 @@
       "fault_class": "representation_fault",
       "mutant": "FNO_TRANS_roll_output",
       "description": "roll the returned field without applying the inverse periodic translation",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1489,34 +1489,34 @@
       "fault_class": "representation_fault",
       "mutant": "FNO_TRANS_channel_stale_roll",
       "description": "leave one output channel unrolled after the periodic translation map",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1529,34 +1529,34 @@
       "fault_class": "representation_fault",
       "mutant": "FNO_TRANS_boundary_wrap_mismatch",
       "description": "apply periodic wrap restoration to a non-periodic boundary-condition candidate",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1569,34 +1569,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "FNO_SYM_x_axis_flip",
       "description": "flip the wrong spatial axis in the mirror-output restoration",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1609,34 +1609,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "FNO_SYM_channel_sign_flip",
       "description": "flip the wrong vector component/sign convention in the mirror relation",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1649,34 +1649,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "FNO_SYM_asymmetric_gain",
       "description": "multiply predictions by an asymmetric spatial gain",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1689,34 +1689,34 @@
       "fault_class": "conservation_fault",
       "mutant": "FNO_CONS_global_scale",
       "description": "scale the predicted integral-bearing field by a constant factor",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1729,34 +1729,34 @@
       "fault_class": "conservation_fault",
       "mutant": "FNO_CONS_uniform_offset",
       "description": "add a uniform offset that shifts the grid integral",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1769,34 +1769,34 @@
       "fault_class": "conservation_fault",
       "mutant": "FNO_CONS_low_mode_bias",
       "description": "add a retained low Fourier mode with non-zero mean",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1809,35 +1809,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "FNO_BLIND_zero_mean_high_mode",
       "description": "add a zero-mean high-frequency mode outside the retained MR thresholds",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -1849,35 +1849,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "FNO_BLIND_channel_balanced_noise",
       "description": "add channel-balanced perturbation preserving row order, mirror score, and integral",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -1889,35 +1889,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "FNO_BLIND_small_periodic_phase",
       "description": "apply a sub-threshold periodic phase perturbation",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -1929,34 +1929,34 @@
       "fault_class": "representation_fault",
       "mutant": "FNO_TRANS_roll_output",
       "description": "roll the returned field without applying the inverse periodic translation",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -1969,34 +1969,34 @@
       "fault_class": "representation_fault",
       "mutant": "FNO_TRANS_channel_stale_roll",
       "description": "leave one output channel unrolled after the periodic translation map",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -2009,34 +2009,34 @@
       "fault_class": "representation_fault",
       "mutant": "FNO_TRANS_boundary_wrap_mismatch",
       "description": "apply periodic wrap restoration to a non-periodic boundary-condition candidate",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -2049,34 +2049,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "FNO_SYM_x_axis_flip",
       "description": "flip the wrong spatial axis in the mirror-output restoration",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -2089,34 +2089,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "FNO_SYM_channel_sign_flip",
       "description": "flip the wrong vector component/sign convention in the mirror relation",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -2129,34 +2129,34 @@
       "fault_class": "symmetry_fault",
       "mutant": "FNO_SYM_asymmetric_gain",
       "description": "multiply predictions by an asymmetric spatial gain",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -2169,34 +2169,34 @@
       "fault_class": "conservation_fault",
       "mutant": "FNO_CONS_global_scale",
       "description": "scale the predicted integral-bearing field by a constant factor",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -2209,34 +2209,34 @@
       "fault_class": "conservation_fault",
       "mutant": "FNO_CONS_uniform_offset",
       "description": "add a uniform offset that shifts the grid integral",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -2249,34 +2249,34 @@
       "fault_class": "conservation_fault",
       "mutant": "FNO_CONS_low_mode_bias",
       "description": "add a retained low Fourier mode with non-zero mean",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
-          "k": 3,
-          "n": 3,
+          "k": 15,
+          "n": 15,
           "rate": 1.0,
-          "ci_lo": 0.43849391955098227,
+          "ci_lo": 0.7961107336956521,
           "ci_hi": 1.0
         }
       }
@@ -2289,35 +2289,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "FNO_BLIND_zero_mean_high_mode",
       "description": "add a zero-mean high-frequency mode outside the retained MR thresholds",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -2329,35 +2329,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "FNO_BLIND_channel_balanced_noise",
       "description": "add channel-balanced perturbation preserving row order, mirror score, and integral",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     },
@@ -2369,35 +2369,35 @@
       "fault_class": "detector_invariant_fault",
       "mutant": "FNO_BLIND_small_periodic_phase",
       "description": "apply a sub-threshold periodic phase perturbation",
-      "n_trials": 3,
+      "n_trials": 15,
       "per_detector": {
         "node_perm": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "conservation": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "mirror_y": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         },
         "any": {
           "k": 0,
-          "n": 3,
+          "n": 15,
           "rate": 0.0,
           "ci_lo": 0.0,
-          "ci_hi": 0.5615060804490177
+          "ci_hi": 0.20388926630434784
         }
       }
     }
@@ -2417,26 +2417,26 @@
     },
     "conservation_fault": {
       "entries": 12,
-      "trials": 36,
-      "any_detected": 36,
+      "trials": 180,
+      "any_detected": 180,
       "any_detection_rate": {
-        "k": 36,
-        "n": 36,
+        "k": 180,
+        "n": 180,
         "rate": 1.0,
-        "ci_lo": 0.9035781695514236,
+        "ci_lo": 0.9791037501849418,
         "ci_hi": 1.0
       }
     },
     "detector_invariant_fault": {
       "entries": 14,
-      "trials": 48,
+      "trials": 192,
       "any_detected": 6,
       "any_detection_rate": {
         "k": 6,
-        "n": 48,
-        "rate": 0.125,
-        "ci_lo": 0.05856971750400845,
-        "ci_hi": 0.2470072708605482
+        "n": 192,
+        "rate": 0.03125,
+        "ci_lo": 0.014399085841634567,
+        "ci_hi": 0.06649077616929672
       }
     },
     "mesh_adjacency_fault": {
@@ -2477,37 +2477,37 @@
     },
     "representation_fault": {
       "entries": 6,
-      "trials": 18,
-      "any_detected": 18,
+      "trials": 90,
+      "any_detected": 90,
       "any_detection_rate": {
-        "k": 18,
-        "n": 18,
+        "k": 90,
+        "n": 90,
         "rate": 1.0,
-        "ci_lo": 0.8241154494176252,
+        "ci_lo": 0.9590629315783191,
         "ci_hi": 1.0
       }
     },
     "sampling_order_fault": {
       "entries": 6,
-      "trials": 18,
-      "any_detected": 18,
+      "trials": 90,
+      "any_detected": 90,
       "any_detection_rate": {
-        "k": 18,
-        "n": 18,
+        "k": 90,
+        "n": 90,
         "rate": 1.0,
-        "ci_lo": 0.8241154494176252,
+        "ci_lo": 0.9590629315783191,
         "ci_hi": 1.0
       }
     },
     "symmetry_fault": {
       "entries": 12,
-      "trials": 36,
-      "any_detected": 36,
+      "trials": 180,
+      "any_detected": 180,
       "any_detection_rate": {
-        "k": 36,
-        "n": 36,
+        "k": 180,
+        "n": 180,
         "rate": 1.0,
-        "ci_lo": 0.9035781695514236,
+        "ci_lo": 0.9791037501849418,
         "ci_hi": 1.0
       }
     },
@@ -2530,20 +2530,20 @@
         "representation_fault",
         "sampling_order_fault"
       ],
-      "tp": 36,
+      "tp": 180,
       "fp": 0,
       "fn": 0,
       "precision": {
         "value": 1.0,
-        "ci_lo": 0.9035781695514236,
+        "ci_lo": 0.9791037501849418,
         "ci_hi": 1.0,
-        "denominator": 36
+        "denominator": 180
       },
       "recall": {
         "value": 1.0,
-        "ci_lo": 0.9035781695514236,
+        "ci_lo": 0.9791037501849418,
         "ci_hi": 1.0,
-        "denominator": 36
+        "denominator": 180
       }
     },
     "conservation": {
@@ -2552,20 +2552,20 @@
         "conservation_fault",
         "normalization_scale_fault"
       ],
-      "tp": 126,
+      "tp": 270,
       "fp": 0,
       "fn": 30,
       "precision": {
         "value": 1.0,
-        "ci_lo": 0.9704131803674632,
+        "ci_lo": 0.9859714521095407,
         "ci_hi": 1.0,
-        "denominator": 126
+        "denominator": 270
       },
       "recall": {
-        "value": 0.8076923076923077,
-        "ci_lo": 0.7387526287757789,
-        "ci_hi": 0.8618419598669775,
-        "denominator": 156
+        "value": 0.9,
+        "ci_lo": 0.8608327216490343,
+        "ci_hi": 0.9290525343527771,
+        "denominator": 300
       }
     },
     "mirror_y": {
@@ -2574,20 +2574,20 @@
         "physical_channel_fault",
         "symmetry_fault"
       ],
-      "tp": 86,
+      "tp": 230,
       "fp": 6,
       "fn": 70,
       "precision": {
-        "value": 0.9347826086956522,
-        "ci_lo": 0.8649403972069417,
-        "ci_hi": 0.9697702086260162,
-        "denominator": 92
+        "value": 0.9745762711864406,
+        "ci_lo": 0.9456524354811741,
+        "ci_hi": 0.9882973046806659,
+        "denominator": 236
       },
       "recall": {
-        "value": 0.5512820512820513,
-        "ci_lo": 0.4729342964563181,
-        "ci_hi": 0.627164801650808,
-        "denominator": 156
+        "value": 0.7666666666666667,
+        "ci_lo": 0.7156176619060444,
+        "ci_hi": 0.81097250876183,
+        "denominator": 300
       }
     }
   },
@@ -2630,27 +2630,51 @@
       "group_a": "PINN-diffusion MR-B violation/floor ratios",
       "group_b": "PINN-burgers MR-B violation/floor ratios",
       "a_values": [
-        0.8533572161705272,
-        1.3985681820178573,
-        2.7946307497085083
+        0.853355565260861,
+        1.3985683731316774,
+        2.7946315398304757,
+        1.3700565302526566,
+        0.8393029973102059,
+        2.9989144782450787,
+        1.5270657177949516,
+        2.4373955478352562,
+        0.6848310536713293,
+        0.9240399638861929,
+        1.316826735836427,
+        0.9934974381492963,
+        0.9618463672183449,
+        0.7907980868626806,
+        2.531615670369702
       ],
       "b_values": [
-        0.8896689677021489,
-        0.4458710100275047,
-        0.5098211235579608
+        0.8896693569921482,
+        0.4458716553264727,
+        0.5098212173831523,
+        0.4935031673068431,
+        0.9124279889173045,
+        0.6267355433971489,
+        0.5491145677933035,
+        0.5459105103428107,
+        1.1246777705785151,
+        0.4764353626059428,
+        0.5797038270534537,
+        0.8400546624578802,
+        1.4706254145637767,
+        0.4160601518872201,
+        0.7988681897042956
       ],
       "cliffs_delta": {
-        "delta": 0.7777777777777778,
+        "delta": 0.7333333333333333,
         "magnitude": "large",
-        "gt_pairs": 8,
-        "lt_pairs": 1,
-        "total_pairs": 9
+        "gt_pairs": 195,
+        "lt_pairs": 30,
+        "total_pairs": 225
       },
       "wilcoxon_signed_rank": {
-        "n": 3,
-        "W_plus": 5.0,
-        "p_two_sided": 0.5,
-        "exact_min_two_sided_p": 0.25
+        "n": 15,
+        "W_plus": 105.0,
+        "p_two_sided": 0.00836181640625,
+        "exact_min_two_sided_p": 6.103515625e-05
       },
       "note": "paired by training seed index (s0,s1,s2); exact Wilcoxon is low-powered at n=3"
     }
