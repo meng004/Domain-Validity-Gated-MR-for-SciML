@@ -1,0 +1,7 @@
+# Release-archive curation (git archive / Zenodo replication tarball).
+# These internal development/process records stay in the Git repository but are
+# excluded from the replication archive: they are not needed to reproduce any
+# result and some carry local absolute paths. export-ignore affects `git archive`
+# only -- the working tree, tests, and CI are unaffected.
+docs/superpowers/** export-ignore
+paper/[0-9][0-9]_*.md export-ignore
