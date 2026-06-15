@@ -1,0 +1,18 @@
+# Verifiable tier: manuscript regression test suite + fail-closed validators.
+# No GPU and no API key required; this is what CI and the Docker image run.
+# Tested with Python 3.12.7.
+numpy==1.26.4
+PyYAML==6.0.2
+
+# --- Full SUT re-run tier (optional; CUDA GPU required) ---
+# The real MeshGraphNet / PhysicsNeMo / PointMLP / PINN / FNO executions are
+# exercised offline and committed under research_assets/runs/. To regenerate
+# them from scratch, additionally install the following (pin exact versions
+# from `pip freeze` of the GPU run environment that produced the artifacts):
+#   torch==2.12.*
+#   nvidia-physicsnemo==2.1.1
+#   torch_geometric
+#   torch_scatter
+#   tfrecord
+# Real-SUT runs also require the METBENCH_MGN_* environment variables; absent
+# those the precondition gate fails closed by design (see REPRODUCIBILITY.md).

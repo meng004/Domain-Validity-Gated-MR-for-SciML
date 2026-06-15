@@ -1,0 +1,90 @@
+# Reproducibility
+
+This package separates **what can be reproduced with no special hardware or
+credentials** (the evidence the manuscript actually rests on, all bound to
+committed artifacts) from **what requires a GPU and external data** (the
+from-scratch SUT training/inference). Every paper claim is bound to a tracked
+artifact under `research_assets/runs/` via
+`research_assets/experiments/claim-ledger.yml`.
+
+## System requirements
+
+| Tier | Hardware | Credentials | Time |
+|------|----------|-------------|------|
+| 1 Smoke | CPU, Python 3.12 | none | ≤ 5 min |
+| 2 Cache replay | CPU, Python 3.12 (+ a TeX dist for the PDF) | none | ≤ 30 min |
+| 3 Full re-run | CUDA GPU | `METBENCH_MGN_*`; gateway key for the review panel | hours |
+
+## Environment setup
+
+```bash
+python -m venv .venv && source .venv/bin/activate   # Python 3.12 (tested on 3.12.7)
+pip install -r requirements.txt                     # verifiable tier: numpy + PyYAML only
+```
+
+## Tier 1 — Smoke (≤ 5 min, no credentials): toolchain integrity
+
+```bash
+# Fail-closed asset validators + the compile-independent test subset CI runs:
+python tools/validate_research_assets.py; echo $?      # expect: 0
+python tools/validate_experiment_protocol.py; echo $?  # expect: 0
+python -m unittest tests/test_research_assets.py tests/test_executable_mr_assets.py \
+  tests/test_experiment_protocol.py tests/test_mirror_y_rubric.py \
+  tests/test_conservation_rubric.py                    # expect: OK
+```
+
+The validators are fail-closed: they refuse to pass if any claim in the
+manuscript is not backed by a committed artifact ledger.
+
+The **full** regression suite (`python -m pytest tests -q`, 313 tests) additionally
+includes one compile-gate check (`test_stage4_revision_readiness`) that reads the
+gitignored `main.bbl`/`main.log`. On a fresh clone run the Tier-2 LaTeX compile
+first to generate them; without it, that single test fails and the other 312 pass.
+CI runs only the compile-independent subset above and is unaffected.
+
+## Tier 2 — Cache replay (≤ 30 min, no credentials): paper numbers + PDF
+
+```bash
+# IST word count (single source of truth; counts refs + appendices + 200 w/float)
+python tools/ist_wordcount.py
+
+# A representative deterministic ledger regeneration (no GPU, no data download):
+python tools/run_classical_operator_conservation.py
+#   expect: baseline |dM|max ~2.2e-16 PASS; 3/3 operator-code faults detected
+
+# Build the submission PDF (needs a TeX distribution, e.g. TeX Live / MacTeX):
+cd paper/ist-submission
+pdflatex -interaction=nonstopmode main.tex
+bibtex main
+pdflatex -interaction=nonstopmode main.tex
+pdflatex -interaction=nonstopmode main.tex
+#   expect: 0 undefined references, 0 "Missing character", 0 "Overfull \hbox"
+```
+
+Every other number in the paper is read from a committed ledger under
+`research_assets/runs/`; the regression suite in Tier 1 pins the prose to those
+ledgers, so a green Tier 1 already certifies that the paper does not claim more
+than the artifacts license.
+
+## Tier 3 — Full re-run (hours, GPU + credentials)
+
+Real SUT runs require a CUDA GPU and the `METBENCH_MGN_*` environment variables;
+absent those, the precondition gate fails closed **by design** (this is intended
+behavior, not an error). Datasets (~1–2 GB DeepMind cylinder-flow / airfoil
+TFRecords) are auto-staged by the workflow runners. The review panel
+(`tools/run_academic_review_panel.py`) additionally needs `OPENAI_API_KEY` and
+`OPENAI_BASE_URL` for an OpenAI-compatible gateway. Provide credentials via the
+environment only; never commit them.
+
+## Container (Tier 1, reproducible toolchain)
+
+```bash
+docker build -t dvg-mr-sciml .
+docker run --rm dvg-mr-sciml      # runs the compile-independent CI checks (validators + unittest subset)
+```
+
+## Archival
+
+On acceptance the full repository is deposited to Zenodo for a persistent DOI.
+After the deposit, fill the `doi:` field in `CITATION.cff` and the placeholder in
+the manuscript's Data-availability statement.

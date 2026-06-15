@@ -103,6 +103,18 @@ python tools/validate_research_assets.py
 python -m unittest discover -s tests -v
 ```
 
+> **Fresh-clone note.** `paper/ist-submission/main.bbl` and `main.log` are gitignored
+> regenerable LaTeX byproducts (they would otherwise carry local absolute paths). The full
+> test discovery above includes one compile-gate check
+> (`test_stage4_revision_readiness.test_final_latex_artifacts_*`) that reads those two files,
+> so after a fresh clone run a LaTeX compile first to generate them:
+> ```bash
+> cd paper/ist-submission && pdflatex -interaction=nonstopmode main.tex && bibtex main \
+>   && pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex
+> ```
+> Otherwise that single test errors on the missing artifacts. CI (`.github/workflows/validate.yml`)
+> runs a compile-independent subset and is unaffected.
+
 Real-SUT pilots require the `METBENCH_MGN_*` environment variables to be set; absent those,
 the precondition gate fails closed and the SUT runs stay blocked by design.
 

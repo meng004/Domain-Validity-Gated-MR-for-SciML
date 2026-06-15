@@ -86,6 +86,15 @@
 - **天花板结论**：3 个 major（EIC/DomainExpert/DevilsAdvocate）卡在 prose/framing 改不动的硬伤——增量性(3/5)、
   单族窄经验(3/5)、缺陷目录薄、可复现(DOI/容器)。唯一不加篇幅又命中 major 的杠杆 = **DevilsAdvocate 可复现**
   （Zenodo DOI + 容器化复现包，§13/§14）。其余需真实新证据，与篇幅/密度冲突（airfoil −0.4、增量② 撤 两次实证）。
+- **✅ 可复现包第一增量（闭 DevilsAdvocate 可复现关切）**：新建 `CITATION.cff`（DOI 占位待 Zenodo）、`LICENSE`
+  （MIT，§13.6）、`requirements.txt`（可验证档 numpy/pyyaml pin + SUT 档注记）、`REPRODUCIBILITY.md`（三档
+  smoke/cache-replay/full）、`Dockerfile`+`.dockerignore`（容器跑 compile-independent CI 子集）。容器 CMD 内容
+  本地实跑全绿（CI 子集 82 tests OK + 两 validator 0）；docker daemon 未运行，镜像本地未实测构建。
+- **test_stage4 × gitignore 冲突 → 选 (d) 文档化（用户拍板）**：不改测试、不重新跟踪 byproduct；README +
+  REPRODUCIBILITY 注明"干净 clone 跑整套前须先编译生成 bbl/log，否则 test_stage4 那一条报错"。**CI 不受影响**
+  （实测 `validate.yml` 只跑 compile-independent 子集、不含 test_stage4）。
+- **可复现遗留（待你）**：Zenodo 上传取 DOI（§13.4 需你账号）→ 回填 `CITATION.cff` 的 `doi:` + 论文
+  Data-availability；docker daemon 起来后实测 `docker build`。
 
 ---
 

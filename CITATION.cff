@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software or its replication package, please cite the
+  accompanying paper and this archive.
+title: >-
+  Domain-Validity-Gated Metamorphic Relation Identification and Executable
+  Test Assets for Scientific Machine Learning
+type: software
+authors:
+  - family-names: Li
+    given-names: Meng
+  - family-names: Yang
+    given-names: Xiaohua
+  - family-names: Liu
+    given-names: Jie
+  - family-names: Yan
+    given-names: Shiyu
+version: 1.0.0
+date-released: "2026-06-15"
+license: MIT
+repository-code: "https://github.com/meng004/Domain-Validity-Gated-MR-for-SciML"
+# doi: 10.5281/zenodo.XXXXXXX   # uncomment and fill after the Zenodo deposit (see REPRODUCIBILITY.md, "Archival")
+keywords:
+  - metamorphic testing
+  - scientific machine learning
+  - oracle problem
+  - domain validity
+  - executable test assets
+  - MeshGraphNets

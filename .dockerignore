@@ -1,0 +1,16 @@
+.git
+.venv
+venv
+**/__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.DS_Store
+.translate_cache/
+CLAUDE-FABLE-5.md
+paper/ist-submission/main.pdf
+paper/ist-submission/figures/
+paper/ist-submission/*.log
+paper/ist-submission/*.bbl
+paper/ist-submission/*.aux
+paper/ist-submission/*.blg
