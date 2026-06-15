@@ -65,7 +65,16 @@
   编译通过**：39 页、undefined refs=0、Missing character=0、LaTeX Error=0、bibtex 全解析、无 >50pt Overfull。
   同时清掉"main.pdf 未重编译"遗留（byproduct main.pdf/bbl/log 工作树重生，未提交）。
   踩坑记录：`re.sub` 替换串会解释 `\r`/`\t`，写指针时致 `\ref`/`\texttt` 损坏，已改 str 切片修复（见 PITFALLS 候选）。
-- **(b) 进行中**：Part B = FNO(C23) co-primary reframe（打 4/5 单任务 + 软化 3/5 novelty；reframe 非 re-run）。
+- **(b) 已做**：Part B FNO(C23) co-primary reframe —— abstract Results 把 FNO 升格为"second PDE family
+  full admit/reject/execute"、Conclusion "Within-architecture-family" → "spanning two CFD tasks and a
+  second PDE family"、intro L85 broaden（airfoil + FNO/PINN）。把 abstract headline 对齐正文**已有** scope
+  （Threats 早写 "two CFD tasks on two official datasets"），非灌水。abstract trim 回 ≤300 词、保留锁定句
+  （second CFD task / Broader generalization is future work / machine precision / non-regression guard）、
+  编译 undefined/Missing/Error=0、313 全绿。打 4/5 单任务 + 软化 3/5 novelty。
+- **🔴 新暴露（预存 bug，非 A/B 引入，投稿前必修）**：首次本地真编译（MacTeX）发现 **2 张表 float-too-large**
+  —— MR-card-to-verdict 表（超页 404pt）+ claim-evidence 表（超页 115pt）+ 1 个 3.93pt 单元 overfull。
+  提交态 main.log 陈旧（cloud 无 texlive，0 命中）一直 false-green；`test_stage4` 读 main.log 故仅真编译 log 上红。
+  修法：超大表转 longtable/xltabular 分页（tabularx Y 列需 xltabular）。byproduct 已还原提交态保工作树绿。
 - **(c) 备选**：接受面板密度惩罚为伪信号。
 - **委员身份**：本仓库 commit 统一 `meng004 <meng004@gmail.com>`（已 filter-branch 重写本会话 2 commit + 设 config）。
 - **本轮密度总计**：IST 11787→11314（−473）；313 全绿、两 validator exit 0、零证据/honesty 损失。
