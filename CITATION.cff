@@ -15,8 +15,8 @@ authors:
     given-names: Jie
   - family-names: Yan
     given-names: Shiyu
-version: 1.0.0
-date-released: "2026-06-15"
+version: 1.1.0
+date-released: "2026-06-16"
 license: MIT
 repository-code: "https://github.com/meng004/Domain-Validity-Gated-MR-for-SciML"
 doi: 10.5281/zenodo.20702953
