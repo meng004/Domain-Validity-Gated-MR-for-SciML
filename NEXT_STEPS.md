@@ -52,11 +52,19 @@
   逐行复述 R1）+ R2 三机制括号并一句。IST 11787→11355（−432，float 12→10）；证据零损失
   （CI 仍在 R1 散文 + metric_ledger）。pytest 313 全绿、两 validator exit 0。
 - **A2 至地板**：原拟 −80，实得 −3（仅一处 filler）；其余经核为 §6.4/§6.9 honesty，保留不删。
-- **待办（本会话续）**：
-  - [ ] A3：§Claim-to-evidence（main.tex L337，587w）去散文复述表，约 −150。
-  - [ ] A5：合并 Boundary-of-claims（L533）+ Boundary-of-evidence（L514）+ Results 内联
-        not-X 进单一 Threats（L543），约 −120，readability 增益最大。
-  - [ ] A3+A5 后跑 v30 面板验 readability 是否回升（凭据在手）；净正才留、回退即撤（同 C33/C34）。
+- **A3 = N/A（实测）**：§Claim-to-evidence（L337）几乎全是被 \ref 的 21 行 ledger 表 + 1 句散文，
+  无"散文复述表格"可删（先前 587w 误把表行文本计入）；表是核心证据 ledger，删行=删 claim，不可动。
+- **A5 已做（−41w）**：删 Results-intro 子节指引句（throat-clearing）+ §Boundary-of-evidence 冗余
+  第二句（其"comparators=诊断/audit=次要/executions widen within rosters"在 Threats+Results-intro 已有）；
+  含 `canonical blocked`（1 守卫）的 blocked-list 句保留。
+- **关键 meta-finding（实事求是）**：正文散文密度已近"守卫+honesty 地板"——回归守卫逐字钉了多数证据
+  散文，§6.4/§6.9 钉了 caveat，prose-only 去密空间已尽。A1 删孤儿 float（−432）是本轮唯一大净 win；
+  v29 的 5/5 readability **不能靠再砍散文解决**。
+- **剩余真杠杆（待拍板）**：(a) 新建 \appendix 把 §Boundary-of-evidence + per-mutant 明细移附录
+  （MethRigor 原话"move caveats to appendices"；body 去密、IST 计数不变，属结构改动）；
+  (b) Part B = FNO(C23) co-primary reframe（打 4/5 单任务 + 软化 novelty）；(c) 接受面板密度惩罚为伪信号。
+- **本轮密度总计**：IST 11787→11314（−473）；313 全绿、两 validator exit 0、零证据/honesty 损失。
+- **验收门（同 C33/C34）**：定下结构动作后跑 v30 面板验 readability 是否回升；净正才留、回退即撤。
 
 ---
 
