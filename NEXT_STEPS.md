@@ -76,8 +76,16 @@
   清 3.93pt 单元 overfull。**完整编译循环全 0**：Overfull=0 / Float-too-large=0 / undefined=0 /
   Missing=0 / LaTeX Error=0（40 页）。`test_stage4` 现在在**新鲜干净 main.log** 上诚实通过、313 全绿；
   守卫字面量（`\small` / `tabcolsep 3pt`）保留。
-- **byproduct 待你定**：main.log 含本地 `/Users` 路径（§5 不宜提交）且 §14.2 本不应跟踪 → 建议 gitignore
-  main.log/bbl/pdf，或投稿前重编后定。本次只提交源码；fresh PDF（40pp，含附录 + 修复表）留工作树未提交。
+- **✅ byproduct 治理（commit 0879cc2）**：`.bbl`/`.log` 已 gitignore + `git rm --cached`；fresh main.pdf
+  （40pp）保留跟踪并提交（已扫无 `/Users` 路径）。ist-submission 现只跟踪 main.pdf + 源图。
+- **✅ v30 面板（本会话改动的同基线验证，均读 main.tex）= overall 7.40 / accept 0.636 / clarity 6.8 /
+  scope 8.6 / majority major(3:2)**。vs v29(7.31)：**clarity +0.60（6.2→6.8）是唯一移动维度**，overall
+  的 +0.09 几乎全来自它 —— 去密（Part A + 移表）真有效、坐实"密度是绑定约束"；MethodologyRigor accept
+  0.65→0.85。**B（abstract 双任务 reframe）面板净中性**：scope_match 8.6→8.6、novelty 6.8→6.8 纹丝不动
+  （诚实负结果；framing 价值在真人外部效度观感，不在模拟面板）。产物 `research_assets/runs/academic-review-panel-v30/`。
+- **天花板结论**：3 个 major（EIC/DomainExpert/DevilsAdvocate）卡在 prose/framing 改不动的硬伤——增量性(3/5)、
+  单族窄经验(3/5)、缺陷目录薄、可复现(DOI/容器)。唯一不加篇幅又命中 major 的杠杆 = **DevilsAdvocate 可复现**
+  （Zenodo DOI + 容器化复现包，§13/§14）。其余需真实新证据，与篇幅/密度冲突（airfoil −0.4、增量② 撤 两次实证）。
 
 ---
 
