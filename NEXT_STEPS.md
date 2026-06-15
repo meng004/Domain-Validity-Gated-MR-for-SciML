@@ -94,6 +94,7 @@
   REPRODUCIBILITY 注明"干净 clone 跑整套前须先编译生成 bbl/log，否则 test_stage4 那一条报错"。**CI 不受影响**
   （实测 `validate.yml` 只跑 compile-independent 子集、不含 test_stage4）。
 - **可复现包收尾（✅ 完成）**：Zenodo 已归档，DOI=`10.5281/zenodo.20702953`；已回填 `CITATION.cff` 的 `doi:` + 论文 Data-availability（`\url{https://doi.org/10.5281/zenodo.20702953}`，重编译 undefined/Missing/Overfull=0、pytest 313）；✅ `docker build` 已实测：关 Docker 手动代理 + daocloud 镜像源后镜像构建成功，容器跑 CI 子集 **82 tests OK + 两 validator exit 0**（image `dvg-mr-sciml:latest`）。根因记录：Docker 的 HTTPS 代理被写成 `https://…:7890`（对明文代理做 TLS→EOF），且 7890 链路对 Docker 不通；关代理后直连/镜像即通。
+- **✅ v31 面板（DOI 回填后）= overall 7.83 / accept 0.694 / majority minor(2:3，翻盘)**。vs v30(7.40)：**reproducibility +1.60(7.2→8.8) 是真信号**——DevilsAdvocate 的"no DOI/container/promised-upon-acceptance"关切在 v31 消失(可复现包 + DOI 命中)。**但** related_work+0.6 / scope+0.4 / novelty+0.2 / technical+0.2 及 DomainExpert major→minor 与单行 Data-availability 改动无关 = 面板 run-to-run 噪声。诚实读：repro 真升、DevilsAdvocate 真软化；+0.43/翻盘**部分是噪声**，论文处于 minor/major 噪声边界(同 v18=7.83)。剩余天花板未动：增量性(EIC/DA/DomainExpert)、密度(EIC/MethRigor)、单任务(EIC/MethRigor/DA/Perspective)、缺陷目录薄、D 未校准。2 个 major=EIC(0.62)、MethRigor(0.55)。产物 `research_assets/runs/academic-review-panel-v31/`。
 
 ---
 
