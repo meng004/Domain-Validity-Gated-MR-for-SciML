@@ -1,0 +1,325 @@
+{
+  "record_type": "academic-review-panel",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-14T21:37:21Z",
+  "venue": "Elsevier IST regular track",
+  "paper": "paper/manuscript.md",
+  "panel": [
+    {
+      "role": "EIC",
+      "model": "gpt-5.5"
+    },
+    {
+      "role": "MethodologyRigor",
+      "model": "glm-5.1"
+    },
+    {
+      "role": "DomainExpert",
+      "model": "deepseek-v4-flash"
+    },
+    {
+      "role": "Perspective",
+      "model": "qwen3-max"
+    },
+    {
+      "role": "DevilsAdvocate",
+      "model": "kimi-k2.6"
+    }
+  ],
+  "reviewers_succeeded": [
+    "EIC",
+    "MethodologyRigor",
+    "DomainExpert",
+    "Perspective",
+    "DevilsAdvocate"
+  ],
+  "review_failures": [],
+  "per_dimension_mean": {
+    "novelty_contribution": 7.4,
+    "technical_soundness": 7.6,
+    "empirical_rigor": 7.4,
+    "related_work": 8.0,
+    "clarity": 7.4,
+    "reproducibility": 8.4,
+    "scope_match_to_ist": 9.0
+  },
+  "overall_dimension_mean": 7.89,
+  "accept_probability_mean": 0.664,
+  "accept_probability_range": [
+    0.6,
+    0.85
+  ],
+  "verdict_distribution": {
+    "major_revision": 2,
+    "minor_revision": 3
+  },
+  "panel_majority_verdict": "minor_revision",
+  "per_reviewer": {
+    "EIC": {
+      "model": "gpt-5.5",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 7,
+          "empirical_rigor": 8,
+          "related_work": 7,
+          "clarity": 6,
+          "reproducibility": 7,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.62,
+        "verdict": "major_revision",
+        "top_concerns": [
+          "Contribution is partly methodological integration and needs sharper separation from prior MT applicability and relaxation work",
+          "Manuscript is over-complex with many ledgers, pilots, secondary audits, and cross-family additions that obscure the main claim",
+          "Some empirical claims rely on clustered or highly scoped executions and must avoid implied generality",
+          "Artifacts are described as committed but not yet DOI-archived, limiting review-stage reproducibility"
+        ],
+        "top_strengths": [
+          "Strong fit to software V&V and oracle-free testing for SciML",
+          "Careful domain-validity framing with explicit inadmissibility and numerical-floor reasoning",
+          "Unusually transparent scoping, threats, and artifact-ledger discipline"
+        ]
+      }
+    },
+    "MethodologyRigor": {
+      "model": "glm-5.1",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 7,
+          "empirical_rigor": 6,
+          "related_work": 8,
+          "clarity": 7,
+          "reproducibility": 8,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.6,
+        "verdict": "major_revision",
+        "top_concerns": [
+          "Conservation MR deferred on primary SUT \u2014 the most physically important relation class produces no executable absolute verdict, leaving the rubric's hardest gate unexercised on the main case study",
+          "Seeded-fault catalogue too small (10+2 mutants) for meaningful fault-detection generalization; detected faults are gross corruptions any divergence/symmetry check would catch",
+          "LLM baselines are simulated-expert scope contrasts with no human-expert comparator; Fleiss kappa 0.077 undermines rubric-reliability claims",
+          "Mirror-y OOD result has partial circularity: asymmetric mesh makes exact relation inadmissible by construction, and the approximate probe's failure is geometrically expected, limiting the diagnostic yield"
+        ],
+        "top_strengths": [
+          "Measurement-floor admissibility gate grounded in the discrete operator's own O(h) error floor is a genuine, technically rigorous contribution novel for SciML MT",
+          "Second-task airfoil experiment elegantly demonstrates the predicate produces physically correct, task-specific typed verdicts rather than a fixed checklist \u2014 strong internal validity for the gating logic",
+          "Exceptional discipline in scope bounding: claim-to-evidence map, explicit boundary statements, and honest deferral of unsupported generalizations set a high standard for methodological transparency"
+        ]
+      }
+    },
+    "DomainExpert": {
+      "model": "deepseek-v4-flash",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 8,
+          "empirical_rigor": 9,
+          "related_work": 8,
+          "clarity": 8,
+          "reproducibility": 8,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.65,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "Novelty is incremental despite detailed positioning",
+          "Empirical breadth limited: two tasks, one primary",
+          "Measurement-floor gate validated only for one operator/mesh",
+          "Seeded-fault diagnostic is a stress test, not validated localization"
+        ],
+        "top_strengths": [
+          "Rigorous methodological framework with explicit validity conditions",
+          "Thorough empirical evaluation with honest scoping and statistical reporting",
+          "Clear positioning against closest prior work with detailed comparison table"
+        ]
+      }
+    },
+    "Perspective": {
+      "model": "qwen3-max",
+      "review": {
+        "scores": {
+          "novelty_contribution": 9,
+          "technical_soundness": 9,
+          "empirical_rigor": 8,
+          "related_work": 9,
+          "clarity": 8,
+          "reproducibility": 10,
+          "scope_match_to_ist": 10
+        },
+        "accept_probability": 0.85,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "Empirical scope is deliberately narrow; reviewers may question generalizability beyond cylinder/airfoil flow",
+          "Typed inadmissibility verdict lacks cross-relation calibration (acknowledged but limits interpretability)",
+          "Seeded-fault stress test is suggestive but not a validated fault-localization model"
+        ],
+        "top_strengths": [
+          "Novel measurement-floor admissibility gate grounded in operator error analysis",
+          "Exceptional reproducibility with committed ledgers, artifacts, and deterministic re-runs",
+          "Clear positioning against closest prior work with explicit capability comparison"
+        ]
+      }
+    },
+    "DevilsAdvocate": {
+      "model": "kimi-k2.6",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 7,
+          "empirical_rigor": 6,
+          "related_work": 8,
+          "clarity": 8,
+          "reproducibility": 9,
+          "scope_match_to_ist": 8
+        },
+        "accept_probability": 0.6,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "Primary case study defers core conservation MR; positive executable evidence is thin",
+          "Seeded-fault catalogue too small (10 mutants) to support even scoped diagnostic claims",
+          "Cross-family and second-task evidence is underpowered (n=3, CPU-scale) and supporting only",
+          "Contribution is largely organizational with limited demonstrated advantage over residual diagnostics"
+        ],
+        "top_strengths": [
+          "Exemplary reproducibility infrastructure and explicit evidence boundaries",
+          "Honest, thorough differentiation from closest prior work via direct comparison",
+          "Novel integration of numerical operator-analysis with metamorphic-testing tolerances"
+        ]
+      }
+    }
+  },
+  "raw_responses": {
+    "EIC": {
+      "id": "resp_022640935492bc83016a2f1e95c868819392097140c53c3b08",
+      "object": "chat.completion",
+      "created": 1781472926,
+      "model": "gpt-5.5",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 7,\n    \"empirical_rigor\": 8,\n    \"related_work\": 7,\n    \"clarity\": 6,\n    \"reproducibility\": 7,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.62,\n  \"verdict\": \"major_revision\",\n  \"top_concerns\": [\n    \"Contribution is partly methodological integration and needs sharper separation from prior MT applicability and relaxation work\",\n    \"Manuscript is over-complex with many ledgers, pilots, secondary audits, and cross-family additions that obscure the main claim\",\n    \"Some empirical claims rely on clustered or highly scoped executions and must avoid implied generality\",\n    \"Artifacts are described as committed but not yet DOI-archived, limiting review-stage reproducibility\"\n  ],\n  \"top_strengths\": [\n    \"Strong fit to software V&V and oracle-free testing for SciML\",\n    \"Careful domain-validity framing with explicit inadmissibility and numerical-floor reasoning\",\n    \"Unusually transparent scoping, threats, and artifact-ledger discipline\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 17961,
+        "completion_tokens": 412,
+        "total_tokens": 18373
+      }
+    },
+    "MethodologyRigor": {
+      "id": "20260615053527807aac7eb9cd4f0d",
+      "object": "chat.completion",
+      "created": 1781472971,
+      "model": "glm-5.1",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 7,\n    \"empirical_rigor\": 6,\n    \"related_work\": 8,\n    \"clarity\": 7,\n    \"reproducibility\": 8,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.60,\n  \"verdict\": \"major_revision\",\n  \"top_concerns\": [\n    \"Conservation MR deferred on primary SUT \u2014 the most physically important relation class produces no executable absolute verdict, leaving the rubric's hardest gate unexercised on the main case study\",\n    \"Seeded-fault catalogue too small (10+2 mutants) for meaningful fault-detection generalization; detected faults are gross corruptions any divergence/symmetry check would catch\",\n    \"LLM baselines are simulated-expert scope contrasts with no human-expert comparator; Fleiss kappa 0.077 undermines rubric-reliability claims\",\n    \"Mirror-y OOD result has partial circularity: asymmetric mesh makes exact relation inadmissible by construction, and the approximate probe's failure is geometrically expected, limiting the diagnostic yield\"\n  ],\n  \"top_strengths\": [\n    \"Measurement-floor admissibility gate grounded in the discrete operator's own O(h) error floor is a genuine, technically rigorous contribution novel for SciML MT\",\n    \"Second-task airfoil experiment elegantly demonstrates the predicate produces physically correct, task-specific typed verdicts rather than a fixed checklist \u2014 strong internal validity for the gating logic\",\n    \"Exceptional discipline in scope bounding: claim-to-evidence map, explicit boundary statements, and honest deferral of unsupported generalizations set a high standard for methodological transparency\"\n  ]\n}\n```",
+            "reasoning_content": "Let me carefully analyze this manuscript as a methodology-focused reviewer for Elsevier's Information and Software Technology (IST).\n\nThe paper proposes a domain-validity-gated approach to identifying and operationalizing metamorphic relations (MRs) for scientific machine learning (SciML) systems, specifically mesh-based neural simulators for fluid flow. Let me evaluate each dimension.\n\n**Novelty/Contribution:**\nThe paper claims three contributions: (1) measurement-floor admissibility gate, (2) typed domain-inadmissibility verdict, (3) seeded-fault diagnostic stress test. The positioning against prior work (Reichert, Eniser, Duque-Torres) is careful and honest. The idea of grounding MR tolerance in the measurement operator's error floor is genuinely novel for SciML MT. The typed verdict is an incremental but meaningful extension of binary skip/proceed. The seeded-fault diagnostic is suggestive but limited. Overall, this is a solid methodological contribution for IST - not revolutionary but non-trivial and well-scoped.\n\n**Technical Soundness:**\nThe method is internally consistent. The four-condition admissibility predicate is well-defined. The O(h) operator floor analysis is technically correct. The two-dimensional verdict space (relation-violation vs domain-violation) is a useful conceptual device. The closed-form floor derivation for the deployed mesh is rigorous. However, there are some concerns:\n- The D score operationalization is per-relation and not cross-relation calibrated, which the authors acknowledge but which limits its practical utility\n- The conservation MR being deferred rather than executed is honest but means one of the most physically important relations remains untested in absolute terms\n- The seeded-fault catalogue is small (10+2 mutants) and the faults are \"gross corruptions\"\n\n**Empirical Rigor:**\nStrengths:\n- Very honest about scope boundaries - the paper is exceptionally careful about not overclaiming\n- K=6 checkpoint roster with 3 held-out trajectories provides reasonable within-family replication\n- The second-task (airfoil) experiment is a strong design choice - showing the predicate produces *different* verdicts when physics changes\n- Operator-floor sweep with 9 resolutions, log-log slope 0.984 with CI\n- Cross-family PINN/FNO executions\n- Wilson intervals, Wilcoxon tests, Cliff's delta reported\n- Clear distinction between descriptive cell counts and inferential statistics\n\nWeaknesses:\n- The primary evidence is still essentially one task (cylinder flow) with one dataset, even with multiple architectures\n- The airfoil experiment is at \"bounded CPU training budget\" with large rollout error - it's more of a proof-of-concept\n- The seeded-fault experiment has only 10+2 mutants, which is very small for any generalizable fault-detection claim\n- The LLM baselines are \"simulated expert\" baselines, not human expert baselines - limited comparator value\n- The Fleiss kappa of 0.077 for LLM rater agreement is very low, raising questions about the rubric's inter-rater reliability\n- The conservation MR being deferred means the most physically meaningful MR class doesn't actually produce an executable verdict on the primary SUT\n- The mirror-y result (OOD stress) is somewhat circular - the mesh is asymmetric, so exact mirror-y is inadmissible, and the approximate version fails, which is somewhat expected\n\n**Related Work:**\nExcellent positioning against the three closest priors (Reichert, Eniser, Duque-Torres). The comparison table is clear and honest. The paper correctly identifies the gap between candidate identification and validity-gated execution. Engagement with SciML V&V literature (residuals, UQ, conformal prediction) is adequate though could be deeper.\n\n**Clarity:**\nThe paper is very well-structured but dense. The writing is careful and precise, sometimes to a fault - the hedging and scope-limiting language can make it hard to identify the core contributions. The MR-card format and rubric are clearly described. The claim-to-evidence map and boundary statements are exemplary in their honesty. However, the paper could benefit from a clearer upfront statement of what the reader should take away.\n\n**Reproducibility:**\nStrong commitment to artifacts: MR cards, executable assets, run manifests, raw outputs, metric ledgers, claim ledger, version-controlled replication package, Zenodo DOI upon acceptance. The experiment ledger records checkpoints, seeds, environments. This is above average for the field.\n\n**Scope Match to IST:**\nExcellent fit. Software V&V for SciML is squarely in IST's remit. The paper treats learned surrogates as software under test and addresses the oracle problem through metamorphic testing - core software engineering topics.\n\n**Overall Assessment:**\nThis is a solid, methodologically careful paper that makes a genuine contribution to SciML testing. The main weaknesses are:\n1. Limited empirical breadth (essentially one primary task, even with multiple architectures)\n2. The most physically important MR (conservation) is deferred rather than executed on the primary SUT\n3. Small seeded-fault catalogue\n4. The LLM baselines are weak comparators\n5. Some circularity in the mirror-y OOD result\n\nThe strengths are:\n1. Exceptional honesty about scope and limitations\n2. The measurement-floor gate is a genuine and useful contribution\n3. The second-task experiment showing different typed verdicts is a strong design\n4. Good reproducibility commitments\n5. Clear positioning against prior work\n\nI'd estimate accept probability around 0.55-0.65. The paper is methodologically sound and makes a real contribution, but the empirical evidence is narrow and the conservation MR deferral is a significant gap. A major revision could address some concerns (e.g., more mutants, human expert baseline, attempting to calibrate the conservation floor), but the fundamental scope limitations are inherent to the study design.\n\nLet me settle on scores:\n- novelty_contribution: 7 (solid methodological contribution, well-positioned)\n- technical_soundness: 7 (internally consistent, honest about limitations, but conservation deferral and small fault catalogue)\n- empirical_rigor: 6 (honest scope, good statistical reporting, but narrow evidence and weak baselines)\n- related_work: 8 (excellent positioning against closest priors)\n- clarity: 7 (well-structured but dense, excessive hedging)\n- reproducibility: 8 (strong artifact commitments)\n- scope_match_to_ist: 9 (excellent fit)\n\nAccept probability: ~0.60\nVerdict: major_revision (the empirical evidence needs strengthening - more mutants, better baselines, and ideally a path to executing the conservation MR)\n\nTop concerns:\n1. Conservation MR deferred on primary SUT - the most physically important relation class produces no executable verdict\n2. Seeded-fault catalogue too small (10+2) for meaningful fault-detection claims\n3. LLM baselines are weak comparators; no human expert baseline\n4. Mirror-y OOD result has some circularity - asymmetric mesh makes exact relation inadmissible, approximate version fails expectedly\n\nTop strengths:\n1. Measurement-floor admissibility gate is a genuine, technically grounded contribution\n2. Second-task (airfoil) experiment showing predicate produces physically correct different verdicts\n3. Exceptional honesty about scope boundaries and limitations"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 18022,
+        "completion_tokens": 1888,
+        "total_tokens": 19910,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1512
+        }
+      },
+      "request_id": "20260615053527807aac7eb9cd4f0d"
+    },
+    "DomainExpert": {
+      "id": "b8f19e5e878e7e5d2b4d873f6106da79",
+      "object": "chat.completion",
+      "created": 1781472973,
+      "model": "deepseek-v4-flash",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 9,\n    \"related_work\": 8,\n    \"clarity\": 8,\n    \"reproducibility\": 8,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.65,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Novelty is incremental despite detailed positioning\",\n    \"Empirical breadth limited: two tasks, one primary\",\n    \"Measurement-floor gate validated only for one operator/mesh\",\n    \"Seeded-fault diagnostic is a stress test, not validated localization\"\n  ],\n  \"top_strengths\": [\n    \"Rigorous methodological framework with explicit validity conditions\",\n    \"Thorough empirical evaluation with honest scoping and statistical reporting\",\n    \"Clear positioning against closest prior work with detailed comparison table\"\n  ]\n}",
+            "reasoning_content": "We need to evaluate the manuscript according to the given criteria. The manuscript is about domain-validity-gated metamorphic relation identification for SciML. It proposes a rubric to screen candidate MRs, an MR card format, and a two-dimensional verdict. The case study is on cylinder-flow surrogates (MeshGraphNets family) with additional experiments on airfoil, PINN, FNO.\n\nWe are to score each dimension on 1-10, then give accept_probability, verdict, top_concerns, top_strengths.\n\nLet's analyze:\n\nNovelty: The paper claims novelty in measurement-floor admissibility gate, typed domain-inadmissibility verdict, and seeded-fault diagnostic. However, metamorphic testing for SciML is not new (Reichert, Eniser, Duque-Torres). The paper positions itself as extending these. The contribution is methodological but incremental. The measurement-floor gate is grounded in numerical analysis of the operator, which is new. The typed verdict separating relation-violation and domain-violation is also a refinement. The seeded-fault diagnostic is a stress test. Overall, for IST, this is a moderate novelty. I'd say 6 or 7. But given the detailed engagement with prior work and explicit statements of what is new, I'd lean 7.\n\nTechnical soundness: The method seems technically sound. The admissibility predicate is well-defined. The MR card format is thorough. The experiments are carefully scoped. The claims are bounded. The threats are discussed. I see no major errors. However, there is a risk of overfitting to the case study. But the airfoil task shows the gate produces different verdicts, which strengthens soundness. I'd give 8.\n\nEmpirical rigor: The paper is very rigorous in its scoping. It includes multiple checkpoints, architectures, tasks, and cross-family transfer. It uses proper statistical reporting (Wilson intervals, Cliff's delta, bootstrap CIs). It acknowledges limitations and does not overclaim. The operator-floor sweep is thorough. The fault-detection experiment is a stress test with by-class patterns. The external audit and baseline comparisons are included. However, the primary evidence is still on one main task (cylinder flow) with one secondary task (airfoil). The cross-family PINN/FNO are supporting. The sample sizes are small but appropriate. The paper is honest about the boundaries. I'd give 8 or 9. Given the detailed ledgers and reproducibility commitments, I lean 9.\n\nRelated work: The paper has an extensive related work section that clearly positions itself against prior work. It compares with Reichert, Eniser, Duque-Torres in a table. It also discusses SciML V&V, MR identification, etc. It is well-positioned. I'd give 8.\n\nClarity: The paper is well-written and structured. The abstract, introduction, method, results, discussion are clear. The use of structured abstract is good. The MR card format is clearly described. The verdict space is explained. However, sometimes it is verbose and repetitive. The results section has many tables and ledgers that might be heavy. But overall clarity is high. I'd give 8.\n\nReproducibility: The paper commits to a replication package with Zenodo upon acceptance. It mentions experiment ledger, claim-ledger, raw outputs, etc. The artifacts are version-controlled. This is good. However, it is not yet available. The paper states \"will be archived with a DOI on Zenodo upon acceptance\" and \"until then it is available to reviewers on request\". This is acceptable for a single-anonymized review. I'd give 8.\n\nScope match to IST: IST's remit is software V&V. This paper is about metamorphic testing for scientific machine learning, which fits the software V&V remit. It addresses the oracle problem and provides a method for testing neural surrogates. It is within scope. I'd give 9.\n\nAccept probability: Given the strengths (rigor, clear contributions, bounded claims) and weaknesses (moderate novelty, narrow empirical evidence), I think it has a good chance. The reviewers might ask for more empirical breadth, but the paper is careful. I'd say 0.6.\n\nVerdict: Given the scores, likely minor revision or accept. But I see some issues: the paper is very long and detailed, might need condensation. The main concern is that the novelty is incremental. But the paper does a good job of positioning. I'd lean minor revision.\n\nTop concerns: 1) Limited empirical breadth despite depth; 2) The measurement-floor gate is validated only for one operator on one mesh; 3) The seeded-fault diagnostic is a stress test, not validated localization; 4) The paper could be shortened.\n\nTop strengths: 1) Rigorous methodological framework with explicit validity conditions; 2) Thorough empirical evaluation with careful scoping and honesty about boundaries; 3) Detailed comparison with prior work and clear positioning.\n\nLet's produce the JSON."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 17977,
+        "completion_tokens": 1255,
+        "total_tokens": 19232,
+        "prompt_tokens_details": {},
+        "completion_tokens_details": {
+          "reasoning_tokens": 1038,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0,
+          "image_tokens": 0,
+          "text_tokens": 0,
+          "video_tokens": 0
+        }
+      },
+      "system_fingerprint": ""
+    },
+    "Perspective": {
+      "id": "chatcmpl-652e3673-7d6b-9afb-8d13-ea02a3a771ca",
+      "object": "chat.completion",
+      "created": 1781472988,
+      "model": "qwen3-max",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 9,\n    \"technical_soundness\": 9,\n    \"empirical_rigor\": 8,\n    \"related_work\": 9,\n    \"clarity\": 8,\n    \"reproducibility\": 10,\n    \"scope_match_to_ist\": 10\n  },\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Empirical scope is deliberately narrow; reviewers may question generalizability beyond cylinder/airfoil flow\",\n    \"Typed inadmissibility verdict lacks cross-relation calibration (acknowledged but limits interpretability)\",\n    \"Seeded-fault stress test is suggestive but not a validated fault-localization model\"\n  ],\n  \"top_strengths\": [\n    \"Novel measurement-floor admissibility gate grounded in operator error analysis\",\n    \"Exceptional reproducibility with committed ledgers, artifacts, and deterministic re-runs\",\n    \"Clear positioning against closest prior work with explicit capability comparison\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 18358,
+        "completion_tokens": 229,
+        "total_tokens": 18587,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    "DevilsAdvocate": {
+      "id": "chatcmpl-6a2f1ee49896d85c952c4f09",
+      "object": "chat.completion",
+      "created": 1781472998,
+      "model": "kimi-k2.6",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 7,\n    \"empirical_rigor\": 6,\n    \"related_work\": 8,\n    \"clarity\": 8,\n    \"reproducibility\": 9,\n    \"scope_match_to_ist\": 8\n  },\n  \"accept_probability\": 0.6,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Primary case study defers core conservation MR; positive executable evidence is thin\",\n    \"Seeded-fault catalogue too small (10 mutants) to support even scoped diagnostic claims\",\n    \"Cross-family and second-task evidence is underpowered (n=3, CPU-scale) and supporting only\",\n    \"Contribution is largely organizational with limited demonstrated advantage over residual diagnostics\"\n  ],\n  \"top_strengths\": [\n    \"Exemplary reproducibility infrastructure and explicit evidence boundaries\",\n    \"Honest, thorough differentiation from closest prior work via direct comparison\",\n    \"Novel integration of numerical operator-analysis with metamorphic-testing tolerances\"\n  ]\n}",
+            "reasoning_content": "The user wants me to act as an adversarial, skeptical reviewer for a manuscript submitted to Elsevier Information and Software Technology (IST). I need to output JSON only, no prose, with specific fields.\n\nFirst, I need to carefully read the manuscript and evaluate it on the dimensions:\n1. novelty_contribution\n2. technical_soundness\n3. empirical_rigor\n4. related_work\n5. clarity\n6. reproducibility\n7. scope_match_to_ist\n\nThen provide accept_probability, verdict, top_concerns, top_strengths.\n\nLet me analyze the manuscript critically:\n\n**Novelty/Contribution:**\nThe paper proposes a domain-validity rubric for screening metamorphic relations (MRs) for scientific ML (SciML). It introduces:\n- Measurement-floor admissibility gate (grounding tolerance in numerical error floor of operator)\n- Typed domain-inadmissibility verdict (2D: relation-violation vs domain-violation)\n- Seeded-fault diagnostic stress test\n\nThe authors are careful to scope their claims. They explicitly state what is new vs prior work (Reichert et al., Eniser et al., Duque-Torres line). The novelty seems solid but narrow - it's about validity-gating and operationalizing MRs, not discovering new MRs. For IST, this is relevant but perhaps incremental? However, the careful methodological framing and the focus on software V&V makes it a reasonable contribution. I'd score around 7-8.\n\n**Technical Soundness:**\nThe method seems internally consistent. The rubric has 4 conditions/6 criteria. The measurement floor for P1 discrete divergence is derived analytically and validated empirically (slope 0.984, R\u00b2 0.9999). The two-dimensional verdict space is conceptually clean. The seeded-fault detection has limitations (only 5/10 detected) but the authors are honest about this. The symmetric mesh control is a good idea. However, there are some concerns:\n- The \"closed-form floor\" is only for a specific deployed mesh; general unstructured mesh remains future work.\n- The D = m/(m+1) score for domain violation is somewhat ad hoc and the authors admit it's per-relation and not cross-relation calibrated.\n- The seeded fault catalogue is small (10 mutants) and the \"MR-class-to-fault-class diagnostic\" is explicitly called \"suggestive rather than a validation\" by the authors themselves.\n\nOverall, technical soundness seems good but there are limitations. Score around 7.\n\n**Empirical Rigor:**\nThe paper deliberately keeps narrow scope. The experiments are well-structured with controls:\n- K=6 checkpoint roster for MGN\n- Three held-out trajectories\n- Same-task multi-architecture (MGN variants, PointMLP, PhysicsNeMo)\n- Second CFD task (airfoil) to test generalization of the *predicate* (not results)\n- Cross-family (PINN, FNO)\n- Operator-floor sweep with log-log slope CI\n- Wilson score intervals for binary outcomes\n- Bootstrap CIs\n- Honest about non-independence (consecutive frames)\n\nStrengths: Very careful scoping, explicit evidence boundaries in Section 5.9, multiple controls (symmetric mesh, normalizer control, O(h) sweep), honest reporting of deferrals and failures.\nWeaknesses: Small sample sizes in some places (e.g., FNO K=6 but 24 executions total), the seeded fault catalogue is tiny (10 mutants + 2 adversarial), PINN/FNO results are described as \"supporting\" and \"bounded\". The LLM baseline is simulated rather than human.\n\nThe paper is extremely careful about scope. Score around 8.\n\n**Related Work:**\nThe related work section is very thorough. It explicitly engages with three closest prior works (Reichert, Eniser, Duque-Torres) and has a comparison table. It positions against MT for scientific software, mesh-based neural simulators, physics-based MT, SciML V&V, and hybrid ML-solvers. It clearly states what is new and what is not. The citation audit mentioned at the end is also careful. Score around 8-9.\n\n**Clarity:**\nThe paper is very well written, perhaps even densely so. The structure is clear: Abstract, Intro, Background, Method, Results, Discussion, Threats, Conclusion. The use of RQs, claim-to-evidence maps, MR-card-to-verdict tables, and explicit boundary statements makes it unusually transparent. However, the density of caveats and scope-limitations might be overwhelming. Some terms are jargon-heavy. But for a specialized journal like IST, this is acceptable. Score around 8.\n\n**Reproducibility:**\nExcellent. The paper mentions:\n- Version-controlled replication package\n- Claim ledger (`claim-ledger.yml`)\n- Per-trajectory/checkpoint manifests\n- Raw outputs, metric ledgers\n- Zenodo archive upon acceptance, available to reviewers now\n- Experiment ledger recording failed/skipped/inconclusive cases\n- Commit hashes mentioned (e.g., `9ef862ec...`)\n\nThis is exemplary for reproducibility. Score 9 or 10.\n\n**Scope Match to IST:**\nIST covers software verification and validation. This paper is explicitly about testing scientific ML surrogates (software testing), oracle-free testing, metamorphic testing, and executable test assets. It fits very well within the software V&V remit, though it's at the intersection of SE and ML/Scientific Computing. The focus is on the *testing methodology* and *software assets*, not on improving the ML model itself. Score around 8-9.\n\n**Concerns (as adversarial reviewer):**\n1. **Narrow scope / Limited generalizability**: The evidence is heavily bounded to cylinder flow (primary) and a few other tasks. The authors admit this, but a skeptical reviewer might worry about whether this methodological contribution is substantial enough for a full paper given such thin empirical breadth. However, the prompt says \"This paper deliberately keeps a narrow... evidence boundary; judge rigor, not breadth.\" So I should be careful not to penalize too much for narrow scope since it's deliberate and honest. But I should still flag it as a concern regarding impact.\n\n2. **Seeded-fault catalogue size**: Only 10 mutants, and only 5 detected. The \"MR-class-to-fault-class\" mapping is explicitly called suggestive by the authors. This is weak evidence for the diagnostic claim.\n\n3. **Ad-hoc aspects of the rubric**: The D score m/(m+1) is somewhat arbitrary (though normalized). The general measurement floor for unstructured meshes is \"future work\". The rubric criteria, while sensible, are not themselves validated - there's no inter-rater reliability reported for human application of the rubric (only LLM rater agreement with Fleiss kappa 0.077, which is poor).\n\n4. **Over-cautious / Self-neutering**: The paper is so careful to scope its claims that one wonders if it makes a strong enough contribution. Every paragraph has caveats. This is intellectually honest but might render the contribution too thin. However, the prompt asks me to hunt for over-claims, and this paper actually under-claims. But as a skeptical reviewer, I might say \"The contribution is methodological but the empirical validation is too thin to support even the scoped claims\" - though I think the evidence actually supports the scoped claims reasonably well.\n\nWait, looking for reasons to reject:\n- Is the novelty sufficient? The paper positions itself carefully against prior work. The measurement-floor gate is new. The typed verdict is new. But are these \"non-trivial\"? Yes, arguably.\n- Is there any unsupported generalization? The authors are very careful. Perhaps the only overclaim is calling the seeded-fault evidence \"suggestive evidence for a typed MR-class-to-fault-class diagnostic\" - but they immediately qualify it.\n- The FNO \"primary workflow upgrade\" has only 6 checkpoints and 24 executions. Small N.\n- The airfoil result is \"bounded CPU-scale\" - again, small.\n\nActually, looking closely at Section 5.6: \"The artifact reports precision/recall with Wilson intervals: node-permutation 1.00/1.00, conservation 1.00/0.81, and mirror-y 0.94/0.55; it also reports Wilcoxon and Cliff's \u03b4 effect-size summaries, including PINN MR-B diffusion-vs-Burgers \u03b4 = 0.78 (large) with paired Wilcoxon p = 0.5 at n = 3.\" -- At n=3, a Wilcoxon test is basically meaningless. Reporting p=0.5 at n=3 is absurd and could be flagged as pseudo-statistics. This is a rigor gap.\n\nAlso in 5.8.1: \"MR-B passes on Burgers (mean 0.615, CI [0.446, 0.890]) but is mixed on heat (mean 1.682, CI [0.853, 2.795]).\" -- These CIs at n=3 (three seeds) are extremely wide and the \"mixed\" interpretation is weak.\n\nAnother concern: The paper mentions \"The manuscript treats absolute conservation on the deployed mesh as deferred and reports only the reference-relative non-regression guard as executable evidence.\" But then in the FNO case, they report 24/24 conservation failures under a periodic discrete-conservation MR. The inconsistency in what constitutes \"executable\" between MGN (deferred) and FNO (admitted-with-reference-floor) is noted by the authors, but still, the primary case study has a major MR class deferred.\n\nAnother concern: The exact mirror-y failure on synthetic symmetric mesh (relative L2 1.10) is deeply OOD (no obstacle). The authors admit this. But then what does it tell us about the *model's* failure vs the domain shift? The 2D verdict separates domain from relation violation, but since D=0 (admissible) and it fails, it's a model violation, but on an OOD mesh. So it's somewhat contrived.\n\n**Top Strengths:**\n1. Exceptional intellectual honesty and reproducibility infrastructure (claim ledgers, explicit evidence boundaries, artifacts).\n2. Careful methodological distinction between candidate generation and validity judgment; the rubric and MR-card format are well-conceived.\n3. Strong related work positioning and clear differentiation from closest prior art.\n\n**Verdict:**\nGiven the careful scope, solid methodology, and excellent reproducibility, but with concerns about thin empirical breadth (deliberate), tiny fault catalogue, and some weak statistical reporting at small n, I think \"major_revision\" is too harsh. \"Minor_revision\" seems right - the paper is basically publishable but needs to address the small-N statistical reporting, perhaps clarify the generalizability of the measurement floor, and maybe strengthen the discussion of why the deferred conservation result isn't a major gap. However, as an adversarial reviewer, I might push for major revision if I think the empirical basis is too thin.\n\nWait, let me reconsider. The prompt says I should hunt for over-claims, unsupported generalizations, reproducibility gaps, and reasons to reject.\n\nReasons to reject:\n- The primary case study defers the absolute conservation MR, which is one of the main physical MR classes. The only executable conservation result is a reference-relative diagnostic (non-regression guard). For a paper about \"executable test assets\", having one of the main physical MR classes deferred in the primary case study is a weakness.\n- The seeded-fault catalogue is tiny and the fault-class diagnosis is explicitly unvalidated.\n- The airfoil result is small-scale (CPU training, 10 trajectories).\n- The cross-family results are \"supporting\" and based on tiny rosters (n=3 per PDE for PINN).\n- Some statistical reporting at n=3 is questionable.\n\nBut the paper is so well-scoped that it's hard to reject outright. The authors never claim the fault diagnosis is validated. They never claim the conservation MR works on MGN. They frame everything as \"bounded pilots.\"\n\nHowever, an adversarial reviewer might say: \"If the method's primary empirical demonstration defers the key physics MR (conservation) in the primary subject, and only detects 5/10 trivial injected mutants, what concrete value does it add over simply using residuals or reference comparisons?\" The answer is in the auditable, relation-indexed structure - but a skeptic might find that too thin.\n\nLet me think about the scores:\n- novelty_contribution: 7 (methodologically sound but narrow; the core ideas are somewhat incremental combinations of existing concepts - MRs, numerical analysis, validity gating - but the synthesis is new)\n- technical_soundness: 7 (sound internally but small-N stats, ad-hoc D-score, general floor unresolved)\n- empirical_rigor: 7 (very honest but thin N in places, questionable n=3 stats, deferred primary MR)\n- related_work: 8 (excellent and explicit positioning)\n- clarity: 8 (very clear but dense with caveats)\n- reproducibility: 9 (exemplary infrastructure)\n- scope_match_to_ist: 8 (good fit for software V&V)\n\nAverage around 7.5. Accept probability maybe 0.6-0.7. Verdict: minor_revision.\n\nWait, if I'm being adversarial, maybe I should score lower on empirical_rigor because of the n=3 Wilcoxon and the deferred conservation. And maybe novelty is a 6 because the contribution is \"organizing devices\" rather than algorithms.\n\nLet me reconsider novelty. The paper claims:\n- Measurement-floor admissibility gate (new for SciML)\n- Typed domain-inadmissibility verdict (new)\n- Seeded-fault diagnostic stress test (new element)\n\nThese are genuine methodological contributions. But are they non-trivial? Yes, the integration of numerical analysis (O(h) operator floor) into MR tolerance setting is non-trivial. The 2D verdict typing is conceptually useful. I think 7 is fair.\n\nTechnical soundness: The closed-form floor derivation (predictor within 0.5%) is strong. The symmetric mesh control is strong. The D-score construction, while ad hoc, is clearly bounded. The n=3 statistical tests are a weakness but they are in the supporting/cross-family evidence, not the core claim. I'll give 7.\n\nEmpirical rigor: The core evidence (K=6 x 3 trajectories) is decent. The controls are good. The n=3 stuff is supporting. The seeded fault catalogue is small but used as a stress test, not a rate estimator. The LLM baseline is simulated. I'll give 7, maybe 6 if I'm harsh. Let's say 6 because the primary case study has a major MR deferred and the fault detection is very weak.\n\nRelated work: 9. It's really thorough.\n\nClarity: 8. Very well structured.\n\nReproducibility: 9. Claim ledger, manifests, ledgers, Zenodo.\n\nScope match: 8. Fits IST well.\n\nIf empirical_rigor is 6, the average drops. Verdict: minor_revision. Accept probability 0.55.\n\nBut let me look again at the n=3 Wilcoxon. In section 5.6: \"including PINN MR-B diffusion-vs-Burgers \u03b4 = 0.78 (large) with paired Wilcoxon p = 0.5 at n = 3.\" This is mentioned almost as a self-deprecating footnote. In 5.8.1, they report means and CIs for n=3. The CIs are clearly bootstrap or similar and very wide. They don't claim significance for the heat equation \"mixed\" result. So the rigor is honest about small N.\n\nActually, the biggest weakness for an adversarial reviewer is: **The paper makes almost no positive findings.** Node permutation passes (trivial). Mirror-y fails (but it's OOD or synthetic OOD). Conservation is deferred. Seeded faults: only 5/10 caught. Airfoil: incompressible continuity rejected (obviously, since it's compressible flow). FNO: translation passes (trivial representation property), conservation fails (but on a periodic case with reference floor). So what does the method actually *achieve* positively? It mostly rejects or defers candidates, and finds failures. The value is in the structure, not in positive results. A skeptic might say: \"This is a lot of machinery to tell us what we already know or to defer judgments.\"\n\nBut the paper's argument is exactly that: a validity gate should defer when uncertain, and the value is in the auditable structure. I think an adversarial reviewer would flag this as \"limited positive demonstration\" and \"primarily negative/deferral results.\"\n\nTop concerns:\n1. \"Core physical MR (conservation) deferred in primary case study; positive executable evidence is thin\"\n2. \"Seeded-fault catalogue too small (10 mutants) to support even scoped diagnostic claims\"\n3. \"Cross-family and second-task evidence is underpowered (n=3, CPU-scale) and supporting only\"\n4. \"Method contribution is primarily structural/organizational; limited demonstrated advantage over residual diagnostics or reference comparisons\"\n\nTop strengths:\n1. \"Exemplary reproducibility infrastructure and explicit evidence boundaries\"\n2. \"Careful, honest differentiation from closest prior work via direct comparison\"\n3. \"Novel integration of numerical operator analysis with metamorphic testing tolerances\"\n\nLet me finalize scores:\n- novelty_contribution: 7 (The synthesis is new and non-trivial for IST, though individual pieces are known)\n- technical_soundness: 7 (Internal logic holds but D-score ad hoc and small-N stats in supporting evidence)\n- empirical_rigor: 6 (Honest scope but primary MR deferred, tiny fault catalogue, weak positive demonstration)\n- related_work: 8 (Thorough and explicit positioning)\n- clarity: 8 (Dense but very well organized and scoped)\n- reproducibility: 9 (Outstanding artifact commitment)\n- scope_match_to_ist: 8 (Strong fit for software V&V remit)\n\nWait, related_work could be 9. But 8 is fine. Clarity could be 8. Reproducibility 9. Scope match 8.\n\nAccept probability: 0.6. Verdict: minor_revision.\n\nActually, looking at the rubric: 1=unacceptable, 5=borderline, 8=clearly publishable, 10=exemplary. If I give 6s and 7s, that's above borderline but not clearly publishable. Minor revision fits.\n\nOne more check: The prompt says \"Hunt for over-claims, unsupported generalisations, reproducibility gaps, and reasons to reject.\" The paper is extremely careful about not over-claiming. The main reasons to reject would be:\n- Contribution too thin/organizational\n- Primary case study doesn't execute key MRs\n- Empirical evidence mostly negative/deferred\n- Small fault catalogue\n\nBut I won't recommend reject because the methodological contribution is real, the reproducibility is excellent, and the scope is appropriate for IST. It's a minor revision because the authors need to:\n- Address why conservation being deferred isn't a fatal gap for the primary case study (they actually do address this in 6.1, but could strengthen)\n- Better justify the seeded-fault catalogue size or move it to a more minor position\n- Clarify the statistical limitations in cross-family results\n\nSo final JSON:\n\n{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 7,\n    \"empirical_rigor\": 6,\n    \"related_work\": 8,\n    \"clarity\": 8,\n    \"reproducibility\": 9,\n    \"scope_match_to_ist\": 8\n  },\n  \"accept_probability\": 0.6,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Primary case study defers key conservation MR; positive executable evidence is thin\",\n    \"Seeded-fault catalogue too small to support scoped diagnostic claims\",\n    \"Cross-family and second-task evidence is underpowered and supporting only\",\n    \"Contribution is largely organizational with limited advantage over residual diagnostics\"\n  ],\n  \"top_strengths\": [\n    \"Exemplary reproducibility infrastructure and explicit evidence boundaries\",\n    \"Honest, thorough differentiation from closest prior work via direct comparison\",\n    \"Novel integration of numerical operator analysis with metamorphic testing tolerances\"\n  ]\n}\n\nLet me double check the exact output format required. JSON ONLY, no prose, in EXACTLY this shape. Okay.\n\nWait, should accept_probability be a float like 0.6 or 0.60? 0.6 is fine.\n\nAre there any other issues?\n- In Section 5.4.1, the airfoil result: \"compressible unsteady mass conservation ... deferred\". So even on the second task, the replacement MR is deferred. This means the method mostly defers conservation across tasks. That's a weakness.\n- The \"measurement-floor admissibility gate\" is only closed-form for one specific mesh. General bound is future work. This limits practical applicability.\n- The LLM baseline with Fleiss kappa 0.077 is basically agreement by chance, yet they report it. This could be seen as a weakness, but they frame it honestly.\n\nI think my scores are fair for an adversarial reviewer. I'll stick with them."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 17929,
+        "completion_tokens": 4718,
+        "total_tokens": 22647
+      }
+    }
+  },
+  "honesty_boundary": "Five single-call temperature-0 LLM reviews via one gateway; an automated panel estimate, NOT a substitute for human peer review and NOT a prediction of an actual IST editorial decision."
+}
