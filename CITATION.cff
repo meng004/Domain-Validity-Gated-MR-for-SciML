@@ -19,7 +19,7 @@ version: 1.0.0
 date-released: "2026-06-15"
 license: MIT
 repository-code: "https://github.com/meng004/Domain-Validity-Gated-MR-for-SciML"
-# doi: 10.5281/zenodo.XXXXXXX   # uncomment and fill after the Zenodo deposit (see REPRODUCIBILITY.md, "Archival")
+doi: 10.5281/zenodo.20702953
 keywords:
   - metamorphic testing
   - scientific machine learning
