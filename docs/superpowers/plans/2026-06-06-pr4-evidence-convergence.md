@@ -12,7 +12,7 @@
 
 ## Preconditions
 
-- Current repo: `/Users/limeng/Library/CloudStorage/OneDrive-个人/0-论文/MR识别/圆柱绕流`.
+- Current repo: `<PROJECT_ROOT>`.
 - All shell commands must use the `rtk` prefix.
 - PR4 source evidence snapshots:
   - `/private/tmp/pr4-claim-ledger.yml`

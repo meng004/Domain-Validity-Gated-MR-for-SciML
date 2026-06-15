@@ -8,7 +8,7 @@ Move the paper from a minimal empirically supported method-paper draft to a subm
 
 ## Preconditions
 
-- Work only in `/Users/limeng/Library/CloudStorage/OneDrive-个人/0-论文/MR识别/圆柱绕流`.
+- Work only in `<PROJECT_ROOT>`.
 - Prefix every shell command with `rtk`.
 - Preserve existing user/PR4 changes; do not reset or revert dirty files.
 - Treat PR4 as a bounded evidence source only: one SUT, one checkpoint, one mirror-y OOD-stress MR, one eval trajectory, 10 recorded frames.

@@ -5,7 +5,7 @@
 
 ## 1. 输入
 
-- 工作流指南：`/Users/limeng/Library/CloudStorage/OneDrive-个人/0-论文/科研工作流/科研工作流指南_副本.md`
+- 工作流指南：`<external workflow guide, not distributed with this repo>`
 - 已有研究定位：`theory/论文必要性与学术问题.md`
 - 实验方案：`theory/蜕变测试实验方案.md`
 - MetBench 资产方案：`theory/MeshGraphNets圆柱绕流MetBench_MR资产编制与验证说明.md`
