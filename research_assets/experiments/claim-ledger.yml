@@ -517,7 +517,7 @@ claims:
 
   - claim_id: "C19-third-family-fno-roster"
     status: "observed"
-    scope: "FNO-2D K=6 roster (3 seeds x 2 PDEs) / small torch FNO-2D checkpoints / closed-form synthetic 2D Burgers and heat FD data with periodic and Dirichlet boundary-condition variants / admissibility-gated translation, mirror, conservation, and output-probe evidence"
+    scope: "FNO-2D roster (15 seeds x 2 PDEs) / small torch FNO-2D checkpoints / closed-form synthetic 2D Burgers and heat FD data with periodic and Dirichlet boundary-condition variants / admissibility-gated translation, mirror, conservation, and output-probe evidence"
     evidence:
       - "tools/gen_fd_dataset_2d.py"
       - "tools/fno2d.py"
@@ -528,13 +528,14 @@ claims:
       - "research_assets/runs/fno-k6-roster/burgers_s0/manifest.json"
       - "research_assets/runs/fno-k6-roster/heat_s0/manifest.json"
     wording_allowed: >
-      A third architecture family was added as a bounded evidence point: six torch FNO-2D
-      checkpoints over closed-form synthetic 2D Burgers and heat data (three seeds per PDE).
+      A third architecture family was added as a bounded evidence point: 30 torch FNO-2D
+      checkpoints over closed-form synthetic 2D Burgers and heat data (15 seeds per PDE).
       The admissibility gate makes a non-trivial decision on this family: periodic integer
-      translations are admitted for all 6/6 SUTs and exhibit near-machine-precision violations
-      (Burgers mean 2.12e-08, 95% CI [1.88e-08, 2.34e-08]; heat mean 2.10e-07, 95% CI
-      [3.90e-08, 5.15e-07]), while the corresponding Dirichlet-boundary translation candidate
-      is rejected or downgraded on all 6/6 SUTs because the transformation changes the
+      translations are admitted for all 30/30 SUTs (15/15 per PDE; per-PDE pass-rate Wilson
+      95% CI [0.80, 1.00]) and exhibit near-machine-precision violations
+      (Burgers mean 4.46e-08, 95% CI [3.26e-08, 5.83e-08]; heat mean 1.38e-07, 95% CI
+      [5.10e-08, 2.52e-07]), while the corresponding Dirichlet-boundary translation candidate
+      is rejected or downgraded on all 30/30 SUTs because the transformation changes the
       boundary-value problem. This is third-family admissibility evidence on closed-form
       synthetic data; it is not cylinder-flow evidence, not a FNO-vs-MGN/PINN performance
       benchmark, and not a general neural-operator reliability claim.

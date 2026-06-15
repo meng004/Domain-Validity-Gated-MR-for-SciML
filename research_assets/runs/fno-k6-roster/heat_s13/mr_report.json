@@ -1,0 +1,38 @@
+{
+  "record_type": "fno2d-mr-report",
+  "sut_id": "fno_heat_s13",
+  "architecture_family": "FNO-2D",
+  "pde": "heat",
+  "seed": 13,
+  "checkpoint_sha256": "803a37323eb2f78bbcf4377ba5f59736a7609a39107c3682597606006bee2a1d",
+  "eval_relative_l2": 0.8355157544592253,
+  "mr_translation_periodic": {
+    "admissibility": "admitted",
+    "reason": "periodic boundary condition makes integer grid translation a valid relation",
+    "integer_shift": [
+      2,
+      2
+    ],
+    "violation": 5.201161526824952e-08,
+    "verdict": "pass"
+  },
+  "mr_translation_dirichlet": {
+    "admissibility": "rejected",
+    "reason": "boundary condition is non-periodic; translation changes the physical boundary-value problem",
+    "integer_shift": [
+      2,
+      2
+    ],
+    "verdict": "not-executed-as-exact-mr"
+  },
+  "mr_mirror_probe": {
+    "admissibility": "observed-probe",
+    "reason": "closed-form data are symmetric enough for a bounded probe, but this roster does not claim a new exact mirror theorem",
+    "violation": 0.01864875300703381
+  },
+  "mr_conservation_probe": {
+    "admissibility": "observed-probe",
+    "reason": "output integral drift is recorded as a probe; the evidence claim is the admissibility decision, not solver accuracy",
+    "relative_channel_sum_drift": 0.13168186982711366
+  }
+}

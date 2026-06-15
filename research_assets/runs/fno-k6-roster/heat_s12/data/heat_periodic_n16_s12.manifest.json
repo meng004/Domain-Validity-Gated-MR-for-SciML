@@ -1,0 +1,11 @@
+{
+  "record_type": "fno-fd-dataset-2d",
+  "generated_at": "2026-06-15T13:55:49Z",
+  "pde": "heat",
+  "boundary_condition": "periodic",
+  "grid_n": 16,
+  "samples": 12,
+  "seed": 12,
+  "steps": 8,
+  "output": "research_assets/runs/fno-k6-roster/heat_s12/data/heat_periodic_n16_s12.npz"
+}

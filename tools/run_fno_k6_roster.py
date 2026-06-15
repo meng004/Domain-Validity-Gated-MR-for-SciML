@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -12,7 +13,6 @@ import torch
 
 ROOT = Path(__file__).resolve().parents[1]
 ROSTER_DIR = ROOT / "research_assets/runs/fno-k6-roster"
-SEEDS = [0, 1, 2]
 PDES = ["burgers", "heat"]
 N_BOOTSTRAP = 2000
 
@@ -27,6 +27,22 @@ def bootstrap_ci(values: list[float], n_boot: int = N_BOOTSTRAP) -> tuple[float,
     rng = np.random.default_rng(20260611)
     means = np.array([float(np.mean(rng.choice(arr, size=len(arr), replace=True))) for _ in range(n_boot)])
     return float(np.mean(arr)), float(np.percentile(means, 2.5)), float(np.percentile(means, 97.5))
+
+
+def wilson_ci(k: int, n: int, z: float = 1.96) -> list[float]:
+    """Wilson score 95% CI for a binomial proportion k/n.
+
+    Returns [lo, hi] as floats. Valid for k=0..n. z=1.96 gives nominal 95%.
+    """
+    if n == 0:
+        return [float("nan"), float("nan")]
+    p_hat = k / n
+    denom = 1.0 + z * z / n
+    centre = (p_hat + z * z / (2 * n)) / denom
+    margin = z * math.sqrt(p_hat * (1 - p_hat) / n + z * z / (4 * n * n)) / denom
+    lo = max(0.0, centre - margin)
+    hi = min(1.0, centre + margin)
+    return [float(lo), float(hi)]
 
 
 def load_model(sut_dir: Path) -> tuple[FNO2D, dict]:
@@ -111,14 +127,15 @@ def evaluate_mrs(sut_dir: Path, manifest: dict, n_eval: int, shift: int = 2) -> 
     }
 
 
-def aggregate(results: list[dict], args: argparse.Namespace) -> dict:
+def aggregate(results: list[dict], args: argparse.Namespace, seeds: list[int]) -> dict:
+    n_seeds = len(seeds)
     out = {
         "record_type": "fno-k6-roster-aggregate",
-        "schema_version": "0.1.0",
+        "schema_version": "0.2.0",
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "architecture_family": "FNO-2D",
-        "n_seeds": len(SEEDS),
-        "seeds": SEEDS,
+        "n_seeds": n_seeds,
+        "seeds": seeds,
         "pdes": PDES,
         "grid_n": args.n,
         "train_samples": args.samples,
@@ -136,7 +153,7 @@ def aggregate(results: list[dict], args: argparse.Namespace) -> dict:
             ),
         },
         "honesty_boundary": (
-            "FNO-2D roster on closed-form synthetic data with small grids and K=3 seeds per PDE; "
+            f"FNO-2D roster on closed-form synthetic data with small grids and K={n_seeds} seeds per PDE; "
             "not a cylinder-flow experiment, not a cross-family performance benchmark, and not a "
             "generalization claim for neural operators. The primary evidence is that the rubric "
             "admits periodic translation while rejecting non-periodic boundary-condition variants."
@@ -146,6 +163,8 @@ def aggregate(results: list[dict], args: argparse.Namespace) -> dict:
         fam = [r for r in results if r["pde"] == pde]
         eval_mean, eval_lo, eval_hi = bootstrap_ci([r["eval_relative_l2"] for r in fam])
         tr_mean, tr_lo, tr_hi = bootstrap_ci([r["mr_translation_periodic"]["violation"] for r in fam])
+        pass_count = sum(1 for r in fam if r["mr_translation_periodic"]["verdict"] == "pass")
+        n_fam = len(fam)
         out["per_pde_family"][pde] = {
             "eval_relative_l2_mean": eval_mean,
             "eval_relative_l2_95ci": [eval_lo, eval_hi],
@@ -153,6 +172,10 @@ def aggregate(results: list[dict], args: argparse.Namespace) -> dict:
             "periodic_translation_violation_95ci": [tr_lo, tr_hi],
             "periodic_translation_admission_rate": 1.0,
             "dirichlet_translation_rejection_rate": 1.0,
+            "periodic_translation_pass_count": pass_count,
+            "periodic_translation_n": n_fam,
+            "periodic_translation_pass_rate": pass_count / n_fam if n_fam else float("nan"),
+            "periodic_translation_pass_rate_wilson95_ci": wilson_ci(pass_count, n_fam),
         }
     return out
 
@@ -164,11 +187,19 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--n", type=int, default=16)
     parser.add_argument("--n-eval", type=int, default=4)
     parser.add_argument("--skip-existing", action="store_true")
+    parser.add_argument(
+        "--seeds",
+        type=int,
+        nargs="+",
+        default=list(range(15)),
+        help="List of random seeds to train/evaluate (default: 0..14).",
+    )
     args = parser.parse_args(argv)
+    seeds = args.seeds
     ROSTER_DIR.mkdir(parents=True, exist_ok=True)
     results = []
     for pde in PDES:
-        for seed in SEEDS:
+        for seed in seeds:
             tag = f"{pde}_s{seed}"
             outdir = ROSTER_DIR / tag
             manifest_path = outdir / "manifest.json"
@@ -187,12 +218,15 @@ def main(argv: list[str] | None = None) -> int:
                 f"dirichlet={mr['mr_translation_dirichlet']['admissibility']}",
                 flush=True,
             )
-    report = aggregate(results, args)
+    report = aggregate(results, args, seeds)
     (ROSTER_DIR / "fno_k6_aggregate.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     (ROSTER_DIR / "smoke_manifest.json").write_text(json.dumps({
         "record_type": "fno-roster-smoke-manifest",
         "generated_at": report["generated_at"],
-        "command": f"python3 tools/run_fno_k6_roster.py --epochs {args.epochs} --samples {args.samples} --n {args.n}",
+        "command": (
+            f"python3 tools/run_fno_k6_roster.py --epochs {args.epochs} "
+            f"--samples {args.samples} --n {args.n} --seeds {' '.join(str(s) for s in seeds)}"
+        ),
         "aggregate": "research_assets/runs/fno-k6-roster/fno_k6_aggregate.json",
         "sut_count": len(results),
     }, indent=2) + "\n", encoding="utf-8")

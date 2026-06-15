@@ -5,7 +5,7 @@
   "pde": "burgers",
   "seed": 0,
   "checkpoint_sha256": "3221c8cc561825cb88a86163acbac5b7c83c123d4fa9a5552b25732986ff89ac",
-  "eval_relative_l2": 1.5690538883209229,
+  "eval_relative_l2": 1.5690539016335388,
   "mr_translation_periodic": {
     "admissibility": "admitted",
     "reason": "periodic boundary condition makes integer grid translation a valid relation",
@@ -13,7 +13,7 @@
       2,
       2
     ],
-    "violation": 2.12403588051302e-08,
+    "violation": 2.124035953473457e-08,
     "verdict": "pass"
   },
   "mr_translation_dirichlet": {
@@ -28,11 +28,11 @@
   "mr_mirror_probe": {
     "admissibility": "observed-probe",
     "reason": "closed-form data are symmetric enough for a bounded probe, but this roster does not claim a new exact mirror theorem",
-    "violation": 0.0038817969616502523
+    "violation": 0.003881797065846453
   },
   "mr_conservation_probe": {
     "admissibility": "observed-probe",
     "reason": "output integral drift is recorded as a probe; the evidence claim is the admissibility decision, not solver accuracy",
-    "relative_channel_sum_drift": 2.754868268966675
+    "relative_channel_sum_drift": 2.7548683448152196
   }
 }

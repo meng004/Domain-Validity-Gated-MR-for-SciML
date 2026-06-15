@@ -5,7 +5,7 @@
   "pde": "heat",
   "seed": 1,
   "checkpoint_sha256": "5076396c29332e57ccacaaace872ec89737518698cb54e61dae19dd6d89972e7",
-  "eval_relative_l2": 0.9032668471336365,
+  "eval_relative_l2": 0.9032667864362084,
   "mr_translation_periodic": {
     "admissibility": "admitted",
     "reason": "periodic boundary condition makes integer grid translation a valid relation",
@@ -13,7 +13,7 @@
       2,
       2
     ],
-    "violation": 7.571852478349683e-08,
+    "violation": 7.571852459027594e-08,
     "verdict": "pass"
   },
   "mr_translation_dirichlet": {
@@ -28,11 +28,11 @@
   "mr_mirror_probe": {
     "admissibility": "observed-probe",
     "reason": "closed-form data are symmetric enough for a bounded probe, but this roster does not claim a new exact mirror theorem",
-    "violation": 0.012189517728984356
+    "violation": 0.012189517514622864
   },
   "mr_conservation_probe": {
     "admissibility": "observed-probe",
     "reason": "output integral drift is recorded as a probe; the evidence claim is the admissibility decision, not solver accuracy",
-    "relative_channel_sum_drift": 0.6851194500923157
+    "relative_channel_sum_drift": 0.6851194462356435
   }
 }

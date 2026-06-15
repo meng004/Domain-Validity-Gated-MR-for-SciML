@@ -31,7 +31,7 @@ class TestFnoK6RosterArtifacts(unittest.TestCase):
     def test_aggregate_and_per_sut_artifacts_present(self) -> None:
         self.assertTrue(AGG.exists(), f"missing aggregate: {AGG}")
         for pde in ("burgers", "heat"):
-            for seed in range(3):
+            for seed in range(15):
                 d = ROSTER / f"{pde}_s{seed}"
                 for rel in ("manifest.json", "mr_report.json", "sut/checkpoint.pt"):
                     self.assertTrue((d / rel).exists(), f"missing {d / rel}")
@@ -45,16 +45,16 @@ class TestFnoK6Aggregate(unittest.TestCase):
     def test_roster_shape(self) -> None:
         self.assertEqual(self.r["record_type"], "fno-k6-roster-aggregate")
         self.assertEqual(self.r["architecture_family"], "FNO-2D")
-        self.assertEqual(self.r["n_seeds"], 3)
-        self.assertEqual(self.r["seeds"], [0, 1, 2])
-        self.assertEqual(len(self.r["per_sut"]), 6)
+        self.assertEqual(self.r["n_seeds"], 15)
+        self.assertEqual(self.r["seeds"], list(range(15)))
+        self.assertEqual(len(self.r["per_sut"]), 30)
         self.assertEqual({x["pde"] for x in self.r["per_sut"]}, {"burgers", "heat"})
 
     def test_rubric_makes_nontrivial_admissibility_decisions(self) -> None:
         gate = self.r["admissibility_gate_summary"]
-        self.assertEqual(gate["periodic_translation_admitted"], 6)
-        self.assertEqual(gate["dirichlet_translation_rejected_or_downgraded"], 6)
-        self.assertGreaterEqual(gate["nontrivial_decisions"], 6)
+        self.assertEqual(gate["periodic_translation_admitted"], 30)
+        self.assertEqual(gate["dirichlet_translation_rejected_or_downgraded"], 30)
+        self.assertGreaterEqual(gate["nontrivial_decisions"], 30)
         for row in self.r["per_sut"]:
             self.assertEqual(row["mr_translation_periodic"]["admissibility"], "admitted")
             self.assertIn(

@@ -1,0 +1,11 @@
+{
+  "record_type": "fno-fd-dataset-2d",
+  "generated_at": "2026-06-15T13:55:48Z",
+  "pde": "burgers",
+  "boundary_condition": "periodic",
+  "grid_n": 16,
+  "samples": 12,
+  "seed": 14,
+  "steps": 8,
+  "output": "research_assets/runs/fno-k6-roster/burgers_s14/data/burgers_periodic_n16_s14.npz"
+}
