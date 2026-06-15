@@ -970,6 +970,32 @@ claims:
       - "Cross-SUT, cross-checkpoint, or cross-architecture generalization of detection."
     blocked_reason: null
 
+  - claim_id: "C34-classical-operator-executable-conservation"
+    status: "observed"
+    scope: "one 1D periodic finite-volume Burgers exemplar (flux-form Lax-Friedrichs) / correct conservative scheme vs hand-constructed operator-code faults / conservation MR with machine-precision-scale tolerance"
+    evidence:
+      - "tools/run_classical_operator_conservation.py"
+      - "tests/test_classical_operator_conservation.py"
+      - "research_assets/runs/classical-operator-conservation/raw/metric_ledger.json"
+      - "paper/39_increment2_classical_operator_sut_design.md"
+    wording_allowed: >
+      On a classical finite-volume conservation-law operator (1D periodic Burgers,
+      flux-form), the conservation MR passes the numerical-decidability gate -- the
+      flux-form discrete-conservation residual is floating-point roundoff
+      (baseline |dM|max = 2.22e-16), dominated by the 1e-12 verdict tolerance --
+      and yields an EXECUTABLE verdict: the correct conservative scheme conserves
+      total mass to machine precision (PASS) while three operator-code faults
+      (non-conservative form, dropped interface flux, doubled interface flux) are
+      detected (FAIL). The same conservation relation is admissible-and-executable
+      here, deferred on the MGN cylinder (uncalibratable floor; C12, C32), and
+      rejected on the compressible airfoil (C31) -- a three-task typed verdict for
+      one relation.
+    wording_forbidden:
+      - "A production-solver reliability, generalization, or baseline-superiority claim."
+      - "High or general fault-detection recall."
+      - "Any claim beyond the single textbook finite-volume exemplar."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"

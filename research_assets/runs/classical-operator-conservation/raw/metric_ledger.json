@@ -1,0 +1,61 @@
+{
+  "ledger_id": "classical-operator-conservation",
+  "schema_version": "0.1.0",
+  "evidence_level": "classical-operator-code-sut-executable-conservation",
+  "sut": "1D periodic finite-volume Burgers (flux-form Lax-Friedrichs)",
+  "operator_under_test": "scientist-written interface flux + flux-form update",
+  "framework_libraries": "uniform grid, explicit time-stepping (not under test)",
+  "conservation_mr": {
+    "quantity": "total mass M = sum(u)*dx",
+    "tolerance": 1e-12,
+    "operator_floor_estimate": "flux-form telescoping residual ~1e-15 (float roundoff)",
+    "admissible": true,
+    "admissibility_reason": "verdict tolerance 1e-12 dominates the ~1e-15 flux-form floor"
+  },
+  "grid": {
+    "L": 2.0,
+    "N": 200,
+    "dx": 0.01,
+    "steps": 50,
+    "cfl": 0.4
+  },
+  "results": [
+    {
+      "mutant": "baseline",
+      "max_abs_delta_mass": 2.220446049250313e-16,
+      "conservation_MR_pass": true,
+      "conservation_MR_detects_fault": false
+    },
+    {
+      "mutant": "nonconservative_form",
+      "max_abs_delta_mass": 0.001783625293437896,
+      "conservation_MR_pass": false,
+      "conservation_MR_detects_fault": true
+    },
+    {
+      "mutant": "drop_boundary_flux",
+      "max_abs_delta_mass": 0.02341360257236813,
+      "conservation_MR_pass": false,
+      "conservation_MR_detects_fault": true
+    },
+    {
+      "mutant": "double_flux",
+      "max_abs_delta_mass": 1.0026822698511726,
+      "conservation_MR_pass": false,
+      "conservation_MR_detects_fault": true
+    }
+  ],
+  "summary": {
+    "baseline_pass": true,
+    "baseline_max_abs_delta_mass": 2.220446049250313e-16,
+    "faults_detected": 3,
+    "num_faults": 3
+  },
+  "typed_verdict_contrast": {
+    "classical_fv_operator": "admissible + executable (this run)",
+    "cylinder_mgn": "deferred (uncalibratable floor; C12/C32)",
+    "airfoil_mgn": "rejected (compressible; C31)"
+  },
+  "honesty_boundary": "One minimal textbook FV exemplar; faults are hand-constructed operator-code edits. Not a production-solver, reliability, generalization, or baseline-superiority claim.",
+  "generated_at": "2026-06-15T02:22:11Z"
+}

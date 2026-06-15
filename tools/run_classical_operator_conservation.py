@@ -61,8 +61,16 @@ def step(u: np.ndarray, mutant: str) -> np.ndarray:
     """One explicit step. The flux/update operator is the scientist-written code
     under test; mutants edit it. The framework (grid, stepping) is fixed."""
     dt = dt_from_cfl(u)
-    if mutant == "nonconservative_form":            # advective (non-flux) form: not conservative
-        ux = (np.roll(u, -1) - np.roll(u, 1)) / (2 * DX)
+    if mutant == "nonconservative_form":            # advective (primitive, non-flux) form: not conservative
+        # Upwind (backward; the field stays positive here so this is the correct
+        # upwind direction) primitive-variable advection u*du/dx -- a realistic
+        # "wrote the PDE in primitive form" operator bug that genuinely loses mass.
+        # NB: a *centered* advective stencil u_i*(u_{i+1}-u_{i-1})/(2dx) instead
+        # conserves the first moment (total mass) to roundoff by periodic
+        # anti-symmetry, so it is a documented blind spot of a mass-conservation MR
+        # (the MR detects faults that break the flux-difference telescoping
+        # structure, not every non-conservative discretization).
+        ux = (u - np.roll(u, 1)) / DX
         return u - dt * u * ux
     F = lf_flux(u, dt)                               # F_{i+1/2}, i = 0..N-1
     Fm = np.roll(F, 1)                              # F_{i-1/2}
