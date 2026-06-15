@@ -32,7 +32,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PAPER = ROOT / "paper" / "manuscript.md"
+# Canonical submission document is the LaTeX source (single source of truth);
+# the panel reviews exactly what is submitted to IST.
+PAPER = ROOT / "paper" / "ist-submission" / "main.tex"
 OUTDIR = ROOT / "research_assets" / "runs" / "academic-review-panel"
 TOKEN_LADDER = (16000, 28000)
 

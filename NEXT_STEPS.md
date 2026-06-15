@@ -1,6 +1,46 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-14 by claude-code (Phase 20 compression session)
+> Last updated: 2026-06-15 by claude-code (Phase 22 increment-2 cloud execution)
+
+## 🟢 增量② 云端执行结果（C34 经典算子-代码可执行守恒；正文撤下，工具/产物留仓库）
+
+> 执行方案 `paper/40_increment2_cloud_execution_plan.md`，分支 `claude/youthful-feynman-qy22k2`。
+
+- **工具真实跑通**：`tools/run_classical_operator_conservation.py` →
+  baseline `|dM|max=2.22e-16` PASS；3/3 算子代码缺陷检出（FAIL）：迎风原始变量非守恒
+  `1.78e-3`、漏界面通量 `2.34e-2`、重复通量 `1.00`。确定性（除 `generated_at` 逐字节一致）。
+  产物 `research_assets/runs/classical-operator-conservation/raw/metric_ledger.json`。
+- **诚实修正（守铁律，不动 tol）**：paper/39 §4 原拟的**中心**平流非守恒形式在周期边界下
+  `Σu_i(u_{i+1}-u_{i-1})≡0`，恰好守恒一阶矩（实测 |dM|=舍入级，**未检出**）。按"只修缺陷构造、
+  不动 tol"改为**迎风原始变量平流** `u_i(u_i-u_{i-1})/Δx`（同为真实非守恒 CFD bug），真实丢质量。
+  已在工具注释与 paper/39 §4 记录。`CONS_TOL=1e-12` 未动。
+- **claim C34 入账**（真实数字）；guard `tests/test_classical_operator_conservation.py` skip→PASS；
+  `pytest` 313 全绿；两 validator exit 0。
+- **用户中途指示（本会话）**：以 **LaTeX (main.tex) 为唯一文档**，不再 md/tex 双维护；
+  **评审面板目标改为 main.tex**（`tools/run_academic_review_panel.py` 的 `PAPER`）。
+  → manuscript.md 已回退至 HEAD（冻结/弃用，不再同步）。
+- **v29 三方对照面板（均经网关真实跑出，温度0）**：
+  | | v28(md,无增量) | 对照(tex,无增量) | v29(tex,+增量) |
+  |---|---:|---:|---:|
+  | overall | 7.89 | **7.49** | **7.31** |
+  | accept | 0.664 | 0.634 | 0.60 |
+  | clarity | 7.4 | 6.8 | 6.2 |
+  产物：`research_assets/runs/academic-review-panel-v29/`、`.../academic-review-panel-v29-control-pretex/`。
+- **判读（实事求是）**：
+  - md→tex 格式切换独立造成 overall **-0.40**（评审读原始 LaTeX：clarity/reproducibility/
+    related_work 下滑，参考文献在 .bbl 不内联、`\ref` 未解析）——格式伪信号。
+  - 增量净效应（对照→v29，同 tex）= overall **-0.18**、accept -0.034、**clarity -0.6**，仅 scope +0.2。
+  - 守恒 major：v28 由 glm(major)+kimi 提出；但**对照（无增量）中也已 0/5 消失**——故 v29 守恒关切
+    缺席**不能归因于增量**（格式/噪声所致）。增量无可证收益、且净负向。
+  - **结论=撤下正文新增**（plan 纪律"仅加长无收益/回退→撤下"）：main.tex 仅在 §5.6 留**一句**
+    "经典算子上守恒 MR 可执行（指向 C34）"作 backup；§4.1/§5.5.1/§3.2/§6.1 等完整集成已撤。
+    C34 工具/产物/claim/guard 留仓库作 **revision 备用证据**（类比 C33 覆盖几何处置）。
+- **遗留**：(1) `main.pdf` 未重编译（容器无 texlive；源为准，投稿前 `apt-get install texlive-*` 重编）；
+  (2) 同步守卫 `test_stage2p5`/`test_phase8` 仍要求 md+tex 双含锚点——md 冻结后它们靠 md@HEAD 通过，
+  建议后续重构为 **tex-only**（单文档化的收尾，本会话未改测试以免越界）。
+
+---
+
 
 ## 🟡 进行中：方案 B（airfoil 进正文）+ 聚焦压缩（用户拍板，本会话）
 
