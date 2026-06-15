@@ -337,42 +337,7 @@ The results are organized in three tiers. The \emph{primary} evidence is the cyl
 \subsection{Claim-to-evidence map}
 \label{subsec:claim-evidence-map}
 
-\begin{table}[t]
-\centering
-\caption{Compact claim-to-evidence map for the current manuscript.}
-\label{tab:claim-evidence}
-\tiny
-\setlength{\tabcolsep}{1.5pt}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}Y@{}}
-\toprule
-\textbf{Claim} & \textbf{Status} & \textbf{Evidence} & \textbf{Boundary} \\
-\midrule
-Domain-validity rubric & Method claim & Rubric asset and manuscript method section & Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. \\
-MR-card executable assets & Workflow claim & MR cards and validators & Some cards remain protocol assets pending matched SUT evidence. \\
-Baseline admissibility contrast & Observed & Expert-MR, generic-MR, LLM-MR baselines and claim ledger & Quantifies an admissibility gap without ranking methods as competitors. \\
-Minimum-MR-SubSet external-scope audit & Observed secondary audit & External-scope audit JSON & external witness evidence from 70 real rows and three SciML/PDE true-fault-class PASS\_WITNESS rows; does not add new primary SUT executions to this paper. \\
-Minimum-MR-SubSet primary rerun & Observed external runtime rerun & ABD witness rerun report & PASS\_WITNESS, kstar = 6, four active true fault classes, max signature rank 2, collapse false; real held-out cylinder-flow MGN runtime, not a second architecture or dataset. \\
-Minimum-MR-SubSet PINN primary reruns & Observed second-SUT/PDE reruns & ABD PINN witness rerun reports & trained Burgers2D and Diffusion2D PINN witnesses, PASS\_WITNESS, kstar = 1 each, five active true fault classes each; one-seed witnesses, no cross-SUT rate. \\
-Node-permutation sanity check & Observed pilot & Node-permutation metric ledger & One representation-contract path on one pilot case. \\
-Conservation diagnostic & Diagnostic; absolute relation deferred & Conservation metric ledger and report & Reference-relative guard only; absolute conservation remains deferred. \\
-Mirror-y OOD stress (PC6-mirror-y-ood-stress) & Observed bounded pilot & Mirror-y rate metric ledger and claim ledger & Failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. \\
-Primary empirical scope upgrade & Observed & Primary-scope report and per-trajectory/checkpoint manifests & K=6 x 3 trajectories x 10 mirror-y OOD-stress grid fails 180/180; K=6 x 3 trajectories x 9 conservation-transition grid passes 162/162; K=6 x 3 exact-symmetric-mesh input grid fails 18/18; not a single-source-trajectory estimate and not a cross-SUT rate. \\
-LLM role boundary & Process boundary & Method and ethics sections & LLMs organize candidates; the rubric decides validity. \\
-Rollout-accuracy diagnostic & Observed & Rollout-accuracy metric ledger & Same-SUT one-step median relative L2 0.0216; mirror-y is $\sim$34x larger. \\
-Exact mirror-y symmetric mesh & Observed & Symmetric-mesh metric ledger & Exact relation admissible and fails (rel L2 1.10) on a synthetic OOD mesh; binary equivariance evidence. \\
-PC10-seeded-fault-detection & Observed & Seeded-fault metric ledger & Detector stress test: MRs catch 5/10 injected mutants with class-specific response patterns. \\
-Multicheckpoint replication & Observed & E1 aggregate and per-SUT manifests in \texttt{multicheckpoint/} & K=6 checkpoints of one MeshGraphNets family; within-family replication. \\
-Operator-floor resolution & Observed & Operator-floor sweep report & Log--log slope 0.984, 95\% CI $[0.975, 0.992]$ (interior 0.989), $R^2 = 0.9999$ over nine resolutions; calibrates the admissibility predicate on one mesh family. \\
-Fault-detection robustness & Observed & E3 robustness report; Phase-3 unified catalogue & 30-trial Wilson CIs per MGN mutant plus a 60-entry unified fault catalogue (10 canonical MGN + 2 adversarial MGN + 24 closed-form PINN output-level probes + 24 closed-form FNO output-level probes), by-detector precision/recall with Wilson CIs, and Wilcoxon/Cliff effect-size tests; PINN/FNO probes are closed-form output-level probes. \\
-S4/S5 variant primary workflow & Observed & Variant report and raw ledgers & Same-domain wider/deeper MGN variants: 2/2 node-permutation passes, 60/60 mirror OOD failures, 54/54 conservation-diagnostic passes, 6/6 exact-symmetric failures; not PhysicsNeMo/EchoWave or cross-dataset reliability evidence. \\
-PointMLP cylinder primary workflow & Observed & PointMLP report, checkpoint, and raw ledgers & Newly trained non-MGN row-wise coordinate network: 9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, 3/3 exact-symmetric failures, median rollout rel L2 0.0298; not PhysicsNeMo/EchoWave or production CFD evidence. \\
-PhysicsNeMo MGN Object-A smoke workflow & Observed smoke-subset production-framework execution & PhysicsNeMo smoke report, newly trained checkpoint, raw outputs, and metric ledgers & NVIDIA PhysicsNeMo \texttt{MeshGraphNet} executes on a first-record official DeepMind \texttt{cylinder\_flow} smoke subset: node permutation passes (relative L2 0.0), mirror-y is OOD stress, and conservation is reference-relative diagnostic only; not full production-scale PhysicsNeMo, AeroGraphNet, or DoMINO evidence. \\
-FNO primary workflow upgrade & Observed & FNO workflow report, per-SUT ledgers, and raw source/follow-up outputs & Six trained FNO-2D checkpoints over Burgers/heat: 24/24 translation passes, 24/24 conservation failures under a periodic discrete-conservation MR, and 6/6 Dirichlet-boundary translation rejections; not only admissibility evidence. \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-The table uses reviewer-facing claim names. The authoritative runtime mapping remains in \texttt{claim-ledger.yml}; this keeps the results readable while preserving a complete evidence ledger.
+The compact claim-to-evidence map binds every claim to a tracked artifact using reviewer-facing claim names; the full table is given in Appendix~\ref{app:claim-evidence} (Table~\ref{tab:claim-evidence}), and the authoritative runtime mapping remains in \texttt{claim-ledger.yml}.
 
 \subsection{MR-card-to-verdict map}
 \label{subsec:mr-card-verdict-map}
@@ -552,6 +517,48 @@ This work was supported by the National Natural Science Foundation of China (NSF
 
 \section*{Data availability}
 The replication package contains the manuscript source, assets, ledger, and outputs, and will be archived with a DOI on Zenodo upon acceptance. Minimum-MR-SubSet audit/rerun artifacts are under \path{research_assets/runs/} and cite commit \path{9ef862ec37335b4834d0a1fb38b4b613af702f34}. The MeshGraphNets checkpoints derive from the public DeepMind cylinder-flow benchmark; no proprietary data was used.
+
+\clearpage
+\appendix
+\renewcommand{\thetable}{A\arabic{table}}
+\setcounter{table}{0}
+\section{Claim-to-evidence map}
+\label{app:claim-evidence}
+
+\begin{table}[t]
+\centering
+\caption{Compact claim-to-evidence map for the current manuscript.}
+\label{tab:claim-evidence}
+\tiny
+\setlength{\tabcolsep}{1.5pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}Y@{}}
+\toprule
+\textbf{Claim} & \textbf{Status} & \textbf{Evidence} & \textbf{Boundary} \\
+\midrule
+Domain-validity rubric & Method claim & Rubric asset and manuscript method section & Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. \\
+MR-card executable assets & Workflow claim & MR cards and validators & Some cards remain protocol assets pending matched SUT evidence. \\
+Baseline admissibility contrast & Observed & Expert-MR, generic-MR, LLM-MR baselines and claim ledger & Quantifies an admissibility gap without ranking methods as competitors. \\
+Minimum-MR-SubSet external-scope audit & Observed secondary audit & External-scope audit JSON & external witness evidence from 70 real rows and three SciML/PDE true-fault-class PASS\_WITNESS rows; does not add new primary SUT executions to this paper. \\
+Minimum-MR-SubSet primary rerun & Observed external runtime rerun & ABD witness rerun report & PASS\_WITNESS, kstar = 6, four active true fault classes, max signature rank 2, collapse false; real held-out cylinder-flow MGN runtime, not a second architecture or dataset. \\
+Minimum-MR-SubSet PINN primary reruns & Observed second-SUT/PDE reruns & ABD PINN witness rerun reports & trained Burgers2D and Diffusion2D PINN witnesses, PASS\_WITNESS, kstar = 1 each, five active true fault classes each; one-seed witnesses, no cross-SUT rate. \\
+Node-permutation sanity check & Observed pilot & Node-permutation metric ledger & One representation-contract path on one pilot case. \\
+Conservation diagnostic & Diagnostic; absolute relation deferred & Conservation metric ledger and report & Reference-relative guard only; absolute conservation remains deferred. \\
+Mirror-y OOD stress (PC6-mirror-y-ood-stress) & Observed bounded pilot & Mirror-y rate metric ledger and claim ledger & Failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. \\
+Primary empirical scope upgrade & Observed & Primary-scope report and per-trajectory/checkpoint manifests & K=6 x 3 trajectories x 10 mirror-y OOD-stress grid fails 180/180; K=6 x 3 trajectories x 9 conservation-transition grid passes 162/162; K=6 x 3 exact-symmetric-mesh input grid fails 18/18; not a single-source-trajectory estimate and not a cross-SUT rate. \\
+LLM role boundary & Process boundary & Method and ethics sections & LLMs organize candidates; the rubric decides validity. \\
+Rollout-accuracy diagnostic & Observed & Rollout-accuracy metric ledger & Same-SUT one-step median relative L2 0.0216; mirror-y is $\sim$34x larger. \\
+Exact mirror-y symmetric mesh & Observed & Symmetric-mesh metric ledger & Exact relation admissible and fails (rel L2 1.10) on a synthetic OOD mesh; binary equivariance evidence. \\
+PC10-seeded-fault-detection & Observed & Seeded-fault metric ledger & Detector stress test: MRs catch 5/10 injected mutants with class-specific response patterns. \\
+Multicheckpoint replication & Observed & E1 aggregate and per-SUT manifests in \texttt{multicheckpoint/} & K=6 checkpoints of one MeshGraphNets family; within-family replication. \\
+Operator-floor resolution & Observed & Operator-floor sweep report & Log--log slope 0.984, 95\% CI $[0.975, 0.992]$ (interior 0.989), $R^2 = 0.9999$ over nine resolutions; calibrates the admissibility predicate on one mesh family. \\
+Fault-detection robustness & Observed & E3 robustness report; Phase-3 unified catalogue & 30-trial Wilson CIs per MGN mutant plus a 60-entry unified fault catalogue (10 canonical MGN + 2 adversarial MGN + 24 closed-form PINN output-level probes + 24 closed-form FNO output-level probes), by-detector precision/recall with Wilson CIs, and Wilcoxon/Cliff effect-size tests; PINN/FNO probes are closed-form output-level probes. \\
+S4/S5 variant primary workflow & Observed & Variant report and raw ledgers & Same-domain wider/deeper MGN variants: 2/2 node-permutation passes, 60/60 mirror OOD failures, 54/54 conservation-diagnostic passes, 6/6 exact-symmetric failures; not PhysicsNeMo/EchoWave or cross-dataset reliability evidence. \\
+PointMLP cylinder primary workflow & Observed & PointMLP report, checkpoint, and raw ledgers & Newly trained non-MGN row-wise coordinate network: 9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, 3/3 exact-symmetric failures, median rollout rel L2 0.0298; not PhysicsNeMo/EchoWave or production CFD evidence. \\
+PhysicsNeMo MGN Object-A smoke workflow & Observed smoke-subset production-framework execution & PhysicsNeMo smoke report, newly trained checkpoint, raw outputs, and metric ledgers & NVIDIA PhysicsNeMo \texttt{MeshGraphNet} executes on a first-record official DeepMind \texttt{cylinder\_flow} smoke subset: node permutation passes (relative L2 0.0), mirror-y is OOD stress, and conservation is reference-relative diagnostic only; not full production-scale PhysicsNeMo, AeroGraphNet, or DoMINO evidence. \\
+FNO primary workflow upgrade & Observed & FNO workflow report, per-SUT ledgers, and raw source/follow-up outputs & Six trained FNO-2D checkpoints over Burgers/heat: 24/24 translation passes, 24/24 conservation failures under a periodic discrete-conservation MR, and 6/6 Dirichlet-boundary translation rejections; not only admissibility evidence. \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{references}

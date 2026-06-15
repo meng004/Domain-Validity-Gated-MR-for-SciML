@@ -60,9 +60,14 @@
 - **关键 meta-finding（实事求是）**：正文散文密度已近"守卫+honesty 地板"——回归守卫逐字钉了多数证据
   散文，§6.4/§6.9 钉了 caveat，prose-only 去密空间已尽。A1 删孤儿 float（−432）是本轮唯一大净 win；
   v29 的 5/5 readability **不能靠再砍散文解决**。
-- **剩余真杠杆（待拍板）**：(a) 新建 \appendix 把 §Boundary-of-evidence + per-mutant 明细移附录
-  （MethRigor 原话"move caveats to appendices"；body 去密、IST 计数不变，属结构改动）；
-  (b) Part B = FNO(C23) co-primary reframe（打 4/5 单任务 + 软化 novelty）；(c) 接受面板密度惩罚为伪信号。
+- **(a) 已做 + 编译验证**：移 21 行 claim-evidence 大表 → 新建 `\appendix`（Appendix A，表 A1），
+  子节留指针（守卫要求的 `\subsection{Claim-to-evidence map}` 标题保留）。**本地 xelatex/pdflatex 全循环
+  编译通过**：39 页、undefined refs=0、Missing character=0、LaTeX Error=0、bibtex 全解析、无 >50pt Overfull。
+  同时清掉"main.pdf 未重编译"遗留（byproduct main.pdf/bbl/log 工作树重生，未提交）。
+  踩坑记录：`re.sub` 替换串会解释 `\r`/`\t`，写指针时致 `\ref`/`\texttt` 损坏，已改 str 切片修复（见 PITFALLS 候选）。
+- **(b) 进行中**：Part B = FNO(C23) co-primary reframe（打 4/5 单任务 + 软化 3/5 novelty；reframe 非 re-run）。
+- **(c) 备选**：接受面板密度惩罚为伪信号。
+- **委员身份**：本仓库 commit 统一 `meng004 <meng004@gmail.com>`（已 filter-branch 重写本会话 2 commit + 设 config）。
 - **本轮密度总计**：IST 11787→11314（−473）；313 全绿、两 validator exit 0、零证据/honesty 损失。
 - **验收门（同 C33/C34）**：定下结构动作后跑 v30 面板验 readability 是否回升；净正才留、回退即撤。
 
