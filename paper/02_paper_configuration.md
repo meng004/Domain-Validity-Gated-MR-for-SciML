@@ -38,7 +38,7 @@ Journal hierarchy:
 
 Primary title:
 
-**Domain-Validity-Gated Metamorphic Relation Identification and Executable Test Assets for Scientific Machine Learning**
+**Domain-Validity-Gated Metamorphic Testing of Scientific ML Surrogates**
 
 Candidate alternatives:
 

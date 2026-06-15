@@ -3,9 +3,8 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 This repository develops the manuscript "Domain-Validity-Gated Metamorphic
-Relation Identification and Executable Test Assets for Scientific Machine
-Learning" for submission to **Elsevier Information and Software Technology
-(IST), regular track**.
+Testing of Scientific ML Surrogates" for submission to **Elsevier Information
+and Software Technology (IST), regular track**.
 
 ## Hard user constraints (standing)
 

@@ -1,4 +1,4 @@
-# Domain-Validity-Gated Metamorphic Relation Identification and Executable Test Assets for Scientific Machine Learning
+# Domain-Validity-Gated Metamorphic Testing of Scientific ML Surrogates
 
 ## Structured Abstract
 

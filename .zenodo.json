@@ -1,6 +1,6 @@
 {
   "upload_type": "software",
-  "title": "Domain-Validity-Gated Metamorphic Relation Identification and Executable Test Assets for Scientific Machine Learning",
+  "title": "Domain-Validity-Gated Metamorphic Testing of Scientific ML Surrogates",
   "version": "1.1.0",
   "license": "MIT",
   "creators": [
@@ -17,5 +17,5 @@
     "executable test assets",
     "MeshGraphNets"
   ],
-  "description": "Replication package for the manuscript \"Domain-Validity-Gated Metamorphic Relation Identification and Executable Test Assets for Scientific Machine Learning\" (submitted to Information and Software Technology). Contains the domain-validity rubric, MR-card executable assets, the claim ledger binding every reported result to a tracked artifact, the MeshGraphNets cylinder-flow case study with committed run artifacts, cross-family PINN/FNO executions, the manuscript source (Elsevier elsarticle), the regression test suite and fail-closed validators, and three reproducibility tiers (smoke / cache-replay / full re-run) with a Dockerfile. See REPRODUCIBILITY.md."
+  "description": "Replication package for the manuscript \"Domain-Validity-Gated Metamorphic Testing of Scientific ML Surrogates\" (submitted to Information and Software Technology). Contains the domain-validity rubric, MR-card executable assets, the claim ledger binding every reported result to a tracked artifact, the MeshGraphNets cylinder-flow case study with committed run artifacts, cross-family PINN/FNO executions, the manuscript source (Elsevier elsarticle), the regression test suite and fail-closed validators, and three reproducibility tiers (smoke / cache-replay / full re-run) with a Dockerfile. See REPRODUCIBILITY.md."
 }

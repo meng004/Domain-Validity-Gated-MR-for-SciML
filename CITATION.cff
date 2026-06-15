@@ -2,9 +2,7 @@ cff-version: 1.2.0
 message: >-
   If you use this software or its replication package, please cite the
   accompanying paper and this archive.
-title: >-
-  Domain-Validity-Gated Metamorphic Relation Identification and Executable
-  Test Assets for Scientific Machine Learning
+title: Domain-Validity-Gated Metamorphic Testing of Scientific ML Surrogates
 type: software
 authors:
   - family-names: Li
