@@ -41,6 +41,24 @@
 
 ---
 
+## 🟡 进行中：密度优先手术（plan paper/40 Part A；打 v29 readability 5/5）
+
+> 依据：v29 五评审 5/5 提 density/overextended（最被反复提、且是面板 score 绑定约束）；
+> 加 SUT 反伤 EIC（已两次实证：airfoil −0.4、C34 撤）。故砍散文密度优先。
+> 锚点纪律：守卫逐文件钉 main.tex 的 token 逐字保（combined/md-only 的因 md 冻结安全）；
+> §6.4/§6.9 honesty 声明当证据保，不当对冲删。
+
+- **A1 已做（本次 commit）**：删 §Fault-robustness 孤儿 Wilson-CI 表（无 \ref、零守卫、
+  逐行复述 R1）+ R2 三机制括号并一句。IST 11787→11355（−432，float 12→10）；证据零损失
+  （CI 仍在 R1 散文 + metric_ledger）。pytest 313 全绿、两 validator exit 0。
+- **A2 至地板**：原拟 −80，实得 −3（仅一处 filler）；其余经核为 §6.4/§6.9 honesty，保留不删。
+- **待办（本会话续）**：
+  - [ ] A3：§Claim-to-evidence（main.tex L337，587w）去散文复述表，约 −150。
+  - [ ] A5：合并 Boundary-of-claims（L533）+ Boundary-of-evidence（L514）+ Results 内联
+        not-X 进单一 Threats（L543），约 −120，readability 增益最大。
+  - [ ] A3+A5 后跑 v30 面板验 readability 是否回升（凭据在手）；净正才留、回退即撤（同 C33/C34）。
+
+---
 
 ## 🟡 进行中：方案 B（airfoil 进正文）+ 聚焦压缩（用户拍板，本会话）
 

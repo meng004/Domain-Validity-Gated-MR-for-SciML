@@ -403,7 +403,7 @@ FNO periodic translation and conservation & Translation admitted; periodic discr
 \subsection{Within-SUT pilot evidence}
 \label{subsec:within-sut-pilot}
 
-All pilots run on one real trained MeshGraphNets cylinder-flow surrogate, using the read-only Minimum-MR-SubSet checkpoint recorded in the experiment ledger. They exercise three different rubric outcomes and are scoped accordingly; raw outputs, manifests, and metric ledgers are committed (Table~\ref{tab:claim-evidence}).
+All pilots run on one real trained MeshGraphNets cylinder-flow surrogate, using the read-only Minimum-MR-SubSet checkpoint recorded in the experiment ledger. They exercise three different rubric outcomes; raw outputs, manifests, and metric ledgers are committed (Table~\ref{tab:claim-evidence}).
 
 \textbf{Representation MR.} Node-permutation equivariance holds to machine precision (relative L2 = 0.0 at tolerance 1e-6). This is a structural property of message-passing and is reported as a pipeline-implementation sanity check rather than model capability or accuracy evidence.
 
@@ -459,35 +459,11 @@ To check whether the seeded-fault detection result of Section~\ref{subsec:within
 
 \textbf{Per-mutant cross-family detection (R1).} Four mutants are detected on every cell (30/30, CI $[0.89, 1.00]$): conservation flags both boundary-condition faults (BC\_zero\_inflow, BC\_nonzero\_wall) and the un-denormalized output fault (NS\_skip\_denorm); mirror-y flags the swapped-channel fault (PC\_swap\_xy). Five mutants are not detected on any cell (0/30, CI $[0.00, 0.11]$): MA\_drop\_edges, NS\_double\_scale, TR\_sign\_flip, TR\_double\_step, PC\_zero\_vy. The by-class localization of the original C10 pilot holds: continuity $\to$ boundary/scale faults, symmetry $\to$ physical-channel/adjacency faults, node-permutation $\to$ none of these mutants (they preserve node-relabeling invariance, and the representation MR stays exact by design). One mutant is configuration-sensitive: mirror-y detects MA\_permute\_edges on every (S0--S3, seed) cell (20/20 over the seed-replica family) but on neither (S4, seed) nor (S5, seed) cell (0/10 over the wider and deeper configuration variants). The within-family detection rate of that mutant is therefore 20/30 (CI $[0.49, 0.81]$) --- a quantitative bound on within-family generalization that is invisible to a single-checkpoint experiment.
 
-\textbf{NS\_double\_scale severity sweep (R2).} At every multiplicative scale $s \in \{1.1, 1.25, 1.5, 2.0, 4.0\}$ the detection rate stays at 0/6 (Wilson CI $[0.00, 0.39]$). This widens the bounded-insensitivity note from Section~\ref{subsec:within-sut-pilot}: multiplying the per-step output by a constant factor does not push the reference-relative conservation ratio past 1.5 (the per-step delta is small, so the next-state field stays close enough to the reference), does not move mirror-y by 50\% (both the source and the mirrored output scale together, so the relative L2 between them is invariant under output scaling), and does not break node-permutation equivariance (a linear operation is permutation-equivariant). The MR catalogue at the current thresholds is therefore structurally insensitive to multiplicative output scaling on this surrogate across the swept grid, not only at the canonical $2\times$ fault.
+\textbf{NS\_double\_scale severity sweep (R2).} At every multiplicative scale $s \in \{1.1, 1.25, 1.5, 2.0, 4.0\}$ the detection rate stays at 0/6 (Wilson CI $[0.00, 0.39]$). A constant output factor crosses none of the three thresholds: the reference-relative conservation ratio stays below 1.5, mirror-y moves under 50\% (source and mirror scale together), and the linear operation preserves node-permutation equivariance. The catalogue at the current thresholds is therefore structurally insensitive to multiplicative output scaling across the swept grid, not only at the canonical $2\times$ fault.
 
 \textbf{PC\_zero\_vy partial-fraction sweep (R3) --- a knife-edge symmetry blind spot.} The refined grid resolves \emph{where} detection collapses. At every partial fraction up to $p = 0.99$ the detection rate is 6/6 across the roster (Wilson CI $[0.61, 1.00]$); it falls to 0/6 (CI $[0.00, 0.39]$) only at the exactly-uniform $p = 1.0$. The transition is a step rather than a gradual decline --- even 1\%-asymmetric zeroing is caught on every checkpoint. The responsible detector is \emph{node-permutation}: partial zeroing masks $v_y$ on a node-index-selected subset, which is not relabeling-invariant; the symmetry MR never fires in this sweep (0/6 at all fractions). At $p = 1.0$ the fault becomes simultaneously permutation-invariant and mirror-y-symmetric (uniform $v_y = 0 = -0$ under reflection) and escapes every geometric detector at once. The canonical fault therefore sits in a measure-zero blind region that any partial severity exposes --- a within-family finding showing a fault can be invisible to a geometric MR suite precisely when it shares the suite's invariances.
 
 \textbf{Aggregate reading and Phase-3 unified catalogue.} The 5-of-10 union detection rate from C10 reproduces across S0--S3 (4/10 on S4/S5). By-class localization (continuity $\to$ boundary/scale; symmetry $\to$ physical-channel/adjacency) replicates across the roster, and the insensitivity regions (multiplicative output scaling, the PC\_zero\_vy / adversarial-mutant blind subspace) are bounded with Wilson 95\% CIs. This reflects the detectors' coverage geometry: each MR scores a single invariant, so a fault is caught only when it perturbs a measured invariant and is structurally invisible when it preserves all of them --- closing the blind region calls for additional MRs probing the uncovered directions, not more mutants of the same kind. Phase 3 additionally emits a 60-entry unified fault catalogue (Table~\ref{tab:claim-evidence}): 10 executed canonical MGN mutants, 2 executed adversarial MGN mutants, 24 closed-form output-level PINN probes, and 24 closed-form output-level FNO probes. The precision/recall summary is node-permutation 1.00/1.00, conservation 1.00/0.81, and mirror-y 0.94/0.55; the same artifact reports Wilcoxon and Cliff's $\delta$ tests, including PINN MR-B diffusion-vs-Burgers $\delta=0.78$ (large) with Wilcoxon $p=0.5$ at $n=3$. The PINN/FNO probes are not retrained mutant checkpoints.
-
-\begin{table}[t]
-\centering
-\caption{Per-mutant Wilson 95\% confidence intervals from the E3 sweep across the K=6 multi-checkpoint roster and 5 input-permutation seeds (30 trials per mutant). ``Detecting MR'' is the MR whose threshold the mutant trips at its canonical severity.}
-\label{tab:fault-robustness-summary}
-\scriptsize
-\setlength{\tabcolsep}{4pt}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.24\linewidth}rrr@{}}
-\toprule
-\textbf{Mutant} & \textbf{Fault class} & \textbf{Detecting MR} & \textbf{k/n} & \textbf{Rate} & \textbf{95\% CI} \\
-\midrule
-BC\_zero\_inflow & boundary cond. & conservation & 30/30 & 1.00 & $[0.89, 1.00]$ \\
-BC\_nonzero\_wall & boundary cond. & conservation & 30/30 & 1.00 & $[0.89, 1.00]$ \\
-NS\_skip\_denorm & normalization & conservation & 30/30 & 1.00 & $[0.89, 1.00]$ \\
-PC\_swap\_xy & physical channel & mirror-y & 30/30 & 1.00 & $[0.89, 1.00]$ \\
-MA\_permute\_edges & mesh adjacency & mirror-y (S0--S3 only) & 20/30 & 0.67 & $[0.49, 0.81]$ \\
-MA\_drop\_edges & mesh adjacency & (none) & 0/30 & 0.00 & $[0.00, 0.11]$ \\
-NS\_double\_scale & normalization & (none) & 0/30 & 0.00 & $[0.00, 0.11]$ \\
-TR\_sign\_flip & temporal rollout & (none) & 0/30 & 0.00 & $[0.00, 0.11]$ \\
-TR\_double\_step & temporal rollout & (none) & 0/30 & 0.00 & $[0.00, 0.11]$ \\
-PC\_zero\_vy & physical channel & (none at $p=1.0$) & 0/30 & 0.00 & $[0.00, 0.11]$ \\
-\bottomrule
-\end{tabularx}
-\end{table}
 
 \textbf{Adversarial mutants (R4).} Two adversarial mutants test whether the blind spot is a subspace, not a point. A1 is magnitude-driven, with node-permutation 0/6 and conservation 0/6; A2 escapes every detector. These results bound the detector set rather than establishing validated localization.
 
