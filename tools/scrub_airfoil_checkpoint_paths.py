@@ -16,6 +16,7 @@ Idempotent: re-running on an already-scrubbed checkpoint is a no-op.
 from __future__ import annotations
 
 import glob
+import re
 import sys
 from collections import OrderedDict
 
@@ -25,18 +26,27 @@ CKPT_DIR = (
     "research_assets/runs/production-grade-sut-extension/"
     "physicsnemo-mgn-airfoil-second-task"
 )
-PERSONAL_PREFIX = "/Users/limeng"
+# Match any personal home prefix generically -- never hard-code a username, so
+# this utility itself carries no personal path (CLAUDE.md S5.A.1).
+HOME_PREFIX_RE = re.compile(r"/(?:Users|home)/[^/\s]+")
 REPLACEMENT = "~"
+
+_changed = False
 
 
 def scrub(obj):
-    """Return a copy with PERSONAL_PREFIX removed from every string value.
+    """Return a copy with any /Users/<name> or /home/<name> prefix relativised.
 
     Tensors are passed through by reference (weights untouched); container
-    types and their ordering are preserved.
+    types and their ordering are preserved. Sets the module-level ``_changed``
+    flag if any string was rewritten, so callers can skip a no-op re-save.
     """
+    global _changed
     if isinstance(obj, str):
-        return obj.replace(PERSONAL_PREFIX, REPLACEMENT)
+        new = HOME_PREFIX_RE.sub(REPLACEMENT, obj)
+        if new != obj:
+            _changed = True
+        return new
     if isinstance(obj, OrderedDict):
         return OrderedDict((scrub(k), scrub(v)) for k, v in obj.items())
     if isinstance(obj, dict):
@@ -67,31 +77,35 @@ def weight_signature(obj):
 
 
 def main() -> int:
+    global _changed
+    import io
+
     pts = sorted(glob.glob(f"{CKPT_DIR}/*.pt"))
     if not pts:
         print(f"ERROR: no checkpoints under {CKPT_DIR}", file=sys.stderr)
         return 1
-    total_leaks_before = 0
     for pt in pts:
         ckpt = torch.load(pt, map_location="cpu", weights_only=False)
         sig_before = weight_signature(ckpt)
+        _changed = False
         scrubbed = scrub(ckpt)
-        sig_after = weight_signature(scrubbed)
-        if sig_before != sig_after:
+        if weight_signature(scrubbed) != sig_before:
             print(f"ABORT: weight signature changed for {pt}", file=sys.stderr)
             return 2
-        # Count remaining personal-path strings as a leak metric.
-        import io
-
+        if not _changed:
+            print(f"already clean (no re-save): {pt}")
+            continue
+        # Prove no home-prefix bytes survive before overwriting the file.
         buf = io.BytesIO()
         torch.save(scrubbed, buf)
-        leaked = buf.getvalue().count(PERSONAL_PREFIX.encode())
+        blob = buf.getvalue()
+        leaked = blob.count(b"/Users/") + blob.count(b"/home/")
         if leaked:
-            print(f"ABORT: {leaked} personal-path bytes survived in {pt}", file=sys.stderr)
+            print(f"ABORT: {leaked} home-path bytes survived in {pt}", file=sys.stderr)
             return 3
         torch.save(scrubbed, pt)
-        print(f"scrubbed (weights identical, {len(sig_after)} tensors): {pt}")
-    print("OK: all checkpoints scrubbed, weights preserved.")
+        print(f"scrubbed (weights identical, {len(sig_before)} tensors): {pt}")
+    print("OK: all checkpoints clean, weights preserved.")
     return 0
 
 
