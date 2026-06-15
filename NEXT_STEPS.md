@@ -71,14 +71,13 @@
   （Threats 早写 "two CFD tasks on two official datasets"），非灌水。abstract trim 回 ≤300 词、保留锁定句
   （second CFD task / Broader generalization is future work / machine precision / non-regression guard）、
   编译 undefined/Missing/Error=0、313 全绿。打 4/5 单任务 + 软化 3/5 novelty。
-- **🔴 新暴露（预存 bug，非 A/B 引入，投稿前必修）**：首次本地真编译（MacTeX）发现 **2 张表 float-too-large**
-  —— MR-card-to-verdict 表（超页 404pt）+ claim-evidence 表（超页 115pt）+ 1 个 3.93pt 单元 overfull。
-  提交态 main.log 陈旧（cloud 无 texlive，0 命中）一直 false-green；`test_stage4` 读 main.log 故仅真编译 log 上红。
-  修法：超大表转 longtable/xltabular 分页（tabularx Y 列需 xltabular）。byproduct 已还原提交态保工作树绿。
-- **(c) 备选**：接受面板密度惩罚为伪信号。
-- **委员身份**：本仓库 commit 统一 `meng004 <meng004@gmail.com>`（已 filter-branch 重写本会话 2 commit + 设 config）。
-- **本轮密度总计**：IST 11787→11314（−473）；313 全绿、两 validator exit 0、零证据/honesty 损失。
-- **验收门（同 C33/C34）**：定下结构动作后跑 v30 面板验 readability 是否回升；净正才留、回退即撤。
+- **✅ 已修（预存版面 bug）**：两张超大表（MR-card-to-verdict、claim-evidence）转 `xltabular` 分页
+  （加载 `xltabular` 包；`Y`=tabularx `X` 列，xltabular 原生支持）；"OOD/conservation" 加 `\allowbreak`
+  清 3.93pt 单元 overfull。**完整编译循环全 0**：Overfull=0 / Float-too-large=0 / undefined=0 /
+  Missing=0 / LaTeX Error=0（40 页）。`test_stage4` 现在在**新鲜干净 main.log** 上诚实通过、313 全绿；
+  守卫字面量（`\small` / `tabcolsep 3pt`）保留。
+- **byproduct 待你定**：main.log 含本地 `/Users` 路径（§5 不宜提交）且 §14.2 本不应跟踪 → 建议 gitignore
+  main.log/bbl/pdf，或投稿前重编后定。本次只提交源码；fresh PDF（40pp，含附录 + 修复表）留工作树未提交。
 
 ---
 

@@ -8,6 +8,7 @@
 \usepackage{array}
 \usepackage{longtable}
 \usepackage{tabularx}
+\usepackage{xltabular}
 \usepackage{makecell}
 \usepackage{enumitem}
 \usepackage[protrusion=true,expansion=false]{microtype}
@@ -342,28 +343,32 @@ The compact claim-to-evidence map binds every claim to a tracked artifact using 
 \subsection{MR-card-to-verdict map}
 \label{subsec:mr-card-verdict-map}
 
-\begin{table}[t]
-\centering
-\caption{MR-card-to-verdict map.}
-\label{tab:mr-card-verdict}
+{
 \small
 \renewcommand{\arraystretch}{0.96}
 \setlength{\tabcolsep}{3pt}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.22\linewidth}Y@{}}
+\begin{xltabular}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.22\linewidth}Y@{}}
+\caption{MR-card-to-verdict map.}\label{tab:mr-card-verdict}\\
 \toprule
 \textbf{MR card} & \textbf{Rubric decision} & \textbf{Runtime verdict} & \textbf{Interpretation boundary} \\
 \midrule
+\endfirsthead
+\toprule
+\textbf{MR card} & \textbf{Rubric decision} & \textbf{Runtime verdict} & \textbf{Interpretation boundary} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
 Node permutation equivariance & Retained as representation MR & pass sanity; relative L2 = 0.0 & Supports one executable representation path; does not establish model reliability. \\
 Mirror-y equivariance (asymmetric eval mesh) & Exact relation out-of-relation-domain; downgraded to approximate OOD-stress & S0 pilot: 10/10 fail; primary upgrade: 180/180 fail across K=6 x 3 trajectories x 10 & Bounded within-family OOD-stress violation across held-out trajectories; not by itself exact symmetry, cross-SUT, or geometry-independent evidence. \\
 Mirror-y equivariance (synthetic symmetric mesh) & Exact relation admissible (bijection verified, offset $<10^{-12}$, type-match 1.0) & S0 pilot: fail, rel L2 1.10; primary upgrade: 18/18 fail across K=6 x 3 input seeds & Exact-symmetry failure where the relation is admissible; synthetic no-obstacle OOD meshes, not accuracy or cross-SUT evidence. \\
 Discrete divergence / conservation & Absolute mass-conservation MR deferred; reference-relative diagnostic retained & S0 pilot inconclusive: reference-relative non-regression guard; primary upgrade: 162/162 pass across K=6 x 3 trajectories x 9 & Reference-relative diagnostic only; the absolute conservation relation remains deferred. \\
-MGN S4/S5 variant workflow & Node permutation admitted; mirror OOD/conservation diagnostic/exact-symmetry decisions recorded & 2/2 node-permutation passes; 60/60 mirror OOD failures; 54/54 conservation-diagnostic passes; 6/6 exact-symmetry failures & Same-domain MGN variant evidence, not an external SUT family. \\
-PointMLP cylinder workflow & Node permutation admitted; mirror OOD/conservation diagnostic/exact-symmetry decisions recorded & 9/9 node-permutation passes; 10/10 mirror OOD failures; 9/9 conservation-diagnostic passes; 3/3 exact-symmetry failures & Different non-MGN cylinder SUT; not PhysicsNeMo/EchoWave or production CFD evidence. \\
-PhysicsNeMo MGN Object-A smoke workflow & Node permutation admitted; mirror OOD/conservation diagnostic decisions recorded & Node permutation passes on the smoke subset (relative L2 0.0); rollout, mirror OOD, and conservation diagnostic ledgers recorded & Production-framework artifact-chain smoke evidence only; no full-scale production pass/fail rate and not external-aerodynamics evidence. \\
+MGN S4/S5 variant workflow & Node permutation admitted; mirror OOD/\allowbreak conservation diagnostic/exact-symmetry decisions recorded & 2/2 node-permutation passes; 60/60 mirror OOD failures; 54/54 conservation-diagnostic passes; 6/6 exact-symmetry failures & Same-domain MGN variant evidence, not an external SUT family. \\
+PointMLP cylinder workflow & Node permutation admitted; mirror OOD/\allowbreak conservation diagnostic/exact-symmetry decisions recorded & 9/9 node-permutation passes; 10/10 mirror OOD failures; 9/9 conservation-diagnostic passes; 3/3 exact-symmetry failures & Different non-MGN cylinder SUT; not PhysicsNeMo/EchoWave or production CFD evidence. \\
+PhysicsNeMo MGN Object-A smoke workflow & Node permutation admitted; mirror OOD/\allowbreak conservation diagnostic decisions recorded & Node permutation passes on the smoke subset (relative L2 0.0); rollout, mirror OOD, and conservation diagnostic ledgers recorded & Production-framework artifact-chain smoke evidence only; no full-scale production pass/fail rate and not external-aerodynamics evidence. \\
 FNO periodic translation and conservation & Translation admitted; periodic discrete-conservation MR admitted-with-reference-floor; Dirichlet translation rejected & FNO primary workflow upgrade: 24/24 translation passes, 24/24 conservation failures, and 6/6 rejected Dirichlet exact-MR executions & Full rubric-to-verdict FNO evidence with raw source/follow-up outputs and per-case ledgers; outside cylinder-flow and broad neural-operator claims. \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\end{xltabular}
+}
 
 \subsection{Within-SUT pilot evidence}
 \label{subsec:within-sut-pilot}
@@ -525,16 +530,21 @@ The replication package contains the manuscript source, assets, ledger, and outp
 \section{Claim-to-evidence map}
 \label{app:claim-evidence}
 
-\begin{table}[t]
-\centering
-\caption{Compact claim-to-evidence map for the current manuscript.}
-\label{tab:claim-evidence}
+{
 \tiny
 \setlength{\tabcolsep}{1.5pt}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}Y@{}}
+\begin{xltabular}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}Y@{}}
+\caption{Compact claim-to-evidence map for the current manuscript.}\label{tab:claim-evidence}\\
 \toprule
 \textbf{Claim} & \textbf{Status} & \textbf{Evidence} & \textbf{Boundary} \\
 \midrule
+\endfirsthead
+\toprule
+\textbf{Claim} & \textbf{Status} & \textbf{Evidence} & \textbf{Boundary} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
 Domain-validity rubric & Method claim & Rubric asset and manuscript method section & Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. \\
 MR-card executable assets & Workflow claim & MR cards and validators & Some cards remain protocol assets pending matched SUT evidence. \\
 Baseline admissibility contrast & Observed & Expert-MR, generic-MR, LLM-MR baselines and claim ledger & Quantifies an admissibility gap without ranking methods as competitors. \\
@@ -556,9 +566,8 @@ S4/S5 variant primary workflow & Observed & Variant report and raw ledgers & Sam
 PointMLP cylinder primary workflow & Observed & PointMLP report, checkpoint, and raw ledgers & Newly trained non-MGN row-wise coordinate network: 9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, 3/3 exact-symmetric failures, median rollout rel L2 0.0298; not PhysicsNeMo/EchoWave or production CFD evidence. \\
 PhysicsNeMo MGN Object-A smoke workflow & Observed smoke-subset production-framework execution & PhysicsNeMo smoke report, newly trained checkpoint, raw outputs, and metric ledgers & NVIDIA PhysicsNeMo \texttt{MeshGraphNet} executes on a first-record official DeepMind \texttt{cylinder\_flow} smoke subset: node permutation passes (relative L2 0.0), mirror-y is OOD stress, and conservation is reference-relative diagnostic only; not full production-scale PhysicsNeMo, AeroGraphNet, or DoMINO evidence. \\
 FNO primary workflow upgrade & Observed & FNO workflow report, per-SUT ledgers, and raw source/follow-up outputs & Six trained FNO-2D checkpoints over Burgers/heat: 24/24 translation passes, 24/24 conservation failures under a periodic discrete-conservation MR, and 6/6 Dirichlet-boundary translation rejections; not only admissibility evidence. \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\end{xltabular}
+}
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{references}
