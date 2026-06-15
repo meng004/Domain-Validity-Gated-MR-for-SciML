@@ -6,3 +6,5 @@ tmp/
 paper/ist-submission/*.aux
 paper/ist-submission/*.blg
 paper/ist-submission/*.spl
+paper/ist-submission/*.bbl
+paper/ist-submission/*.log
