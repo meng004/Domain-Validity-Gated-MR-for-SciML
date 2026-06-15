@@ -94,7 +94,7 @@
   REPRODUCIBILITY 注明"干净 clone 跑整套前须先编译生成 bbl/log，否则 test_stage4 那一条报错"。**CI 不受影响**
   （实测 `validate.yml` 只跑 compile-independent 子集、不含 test_stage4）。
 - **可复现遗留（待你）**：Zenodo 上传取 DOI（§13.4 需你账号）→ 回填 `CITATION.cff` 的 `doi:` + 论文
-  Data-availability；docker daemon 起来后实测 `docker build`。
+  Data-availability；✅ `docker build` 已实测：关 Docker 手动代理 + daocloud 镜像源后镜像构建成功，容器跑 CI 子集 **82 tests OK + 两 validator exit 0**（image `dvg-mr-sciml:latest`）。根因记录：Docker 的 HTTPS 代理被写成 `https://…:7890`（对明文代理做 TLS→EOF），且 7890 链路对 Docker 不通；关代理后直连/镜像即通。
 
 ---
 
