@@ -1,6 +1,17 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-15 by claude-code (Phase 22 increment-2 cloud execution)
+> Last updated: 2026-06-16 by claude-code (teleport->local session)
+
+## 🟢 2026-06-16 本地会话（teleport）小结
+- **✅ DOI→concept**：Zenodo v1.1.0 已发布；`CITATION.cff` + `main.tex` Data-availability 改引 **concept DOI 10.5281/zenodo.20702952**（始终指向最新版），弃用 version DOI ...953。commit `5f5b370`。
+- **✅ clarity + humanizer**：em-dash 全清（main.tex 16→0；manuscript.md 41 散文行，表格内保留）；OOD 首用定义 + K=6 加注"(six checkpoints)"；itemize 三层级长句；R1 缺陷检测段去密度（数字全留）。337 tests / 40pp / IST 11,438。commits `5f5b370`+`8ef1ba6`。
+- **✅ 面板 v34/v35（OpenAI 兼容网关）**：v34=7.49/major(5人)；v35=7.64/minor(4人,kimi 502 掉线)；**clarity 6.6→6.25 未升**（噪声+缺一人）。commit `197a30a`。诚实结论：散文/结构杠杆基本用尽（Tier1 表述正文已写过；Tier2 防御性 caveat 被 `test_stage2p5` pin、删不得）。
+- **📋 计划文档**：`docs/superpowers/plans/2026-06-16-clarity-density-revision.md` + `2026-06-16-substantive-strengthening-plan.md`（reviewer 共识 5 项+根因+修复）。
+
+## 🟡 批次 2 = Tier 3 airfoil 主级轮（治 5/5 single-task；用户授权本地 Metal）
+- **可行性 ✓**：deps(torch/torch_geometric/physicsnemo/tfrecord)+MPS=True；`~/.cache/dvgmr/airfoil_staged/` 已暂存 6 train+10 test(771MB)+K=6 ckpt；数据源 `gs://dm-meshgraphnets/airfoil`（runner range-download；补更多轨迹需 GCS+dangerouslyDisableSandbox）。bounded C31=172s（但 2-epoch 玩具、rollout L2=2.66）。
+- **🔴 拦路点**：`run_physicsnemo_mgn_airfoil_workflow.py` 的 `OUT_DIR` **硬编码到 C31 已提交目录**、无 `--out`；`test_physicsnemo_airfoil_workflow` pin 了 C31 bounded 值 → 放大跑会**覆盖 C31+破测试**。须先：(1) runner 加 `--out`/新目录 `physicsnemo-mgn-airfoil-primary-roster`、(2) 新 ledger 条目(C35)、(3) 新测试，再跑(下载+训练)+整合正文。
+- **🔵 待拍板**：主级规模 n_train/n_test/epochs（乘性成本：hidden128/proc15≈9h；n_train20/n_test30/epochs10/hidden64≈47min+~2.5GB 下载）。
 
 ## 🟢 增量② 云端执行结果（C34 经典算子-代码可执行守恒；正文撤下，工具/产物留仓库）
 
@@ -179,7 +190,7 @@ pip install torch_scatter
 
 **4. 评审面板凭据**（跑 `tools/run_academic_review_panel.py` 才需要）
 ```
-export OPENAI_BASE_URL="https://llm-api.net/v1"
+export OPENAI_BASE_URL="<GATEWAY_BASE_URL>"   # OpenAI-compatible gateway
 export OPENAI_API_KEY="<gateway key>"     # 不要提交进仓库
 ```
 

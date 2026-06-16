@@ -453,9 +453,15 @@ def _eval_one_checkpoint(model, args, meta, test_records: list, nf, nt_, ts, tm,
 def run(args):
     import time as _time
     # Update module-level STAGE_DIR if --stage-dir was provided via CLI
-    global STAGE_DIR
+    global STAGE_DIR, OUT_DIR, RAW_DIR, CHECKPOINT, REPORT, RUBRIC
     if hasattr(args, "stage_dir") and args.stage_dir:
         STAGE_DIR = Path(args.stage_dir)
+    if getattr(args, "out", None):
+        OUT_DIR = Path(args.out) if Path(args.out).is_absolute() else ROOT / args.out
+        RAW_DIR = OUT_DIR / "raw_outputs"
+        CHECKPOINT = OUT_DIR / "physicsnemo_mgn_airfoil_checkpoint.pt"
+        REPORT = OUT_DIR / "physicsnemo_mgn_airfoil_workflow_report.json"
+        RUBRIC = OUT_DIR / "physicsnemo_mgn_airfoil_rubric_decisions.json"
 
     torch.manual_seed(args.seed); np.random.seed(args.seed)
     torch.set_num_threads(args.threads)
@@ -751,6 +757,10 @@ def main():
     ap.add_argument("--stage-dir", type=str, default=None,
                     help="Override STAGE_DIR (also overridden by METBENCH_AIRFOIL_STAGE_DIR env var). "
                          "Defaults to ~/.cache/dvgmr/airfoil_staged (outside git tree).")
+    ap.add_argument("--out", type=str, default=None,
+                    help="Override OUT_DIR (relative to repo root, or absolute). Default keeps "
+                         "the committed C31 second-task dir; the primary-scale roster passes a "
+                         "new dir so C31 is preserved.")
     ap.add_argument("--n-train", type=int, default=6)
     ap.add_argument("--n-test", type=int, default=10)
     ap.add_argument("--traj-len", type=int, default=600)
