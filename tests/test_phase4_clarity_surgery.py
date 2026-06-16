@@ -24,14 +24,16 @@ class Phase4ClaritySurgeryTest(unittest.TestCase):
         # Buffer history: 11000 (Phase 4) -> 11500 (Phase 17, scaled PhysicsNeMo) ->
         # 11800 (Phase 18, second CFD task). Phase 21 adds the closed-form
         # operator-floor bound (C32, ~80 words, kept in body) but reverts the
-        # expanded-fault-catalogue prose (C33) to the repo after it did not help the
-        # review panel, so the buffer stays at 11800. The IST hard limit is 15000
-        # (conservative count), leaving a >3k margin.
+        # expanded-fault-catalogue prose (C33). Phase 22 adds the C36 cross-SUT
+        # seeded-fault replication (the second-SUT R2-1 evidence that the by-class
+        # pattern is SUT-specific, ~165 words) plus two related-work citations
+        # (physical-consistency diagnostics; same-venue MT4ML), raising the buffer to
+        # 12100. The IST hard limit is 15000 (conservative count), leaving a ~3k margin.
         counts = ist_word_count()
         self.assertLessEqual(
             counts["total"],
-            11800,
-            f"Phase 4/17/18 clarity buffer requires IST-counted text <=11800; got {counts}",
+            12100,
+            f"Phase 4/17/18/22 clarity buffer requires IST-counted text <=12100; got {counts}",
         )
 
     def test_abstract_results_and_conclusion_are_not_number_dump(self) -> None:

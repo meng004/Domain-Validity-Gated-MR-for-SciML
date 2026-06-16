@@ -1,0 +1,637 @@
+{
+  "ledger_id": "real-sut-seeded-fault-detection-physicsnemo-airfoil",
+  "evidence_level": "real-sut-second-sut-multi-trajectory-seeded-fault-detection",
+  "schema_version": "0.2.0",
+  "sut": "physicsnemo-mgn-airfoil-primary-roster (claim C35)",
+  "checkpoint_file": "checkpoint_k01_seed20260616.pt",
+  "checkpoint_sha256": "e98728518153a354759daade9421a4c6cd3ff108fac480fefdb2841057a05235",
+  "constructor": {
+    "input_dim_nodes": 6,
+    "input_dim_edges": 3,
+    "output_dim": 3,
+    "hidden": 128,
+    "processor_size": 15
+  },
+  "trajectory_indices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "num_frames_per_trajectory": 9,
+  "fault_taxonomy_source": "same 10-mutant five-class catalogue as the cylinder pilot tools/run_seeded_fault_detection.py; BC mutants mapped to airfoil boundary node types (outflow=2, wall=4)",
+  "detectors": {
+    "node_permutation_equivariance": {
+      "class": "representation MR",
+      "tolerance": 1e-05
+    },
+    "compressible_conservation_residual_ratio": {
+      "class": "continuity MR",
+      "reference_relative_regression_threshold": 1.5,
+      "note": "interior-masked compressible residual d(rho)/dt + div(rho u); differs from the cylinder's full-field incompressible divergence (physics-specific)"
+    },
+    "mirror_y_symmetry": {
+      "class": "geometric/symmetry MR",
+      "status": "inadmissible",
+      "reason": "non-zero angle of attack: reflection about the chord is not a symmetry of the boundary-value problem; rejected at the boundary/precondition gate",
+      "gate_evidence": "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/mirror_y_symmetry_rejection_ledger.json"
+    }
+  },
+  "per_trajectory": [
+    {
+      "trajectory_index": 0,
+      "baseline_conservation_ratio": 1.153517553664508,
+      "detection_matrix": [
+        {
+          "mutant": "BC_zero_outflow",
+          "fault_class": "boundary_condition_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.153517553664508,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "BC_nonzero_wall",
+          "fault_class": "boundary_condition_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.153517553664508,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "MA_drop_edges",
+          "fault_class": "mesh_adjacency_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.153517553664508,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "MA_permute_edges",
+          "fault_class": "mesh_adjacency_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.153517553664508,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "NS_skip_denorm",
+          "fault_class": "normalization_scale_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 47.710206164842766,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": true,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": true
+        },
+        {
+          "mutant": "NS_double_scale",
+          "fault_class": "normalization_scale_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.5227339812422487,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": true,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": true
+        },
+        {
+          "mutant": "TR_sign_flip",
+          "fault_class": "temporal_rollout_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.1541924672700383,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "TR_double_step",
+          "fault_class": "temporal_rollout_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.523266864843789,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": true,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": true
+        },
+        {
+          "mutant": "PC_swap_xy",
+          "fault_class": "physical_channel_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.1536131197392403,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "PC_zero_vy",
+          "fault_class": "physical_channel_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.1535154767024915,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        }
+      ],
+      "union_detection_rate": 0.3,
+      "conservation_localizes": [
+        "normalization_scale_fault",
+        "temporal_rollout_fault"
+      ]
+    },
+    {
+      "trajectory_index": 1,
+      "baseline_conservation_ratio": 1.0048193844118545,
+      "detection_matrix": [
+        {
+          "mutant": "BC_zero_outflow",
+          "fault_class": "boundary_condition_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0048193844118545,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "BC_nonzero_wall",
+          "fault_class": "boundary_condition_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0048193844118545,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "MA_drop_edges",
+          "fault_class": "mesh_adjacency_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0048193844118545,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "MA_permute_edges",
+          "fault_class": "mesh_adjacency_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0048193844118545,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "NS_skip_denorm",
+          "fault_class": "normalization_scale_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 8.420413220085015,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": true,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": true
+        },
+        {
+          "mutant": "NS_double_scale",
+          "fault_class": "normalization_scale_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0194224696771559,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "TR_sign_flip",
+          "fault_class": "temporal_rollout_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0056270521310555,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "TR_double_step",
+          "fault_class": "temporal_rollout_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.019446762622563,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "PC_swap_xy",
+          "fault_class": "physical_channel_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0054411220366974,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "PC_zero_vy",
+          "fault_class": "physical_channel_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0048685660151722,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        }
+      ],
+      "union_detection_rate": 0.1,
+      "conservation_localizes": [
+        "normalization_scale_fault"
+      ]
+    },
+    {
+      "trajectory_index": 2,
+      "baseline_conservation_ratio": 1.0145840352087605,
+      "detection_matrix": [
+        {
+          "mutant": "BC_zero_outflow",
+          "fault_class": "boundary_condition_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0145840352087605,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "BC_nonzero_wall",
+          "fault_class": "boundary_condition_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0145840352087605,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "MA_drop_edges",
+          "fault_class": "mesh_adjacency_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0145840352087605,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "MA_permute_edges",
+          "fault_class": "mesh_adjacency_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0145840352087605,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "NS_skip_denorm",
+          "fault_class": "normalization_scale_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 13.487686369075139,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": true,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": true
+        },
+        {
+          "mutant": "NS_double_scale",
+          "fault_class": "normalization_scale_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0578133651155894,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "TR_sign_flip",
+          "fault_class": "temporal_rollout_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0154316795091203,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "TR_double_step",
+          "fault_class": "temporal_rollout_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.057883084770708,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "PC_swap_xy",
+          "fault_class": "physical_channel_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0147160971659923,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "PC_zero_vy",
+          "fault_class": "physical_channel_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0145062378578127,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        }
+      ],
+      "union_detection_rate": 0.1,
+      "conservation_localizes": [
+        "normalization_scale_fault"
+      ]
+    },
+    {
+      "trajectory_index": 3,
+      "baseline_conservation_ratio": 1.0040851362973144,
+      "detection_matrix": [
+        {
+          "mutant": "BC_zero_outflow",
+          "fault_class": "boundary_condition_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0040851362973144,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "BC_nonzero_wall",
+          "fault_class": "boundary_condition_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0040851362973144,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "MA_drop_edges",
+          "fault_class": "mesh_adjacency_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.004085148765442,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "MA_permute_edges",
+          "fault_class": "mesh_adjacency_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0040851362973144,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "NS_skip_denorm",
+          "fault_class": "normalization_scale_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 7.649686440531645,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": true,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": true
+        },
+        {
+          "mutant": "NS_double_scale",
+          "fault_class": "normalization_scale_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0161696315489703,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "TR_sign_flip",
+          "fault_class": "temporal_rollout_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.004657523566163,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "TR_double_step",
+          "fault_class": "temporal_rollout_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0161896312786234,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "PC_swap_xy",
+          "fault_class": "physical_channel_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0043907230764426,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "PC_zero_vy",
+          "fault_class": "physical_channel_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0040497403308202,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        }
+      ],
+      "union_detection_rate": 0.1,
+      "conservation_localizes": [
+        "normalization_scale_fault"
+      ]
+    },
+    {
+      "trajectory_index": 4,
+      "baseline_conservation_ratio": 1.0438273830285763,
+      "detection_matrix": [
+        {
+          "mutant": "BC_zero_outflow",
+          "fault_class": "boundary_condition_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0438273830285763,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "BC_nonzero_wall",
+          "fault_class": "boundary_condition_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0438273830285763,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "MA_drop_edges",
+          "fault_class": "mesh_adjacency_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0438273830285763,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "MA_permute_edges",
+          "fault_class": "mesh_adjacency_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0438273830285763,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "NS_skip_denorm",
+          "fault_class": "normalization_scale_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 24.394354192841487,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": true,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": true
+        },
+        {
+          "mutant": "NS_double_scale",
+          "fault_class": "normalization_scale_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.1661346273366426,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "TR_sign_flip",
+          "fault_class": "temporal_rollout_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0451084660656285,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "TR_double_step",
+          "fault_class": "temporal_rollout_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.166325355458304,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "PC_swap_xy",
+          "fault_class": "physical_channel_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0440052150095112,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        },
+        {
+          "mutant": "PC_zero_vy",
+          "fault_class": "physical_channel_fault",
+          "node_perm_relative_l2_median": 0.0,
+          "conservation_ratio_median": 1.0437927200503134,
+          "node_permutation_MR_detects": false,
+          "conservation_MR_detects": false,
+          "mirror_y_MR_detects": null,
+          "detected_by_any": false
+        }
+      ],
+      "union_detection_rate": 0.1,
+      "conservation_localizes": [
+        "normalization_scale_fault"
+      ]
+    }
+  ],
+  "robustness": {
+    "n_trajectories": 5,
+    "robustly_detected_mutants": [
+      "NS_skip_denorm"
+    ],
+    "unstable_mutants": [
+      "NS_double_scale",
+      "TR_double_step"
+    ],
+    "never_detected_mutants": [
+      "BC_zero_outflow",
+      "BC_nonzero_wall",
+      "MA_drop_edges",
+      "MA_permute_edges",
+      "TR_sign_flip",
+      "PC_swap_xy",
+      "PC_zero_vy"
+    ],
+    "node_permutation_MR_detection_rate": 0.0,
+    "conservation_robustly_localizes": [
+      "normalization_scale_fault"
+    ]
+  },
+  "cross_sut_comparison": {
+    "cylinder_conservation_localizes": [
+      "boundary_condition_fault",
+      "normalization_scale_fault"
+    ],
+    "cylinder_mirror_y_localizes": [
+      "mesh_adjacency_fault",
+      "physical_channel_fault"
+    ],
+    "airfoil_conservation_robustly_localizes": [
+      "normalization_scale_fault"
+    ],
+    "shared_localization_across_suts": [
+      "normalization_scale_fault"
+    ],
+    "mirror_y_status_on_airfoil": "inadmissible",
+    "finding": "the by-class localization is SUT-specific: the conservation MR localizes to different fault classes across SUTs (boundary+normalization on the cylinder; normalization on the airfoil), and mirror-y is inadmissible for the airfoil. What generalizes across both SUTs: the conservation MR detecting gross normalization/scale faults, node-permutation's insensitivity to invariant-preserving faults, and the admissibility gate excluding mirror-y."
+  },
+  "claim_limitations": "Two SUTs, one airfoil checkpoint, N airfoil eval trajectories, one injected-fault catalogue, two admissible airfoil detectors. Detection is for this mutant set only; not a real-world fault-detection rate, reliability, or superiority claim. The cylinder by-class pattern does NOT replicate on the airfoil: mirror-y is domain-inadmissible, and the conservation MR localizes to different fault classes (the two SUTs use physics-specific conservation forms: incompressible full-field vs compressible interior-masked).",
+  "generated_at": "2026-06-16T23:45:48Z"
+}

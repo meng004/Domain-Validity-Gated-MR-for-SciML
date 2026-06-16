@@ -1050,6 +1050,46 @@ claims:
       rollout relative L2 stays at 1.00 and is reported only as a training-state
       diagnostic, not an accuracy claim. The typed verdicts do not depend on it.
 
+  - claim_id: "C36-physicsnemo-mgn-airfoil-seeded-fault-cross-sut"
+    status: "observed"
+    scope: "second-SUT replication of the seeded-fault by-class diagnostic / same 10-mutant five-class catalogue and same predeclared thresholds as the cylinder pilot (C10/PC10) / primary-scale PhysicsNeMo airfoil SUT (one checkpoint from the C35 roster) / 5 official test trajectories, 9 frames each / two admissible detectors (node-permutation, compressible conservation), mirror-y domain-inadmissible / honest negative result bounding by-class generalization"
+    evidence:
+      - "tools/run_seeded_fault_detection_physicsnemo_airfoil.py"
+      - "tests/test_seeded_fault_detection_airfoil_cross_sut.py"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-seeded-fault-detection/raw/metric_ledger.json"
+    wording_allowed: >
+      Applying the same 10-mutant five-class seeded-fault catalogue and the same
+      predeclared detector thresholds to a second SUT (the primary-scale PhysicsNeMo
+      airfoil, one checkpoint, five official test trajectories) shows that the
+      by-class fault-localization pattern is SUT-specific, not a method-general
+      property. Mirror-y is domain-inadmissible on the airfoil (non-zero angle of
+      attack), so the admissibility gate removes it from the detector set rather than
+      scoring it. Of the two admissible detectors, the conservation MR robustly
+      detects only the gross normalization fault (NS_skip_denorm) across all five
+      trajectories, node-permutation detects none, the boundary, mesh-adjacency,
+      physical-channel, and sign-flip faults are undetected, and NS_double_scale and
+      TR_double_step fire on one trajectory only. The single localization shared
+      across both SUTs is continuity -> normalization-scale faults; the cylinder's
+      continuity -> boundary and symmetry -> physical-channel/adjacency arms do not
+      transfer, because the airfoil uses a physics-specific (compressible,
+      interior-masked) conservation residual and mirror-y is inadmissible. What
+      generalizes across the two SUTs is the MR-as-detector mechanism for gross
+      output-scale faults, node-permutation's insensitivity to invariant-preserving
+      faults, and the admissibility gate excluding an MR whose precondition fails.
+    wording_forbidden:
+      - "The by-class fault-localization pattern generalizes or replicates across SUTs."
+      - "The airfoil seeded-fault result confirms or validates the by-class diagnostic."
+      - "A real-world fault-detection rate or reliability rate has been established on the airfoil."
+      - "The MRs detect most or all faults on the airfoil, or are superior to any baseline detector."
+      - "Mirror-y was executed as a fault detector on the airfoil."
+    blocked_reason: >
+      This is a deliberately scoped cross-SUT bound, not a generalization claim: two
+      SUTs, one airfoil checkpoint, one injected-fault catalogue, two admissible
+      airfoil detectors. The two SUTs use physics-specific conservation forms
+      (incompressible full-field vs compressible interior-masked), so the differing
+      by-class localization is itself the honest finding: the class-to-class mapping
+      is SUT-specific.
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
