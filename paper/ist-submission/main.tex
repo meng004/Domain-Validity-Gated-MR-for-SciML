@@ -142,9 +142,21 @@ Three contemporary works are the closest prior. \textbf{Reichert et al.~(2024)}~
 
 \textbf{The 2023 violation-attribution cluster}, Duque-Torres et al.~\citep{duqueTorres2023bugornot,duqueTorres2023completePipeline} and MetaTrimmer~\citep{duqueTorres2023metaTrimmer}, addressed the bug-vs-inapplicability separation with explicit MR constraints and automated constraint derivation. Our two-dimensional verdict instantiates this pattern for physics-governed SciML, adding a \emph{typed classification of domain-inadmissibility sub-dimensions} drawn from PDE preconditions, geometry, boundary conditions, and operator admissibility. The element none of these three works addresses is the seeded-fault MR-as-detector with by-class localization of Section~\ref{subsec:within-sut-pilot}.
 
-\paragraph{Closest-prior positioning.}
+\begin{table}[t]
+\centering\small
+\caption{Closest-prior positioning. Each prior work contributes one ingredient of validity-gated MR identification. What this paper adds: it combines them and grounds the tolerance in the operator's own error floor, types the two-dimensional domain-inadmissibility verdict, and maps MR classes to fault classes, executed end-to-end on physics-governed SciML surrogates (the prior works are applied on their own domains: hydrologic LSTM, stochastic RL, general MR pipelines).}
 \label{tab:closest-prior-positioning}
-Reichert et al.: physics-MR applicability filtering; Eniser et al.: relaxations; Duque-Torres / MetaTrimmer: bug-vs-inapplicability constraints. What this paper adds: measurement-floor admissibility, typed domain-inadmissibility, and MR-class-to-fault-class diagnostics for SciML.
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}YYYY@{}}
+\toprule
+Approach & Admissibility filter & Floor-grounded tolerance & Typed (2D) verdict & MR$\to$fault-class \\
+\midrule
+Reichert et al.\ & informal & --- & --- & --- \\
+Eniser et al.\ & --- & relaxation only & --- & --- \\
+Duque-Torres / MetaTrimmer & constraint-based & --- & 1D (bug vs.\ inapplicable) & --- \\
+\textbf{This paper} & four-condition rubric & $O(h)$ operator floor & yes & by-class \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 PINN training itself exhibits gradient-flow pathologies that bias trained models away from the governing residual \citep{wang2021gradflow,krishnapriyan2021failure}, sharpening the case for relation-level validation that does not assume a converged surrogate.
 
@@ -165,7 +177,7 @@ The distinction from residual- and uncertainty-based trust estimation is deliber
 
 Metamorphic testing, MR identification, scientific-software MT, residual diagnostics, uncertainty quantification, LLM candidate generation, and NOETHER-style candidate organization are established or emerging sources of testing ideas. The narrower claim is that SciML MR identification should be treated as a domain-validity problem: a candidate relation becomes useful only after its physical basis, transformation preconditions, output mapping, tolerance, exclusion rule, executable artifact, and relation-level verdict are recorded. Physics-based MRs for learned field predictors are an active area; the verified record sharpens the novelty statement toward validity-gated execution rather than first-use positioning.
 
-What is new is the evidence-gated conversion from candidate relation to executable SciML MR asset, to our knowledge the first end-to-end validity-gated metamorphic-testing pipeline for physics-governed SciML in which every stage, from candidate screening through verdict typing to fault-class diagnosis, is operationalized and executed rather than proposed. Each closest prior contributes one ingredient, an informal admissibility filter, a calibrated tolerance, a binary applicability pre-filter, but none combines them, grounds the tolerance in the measurement operator's own characterizable error floor, types the inadmissibility verdict, or maps MR failures back to fault classes. The structural novelty is two organizing devices: an admissibility gate tying a relation's tolerance to the numerical error floor of its own measurement, and a two-dimensional verdict separating a model violation from an out-of-domain application; the same predicate executes unchanged across MeshGraphNet, PointMLP, PhysicsNeMo, PINN, and FNO subjects. The admissibility gate is fully operational in the case study; the verdict's domain-violation axis is operationalized per relation as a continuous score from committed precondition measurements (Section~\ref{subsec:verdicts}); calibrating these scores across MR classes is still future work. A third empirically distinct element, examined in Section~\ref{subsec:within-sut-pilot}, is the seeded-fault diagnostic stress test: the MRs show a by-class response pattern (continuity to boundary/scale faults, symmetry to physical-channel/adjacency faults), an element none of the three closest prior works addresses.
+What is new is the evidence-gated conversion from candidate relation to executable SciML MR asset, to our knowledge the first end-to-end validity-gated metamorphic-testing pipeline for physics-governed SciML in which every stage, from candidate screening through verdict typing to fault-class diagnosis, is operationalized and executed rather than proposed. Table~\ref{tab:closest-prior-positioning} positions this contribution: each prior supplies one ingredient, and none combines them. The structural novelty is two organizing devices: an admissibility gate tying a relation's tolerance to the numerical error floor of its own measurement, and a two-dimensional verdict separating a model violation from an out-of-domain application; the same predicate executes unchanged across MeshGraphNet, PointMLP, PhysicsNeMo, PINN, and FNO subjects. The admissibility gate is fully operational in the case study; the verdict's domain-violation axis is operationalized per relation as a continuous score from committed precondition measurements (Section~\ref{subsec:verdicts}); calibrating these scores across MR classes is still future work. A third empirically distinct element, examined in Section~\ref{subsec:within-sut-pilot}, is the seeded-fault diagnostic stress test: the MRs show a by-class response pattern (continuity to boundary/scale faults, symmetry to physical-channel/adjacency faults).
 
 \section{Method}
 \label{sec:method}
