@@ -25,7 +25,7 @@ Credentials contract
 --------------------
 This script reads exactly these environment variables:
   OPENAI_API_KEY        (required)  bltcy or OpenAI-compatible bearer key
-  OPENAI_BASE_URL       (required)  e.g. https://api.bltcy.ai/v1
+  OPENAI_BASE_URL       (required)  e.g. <GATEWAY_BASE_URL>
   LLM_PRIMARY_MODEL     (optional, default claude-opus-4-8)
   LLM_FALLBACK_MODEL    (optional, default gpt-5.5)
 If any required env var is missing, the script fails closed with
@@ -112,7 +112,7 @@ about the cylinder-flow problem and from standard metamorphic-testing practice.
 def fail_closed(msg: str) -> int:
     sys.stderr.write(f"BLOCKED_NO_LLM_CREDENTIALS: {msg}\n")
     sys.stderr.write(
-        "Set OPENAI_API_KEY and OPENAI_BASE_URL (e.g. https://api.bltcy.ai/v1) "
+        "Set OPENAI_API_KEY and OPENAI_BASE_URL (e.g. <GATEWAY_BASE_URL>) "
         "and rerun. No output written.\n")
     return 2
 

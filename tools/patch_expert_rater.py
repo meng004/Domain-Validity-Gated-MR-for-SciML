@@ -2,7 +2,7 @@
 to fill in for a rate-limited model (e.g. Kimi-K2-Instruct → MiniMax-M3).
 
 Usage:
-  API_KEY=... BASE_URL=https://llm-api.net/v1 \
+  API_KEY=... BASE_URL=<GATEWAY_BASE_URL> \
     python3 tools/patch_expert_rater.py \
       --failed-rater "Kimi-K2-Instruct" \
       --replacement-rater "MiniMax-M3"

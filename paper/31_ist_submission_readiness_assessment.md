@@ -121,5 +121,5 @@ plateaued.** No reviewer in any round returned *reject*; no reviewer returned
   gains are a deletion-only clarity pass (in-repo) and the expert-MR baseline +
   a scaled second-family study (external input / compute).
 
-Reproduce: `OPENAI_API_KEY=… OPENAI_BASE_URL=https://api.bltcy.ai/v1 python3
+Reproduce: `OPENAI_API_KEY=… OPENAI_BASE_URL=<GATEWAY_BASE_URL> python3
 tools/run_academic_review_panel.py`.

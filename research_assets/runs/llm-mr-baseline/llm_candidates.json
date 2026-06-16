@@ -2,7 +2,7 @@
   "record_type": "llm-mr-baseline-candidates",
   "schema_version": "0.1.0",
   "generated_at": "2026-06-07T13:21:21Z",
-  "gateway_base_url": "https://api.bltcy.ai/v1",
+  "gateway_base_url": "<GATEWAY_BASE_URL>",
   "model_used": "gpt-5.5",
   "primary_model": "claude-opus-4-8",
   "fallback_model": "gpt-5.5",
