@@ -1,0 +1,6 @@
+{
+  "rejection_basis": "The SU2 airfoil trajectories carry a non-zero angle of attack, so reflection about the chord line is not a symmetry of the boundary-value problem; condition (iii) boundary-compatibility fails. Recorded as a rubric rejection rather than executed.",
+  "relation": "mirror_y_chord_symmetry",
+  "rubric_decision": "rejected-domain-invalid-boundary-precondition",
+  "verdict": "rejected-domain-invalid"
+}

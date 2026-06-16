@@ -1007,6 +1007,49 @@ claims:
       - "Any claim beyond the single textbook finite-volume exemplar."
     blocked_reason: null
 
+  - claim_id: "C35-physicsnemo-mgn-airfoil-primary-roster"
+    status: "observed"
+    scope: "NVIDIA PhysicsNeMo MeshGraphNet official architecture (hidden=128, processor_size=15, 2.33M parameters) / DeepMind airfoil (SU2 compressible transonic flow) / second CFD task and second official dataset / 25 official train + 40 official test trajectories, 15-epoch training / K=6 independently-seeded checkpoint roster / 240 checkpoint-by-trajectory evaluation cells / typed rubric decisions, per-trajectory metric ledgers, raw outputs"
+    evidence:
+      - "tools/run_physicsnemo_mgn_airfoil_workflow.py"
+      - "tests/test_physicsnemo_airfoil_primary_roster.py"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/physicsnemo_mgn_airfoil_workflow_report.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/physicsnemo_mgn_airfoil_rubric_decisions.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/node_permutation_metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/incompressible_continuity_rejection_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/compressible_conservation_metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/mirror_y_symmetry_rejection_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/raw_outputs/"
+    wording_allowed: >
+      The same four-condition admissibility predicate, applied to the DeepMind
+      airfoil task (SU2 compressible transonic flow) with the official PhysicsNeMo
+      MeshGraphNet architecture (hidden 128, 15 processor steps, 2.33M parameters)
+      trained for 15 epochs on 25 official trajectories, reproduces the typed
+      inadmissibility structure across a K=6 checkpoint roster at primary scale
+      (240 checkpoint-by-trajectory cells, against the 60-cell bounded pilot C31):
+      node-permutation equivariance is admitted and exact (240/240, relative L2
+      0.0); incompressible divergence-free continuity is rejected at the
+      physical-basis gate because the density varies by a median factor of 2.13x
+      across the field (the flow is compressible), whereas the same relation is
+      only deferred on cylinder flow; compressible unsteady mass conservation is
+      the physically-correct replacement, its absolute discrete form deferred and a
+      reference-relative diagnostic recorded (median residual ratio 1.00 across the
+      K=6 roster); mirror-y chord symmetry is rejected at the boundary-precondition
+      gate (non-zero angle of attack). The typed verdicts are training-independent,
+      which is why they hold across the full roster despite a moderate one-step
+      rollout error (median relative L2 1.00) at this training budget.
+    wording_forbidden:
+      - "This is a full-scale production airfoil benchmark."
+      - "An airfoil pass/fail rate or reliability rate has been established."
+      - "This reproduces an official NVIDIA PhysicsNeMo airfoil checkpoint."
+      - "Absolute compressible mass conservation is verified."
+      - "The airfoil surrogate achieves competitive rollout accuracy."
+    blocked_reason: >
+      SOTA airfoil surrogate accuracy (official multi-million-step schedule on the
+      full dataset) remains blocked by local GPU/runtime budget; the median one-step
+      rollout relative L2 stays at 1.00 and is reported only as a training-state
+      diagnostic, not an accuracy claim. The typed verdicts do not depend on it.
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"

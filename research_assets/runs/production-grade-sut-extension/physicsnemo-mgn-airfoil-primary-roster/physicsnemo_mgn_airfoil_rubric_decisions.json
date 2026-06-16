@@ -1,0 +1,15 @@
+{
+  "admitted_relations": [
+    "node_permutation_equivariance"
+  ],
+  "cross_task_contrast": "Same four-condition admissibility predicate as the cylinder-flow case study; the typed inadmissibility structure differs because the physics differs. Incompressible continuity is DEFERRED on cylinder (valid physics, uncalibratable floor) but REJECTED here (invalid physics, compressible flow) --- a different verdict TYPE produced by the same gate on a second task.",
+  "deferred_then_diagnostic_relations": [
+    "compressible_unsteady_mass_conservation (numerical-decidability gate, condition iv)"
+  ],
+  "object_id": "physicsnemo-mgn-airfoil-second-task",
+  "rejected_relations": [
+    "incompressible_divergence_free_continuity (physical-basis gate, condition i)",
+    "mirror_y_chord_symmetry (boundary-precondition gate, condition iii)"
+  ],
+  "task": "DeepMind airfoil / SU2 compressible transonic flow"
+}

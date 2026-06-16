@@ -1,0 +1,1212 @@
+{
+  "denominator": 240,
+  "max_relative_l2": 0.0,
+  "metric": "relative_l2(unpermuted_followup, source)",
+  "passes": 240,
+  "relation": "node_permutation_equivariance",
+  "rows": [
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 10
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 11
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 12
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 13
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 14
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 15
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 16
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 17
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 18
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 19
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 20
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 21
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 22
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 23
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 24
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 25
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 26
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 27
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 28
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 29
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 30
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 31
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 32
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 33
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 34
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 35
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 36
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 37
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 38
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 39
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 10
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 11
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 12
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 13
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 14
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 15
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 16
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 17
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 18
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 19
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 20
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 21
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 22
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 23
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 24
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 25
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 26
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 27
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 28
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 29
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 30
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 31
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 32
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 33
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 34
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 35
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 36
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 37
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 38
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 39
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 10
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 11
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 12
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 13
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 14
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 15
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 16
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 17
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 18
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 19
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 20
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 21
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 22
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 23
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 24
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 25
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 26
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 27
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 28
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 29
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 30
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 31
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 32
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 33
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 34
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 35
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 36
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 37
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 38
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 39
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 10
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 11
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 12
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 13
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 14
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 15
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 16
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 17
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 18
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 19
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 20
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 21
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 22
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 23
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 24
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 25
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 26
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 27
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 28
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 29
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 30
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 31
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 32
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 33
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 34
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 35
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 36
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 37
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 38
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 39
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 10
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 11
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 12
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 13
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 14
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 15
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 16
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 17
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 18
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 19
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 20
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 21
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 22
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 23
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 24
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 25
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 26
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 27
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 28
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 29
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 30
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 31
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 32
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 33
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 34
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 35
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 36
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 37
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 38
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 39
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 0
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 1
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 2
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 3
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 4
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 5
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 6
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 7
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 8
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 9
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 10
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 11
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 12
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 13
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 14
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 15
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 16
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 17
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 18
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 19
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 20
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 21
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 22
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 23
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 24
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 25
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 26
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 27
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 28
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 29
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 30
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 31
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 32
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 33
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 34
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 35
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 36
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 37
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 38
+    },
+    {
+      "passes": 1,
+      "relative_l2": 0.0,
+      "trajectory": 39
+    }
+  ],
+  "rubric_decision": "admitted",
+  "threshold": 1e-05,
+  "verdict": "pass"
+}

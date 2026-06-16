@@ -10,3 +10,6 @@ paper/ist-submission/*.bbl
 paper/ist-submission/*.log
 dist/
 *.tar.gz
+
+# Primary-scale airfoil roster checkpoints (regenerable from recorded seeds in the report)
+research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/*.pt
