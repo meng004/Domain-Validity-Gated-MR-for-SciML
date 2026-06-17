@@ -87,3 +87,12 @@ A full CrossRef re-verification (paper-search-mcp, DOI-first, field-by-field) fo
 | `hiremath2021ocean` | VERIFIED (corrected) | Pages 42--46 (were 31--35); title/authors/venue unchanged. crossref-verified. | Automated MR identification for ocean system models. |
 | `spieker2024trajectory` | VERIFIED | Spieker, Belmecheri, Gotlieb, Lazaar, "Evaluating Human Trajectory Prediction with Metamorphic Testing", 9th ACM MET Workshop 2024 pp.34--40, DOI 10.1145/3679006.3685071. crossref-verified. | Symmetry-MR + statistical violation-criterion neighbor (trajectory prediction, not SciML); cited in §2.3. |
 | `spieker2025multimodal` | VERIFIED | Spieker, Lazaar, Gotlieb, Belmecheri, "Metamorphic Testing of Multimodal Human Trajectory Prediction", Information and Software Technology 188:107890, 2025, DOI 10.1016/j.infsof.2025.107890. crossref-verified. | Same-venue symmetry-MR + violation-criterion neighbor; cited in §2.3. |
+
+## Maturity-reassessment additions (2026-06-17, real multi-vendor gateway panel)
+
+A real multi-vendor gateway review panel (v37+v38) plus a paper-search-mcp deep-research pass flagged the MR fault-coverage / prioritization neighbourhood as the closest *uncited* prior to the validity--coverage duality (every panel reviewer read the duality as near-tautological). Both rows crossref-verified DOI-first this session.
+
+| Key | Status | DOI / venue | Why added |
+|---|---|---|---|
+| `srinivasan2022prioritization` | VERIFIED | doi 10.1002/stvr.1807 | Srinivasan & Kanewala, "Metamorphic Relation Prioritization for Effective Regression Testing", Software Testing, Verification and Reliability 32(3):e1807, 2022. Fault-based and coverage-based MR prioritization; cited in §2.3 to contrast empirically-measured/optimized MR coverage with this paper's coverage-from-admissibility-gate result (the duality). crossref-verified. |
+| `saha2019faultdetection` | VERIFIED | doi 10.1109/aitest.2019.00019 | Saha & Kanewala, "Fault Detection Effectiveness of Metamorphic Relations Developed for Testing Supervised Classifiers", IEEE Int. Conf. on Artificial Intelligence Testing (AITest) 2019, pp.157--164. Empirical MR fault-detection-effectiveness precedent (the published venue for the arXiv:1904.07348 preprint); cited in §2.3 alongside the prioritization work. crossref-verified. |
