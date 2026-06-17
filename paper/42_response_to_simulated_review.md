@@ -49,17 +49,21 @@ which necessary relation breaks. Commit `f002c80`.
 Added a same-venue nod (§2.2, `ying2025`): recent MT applied to tabular ML models
 such as credit scoring. Commit `f002c80`.
 
-## OPEN — elevate the by-class diagnostic from "suggestive" to an evidence-supported coverage model — NEXT STEP
-The cross-SUT result (C36) plus the within-SUT K=6 replication (R1), the knife-edge
-blind-spot sweep (R3), and the adversarial mutants (R4) give four independent lines
-supporting a *predictive coverage-geometry* reading: a fault is detected iff it
-perturbs a measured invariant of an admissible MR, so the admissibility gate
-predicts the detector suite's blind spots. Two of the four lines are falsifiable
-confirmed predictions (R3 knife-edge collapse; C36 cross-SUT MR removal). Elevating
-this from a buried sentence (current §Results) to a first-class contribution is the
-next step. See NEXT_STEPS.md.
+## DONE — elevated to the central validity–coverage duality thesis (C37)
+The coverage result is now the paper's central, falsifiable thesis: the same
+physics-based gate that decides a relation's validity also fixes which faults it can
+detect — validity and fault-coverage are two faces of one gate. The airfoil cross-SUT
+result is reframed from a defensive "SUT-specific limitation" into the KEYSTONE
+confirming experiment (excluding the inadmissible mirror-y removes exactly its
+coverage while admissible relations keep theirs). Added: an explicit "Falsifiable
+predictions, and what would refute them" paragraph; the abstract Results/Conclusion
+and intro novelty paragraph recentered on the duality; claim C37 (a proposed
+principle with two confirmed falsifiable predictions; wording forbids any
+validated/quantitative predictive-model claim) plus a guard test. Honesty boundaries
+kept verbatim (test_phase9 pins; "Broader generalization is future work"; abstract
+≤300 words). Commit `e1ef055`.
 
 ## Remaining review items (paper/41) — not yet actioned
-- **R2-2** configurational-novelty framing (lead with the two genuinely new devices).
+- **R2-2** configurational-novelty framing — ADDRESSED by the duality reframe: the paper now leads with a unifying principle (validity–coverage duality), not a union of ingredients.
 - **R2-3** one concrete cross-class calibration example for the domain-violation axis.
 - **R2-4** audit abstract/intro wording so the O(h) floor's generality is not overstated.

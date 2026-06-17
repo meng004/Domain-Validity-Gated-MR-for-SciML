@@ -8,7 +8,12 @@
 - **✅ P1/P2 文献**：najafi2026（L173 物理一致性对比）+ ying2025（L129 同刊 MT4ML）。crossref 核验 + citation_audit 入账。
 - **📋 response-letter 草稿**：`paper/42_response_to_simulated_review.md`（R2-1 已解 + P1/P2 + 剩余 R2-2/2-3/2-4）。
 
-## 🔵 下一步（用户指示）：提升 suggestive 卖点 → coverage-geometry 可预测覆盖模型
+## ✅ 提升 suggestive 卖点 → validity–coverage 二象性中心论点（已完成）
+- **结果（两步落地）**：① coverage-geometry 正文升级（`b624425`）；② 按用户"全力·中心论点"指示升为**中心论点 validity–coverage duality**——abstract+intro+§Results 重构、新增 "Falsifiable predictions, and what would refute them" 段、claim **C37**（status qualified，许"提出+确证"、封"validated quantitative model"）、airfoil 从"SUT-specific 限制"重构为 **keystone 确证实验**（`e1ef055`）。诚实 pins 全留、abstract≤300、buffer 12300→12500、**352 tests 绿**、42pp。
+- **用户方法论纠正（已内化）**：诚实≠防守;最有勇气的姿态是 Popper 式"提强命题+用证据辩护+划边界+主动递靶子"。"实事求是"约束的是"不超出证据",不是"不敢下判断"。
+- **剩余 review 项**：R2-3 跨类校准示例;R2-4 O(h) floor 措辞审计(abstract/intro 不过度声称泛化)。
+
+### （存档）原始 coverage-geometry 思路
 - **思路（诚实升级，非 overclaim）**：把"by-class 定位（suggestive，SUT-specific）"升级为 **coverage-geometry 原理**——*故障被检出 ⟺ 它扰动某个 admissible MR 所测的不变量；admissibility gate 因此预测 detector 套件的盲区*。
 - **已有 4 条独立证据支撑**（2 条是可证伪的已确认预测）：R1 K=6 跨-checkpoint 复现 / **R3 knife-edge**（PC_zero_vy 在 p=1.0 同时 permutation-invariant + mirror-symmetric 时检测精确坍塌）/ R4 adversarial（盲区=子空间）/ **C36 跨-SUT**（移除 inadmissible 的 mirror-y 恰好移除其覆盖）。
 - **动作**：把现埋在 §Results 的 coverage-geometry 句提为一级贡献/卖点；abstract+contributions+novelty 以"gate 不仅 type verdict，还预测 detector 覆盖与盲区，经 knife-edge + 跨-SUT 两个可证伪预测确认"为主线。**不新增实验**（复用 R1/R3/R4/C36）。**风险**：动 contributions/abstract framing，先给具体改写方案再落。
