@@ -36,11 +36,17 @@ class Phase4ClaritySurgeryTest(unittest.TestCase):
         # accuracy complementarity result and the C39 cross-program coverage generalization
         # (seven program types, three families) -- raising the buffer to 12750 (compiled
         # count 12658). The IST hard limit is 15000, leaving a ~2.3k margin.
+        # Phase 22 then adds the C40 end-to-end cross-program execution (this paper's gate +
+        # typed verdict run on four CPU-only classical sibling solvers spanning parabolic /
+        # hyperbolic / stiff-ODE / conservation program types): one Results paragraph plus
+        # the coupled subject-systems and Threats external-validity sentences (~336 body
+        # words), raising the buffer to 13050 (compiled count 12994). The IST hard limit is
+        # 15000, still leaving a ~2.0k margin.
         counts = ist_word_count()
         self.assertLessEqual(
             counts["total"],
-            12750,
-            f"Phase 4/17/18/22 clarity buffer requires IST-counted text <=12750; got {counts}",
+            13050,
+            f"Phase 4/17/18/22 clarity buffer requires IST-counted text <=13050; got {counts}",
         )
 
     def test_abstract_results_and_conclusion_are_not_number_dump(self) -> None:

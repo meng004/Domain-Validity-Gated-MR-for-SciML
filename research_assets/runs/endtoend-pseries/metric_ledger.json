@@ -1,0 +1,1175 @@
+{
+  "ledger_id": "endtoend-cross-program-pipeline",
+  "evidence_level": "endtoend-pipeline-executed-cpu",
+  "schema_version": "0.1.0",
+  "source": "Minimum-MR-SubSet (read-only sibling) commit 726c0314e014fb4286346cf500680fd57a0f2326; SUT + MR specs + mutants imported read-only, this paper's gate + typed-verdict pipeline executed end-to-end on CPU",
+  "sibling_commit": "726c0314e014fb4286346cf500680fd57a0f2326",
+  "rubric_conditions": {
+    "i_physical_basis": "the relation has a declared physical/software basis (operator class)",
+    "ii_transformation_preconditions": "the transformation keeps the case inside the runnable validity domain",
+    "iii_output_mapping": "the expected relation is measurable from available outputs and discriminates a scrambled output (construct validity)",
+    "iv_numerical_decidability": "the verdict tolerance dominates the measuring-operator error floor (the correct program honours the relation within tolerance)"
+  },
+  "n_suts_executed": 4,
+  "n_program_types": 4,
+  "program_types": [
+    "hyperbolic PDE",
+    "nonlinear conservation law",
+    "parabolic PDE",
+    "stiff ODE"
+  ],
+  "suts": [
+    "p1_heat",
+    "p2_wave",
+    "p5_pke",
+    "p7_burgers"
+  ],
+  "openmc_e5_status": "not-executed-openmc-not-importable",
+  "openmc_importable": false,
+  "gate_makes_nontrivial_decisions": true,
+  "programs_with_rejections": 2,
+  "programs_with_deferrals": 0,
+  "programs_with_structural_blind_spots": 4,
+  "class_to_class_mappings_program_specific": true,
+  "per_sut": [
+    {
+      "tag": "E1",
+      "sut": "p1_heat",
+      "program_type": "parabolic PDE",
+      "numerical_method": "classical FDM",
+      "domain": "heat diffusion",
+      "sibling_path": "/home/user/Minimum-MR-SubSet",
+      "n_candidate_mrs": 9,
+      "gate_decision_counts": {
+        "admit": 9,
+        "reject": 0,
+        "defer": 0
+      },
+      "gate_per_mr": [
+        {
+          "mr_id": "MR1",
+          "operator_class": "P1_conservation",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR10",
+          "operator_class": "P2_monotonicity",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR2",
+          "operator_class": "P4_trajectory",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR3",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR5",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR6",
+          "operator_class": "P5_asymptotic",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR8",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR9",
+          "operator_class": "P1_conservation",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "SAMPLE_decay",
+          "operator_class": "P4_trajectory",
+          "justification_documented": false,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        }
+      ],
+      "n_mrs": 9,
+      "n_admitted_mrs": 9,
+      "n_mutants": 20,
+      "declared_equivalent_mutants": [
+        "M20_equiv_factored",
+        "M6_equiv"
+      ],
+      "admitted_operator_classes": [
+        "P1_conservation",
+        "P2_monotonicity",
+        "P3_convergence",
+        "P4_trajectory",
+        "P5_asymptotic"
+      ],
+      "full_set_mutation_score": 0.75,
+      "non_equivalent_mutation_score": 0.8333,
+      "detected_mutants": [
+        "M10_ic_shifted",
+        "M11_nt_minus1",
+        "M12_coeff_1pct",
+        "M14_ic_cos",
+        "M15_ic_amp2",
+        "M16_stencil_backward",
+        "M17_dt_x2",
+        "M18_coeff_neg1pct",
+        "M19_bc_swap",
+        "M1_coeff_sign",
+        "M2_drop_left",
+        "M4_coeff_x2",
+        "M5_ic_2pi",
+        "M8_drop_right",
+        "M9_coeff_half"
+      ],
+      "escaped_mutants": [
+        "M13_bc_left_only",
+        "M20_equiv_factored",
+        "M3_no_bc",
+        "M6_equiv",
+        "M7_dx_offbyone"
+      ],
+      "declared_equivalents_among_escaped": [
+        "M20_equiv_factored",
+        "M6_equiv"
+      ],
+      "structural_blind_spots": [
+        "M13_bc_left_only",
+        "M3_no_bc",
+        "M7_dx_offbyone"
+      ],
+      "has_structural_blind_spot": true,
+      "per_operator_class_fault_coverage": {
+        "P1_conservation": [
+          "M12_coeff_1pct",
+          "M16_stencil_backward",
+          "M17_dt_x2",
+          "M18_coeff_neg1pct",
+          "M19_bc_swap",
+          "M1_coeff_sign",
+          "M4_coeff_x2",
+          "M9_coeff_half"
+        ],
+        "P2_monotonicity": [
+          "M10_ic_shifted",
+          "M14_ic_cos",
+          "M17_dt_x2",
+          "M19_bc_swap",
+          "M1_coeff_sign",
+          "M4_coeff_x2",
+          "M5_ic_2pi"
+        ],
+        "P3_convergence": [
+          "M10_ic_shifted",
+          "M11_nt_minus1",
+          "M14_ic_cos",
+          "M15_ic_amp2",
+          "M16_stencil_backward",
+          "M17_dt_x2",
+          "M18_coeff_neg1pct",
+          "M19_bc_swap",
+          "M1_coeff_sign",
+          "M4_coeff_x2",
+          "M5_ic_2pi",
+          "M9_coeff_half"
+        ],
+        "P4_trajectory": [
+          "M10_ic_shifted",
+          "M11_nt_minus1",
+          "M14_ic_cos",
+          "M15_ic_amp2",
+          "M16_stencil_backward",
+          "M17_dt_x2",
+          "M19_bc_swap",
+          "M1_coeff_sign",
+          "M2_drop_left",
+          "M4_coeff_x2",
+          "M5_ic_2pi",
+          "M8_drop_right"
+        ]
+      },
+      "per_mr_kill_count": {
+        "MR10": 56,
+        "MR2": 80,
+        "MR3": 88,
+        "MR5": 88,
+        "MR8": 72,
+        "MR9": 64,
+        "SAMPLE_decay": 48
+      },
+      "typed_verdict_2d": {
+        "domain_violation_axis": "in-domain for all admitted MRs (gate established conditions ii and iv)",
+        "relation_violation_axis_reading": "boolean relation at declared tolerance: pass = V/floor<1 (consistent), fail = V/floor>=1 (SUT-inconsistency / fault detected)",
+        "correct_sut_region": "in-domain / consistent (all admitted MRs hold on the correct program)",
+        "n_admitted_mr_correct_sut_pass": 9,
+        "mutant_inconsistency_detections": 15,
+        "mutant_in_domain_pass_escaped": 5,
+        "excluded_from_verdict_space_reject_or_defer": 0
+      }
+    },
+    {
+      "tag": "E2",
+      "sut": "p2_wave",
+      "program_type": "hyperbolic PDE",
+      "numerical_method": "classical FDM",
+      "domain": "wave propagation",
+      "sibling_path": "/home/user/Minimum-MR-SubSet",
+      "n_candidate_mrs": 9,
+      "gate_decision_counts": {
+        "admit": 7,
+        "reject": 2,
+        "defer": 0
+      },
+      "gate_per_mr": [
+        {
+          "mr_id": "MR1",
+          "operator_class": "P5_asymptotic",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR10",
+          "operator_class": "P1_conservation",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR3",
+          "operator_class": "P1_conservation",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": false,
+            "iv_numerical_decidability": true
+          },
+          "decision": "reject",
+          "rubric_decision": "rejected-design-time",
+          "reason": "output mapping fails construct validity (condition iii): the relation is not falsified by the scrambled-observable probe, so a uniformly transformed (incorrect) output still satisfies it and the mapping yields no discriminating oracle",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": false,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR4",
+          "operator_class": "P5_asymptotic",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR5",
+          "operator_class": "P4_trajectory",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR6",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR7",
+          "operator_class": "P4_trajectory",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR8",
+          "operator_class": "P2_monotonicity",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR9",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": false,
+            "iv_numerical_decidability": true
+          },
+          "decision": "reject",
+          "rubric_decision": "rejected-design-time",
+          "reason": "output mapping fails construct validity (condition iii): the relation is not falsified by the scrambled-observable probe, so a uniformly transformed (incorrect) output still satisfies it and the mapping yields no discriminating oracle",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": false,
+            "errors": 0
+          }
+        }
+      ],
+      "n_mrs": 9,
+      "n_admitted_mrs": 7,
+      "n_mutants": 20,
+      "declared_equivalent_mutants": [
+        "W19_equiv_factored",
+        "W5_equiv"
+      ],
+      "admitted_operator_classes": [
+        "P1_conservation",
+        "P2_monotonicity",
+        "P3_convergence",
+        "P4_trajectory",
+        "P5_asymptotic"
+      ],
+      "full_set_mutation_score": 0.2,
+      "non_equivalent_mutation_score": 0.2222,
+      "detected_mutants": [
+        "W10_stencil_asym",
+        "W17_bc_reflect",
+        "W3_sign",
+        "W9_drop_prev"
+      ],
+      "escaped_mutants": [
+        "W11_energy_no_ke",
+        "W12_energy_sign",
+        "W13_cfl_neg1pct",
+        "W14_nt_minus1",
+        "W15_ic_wide",
+        "W16_ic_centered",
+        "W18_dt_half",
+        "W19_equiv_factored",
+        "W1_r2_drop",
+        "W20_dx_offbyone",
+        "W2_no_halfstep",
+        "W4_energy_no_pe",
+        "W5_equiv",
+        "W6_cfl_close",
+        "W7_r2_half",
+        "W8_halfstep_full"
+      ],
+      "declared_equivalents_among_escaped": [
+        "W19_equiv_factored",
+        "W5_equiv"
+      ],
+      "structural_blind_spots": [
+        "W11_energy_no_ke",
+        "W12_energy_sign",
+        "W13_cfl_neg1pct",
+        "W14_nt_minus1",
+        "W15_ic_wide",
+        "W16_ic_centered",
+        "W18_dt_half",
+        "W1_r2_drop",
+        "W20_dx_offbyone",
+        "W2_no_halfstep",
+        "W4_energy_no_pe",
+        "W6_cfl_close",
+        "W7_r2_half",
+        "W8_halfstep_full"
+      ],
+      "has_structural_blind_spot": true,
+      "per_operator_class_fault_coverage": {
+        "P3_convergence": [
+          "W10_stencil_asym",
+          "W17_bc_reflect",
+          "W3_sign",
+          "W9_drop_prev"
+        ]
+      },
+      "per_mr_kill_count": {
+        "MR6": 32
+      },
+      "typed_verdict_2d": {
+        "domain_violation_axis": "in-domain for all admitted MRs (gate established conditions ii and iv)",
+        "relation_violation_axis_reading": "boolean relation at declared tolerance: pass = V/floor<1 (consistent), fail = V/floor>=1 (SUT-inconsistency / fault detected)",
+        "correct_sut_region": "in-domain / consistent (all admitted MRs hold on the correct program)",
+        "n_admitted_mr_correct_sut_pass": 7,
+        "mutant_inconsistency_detections": 4,
+        "mutant_in_domain_pass_escaped": 16,
+        "excluded_from_verdict_space_reject_or_defer": 2
+      }
+    },
+    {
+      "tag": "E3",
+      "sut": "p5_pke",
+      "program_type": "stiff ODE",
+      "numerical_method": "stiff-ODE integrator (LSODA)",
+      "domain": "reactor point-kinetics",
+      "sibling_path": "/home/user/Minimum-MR-SubSet",
+      "n_candidate_mrs": 10,
+      "gate_decision_counts": {
+        "admit": 7,
+        "reject": 3,
+        "defer": 0
+      },
+      "gate_per_mr": [
+        {
+          "mr_id": "MR1",
+          "operator_class": "P2_monotonicity",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": false,
+            "iv_numerical_decidability": true
+          },
+          "decision": "reject",
+          "rubric_decision": "rejected-design-time",
+          "reason": "output mapping fails construct validity (condition iii): the relation is not falsified by the scrambled-observable probe, so a uniformly transformed (incorrect) output still satisfies it and the mapping yields no discriminating oracle",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": false,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR10",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR2",
+          "operator_class": "P4_trajectory",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR3",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR4",
+          "operator_class": "P4_trajectory",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR5",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR6",
+          "operator_class": "P2_monotonicity",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": false,
+            "iv_numerical_decidability": true
+          },
+          "decision": "reject",
+          "rubric_decision": "rejected-design-time",
+          "reason": "output mapping fails construct validity (condition iii): the relation is not falsified by the scrambled-observable probe, so a uniformly transformed (incorrect) output still satisfies it and the mapping yields no discriminating oracle",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": false,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR7",
+          "operator_class": "P4_trajectory",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR8",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR9",
+          "operator_class": "P2_monotonicity",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": false,
+            "iv_numerical_decidability": true
+          },
+          "decision": "reject",
+          "rubric_decision": "rejected-design-time",
+          "reason": "output mapping fails construct validity (condition iii): the relation is not falsified by the scrambled-observable probe, so a uniformly transformed (incorrect) output still satisfies it and the mapping yields no discriminating oracle",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": false,
+            "errors": 0
+          }
+        }
+      ],
+      "n_mrs": 10,
+      "n_admitted_mrs": 7,
+      "n_mutants": 5,
+      "declared_equivalent_mutants": [
+        "PK5_equiv"
+      ],
+      "admitted_operator_classes": [
+        "P3_convergence",
+        "P4_trajectory"
+      ],
+      "full_set_mutation_score": 0.2,
+      "non_equivalent_mutation_score": 0.25,
+      "detected_mutants": [
+        "PK2_beta_drop"
+      ],
+      "escaped_mutants": [
+        "PK1_rho_sign",
+        "PK3_lambda_sign",
+        "PK4_swap",
+        "PK5_equiv"
+      ],
+      "declared_equivalents_among_escaped": [
+        "PK5_equiv"
+      ],
+      "structural_blind_spots": [
+        "PK1_rho_sign",
+        "PK3_lambda_sign",
+        "PK4_swap"
+      ],
+      "has_structural_blind_spot": true,
+      "per_operator_class_fault_coverage": {
+        "P3_convergence": [
+          "PK2_beta_drop"
+        ]
+      },
+      "per_mr_kill_count": {
+        "MR10": 8,
+        "MR3": 8,
+        "MR8": 8
+      },
+      "typed_verdict_2d": {
+        "domain_violation_axis": "in-domain for all admitted MRs (gate established conditions ii and iv)",
+        "relation_violation_axis_reading": "boolean relation at declared tolerance: pass = V/floor<1 (consistent), fail = V/floor>=1 (SUT-inconsistency / fault detected)",
+        "correct_sut_region": "in-domain / consistent (all admitted MRs hold on the correct program)",
+        "n_admitted_mr_correct_sut_pass": 7,
+        "mutant_inconsistency_detections": 1,
+        "mutant_in_domain_pass_escaped": 4,
+        "excluded_from_verdict_space_reject_or_defer": 3
+      }
+    },
+    {
+      "tag": "E4",
+      "sut": "p7_burgers",
+      "program_type": "nonlinear conservation law",
+      "numerical_method": "classical FVM",
+      "domain": "Burgers transport",
+      "sibling_path": "/home/user/Minimum-MR-SubSet",
+      "n_candidate_mrs": 10,
+      "gate_decision_counts": {
+        "admit": 10,
+        "reject": 0,
+        "defer": 0
+      },
+      "gate_per_mr": [
+        {
+          "mr_id": "MR1",
+          "operator_class": "P1_conservation",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR10",
+          "operator_class": "P1_conservation",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR2",
+          "operator_class": "P2_monotonicity",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR3",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR4",
+          "operator_class": "P1_conservation",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR5",
+          "operator_class": "P5_asymptotic",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR6",
+          "operator_class": "P3_convergence",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR7",
+          "operator_class": "P4_trajectory",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR8",
+          "operator_class": "P1_conservation",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        },
+        {
+          "mr_id": "MR9",
+          "operator_class": "P2_monotonicity",
+          "justification_documented": true,
+          "conditions": {
+            "i_physical_basis": true,
+            "ii_transformation_preconditions": true,
+            "iii_output_mapping": true,
+            "iv_numerical_decidability": true
+          },
+          "decision": "admit",
+          "rubric_decision": "retained-design-time",
+          "reason": "all four conditions hold",
+          "firewall": {
+            "holds": true,
+            "frac_pass": 1.0,
+            "falsifiable": true,
+            "errors": 0
+          }
+        }
+      ],
+      "n_mrs": 10,
+      "n_admitted_mrs": 10,
+      "n_mutants": 5,
+      "declared_equivalent_mutants": [
+        "BU5_equiv"
+      ],
+      "admitted_operator_classes": [
+        "P1_conservation",
+        "P2_monotonicity",
+        "P3_convergence",
+        "P4_trajectory",
+        "P5_asymptotic"
+      ],
+      "full_set_mutation_score": 0.2,
+      "non_equivalent_mutation_score": 0.25,
+      "detected_mutants": [
+        "BU3_no_conserve"
+      ],
+      "escaped_mutants": [
+        "BU1_flux_linear",
+        "BU2_roll_sign",
+        "BU4_cfl_x2",
+        "BU5_equiv"
+      ],
+      "declared_equivalents_among_escaped": [
+        "BU5_equiv"
+      ],
+      "structural_blind_spots": [
+        "BU1_flux_linear",
+        "BU2_roll_sign",
+        "BU4_cfl_x2"
+      ],
+      "has_structural_blind_spot": true,
+      "per_operator_class_fault_coverage": {
+        "P1_conservation": [
+          "BU3_no_conserve"
+        ],
+        "P2_monotonicity": [
+          "BU3_no_conserve"
+        ],
+        "P3_convergence": [
+          "BU3_no_conserve"
+        ],
+        "P5_asymptotic": [
+          "BU3_no_conserve"
+        ]
+      },
+      "per_mr_kill_count": {
+        "MR1": 8,
+        "MR10": 8,
+        "MR2": 8,
+        "MR3": 8,
+        "MR4": 8,
+        "MR5": 8,
+        "MR8": 8
+      },
+      "typed_verdict_2d": {
+        "domain_violation_axis": "in-domain for all admitted MRs (gate established conditions ii and iv)",
+        "relation_violation_axis_reading": "boolean relation at declared tolerance: pass = V/floor<1 (consistent), fail = V/floor>=1 (SUT-inconsistency / fault detected)",
+        "correct_sut_region": "in-domain / consistent (all admitted MRs hold on the correct program)",
+        "n_admitted_mr_correct_sut_pass": 10,
+        "mutant_inconsistency_detections": 1,
+        "mutant_in_domain_pass_escaped": 4,
+        "excluded_from_verdict_space_reject_or_defer": 0
+      }
+    }
+  ],
+  "finding": "this paper's validity-gated pipeline (four-condition admissibility rubric + typed two-dimensional verdict + coverage map) executes end-to-end on 4 classical SUTs spanning 4 program types on CPU, producing admit/reject/defer gate decisions, typed verdicts, and a per-SUT coverage map; the gate makes non-trivial decisions (it rejects MRs whose output mapping fails construct validity), structural blind spots are present per program, and the operator-class-to-fault-coverage mapping is program-specific",
+  "honesty_boundary": "The MRs and mutants are the sibling's domain assets; what is newly executed end-to-end is this paper's gate + typed-verdict framework, unlike C39's read-only kill-matrix reuse. Detection counts are for the sibling's committed mutant sets only; no per-program reliability or real-world detection rate, no baseline superiority, and no claim that the MRs are new contributions. The E5 OpenMC Monte-Carlo SUT is not-executed-openmc-not-importable (it remains the C39 read-only generalization witness when the openmc package is unavailable on CPU).",
+  "generated_at": "2026-06-17T08:13:49Z"
+}

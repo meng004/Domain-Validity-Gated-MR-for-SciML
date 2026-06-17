@@ -1184,6 +1184,49 @@ claims:
       accuracy threshold (2x baseline rollout). The complementarity is for this mutant set
       only and asserts no superiority over accuracy/UQ, which remain necessary diagnostics.
 
+  - claim_id: "C40-endtoend-cross-program-pipeline"
+    status: "observed"
+    scope: "end-to-end execution of this paper's validity-gated pipeline (four-condition admissibility rubric + typed two-dimensional verdict + per-SUT coverage map) on four CPU-only classical SUTs imported read-only from the Minimum-MR-SubSet sibling (p1_heat, p2_wave, p5_pke, p7_burgers) spanning four program types (parabolic / hyperbolic / stiff-ODE / conservation) / the MRs and mutants are the sibling's domain assets, only the gate+verdict framework is newly executed / detection counts are for the sibling's committed mutant sets only / OpenMC Monte-Carlo (E5) not executed because openmc is not importable on CPU, so it stays the C39 read-only witness"
+    evidence:
+      - "tools/run_endtoend_pipeline_pseries.py"
+      - "tests/test_endtoend_pipeline_pseries.py"
+      - "research_assets/runs/endtoend-pseries/metric_ledger.json"
+      - "research_assets/runs/endtoend-pseries/e1/metric_ledger.json"
+      - "research_assets/runs/endtoend-pseries/e2/metric_ledger.json"
+      - "research_assets/runs/endtoend-pseries/e3/metric_ledger.json"
+      - "research_assets/runs/endtoend-pseries/e4/metric_ledger.json"
+    wording_allowed: >
+      This paper's validity-gated pipeline (the four-condition admissibility rubric, the
+      typed two-dimensional verdict, and the per-SUT coverage map) executes end-to-end on
+      CPU on four classical SUTs imported read-only from the Minimum-MR-SubSet sibling,
+      spanning parabolic, hyperbolic, stiff-ODE, and conservation-law program types. The
+      gate makes non-trivial, program-specific decisions: across the four programs it admits
+      33 MRs and rejects 5 (two on the wave SUT, three on the point-kinetics SUT) at the
+      output-mapping / construct-validity condition, because those relations are not
+      falsified by a scrambled-observable probe; no MR is deferred on these four SUTs. Each
+      admitted MR holds on the correct program (the in-domain / consistent region of the
+      typed verdict) while the mutant executions populate the SUT-inconsistency region; every
+      program carries structural blind spots once the sibling's declared equivalent mutants
+      are set aside, and the operator-class-to-fault-coverage mapping is program-specific.
+      Detection tracks the admissible MR set rather than being uniform (full-set mutation
+      score 0.75 on heat and 0.20 on the other three for the sibling's committed mutant
+      sets). This is an end-to-end execution of the pipeline, distinct from C39's read-only
+      kill-matrix reuse.
+    wording_forbidden:
+      - "A per-program reliability or real-world fault-detection rate."
+      - "Superiority over any baseline."
+      - "The MRs are new contributions of this paper (they are the sibling's domain MRs)."
+      - "The pipeline was executed on a Monte-Carlo / OpenMC SUT in this study."
+      - "Detection rates generalize beyond the sibling's committed mutant sets."
+    blocked_reason: >
+      The MRs and mutant catalogues are the read-only sibling's domain assets; only this
+      paper's gate + typed-verdict framework is newly executed end-to-end. Detection counts
+      are for the sibling's committed mutant sets at the pinned sibling commit only and are
+      deliberately heterogeneous (they track MR richness, not reliability). No baseline
+      comparison and no real-world rate. The OpenMC Monte-Carlo SUT (E5) is not executed here
+      because the openmc package is not importable on this CPU host; it remains the C39
+      read-only generalization witness.
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
