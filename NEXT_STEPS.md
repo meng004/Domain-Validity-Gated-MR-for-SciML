@@ -1,12 +1,13 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-17 by claude-code (coherence review + end-to-end breadth runbook paper/46)
+> Last updated: 2026-06-17 by claude-code (C40 端到端广度:云端 E1-E4 执行 + 已并入 youthful-feynman + 验证通过)
 
 ## 🟢 2026-06-17 连贯性终审 + 端到端广度 runbook(GPU 答案)
 - **✅ fresh-eyes coherence 审查**(agent 通读全稿):唯一真矛盾 = closest-prior 表把 by-class 当已交付能力、缺限定 → **已修**(caption 加 "(a SUT-specific stress test, not a validated localization model)")。
 - **✅ coherence follow-ups 本地已执行(commit 02b49a6 / 63cfd93)**:① duality 去冗(intro novelty 段精简 + abstract Results/Conclusion 去重,~55 词);② §4 subject 列表 + Threats 已补 C39 跨程序语料(OpenMC/wave/PKE);④ 加 tautology 防御(物理有效性谓词≠调参检测,反"检测器测什么抓什么"同义反复指控);⑤ airfoil rollout L2=1.0 "moderate"→"high/low";+ closest-prior 表 caption 加 "(SUT-specific, not a validated localization model)"。44pp / abstract 295 / 总 12725 / 361 tests。
   - **留作可选(你定)**:③ "principle/keystone" bold 词汇(你选的中心论点 framing,保留);§5.7 "Aggregate reading" 段相对位置(flow,重排有破测试风险);§3.6 D-score 五重 hedge(诚实,保留)。
-- **🔵 大杠杆 = C40 端到端跨程序(GPU-free,runbook 就绪)= `paper/46`**。**GPU 答案:不依赖**——P-series 经典解算器纯 numpy、OpenMC 纯 CPU;仅神经 surrogate 需 GPU(已覆盖)。选 E1-E4(heat/wave/PKE/burgers)+ E5 可选(OpenMC),用本文 gate+typed-verdict **端到端**跑(把 C39 只读复用升级为端到端执行)。**待下令**:切分支 `claude/endtoend-breadth-c40`、读 `paper/46`、执行。
+- **✅ 大杠杆 = C40 端到端跨程序(GPU-free)已执行 + 已并(merge `f50b530`)= `paper/46`**。**GPU 答案:不依赖**——P-series 经典解算器纯 numpy、OpenMC 纯 CPU;仅神经 surrogate 需 GPU(已覆盖)。云端在 **E1-E4(heat/wave/PKE/burgers)** 端到端跑通本文 gate+typed-verdict(把 C39 只读复用升级为端到端执行):**33 MR admit / 5 reject / 0 defer 跨 4 SUT;检出 heat 0.75、其余 0.20**;claim **C40**(status observed)+ guard `tests/test_endtoend_pipeline_pseries.py`。本地解决 §4 + Threats 两处 merge 冲突——§4 合为单一 "Cross-program breadth subjects" 组(覆盖 C39 只读 7 类型 + C40 端到端 4 经典,ref 修正 subsec:fault-robustness);Threats 保 coherence 修正 "low surrogate accuracy, L2=1.0" + 采云端更全跨程序句。**验证:371 tests / wordcount 12990≤13050(≤15000 硬限)/ validators rc=0 / §15 grep 全 0 / prose em-dash 0 / abstract 296≤300 / 45pp 0 undefined·0 missing char·0 overfull>50pt**。已 push origin/claude/youthful-feynman-qy22k2。
+- **🟡 E5 OpenMC 诚实搁置**:`openmc` 包本地 + 云端均不可用 → OpenMC 仍作 C39 **只读**见证(committed kill matrix),不进 C40 端到端集合。如需补,需先在某环境 `pip install openmc`(非 pure-pip,依赖 HDF5/cross-section data),再按 `paper/46` E5 跑。
 
 
 ## 🟢 2026-06-17 新实验执行(强化"无对比" + "实证广度")
