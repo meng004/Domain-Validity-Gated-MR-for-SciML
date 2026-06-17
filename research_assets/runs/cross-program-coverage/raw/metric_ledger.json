@@ -1,0 +1,411 @@
+{
+  "ledger_id": "cross-program-coverage-geometry-generalization",
+  "evidence_level": "reused-committed-kill-matrices-no-rerun",
+  "schema_version": "0.1.0",
+  "source": "Minimum-MR-SubSet committed kill matrices (read-only sibling), copied verbatim as fixtures under research_assets/external/minimum-mr-subset-killmatrices/",
+  "n_programs": 7,
+  "families": [
+    "classical solver",
+    "neural surrogate",
+    "production code"
+  ],
+  "per_program": [
+    {
+      "program": "s1-cylinder-mgn",
+      "n_admissible_mrs": 7,
+      "n_mutants": 10,
+      "n_fault_classes": 5,
+      "detection_rate": 0.8,
+      "covered_fault_classes": [
+        "boundary_condition_fault",
+        "normalization_scale_fault",
+        "physical_channel_fault",
+        "temporal_rollout_fault"
+      ],
+      "blind_fault_classes": [
+        "mesh_adjacency_fault"
+      ],
+      "has_structural_blind_spot": true,
+      "per_mr_localization": {
+        "mr_channel_energy": [
+          "physical_channel_fault"
+        ],
+        "mr_inflow_dirichlet": [
+          "boundary_condition_fault"
+        ],
+        "mr_rollout_direction": [
+          "temporal_rollout_fault"
+        ],
+        "mr_swap_signature": [
+          "physical_channel_fault"
+        ],
+        "mr_update_magnitude": [
+          "normalization_scale_fault",
+          "temporal_rollout_fault"
+        ],
+        "mr_update_smoothness": [
+          "normalization_scale_fault",
+          "temporal_rollout_fault"
+        ],
+        "mr_wall_noslip": [
+          "boundary_condition_fault"
+        ]
+      },
+      "fault_classes": [
+        "boundary_condition_fault",
+        "mesh_adjacency_fault",
+        "normalization_scale_fault",
+        "physical_channel_fault",
+        "temporal_rollout_fault"
+      ],
+      "family": "neural surrogate",
+      "domain": "CFD incompressible (MeshGraphNet)"
+    },
+    {
+      "program": "s2-burgers2d-pinn",
+      "n_admissible_mrs": 4,
+      "n_mutants": 10,
+      "n_fault_classes": 5,
+      "detection_rate": 0.7,
+      "covered_fault_classes": [
+        "activation_semantics",
+        "normalization_semantics",
+        "time_semantics",
+        "weight_semantics"
+      ],
+      "blind_fault_classes": [
+        "coordinate_semantics"
+      ],
+      "has_structural_blind_spot": true,
+      "per_mr_localization": {
+        "PINN_MR_INITIAL_REFERENCE": [
+          "activation_semantics",
+          "normalization_semantics",
+          "time_semantics",
+          "weight_semantics"
+        ],
+        "PINN_MR_SNAPSHOT_REFERENCE": [
+          "weight_semantics"
+        ]
+      },
+      "fault_classes": [
+        "activation_semantics",
+        "coordinate_semantics",
+        "normalization_semantics",
+        "time_semantics",
+        "weight_semantics"
+      ],
+      "family": "neural surrogate",
+      "domain": "2D conservation law (PINN)"
+    },
+    {
+      "program": "s3-diffusion2d-pinn",
+      "n_admissible_mrs": 5,
+      "n_mutants": 12,
+      "n_fault_classes": 6,
+      "detection_rate": 0.833,
+      "covered_fault_classes": [
+        "activation_semantics",
+        "neumann_boundary_semantics",
+        "normalization_semantics",
+        "time_semantics",
+        "weight_semantics"
+      ],
+      "blind_fault_classes": [
+        "coordinate_semantics"
+      ],
+      "has_structural_blind_spot": true,
+      "per_mr_localization": {
+        "DIFFUSION_PINN_MR_INITIAL_REFERENCE": [
+          "activation_semantics",
+          "neumann_boundary_semantics",
+          "normalization_semantics",
+          "time_semantics",
+          "weight_semantics"
+        ],
+        "DIFFUSION_PINN_MR_NEUMANN_MASS_CONSERVATION": [
+          "time_semantics",
+          "weight_semantics"
+        ],
+        "DIFFUSION_PINN_MR_SNAPSHOT_REFERENCE": [
+          "activation_semantics",
+          "neumann_boundary_semantics",
+          "normalization_semantics",
+          "time_semantics",
+          "weight_semantics"
+        ],
+        "DIFFUSION_PINN_MR_TEMPORAL_SMOOTHNESS": [
+          "weight_semantics"
+        ]
+      },
+      "fault_classes": [
+        "activation_semantics",
+        "coordinate_semantics",
+        "neumann_boundary_semantics",
+        "normalization_semantics",
+        "time_semantics",
+        "weight_semantics"
+      ],
+      "family": "neural surrogate",
+      "domain": "2D parabolic (PINN)"
+    },
+    {
+      "program": "c1-p2-wave",
+      "n_admissible_mrs": 7,
+      "n_mutants": 20,
+      "n_fault_classes": 16,
+      "detection_rate": 0.2,
+      "covered_fault_classes": [
+        "boundary_condition_type_error",
+        "leapfrog_history_drop",
+        "leapfrog_sign_error",
+        "stencil_asymmetry"
+      ],
+      "blind_fault_classes": [
+        "energy_observable_drop",
+        "energy_observable_sign",
+        "equivalent_reorder",
+        "grid_spacing_offbyone",
+        "initial_condition_error",
+        "initialization_overcount",
+        "initialization_skip",
+        "subtle_coefficient_bias",
+        "time_loop_truncation",
+        "timestep_halved",
+        "wave_coefficient_halved",
+        "wave_term_drop"
+      ],
+      "has_structural_blind_spot": true,
+      "per_mr_localization": {
+        "MR6": [
+          "boundary_condition_type_error",
+          "leapfrog_history_drop",
+          "leapfrog_sign_error",
+          "stencil_asymmetry"
+        ]
+      },
+      "fault_classes": [
+        "boundary_condition_type_error",
+        "energy_observable_drop",
+        "energy_observable_sign",
+        "equivalent_reorder",
+        "grid_spacing_offbyone",
+        "initial_condition_error",
+        "initialization_overcount",
+        "initialization_skip",
+        "leapfrog_history_drop",
+        "leapfrog_sign_error",
+        "stencil_asymmetry",
+        "subtle_coefficient_bias",
+        "time_loop_truncation",
+        "timestep_halved",
+        "wave_coefficient_halved",
+        "wave_term_drop"
+      ],
+      "family": "classical solver",
+      "domain": "hyperbolic PDE (FDM)"
+    },
+    {
+      "program": "c2-p5-pke",
+      "n_admissible_mrs": 7,
+      "n_mutants": 20,
+      "n_fault_classes": 15,
+      "detection_rate": 0.1,
+      "covered_fault_classes": [
+        "delayed_neutron_term_drop",
+        "derivative_vector_swap"
+      ],
+      "blind_fault_classes": [
+        "decay_constant_error",
+        "delayed_fraction_error",
+        "equivalent_reorder",
+        "generation_time_error",
+        "initial_condition_error",
+        "integrator_tolerance_error",
+        "output_index_swap",
+        "precursor_decay_drop",
+        "precursor_feedback_sign",
+        "precursor_production_sign",
+        "reactivity_scale_error",
+        "reactivity_sign_error",
+        "subtle_coefficient_bias"
+      ],
+      "has_structural_blind_spot": true,
+      "per_mr_localization": {
+        "MR10": [
+          "delayed_neutron_term_drop",
+          "derivative_vector_swap"
+        ],
+        "MR3": [
+          "delayed_neutron_term_drop",
+          "derivative_vector_swap"
+        ],
+        "MR8": [
+          "delayed_neutron_term_drop",
+          "derivative_vector_swap"
+        ]
+      },
+      "fault_classes": [
+        "decay_constant_error",
+        "delayed_fraction_error",
+        "delayed_neutron_term_drop",
+        "derivative_vector_swap",
+        "equivalent_reorder",
+        "generation_time_error",
+        "initial_condition_error",
+        "integrator_tolerance_error",
+        "output_index_swap",
+        "precursor_decay_drop",
+        "precursor_feedback_sign",
+        "precursor_production_sign",
+        "reactivity_scale_error",
+        "reactivity_sign_error",
+        "subtle_coefficient_bias"
+      ],
+      "family": "classical solver",
+      "domain": "stiff ODE / reactor kinetics"
+    },
+    {
+      "program": "c3-p7-burgers",
+      "n_admissible_mrs": 10,
+      "n_mutants": 20,
+      "n_fault_classes": 15,
+      "detection_rate": 0.2,
+      "covered_fault_classes": [
+        "boundary_update_drop",
+        "conservation_form_drop",
+        "initial_condition_error",
+        "mass_observable_scale"
+      ],
+      "blind_fault_classes": [
+        "cfl_floor_error",
+        "cfl_freeze_error",
+        "cfl_scale_error",
+        "equivalent_reorder",
+        "flux_coefficient_error",
+        "flux_form_error",
+        "spurious_diffusion",
+        "stencil_offset_error",
+        "subtle_coefficient_bias",
+        "time_loop_truncation",
+        "upwind_direction_error"
+      ],
+      "has_structural_blind_spot": true,
+      "per_mr_localization": {
+        "MR1": [
+          "boundary_update_drop",
+          "conservation_form_drop",
+          "initial_condition_error"
+        ],
+        "MR10": [
+          "boundary_update_drop",
+          "conservation_form_drop",
+          "initial_condition_error",
+          "mass_observable_scale"
+        ],
+        "MR2": [
+          "conservation_form_drop",
+          "initial_condition_error"
+        ],
+        "MR3": [
+          "boundary_update_drop",
+          "conservation_form_drop",
+          "initial_condition_error",
+          "mass_observable_scale"
+        ],
+        "MR4": [
+          "boundary_update_drop",
+          "conservation_form_drop",
+          "initial_condition_error"
+        ],
+        "MR5": [
+          "conservation_form_drop",
+          "initial_condition_error"
+        ],
+        "MR6": [
+          "initial_condition_error"
+        ],
+        "MR8": [
+          "boundary_update_drop",
+          "conservation_form_drop",
+          "mass_observable_scale"
+        ],
+        "MR9": [
+          "initial_condition_error"
+        ]
+      },
+      "fault_classes": [
+        "boundary_update_drop",
+        "cfl_floor_error",
+        "cfl_freeze_error",
+        "cfl_scale_error",
+        "conservation_form_drop",
+        "equivalent_reorder",
+        "flux_coefficient_error",
+        "flux_form_error",
+        "initial_condition_error",
+        "mass_observable_scale",
+        "spurious_diffusion",
+        "stencil_offset_error",
+        "subtle_coefficient_bias",
+        "time_loop_truncation",
+        "upwind_direction_error"
+      ],
+      "family": "classical solver",
+      "domain": "conservation law (FVM)"
+    },
+    {
+      "program": "r1-openmc",
+      "n_admissible_mrs": 5,
+      "n_mutants": 5,
+      "n_fault_classes": 5,
+      "detection_rate": 1.0,
+      "covered_fault_classes": [
+        "boundary_condition_fault",
+        "fuel_enrichment_fault",
+        "geometry_radius_fault",
+        "moderator_density_fault",
+        "particle_statistics_fault"
+      ],
+      "blind_fault_classes": [],
+      "has_structural_blind_spot": false,
+      "per_mr_localization": {
+        "P9_MR1_k_eff_physical_window": [
+          "boundary_condition_fault"
+        ],
+        "P9_MR2_enrichment_monotonicity": [
+          "fuel_enrichment_fault"
+        ],
+        "P9_MR3_statistics_convergence": [
+          "particle_statistics_fault"
+        ],
+        "P9_MR4_geometry_sensitivity": [
+          "boundary_condition_fault",
+          "geometry_radius_fault",
+          "moderator_density_fault"
+        ]
+      },
+      "fault_classes": [
+        "boundary_condition_fault",
+        "fuel_enrichment_fault",
+        "geometry_radius_fault",
+        "moderator_density_fault",
+        "particle_statistics_fault"
+      ],
+      "family": "production code",
+      "domain": "Monte-Carlo neutron transport"
+    }
+  ],
+  "aggregate": {
+    "all_programs_have_mr_coverage": true,
+    "n_with_structural_blind_spot": 6,
+    "detection_rate_range": [
+      0.1,
+      1.0
+    ],
+    "class_to_class_mappings_program_specific": true,
+    "finding": "the coverage-geometry reading -- fault coverage is the union of the admissible MR set's per-class coverage, with structural blind spots -- reproduces across all seven program types and three families; the class-to-class mapping is program-specific (distinct per program), so what generalizes is the coverage-generation structure, not the mapping."
+  },
+  "honesty_boundary": "These are committed kill matrices from the read-only Minimum-MR-SubSet corpus, reused as a generalization check of the coverage principle; the paper's validity-gated pipeline was NOT executed end-to-end on each program, and no per-program reliability or real-world detection-rate claim is made beyond these committed mutant sets.",
+  "generated_at": "2026-06-17T04:45:13Z"
+}

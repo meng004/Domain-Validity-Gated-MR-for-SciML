@@ -1125,6 +1125,38 @@ claims:
       classes, not rates); broader validation across MR families, SUTs, and fault
       models is future work and is the explicitly invited refutation surface.
 
+  - claim_id: "C39-cross-program-coverage-generalization"
+    status: "qualified"
+    scope: "generalization check of the coverage-geometry reading across seven program types in three families (neural surrogates: cylinder MGN, Burgers2D PINN, Diffusion2D PINN; classical solvers: wave, PKE, Burgers; production code: OpenMC) / reuses committed Minimum-MR-SubSet kill matrices read-only / no SUT re-run, no pipeline executed end-to-end / qualitative coverage structure, not a detection-rate or reliability claim"
+    evidence:
+      - "tools/run_cross_program_coverage.py"
+      - "tests/test_cross_program_coverage.py"
+      - "research_assets/external/minimum-mr-subset-killmatrices/PROVENANCE.md"
+      - "research_assets/runs/cross-program-coverage/raw/metric_ledger.json"
+    wording_allowed: >
+      The coverage-geometry reading reproduces across seven program types in three families
+      (neural surrogates, classical numerical solvers, and a production Monte-Carlo physics
+      code), reusing committed Minimum-MR-SubSet kill matrices read-only: each program's
+      fault coverage is the union of its admissible MR set's per-class coverage, with
+      structural blind spots present in six of the seven programs, and the class-to-class
+      mapping is program-specific (distinct per program, extending the SUT-specificity
+      finding from two CFD SUTs to seven program types). Detection rate tracks the admissible
+      MR set rather than being uniform (minimal p-series MR sets reach 10-20% with large
+      structural blind spots; richer sets reach up to 100%), which is the coverage-generation
+      structure the principle predicts. What generalizes is this structure, not the mapping
+      or any detection rate.
+    wording_forbidden:
+      - "The paper's validity-gated pipeline was executed end-to-end on each program."
+      - "A validated cross-program fault detector or a per-program reliability rate."
+      - "The MRs reliably or uniformly detect faults across programs."
+      - "These are new SUTs tested with our workflow."
+    blocked_reason: >
+      Read-only reuse of the sibling corpus's own MR suites and committed kill matrices as a
+      generalization check; not an end-to-end execution of this paper's pipeline on each
+      program. The MR suites and mutant catalogues are the sibling's; detection rates are for
+      those committed mutant sets only and are deliberately heterogeneous (they track MR
+      richness). No real-world or reliability claim.
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
