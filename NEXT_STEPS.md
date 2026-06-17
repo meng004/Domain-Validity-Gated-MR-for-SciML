@@ -1,6 +1,12 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-17 by claude-code (new experiments C38/C39 executed + integrated)
+> Last updated: 2026-06-17 by claude-code (coherence review + end-to-end breadth runbook paper/46)
+
+## 🟢 2026-06-17 连贯性终审 + 端到端广度 runbook(GPU 答案)
+- **✅ fresh-eyes coherence 审查**(agent 通读全稿):唯一真矛盾 = closest-prior 表把 by-class 当已交付能力、缺限定 → **已修**(caption 加 "(a SUT-specific stress test, not a validated localization model)")。
+- **🔵 coherence follow-ups(未做,建议)**:① duality 论述重复 ~7 次(abstract 内 2 次、L112≈L180)可合并去冗;② **§4.1 subject 列表 + Threads/Threats 未提 C39 的 OpenMC/wave/PKE**(设计-结果耦合缺口,应补,paper/46 §6 已列为 C40 必做);③ "principle/keystone" 词汇 vs "qualitative/two-SUT" hedging 张力;④ Reviewer-2 最可能攻击 coverage 半边"同义反复",仅部分预防;⑤ airfoil rollout L2=1.0 称 "moderate" 偏软。
+- **🔵 大杠杆 = C40 端到端跨程序(GPU-free,runbook 就绪)= `paper/46`**。**GPU 答案:不依赖**——P-series 经典解算器纯 numpy、OpenMC 纯 CPU;仅神经 surrogate 需 GPU(已覆盖)。选 E1-E4(heat/wave/PKE/burgers)+ E5 可选(OpenMC),用本文 gate+typed-verdict **端到端**跑(把 C39 只读复用升级为端到端执行)。**待下令**:切分支 `claude/endtoend-breadth-c40`、读 `paper/46`、执行。
+
 
 ## 🟢 2026-06-17 新实验执行(强化"无对比" + "实证广度")
 - **✅ Step 1 = C38 互补**:cylinder MGN 上 MR-detection vs rollout-accuracy。harness 加可选 `--with-rollout`(默认关、C10 证据字节不变)。结果:symmetry MR 抓 MA_permute_edges + PC_swap_xy,而它们 rollout error 仅 1.3× baseline(0.0216,< 2× 阈值)——**MR 抓 accuracy 漏的关系违背**;互补非优越。commit `374355c`。
