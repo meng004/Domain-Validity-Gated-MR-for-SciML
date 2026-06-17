@@ -131,6 +131,33 @@ def load_specs(put_id: str):
     return out
 
 
+def _decide(cond: dict, errors: int, frac_pass: float, n_draws: int):
+    """Map the four-condition outcome to a rubric decision + human reason.
+
+    Shared by the pseries gate (gate_mr) and the OpenMC gate (gate_openmc_mr) so the
+    admit/reject/defer semantics are identical across program types. None of the four
+    conditions is optional; the first failing one decides. Output-mapping (iii) is a hard
+    reject; preconditions (ii) and numerical decidability (iv) are soft deferrals.
+    """
+    if not cond["i_physical_basis"]:
+        return ("reject", "rejected-design-time",
+                "no declared physical/software basis (condition i)")
+    if not cond["iii_output_mapping"]:
+        return ("reject", "rejected-design-time",
+                "output mapping fails construct validity (condition iii): the relation is not "
+                "falsified by the scrambled-observable probe, so a uniformly transformed "
+                "(incorrect) output still satisfies it and the mapping yields no discriminating oracle")
+    if not cond["ii_transformation_preconditions"]:
+        return ("defer", "deferred",
+                "transformation preconditions not robustly satisfiable (condition ii): the "
+                f"transform raised on {errors}/{n_draws} draws")
+    if not cond["iv_numerical_decidability"]:
+        return ("defer", "deferred",
+                "numerical decidability not established (condition iv): the correct program "
+                f"honours the relation on only {frac_pass:.2f} of draws within tolerance")
+    return ("admit", "retained-design-time", "all four conditions hold")
+
+
 def gate_mr(put_id: str, mr, doc: str) -> dict:
     """Apply the four-condition domain-validity rubric to one candidate MR.
 
@@ -164,28 +191,7 @@ def gate_mr(put_id: str, mr, doc: str) -> dict:
         "iii_output_mapping": bool(vh["falsifiable"]),
         "iv_numerical_decidability": vh["frac_pass"] == 1.0 and vh["errors"] == 0,
     }
-    if not cond["i_physical_basis"]:
-        decision, rubric, reason = ("reject", "rejected-design-time",
-                                    "no declared physical/software basis (condition i)")
-    elif not cond["iii_output_mapping"]:
-        decision, rubric, reason = (
-            "reject", "rejected-design-time",
-            "output mapping fails construct validity (condition iii): the relation is not "
-            "falsified by the scrambled-observable probe, so a uniformly transformed "
-            "(incorrect) output still satisfies it and the mapping yields no discriminating oracle")
-    elif not cond["ii_transformation_preconditions"]:
-        decision, rubric, reason = (
-            "defer", "deferred",
-            "transformation preconditions not robustly satisfiable (condition ii): the "
-            f"transform raised on {vh['errors']}/{GATE_DRAWS} draws")
-    elif not cond["iv_numerical_decidability"]:
-        decision, rubric, reason = (
-            "defer", "deferred",
-            "numerical decidability not established (condition iv): the correct program "
-            f"honours the relation on only {vh['frac_pass']:.2f} of draws within tolerance")
-    else:
-        decision, rubric, reason = ("admit", "retained-design-time",
-                                    "all four conditions hold")
+    decision, rubric, reason = _decide(cond, vh["errors"], vh["frac_pass"], GATE_DRAWS)
     return {
         "mr_id": mr.mr_id,
         "operator_class": mr.meta_pattern,
@@ -321,10 +327,193 @@ def write_sut_ledger(record: dict, sibling_commit_hash: str) -> Path:
     return d / "metric_ledger.json"
 
 
+# ---------------------------------------------------------------------------
+# E5 OpenMC (Monte-Carlo neutron transport) end-to-end path.
+#
+# The sibling's MR-bearing OpenMC subject is the 1-group infinite-medium "headline"
+# PUT: its MRs are cross-section-algebra relations and its mutants are MGXS-assembly
+# bugs, so the subject is multi-group BY CONSTRUCTION and runs on CPU with a
+# self-generated MGXS library (no continuous-energy nuclear-data download). The
+# oracle is the REAL OpenMC Monte-Carlo k-eigenvalue solve
+# (mcmr.openmc_put.headline_openmc.run_kinf_openmc). The MR/relation interface here
+# is k-based -- relation(k_base, k_trans, tol) -- so this path is separate from the
+# pseries observables interface, but the four-condition gate (via _decide) is the same.
+# ---------------------------------------------------------------------------
+OPENMC_PARTICLES = 2000
+OPENMC_BATCHES = 30
+OPENMC_INACTIVE = 10
+OPENMC_MC_SEED = 1            # OpenMC RNG seed (deterministic run)
+OPENMC_DRAW_SEED = 20260531
+OPENMC_N_DRAWS = 3
+OPENMC_TOL_FLOOR = 0.01
+OPENMC_Z = 3.0
+# Documented clean equivalent (k provably unchanged: sigma_s doubling in an infinite
+# medium leaves k_inf invariant); expected to escape, not a structural blind spot.
+OPENMC_DECLARED_EQUIVALENTS = ["M07_scatter_x2"]
+
+
+def _scramble_k(k: float) -> float:
+    """Falsifiability probe mirroring the sibling pseries _scramble: uniformly transform
+    the follow-up observable by x2+1. A non-tautological relation must reject it."""
+    return k * 2.0 + 1.0
+
+
+def _make_openmc_oracle():
+    """Memoized REAL-OpenMC oracle (params, bug) -> (k, kstd): one OpenMC eigenvalue run
+    per distinct (bug, params); raising calls are not cached so the kill driver's
+    exception policy applies cleanly. Shared by the gate and the kill matrix."""
+    from mcmr.openmc_put.headline_openmc import run_kinf_openmc
+    cache: dict = {}
+
+    def oracle(params: dict, bug):
+        key = (bug, tuple(sorted(params.items())))
+        if key in cache:
+            return cache[key]
+        result = run_kinf_openmc(params, bug=bug, particles=OPENMC_PARTICLES,
+                                 batches=OPENMC_BATCHES, inactive=OPENMC_INACTIVE,
+                                 seed=OPENMC_MC_SEED)
+        cache[key] = result
+        return result
+    return oracle
+
+
+def gate_openmc_mr(mr: dict, draws: list, oracle) -> dict:
+    """Apply the paper's four-condition rubric to one OpenMC headline MR using the REAL
+    OpenMC oracle (same condition semantics and _decide logic as the pseries gate)."""
+    import math
+    relation = mr["relation"]
+    transform = mr["transform"]
+    npass = 0
+    errors = 0
+    k_b0 = k_t0 = tol0 = None
+    for i, base in enumerate(draws):
+        try:
+            trans = transform(base)
+            k_b, s_b = oracle(base, None)
+            k_t, s_t = oracle(trans, None)
+            tol = max(OPENMC_TOL_FLOOR, OPENMC_Z * math.sqrt(s_b ** 2 + s_t ** 2))
+            if i == 0:
+                k_b0, k_t0, tol0 = k_b, k_t, tol
+            if bool(relation(k_b, k_t, tol)):
+                npass += 1
+        except Exception:
+            errors += 1
+    n = len(draws)
+    frac_pass = npass / n if n else 0.0
+    if k_t0 is not None:
+        try:
+            falsifiable = not bool(relation(k_b0, _scramble_k(k_t0), tol0))
+        except Exception:
+            falsifiable = False
+    else:
+        falsifiable = False
+    cond = {
+        "i_physical_basis": bool(mr["meta_pattern"]),
+        "ii_transformation_preconditions": errors == 0,
+        "iii_output_mapping": bool(falsifiable),
+        "iv_numerical_decidability": frac_pass == 1.0 and errors == 0,
+    }
+    decision, rubric, reason = _decide(cond, errors, frac_pass, n)
+    return {
+        "mr_id": mr["mr_id"],
+        "operator_class": mr["meta_pattern"],
+        "justification_documented": True,  # headline MRs carry inline physics justification
+        "conditions": cond,
+        "decision": decision,
+        "rubric_decision": rubric,
+        "reason": reason,
+        "firewall": {"holds": frac_pass == 1.0 and errors == 0, "frac_pass": frac_pass,
+                     "falsifiable": bool(falsifiable), "errors": errors},
+    }
+
+
+def run_openmc_sut(tag: str, sibling: Path) -> dict:
+    """E5: run THIS paper's gate + typed verdict + coverage map on the sibling's OpenMC
+    headline subject, with the REAL OpenMC Monte-Carlo k-eigenvalue solve as the oracle."""
+    import openmc as _omc
+    from collections import Counter
+    from mcmr.openmc_put.headline_spec import CANDIDATE_MRS, BUG_FUNCS, sample_param_draws
+    from mcmr.openmc_put.headline_killmatrix import build_headline_kill_rows, summarize_headline
+
+    draws = sample_param_draws(OPENMC_N_DRAWS, OPENMC_DRAW_SEED)
+    oracle = _make_openmc_oracle()  # shared cache: gate runs are reused by the kill matrix
+
+    gate_rows = [gate_openmc_mr(mr, draws, oracle) for mr in CANDIDATE_MRS]
+    admitted = [mr for mr, g in zip(CANDIDATE_MRS, gate_rows) if g["decision"] == "admit"]
+    mutant_ids = list(BUG_FUNCS.keys())
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        with __import__("numpy").errstate(all="ignore"):
+            rows = build_headline_kill_rows(admitted, mutant_ids, draws, oracle,
+                                            tol_floor=OPENMC_TOL_FLOOR, z=OPENMC_Z)
+            summ = summarize_headline(rows, mutant_ids, OPENMC_N_DRAWS)
+
+    class_of = {mr["mr_id"]: mr["meta_pattern"] for mr in admitted}
+    per_class_cover: dict[str, set] = defaultdict(set)
+    for mid, coverers in summ["per_mutant_coverers"].items():
+        for covering_mr in coverers:
+            per_class_cover[class_of[covering_mr]].add(mid)
+    detected = sorted({m for m, c in summ["per_mutant_coverers"].items() if c})
+    escaped = sorted(summ["escaped"])
+    declared_equiv_escaped = sorted(set(OPENMC_DECLARED_EQUIVALENTS) & set(escaped))
+    structural_blind_spots = sorted(set(escaped) - set(OPENMC_DECLARED_EQUIVALENTS))
+    n_real = len(mutant_ids) - len(OPENMC_DECLARED_EQUIVALENTS)
+    n_detected_real = len([m for m in detected if m not in OPENMC_DECLARED_EQUIVALENTS])
+
+    decisions = {"admit": 0, "reject": 0, "defer": 0}
+    for g in gate_rows:
+        decisions[g["decision"]] += 1
+
+    typed_verdict_2d = {
+        "domain_violation_axis": "in-domain for all admitted MRs (gate established conditions ii and iv)",
+        "relation_violation_axis_reading": (
+            "boolean relation at declared tolerance: pass = V/floor<1 (consistent), "
+            "fail = V/floor>=1 (SUT-inconsistency / fault detected)"),
+        "correct_sut_region": "in-domain / consistent (all admitted MRs hold on the correct program)",
+        "n_admitted_mr_correct_sut_pass": len(admitted),
+        "mutant_inconsistency_detections": len(detected),
+        "mutant_in_domain_pass_escaped": len(escaped),
+        "excluded_from_verdict_space_reject_or_defer": decisions["reject"] + decisions["defer"],
+    }
+    return {
+        "tag": tag,
+        "sut": "openmc_headline_mg",
+        "program_type": "Monte-Carlo transport",
+        "numerical_method": "Monte-Carlo (multi-group, real OpenMC k-eigenvalue)",
+        "domain": "1-group infinite-medium criticality",
+        "sibling_path": str(sibling),
+        "openmc_version": str(getattr(_omc, "__version__", "unknown")),
+        "oracle": "real OpenMC k-eigenvalue (mcmr.openmc_put.headline_openmc.run_kinf_openmc)",
+        "openmc_run_settings": {"particles": OPENMC_PARTICLES, "batches": OPENMC_BATCHES,
+                                "inactive": OPENMC_INACTIVE, "mc_seed": OPENMC_MC_SEED,
+                                "n_draws": OPENMC_N_DRAWS},
+        "n_candidate_mrs": len(gate_rows),
+        "gate_decision_counts": decisions,
+        "gate_per_mr": gate_rows,
+        "n_mrs": len(gate_rows),
+        "n_admitted_mrs": len(admitted),
+        "n_mutants": len(mutant_ids),
+        "declared_equivalent_mutants": OPENMC_DECLARED_EQUIVALENTS,
+        "admitted_operator_classes": sorted({mr["meta_pattern"] for mr in admitted}),
+        "full_set_mutation_score": round(summ["full_set_mutation_score"], 4),
+        "non_equivalent_mutation_score": round(n_detected_real / n_real, 4) if n_real else 0.0,
+        "detected_mutants": detected,
+        "escaped_mutants": escaped,
+        "declared_equivalents_among_escaped": declared_equiv_escaped,
+        "structural_blind_spots": structural_blind_spots,
+        "has_structural_blind_spot": bool(structural_blind_spots),
+        "per_operator_class_fault_coverage": {k: sorted(v) for k, v in sorted(per_class_cover.items())},
+        "per_mr_kill_count": dict(Counter(r[0] for r in rows if r[5] == 1)),
+        "typed_verdict_2d": typed_verdict_2d,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--suts", default="p1_heat,p2_wave,p5_pke,p7_burgers",
-                        help="comma-separated SUT ids (default: the four CPU-only core SUTs)")
+    parser.add_argument("--suts", default="p1_heat,p2_wave,p5_pke,p7_burgers,p9_openmc",
+                        help="comma-separated SUT ids (default: the four CPU-only core SUTs "
+                             "plus p9_openmc, which runs only if the openmc package is importable)")
     args = parser.parse_args()
     requested = [s.strip() for s in args.suts.split(",") if s.strip()]
 
@@ -339,9 +528,20 @@ def main() -> int:
         openmc_importable = True
     except Exception:
         openmc_importable = False
-    # E5 OpenMC runs only if requested AND importable; otherwise it stays the C39 witness.
-    if OPENMC_SUT[1] in requested and openmc_importable:
-        plan.append(OPENMC_SUT)
+    run_e5 = OPENMC_SUT[1] in requested and openmc_importable
+
+    per_sut = []
+    for tag, put_id, prog_type, num_method, domain in plan:
+        rec = run_sut(tag, put_id, prog_type, num_method, domain, sibling)
+        write_sut_ledger(rec, commit)
+        per_sut.append(rec)
+
+    # E5 OpenMC: a separate code path (k-eigenvalue oracle interface), executed only if the
+    # openmc package is importable; otherwise it stays the C39 read-only witness.
+    if run_e5:
+        rec = run_openmc_sut("E5", sibling)
+        write_sut_ledger(rec, commit)
+        per_sut.append(rec)
         openmc_status = "executed"
     elif OPENMC_SUT[1] in requested:
         openmc_status = "skipped-openmc-not-importable"
@@ -349,12 +549,6 @@ def main() -> int:
         openmc_status = "not-requested-but-importable"
     else:
         openmc_status = "not-executed-openmc-not-importable"
-
-    per_sut = []
-    for tag, put_id, prog_type, num_method, domain in plan:
-        rec = run_sut(tag, put_id, prog_type, num_method, domain, sibling)
-        write_sut_ledger(rec, commit)
-        per_sut.append(rec)
 
     program_types = sorted({r["program_type"] for r in per_sut})
     # program-specific class->coverage mapping check (distinct per program)
@@ -389,20 +583,27 @@ def main() -> int:
         "finding": (
             "this paper's validity-gated pipeline (four-condition admissibility rubric + "
             "typed two-dimensional verdict + coverage map) executes end-to-end on "
-            f"{len(per_sut)} classical SUTs spanning {len(program_types)} program types on "
-            "CPU, producing admit/reject/defer gate decisions, typed verdicts, and a "
-            "per-SUT coverage map; the gate makes non-trivial decisions (it rejects MRs "
-            "whose output mapping fails construct validity), structural blind spots are "
-            "present per program, and the operator-class-to-fault-coverage mapping is "
-            "program-specific"),
+            f"{len(per_sut)} SUTs spanning {len(program_types)} program types on CPU "
+            f"({', '.join(program_types)}), producing admit/reject/defer gate decisions, "
+            "typed verdicts, and a per-SUT coverage map; the gate makes non-trivial "
+            "decisions (it rejects MRs whose output mapping fails construct validity), "
+            "structural blind spots are present per program, and the operator-class-to-"
+            "fault-coverage mapping is program-specific"),
         "honesty_boundary": (
             "The MRs and mutants are the sibling's domain assets; what is newly executed "
             "end-to-end is this paper's gate + typed-verdict framework, unlike C39's "
             "read-only kill-matrix reuse. Detection counts are for the sibling's committed "
             "mutant sets only; no per-program reliability or real-world detection rate, no "
-            "baseline superiority, and no claim that the MRs are new contributions. The E5 "
-            "OpenMC Monte-Carlo SUT is " + openmc_status + " (it remains the C39 read-only "
-            "generalization witness when the openmc package is unavailable on CPU)."),
+            "baseline superiority, and no claim that the MRs are new contributions. " + (
+                "The E5 OpenMC subject is the sibling's 1-group infinite-medium headline PUT, "
+                "executed with the REAL OpenMC Monte-Carlo k-eigenvalue solver in multi-group "
+                "mode (self-generated MGXS, no continuous-energy nuclear-data download); its "
+                "verification is against the closed-form k_inf. This is a multi-group "
+                "criticality subject, not a continuous-energy whole-core or reactor-physics "
+                "reliability result."
+                if run_e5 else
+                "The E5 OpenMC Monte-Carlo SUT is " + openmc_status + "; it remains the C39 "
+                "read-only generalization witness when the openmc package is unavailable on CPU.")),
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
     OUT.mkdir(parents=True, exist_ok=True)
