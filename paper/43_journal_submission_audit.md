@@ -43,6 +43,9 @@ Rasterized p1 (highlights), p30, p31. All render without overflow or overlap.
    that `main.tex` does **not** `\input` (main.tex is self-contained). No
    `build_submission.sh` exists, so the tarball is assembled by hand — exclude this
    file (or `git rm` / gitignore it) so it does not ship in the submission package.
+   **RESOLVED (commit `0b8fc12`):** `git rm --cached` + a `paper/ist-submission/*.raw.tex`
+   gitignore rule; the file is kept locally but removed from tracking and from any
+   future submission tarball. 352 tests still pass.
 2. **ℹ `(R1)–(R4)` experiment labels** in §Results (fault-robustness battery) read as
    experiment IDs, not revision rounds. They pass the project's own §15.3-B/§6.5
    patterns and are referenced by `tests/test_p2_adversarial_mutants.py`, so they are
@@ -54,5 +57,5 @@ Rasterized p1 (highlights), p30, p31. All render without overflow or overlap.
 
 ## Verdict
 **Submission-ready.** §15.3 grep, §15.4 compile, §15.5 numbering, and §15.6 visual all
-pass. Only finding #1 (exclude the stale `manuscript-body.raw.tex` from the tarball)
-needs a one-line action at packaging time; #2 and #3 are optional.
+pass. Finding #1 is now resolved (commit `0b8fc12`); #2 and #3 are optional. No
+outstanding actions — the manuscript is ready for IST Editorial Manager upload.
