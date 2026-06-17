@@ -1,13 +1,13 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-17 by claude-code (C40 端到端广度:云端 E1-E4 执行 + 已并入 youthful-feynman + 验证通过)
+> Last updated: 2026-06-17 by claude-code (C40 端到端广度:E1-E4 + E5 真实 OpenMC 全部执行 + 已并入 youthful-feynman + 验证通过)
 
 ## 🟢 2026-06-17 连贯性终审 + 端到端广度 runbook(GPU 答案)
 - **✅ fresh-eyes coherence 审查**(agent 通读全稿):唯一真矛盾 = closest-prior 表把 by-class 当已交付能力、缺限定 → **已修**(caption 加 "(a SUT-specific stress test, not a validated localization model)")。
 - **✅ coherence follow-ups 本地已执行(commit 02b49a6 / 63cfd93)**:① duality 去冗(intro novelty 段精简 + abstract Results/Conclusion 去重,~55 词);② §4 subject 列表 + Threats 已补 C39 跨程序语料(OpenMC/wave/PKE);④ 加 tautology 防御(物理有效性谓词≠调参检测,反"检测器测什么抓什么"同义反复指控);⑤ airfoil rollout L2=1.0 "moderate"→"high/low";+ closest-prior 表 caption 加 "(SUT-specific, not a validated localization model)"。44pp / abstract 295 / 总 12725 / 361 tests。
   - **留作可选(你定)**:③ "principle/keystone" bold 词汇(你选的中心论点 framing,保留);§5.7 "Aggregate reading" 段相对位置(flow,重排有破测试风险);§3.6 D-score 五重 hedge(诚实,保留)。
 - **✅ 大杠杆 = C40 端到端跨程序(GPU-free)已执行 + 已并(merge `f50b530`)= `paper/46`**。**GPU 答案:不依赖**——P-series 经典解算器纯 numpy、OpenMC 纯 CPU;仅神经 surrogate 需 GPU(已覆盖)。云端在 **E1-E4(heat/wave/PKE/burgers)** 端到端跑通本文 gate+typed-verdict(把 C39 只读复用升级为端到端执行):**33 MR admit / 5 reject / 0 defer 跨 4 SUT;检出 heat 0.75、其余 0.20**;claim **C40**(status observed)+ guard `tests/test_endtoend_pipeline_pseries.py`。本地解决 §4 + Threats 两处 merge 冲突——§4 合为单一 "Cross-program breadth subjects" 组(覆盖 C39 只读 7 类型 + C40 端到端 4 经典,ref 修正 subsec:fault-robustness);Threats 保 coherence 修正 "low surrogate accuracy, L2=1.0" + 采云端更全跨程序句。**验证:371 tests / wordcount 12990≤13050(≤15000 硬限)/ validators rc=0 / §15 grep 全 0 / prose em-dash 0 / abstract 296≤300 / 45pp 0 undefined·0 missing char·0 overfull>50pt**。已 push origin/claude/youthful-feynman-qy22k2。
-- **🟡 E5 OpenMC 诚实搁置**:`openmc` 包本地 + 云端均不可用 → OpenMC 仍作 C39 **只读**见证(committed kill matrix),不进 C40 端到端集合。如需补,需先在某环境 `pip install openmc`(非 pure-pip,依赖 HDF5/cross-section data),再按 `paper/46` E5 跑。
+- **✅ E5 OpenMC 已完成(云端真实跑通)+ 已并(merge `6e1973e`)**:云端用**真实 OpenMC Monte-Carlo k-eigenvalue 解算器**(v0.15.2,multi-group、1-group 无限介质,对照闭式 k∞ 验证)端到端跑通**第 5 程序类型(Monte-Carlo transport)**。C40 现升级为 **5 SUT / 5 程序类型**:gate **38 admit / 7 reject(2 wave+3 PKE+2 OpenMC)/ 0 defer**;检出 0.75 heat·0.20 其余三经典·**0.56 OpenMC**;5/5 结构盲区、映射 program-specific。诚实边界:1-group 无限介质临界 PUT、自生 MGXS、无连续能量/全堆芯/反应堆物理结果;MR+mutant 仍为兄弟仓库资产,仅 gate+verdict 新执行。claim C40 加宽(wording_forbidden 同步:禁"连续能量/全堆芯/反应堆物理")+ guard 升级 + `tools/build_openmc_e5.sh` 可复现脚本 + `endtoend-pseries/PROVENANCE.md`。本地手工解 §4 + Threats(保单一 cross-program 组结构 + 正确 ref subsec:fault-robustness + coherence "low L2=1.0";逗号替云端 prose em-dash)。**验证:372 tests / wordcount 13038≤13050 / validators rc=0 / §15 grep 全 0 / prose em-dash 0 / abstract 296≤300 / 45pp 0 undefined·0 missing char·0 overfull>50pt / §5 机密扫描 0**。已 push origin/claude/youthful-feynman-qy22k2。**至此 C40 端到端跨程序广度全部完成(5 程序类型 × 3 族,含真实生产级 Monte-Carlo 码)。**
 
 
 ## 🟢 2026-06-17 新实验执行(强化"无对比" + "实证广度")
