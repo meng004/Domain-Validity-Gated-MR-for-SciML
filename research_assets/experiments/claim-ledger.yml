@@ -1090,6 +1090,41 @@ claims:
       by-class localization is itself the honest finding: the class-to-class mapping
       is SUT-specific.
 
+  - claim_id: "C37-validity-coverage-duality"
+    status: "qualified"
+    scope: "synthesis/organizing-principle claim across C10/PC10 (cylinder seeded-fault), the R1 multi-checkpoint replication, the R3 knife-edge severity sweep, the R4 adversarial mutants, and C36 (cross-SUT replication) / a proposed falsifiable principle, not a standalone experiment / qualitative (fault-class level), two CFD SUTs / two of its predictions are confirmed"
+    evidence:
+      - "research_assets/runs/seeded-fault-detection/raw/metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-seeded-fault-detection/raw/metric_ledger.json"
+      - "tests/test_validity_coverage_duality.py"
+      - "paper/ist-submission/main.tex"
+    wording_allowed: >
+      We propose, and give confirming evidence for, a validity-coverage duality: the
+      same physics-based admissibility gate that decides whether a metamorphic
+      relation yields a meaningful verdict also fixes which faults that relation can
+      detect, because each admissible MR scores one invariant and detects exactly the
+      faults that perturb it. The gate therefore generates the MR suite's
+      fault-detection coverage and its blind spots, so coverage is predictable from
+      the admissible-MR set before any fault is run. Two of the principle's
+      predictions are falsifiable and were confirmed: a knife-edge severity sweep
+      where detection collapses exactly when a fault enters the suite's
+      shared-invariant subspace, and a cross-SUT natural experiment where changing
+      the physics makes the gate rule one MR inadmissible and removes exactly that
+      MR's fault coverage while the admissible MRs' coverage persists. The principle
+      is qualitative (fault-class level), evidenced on two CFD SUTs, and is offered as
+      a falsifiable organizing principle inviting refutation.
+    wording_forbidden:
+      - "A validated or quantitative predictive coverage model has been established."
+      - "Coverage is predicted at the level of detection rates or probabilities."
+      - "The duality is proven, or holds for all MRs, SUTs, or fault types."
+      - "Real-world or general fault-detection effectiveness is established."
+    blocked_reason: >
+      A proposed organizing principle with confirming evidence on two CFD SUTs and two
+      confirmed falsifiable predictions, not a validated theory. The "one invariant
+      per MR" reading is an idealization; the predictions are qualitative (which fault
+      classes, not rates); broader validation across MR families, SUTs, and fault
+      models is future work and is the explicitly invited refutation surface.
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"

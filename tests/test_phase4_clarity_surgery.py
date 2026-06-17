@@ -27,13 +27,16 @@ class Phase4ClaritySurgeryTest(unittest.TestCase):
         # seeded-fault replication (the second-SUT R2-1 evidence that the by-class
         # pattern is SUT-specific, ~165 words), two related-work citations
         # (physical-consistency diagnostics; same-venue MT4ML, ~120 .bbl words), and
-        # the coverage-geometry contribution reframe -- raising the buffer to 12300.
-        # The IST hard limit is 15000 (conservative count), leaving a ~2.8k margin.
+        # the coverage-geometry contribution reframe. Phase 22 then elevates that
+        # result to the central validity-coverage duality thesis (C37): a cross-SUT
+        # keystone reframe, an explicit falsifiable-predictions paragraph, and the
+        # abstract/intro recentered on the principle -- raising the buffer to 12500
+        # (compiled count 12415). The IST hard limit is 15000, leaving a ~2.5k margin.
         counts = ist_word_count()
         self.assertLessEqual(
             counts["total"],
-            12300,
-            f"Phase 4/17/18/22 clarity buffer requires IST-counted text <=12300; got {counts}",
+            12500,
+            f"Phase 4/17/18/22 clarity buffer requires IST-counted text <=12500; got {counts}",
         )
 
     def test_abstract_results_and_conclusion_are_not_number_dump(self) -> None:
