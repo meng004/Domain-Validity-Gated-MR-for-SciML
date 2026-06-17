@@ -85,10 +85,20 @@ reproducibility and the honest, falsifiable framing are genuine differentiators.
 | elsarticle (elsarticle-num) | ✓ |
 | §15 pre-submission audit (paper/43) | ✓ submission-ready |
 
-### B.4 Optional strengthening (not blockers)
-- Add Tsigkanos et al. 2023 to the LLM-MR-baseline related work (closes the missed cite).
-- A one-paragraph comparison framing (MR detection power vs an accuracy/UQ baseline on
-  the seeded faults) would pre-empt the "no comparison" reviewer reflex.
+### B.4 Strengthening pass — done
+- **Tsigkanos et al. 2023 added** (§2.3, as the LLM-driven MR-discovery prior alongside
+  graph-kernel and data-driven approaches; bib entry + crossref-verified citation_audit
+  row). Missed cite closed; bib now 33/33 all-cited.
+- **Accuracy/UQ complementarity made explicit** (the related-work distinction): the
+  gate-admitted MR surfaces a property failure that an in-distribution accuracy or UQ
+  monitor, reading only output magnitude, does not — framed as *complementarity, not
+  superiority* (per the no-baseline-superiority scope), using the committed
+  0.0216-accuracy-vs-mirror-y datum; no new experiment. Clarity buffer 12500 → 12650
+  (compiled count 12569; still ~2.4k under the 15000 hard cap).
+- *Still available on request (needs a new run, not done):* a per-seeded-fault
+  rollout-error-vs-MR-detection table would turn the conceptual complementarity into an
+  empirical one. Deferred because it requires new computation and the empirical-breadth
+  gap (more SUTs / an industrial case) is the larger lever.
 
 ## Verdict
 **Submission-ready, no blockers.** The em-dash regression is fixed. Realistic IST outcome
