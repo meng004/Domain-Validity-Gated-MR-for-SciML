@@ -1,49 +1,98 @@
-# Submission-maturity assessment — IST (2026-06-17)
+# Submission-maturity assessment — IST (2026-06-17, real multi-vendor gateway)
 
 ## How this was produced
 
-- **Gateway panel (requested): could NOT run.** `tools/run_academic_review_panel.py` fails closed without `OPENAI_BASE_URL` + `OPENAI_API_KEY` (bltcy gateway); both are unset this session and the prior key was exhausted. No multi-vendor (gpt-5.5 / glm-5.1 / deepseek-v4-flash / qwen3-max / kimi-k2.6) panel was run. To run it, provide/rotate the two env vars and re-run the script.
-- **Substitute actually run: Claude-simulated adversarial council** (project CLAUDE.md §10.9 Council Mode) — 5 reviewer personas (EIC, MethodologyRigor, DomainExpert, Perspective, DevilsAdvocate) each read the current `main.tex` independently. Record: `research_assets/runs/academic-review-panel-claude-council/review_panel_report.json`. Scores are **not numerically comparable** to the v18–v36 gateway series; read them for consensus structure, not as a calibrated score.
+- **Real multi-vendor gateway panel — RAN this session** (the deliverable that prior sessions could not run because the gateway key was exhausted). `tools/run_academic_review_panel.py` was executed twice, on two independent OpenAI-compatible gateways, each with **five distinct vendors**:
+  - **EIC** = gpt-5.5 · **MethodologyRigor** = glm-5.1 · **DomainExpert** = deepseek-v4-flash · **Perspective** = qwen3-max · **DevilsAdvocate** = kimi-k2.6.
+  - **v38** (user-provided OpenAI-compatible gateway this session) — records `research_assets/runs/academic-review-panel-v38/`.
+  - **v37** (sibling bltcy gateway) — records `research_assets/runs/academic-review-panel-v37/`.
+  - Both runs: 5/5 reviewers succeeded, zero failures, temperature 0.
+- **deep-research literature assessment** via paper-search-mcp (dblp / arXiv / crossref / openalex / semantic), independently judging novelty and positioning against the real literature.
+- **IST compliance scorecard** against the Guide-for-Authors hard requirements.
+- **Honesty boundary:** these are temperature-0 single-call LLM reviews via gateways — an automated panel *estimate*, NOT a substitute for human peer review and NOT a prediction of an actual IST editorial decision. No manuscript (`main.tex`) edits were made; this is an evaluation.
 
-## Quantitative result (Claude council)
+## 1. IST compliance — 14/14 (desk-check clean)
 
-| Dimension | Mean | Note |
+| # | Requirement | Limit | Measured | OK |
+|---|---|---|---|---|
+| 1 | Body word count | ≤ 15,000 (refs+appendices+200/float) | **12,339** (headroom 2,661) | ✓ |
+| 2 | Structured abstract sections | Context/Objective/Method/Results/Conclusion | all 5 present | ✓ |
+| 3 | Abstract length | ≤ 300 words | 295 | ✓ |
+| 4 | Highlights | 3–5 bullets, ≤85 chars each | 5 (75/80/75/76/67), separate file | ✓ |
+| 5 | Keywords | 1–7 | 7 | ✓ |
+| 6 | Title | required | present (7 words) | ✓ |
+| 7 | Reference style | elsarticle-num (Vancouver) | elsarticle-num | ✓ |
+| 8 | Document class | formal elsarticle (not free-form) | elsarticle [preprint,12pt] | ✓ |
+| 9 | Single-anonymized → keep authors | NOT anonymized | 4 authors + 3 affiliations + corr. email | ✓ |
+| 10 | CRediT statement | required | present | ✓ |
+| 11 | Declaration of Competing Interest | required | present | ✓ |
+| 12 | Generative-AI declaration | required | present | ✓ |
+| 13 | Data availability | required | present (Zenodo concept DOI) | ✓ |
+| 14 | Funding | declare | present (NSFC etc.) | ✓ |
+
+→ Nothing a desk check looks at can block this submission.
+
+## 2. Real gateway panel — cross-gateway + historical comparison
+
+| Run | Gateway | Overall /10 | Accept-prob (range) | Clarity | Majority verdict | Distribution |
+|---|---|---|---|---|---|---|
+| **v38** | user gateway | **7.86** | **0.604** (0.30–0.85) | 7.0 | **major_revision** | 3 major / 2 minor |
+| **v37** | bltcy (sibling) | **7.6** | **0.67** (0.45–0.85) | 6.8 | **minor_revision** | 2 major / 3 minor |
+| v36 | bltcy (pre-E5, pre-bib-fix) | 7.37 | 0.664 | — | major_revision | 3 major / 2 minor |
+| Claude council | simulated (5 Claude personas) | 7.0 | 0.478 | 5.8 | major_revision | 3 major / 2 minor |
+
+Per-dimension means (the two real gateways agree within noise):
+
+| Dimension | v38 | v37 |
 |---|---|---|
-| novelty_contribution | 6.4 | "incremental recombination," paper concedes this |
-| technical_soundness | 7.2 | operator-floor derivation verified correct |
-| empirical_rigor | 6.6 | DevilsAdvocate 4 (catalogue/airfoil); others 7–8 |
-| related_work | 7.4 | Perspective 6 (missing Spieker neighbor) |
-| **clarity** | **5.8** | **lowest — binding constraint, as in all prior panels** |
-| reproducibility | 8.2 | DevilsAdvocate 5 (CI cannot exercise torch SUTs); others 9 |
-| scope_match_to_ist | 7.4 | clean V&V-method fit |
+| novelty_contribution | 7.4 | 7.0 |
+| technical_soundness | 7.6 | 7.2 |
+| empirical_rigor | 7.6 | 7.6 |
+| related_work | 8.0 | 7.6 |
+| **clarity** | **7.0** | **6.8** |
+| reproducibility | 8.2 | 8.4 |
+| scope_match_to_ist | 9.2 | 8.6 |
 
-Overall 7.0 · accept-probability mean 0.478 (range 0.32–0.62) · **majority verdict major_revision (3 major / 2 minor)**.
+**The boundary story (quantitative).** Per-reviewer verdicts are stable across the two gateways for 4 of 5 reviewers:
 
-Gateway baseline v36 (pre-E5, pre-bib-fix): overall 7.37 · accept 0.664 · major_revision (3/2). The Claude council is harsher in absolute numbers (different models) but **reproduces the verdict structure and the clarity-is-weakest pattern** — the consistent signal across both panel types.
+| Reviewer (model) | v38 | v37 |
+|---|---|---|
+| EIC (gpt-5.5) | major (0.62) | major (0.55) |
+| MethodologyRigor (glm-5.1) | minor (0.85) | minor (0.85) |
+| **DomainExpert (deepseek-v4-flash)** | **major (0.40)** | **minor (0.65)** |
+| Perspective (qwen3-max) | minor (0.85) | minor (0.85) |
+| DevilsAdvocate (kimi-k2.6) | major (0.30) | major (0.45) |
 
-## Consensus (the real signal — flagged by ≥3 reviewers)
+The paper's overall verdict pivots on a **single borderline reviewer** (deepseek); the other four are gateway-invariant. Accept-probability means (0.604 / 0.67) straddle the minor/major threshold. This is the data-grounded meaning of "major-revision-ready / borderline": the manuscript sits *exactly* on the major↔minor line.
 
-1. **Clarity / scope dilution is the ceiling.** Eleven Results subsections; the EIC and Perspective both read the secondary breadth studies (read-only cross-program C39; end-to-end OpenMC + classical solvers C40) as *diluting* the contribution — and note the paper *itself* says they "assert no per-program reliability, no superiority, no new MR contribution." Recommendation (EIC, verbatim sense): consolidate to cylinder-flow core + airfoil discriminator + one cross-family transfer; demote OpenMC/classical-solver + read-only kill-matrix material to a brief appendix.
-   - **Tension worth naming:** the E5/C40 breadth was added to answer the prior "single-task external validity" criticism. A different reviewer lens now reads that same breadth as dilution. The resolution is *structural demotion* (appendix + one-line pointer), not deletion — it keeps the evidence while restoring focus.
-2. **The validity–coverage duality (C37) is near-tautological.** All five touch it. "Each MR scores one invariant" makes predictions (i)/(iii) close to definitional; only the cross-SUT keystone (C36) is a genuine empirical test, and it is n=2 CFD, fault-class-level, qualitative. Stating it as a "confirmed falsifiable principle" in the Abstract is stronger than the evidence licenses.
-3. **Airfoil second task is essentially untrained** (one-step rel L2 ≈ 1.00). The "primary-scale 240-cell" label oversells a gate-*discrimination* demo on a non-functional surrogate. The training-independence argument is sound, but the framing invites the objection.
-4. **Statistical-treatment inconsistency.** The 180/180 and 162/162 grids are honestly labelled descriptive (non-independent frames), but detector precision/recall Wilson CIs are reported *inferentially* over the same kind of correlated cells.
-5. **Novelty + one verified missing neighbor.** Novelty is honestly "combine + ground the floor"; the genuinely new atom is the O(h)-floor-grounded tolerance. Perspective flags **Spieker et al.** — verified real and on-point: *Evaluating Human Trajectory Prediction with Metamorphic Testing*, MET 2024 (DOI 10.1145/3679006.3685071), and same-venue *Metamorphic Testing of Multimodal Human Trajectory Prediction*, IST 188:107890, 2025 (DOI 10.1016/j.infsof.2025.107890). Both use symmetry MRs + a statistical violation criterion — adjacent to the mirror-y MR + V/floor device.
+## 3. Consensus diagnosis (flagged by ≥3 reviewers, present in BOTH gateways)
 
-## Strengths (consistent)
+1. **Validity–coverage duality risks reading as tautological / over-claimed for the evidence** — *every* reviewer, both runs. "Each admissible MR scores one invariant ⇒ coverage = admissible set" makes the duality near-definitional; only the cross-SUT keystone is a genuine empirical test, and it is n=2 CFD, fault-class-level, qualitative. **The #1 signal.**
+2. **Density / clarity is the binding constraint** — EIC ("sprawling, mixes primary/supporting/secondary evidence, obscures the core"), MethodologyRigor ("extremely dense, heavily hedged"), DevilsAdvocate ("jargon-heavy, impedes IST's broad audience"). Clarity is the lowest/near-lowest dimension (6.8–7.0) in every panel ever run.
+3. **Narrow empirical core + synthetic faults + under-trained airfoil** — two CFD tasks; the 10-mutant catalogue is author-implemented gross corruptions; the airfoil SUT is deliberately under-trained (rel L2 ≈ 1.0). Real-world fault-detection relevance "tenuous" (MethRigor); K=6 are same-family variants, not independent SUTs (DevilsAdvocate).
+4. **The 2D verdict's domain-violation axis is not calibrated across MR classes** (deferred to future work) — DomainExpert, Perspective; weakens cross-MR interpretability of the duality.
+5. **Novelty is incremental recombination; delineation vs Duque-Torres / Reichert / Eniser not fully sharp** — DomainExpert, DevilsAdvocate. (deep-research adds the specific uncited threat — see §4.)
 
-Fail-closed claim-ledger / reproducibility (spot-checked numbers matched raw JSON); the measurement-floor admissibility gate (correct, well-grounded, the strongest novel atom); construct discrimination via the airfoil design; honest scope/threats with a falsifiable central claim.
+Consistent strengths (both gateways): exemplary fail-closed reproducibility / claim-ledger discipline; the measurement-floor admissibility gate as the strongest novel atom; construct discrimination via the airfoil design; unusually honest scope/threats with a falsifiable central claim.
 
-## Maturity verdict
+## 4. deep-research novelty / academic-level verdict
 
-**Submission-mechanically ready, scientifically at "major-revision-ready / borderline."** Everything a desk check looks at is clean: IST-compliant (structured abstract 296 w, 5 highlights ≤85, 7 keywords, 12,158/15,000 words, numbered refs), citation integrity fixed (7 defects corrected this session), compiles 0-warning, every number ledger-backed. The paper *can* be submitted as-is and would likely draw major-revision — exactly the historical ceiling (v18–v36 plateaued at overall ~7.4–7.8, clarity-bound). No new *blocker* appeared; the gaps are the long-standing clarity/density and significance-ceiling ones.
+- **Novelty = incremental recombination + one genuinely-new atom.** The paper says so itself (§2.8), and the literature confirms it. The single most-defensible new atom: *grounding an MR's admissibility/tolerance in the intrinsic discretization-error floor (O(h) P1 divergence floor, closed-form, verified <0.5%) as an admit/defer gate.* A discretization-/round-off-tolerance search across crossref + arXiv found **no MT paper that gates MR admissibility by a measurement-operator error floor** — this atom is well-supported as new.
+- **Biggest novelty threat (verified, and actionable):** the validity–coverage / predictable-coverage claim is the territory of the **Kanewala coverage cluster** — **Srinivasan & Kanewala 2022, STVR, MR prioritization (DOI 10.1002/stvr.1807)** and **Saha & Kanewala 2018/2019, MR fault-detection effectiveness (arXiv 1904.07348)**. Both verified real; **both verified ABSENT** from the 35-entry `references.bib`. A Reviewer 2 will ask why "which MR catches which fault / where the suite is blind" is not cited or contrasted.
+  - (deep-research also tentatively flagged Olsen & Raunak's validity-titled TR and Lin/Simon/Niu hierarchical MRs as possibly missing — **bib verification shows both are already cited**; those were false alarms. `yang2020hierarchical` is the authors' own 《计算机科学》/北大核心 2020 paper, DOI 10.11896/jsjkx.200200015 — real, just not in crossref/dblp because it is a Chinese journal.)
+- **Significance for IST:** borderline-to-above-bar (lower half of acceptable), appropriate for a regular paper. Strong venue fit (IST has a 2025 MT-of-ML precedent, Spieker et al. 188:107890). The limiter is scope (one-task core, qualitative duality, deferred cross-relation calibration) and the recombination-not-paradigm novelty — all candidly flagged by the paper.
 
-## Prioritized pre-submission options (all the user's call — no manuscript edits made)
+## 5. Maturity verdict
 
-- **P1 (highest leverage, low risk): density/clarity surgery on Results §5.** Demote C39/C40 cross-program + OpenMC detail to an appendix with a one-line main-text pointer; this directly targets the binding constraint (clarity 5.8) without removing evidence. The historical record shows clarity is the only dimension that moves the panel.
-- **P2 (low risk): add the verified Spieker citations** (MET 2024 + IST 2025) to the related-work symmetry-MR/violation-criterion discussion; same-venue IST 2025 cite also helps scope-fit.
-- **P3 (trivial): tighten OpenMC wording** in the body from "multi-group" to "1-group infinite-medium" to match the ledger/PROVENANCE precision.
-- **P4 (trivial): label detector precision/recall descriptively** (consistent with the 180/180 grids) or add the "non-independent cells" caveat to the CIs.
-- **P5 (optional): soften the Abstract duality wording** from "confirmed falsifiable principle" toward the n=2 qualitative scope already stated in the body.
+**Mechanically submission-ready; scientifically on the major/minor-revision boundary.** Quantitatively: overall ≈ 7.6–7.9, accept-prob ≈ 0.60–0.67, verdict flips major↔minor across gateways on one reviewer. This is the **historical ceiling** (v18–v36 plateaued at ~7.4–7.8, clarity-bound); the recent P1–P5 revision round lifted clarity from the council's 5.8 to the gateway's 6.8–7.0 and moved the verdict from major-only baselines onto the boundary, but did **not** dislodge the top-3 consensus concerns, which are now at their structural floor. **No new blocker** appeared. The one genuinely new, cheap, on-point lever surfaced this session is the Kanewala citation gap (§4).
 
-These are revision choices, not blockers. If you want, I can execute P2–P4 (small, verified, low-risk) directly, and draft a P1 consolidation plan for your approval before touching the Results structure.
+## 6. Prioritized options (revision choices, NOT blockers; no manuscript edits made)
+
+> The prior round already executed: density surgery (C39/C40 → Appendix B), Spieker citations, OpenMC wording, precision/recall descriptive labeling, abstract duality softening. The items below are what the *real gateway panel + deep-research* add on top.
+
+- **P0 — NEW, highest value/risk ratio.** Add the two verified-absent Kanewala coverage-cluster citations (Srinivasan & Kanewala 2022 STVR; Saha & Kanewala 2018/2019) to related work and **contrast them with the duality claim**. This simultaneously defuses consensus concern #1 (duality tautology) and #5 (novelty delineation) and closes the single biggest novelty threat deep-research found. Cheap, verified, directly on the binding concern.
+- **P1 — soften the duality in the BODY** (the abstract was already softened to "consistent with"; the body still frames it as a principle/law). Restate it explicitly as a *hypothesized generalization, qualitatively supported on two CFD tasks*, since every reviewer in both gateways reads the current framing as the strongest over-claim.
+- **P2 — density/clarity (binding constraint, diminishing returns).** Despite the appendix demotion, clarity remains the lowest dimension and "sprawling / mixes primary-supporting-secondary evidence" is a repeated concern. Consider consolidating the Results subsections and sharpening primary-vs-secondary separation. Historically the only dimension that moves the panel — but also at its floor.
+- **P3 — bound the synthetic-fault evidence.** Explicitly bound the 10-mutant author-implemented catalogue's real-world applicability and keep detector precision/recall descriptive (consistent with the 180/180 grids).
+
+These are revision choices. The paper *can* be submitted as-is and would draw major-or-minor revision — exactly what the two gateways straddle.
