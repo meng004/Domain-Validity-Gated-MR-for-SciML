@@ -13,6 +13,7 @@ artifact under `research_assets/runs/` via
 |------|----------|-------------|------|
 | 1 Smoke | CPU, Python 3.12 | none | ≤ 5 min |
 | 2 Cache replay | CPU, Python 3.12 (+ a TeX dist for the PDF) | none | ≤ 30 min |
+| 2c C40 cross-program | CPU + scipy (+ a source-built OpenMC for E5) | none | ≤ 30 min |
 | 3 Full re-run | CUDA GPU | `METBENCH_MGN_*`; gateway key for the review panel | hours |
 
 ## Environment setup
@@ -65,6 +66,35 @@ Every other number in the paper is read from a committed ledger under
 `research_assets/runs/`; the regression suite in Tier 1 pins the prose to those
 ledgers, so a green Tier 1 already certifies that the paper does not claim more
 than the artifacts license.
+
+## Tier 2c — C40 end-to-end cross-program pipeline (CPU; OpenMC E5 needs a source build)
+
+This paper's validity-gated pipeline is executed end-to-end on five read-only
+Minimum-MR-SubSet SUTs (claim C40). The four classical solvers are pure CPU (numpy + scipy);
+the fifth (E5) runs the **real OpenMC Monte-Carlo k-eigenvalue solver** in multi-group mode.
+Full provenance, including the nuclear-data choice, is in
+`research_assets/runs/endtoend-pseries/PROVENANCE.md`.
+
+```bash
+MMRS=/home/user/Minimum-MR-SubSet                      # read-only sibling (clone if absent)
+
+# Classical SUTs E1-E4 (parabolic / hyperbolic / stiff-ODE / conservation), no build:
+pip install "scipy>=1.11"                              # numpy already in requirements.txt
+PYTHONPATH="$MMRS/scripts:$MMRS" python3 tools/run_endtoend_pipeline_pseries.py \
+    --suts p1_heat,p2_wave,p5_pke,p7_burgers
+
+# E5 OpenMC (Monte-Carlo): build OpenMC from source first (no wheel/conda/Docker here).
+# Multi-group mode -> NO continuous-energy nuclear-data download (~GB ENDF/B not needed):
+bash tools/build_openmc_e5.sh                          # builds + installs + smoke-verifies
+PYTHONPATH="$MMRS/scripts:$MMRS" LD_LIBRARY_PATH=/usr/local/lib \
+    python3 tools/run_endtoend_pipeline_pseries.py     # default --suts includes p9_openmc
+#   expect: 5 SUTs / 5 program types; gate 38 admit / 7 reject / 0 defer; E5 k_eff == k_inf
+```
+
+If `openmc` is not importable the runner records E5 as `not-executed-openmc-not-importable`
+and the four classical SUTs still run; the committed five-SUT artifact was produced with a
+from-source OpenMC 0.15.2. The guard `tests/test_endtoend_pipeline_pseries.py` pins the
+committed result (it reads the ledgers, it does not re-run OpenMC).
 
 ## Tier 3 — Full re-run (hours, GPU + credentials)
 

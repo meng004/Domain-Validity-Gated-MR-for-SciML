@@ -28,6 +28,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RUN = ROOT / "research_assets/runs/endtoend-pseries"
 AGG = RUN / "metric_ledger.json"
+PROVENANCE = RUN / "PROVENANCE.md"
+OPENMC_BUILD_SCRIPT = ROOT / "tools/build_openmc_e5.sh"
 
 CLASSICAL_SUTS = ["p1_heat", "p2_wave", "p5_pke", "p7_burgers"]
 OPENMC_SUT = "openmc_headline_mg"
@@ -132,6 +134,18 @@ class EndToEndPipelinePseriesTest(unittest.TestCase):
         # gate ran on the 7 headline MRs and admitted at least one per executed class
         self.assertEqual(e5["n_candidate_mrs"], 7)
         self.assertGreaterEqual(e5["n_admitted_mrs"], 1)
+
+    def test_reproducibility_artifacts_present(self) -> None:
+        # Provenance for the run (incl. the OpenMC environment/data/steps) and the
+        # from-source OpenMC build recipe behind E5 must be committed so the result is
+        # reproducible from a fresh clone.
+        self.assertTrue(PROVENANCE.exists(), f"missing provenance: {PROVENANCE}")
+        self.assertTrue(OPENMC_BUILD_SCRIPT.exists(),
+                        f"missing OpenMC build recipe: {OPENMC_BUILD_SCRIPT}")
+        prov = PROVENANCE.read_text(encoding="utf-8")
+        # the provenance documents the multi-group (no continuous-energy data) choice
+        self.assertIn("multi-group", prov)
+        self.assertIn(self.d["sibling_commit"], prov)
 
     def test_honesty_boundary(self) -> None:
         hb = self.d["honesty_boundary"].lower()
