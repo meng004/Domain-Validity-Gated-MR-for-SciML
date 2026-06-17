@@ -11,7 +11,7 @@
     "iv_numerical_decidability": "the verdict tolerance dominates the measuring-operator error floor (the correct program honours the relation within tolerance)"
   },
   "honesty_boundary": "The MRs and mutants are the sibling's domain assets; what is executed end-to-end is this paper's validity gate + typed verdict. Detection counts are for the sibling's committed mutant set only; no per-program reliability or real-world detection rate, no baseline superiority, and no claim that the MRs are new contributions of this paper.",
-  "generated_at": "2026-06-17T08:13:39Z",
+  "generated_at": "2026-06-17T08:48:57Z",
   "tag": "E2",
   "sut": "p2_wave",
   "program_type": "hyperbolic PDE",
