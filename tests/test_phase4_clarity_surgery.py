@@ -32,13 +32,15 @@ class Phase4ClaritySurgeryTest(unittest.TestCase):
         # keystone reframe, an explicit falsifiable-predictions paragraph, and the
         # abstract/intro recentered on the principle. A final strengthening pass adds
         # the Tsigkanos 2023 missed citation and an explicit accuracy/UQ complementarity
-        # statement -- raising the buffer to 12650 (compiled count 12569). The IST hard
-        # limit is 15000, leaving a ~2.4k margin.
+        # statement. Finally it integrates the two new experiments -- the C38 detection-vs-
+        # accuracy complementarity result and the C39 cross-program coverage generalization
+        # (seven program types, three families) -- raising the buffer to 12750 (compiled
+        # count 12658). The IST hard limit is 15000, leaving a ~2.3k margin.
         counts = ist_word_count()
         self.assertLessEqual(
             counts["total"],
-            12650,
-            f"Phase 4/17/18/22 clarity buffer requires IST-counted text <=12650; got {counts}",
+            12750,
+            f"Phase 4/17/18/22 clarity buffer requires IST-counted text <=12750; got {counts}",
         )
 
     def test_abstract_results_and_conclusion_are_not_number_dump(self) -> None:
