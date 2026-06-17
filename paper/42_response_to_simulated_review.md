@@ -63,7 +63,7 @@ validated/quantitative predictive-model claim) plus a guard test. Honesty bounda
 kept verbatim (test_phase9 pins; "Broader generalization is future work"; abstract
 ≤300 words). Commit `e1ef055`.
 
-## Remaining review items (paper/41) — not yet actioned
+## Review items (paper/41) — all addressed
 - **R2-2** configurational-novelty framing — ADDRESSED by the duality reframe: the paper now leads with a unifying principle (validity–coverage duality), not a union of ingredients.
-- **R2-3** one concrete cross-class calibration example for the domain-violation axis.
-- **R2-4** audit abstract/intro wording so the O(h) floor's generality is not overstated.
+- **R2-3** domain-violation axis reads half-delivered — ADDRESSED within the honesty boundary: the axis is already delivered per-relation for every executed MR class from committed measurements, and the cross-class calibration is now a *concrete recipe* (normalize each class's precondition violation by its own admissibility boundary → a common D_cal=1, the device that makes the relation-violation axis comparable through V/floor), marked explicitly as future work to specify and validate. The ledger's prohibition on a calibrated cross-class metric (C15 wording_forbidden) and the honesty pins ("cannot be averaged or ranked across MR classes"; "not a calibrated"; "left to future work") are kept verbatim — so the future work is now concrete rather than aspirational, without overclaiming a delivered metric.
+- **R2-4** O(h) floor generality — ADDRESSED: the highlight "Each MR tolerance is gated by the operator's own O(h) floor" overstated (exact relations gate at machine precision, not O(h)); scoped to "MR tolerances are gated by the measuring operator's floor (O(h) for divergence)" (80 chars). The abstract/intro floor mentions already scope O(h) to the P1 divergence operator with the general unstructured-mesh bound as future work.

@@ -11,7 +11,7 @@
 ## ✅ 提升 suggestive 卖点 → validity–coverage 二象性中心论点（已完成）
 - **结果（两步落地）**：① coverage-geometry 正文升级（`b624425`）；② 按用户"全力·中心论点"指示升为**中心论点 validity–coverage duality**——abstract+intro+§Results 重构、新增 "Falsifiable predictions, and what would refute them" 段、claim **C37**（status qualified，许"提出+确证"、封"validated quantitative model"）、airfoil 从"SUT-specific 限制"重构为 **keystone 确证实验**（`e1ef055`）。诚实 pins 全留、abstract≤300、buffer 12300→12500、**352 tests 绿**、42pp。
 - **用户方法论纠正（已内化）**：诚实≠防守;最有勇气的姿态是 Popper 式"提强命题+用证据辩护+划边界+主动递靶子"。"实事求是"约束的是"不超出证据",不是"不敢下判断"。
-- **剩余 review 项**：R2-3 跨类校准示例;R2-4 O(h) floor 措辞审计(abstract/intro 不过度声称泛化)。
+- **剩余 review 项**：✅ 全部已解。R2-3 跨类校准——在诚实边界内把模糊"future work"升级为**具体 recipe**(按各类 admissibility 边界归一→D_cal=1),C15 禁止项 + 三条 pin 句逐字保留,不 overclaim;R2-4 highlight 的 O(h) 过度概括已 scope 到 divergence。paper/41 五项(R2-1~R2-4 + P1/P2)全部 ADDRESSED。
 
 ### （存档）原始 coverage-geometry 思路
 - **思路（诚实升级，非 overclaim）**：把"by-class 定位（suggestive，SUT-specific）"升级为 **coverage-geometry 原理**——*故障被检出 ⟺ 它扰动某个 admissible MR 所测的不变量；admissibility gate 因此预测 detector 套件的盲区*。
