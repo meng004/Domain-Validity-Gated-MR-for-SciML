@@ -1,6 +1,6 @@
 %% Elsevier / Information and Software Technology draft.
 %% Template source: official Elsevier elsarticle package downloaded 2026-06-05.
-\documentclass[preprint,12pt,authoryear]{elsarticle}
+\documentclass[preprint,12pt]{elsarticle}
 
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -136,9 +136,9 @@ MRs can be elicited from monotonicity, conservation, scaling, and domain-specifi
 \subsection{Physics-based MT for learned scientific simulators}
 \label{subsec:physics-mt}
 
-Three contemporary works are the closest prior. \textbf{Reichert et al.~(2024)}~\citep{reichert2024hess} applied physics-derived MRs to a trained LSTM hydrologic surrogate, stratifying pass/fail by basin elevation and informally filtering basins where forcing uncertainty dominated the response. We formalise these practices as an explicit admissibility predicate and a two-dimensional verdict, and extend them to mesh-based neural fluid surrogates whose MR validity depends on geometry and discrete operators.
+Three contemporary works are the closest prior. \textbf{Reichert et al.}~\citep{reichert2024hess} applied physics-derived MRs to a trained LSTM hydrologic surrogate, stratifying pass/fail by basin elevation and informally filtering basins where forcing uncertainty dominated the response. We formalise these practices as an explicit admissibility predicate and a two-dimensional verdict, and extend them to mesh-based neural fluid surrogates whose MR validity depends on geometry and discrete operators.
 
-\textbf{Eniser et al.~(2022)}~\citep{eniser2022relaxations} introduced \emph{relaxations}, numerical tolerances embedded in MR oracles, for stochastic RL policy testing. We extend this calibrated-tolerance principle to deterministic surrogates by grounding the tolerance floor in the intrinsic error floor of the discrete measurement operator (theoretically $O(h)$ for a P1 divergence operator); for the concrete deployed-scale mesh the floor is given in closed form (a leading-order predictor within 0.5\% plus a rigorous a-priori bound; Sec.~\ref{subsec:operator-floor-sweep}), with a general unstructured-mesh bound left to future work.
+\textbf{Eniser et al.}~\citep{eniser2022relaxations} introduced \emph{relaxations}, numerical tolerances embedded in MR oracles, for stochastic RL policy testing. We extend this calibrated-tolerance principle to deterministic surrogates by grounding the tolerance floor in the intrinsic error floor of the discrete measurement operator (theoretically $O(h)$ for a P1 divergence operator); for the concrete deployed-scale mesh the floor is given in closed form (a leading-order predictor within 0.5\% plus a rigorous a-priori bound; Sec.~\ref{subsec:operator-floor-sweep}), with a general unstructured-mesh bound left to future work.
 
 \textbf{The 2023 violation-attribution cluster}, Duque-Torres et al.~\citep{duqueTorres2023bugornot,duqueTorres2023completePipeline} and MetaTrimmer~\citep{duqueTorres2023metaTrimmer}, addressed the bug-vs-inapplicability separation with explicit MR constraints and automated constraint derivation. Our two-dimensional verdict instantiates this pattern for physics-governed SciML, adding a \emph{typed classification of domain-inadmissibility sub-dimensions} drawn from PDE preconditions, geometry, boundary conditions, and operator admissibility. The element none of these three works addresses is the seeded-fault MR-as-detector with by-class localization of Section~\ref{subsec:within-sut-pilot}.
 
@@ -597,7 +597,7 @@ FNO primary workflow upgrade & Observed & FNO workflow report, per-SUT ledgers, 
 \end{xltabular}
 }
 
-\bibliographystyle{elsarticle-harv}
+\bibliographystyle{elsarticle-num}
 \bibliography{references}
 
 \end{document}
