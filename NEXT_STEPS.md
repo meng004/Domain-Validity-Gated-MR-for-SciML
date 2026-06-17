@@ -1,6 +1,13 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-17 by claude-code (C40 端到端广度:E1-E4 + E5 真实 OpenMC 全部执行 + 已并入 youthful-feynman + 验证通过)
+> Last updated: 2026-06-17 by claude-code (投稿前流水线 §11/§15 + bib 真实性修 7 处 + 引用切数字制)
+
+## 🟢 2026-06-17 投稿前流水线(§11 终稿 / §15 投稿审计 / §12 IST 合规)
+- **✅ bib 真实性校验(§8.5 hard-block)→ 修 7 处引用完整性缺陷**(commit `adad46b`):逐条 crossref 亲验(子代理在 lin/reichert 漏报作者错,已全复核纠正)。`kanewala2019scientific` **按原样不存在**(DOI=Codabux 技术债文)→ 换真实 Kanewala & Chen 2019 CiSE;`olsen2019simulation` 死 DOI + 标题/作者/期/页全错 → 正确版 Olsen & Raunak TR 68(1):91-108;`duqueTorres2023bugornot` DOI 指向 HFCommunity → `...00109`+页 905-912;`raunak2021continuum`/`lin2020exploratory`/`reichert2024hess` 作者/页/期校正;`hiremath` 页。键名 + 首作者姓不变(正文 \cite 与著者-年内联均不受影响)。报告 `docs/review_presubmission/reference_verification.md`。
+- **✅ proofread / humanizer / §15 grep+编译 audit → 全清**:全文无拼写语法错、关键数字 Results/Threats/Appendix 三处自洽、符号先定义后用;prose em-dash 0、无 delve/leverage/throat-clearing(仅 1 处合规 "notably");reviewer-speak/process-mark/placeholder/版本叙事/悬空 §X.Y.Z 全 0;0 undefined / 0 multiply-defined / 0 Missing character / 0 overfull>50pt;bib 全引用 33/33;内联枚举各系列一致、`\clearpage`+`\appendix` 正确。
+- **✅ §12 IST 合规**:结构化 abstract 五段 296≤300;Highlights 5 条均 ≤85(已抽出单独文件 `paper/ist-submission/highlights.txt`);Keywords 7;Title 7 词;Data avail / CRediT / CoI / GenAI 声明 / Funding(NSFC 12575176 等)全在;wordcount **12158 ≤ 15000**(余 2842)。
+- **✅ 参考文献样式切换 elsarticle-harv → elsarticle-num(数字制,用户拍板)**(commit `1eac1a3`):去 `authoryear`、bibstyle 改 num、清 Related Work 手写"(year)";渲染 [1][2]…;372 tests、45pp 全 0。
+- **🟡 剩余投稿物料(投稿系统逻辑项,manuscript 本体已 submission-ready)**:① cover letter(突出 novelty + industrial relevance,需作者口吻,待你定);② Editorial Manager 元数据(作者/单位/建议审稿人);③ 可选 graphical abstract(TIFF/EPS/PDF,禁 AI 生成图)。
 
 ## 🟢 2026-06-17 连贯性终审 + 端到端广度 runbook(GPU 答案)
 - **✅ fresh-eyes coherence 审查**(agent 通读全稿):唯一真矛盾 = closest-prior 表把 by-class 当已交付能力、缺限定 → **已修**(caption 加 "(a SUT-specific stress test, not a validated localization model)")。
