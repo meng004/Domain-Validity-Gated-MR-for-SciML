@@ -52,8 +52,7 @@
 - 内容要点: representation/preprocessing MRs; physical-model MRs; temporal/rollout MRs; method-comparison MRs; implementation/runtime MRs; possible interpretation; evidence caution。
 - 数据来源: 无需实验数据。
 - caption 草稿: `Figure 3. Hierarchical interpretation protocol for grouping MR violations by representation, physical-model, temporal, cross-SUT, and implementation layers.`
-- 拟生成: `fig_3_mr_hierarchy.{pdf,png}` + `src/fig_3_mr_hierarchy.mmd`。
-- 生成建议: 建议生成，但正文是否放入取决于最终篇幅。
+- 状态: 已弃用 -- 此 MR-hierarchy 图未纳入终稿；正文 Figure 3 改用 2D 判定图 `fig_3_verdict_2d.{pdf,png}`。源文件 `fig_3_mr_hierarchy.{pdf,png,mmd}` 已于 2026-06-17 删除。
 
 ### Fig 4 -- Experiment design and evidence gates
 

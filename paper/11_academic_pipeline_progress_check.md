@@ -43,7 +43,7 @@ The paper has a coherent IST-format draft, a method-centered framing, a bibliogr
 |---|---|---|---|---|
 | Fig 1. Validity-gated MR testing workflow | `fig_1_validity_gated_workflow.mmd` | generated | 2352 x 2454, 300dpi | Ready for insertion after caption check. |
 | Fig 2. Executable MR asset and verdict data flow | `fig_2_mr_asset_dataflow.mmd` | generated | 2352 x 2943, 300dpi | Ready for insertion after caption check. |
-| Fig 3. MR hierarchy and interpretation protocol | `fig_3_mr_hierarchy.mmd` | generated | 1758 x 3597, 300dpi | Ready for insertion after caption check. |
+| Fig 3. MR hierarchy and interpretation protocol | `fig_3_mr_hierarchy.mmd` | generated, later dropped | 1758 x 3597, 300dpi | Not adopted; manuscript Fig 3 = fig_3_verdict_2d; source files removed 2026-06-17. |
 
 Recommended insertion policy:
 
