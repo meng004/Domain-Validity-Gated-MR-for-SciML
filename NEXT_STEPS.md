@@ -4,7 +4,8 @@
 
 ## 🟢 2026-06-17 连贯性终审 + 端到端广度 runbook(GPU 答案)
 - **✅ fresh-eyes coherence 审查**(agent 通读全稿):唯一真矛盾 = closest-prior 表把 by-class 当已交付能力、缺限定 → **已修**(caption 加 "(a SUT-specific stress test, not a validated localization model)")。
-- **🔵 coherence follow-ups(未做,建议)**:① duality 论述重复 ~7 次(abstract 内 2 次、L112≈L180)可合并去冗;② **§4.1 subject 列表 + Threads/Threats 未提 C39 的 OpenMC/wave/PKE**(设计-结果耦合缺口,应补,paper/46 §6 已列为 C40 必做);③ "principle/keystone" 词汇 vs "qualitative/two-SUT" hedging 张力;④ Reviewer-2 最可能攻击 coverage 半边"同义反复",仅部分预防;⑤ airfoil rollout L2=1.0 称 "moderate" 偏软。
+- **✅ coherence follow-ups 本地已执行(commit 02b49a6 / 63cfd93)**:① duality 去冗(intro novelty 段精简 + abstract Results/Conclusion 去重,~55 词);② §4 subject 列表 + Threats 已补 C39 跨程序语料(OpenMC/wave/PKE);④ 加 tautology 防御(物理有效性谓词≠调参检测,反"检测器测什么抓什么"同义反复指控);⑤ airfoil rollout L2=1.0 "moderate"→"high/low";+ closest-prior 表 caption 加 "(SUT-specific, not a validated localization model)"。44pp / abstract 295 / 总 12725 / 361 tests。
+  - **留作可选(你定)**:③ "principle/keystone" bold 词汇(你选的中心论点 framing,保留);§5.7 "Aggregate reading" 段相对位置(flow,重排有破测试风险);§3.6 D-score 五重 hedge(诚实,保留)。
 - **🔵 大杠杆 = C40 端到端跨程序(GPU-free,runbook 就绪)= `paper/46`**。**GPU 答案:不依赖**——P-series 经典解算器纯 numpy、OpenMC 纯 CPU;仅神经 surrogate 需 GPU(已覆盖)。选 E1-E4(heat/wave/PKE/burgers)+ E5 可选(OpenMC),用本文 gate+typed-verdict **端到端**跑(把 C39 只读复用升级为端到端执行)。**待下令**:切分支 `claude/endtoend-breadth-c40`、读 `paper/46`、执行。
 
 
