@@ -1,0 +1,50 @@
+{
+  "record_type": "academic-review-panel",
+  "panel_kind": "claude-council-simulated",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-17",
+  "venue": "Information and Software Technology (regular paper)",
+  "paper": "paper/ist-submission/main.tex",
+  "honesty_boundary": "This is a Claude-simulated adversarial council (5 reviewer personas spawned via the Agent tool, project CLAUDE.md SS10.9 Council Mode). It is NOT the bltcy multi-vendor gateway panel (run_academic_review_panel.py), which could not run this session: OPENAI_BASE_URL/OPENAI_API_KEY are unset and the prior key was exhausted. Scores are not numerically comparable to the gpt-5.5/glm-5.1/deepseek/qwen/kimi gateway panels (v18-v36); use for qualitative consensus, not as a calibrated score against that series.",
+  "panel": [
+    {"role": "EIC", "lens": "editorial decision / contribution coherence / IST fit"},
+    {"role": "MethodologyRigor", "lens": "experimental design / statistics / claim-evidence match"},
+    {"role": "DomainExpert", "lens": "SciML/CFD/MT physical + numerical correctness"},
+    {"role": "Perspective", "lens": "novelty vs closest prior / related-work completeness"},
+    {"role": "DevilsAdvocate", "lens": "strongest reasons to reject"}
+  ],
+  "per_reviewer": {
+    "EIC":             {"scores": {"novelty_contribution": 6, "technical_soundness": 7, "empirical_rigor": 7, "related_work": 8, "clarity": 6, "reproducibility": 9, "scope_match_to_ist": 7}, "accept_probability": 0.42, "verdict": "major_revision"},
+    "MethodologyRigor":{"scores": {"novelty_contribution": 7, "technical_soundness": 7, "empirical_rigor": 7, "related_work": 8, "clarity": 6, "reproducibility": 9, "scope_match_to_ist": 8}, "accept_probability": 0.55, "verdict": "minor_revision"},
+    "DomainExpert":    {"scores": {"novelty_contribution": 7, "technical_soundness": 8, "empirical_rigor": 8, "related_work": 8, "clarity": 6, "reproducibility": 9, "scope_match_to_ist": 7}, "accept_probability": 0.62, "verdict": "minor_revision"},
+    "Perspective":     {"scores": {"novelty_contribution": 6, "technical_soundness": 8, "empirical_rigor": 7, "related_work": 6, "clarity": 6, "reproducibility": 9, "scope_match_to_ist": 8}, "accept_probability": 0.48, "verdict": "major_revision"},
+    "DevilsAdvocate":  {"scores": {"novelty_contribution": 6, "technical_soundness": 6, "empirical_rigor": 4, "related_work": 7, "clarity": 5, "reproducibility": 5, "scope_match_to_ist": 7}, "accept_probability": 0.32, "verdict": "major_revision"}
+  },
+  "per_dimension_mean": {"novelty_contribution": 6.4, "technical_soundness": 7.2, "empirical_rigor": 6.6, "related_work": 7.4, "clarity": 5.8, "reproducibility": 8.2, "scope_match_to_ist": 7.4},
+  "overall_dimension_mean": 7.0,
+  "accept_probability_mean": 0.478,
+  "accept_probability_range": [0.32, 0.62],
+  "verdict_distribution": {"major_revision": 3, "minor_revision": 2},
+  "panel_majority_verdict": "major_revision",
+  "consensus_concerns": [
+    "Clarity/density is the binding constraint (clarity 5.8, lowest dimension): 11 Results subsections; many secondary breadth studies the paper itself says prove nothing about the core claim -> consolidate, demote OpenMC/classical-solver + read-only cross-program to an appendix.",
+    "Validity-coverage duality (C37) borders on a true-by-construction tautology (each MR scores one invariant); only the cross-SUT keystone (C36) is a genuine empirical test, n=2 CFD; stating it as a 'confirmed falsifiable principle' in the Abstract is stronger than n=2 qualitative evidence licenses.",
+    "Airfoil 'second task' surrogate is essentially untrained (one-step rel L2 ~1.00); 'primary-scale 240-cell' framing oversells a gate-discrimination demo on a non-functional model.",
+    "Pseudo-replication: the largest grids (180/180, 162/162) are correctly labelled descriptive, but the detector precision/recall Wilson CIs are reported inferentially over the same kind of non-independent cells -> inconsistent statistical treatment.",
+    "Novelty is incremental recombination (paper concedes this); missing on-point neighbor Spieker et al. (MET 2024 + IST 2025, symmetry MRs + statistical violation criterion); zhao2026noether self-cite x4 under single-anonymized review."
+  ],
+  "consensus_strengths": [
+    "Exemplary reproducibility / evidence discipline: fail-closed claim ledger ties every number to a tracked artifact; spot-checked numbers matched raw JSON; Zenodo DOI; IST-compliant.",
+    "Measurement-floor admissibility gate is a genuine, correct, well-grounded contribution (O(h) P1 floor, closed-form predictor within 0.5%, a-priori spectral bound).",
+    "Strong construct discrimination via the airfoil second-task design (identical gate -> categorically different typed verdict for the physically correct reason).",
+    "Unusually honest scope/threats handling and a falsifiable central claim with explicit refutation conditions."
+  ],
+  "verified_actionable_findings": {
+    "missing_citation": "Spieker et al., Evaluating Human Trajectory Prediction with Metamorphic Testing, MET 2024, DOI 10.1145/3679006.3685071 (verified real); and same-venue Spieker et al., Metamorphic Testing of Multimodal Human Trajectory Prediction, IST 188:107890, 2025, DOI 10.1016/j.infsof.2025.107890 (verified real).",
+    "openmc_wording": "Body prose says 'multi-group OpenMC' but the ledger/PROVENANCE specify '1-group infinite-medium' (run via OpenMC energy_mode=multi-group with self-generated 1-group MGXS). Reconcilable, but tighten body wording to match the ledger precision.",
+    "precision_recall_labeling": "Label detector precision/recall (node-perm 1.00/1.00, conservation 1.00/0.81, mirror-y 0.94/0.55) consistently with the descriptive treatment used for the 180/180 grids."
+  },
+  "baseline_for_comparison": {
+    "v36_gateway_panel": {"overall_dimension_mean": 7.37, "accept_probability_mean": 0.664, "panel_majority_verdict": "major_revision", "note": "multi-vendor gateway, pre-E5/pre-bib-fix manuscript; harsher Claude-council numbers are not directly comparable, but the verdict structure (3 major / 2 minor) and the clarity-is-weakest pattern reproduce."}
+  }
+}
