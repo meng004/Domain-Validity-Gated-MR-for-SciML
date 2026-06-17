@@ -1,6 +1,17 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-16 by claude-code (teleport->local session)
+> Last updated: 2026-06-17 by claude-code (deep-research review + R2-1 cross-SUT)
+
+## 🟢 2026-06-17 deep-research 评审 + R2-1 跨-SUT（诚实负结果）
+- **✅ paper/41 评审**：deep-research（paper-search-mcp）+ §10/§11 结构化 + Reviewer-2。3 篇 closest-prior crossref 核实、novelty gap 真实、3 处漏引（ying2025 同刊 / najafi2026 物理一致性 / Eniser k-safety）。裁决 borderline minor/major，R2-1 为唯一 blocker。commit `ba2a220`。
+- **✅ R2-1 策略 (a) 执行 → 诚实负结果**：在第二 SUT（primary-scale airfoil，5 轨）复刻 seeded-fault。**by-class 模式 SUT-specific**：仅 NS_skip_denorm 跨 5 轨稳健；mirror-y domain-inadmissible（gate 排除）；BC/MA/PC/sign 全测不到；跨 SUT 唯一共享=continuity→归一化。新建 harness + **C36** + 多轨 ledger + 5 断言守卫；6 处正文重构；buffer 11800→12100。347 tests / 41pp / 0 undefined。commit `f002c80`。
+- **✅ P1/P2 文献**：najafi2026（L173 物理一致性对比）+ ying2025（L129 同刊 MT4ML）。crossref 核验 + citation_audit 入账。
+- **📋 response-letter 草稿**：`paper/42_response_to_simulated_review.md`（R2-1 已解 + P1/P2 + 剩余 R2-2/2-3/2-4）。
+
+## 🔵 下一步（用户指示）：提升 suggestive 卖点 → coverage-geometry 可预测覆盖模型
+- **思路（诚实升级，非 overclaim）**：把"by-class 定位（suggestive，SUT-specific）"升级为 **coverage-geometry 原理**——*故障被检出 ⟺ 它扰动某个 admissible MR 所测的不变量；admissibility gate 因此预测 detector 套件的盲区*。
+- **已有 4 条独立证据支撑**（2 条是可证伪的已确认预测）：R1 K=6 跨-checkpoint 复现 / **R3 knife-edge**（PC_zero_vy 在 p=1.0 同时 permutation-invariant + mirror-symmetric 时检测精确坍塌）/ R4 adversarial（盲区=子空间）/ **C36 跨-SUT**（移除 inadmissible 的 mirror-y 恰好移除其覆盖）。
+- **动作**：把现埋在 §Results 的 coverage-geometry 句提为一级贡献/卖点；abstract+contributions+novelty 以"gate 不仅 type verdict，还预测 detector 覆盖与盲区，经 knife-edge + 跨-SUT 两个可证伪预测确认"为主线。**不新增实验**（复用 R1/R3/R4/C36）。**风险**：动 contributions/abstract framing，先给具体改写方案再落。
 
 ## 🟢 2026-06-16 本地会话（teleport）小结
 - **✅ DOI→concept**：Zenodo v1.1.0 已发布；`CITATION.cff` + `main.tex` Data-availability 改引 **concept DOI 10.5281/zenodo.20702952**（始终指向最新版），弃用 version DOI ...953。commit `5f5b370`。
