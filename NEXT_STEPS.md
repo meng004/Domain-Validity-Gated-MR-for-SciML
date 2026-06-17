@@ -1,6 +1,14 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-17 by claude-code (deep-research review + R2-1 cross-SUT)
+> Last updated: 2026-06-17 by claude-code (new experiments C38/C39 executed + integrated)
+
+## 🟢 2026-06-17 新实验执行(强化"无对比" + "实证广度")
+- **✅ Step 1 = C38 互补**:cylinder MGN 上 MR-detection vs rollout-accuracy。harness 加可选 `--with-rollout`(默认关、C10 证据字节不变)。结果:symmetry MR 抓 MA_permute_edges + PC_swap_xy,而它们 rollout error 仅 1.3× baseline(0.0216,< 2× 阈值)——**MR 抓 accuracy 漏的关系违背**;互补非优越。commit `374355c`。
+- **✅ Step 2 = C39 跨程序泛化**:读兄弟仓库**已提交 kill matrix**(只读、零重训),在 **7 程序类型 × 3 族**(神经 surrogate / 经典解算器 wave·PKE·Burgers / 生产码 OpenMC)测 coverage-geometry。6/7 有结构盲区、映射 program-specific(SUT-specificity 从 2→7)、检出率 10-100% 随 MR 集变。诚实:非端到端跑 pipeline。fixtures + PROVENANCE + 分析脚本 + 守卫。commit `fed25d9`。
+- **✅ 正文集成**:seeded-fault 段加 C38 互补句;falsifiable 段后加 "Cross-program generalization" 段(C39)。buffer 12650→12750、43pp、**361 tests**、§15 复审干净(em-dash 0/reviewer-speak 0)。commit `4f3538f`。
+- 计划文档 `paper/45`(已执行)。
+
+
 
 ## 🟢 2026-06-17 deep-research 评审 + R2-1 跨-SUT（诚实负结果）
 - **✅ paper/41 评审**：deep-research（paper-search-mcp）+ §10/§11 结构化 + Reviewer-2。3 篇 closest-prior crossref 核实、novelty gap 真实、3 处漏引（ying2025 同刊 / najafi2026 物理一致性 / Eniser k-safety）。裁决 borderline minor/major，R2-1 为唯一 blocker。commit `ba2a220`。

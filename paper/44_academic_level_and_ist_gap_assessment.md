@@ -95,10 +95,15 @@ reproducibility and the honest, falsifiable framing are genuine differentiators.
   superiority* (per the no-baseline-superiority scope), using the committed
   0.0216-accuracy-vs-mirror-y datum; no new experiment. Clarity buffer 12500 → 12650
   (compiled count 12569; still ~2.4k under the 15000 hard cap).
-- *Still available on request (needs a new run, not done):* a per-seeded-fault
-  rollout-error-vs-MR-detection table would turn the conceptual complementarity into an
-  empirical one. Deferred because it requires new computation and the empirical-breadth
-  gap (more SUTs / an industrial case) is the larger lever.
+- **DONE (C38, commit 374355c):** the per-seeded-fault rollout-error-vs-MR-detection
+  comparison was run on the cylinder MGN — the symmetry MR catches a mesh-adjacency and a
+  physical-channel fault that leave rollout error within 1.3x of the 0.0216 baseline (under
+  a 2x threshold), turning the conceptual complementarity into an empirical one.
+- **DONE (C39, commit fed25d9):** the empirical-breadth gap was addressed by a read-only
+  cross-program generalization — the coverage-geometry reading reproduces across seven
+  program types in three families (neural surrogates, classical solvers, OpenMC) from
+  committed Minimum-MR-SubSet kill matrices (plan in paper/45). Both are integrated into the
+  manuscript (commit 4f3538f).
 
 ## Verdict
 **Submission-ready, no blockers.** The em-dash regression is fixed. Realistic IST outcome

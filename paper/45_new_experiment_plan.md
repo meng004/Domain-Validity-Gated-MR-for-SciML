@@ -1,6 +1,10 @@
 # 45 — New-Experiment Plan: complementarity table + empirical breadth
 
-> Date: 2026-06-17 · Status: **plan only, pending approval** (no experiment run yet).
+> Date: 2026-06-17 · Status: **EXECUTED** (both steps; full three-family spectrum approved).
+> Step 1 = C38 (complementarity: symmetry MR catches MA_permute/PC_swap that leave rollout
+> within 1.3x of the 0.0216 baseline; commit 374355c). Step 2 = C39 (coverage-geometry
+> reproduces across 7 program types / 3 families, 6/7 structural blind spots, mappings
+> program-specific; commit fed25d9). Integrated into the manuscript (commit 4f3538f).
 > Addresses the two deep-research / IST-gap findings in paper/44: (1) "no comparison"
 > → a fault-detection-vs-accuracy complementarity table; (2) empirical breadth / the
 > duality resting on two SUTs → a cross-program-type test of the coverage principle.
