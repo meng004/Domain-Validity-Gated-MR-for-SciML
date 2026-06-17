@@ -37,11 +37,12 @@ class Phase4ClaritySurgeryTest(unittest.TestCase):
         # (seven program types, three families) -- raising the buffer to 12750 (compiled
         # count 12658). The IST hard limit is 15000, leaving a ~2.3k margin.
         # Phase 22 then adds the C40 end-to-end cross-program execution (this paper's gate +
-        # typed verdict run on four CPU-only classical sibling solvers spanning parabolic /
-        # hyperbolic / stiff-ODE / conservation program types): one Results paragraph plus
-        # the coupled subject-systems and Threats external-validity sentences (~336 body
-        # words), raising the buffer to 13050 (compiled count 12994). The IST hard limit is
-        # 15000, still leaving a ~2.0k margin.
+        # typed verdict run end-to-end on five CPU-only sibling SUTs: four classical solvers
+        # plus the OpenMC headline subject run with the real OpenMC Monte-Carlo k-eigenvalue
+        # solver, spanning parabolic / hyperbolic / stiff-ODE / conservation / Monte-Carlo
+        # program types): one Results paragraph plus the coupled subject-systems and Threats
+        # external-validity sentences, raising the buffer to 13050 (compiled count 13043 with
+        # the OpenMC E5 wording). The IST hard limit is 15000, still leaving a ~1.9k margin.
         counts = ist_word_count()
         self.assertLessEqual(
             counts["total"],
