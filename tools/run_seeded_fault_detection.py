@@ -61,6 +61,7 @@ MUTANTS = list(FAULT_CLASS)
 NODE_PERM_TOL = 1e-5          # equivariance is exact for a correct pipeline
 CONSERVATION_RATIO_TOL = 1.5  # predeclared reference-relative regression threshold
 MIRROR_Y_REL_CHANGE_TOL = 0.5  # mirror-y baseline already fails; flag a >=50% shift
+ACCURACY_ROLLOUT_MULT = 2.0    # accuracy monitor flags a fault if rollout error >= 2x baseline
 
 
 def inverse_permutation(perm: np.ndarray) -> np.ndarray:
@@ -79,7 +80,7 @@ def _sha256(p: Path) -> str:
     return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 
 
-def run_from_manifest(manifest_path: Path) -> dict:
+def run_from_manifest(manifest_path: Path, with_rollout: bool = False) -> dict:
     fields = parse_flat_manifest(Path(manifest_path).read_text(encoding="utf-8"))
     repo_root = Path(__file__).resolve().parents[1]
 
@@ -202,22 +203,28 @@ def run_from_manifest(manifest_path: Path) -> dict:
 
     results = {}
     for mutant in ["baseline"] + MUTANTS:
-        np_vals, cons_vals, mir_vals = [], [], []
+        np_vals, cons_vals, mir_vals, roll_vals = [], [], [], []
         for t in frames:
             v_t = traj.velocity[t]
             prescribed = traj.velocity[t + 1]
             np_vals.append(node_perm_metric(v_t, prescribed, mutant))
             cons_vals.append(conservation_ratio(v_t, prescribed, prescribed, mutant))
             mir_vals.append(mirror_y_violation(v_t, prescribed, mutant))
+            if with_rollout:
+                v_next = predict(traj.mesh_pos, onehot, base_edge_index, inflow, wall,
+                                 v_t, prescribed, mutant)
+                roll_vals.append(relative_l2(v_next, prescribed))
         results[mutant] = {
             "node_perm_relative_l2_median": float(np.median(np_vals)),
             "conservation_ratio_median": float(np.median(cons_vals)),
             "mirror_y_violation_median": float(np.median(mir_vals)),
+            "rollout_relative_l2_median": float(np.median(roll_vals)) if roll_vals else None,
         }
 
     base_np = results["baseline"]["node_perm_relative_l2_median"]
     base_cons = results["baseline"]["conservation_ratio_median"]
     base_mir = results["baseline"]["mirror_y_violation_median"]
+    base_roll = results["baseline"].get("rollout_relative_l2_median")
     detection = []
     for mutant in MUTANTS:
         r = results[mutant]
@@ -226,7 +233,7 @@ def run_from_manifest(manifest_path: Path) -> dict:
         mir_rel_change = (abs(r["mirror_y_violation_median"] - base_mir) / base_mir
                           if base_mir else float("inf"))
         mir_detected = mir_rel_change > MIRROR_Y_REL_CHANGE_TOL
-        detection.append({
+        entry = {
             "mutant": mutant, "fault_class": FAULT_CLASS[mutant],
             "node_perm_relative_l2_median": r["node_perm_relative_l2_median"],
             "conservation_ratio_median": r["conservation_ratio_median"],
@@ -236,7 +243,16 @@ def run_from_manifest(manifest_path: Path) -> dict:
             "conservation_MR_detects": bool(cons_detected),
             "mirror_y_MR_detects": bool(mir_detected),
             "detected_by_any": bool(np_detected or cons_detected or mir_detected),
-        })
+        }
+        if with_rollout and base_roll:
+            roll = r.get("rollout_relative_l2_median")
+            acc_detected = roll is not None and roll >= ACCURACY_ROLLOUT_MULT * base_roll
+            entry["rollout_relative_l2_median"] = roll
+            entry["rollout_over_baseline"] = (roll / base_roll) if roll else None
+            entry["accuracy_monitor_detects"] = bool(acc_detected)
+            entry["mr_catches_accuracy_misses"] = bool(entry["detected_by_any"] and not acc_detected)
+            entry["accuracy_catches_mr_misses"] = bool(acc_detected and not entry["detected_by_any"])
+        detection.append(entry)
 
     n = len(MUTANTS)
     ledger = {
@@ -280,6 +296,18 @@ def run_from_manifest(manifest_path: Path) -> dict:
         ),
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
+    if with_rollout:
+        ledger["complementarity"] = {
+            "accuracy_rollout_multiplier": ACCURACY_ROLLOUT_MULT,
+            "baseline_rollout_relative_l2": base_roll,
+            "mr_catches_accuracy_misses": sorted({d["mutant"] for d in detection if d.get("mr_catches_accuracy_misses")}),
+            "accuracy_catches_mr_misses": sorted({d["mutant"] for d in detection if d.get("accuracy_catches_mr_misses")}),
+            "both": sorted({d["mutant"] for d in detection if d["detected_by_any"] and d.get("accuracy_monitor_detects")}),
+            "neither": sorted({d["mutant"] for d in detection if not d["detected_by_any"] and not d.get("accuracy_monitor_detects")}),
+            "note": ("complementarity, not superiority: each axis catches a distinct subset; an "
+                     "MR-only fault is caught by a relation an accuracy monitor leaves within band, "
+                     "an accuracy-only fault degrades rollout without crossing a relation threshold."),
+        }
     raw_dir = _resolve(fields["raw_output_dir"])
     raw_dir.mkdir(parents=True, exist_ok=True)
     (raw_dir / "metric_ledger.json").write_text(
@@ -290,8 +318,10 @@ def run_from_manifest(manifest_path: Path) -> dict:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--manifest", required=True)
+    ap.add_argument("--with-rollout", action="store_true",
+                    help="also record per-mutant rollout error and the MR-vs-accuracy complementarity")
     args = ap.parse_args(argv)
-    led = run_from_manifest(Path(args.manifest))
+    led = run_from_manifest(Path(args.manifest), with_rollout=args.with_rollout)
     s = led["summary"]
     print(f"seeded-fault detection over {s['num_mutants']} mutants: "
           f"node-perm {s['node_permutation_MR_detection_rate']:.0%}, "
@@ -304,6 +334,11 @@ def main(argv=None) -> int:
               f"np={d['node_perm_relative_l2_median']:.4f} "
               f"cons={d['conservation_ratio_median']:.3f} "
               f"mir={d['mirror_y_violation_median']:.3f}")
+    if led.get("complementarity"):
+        c = led["complementarity"]
+        print(f"  complementarity (MR vs accuracy@{c['accuracy_rollout_multiplier']}x baseline): "
+              f"MR-only={c['mr_catches_accuracy_misses']} accuracy-only={c['accuracy_catches_mr_misses']} "
+              f"both={c['both']} neither={c['neither']}")
     return 0
 
 

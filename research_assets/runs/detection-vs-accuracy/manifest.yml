@@ -1,0 +1,16 @@
+# Local manifest: MR-detection-vs-accuracy complementarity (claim C38).
+# Reuses the committed cylinder MGN checkpoint + source case; sut_repo points to the
+# local read-only sibling (cloud runs use /home/user/Minimum-MR-SubSet). Writes to a
+# SEPARATE raw dir so the C10 seeded-fault evidence is untouched.
+record_type: "real-sut-run"
+run_id: "real-sut-detection-vs-accuracy-001"
+sut_id: "cylinder_flow_meshgraphnet"
+sut_repo: "../最小完备MR子集"
+sut_commit: "8c0b7ef3605fd9452884d701e2a191a2b14a5a35"
+checkpoint_path: "research_assets/runs/real-sut-node-permutation-pilot/sut/checkpoint.pt"
+checkpoint_sha256: "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9"
+source_case_path: "research_assets/runs/real-sut-node-permutation-pilot/source_case.npz"
+mr_id: "detection-vs-accuracy-complementarity"
+raw_output_dir: "research_assets/runs/detection-vs-accuracy/raw"
+seed: "20260606"
+device: "cpu"

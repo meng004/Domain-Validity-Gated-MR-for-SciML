@@ -1157,6 +1157,33 @@ claims:
       those committed mutant sets only and are deliberately heterogeneous (they track MR
       richness). No real-world or reliability claim.
 
+  - claim_id: "C38-detection-vs-accuracy-complementarity"
+    status: "observed"
+    scope: "MR-detection vs rollout-accuracy complementarity on the cylinder MGN SUT / same 10-mutant seeded-fault catalogue / per-mutant rollout error vs the three domain-validity MRs / one SUT, one checkpoint, one eval trajectory, one predeclared 2x-baseline accuracy threshold"
+    evidence:
+      - "tools/run_seeded_fault_detection.py"
+      - "tests/test_detection_vs_accuracy.py"
+      - "research_assets/runs/detection-vs-accuracy/manifest.yml"
+      - "research_assets/runs/detection-vs-accuracy/raw/metric_ledger.json"
+    wording_allowed: >
+      On the cylinder MGN SUT, comparing the domain-validity MRs with a rollout-accuracy
+      monitor on the 10-mutant seeded-fault catalogue shows the two are complementary, not
+      redundant: two faults (a mesh-adjacency edge permutation and a physical-channel swap)
+      are caught by the symmetry MR while leaving the rollout error within 1.3x of its
+      in-distribution baseline (0.0216), below a predeclared 2x accuracy-regression
+      threshold; three gross faults (two boundary-condition, one normalization) are caught
+      by both; and the remaining five are caught by neither. The MRs therefore surface
+      relation violations an accuracy monitor leaves within band. This is complementarity,
+      not superiority.
+    wording_forbidden:
+      - "The MRs are better than or superior to accuracy/UQ monitoring."
+      - "A real-world or general fault-detection rate."
+      - "Accuracy monitoring is inadequate or unnecessary."
+    blocked_reason: >
+      One SUT, one checkpoint, one eval trajectory, one mutant catalogue, one predeclared
+      accuracy threshold (2x baseline rollout). The complementarity is for this mutant set
+      only and asserts no superiority over accuracy/UQ, which remain necessary diagnostics.
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"

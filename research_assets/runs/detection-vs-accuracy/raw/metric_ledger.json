@@ -1,0 +1,243 @@
+{
+  "ledger_id": "real-sut-seeded-fault-detection",
+  "evidence_level": "real-sut-single-checkpoint-seeded-fault-detection",
+  "schema_version": "0.1.0",
+  "sut_repo": "../最小完备MR子集",
+  "sut_commit": "8c0b7ef3605fd9452884d701e2a191a2b14a5a35",
+  "checkpoint_path": "research_assets/runs/real-sut-node-permutation-pilot/sut/checkpoint.pt",
+  "checkpoint_sha256": "cf281f85941ff21ff86af0122924299d7b71a375f50f118e725eda1e859b04a9",
+  "fault_taxonomy_source": "re-implemented from read-only Minimum-MR-SubSet scripts/mcmr/cylinder_flow/witness_stage_b.py",
+  "detectors": {
+    "node_permutation_equivariance": {
+      "class": "representation MR",
+      "tolerance": 1e-05
+    },
+    "conservation_divergence": {
+      "class": "continuity MR",
+      "reference_relative_regression_threshold": 1.5
+    },
+    "mirror_y_ood_stress": {
+      "class": "geometric/symmetry MR",
+      "baseline_violation": 0.7354229305978729,
+      "relative_change_detection_threshold": 0.5
+    }
+  },
+  "baseline": {
+    "node_perm_relative_l2_median": 0.0,
+    "conservation_ratio_median": 1.0114302951680494,
+    "mirror_y_violation_median": 0.7354229305978729
+  },
+  "num_frames": 9,
+  "detection_matrix": [
+    {
+      "mutant": "BC_zero_inflow",
+      "fault_class": "boundary_condition_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 4.019537706813323,
+      "mirror_y_violation_median": 0.7354229305978729,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": true,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": true,
+      "rollout_relative_l2_median": 0.09413943217351492,
+      "rollout_over_baseline": 4.35308554706795,
+      "accuracy_monitor_detects": true,
+      "mr_catches_accuracy_misses": false,
+      "accuracy_catches_mr_misses": false
+    },
+    {
+      "mutant": "BC_nonzero_wall",
+      "fault_class": "boundary_condition_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 3.7963038816679067,
+      "mirror_y_violation_median": 0.7354229305978729,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": true,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": true,
+      "rollout_relative_l2_median": 0.07252097513428554,
+      "rollout_over_baseline": 3.3534301347225295,
+      "accuracy_monitor_detects": true,
+      "mr_catches_accuracy_misses": false,
+      "accuracy_catches_mr_misses": false
+    },
+    {
+      "mutant": "MA_drop_edges",
+      "fault_class": "mesh_adjacency_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0177662083932166,
+      "mirror_y_violation_median": 0.9715306631544974,
+      "mirror_y_relative_change_from_baseline": 0.3210502728881153,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false,
+      "rollout_relative_l2_median": 0.02394843092347704,
+      "rollout_over_baseline": 1.1073953403053616,
+      "accuracy_monitor_detects": false,
+      "mr_catches_accuracy_misses": false,
+      "accuracy_catches_mr_misses": false
+    },
+    {
+      "mutant": "MA_permute_edges",
+      "fault_class": "mesh_adjacency_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0141872822207996,
+      "mirror_y_violation_median": 1.2445525492833727,
+      "mirror_y_relative_change_from_baseline": 0.692295001288028,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": true,
+      "detected_by_any": true,
+      "rollout_relative_l2_median": 0.02460256906071524,
+      "rollout_over_baseline": 1.1376432311758853,
+      "accuracy_monitor_detects": false,
+      "mr_catches_accuracy_misses": true,
+      "accuracy_catches_mr_misses": false
+    },
+    {
+      "mutant": "NS_skip_denorm",
+      "fault_class": "normalization_scale_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 10.57516042560064,
+      "mirror_y_violation_median": 0.7364042455515556,
+      "mirror_y_relative_change_from_baseline": 0.0013343545772837473,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": true,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": true,
+      "rollout_relative_l2_median": 0.9876936492093575,
+      "rollout_over_baseline": 45.671774834793155,
+      "accuracy_monitor_detects": true,
+      "mr_catches_accuracy_misses": false,
+      "accuracy_catches_mr_misses": false
+    },
+    {
+      "mutant": "NS_double_scale",
+      "fault_class": "normalization_scale_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0272944033768365,
+      "mirror_y_violation_median": 0.7354229305978729,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false,
+      "rollout_relative_l2_median": 0.019540000229797176,
+      "rollout_over_baseline": 0.9035458428648244,
+      "accuracy_monitor_detects": false,
+      "mr_catches_accuracy_misses": false,
+      "accuracy_catches_mr_misses": false
+    },
+    {
+      "mutant": "TR_sign_flip",
+      "fault_class": "temporal_rollout_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0044255736122925,
+      "mirror_y_violation_median": 0.7354229305978729,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false,
+      "rollout_relative_l2_median": 0.033443998419042206,
+      "rollout_over_baseline": 1.546478269443552,
+      "accuracy_monitor_detects": false,
+      "mr_catches_accuracy_misses": false,
+      "accuracy_catches_mr_misses": false
+    },
+    {
+      "mutant": "TR_double_step",
+      "fault_class": "temporal_rollout_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0251494545987332,
+      "mirror_y_violation_median": 0.7354229305978729,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false,
+      "rollout_relative_l2_median": 0.019251732697986114,
+      "rollout_over_baseline": 0.8902161127247192,
+      "accuracy_monitor_detects": false,
+      "mr_catches_accuracy_misses": false,
+      "accuracy_catches_mr_misses": false
+    },
+    {
+      "mutant": "PC_swap_xy",
+      "fault_class": "physical_channel_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.015399982065215,
+      "mirror_y_violation_median": 1.7803453364027535,
+      "mirror_y_relative_change_from_baseline": 1.4208455601940444,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": true,
+      "detected_by_any": true,
+      "rollout_relative_l2_median": 0.027998405954125404,
+      "rollout_over_baseline": 1.294669550111584,
+      "accuracy_monitor_detects": false,
+      "mr_catches_accuracy_misses": true,
+      "accuracy_catches_mr_misses": false
+    },
+    {
+      "mutant": "PC_zero_vy",
+      "fault_class": "physical_channel_fault",
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0094525636906588,
+      "mirror_y_violation_median": 0.7439214779058948,
+      "mirror_y_relative_change_from_baseline": 0.011555999893983303,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false,
+      "rollout_relative_l2_median": 0.02523552698184757,
+      "rollout_over_baseline": 1.1669117312588773,
+      "accuracy_monitor_detects": false,
+      "mr_catches_accuracy_misses": false,
+      "accuracy_catches_mr_misses": false
+    }
+  ],
+  "summary": {
+    "num_mutants": 10,
+    "node_permutation_MR_detection_rate": 0.0,
+    "conservation_MR_detection_rate": 0.3,
+    "mirror_y_MR_detection_rate": 0.2,
+    "union_detection_rate": 0.5,
+    "fault_classes_localized_by_node_permutation": [],
+    "fault_classes_localized_by_conservation": [
+      "boundary_condition_fault",
+      "normalization_scale_fault"
+    ],
+    "fault_classes_localized_by_mirror_y": [
+      "mesh_adjacency_fault",
+      "physical_channel_fault"
+    ]
+  },
+  "claim_limitations": "One SUT, one checkpoint, one eval trajectory, one injected-fault catalogue. Detection rates are for this mutant set only; not a real-world fault-detection rate, reliability, baseline-superiority, or cross-SUT claim.",
+  "generated_at": "2026-06-17T04:56:13Z",
+  "complementarity": {
+    "accuracy_rollout_multiplier": 2.0,
+    "baseline_rollout_relative_l2": 0.021625909060510692,
+    "mr_catches_accuracy_misses": [
+      "MA_permute_edges",
+      "PC_swap_xy"
+    ],
+    "accuracy_catches_mr_misses": [],
+    "both": [
+      "BC_nonzero_wall",
+      "BC_zero_inflow",
+      "NS_skip_denorm"
+    ],
+    "neither": [
+      "MA_drop_edges",
+      "NS_double_scale",
+      "PC_zero_vy",
+      "TR_double_step",
+      "TR_sign_flip"
+    ],
+    "note": "complementarity, not superiority: each axis catches a distinct subset; an MR-only fault is caught by a relation an accuracy monitor leaves within band, an accuracy-only fault degrades rollout without crossing a relation threshold."
+  }
+}
