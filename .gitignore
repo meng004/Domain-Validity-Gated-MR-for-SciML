@@ -8,6 +8,7 @@ paper/ist-submission/*.blg
 paper/ist-submission/*.spl
 paper/ist-submission/*.bbl
 paper/ist-submission/*.log
+paper/ist-submission/*.raw.tex
 dist/
 *.tar.gz
 
