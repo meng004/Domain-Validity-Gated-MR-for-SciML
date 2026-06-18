@@ -13,11 +13,10 @@ Decision rule:
 - A cited key must have a DOI, arXiv record, publisher page, official venue
   metadata, or a stable canonical source named below.
 - A cited key may support only the claim-limit stated in the last column.
-- `qi2025physicalfield` is excluded because the current ledger marks it
-  unverified.
-- `yu2025fluidvelocity` is not cited in the current submission draft; it remains
-  a related-work lead and novelty guardrail until publisher-level verification
-  and paper-text inspection are complete.
+- `qi2025physicalfield` and `yu2025fluidvelocity` are DOI-verified but are not
+  cited in the current submission draft. They remain related-work leads and
+  novelty guardrails; citing them would require a deliberate Related Work
+  expansion rather than metadata repair.
 
 | Key | Submission status | Evidence source used in this pass | Claim limit in this paper |
 |---|---|---|---|
@@ -46,8 +45,8 @@ Decision rule:
 
 | Key | Status | Reason |
 |---|---|---|
-| `qi2025physicalfield` | UNVERIFIED | No trusted DOI, publisher, arXiv, official proceedings, Crossref, or Semantic Scholar-grade record was found in the prior ledger pass. It is excluded from the submission bibliography. |
-| `yu2025fluidvelocity` | NOT_CITED_LEAD | The DOI lead exists, but the paper text and publisher landing page were not inspected in this pass. It remains a novelty guardrail and should not support detailed closest-work claims yet. |
+| `qi2025physicalfield` | VERIFIED_NOT_CITED | MCP paper-search/CrossRef verified DOI `10.1145/3796731.3796804`: ACM proceedings article, Proceedings of the 2025 5th International Conference on Computational Modeling, Simulation and Data Analysis, pp.470--482. It remains a close application lead on scenario-based physical-field prediction testing, but the current IST draft does not cite it because the Related Work already uses stronger method-neighbor citations for the paper's core RQ0--RQ4 gap. |
+| `yu2025fluidvelocity` | VERIFIED_NOT_CITED | MCP paper-search/CrossRef verified DOI `10.1109/IAECST68792.2025.11415187`: IEEE proceedings article, 2025 7th International Academic Exchange Conference on Science and Technology Innovation, pp.178--182. It remains a close physical-field mutation-testing lead, but the current IST draft does not cite it because it would mainly add an application-adjacent example, not strengthen the exact novelty claim around measurement-floor admissibility, MR cards, and typed verdict ledgers. |
 
 ## Stage 5 additions (2026-06-06): three closest prior works after Socratic debate
 
@@ -71,6 +70,17 @@ Decision rule:
 | `ying2025` | VERIFIED | doi 10.1016/j.infsof.2025.107903 | Recent same-venue MT-for-ML application (Inf. Softw. Technol. 188:107903, 2025) to tabular credit-scoring models; cited in §2.2 as a recent MT4ML example (not SciML). crossref-verified. |
 | `najafi2026` | VERIFIED | doi 10.3390/w18020271 | Published review (Water 18(2):271, 2026) of physical-consistency and OOD-stress diagnostics for ML climate-downscaling surrogates; cited to contrast passive physical-consistency diagnostics with relation-space MR testing. crossref-verified. |
 | `tsigkanos2023` | VERIFIED | doi 10.1007/978-3-031-35995-8_23 | LLM-based variable discovery for metamorphic testing of scientific software (ICCS 2023, LNCS pp.321--335); cited in §2.3 as the LLM-driven MR-identification prior alongside graph-kernel and data-driven approaches. crossref-verified. |
+
+## Undermind-assisted related-work gap closure (2026-06-18)
+
+Rows in this section were selected from the archived Undermind report and BibTeX under `research_assets/undermind/`. They are cited only to sharpen the Related Work gap around RQ0--RQ4, not as evidence for this paper's experimental results.
+
+| Key | Status | DOI / venue | Why added |
+|---|---|---|---|
+| `chen2002pde` | VERIFIED_WITH_LIMITS | doi 10.1109/CMPSAC.2002.1045022; COMPSAC 2002 pp.327--333 | Foundational PDE-program MT case study. It supports the historical claim that physics/numerics-derived MRs predate this paper; it does not support MR-card assets, measurement-floor admissibility, or typed SciML verdicts. |
+| `yang2021hydromt` | VERIFIED_WITH_LIMITS | doi 10.1029/2020WR029471; Water Resources Research 57, 2021 | Physics-informed MT for hydrological ML predictions where ground truth may be unavailable. It supports the learned-physical-model MT neighborhood; it does not provide executable MR cards, measurement-floor gates, or typed verdict ledgers. |
+| `duqueTorres2024selecting` | VERIFIED_WITH_LIMITS | doi 10.1145/3639478.3639781; ICSE Companion 2024 pp.212--216 | Closest newer prior for standardized MR representation and constrained MR selection. It supports the claim that MR specification/constraint tooling exists; the manuscript distinguishes its physics-specific admissibility and evidence-ledger requirements. |
+| `sun2026ccml` | VERIFIED_WITH_LIMITS | doi 10.1145/3796225; ACM Transactions on Software Engineering and Methodology, 2026 | Recent general MR specification language and supporting-system work. It is cited to avoid overclaiming around MR specification tooling; it does not cover SciML measurement floors or typed relation-domain verdicts. |
 
 ## Citation-integrity corrections + additions (2026-06-17, pre-submission §8.5 audit)
 
