@@ -33,9 +33,9 @@ Decision rule:
 | `mandrioli2025cps` | VERIFIED | IEEE TSE DOI `10.1109/TSE.2025.3563121` and repository metadata. | Design-assumption-based MRs for CPS; not direct SciML/PDE evidence. |
 | `raissi2019pinn` | VERIFIED | Journal of Computational Physics DOI `10.1016/j.jcp.2018.10.045`. | PINN/SciML background. |
 | `karniadakis2021piml` | VERIFIED | Nature Reviews Physics DOI `10.1038/s42254-021-00314-5`. | Physics-informed machine-learning background. |
-| `li2021fno` | VERIFIED | ICLR/OpenReview record for Fourier Neural Operator. | Neural-operator background. |
+| `li2021fno` | VERIFIED | ICLR/OpenReview/arXiv record for Fourier Neural Operator; arXiv `2010.08895`, DOI `10.48550/arXiv.2010.08895`. | Neural-operator background. |
 | `krishnapriyan2021failure` | VERIFIED | NeurIPS 2021 proceedings record. | PINN failure-mode background; no claim about MeshGraphNets. |
-| `gopakumar2025calibrated` | VERIFIED (author list corrected 2026-06-06) | Calibrated Physics-Informed Uncertainty Quantification, Gopakumar, Gray, Zanisi, Nunn, Pamela, Giles, Kusner, Deisenroth; arXiv:2502.04406; ICML 2025 (PMLR v267). Prior local author list was wrong and is fixed. | Calibrated UQ/residual comparator context; not MT evidence. |
+| `gopakumar2025calibrated` | VERIFIED (author list corrected 2026-06-18) | Calibrated Physics-Informed Uncertainty Quantification, Gopakumar, Gray, Zanisi, Nunn, Giles, Kusner, Pamela, Deisenroth; arXiv:2502.04406; ICML 2025. Prior local author order placed Pamela before Giles/Kusner and is fixed to the current arXiv record. | Calibrated UQ/residual comparator context; not MT evidence. |
 | `baral2025xrepit` | VERIFIED_WITH_LIMITS | ScienceDirect page and DOI `10.1016/j.compfluid.2026.107075`. | Hybrid ML-CFD trust/switching context; not MT or relation-level violation statistics. |
 | `wang2025deeponetfe` | VERIFIED_WITH_LIMITS | ScienceDirect page and DOI `10.1016/j.cma.2025.118319`. | Hybrid neural-operator/FE coupling context; not MT evidence. |
 | `zhao2026noether` | VERIFIED_WITH_LIMITS | arXiv `2605.17390` and DOI `10.48550/arXiv.2605.17390`. | Preprint-level candidate pattern organization context only; not peer-reviewed validation of this paper's MRs. |
@@ -55,8 +55,8 @@ Decision rule:
 | `reichert2024hess` | VERIFIED | doi 10.5194/hess-28-2505-2024 | Closest prior on Contribution 3 (relation-indexed applicability map for a trained neural surrogate); must be cited in Section 2.4 and the discussion of active-transformation MT vs passive UQ. |
 | `eniser2022relaxations` | VERIFIED | doi 10.1145/3533767.3534392 | Closest prior on Contribution 1 (calibrated MR tolerance / admissibility floor); must be cited where the admissibility predicate is introduced. |
 | `duqueTorres2023bugornot` | VERIFIED | doi 10.1109/SANER56733.2023.00080 | Part of the 2023 cluster on bug-vs-inapplicability; closest prior on Contribution 2 (2D verdict). |
-| `duqueTorres2023completePipeline` | VERIFIED_PREPRINT | arXiv:2310.00338 | Companion 2023-cluster paper introducing MR constraints as a pipeline stage. |
-| `duqueTorres2023metaTrimmer` | VERIFIED_PREPRINT | arXiv:2307.15522 | Companion 2023-cluster paper automating domain-constraint derivation. |
+| `duqueTorres2023completePipeline` | VERIFIED (corrected 2026-06-18) | IEEE ICSME 2023 DOI `10.1109/ICSME58846.2023.00081`, pp.606--610; arXiv:2310.00338 lists the same two authors and links the related DOI. Prior local BibTeX incorrectly kept the arXiv DOI as the main DOI and included Klammer/Fischer as coauthors. | Companion 2023-cluster paper introducing MR constraints as a pipeline stage. |
+| `duqueTorres2023metaTrimmer` | VERIFIED (corrected 2026-06-18) | IEEE SEAA 2023 DOI `10.1109/SEAA60479.2023.00063`, pp.370--377; arXiv:2307.15522 retained as eprint. Prior local BibTeX kept only the arXiv DOI. | Companion 2023-cluster paper automating domain-constraint derivation. |
 | `verdecchia2023threats` | VERIFIED | doi 10.1016/j.infsof.2023.107329 | Threats-to-validity standard (IST 164, 2023); cited in Section Threats to Validity as the classification reference. |
 | `ralph2021empirical` | VERIFIED | ACM SIGSOFT Empirical Standards | Reporting standard for SE empirical research; cited in Threats to Validity and the statistical plan. |
 

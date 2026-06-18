@@ -46,3 +46,45 @@ sibling `kanewala2016graphkernel`, `mandrioli2025cps`, `raissi2019pinn`, `karnia
 - `zhao2026noether` — author self-cite, arXiv:2605.17390 (preprint, not yet DOI-indexed).
 - `yang2020hierarchical` — Chinese CNKI venue (计算机科学 47(11A)), not in international indexes.
 - `ralph2021empirical` — ACM SIGSOFT Empirical Standards community asset, cited as `@misc`.
+
+## Follow-up verification — Undermind + paper-search MCP (2026-06-18)
+
+Scope: current `paper/ist-submission/references.bib` after the Undermind-assisted related-work
+expansion (41 entries) and the archived Undermind BibTeX at
+`research_assets/undermind/undermind_domain_gated_workflows.bib` (177 entries). Method:
+DOI-first CrossRef lookup via paper-search MCP for DOI-indexed works; arXiv/Semantic/OpenAlex/DBLP
+fallback for ICLR, NeurIPS, arXiv, and community-standard records. The check focused on existence,
+title, author list, venue, pages/article number, year, and whether the citation supports the claim
+made in the manuscript.
+
+### New corrections applied
+
+| key | defect found in current BibTeX | correction applied |
+|---|---|---|
+| `duqueTorres2023completePipeline` | The record was still arXiv-only and listed four authors. paper-search MCP found the formal IEEE ICSME 2023 record: DOI `10.1109/ICSME58846.2023.00081`, pp.606--610, authors Alejandra Duque-Torres and Dietmar Pfahl. The arXiv page confirms the same two authors and links this related DOI. | Converted to `@inproceedings`, corrected authors to the two-author record, added ICSME venue/pages, kept arXiv eprint, and changed the main DOI to the IEEE DOI. |
+| `duqueTorres2023metaTrimmer` | The record was arXiv-only although paper-search MCP found the formal IEEE SEAA 2023 record: DOI `10.1109/SEAA60479.2023.00063`, pp.370--377. | Converted to `@inproceedings`, added SEAA venue/pages, kept arXiv eprint, and changed the main DOI to the IEEE DOI. |
+| `gopakumar2025calibrated` | Author order in `references.bib` placed Stanislas Pamela before Daniel Giles and Matt J. Kusner; the Undermind BibTeX has the same stale order. The current live arXiv record for `2502.04406` lists the order as Gopakumar, Gray, Zanisi, Nunn, Giles, Kusner, Pamela, Deisenroth. | Corrected author order; claim limit remains calibrated physics-informed UQ context only. |
+| `li2021fno` | Existence was verified, but the record lacked the arXiv identifier/DOI available from arXiv/OpenAlex metadata. | Added `eprint = {2010.08895}`, `archiveprefix = {arXiv}`, and DOI `10.48550/arXiv.2010.08895`. |
+| `chen2018mtSurvey` | CrossRef for DOI `10.1145/3143561` returns the formal title as "Metamorphic Testing" in ACM Computing Surveys 51(1), article 4, pp.1--27. | Shortened BibTeX title to the DOI metadata title while retaining authors, venue, volume/issue, pages, year, and DOI. |
+
+### Additional verified records in the 41-entry file
+
+The Undermind-added current citations were checked DOI-first and match their publisher metadata:
+`chen2002pde` (`10.1109/CMPSAC.2002.1045022`, COMPSAC 2002 pp.327--333; CrossRef's
+`1970-01-01` date is a metadata placeholder and does not override the 2002 conference year),
+`yang2021hydromt` (`10.1029/2020WR029471`, Water Resources Research 57(9), 2021),
+`duqueTorres2024selecting` (`10.1145/3639478.3639781`, ICSE Companion 2024 pp.212--216),
+and `sun2026ccml` (`10.1145/3796225`, ACM TOSEM, online 2026). These citations remain related-work
+boundary evidence only; none is used as evidence for this paper's experimental results.
+
+The close but non-cited Undermind leads remain verified-not-cited: `qi2025physicalfield`
+(`10.1145/3796731.3796804`) and `yu2025fluidvelocity` (`10.1109/IAECST68792.2025.11415187`).
+They are application-adjacent novelty guardrails, not necessary support for the paper's RQ0--RQ4
+argument as currently written.
+
+### Residual non-CrossRef cases
+
+`yang2020hierarchical` did not resolve via CrossRef in this pass, but remains publisher-verified
+through the Chinese journal DOI `10.11896/jsjkx.200200015`. `chen1998metamorphic`,
+`ralph2021empirical`, and arXiv/self-preprint records remain acceptable only under their stated
+claim limits.
