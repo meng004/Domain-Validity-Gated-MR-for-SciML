@@ -1,6 +1,6 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-17 by claude-code (真实多厂商网关面板 v37+v38 跑通 + deep-research 学术评估 + IST 14/14 合规)
+> Last updated: 2026-06-18 by claude-code (投稿工作并入 main + 仓库清理为单一 main 分支;前序:真实网关面板 v37+v38 + deep-research + IST 14/14)
 
 ## 🟢 2026-06-17 真实多厂商网关面板 (v37+v38) + deep-research 学术评估 + 成熟度复评
 - **✅ 真实多厂商网关面板首次跑通(历史一直被"key 耗尽"阻塞)**:`tools/run_academic_review_panel.py` 在两个独立网关各跑一次,5 厂商(gpt-5.5/glm-5.1/deepseek-v4-flash/qwen3-max/kimi-k2.6),5/5 reviewer、0 失败。**v38**(用户提供网关,OpenAI 兼容,需 `/v1` 后缀)overall **7.86** / accept **0.604** / 多数 **major**(3M/2m);**v37**(兄弟 bltcy 网关)overall **7.6** / accept **0.67** / 多数 **minor**(2M/3m)。记录 `research_assets/runs/academic-review-panel-v37|v38/`。
@@ -210,14 +210,14 @@
 
 ## 🚚 本地迁移备忘（在本地继续前先看这段）
 
-**仓库状态**：分支 `claude/youthful-feynman-qy22k2`，本地=远端完全同步，
-工作树干净。最新 commit 见 `git log -1`（Phase 19 时为 `9517fbb`）。
+**仓库状态**：单一 `main` 分支（2026-06-17 投稿工作已全部并入 main、feature/codex 分支已清理删除），本地=远端完全同步，
+工作树干净。最新 commit 见 `git log -1`。
 
 **1. 拉取分支**
 ```
-git fetch origin claude/youthful-feynman-qy22k2
-git checkout claude/youthful-feynman-qy22k2
-git pull origin claude/youthful-feynman-qy22k2
+git fetch origin main
+git checkout main
+git pull origin main
 ```
 
 **2. 本地需要重装的依赖**（容器临时装的，不在 git 里）

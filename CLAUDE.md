@@ -93,9 +93,10 @@ Supporting assets:
 
 ## Branches and verifying prior session state
 
-- Local default branch: `main`. Cloud sessions have used
-  `claude/trusting-curie-i2VHM`; various `codex/*` branches hold earlier
-  PR work.
+- Local default branch: `main`. As of 2026-06-17 the submission work and all
+  prior session / `codex/*` branches were merged into `main` and the repo was
+  consolidated to a single `main` line (local and remote, in sync); work
+  continues directly on `main`.
 - Past sessions have left compaction summaries that did not match reality.
   Before trusting any claim about commits, branches, or artifacts:
 
