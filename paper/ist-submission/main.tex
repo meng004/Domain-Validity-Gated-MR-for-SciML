@@ -199,7 +199,7 @@ The distinction from residual- and uncertainty-based trust estimation is deliber
 
 Metamorphic testing, MR identification, scientific-software MT, residual diagnostics, uncertainty quantification, LLM candidate generation, and NOETHER-style candidate organization are established or emerging sources of testing ideas. The contribution here is narrower: SciML MR use should be treated as a domain-validity and asset-construction problem. A candidate relation becomes a useful oracle-free V\&V asset only after its physical basis, transformation preconditions, output mapping, tolerance, exclusion rule, executable artifact, and relation-level verdict are recorded. Recent work derives or refines domain-specific MRs for scientific programs directly from their numerical models \citep{yan2024elliptic,stevens2025mars}; the wedge here is the learned surrogate evaluated out of distribution and the requirement that a relation's tolerance dominate the measuring operator's numerical floor, rather than testing a numerical solver against derived relations.
 
-Table~\ref{tab:closest-prior-positioning} summarizes the gap. Existing work supplies candidate sources, relaxed oracles, constraint-based inapplicability handling, and SciML diagnostics. The missing combination is a validity-gated, executable, and auditable workflow for physics-governed SciML surrogate software. The coverage discussion later in the paper is intentionally secondary: the admitted relation set helps explain what the test suite can and cannot detect in the studied settings, but the primary contribution is the construction and interpretation of the MR assets themselves.
+Table~\ref{tab:closest-prior-positioning} summarizes the gap. Existing work supplies candidate sources, relaxed oracles, constraint-based inapplicability handling, and SciML diagnostics. The missing combination is a validity-gated, executable, and auditable workflow for physics-governed SciML surrogate software.
 
 \section{Method}
 \label{sec:method}
@@ -290,18 +290,18 @@ Retained MRs are interpreted with the three-level scientific-computing MR classi
 \subsection{Evaluation logic}
 \label{subsec:evaluation-logic}
 
-The experiments evaluate whether the method yields auditable, executable, and interpretable MR evidence under bounded conditions. They do not constitute a model benchmark and do not claim that the tested surrogates are generally reliable. The design separates four evidence tiers: primary cylinder-flow evidence, supporting cross-family checks, secondary candidate-generation and rollout comparators, and stress tests used to interpret coverage boundaries.
+The experiments evaluate whether the method yields auditable, executable, and interpretable MR evidence under bounded conditions. The design separates four evidence tiers: primary cylinder-flow evidence, supporting cross-family checks, secondary candidate-generation and rollout comparators, and stress tests used to interpret coverage boundaries.
 
 \subsection{Subject systems and evidence tiers}
 \label{subsec:suts}
 
 \emph{Primary evidence} comes from a MeshGraphNets-family cylinder-flow case study: a trained checkpoint, its K=6 checkpoint roster over three official held-out trajectories, same-domain S4/S5 wider/deeper variants, a PointMLP coordinate network, and the NVIDIA PhysicsNeMo \texttt{MeshGraphNet} production implementation evaluated on official DeepMind cylinder\_flow TFRecords. The primary unit is a relation-level cell: MR card, SUT/checkpoint, trajectory or source case, transformed follow-up case, metric, and verdict.
 
-\emph{Supporting evidence} checks whether the same admissibility predicate can be applied outside the primary mesh-surrogate setting: a K=15 PINN roster and trained FNO-2D checkpoints over 2D Burgers and heat data. These runs support transfer of the gate and verdict logic, not cross-family pass-rate estimation.
+\emph{Supporting evidence} checks whether the same admissibility predicate can be applied outside the primary mesh-surrogate setting: a K=15 PINN roster and trained FNO-2D checkpoints over 2D Burgers and heat data.
 
-\emph{Secondary evidence} includes LLM-simulated expert MR design, generic MR-generation scope contrasts, LLM-assisted candidate generation, rollout-accuracy diagnostics, and external witness reruns from the read-only Minimum-MR-SubSet repository. These are contextual comparators and provenance checks, not defeated competitors.
+\emph{Secondary evidence} includes LLM-simulated expert MR design, generic MR-generation scope contrasts, LLM-assisted candidate generation, rollout-accuracy diagnostics, and external witness reruns from the read-only Minimum-MR-SubSet repository.
 
-\emph{Stress-test evidence} uses seeded-fault and cross-program checks to interpret where the admitted MR set can and cannot observe faults. This tier supports the bounded coverage implication; it is not a real-world defect-detection-rate estimate.
+\emph{Stress-test evidence} uses seeded-fault and cross-program checks to interpret where the admitted MR set can and cannot observe faults.
 
 \subsection{Baselines and comparators}
 \label{subsec:baselines}
@@ -447,12 +447,12 @@ To check whether the seeded-fault detection result of Section~\ref{subsec:within
 
 \textbf{Falsifiable boundaries for the implication.} The coverage implication would be weakened by coverage that survives exclusion of the only MR measuring the affected invariant, by a fault caught while perturbing no admitted measured invariant, or by a blind spot closed by adding same-kind mutants rather than new relation directions. In this evidence set, the cross-SUT airfoil run supports relation-specific exclusion, while the knife-edge sweep at $p=1.0$ and the adversarial mutants delimit blind subspaces. The claim remains qualitative and fault-class level on two CFD SUTs, reported as an interpretive implication of RQ1--RQ4 rather than as a general theorem.
 
-\textbf{Cross-program breadth.} The Minimum-MR-SubSet sibling is used only as an external breadth audit: seven program types are inspected read-only and five CPU-only SUTs are replayed through this paper's gate and typed verdict (claims~C39--C40). These checks test protocol portability, not per-program reliability, superiority, real-world defect rates, or new MR claims. Appendix~\ref{app:cross-program} gives the full results.
+\textbf{Cross-program breadth.} The Minimum-MR-SubSet sibling is used only as an external breadth audit: seven program types are inspected read-only and five CPU-only SUTs are replayed through this paper's gate and typed verdict (claims~C39--C40). Appendix~\ref{app:cross-program} gives the full results.
 
 \subsection{RQ4 secondary baselines and external-scope audit}
 \label{subsec:llm-mr-baseline}
 
-This subsection reports the Secondary baseline and external-scope audit: LLM baselines are secondary exploratory scope contrasts, not competitors. Expert-LLMs proposed 25 candidates (24 unique), but rubric voting retained 4 and found no novel retained MR family; generic templates admitted 3/13; a one-shot LLM baseline had low rater agreement (Fleiss kappa 0.077). These results support the need for an admissibility gate, not baseline superiority.
+This subsection reports the Secondary baseline and external-scope audit: LLM baselines are secondary exploratory scope contrasts, not competitors. Expert-LLMs proposed 25 candidates (24 unique), but rubric voting retained 4 and found no novel retained MR family; generic templates admitted 3/13; a one-shot LLM baseline had low rater agreement (Fleiss kappa 0.077).
 
 The Minimum-MR-SubSet audit/rerun is likewise an external witness: 70 real ABD instances, 20 true-fault-class rows, three SciML/PDE PASS witness rows, and one held-out cylinder-flow MGN PASS witness rerun. It adds artifact-backed scope context without adding a second primary architecture/dataset.
 
@@ -484,7 +484,7 @@ The value of the current study is not that every MR finds a new fault beyond rol
 
 A natural objection is that the admissibility predicate merely re-describes the three initial outcomes. The added runs answer this: the symmetric-mesh run uses the predicate out-of-sample and fails an admitted relation; rollout accuracy shows the mirror-y violation answers a different question from one-step error; and the primary empirical scope upgrade preserves these readings across a K=6 roster, three held-out trajectories, and larger denominators. The PINN roster, FNO primary workflow, and Minimum-MR-SubSet MGN/PINN reruns broaden applicability context while preserving the reliability and geometry-independent-rate boundary.
 
-A second objection reads the deferred absolute-conservation relation as a gap in the end-to-end pipeline. The portfolio answers this directly: the conservation class produces full executable verdicts wherever its measurement floor is calibratable (FNO periodic conservation fails 24/24 against a calibrated floor; PINN reference-relative conservation passes 30/30), and the gate refuses execution precisely on the one variant where a verdict could not be separated from the operator's own discretization error: MGN open-boundary absolute conservation.
+A second objection reads the deferred absolute-conservation relation as a gap in the end-to-end pipeline. The portfolio answers this directly: the conservation class produces full executable verdicts wherever its measurement floor is calibratable (FNO periodic conservation fails 24/24 against a calibrated floor; PINN reference-relative conservation passes 30/30).
 
 The rubric averts two concrete misreadings: absolute discrete-divergence would have read as a conservation \emph{pass} despite reference-field divergence, and asymmetric-mesh mirror-y would have read as a model fault rather than a geometric artifact.
 
