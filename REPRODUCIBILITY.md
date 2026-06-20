@@ -167,6 +167,42 @@ python -m pytest tests/test_ext2_operator_floor_cross_topology.py \
 All four runners are deterministic (fixed seeds / read-only inputs); reruns are byte-identical
 modulo the report timestamp. EXT-3 needs no dependency beyond the Python standard library.
 
+## Tier 2f — Realistic-fault emergence (FNO + PINN, CPU + torch, no credentials)
+
+Re-runs the FNO/PINN seeded-fault experiments with eight realistic mechanism-level faults that
+are NOT tailored to the invariants, to test whether the by-class detection structure is emergent
+or merely constructed (claims C48, C49). Both runners reuse the committed converged checkpoints,
+the same predeclared detector thresholds as the constructed C45/C46 runs (none tuned), and a
+single shared fault catalogue (the PINN runner imports `apply_fault` from the FNO runner).
+Per-run provenance and the §6 emergence answers are in each run directory's `PROVENANCE.md`.
+
+```bash
+pip install torch          # CPU torch; numpy already in requirements.txt
+
+# C48: FNO realistic-fault emergence (K=6 FNO-2D roster, Burgers/heat)
+python tools/run_realistic_fault_fno.py \
+    --outdir research_assets/runs/fno-realistic-fault
+#   expect: 5/8 faults detected; emergent 2x2 partition (changes integral) x (breaks translation);
+#           transport/high-freq faults (spatial_shift, sharpen, mode_truncation) structurally
+#           blind -- on heat seed 0 spatial_shift/sharpen reach rel-L2 ~0.19/0.20 and STILL escape
+
+# C49: PINN realistic-fault emergence (K=6 Burgers PINN roster, 129x129 reference grid)
+python tools/run_realistic_fault_pinn.py \
+    --outdir research_assets/runs/pinn-realistic-fault
+#   expect: of 4 faults reaching testable magnitude, 3 detected (conservation/mirror/both);
+#           spatial_shift blind at rel-L2 ~0.63; 4 faults below realistic magnitude (untestable)
+
+python tools/validate_research_assets.py                                  # expect: 0
+python -m pytest tests/test_fno_realistic_fault.py \
+    tests/test_pinn_realistic_fault.py -q                                # expect: OK
+```
+
+Both runners are deterministic (fixed noise seed, read-only checkpoints); reruns are
+byte-identical modulo the report timestamp. The committed reports were produced with CPU
+`torch 2.12.0+cpu`. The guards pin the reports without re-running the SUTs and deliberately do
+NOT assert a clean by-class diagonal (the realistic result is a messier 2x2 partition with a
+confirmed structural blind region).
+
 ## Tier 3 — Full re-run (hours, GPU + credentials)
 
 Real SUT runs require a CUDA GPU and the `METBENCH_MGN_*` environment variables;
