@@ -1263,6 +1263,41 @@ claims:
       - "An absolute divergence-free tolerance claim on the real DeepMind eval mesh."
     blocked_reason: null
 
+  - claim_id: "C45-fno-seeded-fault-detection"
+    status: "observed"
+    scope: "K=6 trained FNO-2D checkpoints (Burgers/heat x seeds 0,1,2), 4 eval cases each (24 cells per fault), one author-designed output-level fault catalogue of 5 faults"
+    evidence:
+      - "tools/run_seeded_fault_detection_fno.py"
+      - "tools/run_fno_primary_workflow.py"
+      - "research_assets/runs/fno-seeded-fault-detection/fno_seeded_fault_report.json"
+      - "research_assets/runs/fno-k6-roster"
+    wording_allowed: >
+      On the trained K=6 FNO-2D roster (Burgers and heat, seeds 0/1/2; 4 cases each,
+      24 cells per fault), the FNO's two admitted MRs used as fault detectors -- the
+      periodic integer-translation MR (clean model passes; fault detected when the
+      mapped follow-up crosses tolerance 1e-5) and the periodic channel-sum (mass) MR
+      (fault detected when it changes the per-channel spatial sum by more than 5% of
+      the clean output) -- localize an author-designed output-level fault catalogue by
+      class: the translation MR detects the two position-dependent asymmetry faults
+      (24/24 each) and is blind to the two channel-sum faults (0/24); the channel-sum
+      MR detects the global-scale and constant-offset faults (24/24 each) and is blind
+      to the zero-sum asymmetry fault (0/24); one fault is detected by both (24/24).
+      Four of the five faults are detected by at least one MR. The fifth, a transport/
+      phase error (blend toward a spatially-shifted copy of the output, a translation-
+      equivariant channel-sum-preserving perturbation modelling e.g. a wrong advection
+      speed), is detected by neither MR at any swept severity (0/24, Wilson 95%
+      CI [0.00, 0.14]): a genuine blind subspace in the suite's uncovered
+      transport-direction. This reproduces the MeshGraphNets by-class detection
+      structure and the existence of a structural blind region on a spectral
+      architecture family and different (Burgers/heat) physics, on already-converged
+      checkpoints.
+    wording_forbidden:
+      - "A real-world or general fault-detection rate (one author-designed catalogue, 24 cells per fault)."
+      - "Baseline superiority, or that the MRs outperform an accuracy or other monitor."
+      - "Proof that the by-class detection structure generalizes across architectures (it is reproduced on two families, MGN and FNO, not proven general)."
+      - "A reliability, cross-architecture, or external-validity rate for FNO surrogates."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
