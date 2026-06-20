@@ -1,0 +1,265 @@
+{
+  "ledger_id": "pointmlp-three-arm-complementarity",
+  "evidence_level": "converged-pointmlp-three-arm-complementarity-and-gate-value",
+  "schema_version": "0.1.0",
+  "sut_id": "pointmlp-cylinder-sut-v1",
+  "architecture_family": "PointMLP row-wise coordinate network (no message passing)",
+  "rollout_convergence_median_relative_l2": 0.02975835263724644,
+  "num_frames": 9,
+  "fault_catalogue_size": 20,
+  "fault_classes_predeclared": [
+    "boundary_condition_fault",
+    "normalization_scale_fault",
+    "physical_channel_fault",
+    "temporal_rollout_fault"
+  ],
+  "thresholds": {
+    "node_perm": 1e-05,
+    "conservation_ratio": 1.5,
+    "mirror_y_rel_change": 0.5,
+    "accuracy_rollout_multiplier": 2.0,
+    "generic_exact_tolerance": 1e-05
+  },
+  "baseline": {
+    "mirror_y_violation_median": 0.3684562534404197,
+    "rollout_relative_l2_median": 0.029758352637246476
+  },
+  "arm1_validity_gated_mr": {
+    "detection_count": 13,
+    "detection_rate": 0.65,
+    "detection_rate_wilson_ci95": [
+      0.43285427668523624,
+      0.818808175898918
+    ]
+  },
+  "arm2_accuracy_monitor": {
+    "detection_count": 6,
+    "detection_rate": 0.3,
+    "detection_rate_wilson_ci95": [
+      0.1454772448676043,
+      0.5189728183535235
+    ]
+  },
+  "arm3_ungated_generic_false_positive": {
+    "per_template": [
+      {
+        "template": "node_permutation",
+        "admitted_by_gate": true,
+        "baseline_false_positive_rate": 0.0,
+        "false_positive_ci95": [
+          0.0,
+          0.2991450484195441
+        ],
+        "flags_fault_free_sut": false
+      },
+      {
+        "template": "mirror_y_reflection",
+        "admitted_by_gate": false,
+        "baseline_false_positive_rate": 1.0,
+        "false_positive_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "flags_fault_free_sut": true
+      },
+      {
+        "template": "mirror_x_reflection",
+        "admitted_by_gate": false,
+        "baseline_false_positive_rate": 1.0,
+        "false_positive_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "flags_fault_free_sut": true
+      },
+      {
+        "template": "domain_translation",
+        "admitted_by_gate": false,
+        "baseline_false_positive_rate": 1.0,
+        "false_positive_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "flags_fault_free_sut": true
+      },
+      {
+        "template": "input_global_scaling",
+        "admitted_by_gate": false,
+        "baseline_false_positive_rate": 1.0,
+        "false_positive_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "flags_fault_free_sut": true
+      },
+      {
+        "template": "channel_swap",
+        "admitted_by_gate": false,
+        "baseline_false_positive_rate": 1.0,
+        "false_positive_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "flags_fault_free_sut": true
+      },
+      {
+        "template": "additive_output_constant",
+        "admitted_by_gate": false,
+        "baseline_false_positive_rate": 1.0,
+        "false_positive_ci95": [
+          0.7008549515804559,
+          1.0
+        ],
+        "flags_fault_free_sut": true
+      }
+    ],
+    "admitted_template_max_false_positive_rate": 0.0,
+    "rejected_template_min_false_positive_rate": 1.0,
+    "n_rejected_templates_flagging_fault_free_sut": 6,
+    "n_rejected_templates": 6,
+    "gate_value": "admitted (real-invariant) detectors do not flag the fault-free SUT (false-positive ~0); the rejected generic templates fire on the correct SUT -- the gate removes the false-alarming detectors"
+  },
+  "complementarity_2x2_mr_vs_accuracy": {
+    "both": [
+      "BC_zero_inflow",
+      "BC_nonzero_wall",
+      "NS_skip_denorm",
+      "NS_double_scale@4.0"
+    ],
+    "mr_only": [
+      "PC_swap_xy",
+      "PC_zero_vy@0.1",
+      "PC_zero_vy@0.25",
+      "PC_zero_vy@0.5",
+      "PC_zero_vy@0.75",
+      "PC_zero_vy@0.85",
+      "PC_zero_vy@0.9",
+      "PC_zero_vy@0.95",
+      "PC_zero_vy@0.99"
+    ],
+    "accuracy_only": [
+      "TR_double_step",
+      "NS_double_scale@2.0"
+    ],
+    "neither": [
+      "TR_sign_flip",
+      "NS_double_scale@1.1",
+      "NS_double_scale@1.25",
+      "NS_double_scale@1.5",
+      "PC_zero_vy@1.0"
+    ],
+    "counts": {
+      "both": 4,
+      "mr_only": 9,
+      "accuracy_only": 2,
+      "neither": 5
+    },
+    "note": "complementarity, not superiority: the MR arm and the accuracy arm catch distinct fault subsets; an MR-only fault is a relation violation an accuracy monitor leaves within band"
+  },
+  "knife_edge_pc_zero_vy_sweep": {
+    "curve": [
+      {
+        "fraction": 0.1,
+        "node_perm_median": 0.08830093743889036,
+        "mirror_y_rel_change": 0.00453409891946732,
+        "rollout_over_baseline": 1.004794303940465,
+        "mr_detects": true,
+        "accuracy_detects": false
+      },
+      {
+        "fraction": 0.25,
+        "node_perm_median": 0.14878583354664932,
+        "mirror_y_rel_change": 0.03389690528596116,
+        "rollout_over_baseline": 1.0069430102724193,
+        "mr_detects": true,
+        "accuracy_detects": false
+      },
+      {
+        "fraction": 0.5,
+        "node_perm_median": 0.21267246682650806,
+        "mirror_y_rel_change": 0.002680103824353315,
+        "rollout_over_baseline": 0.9969462668589439,
+        "mr_detects": true,
+        "accuracy_detects": false
+      },
+      {
+        "fraction": 0.75,
+        "node_perm_median": 0.1915529524412182,
+        "mirror_y_rel_change": 0.03264103573452644,
+        "rollout_over_baseline": 1.0031503037216087,
+        "mr_detects": true,
+        "accuracy_detects": false
+      },
+      {
+        "fraction": 0.85,
+        "node_perm_median": 0.17438959050867497,
+        "mirror_y_rel_change": 0.09281006261918998,
+        "rollout_over_baseline": 1.0053882670181726,
+        "mr_detects": true,
+        "accuracy_detects": false
+      },
+      {
+        "fraction": 0.9,
+        "node_perm_median": 0.1326865199947882,
+        "mirror_y_rel_change": 0.0994226562158415,
+        "rollout_over_baseline": 1.015257342245491,
+        "mr_detects": true,
+        "accuracy_detects": false
+      },
+      {
+        "fraction": 0.95,
+        "node_perm_median": 0.1100199505768179,
+        "mirror_y_rel_change": 0.15117141710094387,
+        "rollout_over_baseline": 1.012556959577829,
+        "mr_detects": true,
+        "accuracy_detects": false
+      },
+      {
+        "fraction": 0.99,
+        "node_perm_median": 0.08165482875669583,
+        "mirror_y_rel_change": 0.16582779894265584,
+        "rollout_over_baseline": 1.0079814164167917,
+        "mr_detects": true,
+        "accuracy_detects": false
+      },
+      {
+        "fraction": 1.0,
+        "node_perm_median": 0.0,
+        "mirror_y_rel_change": 0.17357822033466874,
+        "rollout_over_baseline": 1.0114332393202043,
+        "mr_detects": false,
+        "accuracy_detects": false
+      }
+    ],
+    "mr_detect_fractions": [
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.85,
+      0.9,
+      0.95,
+      0.99
+    ],
+    "mr_miss_fractions": [
+      1.0
+    ],
+    "finding": "node-index-selected partial vy-zeroing breaks node-permutation equivariance and is detected; the uniform fraction 1.0 is permutation-invariant and escapes -- a fault becomes invisible to the geometric detector exactly when it enters the detector's invariance"
+  },
+  "cross_sut_mgn_reference": {
+    "source": "research_assets/runs/detection-vs-accuracy/raw/metric_ledger.json",
+    "mgn_mr_catches_accuracy_misses": [
+      "MA_permute_edges",
+      "PC_swap_xy"
+    ],
+    "mgn_accuracy_catches_mr_misses": [],
+    "note": "MGN complementarity read from committed C38 artifact, not re-run here"
+  },
+  "ars_self_check": {
+    "fault_classes_predeclared": true,
+    "statistic": "descriptive detection rates with Wilson 95% CIs (no hypothesis test)",
+    "multiple_comparison_correction": "not applicable -- descriptive rates, not p-values"
+  },
+  "claim_limitations": "One converged SUT, one checkpoint, one eval trajectory, one expanded injected-fault catalogue. Complementarity and a measurable gate value (baseline false positives), not a real-world rate, reliability, or any baseline-superiority claim. The MGN cross-SUT reference is read from committed artifacts, not re-run.",
+  "generated_at": "2026-06-20T09:06:43Z"
+}
