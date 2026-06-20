@@ -1,0 +1,140 @@
+{
+  "record_type": "cross-architecture-validity-coverage-duality",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-20T11:09:56Z",
+  "purpose": "Aggregate four committed end-to-end seeded-fault reports and check whether the validity-coverage duality's two qualitative falsifiable predictions (coverage follows the admitted MR set; a structural blind region exists) reproduce on every architecture family.",
+  "architecture_families": [
+    "MeshGraphNets",
+    "PointMLP",
+    "FNO-2D",
+    "PINN"
+  ],
+  "per_architecture": {
+    "MeshGraphNets": {
+      "detectors": [
+        "node_permutation_equivariance",
+        "conservation_divergence",
+        "mirror_y_ood_stress"
+      ],
+      "coverage_by_invariant": {
+        "conservation": [
+          "boundary_condition_fault",
+          "normalization_scale_fault"
+        ],
+        "mirror_y": [
+          "mesh_adjacency_fault",
+          "physical_channel_fault"
+        ]
+      },
+      "num_detected_faults": 5,
+      "num_blind_faults": 5,
+      "blind_faults": [
+        "MA_drop_edges",
+        "NS_double_scale",
+        "TR_sign_flip",
+        "TR_double_step",
+        "PC_zero_vy"
+      ],
+      "union_detection_rate": 0.5,
+      "duality_P1_coverage_partitioned_by_admitted_MR": true,
+      "duality_P2_structural_blind_region": true,
+      "duality_holds": true,
+      "report": "research_assets/runs/seeded-fault-detection/raw/metric_ledger.json"
+    },
+    "PointMLP": {
+      "detectors": [
+        "node_permutation_equivariance",
+        "conservation_divergence",
+        "mirror_y_ood_stress"
+      ],
+      "coverage_by_invariant": {
+        "conservation": [
+          "boundary_condition_fault",
+          "normalization_scale_fault",
+          "physical_channel_fault"
+        ],
+        "mirror_y": [
+          "normalization_scale_fault",
+          "physical_channel_fault"
+        ]
+      },
+      "num_detected_faults": 4,
+      "num_blind_faults": 4,
+      "blind_faults": [
+        "NS_double_scale",
+        "TR_sign_flip",
+        "TR_double_step",
+        "PC_zero_vy"
+      ],
+      "union_detection_rate": 0.5,
+      "duality_P1_coverage_partitioned_by_admitted_MR": true,
+      "duality_P2_structural_blind_region": true,
+      "duality_holds": true,
+      "report": "research_assets/runs/pointmlp-cylinder-seeded-fault-detection/raw/metric_ledger.json"
+    },
+    "FNO-2D": {
+      "detectors": [
+        "periodic_translation_MR",
+        "periodic_channel_sum_MR"
+      ],
+      "coverage_by_invariant": {
+        "conservation": [
+          "asymmetric_nonzero_bias",
+          "constant_offset",
+          "global_scale"
+        ],
+        "translation": [
+          "asymmetric_nonzero_bias",
+          "asymmetric_zero_sum_bias"
+        ]
+      },
+      "num_detected_faults": 4,
+      "num_blind_faults": 1,
+      "blind_faults": [
+        "transport_shift_blind"
+      ],
+      "union_detection_rate": 0.8,
+      "duality_P1_coverage_partitioned_by_admitted_MR": true,
+      "duality_P2_structural_blind_region": true,
+      "duality_holds": true,
+      "report": "research_assets/runs/fno-seeded-fault-detection/fno_seeded_fault_report.json"
+    },
+    "PINN": {
+      "detectors": [
+        "mr_B_mirror_y",
+        "mr_C_conservation"
+      ],
+      "coverage_by_invariant": {
+        "conservation": [
+          "scale_ux",
+          "upper_half_offset"
+        ],
+        "mirror": [
+          "asym_y_ux",
+          "upper_half_offset"
+        ]
+      },
+      "num_detected_faults": 3,
+      "num_blind_faults": 1,
+      "blind_faults": [
+        "cos_x_blind"
+      ],
+      "union_detection_rate": 0.75,
+      "duality_P1_coverage_partitioned_by_admitted_MR": true,
+      "duality_P2_structural_blind_region": true,
+      "duality_holds": true,
+      "report": "research_assets/runs/pinn-seeded-fault-detection/pinn_seeded_fault_report.json"
+    }
+  },
+  "duality_predictions": {
+    "P1_coverage_partitioned_by_admitted_MR": "detected faults localize by class to the measuring MR, with >=2 distinct invariants covering distinct fault classes",
+    "P2_structural_blind_region": "at least one fault preserves all measured invariants and evades every MR"
+  },
+  "summary": {
+    "architecture_families": 4,
+    "families_where_duality_holds": 4,
+    "duality_reproduces_on_all_families": true,
+    "statement": "The validity-coverage duality's two qualitative predictions reproduce on 4/4 architecture families (MeshGraphNets, PointMLP, FNO, PINN)."
+  },
+  "honesty_boundary": "Synthesis over committed seeded-fault artifacts (no new model runs). The duality remains a qualitative, falsifiable organizing principle strengthened from two CFD SUTs to four architecture families; it is NOT a validated or quantitative predictive coverage model, NOT proven for all MRs or architectures, and asserts no fault-detection rate or baseline superiority."
+}

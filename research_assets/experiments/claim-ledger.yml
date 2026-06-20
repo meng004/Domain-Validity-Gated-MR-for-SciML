@@ -1423,6 +1423,38 @@ claims:
       classes, and it asserts no reliability or superiority. It reproduces the MGN C13 finding on
       a second architecture, it does not generalize it.
 
+  - claim_id: "C47-cross-architecture-coverage-duality"
+    status: "observed"
+    scope: "synthesis over the four committed end-to-end seeded-fault reports (MeshGraphNets, PointMLP, FNO, PINN); no new model runs; qualitative falsifiable duality predictions only"
+    evidence:
+      - "tools/run_cross_architecture_duality.py"
+      - "research_assets/runs/cross-architecture-duality/cross_architecture_duality_report.json"
+      - "research_assets/runs/seeded-fault-detection/raw/metric_ledger.json"
+      - "research_assets/runs/pointmlp-cylinder-seeded-fault-detection/raw/metric_ledger.json"
+      - "research_assets/runs/fno-seeded-fault-detection/fno_seeded_fault_report.json"
+      - "research_assets/runs/pinn-seeded-fault-detection/pinn_seeded_fault_report.json"
+    wording_allowed: >
+      Aggregating the four committed end-to-end seeded-fault reports shows that the
+      validity-coverage duality's two qualitative, falsifiable predictions reproduce on
+      every one of the four architecture families. (P1) Detected faults localize by class
+      to the MR that measures the perturbed invariant, and each architecture's coverage is
+      partitioned across two admitted-MR invariants -- a conservation/mass invariant and a
+      symmetry-or-translation invariant (MeshGraphNets and PointMLP: conservation and
+      mirror-y; FNO: conservation and periodic translation; PINN: conservation and mirror-y).
+      (P2) A structural blind region exists on every family: at least one fault preserves all
+      of the suite's measured invariants and is detected by no MR (MeshGraphNets 5 blind
+      mutants including the PC_zero_vy knife-edge, PointMLP 4, the FNO transport/phase fault,
+      the PINN cos(pi x) fault). This strengthens the validity-coverage duality from two CFD
+      SUTs to four architecture families spanning message-passing, row-wise, spectral, and
+      pointwise designs, as a synthesis over committed artifacts.
+    wording_forbidden:
+      - "A validated or quantitative predictive coverage model, or coverage predicted at detection rates or probabilities."
+      - "Proof that the duality holds for all MRs, faults, or architectures (it is a qualitative falsifiable principle reproduced on four committed families)."
+      - "A real-world or general fault-detection rate."
+      - "Baseline superiority, or that the MR suite outperforms any monitor."
+      - "New seeded-fault executions (this claim is a synthesis over already-committed reports, not a new run)."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
