@@ -1455,6 +1455,49 @@ claims:
       - "New seeded-fault executions (this claim is a synthesis over already-committed reports, not a new run)."
     blocked_reason: null
 
+  - claim_id: "C48-fno-realistic-fault-emergence"
+    status: "observed"
+    scope: "K=6 trained FNO-2D checkpoints (Burgers/heat x seeds 0,1,2), 4 eval cases each (24 cells per fault; 12 for the Burgers-only channel swap), one catalogue of 8 realistic mechanism-level faults NOT tailored to the invariants; same two MRs and same predeclared thresholds as C45 (no threshold or amplitude tuned)"
+    evidence:
+      - "tools/run_realistic_fault_fno.py"
+      - "research_assets/runs/fno-realistic-fault/fno_realistic_fault_report.json"
+      - "research_assets/runs/fno-realistic-fault/PROVENANCE.md"
+      - "research_assets/runs/fno-k6-roster"
+    wording_allowed: >
+      Re-running the FNO seeded-fault experiment with eight realistic mechanism-level
+      surrogate bugs that are NOT tailored to the invariants (boundary-band mis-scale,
+      global renorm, channel swap, region dropout, fixed zero-mean Gaussian noise,
+      spatial shift, sharpen, mode truncation), reusing the same two admitted MRs and the
+      same predeclared thresholds as C45 (periodic-translation 1e-5, periodic channel-sum
+      5%) with no threshold tuned and each fault's measured output perturbation recorded,
+      the by-class detection structure still EMERGES, as a 2x2 partition by the two binary
+      properties the MRs actually probe -- (does the fault change the channel integral?)
+      times (does it break translation equivariance?). Five of the eight faults are
+      detected: global renorm and channel swap localize to the conservation MR only,
+      Gaussian noise localizes to the translation MR only, and boundary-band mis-scale and
+      region dropout (both spatially structured and integral-changing) trigger both MRs
+      (the in-band faults are detected 24/24, Wilson 95% CI [0.86, 1.00]; channel swap,
+      Burgers only, 8/12). The remaining three faults -- spatial shift, sharpen, mode
+      truncation -- are the transport/high-frequency bugs; each is a fixed spatial operator
+      (a roll, or a fixed-kernel high-/low-pass) that commutes with the translation MR and
+      preserves the channel integral, so it is structurally invisible to both MRs (0/24).
+      Where two of them reach realistic damage magnitude on the one roster member whose
+      output retains spatial structure (heat seed 0: spatial shift up to rel-L2 0.19,
+      sharpen up to 0.20) they STILL escape both MRs (0/4 in-band), so this blind region is
+      real rather than a construction artifact; mode truncation stays below the realistic
+      band (max rel-L2 0.001) on these smooth low-resolution spectral outputs. This is
+      emergent rather than constructed evidence (the faults are not designed around the MR
+      null spaces and the detections are read off the measurements), and it is messier than
+      the constructed C45 result: a 2x2 by-class partition with a confirmed structural blind
+      region, not a clean 1:1 diagonal.
+    wording_forbidden:
+      - "A real-world or general fault-detection rate (one realistic catalogue, 24 cells per fault on K=6 checkpoints)."
+      - "Baseline superiority, or that the MRs outperform an accuracy or other monitor."
+      - "A clean 1:1 by-class diagonal (the emergent structure is a 2x2 partition that is messier than the constructed C45 catalogue)."
+      - "Proof that the blind region is exhaustive or that the by-class partition generalizes across architectures or faults."
+      - "That every fault reaches the realistic damage band (transport/high-frequency faults stay sub-band on the smooth roster members; the measured magnitudes are reported, not assumed)."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"

@@ -1,0 +1,2113 @@
+{
+  "record_type": "fno-realistic-fault-emergence",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-20T13:48:48Z",
+  "architecture_family": "FNO-2D (spectral)",
+  "pdes": [
+    "burgers",
+    "heat"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "trained_sut_count": 6,
+  "detectors": {
+    "periodic_translation_MR": "clean pass < 1e-05; fault -> fail above",
+    "periodic_channel_sum_MR": "fault changes channel sum vs clean by > 0.05"
+  },
+  "thresholds_reused_from_constructed_runner": true,
+  "fault_catalogue": {
+    "boundary_band_corrupt": "boundary_condition",
+    "global_renorm": "normalization_scale",
+    "channel_swap": "physical_channel",
+    "region_dropout": "region_masking",
+    "gaussian_noise": "numerical_instability",
+    "mode_truncation": "spectral_oversmoothing",
+    "spatial_shift": "transport_phase",
+    "sharpen": "over_sharpening"
+  },
+  "per_fault": {
+    "boundary_band_corrupt": {
+      "fault_class": "boundary_condition",
+      "applicable_cells": 24,
+      "median_output_perturbation_rel_l2": 0.2985197714012786,
+      "min_output_perturbation_rel_l2": 0.2549617304964621,
+      "max_output_perturbation_rel_l2": 0.29954902368768166,
+      "in_band_cells": 24,
+      "detection_rate_in_band": 1.0,
+      "detected_any": 24,
+      "detection_rate": 1.0,
+      "detection_rate_wilson95": [
+        0.8620194241710247,
+        1.0
+      ],
+      "detected_by_translation": 24,
+      "detected_by_conservation": 24,
+      "by_class_localization": "both"
+    },
+    "global_renorm": {
+      "fault_class": "normalization_scale",
+      "applicable_cells": 24,
+      "median_output_perturbation_rel_l2": 0.20000004737653349,
+      "min_output_perturbation_rel_l2": 0.20000002243765405,
+      "max_output_perturbation_rel_l2": 0.20000007050066484,
+      "in_band_cells": 24,
+      "detection_rate_in_band": 1.0,
+      "detected_any": 24,
+      "detection_rate": 1.0,
+      "detection_rate_wilson95": [
+        0.8620194241710247,
+        1.0
+      ],
+      "detected_by_translation": 0,
+      "detected_by_conservation": 24,
+      "by_class_localization": "conservation"
+    },
+    "channel_swap": {
+      "fault_class": "physical_channel",
+      "applicable_cells": 12,
+      "median_output_perturbation_rel_l2": 1.1250631810906553,
+      "min_output_perturbation_rel_l2": 0.027224753535356833,
+      "max_output_perturbation_rel_l2": 1.9539967533039844,
+      "in_band_cells": 0,
+      "detection_rate_in_band": null,
+      "detected_any": 8,
+      "detection_rate": 0.6666666666666666,
+      "detection_rate_wilson95": [
+        0.3906175873976139,
+        0.8618821601026385
+      ],
+      "detected_by_translation": 0,
+      "detected_by_conservation": 8,
+      "by_class_localization": "conservation"
+    },
+    "region_dropout": {
+      "fault_class": "region_masking",
+      "applicable_cells": 24,
+      "median_output_perturbation_rel_l2": 0.24894480466415098,
+      "min_output_perturbation_rel_l2": 0.2132693054147047,
+      "max_output_perturbation_rel_l2": 0.2504539601039331,
+      "in_band_cells": 24,
+      "detection_rate_in_band": 1.0,
+      "detected_any": 24,
+      "detection_rate": 1.0,
+      "detection_rate_wilson95": [
+        0.8620194241710247,
+        1.0
+      ],
+      "detected_by_translation": 24,
+      "detected_by_conservation": 24,
+      "by_class_localization": "both"
+    },
+    "gaussian_noise": {
+      "fault_class": "numerical_instability",
+      "applicable_cells": 24,
+      "median_output_perturbation_rel_l2": 0.20051250685762395,
+      "min_output_perturbation_rel_l2": 0.19523266910596865,
+      "max_output_perturbation_rel_l2": 0.20579236325751013,
+      "in_band_cells": 24,
+      "detection_rate_in_band": 1.0,
+      "detected_any": 24,
+      "detection_rate": 1.0,
+      "detection_rate_wilson95": [
+        0.8620194241710247,
+        1.0
+      ],
+      "detected_by_translation": 24,
+      "detected_by_conservation": 0,
+      "by_class_localization": "translation"
+    },
+    "mode_truncation": {
+      "fault_class": "spectral_oversmoothing",
+      "applicable_cells": 24,
+      "median_output_perturbation_rel_l2": 2.269986699582057e-05,
+      "min_output_perturbation_rel_l2": 2.9134937135952055e-06,
+      "max_output_perturbation_rel_l2": 0.0011708840778764057,
+      "in_band_cells": 0,
+      "detection_rate_in_band": null,
+      "detected_any": 0,
+      "detection_rate": 0.0,
+      "detection_rate_wilson95": [
+        0.0,
+        0.13798057582897535
+      ],
+      "detected_by_translation": 0,
+      "detected_by_conservation": 0,
+      "by_class_localization": "none"
+    },
+    "spatial_shift": {
+      "fault_class": "transport_phase",
+      "applicable_cells": 24,
+      "median_output_perturbation_rel_l2": 0.0053871583563126785,
+      "min_output_perturbation_rel_l2": 0.001926033624363417,
+      "max_output_perturbation_rel_l2": 0.19394601197154301,
+      "in_band_cells": 4,
+      "detection_rate_in_band": 0.0,
+      "detected_any": 0,
+      "detection_rate": 0.0,
+      "detection_rate_wilson95": [
+        0.0,
+        0.13798057582897535
+      ],
+      "detected_by_translation": 0,
+      "detected_by_conservation": 0,
+      "by_class_localization": "none"
+    },
+    "sharpen": {
+      "fault_class": "over_sharpening",
+      "applicable_cells": 24,
+      "median_output_perturbation_rel_l2": 0.005756727663773076,
+      "min_output_perturbation_rel_l2": 0.0020557099889185436,
+      "max_output_perturbation_rel_l2": 0.2041640580906703,
+      "in_band_cells": 4,
+      "detection_rate_in_band": 0.0,
+      "detected_any": 0,
+      "detection_rate": 0.0,
+      "detection_rate_wilson95": [
+        0.0,
+        0.13798057582897535
+      ],
+      "detected_by_translation": 0,
+      "detected_by_conservation": 0,
+      "by_class_localization": "none"
+    }
+  },
+  "emergence_summary": {
+    "n_applicable_faults": 8,
+    "n_detected_faults": 5,
+    "uniquely_localized_to_one_MR": [
+      "channel_swap",
+      "gaussian_noise",
+      "global_renorm"
+    ],
+    "caught_by_both_MRs": [
+      "boundary_band_corrupt",
+      "region_dropout"
+    ],
+    "missed_by_both_MRs": [
+      "mode_truncation",
+      "sharpen",
+      "spatial_shift"
+    ],
+    "emergent_2x2_partition": {
+      "conservation_only": [
+        "channel_swap",
+        "global_renorm"
+      ],
+      "translation_only": [
+        "gaussian_noise"
+      ],
+      "both_mrs": [
+        "boundary_band_corrupt",
+        "region_dropout"
+      ],
+      "neither_mr": [
+        "mode_truncation",
+        "sharpen",
+        "spatial_shift"
+      ]
+    },
+    "realistic_band": [
+      0.1,
+      0.3
+    ],
+    "old_blind_faults_retest": {
+      "spatial_shift": {
+        "median_output_perturbation_rel_l2": 0.0053871583563126785,
+        "max_output_perturbation_rel_l2": 0.19394601197154301,
+        "in_band_cells": 4,
+        "detection_rate_in_band": 0.0,
+        "detection_rate_overall": 0.0,
+        "by_class_localization": "none",
+        "structurally_blind_to_both_mrs": true,
+        "verdict": "blind_even_at_realistic_magnitude"
+      },
+      "sharpen": {
+        "median_output_perturbation_rel_l2": 0.005756727663773076,
+        "max_output_perturbation_rel_l2": 0.2041640580906703,
+        "in_band_cells": 4,
+        "detection_rate_in_band": 0.0,
+        "detection_rate_overall": 0.0,
+        "by_class_localization": "none",
+        "structurally_blind_to_both_mrs": true,
+        "verdict": "blind_even_at_realistic_magnitude"
+      },
+      "mode_truncation": {
+        "median_output_perturbation_rel_l2": 2.269986699582057e-05,
+        "max_output_perturbation_rel_l2": 0.0011708840778764057,
+        "in_band_cells": 0,
+        "detection_rate_in_band": null,
+        "detection_rate_overall": 0.0,
+        "by_class_localization": "none",
+        "structurally_blind_to_both_mrs": true,
+        "verdict": "magnitude_below_realistic_band_on_these_smooth_fields"
+      }
+    },
+    "honest_verdict": "comparable-but-richer-and-messier than the constructed version: 5 of 8 realistic faults are detected, and their by-class localization EMERGES as a 2x2 partition by (changes channel integral) x (breaks translation equivariance) -- conservation-only=['channel_swap', 'global_renorm'], translation-only=['gaussian_noise'], both=['boundary_band_corrupt', 'region_dropout'] -- rather than a clean 1:1 diagonal. The 3 undetected faults ['mode_truncation', 'sharpen', 'spatial_shift'] are the transport/high-frequency bugs, which are structurally invisible to both MRs; on the SUTs where they reach realistic magnitude (['sharpen', 'spatial_shift']) they STILL escape, so this blind region is real, not a construction artifact."
+  },
+  "per_sut": [
+    {
+      "sut_id": "burgers_s0",
+      "pde": "burgers",
+      "seed": 0,
+      "checkpoint": "research_assets/runs/fno-k6-roster/burgers_s0/sut/checkpoint.pt",
+      "cases": [
+        {
+          "case": 0,
+          "baseline_translation_violation": 1.504137777958168e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.29954902368768166,
+              "translation_violation": 0.44265279567363547,
+              "conservation_break": 0.14433890128297736,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2000000674189369,
+              "translation_violation": 1.4784866589048364e-08,
+              "conservation_break": 0.20000006741918408,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 1.9539257159039995,
+              "translation_violation": 1.504137777958168e-08,
+              "conservation_break": 1.95393112058351,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24996474696152884,
+              "translation_violation": 0.31614335297727364,
+              "conservation_break": 0.06249137744071537,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.1952326910391094,
+              "translation_violation": 0.27970995604156673,
+              "conservation_break": 0.013195931542534274,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 2.9134937135952055e-06,
+              "translation_violation": 8.28115136827964e-09,
+              "conservation_break": 1.8723954892997198e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.001926033624363417,
+              "translation_violation": 1.504137777958168e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0020557099889185436,
+              "translation_violation": 1.7357793525445026e-07,
+              "conservation_break": 7.934415218491247e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 1,
+          "baseline_translation_violation": 1.5837503819333735e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2995438717730506,
+              "translation_violation": 0.4426406012546632,
+              "conservation_break": 0.14433818737602314,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000004612797784,
+              "translation_violation": 1.7336512256889166e-08,
+              "conservation_break": 0.20000009225654242,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 1.9539200777102583,
+              "translation_violation": 1.5837503819333735e-08,
+              "conservation_break": 1.9539297775814952,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24983557128821712,
+              "translation_violation": 0.31604727258645804,
+              "conservation_break": 0.062459229703257076,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.19523267286655352,
+              "translation_violation": 0.2797007859394397,
+              "conservation_break": 0.013195970571980698,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 7.826226183505186e-06,
+              "translation_violation": 9.170144681289339e-09,
+              "conservation_break": 2.1763000211546374e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.002605293809694671,
+              "translation_violation": 1.5837503819333735e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0029483547322177043,
+              "translation_violation": 1.9679841038765748e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 2,
+          "baseline_translation_violation": 1.6883505276914276e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2994827179761795,
+              "translation_violation": 0.44259957391035537,
+              "conservation_break": 0.14430787543022366,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000004965878776,
+              "translation_violation": 1.7719900002373066e-08,
+              "conservation_break": 0.20000013478935738,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 1.9539967533039844,
+              "translation_violation": 1.6883505276914276e-08,
+              "conservation_break": 1.9540119982394726,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24997658940050005,
+              "translation_violation": 0.3161246388195724,
+              "conservation_break": 0.062494519748342844,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.19523268281316028,
+              "translation_violation": 0.2797191314822056,
+              "conservation_break": 0.013196004695575544,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 2.6784951654064938e-05,
+              "translation_violation": 9.684643017854716e-09,
+              "conservation_break": 3.2098871016886936e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0030847566031892088,
+              "translation_violation": 1.6883505276914276e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.002975839399012847,
+              "translation_violation": 1.9216666907544162e-07,
+              "conservation_break": 7.094176900962605e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 3,
+          "baseline_translation_violation": 1.6594744919846978e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2995333460543855,
+              "translation_violation": 0.44261645167316355,
+              "conservation_break": 0.14433321934384508,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000004257720774,
+              "translation_violation": 1.8845685478245404e-08,
+              "conservation_break": 0.20000008160691166,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 1.953932248355173,
+              "translation_violation": 1.6594744919846978e-08,
+              "conservation_break": 1.9539436116083841,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24984562192500426,
+              "translation_violation": 0.3160483094781649,
+              "conservation_break": 0.062461777804521605,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.19523268099939178,
+              "translation_violation": 0.279704196538509,
+              "conservation_break": 0.013196017440698529,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 7.409471748945195e-06,
+              "translation_violation": 9.314989157133478e-09,
+              "conservation_break": 2.8147823241334243e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0028047117862276473,
+              "translation_violation": 1.6594744919846978e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0030861364350733256,
+              "translation_violation": 1.8446908757598763e-07,
+              "conservation_break": 7.096253511669621e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sut_id": "burgers_s1",
+      "pde": "burgers",
+      "seed": 1,
+      "checkpoint": "research_assets/runs/fno-k6-roster/burgers_s1/sut/checkpoint.pt",
+      "cases": [
+        {
+          "case": 0,
+          "baseline_translation_violation": 2.330113330551983e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2981943436078845,
+              "translation_violation": 0.4402869549103327,
+              "conservation_break": 0.14371309684317873,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2000000381759174,
+              "translation_violation": 2.430184252857777e-08,
+              "conservation_break": 0.19999994485417813,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 1.1247945071365584,
+              "translation_violation": 2.330113330551983e-08,
+              "conservation_break": 1.1247333063429656,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24933624681157995,
+              "translation_violation": 0.31466296033121016,
+              "conservation_break": 0.06233648734886938,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.1952326761689635,
+              "translation_violation": 0.2742978980375741,
+              "conservation_break": 0.013196487009707384,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 5.0522997765500065e-05,
+              "translation_violation": 1.237628081490333e-08,
+              "conservation_break": 9.78507386618424e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.007617349118310107,
+              "translation_violation": 2.330113330551983e-08,
+              "conservation_break": 8.745077866679741e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.006934544388449584,
+              "translation_violation": 2.983318431923542e-07,
+              "conservation_break": 8.483971910586891e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 1,
+          "baseline_translation_violation": 1.866485006540935e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2984205699477372,
+              "translation_violation": 0.4410030496464648,
+              "conservation_break": 0.14381507394501827,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000005942502996,
+              "translation_violation": 2.0943915459289873e-08,
+              "conservation_break": 0.20000009338421593,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 1.1249940787127302,
+              "translation_violation": 1.866485006540935e-08,
+              "conservation_break": 1.1249698199178444,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24858171384360003,
+              "translation_violation": 0.3142230055847394,
+              "conservation_break": 0.062146588479170366,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.1952326811393913,
+              "translation_violation": 0.27427107372820264,
+              "conservation_break": 0.013196223664812929,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 1.2878381093238656e-05,
+              "translation_violation": 1.0979097959817842e-08,
+              "conservation_break": 5.425308902576506e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.004783054103624128,
+              "translation_violation": 1.866485006540935e-08,
+              "conservation_break": 2.1223686449066244e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.004063584256069294,
+              "translation_violation": 2.4396637858172277e-07,
+              "conservation_break": 8.750749887960938e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 2,
+          "baseline_translation_violation": 9.752799232118987e-09,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2990346014226558,
+              "translation_violation": 0.4423370674390185,
+              "conservation_break": 0.14409194684590615,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000005521094397,
+              "translation_violation": 1.1963109838072483e-08,
+              "conservation_break": 0.20000006795329564,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 1.1251322834685802,
+              "translation_violation": 9.752799232118987e-09,
+              "conservation_break": 1.125108056364859,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24907073490863854,
+              "translation_violation": 0.3154004695670385,
+              "conservation_break": 0.06226882074947085,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.19523268215701442,
+              "translation_violation": 0.2742713251752811,
+              "conservation_break": 0.013196162893492756,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 3.502717603903012e-05,
+              "translation_violation": 5.477433794294967e-09,
+              "conservation_break": 8.169706908978758e-09,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.005115812191618114,
+              "translation_violation": 9.752799232118987e-09,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.00569596914145734,
+              "translation_violation": 1.0871121912762852e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 3,
+          "baseline_translation_violation": 1.7610661409107486e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2989455473894742,
+              "translation_violation": 0.4416914605358272,
+              "conservation_break": 0.1440648664551857,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000005097414367,
+              "translation_violation": 1.69578971306993e-08,
+              "conservation_break": 0.20000011044554478,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 1.1251787389603893,
+              "translation_violation": 1.7610661409107486e-08,
+              "conservation_break": 1.1251626735502878,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24927631482243975,
+              "translation_violation": 0.3149604770908085,
+              "conservation_break": 0.06231980914839036,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.19523266910596865,
+              "translation_violation": 0.2742596916894111,
+              "conservation_break": 0.013196071784851767,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 4.857629275972799e-06,
+              "translation_violation": 9.442721398968136e-09,
+              "conservation_break": 1.2350649253316922e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.004243082368935073,
+              "translation_violation": 1.7610661409107486e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0048768163095084275,
+              "translation_violation": 3.033476454740591e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sut_id": "burgers_s2",
+      "pde": "burgers",
+      "seed": 2,
+      "checkpoint": "research_assets/runs/fno-k6-roster/burgers_s2/sut/checkpoint.pt",
+      "cases": [
+        {
+          "case": 0,
+          "baseline_translation_violation": 1.4617442457708646e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.299367070424354,
+              "translation_violation": 0.44228333005965703,
+              "conservation_break": 0.14425229849098292,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000004419891854,
+              "translation_violation": 1.660018052906956e-08,
+              "conservation_break": 0.2000000530390351,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.027224753535356833,
+              "translation_violation": 1.4617442457708646e-08,
+              "conservation_break": 0.02679554663448667,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.249856839462536,
+              "translation_violation": 0.31592616176750493,
+              "conservation_break": 0.06246440306947386,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.19523268336636315,
+              "translation_violation": 0.2761767542776236,
+              "conservation_break": 0.013195954230080449,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 6.509177944206412e-06,
+              "translation_violation": 8.692714615640482e-09,
+              "conservation_break": 3.73130524658722e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.002520046142366231,
+              "translation_violation": 1.4617442457708646e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0027001321757054646,
+              "translation_violation": 1.74622711310848e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 1,
+          "baseline_translation_violation": 1.0692031943677933e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.29919585858746994,
+              "translation_violation": 0.44198161835643746,
+              "conservation_break": 0.14417195528390525,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000005742187643,
+              "translation_violation": 1.2173412840164522e-08,
+              "conservation_break": 0.20000006183966912,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.027436437103121335,
+              "translation_violation": 1.069203099912828e-08,
+              "conservation_break": 0.026448303932101545,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2496296505042975,
+              "translation_violation": 0.31567774015353,
+              "conservation_break": 0.06240795827129344,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.1952326824146183,
+              "translation_violation": 0.27619211262907,
+              "conservation_break": 0.01319609415606727,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 1.1463796573527419e-05,
+              "translation_violation": 5.888660517351744e-09,
+              "conservation_break": 5.1473876043383646e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.003421383742788854,
+              "translation_violation": 1.0692031943677933e-08,
+              "conservation_break": 8.834239107868858e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.002843265480205909,
+              "translation_violation": 1.188994791516656e-07,
+              "conservation_break": 8.834239107868858e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 2,
+          "baseline_translation_violation": 1.3527008978876124e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2992745008917752,
+              "translation_violation": 0.44225818781966536,
+              "conservation_break": 0.14420079838075647,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.200000057432658,
+              "translation_violation": 1.7823397310583567e-08,
+              "conservation_break": 0.20000003092580726,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.02807146827573881,
+              "translation_violation": 1.35270077836561e-08,
+              "conservation_break": 0.026479718366582826,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24981937405734791,
+              "translation_violation": 0.3159955217461826,
+              "conservation_break": 0.06245559937006627,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.19523268490159543,
+              "translation_violation": 0.2761824080589923,
+              "conservation_break": 0.013196111980867935,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 4.1168500505988606e-05,
+              "translation_violation": 7.689085161785808e-09,
+              "conservation_break": 1.6108939833336923e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.004377499718246647,
+              "translation_violation": 1.3527008978876124e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0043156535705736855,
+              "translation_violation": 1.5560475900702455e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 3,
+          "baseline_translation_violation": 1.2355587742567572e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2994664228216761,
+              "translation_violation": 0.44253897737069414,
+              "conservation_break": 0.1442952798366781,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000004862508913,
+              "translation_violation": 1.02963225119459e-08,
+              "conservation_break": 0.2000000044205097,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.02791524762230757,
+              "translation_violation": 1.2355587742567572e-08,
+              "conservation_break": 0.02669975185884776,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2504539601039331,
+              "translation_violation": 0.31650938795759914,
+              "conservation_break": 0.06261375088509603,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.19523268748727912,
+              "translation_violation": 0.27616856723863603,
+              "conservation_break": 0.013196018910391474,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 8.894150807902089e-06,
+              "translation_violation": 6.82340892711227e-09,
+              "conservation_break": 2.6753690152552182e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0035284642533425113,
+              "translation_violation": 1.2355587742567572e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0037065794697385673,
+              "translation_violation": 1.6175550377898826e-07,
+              "conservation_break": 4.420514333915471e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sut_id": "heat_s0",
+      "pde": "heat",
+      "seed": 0,
+      "checkpoint": "research_assets/runs/fno-k6-roster/heat_s0/sut/checkpoint.pt",
+      "cases": [
+        {
+          "case": 0,
+          "baseline_translation_violation": 4.183030460665015e-07,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2696873705734137,
+              "translation_violation": 0.39452741895475946,
+              "conservation_break": 0.1318173142143585,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000003187329862,
+              "translation_violation": 4.1830598351412425e-07,
+              "conservation_break": 0.19999999999990953,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.22235710985762813,
+              "translation_violation": 0.2761600551753665,
+              "conservation_break": 0.05641877282787944,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20579234114493947,
+              "translation_violation": 0.29214128054464866,
+              "conservation_break": 1.684964936552894e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.00016537856029326896,
+              "translation_violation": 2.391340970623573e-07,
+              "conservation_break": 1.684964936552894e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.1388694895762936,
+              "translation_violation": 4.183030460665015e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.1545224895296449,
+              "translation_violation": 3.40372114456829e-06,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 1,
+          "baseline_translation_violation": 4.587885285176444e-07,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2549617304964621,
+              "translation_violation": 0.3655528332231711,
+              "conservation_break": 0.12636852601599205,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000007050066484,
+              "translation_violation": 4.591098381617494e-07,
+              "conservation_break": 0.20000008312192577,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2132693054147047,
+              "translation_violation": 0.26458833829626294,
+              "conservation_break": 0.0549461442087719,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20579234114501588,
+              "translation_violation": 0.29264001863986533,
+              "conservation_break": 7.467993349404491e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0002507598646756544,
+              "translation_violation": 2.6415589110868097e-07,
+              "conservation_break": 7.467993349404491e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.19394601197154301,
+              "translation_violation": 4.587885285176444e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2041640580906703,
+              "translation_violation": 3.690406016152877e-06,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 2,
+          "baseline_translation_violation": 4.5903074315089717e-07,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.27393970066110457,
+              "translation_violation": 0.4111492223311763,
+              "conservation_break": 0.13373647253662985,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000006715541582,
+              "translation_violation": 4.5866622187029276e-07,
+              "conservation_break": 0.20000019607575553,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2254077227146922,
+              "translation_violation": 0.2808747509232761,
+              "conservation_break": 0.05712201396907082,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20579236325751013,
+              "translation_violation": 0.29194647476514446,
+              "conservation_break": 4.7657323906711046e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.00042574584249603935,
+              "translation_violation": 2.542086351598904e-07,
+              "conservation_break": 4.7657323906711046e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.14007335677812555,
+              "translation_violation": 4.5903074315089717e-07,
+              "conservation_break": 1.0893102607248238e-07,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.17052133600118588,
+              "translation_violation": 3.806552312755791e-06,
+              "conservation_break": 1.0893102607248238e-07,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 3,
+          "baseline_translation_violation": 4.1694501111058734e-07,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.27503744110309364,
+              "translation_violation": 0.42212930837796164,
+              "conservation_break": 0.13426611155058857,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2000000560521213,
+              "translation_violation": 4.194678838910988e-07,
+              "conservation_break": 0.19999995663034079,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.22961342906332918,
+              "translation_violation": 0.28942563577030445,
+              "conservation_break": 0.05827525515669648,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20579236311710786,
+              "translation_violation": 0.291605459159056,
+              "conservation_break": 3.388247519232049e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0011708840778764057,
+              "translation_violation": 2.2470902108128666e-07,
+              "conservation_break": 3.388247519232049e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.14703453208469497,
+              "translation_violation": 4.1694501111058734e-07,
+              "conservation_break": 1.0842392061542558e-07,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.17293992243986006,
+              "translation_violation": 3.434518234369169e-06,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sut_id": "heat_s1",
+      "pde": "heat",
+      "seed": 1,
+      "checkpoint": "research_assets/runs/fno-k6-roster/heat_s1/sut/checkpoint.pt",
+      "cases": [
+        {
+          "case": 0,
+          "baseline_translation_violation": 4.727328774387848e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.29788276192824903,
+              "translation_violation": 0.4393323624297612,
+              "conservation_break": 0.1435587516040628,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000004357928905,
+              "translation_violation": 4.731631778784152e-08,
+              "conservation_break": 0.1999999999999797,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24923040822727124,
+              "translation_violation": 0.3146746437975354,
+              "conservation_break": 0.062310743081274995,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20579234114607245,
+              "translation_violation": 0.2910207996023629,
+              "conservation_break": 3.7832013752689794e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0001601453780838503,
+              "translation_violation": 2.6641460337719757e-08,
+              "conservation_break": 3.7832013752689794e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.008917080547895535,
+              "translation_violation": 4.727328774387848e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.008513165619273304,
+              "translation_violation": 4.834409283417572e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 1,
+          "baseline_translation_violation": 4.430119732281861e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.29923723852459855,
+              "translation_violation": 0.4420701998899917,
+              "conservation_break": 0.14420413701245519,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000004340580754,
+              "translation_violation": 4.712796742434036e-08,
+              "conservation_break": 0.20000023150383459,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24817125146298788,
+              "translation_violation": 0.31430000160260185,
+              "conservation_break": 0.06204390123350414,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20579234114607378,
+              "translation_violation": 0.2909562890759907,
+              "conservation_break": 8.36488537954683e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 2.019286815024445e-05,
+              "translation_violation": 2.4081496674474537e-08,
+              "conservation_break": 8.36488537954683e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.005074580655769689,
+              "translation_violation": 4.430119732281861e-08,
+              "conservation_break": 1.9291987902378275e-07,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0054149638501594455,
+              "translation_violation": 4.461809617461417e-07,
+              "conservation_break": 9.645993951189137e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 2,
+          "baseline_translation_violation": 3.734629752303544e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.29861897285482003,
+              "translation_violation": 0.44080924565139307,
+              "conservation_break": 0.14393091965749188,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2000000339265441,
+              "translation_violation": 3.6054508796923255e-08,
+              "conservation_break": 0.19999999999997967,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24687395402209902,
+              "translation_violation": 0.3125685893743005,
+              "conservation_break": 0.06172269467622203,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20579234114607214,
+              "translation_violation": 0.2909352377733751,
+              "conservation_break": 4.279047842935334e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 8.222602713024234e-05,
+              "translation_violation": 2.181333809616408e-08,
+              "conservation_break": 4.279047842935334e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.009478176759361755,
+              "translation_violation": 3.734629752303544e-08,
+              "conservation_break": 9.69412608664996e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.008790248141835303,
+              "translation_violation": 4.3437443351800277e-07,
+              "conservation_break": 9.69412608664996e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 3,
+          "baseline_translation_violation": 4.2655718543239344e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.29839077460980257,
+              "translation_violation": 0.4407855293280125,
+              "conservation_break": 0.14379080677485115,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2000000386072254,
+              "translation_violation": 4.8738812978878056e-08,
+              "conservation_break": 0.20000005791273456,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24881887441966344,
+              "translation_violation": 0.3146371446794116,
+              "conservation_break": 0.06220621342084994,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2057923411460736,
+              "translation_violation": 0.2910321953769395,
+              "conservation_break": 2.262216985193024e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 2.4439757923907975e-05,
+              "translation_violation": 2.3503415270292593e-08,
+              "conservation_break": 2.262216985193024e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0056585045210072425,
+              "translation_violation": 4.2655718543239344e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.005817486186088812,
+              "translation_violation": 4.330541260727051e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sut_id": "heat_s2",
+      "pde": "heat",
+      "seed": 2,
+      "checkpoint": "research_assets/runs/fno-k6-roster/heat_s2/sut/checkpoint.pt",
+      "cases": [
+        {
+          "case": 0,
+          "baseline_translation_violation": 2.9147562055292154e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2967965321921924,
+              "translation_violation": 0.4377154720887371,
+              "conservation_break": 0.14305299462638088,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000002243765405,
+              "translation_violation": 3.170429092049315e-08,
+              "conservation_break": 0.1999999999999906,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24701761188143934,
+              "translation_violation": 0.3120889169797086,
+              "conservation_break": 0.06176691844066204,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20579232267613848,
+              "translation_violation": 0.29107030395250183,
+              "conservation_break": 1.6481150164906107e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 9.69896074879247e-06,
+              "translation_violation": 1.8534407048571255e-08,
+              "conservation_break": 1.6481150164906107e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.016899998799564726,
+              "translation_violation": 2.9147562055292154e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.019174900499540844,
+              "translation_violation": 3.129193402539399e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 1,
+          "baseline_translation_violation": 3.26902509355479e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2960937366146596,
+              "translation_violation": 0.4368503881290004,
+              "conservation_break": 0.14271761753187975,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20000004036543975,
+              "translation_violation": 3.303562750128441e-08,
+              "conservation_break": 0.20000010766237644,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2463261033775265,
+              "translation_violation": 0.3111338807294697,
+              "conservation_break": 0.06159329205916046,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20579232268640907,
+              "translation_violation": 0.29107601457865145,
+              "conservation_break": 4.7312571898284814e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 7.892403089359422e-06,
+              "translation_violation": 1.884482711310452e-08,
+              "conservation_break": 4.7312571898284814e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.015017538512574107,
+              "translation_violation": 3.26902509355479e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.014324381437684169,
+              "translation_violation": 4.048402241551929e-07,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 2,
+          "baseline_translation_violation": 2.631982889620855e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.29719441807809305,
+              "translation_violation": 0.43914921271067026,
+              "conservation_break": 0.1432409157645597,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2000000359128494,
+              "translation_violation": 2.8057030440887773e-08,
+              "conservation_break": 0.1999999999999906,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24779855554303878,
+              "translation_violation": 0.31302062433656674,
+              "conservation_break": 0.061960569501750405,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.20579234114625183,
+              "translation_violation": 0.2911004994196588,
+              "conservation_break": 5.8579456078467184e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 2.0959976067733166e-05,
+              "translation_violation": 1.3628615297509904e-08,
+              "conservation_break": 5.857945591120454e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.016057544028428128,
+              "translation_violation": 2.631982889620855e-08,
+              "conservation_break": 8.97984473848405e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.0189314411738632,
+              "translation_violation": 2.9025093945812615e-07,
+              "conservation_break": 1.79596894769681e-07,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        },
+        {
+          "case": 3,
+          "baseline_translation_violation": 2.508658659586492e-08,
+          "detections": {
+            "boundary_band_corrupt": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2971780198639789,
+              "translation_violation": 0.44094925609478136,
+              "conservation_break": 0.14323616570453487,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "global_renorm": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2000000493637241,
+              "translation_violation": 2.725742166546727e-08,
+              "conservation_break": 0.20000010772065369,
+              "detected_by_translation": false,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "channel_swap": {
+              "applicable": false,
+              "not_applicable_reason": "channel swap needs 2 channels (heat is scalar)"
+            },
+            "region_dropout": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.24705831695555996,
+              "translation_violation": 0.3125497216050792,
+              "conservation_break": 0.06177465842675118,
+              "detected_by_translation": true,
+              "detected_by_conservation": true,
+              "detected": true
+            },
+            "gaussian_noise": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.2057923411462519,
+              "translation_violation": 0.291067098842129,
+              "conservation_break": 1.2272862005162116e-08,
+              "detected_by_translation": true,
+              "detected_by_conservation": false,
+              "detected": true
+            },
+            "mode_truncation": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.00016259606298352797,
+              "translation_violation": 1.2602679812236394e-08,
+              "conservation_break": 1.2272862005162116e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "spatial_shift": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.01440737832634019,
+              "translation_violation": 2.508658659586492e-08,
+              "conservation_break": 0.0,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            },
+            "sharpen": {
+              "applicable": true,
+              "output_perturbation_rel_l2": 0.014374657930775818,
+              "translation_violation": 2.758646083881674e-07,
+              "conservation_break": 8.976721923775718e-08,
+              "detected_by_translation": false,
+              "detected_by_conservation": false,
+              "detected": false
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "honesty_boundary": "K=6 trained FNO-2D checkpoints over FD Burgers/heat, one realistic mechanism-level fault catalogue at recorded magnitudes. Bounded by-class emergence evidence; faults are NOT tailored to the MRs and thresholds are unchanged. NOT a real-world fault-detection rate, reliability, baseline-superiority, or cross-architecture generalization claim. On these smooth low-resolution fields some transport/high-frequency faults reach only small realistic magnitudes; this is reported, not hidden."
+}
