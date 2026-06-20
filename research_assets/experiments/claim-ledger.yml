@@ -1333,6 +1333,65 @@ claims:
       pattern across two architecture families; it is not a generalization, reliability, or
       baseline-superiority claim, and the mesh-adjacency fault class is architecture-specific.
 
+  - claim_id: "C42-three-arm-complementarity"
+    status: "observed"
+    scope: "three detector arms on the converged PointMLP cylinder SUT over a 20-fault catalogue spanning four predeclared classes (boundary / normalization / temporal / physical-channel): validity-gated MR suite, accuracy-monitor (rollout L2 >= 2x baseline), and ungated-generic templates measured by baseline false-positive rate / a 2x2 MR-vs-accuracy complementarity table with Wilson CIs and a measurable gate value (baseline false positives) / one SUT, one checkpoint, one eval trajectory; the MGN cross-SUT reference is read from committed artifacts, not re-run / complementarity and gate value, NOT superiority"
+    evidence:
+      - "tools/run_three_arm_complementarity_pointmlp.py"
+      - "tests/test_three_arm_complementarity.py"
+      - "research_assets/runs/pointmlp-three-arm-complementarity/raw/metric_ledger.json"
+      - "research_assets/runs/detection-vs-accuracy/raw/metric_ledger.json"
+    wording_allowed: >
+      On the converged PointMLP cylinder SUT, over a 20-fault catalogue spanning four
+      predeclared fault classes, the validity-gated MR suite and a rollout-accuracy monitor are
+      complementary: the MR suite detects 13/20 faults (Wilson 95% CI [0.43, 0.82]) and the
+      accuracy monitor 6/20, and the 2x2 table is MR-only 9, accuracy-only 2, both 4, neither 5
+      -- nine faults are relation violations the accuracy monitor leaves within its 2x baseline
+      band, and two faults degrade rollout without crossing a relation threshold. The third arm
+      makes the gate's value measurable rather than asserted: treated as claimed exact invariants,
+      the single gate-admitted generic template has a 0% baseline false-positive rate while all six
+      gate-rejected templates fire on the fault-free correct SUT (100% baseline false positive), so
+      the admissibility gate is exactly what removes the detectors that false-alarm. This is
+      complementarity and a measured gate value, not a superiority claim.
+    wording_forbidden:
+      - "The MR detectors are superior to / outperform / better than the accuracy monitor (or any baseline)."
+      - "A real-world, reliability, or general fault-detection rate."
+      - "The complementarity or gate value generalizes beyond this SUT, checkpoint, trajectory, and catalogue."
+      - "The accuracy monitor is unnecessary or inadequate."
+    blocked_reason: >
+      One converged SUT, one checkpoint, one eval trajectory, one 20-fault catalogue. The 2x2 is
+      complementarity (distinct caught subsets), never superiority; the third arm reports a
+      baseline false-positive contrast (a measured gate value), not a competition; the MGN
+      cross-SUT reference is committed, not re-run. Descriptive detection rates with Wilson CIs,
+      no hypothesis test, so no multiple-comparison correction is applied.
+
+  - claim_id: "C43-knife-edge-blind-region"
+    status: "observed"
+    scope: "PC_zero_vy node-index-selected partial-vy-zeroing severity sweep on the converged PointMLP SUT (fractions 0.1 to 1.0): the geometric MR detector blind region is the exactly-uniform fraction / one SUT, one checkpoint, one trajectory / descriptive, not extrapolated to untested fault classes"
+    evidence:
+      - "tools/run_three_arm_complementarity_pointmlp.py"
+      - "tests/test_three_arm_complementarity.py"
+      - "research_assets/runs/pointmlp-three-arm-complementarity/raw/metric_ledger.json"
+    wording_allowed: >
+      Sweeping the PC_zero_vy fault as a node-index-selected partial vy-zeroing on the converged
+      PointMLP SUT, the validity-gated MR suite detects every partial fraction from 0.1 to 0.99
+      and misses only the exactly-uniform fraction 1.0: node-permutation equivariance catches the
+      index-selected zeroing because it is not relabeling-invariant, and only the uniform zeroing
+      becomes permutation-invariant and escapes. The blind region is therefore a measure-zero
+      knife-edge -- a fault becomes invisible to a geometric detector exactly when it enters the
+      detector's own invariance -- which any partial severity exposes. This reproduces, on a
+      second (row-wise) architecture, the knife-edge symmetry blind spot first reported on the
+      MGN roster (C13).
+    wording_forbidden:
+      - "The knife-edge blind region extrapolates to untested fault classes or other detectors."
+      - "A real-world or reliability fault-detection rate."
+      - "Any baseline superiority claim."
+    blocked_reason: >
+      One converged SUT, one checkpoint, one eval trajectory, one parametric fault. The knife-edge
+      is descriptive for this fault and detector set; it is not extrapolated to other fault
+      classes, and it asserts no reliability or superiority. It reproduces the MGN C13 finding on
+      a second architecture, it does not generalize it.
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
