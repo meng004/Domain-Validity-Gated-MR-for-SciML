@@ -107,15 +107,15 @@ We decompose this into four questions:
 \subsection{Contributions}
 \label{subsec:contributions}
 
-This paper makes four scoped contributions. Table~\ref{tab:rq-contribution-evidence} records how each contribution is tied to a research question and to evidence reported later in the paper. The positive claim is methodological: a measurement-floor admissibility gate, a typed domain-inadmissibility verdict, and a seeded-fault diagnostic stress test whose MR-class-to-fault-class diagnostic is reported as stress-test evidence rather than a validated localization model.
+The single methodological idea is to gate a candidate relation's admissibility on numerical decidability: a relation is admitted only when its verdict tolerance dominates the measuring operator's own intrinsic error floor, a test that to our knowledge is new for learned SciML surrogates evaluated out of distribution. The four scoped contributions below build this idea into an auditable workflow, and Table~\ref{tab:rq-contribution-evidence} ties each to a research question and to evidence reported later. The positive claim is methodological: a measurement-floor admissibility gate, a typed domain-inadmissibility verdict, and a seeded-fault diagnostic stress test whose MR-class-to-fault-class diagnostic is reported as stress-test evidence rather than a validated localization model.
 
-\textbf{Validity-gated V\&V asset construction.} The primary contribution is a workflow that transforms physics-derived candidate MRs into auditable executable testing assets. Each admitted MR is represented as an MR card and executable runner that records the transformation, mapping, metric, tolerance, exclusion rule, and ledger fields needed for independent inspection.
+\textbf{Validity-gated V\&V asset construction.} This workflow contribution transforms physics-derived candidate MRs into auditable executable testing assets. Each admitted MR is represented as an MR card and executable runner that records the transformation, mapping, metric, tolerance, exclusion rule, and ledger fields needed for independent inspection.
 
 \textbf{Measurement-floor admissibility.} The method admits a relation only when its verdict tolerance dominates the intrinsic numerical floor of the measurement operator. For the deployed cylinder-flow mesh, the divergence floor is closed form, a leading-order predictor matches the measured floor to within 0.5\%, and a rigorous a-priori bound dominates it (Sec.~\ref{subsec:operator-floor-sweep}); a general unstructured-mesh bound is left to future work.
 
 \textbf{Typed relation-level verdicts.} The verdict scheme separates relation violation from domain violation, instantiating for physics-governed SciML the constraint-architecture pattern behind bug-versus-inapplicability reasoning \citep{duqueTorres2023bugornot,duqueTorres2023completePipeline} and MetaTrimmer \citep{duqueTorres2023metaTrimmer}. The added element is a typed classification of physical, geometric, boundary-condition, mapping, and operator-admissibility limits.
 
-\textbf{Bounded empirical utility.} The case studies evaluate what this workflow adds beyond rollout accuracy, generic MR generation, and LLM-assisted MR candidate elicitation. Evidence is drawn from MeshGraphNets-family cylinder-flow runs, same-domain architectural variants, PhysicsNeMo replication, cross-family FNO/PINN checks, a second CFD task, and secondary baselines. The admissible MR set is also used to interpret fault-detection boundaries and blind spots, but this coverage reading is a discussion implication of the admitted relations rather than a separate formal research question.
+\textbf{Bounded empirical utility.} The case studies evaluate what this workflow adds beyond rollout accuracy, generic MR generation, and LLM-assisted MR candidate elicitation, drawing primarily on MeshGraphNets cylinder-flow runs with supporting airfoil, PINN, and FNO checks (Table~\ref{tab:rq-contribution-evidence}). The admissible MR set is also used to interpret fault-detection boundaries and blind spots, but this coverage reading is a discussion implication of the admitted relations rather than a separate formal research question.
 
 \begin{table}[t]
 \centering
@@ -348,7 +348,7 @@ The study does not involve human subjects or personal data. All SUT versions, da
 \section{Results Analysis and Discussion}
 \label{sec:results}
 
-This section reports the evidence by research question rather than by execution chronology. RQ1 is evaluated through gate decisions, task-specific admissibility, and the operator-floor calibration. RQ2 is evaluated through MR cards, executable runners, and the claim ledger. RQ3 is evaluated through typed verdicts that distinguish SUT inconsistency, out-of-relation-domain application, numerical deferral, and inconclusive evidence. RQ4 is evaluated through bounded SciML executions and secondary comparators. Fault-detection and cross-SUT coverage results are discussed only as a bounded implication of the admitted MR set.
+This section reports the evidence by research question rather than by execution chronology, following the RQ-to-evidence mapping of Table~\ref{tab:rqmap}. The cylinder-flow case study is the primary evidence; the airfoil, PINN, FNO, and cross-program runs are supporting or secondary; and fault-detection and cross-SUT coverage are discussed only as a bounded implication of the admitted MR set.
 
 \subsection{Claim-to-evidence map}
 \label{subsec:claim-evidence-map}
