@@ -15,6 +15,7 @@ artifact under `research_assets/runs/` via
 | 2 Cache replay | CPU, Python 3.12 (+ a TeX dist for the PDF) | none | ≤ 30 min |
 | 2c C40 cross-program | CPU + scipy (+ a source-built OpenMC for E5) | none | ≤ 30 min |
 | 2d MVP cross-arch | CPU + CPU `torch` | none | ≤ 5 min |
+| 2e EXT cross-arch + duality | CPU + CPU `torch` + scipy | none | ≤ 5 min |
 | 3 Full re-run | CUDA GPU | `METBENCH_MGN_*`; gateway key for the review panel | hours |
 
 ## Environment setup
@@ -125,6 +126,46 @@ python -m pytest tests/test_seeded_fault_detection_pointmlp_cross_sut.py \
 
 Both runners are deterministic (fixed seeds, read-only checkpoint); reruns are byte-identical
 modulo the ledger timestamp. The committed ledgers were produced with CPU `torch 2.12.0+cpu`.
+
+## Tier 2e — EXT operator-floor cross-topology, FNO/PINN seeded-fault, cross-arch duality (CPU, no credentials)
+
+The local EXT layer runs entirely on CPU on committed, converged checkpoints and reports (no
+GPU, no METBENCH, no sibling repo). Dependencies beyond the verifiable tier are CPU `torch`
+(FNO/PINN) and `scipy` (EXT-2 Delaunay); EXT-3 is pure standard library. Per-run provenance
+(inputs, expected numbers) is in each run directory's `PROVENANCE.md`.
+
+```bash
+pip install "scipy>=1.11" torch          # CPU torch; numpy already in requirements.txt
+
+# EXT-2: operator-floor on a second unstructured Delaunay topology (claim C44)
+python tools/run_operator_floor_sweep_mesh2.py \
+    --outdir research_assets/runs/operator-floor-sweep-mesh2
+#   expect: slope 0.983 (95% CI [0.953, 1.014]); floor ratio 1.06 median / 1.33 max; topology-stable
+
+# B-FNO: FNO end-to-end seeded-fault, by-class + blind (claim C45)
+python tools/run_seeded_fault_detection_fno.py \
+    --outdir research_assets/runs/fno-seeded-fault-detection
+#   expect: scale/offset -> conservation 24/24; asym -> translation; both; transport-shift blind 0/24
+
+# B-PINN: PINN end-to-end seeded-fault, by-class + blind (claim C46)
+python tools/run_seeded_fault_detection_pinn.py \
+    --outdir research_assets/runs/pinn-seeded-fault-detection
+#   expect: scale -> conservation 6/6; odd-y -> mirror 6/6; both; cos(pi x) blind 0/6
+
+# EXT-3: cross-architecture duality synthesis over the four reports (claim C47)
+python tools/run_cross_architecture_duality.py \
+    --outdir research_assets/runs/cross-architecture-duality
+#   expect: duality holds 4/4 (P1 coverage partitioned by admitted MR + P2 structural blind region)
+
+python tools/validate_research_assets.py                                  # expect: 0
+python -m pytest tests/test_ext2_operator_floor_cross_topology.py \
+    tests/test_fno_seeded_fault_detection.py \
+    tests/test_pinn_seeded_fault_detection.py \
+    tests/test_cross_architecture_duality.py -q                          # expect: OK
+```
+
+All four runners are deterministic (fixed seeds / read-only inputs); reruns are byte-identical
+modulo the report timestamp. EXT-3 needs no dependency beyond the Python standard library.
 
 ## Tier 3 — Full re-run (hours, GPU + credentials)
 
