@@ -1,0 +1,746 @@
+{
+  "record_type": "pinn-realistic-fault-emergence",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-20T14:03:38Z",
+  "architecture_family": "PINN (pointwise physics-informed MLP)",
+  "pde": "burgers2d_viscous",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "trained_sut_count": 6,
+  "detectors": {
+    "mr_B_mirror_y": "median faulted mirror-y violation / clean > 3.0",
+    "mr_C_conservation": "median relative change in integral(u_x) > 0.1"
+  },
+  "thresholds_reused_from_constructed_runner": true,
+  "fault_catalogue_shared_with_fno": true,
+  "fault_catalogue": {
+    "boundary_band_corrupt": "boundary_condition",
+    "global_renorm": "normalization_scale",
+    "channel_swap": "physical_channel",
+    "region_dropout": "region_masking",
+    "gaussian_noise": "numerical_instability",
+    "mode_truncation": "spectral_oversmoothing",
+    "spatial_shift": "transport_phase",
+    "sharpen": "over_sharpening"
+  },
+  "per_fault": {
+    "boundary_band_corrupt": {
+      "fault_class": "boundary_condition",
+      "n_suts": 6,
+      "median_output_perturbation_rel_l2": 0.0029482064665681405,
+      "min_output_perturbation_rel_l2": 0.0015161603378363538,
+      "max_output_perturbation_rel_l2": 0.0043077135071510125,
+      "in_band_cells": 0,
+      "detection_rate_in_band": null,
+      "detected_any": 0,
+      "detection_rate": 0.0,
+      "detection_rate_wilson95": [
+        0.0,
+        0.3903430336530645
+      ],
+      "detected_by_mirror": 0,
+      "detected_by_conservation": 0,
+      "by_class_localization": "none"
+    },
+    "global_renorm": {
+      "fault_class": "normalization_scale",
+      "n_suts": 6,
+      "median_output_perturbation_rel_l2": 0.20000005161293072,
+      "min_output_perturbation_rel_l2": 0.20000003090748886,
+      "max_output_perturbation_rel_l2": 0.20000006413659158,
+      "in_band_cells": 6,
+      "detection_rate_in_band": 1.0,
+      "detected_any": 6,
+      "detection_rate": 1.0,
+      "detection_rate_wilson95": [
+        0.6096569663469354,
+        0.9999999999999999
+      ],
+      "detected_by_mirror": 0,
+      "detected_by_conservation": 6,
+      "by_class_localization": "conservation"
+    },
+    "channel_swap": {
+      "fault_class": "physical_channel",
+      "n_suts": 6,
+      "median_output_perturbation_rel_l2": 1.4131938373020438,
+      "min_output_perturbation_rel_l2": 1.4102459301897823,
+      "max_output_perturbation_rel_l2": 1.4157900656591877,
+      "in_band_cells": 0,
+      "detection_rate_in_band": null,
+      "detected_any": 6,
+      "detection_rate": 1.0,
+      "detection_rate_wilson95": [
+        0.6096569663469354,
+        0.9999999999999999
+      ],
+      "detected_by_mirror": 6,
+      "detected_by_conservation": 6,
+      "by_class_localization": "both"
+    },
+    "region_dropout": {
+      "fault_class": "region_masking",
+      "n_suts": 6,
+      "median_output_perturbation_rel_l2": 0.02203331812664408,
+      "min_output_perturbation_rel_l2": 0.018147074018032124,
+      "max_output_perturbation_rel_l2": 0.023682272624612123,
+      "in_band_cells": 0,
+      "detection_rate_in_band": null,
+      "detected_any": 0,
+      "detection_rate": 0.0,
+      "detection_rate_wilson95": [
+        0.0,
+        0.3903430336530645
+      ],
+      "detected_by_mirror": 0,
+      "detected_by_conservation": 0,
+      "by_class_localization": "none"
+    },
+    "gaussian_noise": {
+      "fault_class": "numerical_instability",
+      "n_suts": 6,
+      "median_output_perturbation_rel_l2": 0.2012302078547804,
+      "min_output_perturbation_rel_l2": 0.2012301908222577,
+      "max_output_perturbation_rel_l2": 0.20123022029589094,
+      "in_band_cells": 6,
+      "detection_rate_in_band": 1.0,
+      "detected_any": 6,
+      "detection_rate": 1.0,
+      "detection_rate_wilson95": [
+        0.6096569663469354,
+        0.9999999999999999
+      ],
+      "detected_by_mirror": 6,
+      "detected_by_conservation": 0,
+      "by_class_localization": "mirror"
+    },
+    "mode_truncation": {
+      "fault_class": "spectral_oversmoothing",
+      "n_suts": 6,
+      "median_output_perturbation_rel_l2": 0.0021750379694679134,
+      "min_output_perturbation_rel_l2": 0.0009931097562282372,
+      "max_output_perturbation_rel_l2": 0.0029891909441391532,
+      "in_band_cells": 0,
+      "detection_rate_in_band": null,
+      "detected_any": 0,
+      "detection_rate": 0.0,
+      "detection_rate_wilson95": [
+        0.0,
+        0.3903430336530645
+      ],
+      "detected_by_mirror": 0,
+      "detected_by_conservation": 0,
+      "by_class_localization": "none"
+    },
+    "spatial_shift": {
+      "fault_class": "transport_phase",
+      "n_suts": 6,
+      "median_output_perturbation_rel_l2": 0.6264457248890933,
+      "min_output_perturbation_rel_l2": 0.6162826634750344,
+      "max_output_perturbation_rel_l2": 0.6311288459338757,
+      "in_band_cells": 0,
+      "detection_rate_in_band": null,
+      "detected_any": 0,
+      "detection_rate": 0.0,
+      "detection_rate_wilson95": [
+        0.0,
+        0.3903430336530645
+      ],
+      "detected_by_mirror": 0,
+      "detected_by_conservation": 0,
+      "by_class_localization": "none"
+    },
+    "sharpen": {
+      "fault_class": "over_sharpening",
+      "n_suts": 6,
+      "median_output_perturbation_rel_l2": 0.022115997745476016,
+      "min_output_perturbation_rel_l2": 0.012512367820646266,
+      "max_output_perturbation_rel_l2": 0.02958829566714955,
+      "in_band_cells": 0,
+      "detection_rate_in_band": null,
+      "detected_any": 0,
+      "detection_rate": 0.0,
+      "detection_rate_wilson95": [
+        0.0,
+        0.3903430336530645
+      ],
+      "detected_by_mirror": 0,
+      "detected_by_conservation": 0,
+      "by_class_localization": "none"
+    }
+  },
+  "emergence_summary": {
+    "n_applicable_faults": 8,
+    "n_detected_faults": 3,
+    "n_tested_at_realistic_magnitude": 4,
+    "tested_at_realistic_magnitude": [
+      "channel_swap",
+      "gaussian_noise",
+      "global_renorm",
+      "spatial_shift"
+    ],
+    "uniquely_localized_to_one_MR": [
+      "gaussian_noise",
+      "global_renorm"
+    ],
+    "caught_by_both_MRs": [
+      "channel_swap"
+    ],
+    "missed_by_both_MRs": [
+      "boundary_band_corrupt",
+      "mode_truncation",
+      "region_dropout",
+      "sharpen",
+      "spatial_shift"
+    ],
+    "blind_at_realistic_magnitude": [
+      "spatial_shift"
+    ],
+    "below_realistic_magnitude_untestable": [
+      "boundary_band_corrupt",
+      "mode_truncation",
+      "region_dropout",
+      "sharpen"
+    ],
+    "emergent_2x2_partition": {
+      "conservation_only": [
+        "global_renorm"
+      ],
+      "mirror_only": [
+        "gaussian_noise"
+      ],
+      "both_mrs": [
+        "channel_swap"
+      ],
+      "neither_mr_at_realistic_magnitude": [
+        "spatial_shift"
+      ],
+      "below_realistic_magnitude_untestable": [
+        "boundary_band_corrupt",
+        "mode_truncation",
+        "region_dropout",
+        "sharpen"
+      ]
+    },
+    "realistic_band": [
+      0.1,
+      0.3
+    ],
+    "old_blind_faults_retest": {
+      "spatial_shift": {
+        "median_output_perturbation_rel_l2": 0.6264457248890933,
+        "max_output_perturbation_rel_l2": 0.6311288459338757,
+        "in_band_cells": 0,
+        "detection_rate_in_band": null,
+        "detection_rate_overall": 0.0,
+        "by_class_localization": "none",
+        "structurally_blind_to_both_mrs": true,
+        "verdict": "blind_above_realistic_magnitude"
+      },
+      "sharpen": {
+        "median_output_perturbation_rel_l2": 0.022115997745476016,
+        "max_output_perturbation_rel_l2": 0.02958829566714955,
+        "in_band_cells": 0,
+        "detection_rate_in_band": null,
+        "detection_rate_overall": 0.0,
+        "by_class_localization": "none",
+        "structurally_blind_to_both_mrs": true,
+        "verdict": "magnitude_below_realistic_band_on_this_smooth_field"
+      },
+      "mode_truncation": {
+        "median_output_perturbation_rel_l2": 0.0021750379694679134,
+        "max_output_perturbation_rel_l2": 0.0029891909441391532,
+        "in_band_cells": 0,
+        "detection_rate_in_band": null,
+        "detection_rate_overall": 0.0,
+        "by_class_localization": "none",
+        "structurally_blind_to_both_mrs": true,
+        "verdict": "magnitude_below_realistic_band_on_this_smooth_field"
+      }
+    },
+    "honest_verdict": "comparable-but-richer-and-messier than the constructed version: of the 4 faults that reach a testable output magnitude on this field, 3 are detected and their by-class localization EMERGES as a 2x2 partition by (changes the conserved x-integral) x (breaks mirror-y symmetry) -- conservation-only=['global_renorm'], mirror-only=['gaussian_noise'], both=['channel_swap'] -- rather than a clean 1:1 diagonal. The transport fault(s) ['spatial_shift'] reach (or exceed) realistic magnitude and STILL escape both MRs, so the blind region is real, not a construction artifact. The remaining 4 faults ['boundary_band_corrupt', 'mode_truncation', 'region_dropout', 'sharpen'] stay below the realistic damage band on this smooth fine-grid field (a 1-cell boundary band, a low-energy zeroed corner, and fixed-kernel high-/low-pass of an already-smooth field), so they cannot be tested as detections here -- reported, not hidden."
+  },
+  "per_sut": [
+    {
+      "sut_id": "burgers_s0",
+      "seed": 0,
+      "baseline_mirror_violation": 0.03388866712507245,
+      "detections": {
+        "boundary_band_corrupt": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.0024119435709724826,
+          "mirror_violation_ratio": 0.9895338477867496,
+          "conservation_q_change": 0.0002767488537147589,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "global_renorm": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.2000000482917896,
+          "mirror_violation_ratio": 1.0000000422800288,
+          "conservation_q_change": 0.2000000772685383,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "channel_swap": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 1.4143364068498967,
+          "mirror_violation_ratio": 59.080192563085916,
+          "conservation_q_change": 0.998745722491338,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "region_dropout": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.023682272624612123,
+          "mirror_violation_ratio": 1.2230120773917563,
+          "conservation_q_change": 0.007105359192018379,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "gaussian_noise": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.20123021206965117,
+          "mirror_violation_ratio": 8.270540012306958,
+          "conservation_q_change": 0.0008413187653730225,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "mode_truncation": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.0014592617738182429,
+          "mirror_violation_ratio": 0.9971895382421057,
+          "conservation_q_change": 2.3739811227940777e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "spatial_shift": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.6244662866946091,
+          "mirror_violation_ratio": 1.0,
+          "conservation_q_change": 4.697702826739203e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "sharpen": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.015932333769748223,
+          "mirror_violation_ratio": 1.3075188057913065,
+          "conservation_q_change": 0.0,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      }
+    },
+    {
+      "sut_id": "burgers_s1",
+      "seed": 1,
+      "baseline_mirror_violation": 0.016368901199394888,
+      "detections": {
+        "boundary_band_corrupt": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.0029908836146262394,
+          "mirror_violation_ratio": 0.9941907972949191,
+          "conservation_q_change": 0.0001830152059072998,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "global_renorm": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.20000004530678953,
+          "mirror_violation_ratio": 0.9999999591625486,
+          "conservation_q_change": 0.2000000197183026,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "channel_swap": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 1.4124462894720704,
+          "mirror_violation_ratio": 122.17936371051036,
+          "conservation_q_change": 0.9990687674626295,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "region_dropout": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.022800706703101015,
+          "mirror_violation_ratio": 1.8618146356015526,
+          "conservation_q_change": 0.006759750408448839,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "gaussian_noise": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.20123020363990962,
+          "mirror_violation_ratio": 17.003856751991485,
+          "conservation_q_change": 0.0008479775014417767,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "mode_truncation": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.0022049942658098572,
+          "mirror_violation_ratio": 0.9988017476781075,
+          "conservation_q_change": 5.944571990212921e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "spatial_shift": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.6311288459338757,
+          "mirror_violation_ratio": 1.0,
+          "conservation_q_change": 9.693594105186776e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "sharpen": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.022384560761773552,
+          "mirror_violation_ratio": 1.1604215418260475,
+          "conservation_q_change": 4.808678089052165e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      }
+    },
+    {
+      "sut_id": "burgers_s2",
+      "seed": 2,
+      "baseline_mirror_violation": 0.013957685521269324,
+      "detections": {
+        "boundary_band_corrupt": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.0015161603378363538,
+          "mirror_violation_ratio": 0.9794270863864339,
+          "conservation_q_change": 0.00018063012671964973,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "global_renorm": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.20000003090748886,
+          "mirror_violation_ratio": 1.000000050163173,
+          "conservation_q_change": 0.2000000569175968,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "channel_swap": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 1.413112847304957,
+          "mirror_violation_ratio": 143.28719364347148,
+          "conservation_q_change": 0.9985513219958843,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "region_dropout": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.019076174191823538,
+          "mirror_violation_ratio": 2.2298153732342736,
+          "conservation_q_change": 0.004339640359539321,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "gaussian_noise": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.2012301908222577,
+          "mirror_violation_ratio": 19.93608575999282,
+          "conservation_q_change": 0.0008423742927675115,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "mode_truncation": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.0009931097562282372,
+          "mirror_violation_ratio": 0.9938534009031964,
+          "conservation_q_change": 2.851593933206331e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "spatial_shift": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.6284251630835775,
+          "mirror_violation_ratio": 1.0,
+          "conservation_q_change": 4.812103715501337e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "sharpen": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.012512367820646266,
+          "mirror_violation_ratio": 1.5900070713197545,
+          "conservation_q_change": 9.536494233186588e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      }
+    },
+    {
+      "sut_id": "burgers_s3",
+      "seed": 3,
+      "baseline_mirror_violation": 0.015922348987631917,
+      "detections": {
+        "boundary_band_corrupt": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.0029055293185100417,
+          "mirror_violation_ratio": 0.9887000090795537,
+          "conservation_q_change": 0.0003027899469518758,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "global_renorm": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.2000000551070777,
+          "mirror_violation_ratio": 1.0000000099837774,
+          "conservation_q_change": 0.20000004870169696,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "channel_swap": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 1.4157900656591877,
+          "mirror_violation_ratio": 125.61016259020403,
+          "conservation_q_change": 1.0023489330091242,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "region_dropout": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.02191685981346107,
+          "mirror_violation_ratio": 2.4055224130738053,
+          "conservation_q_change": 0.006769096503064231,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "gaussian_noise": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.20123020140498057,
+          "mirror_violation_ratio": 17.490108325954154,
+          "conservation_q_change": 0.0008447244119702546,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "mode_truncation": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.002145081673125969,
+          "mirror_violation_ratio": 0.9963668832495765,
+          "conservation_q_change": 2.6333657587862547e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "spatial_shift": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.6286546495537715,
+          "mirror_violation_ratio": 0.9999999447045781,
+          "conservation_q_change": 0.0,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "sharpen": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.02184743472917848,
+          "mirror_violation_ratio": 1.402473925706805,
+          "conservation_q_change": 4.8068682090285364e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      }
+    },
+    {
+      "sut_id": "burgers_s4",
+      "seed": 4,
+      "baseline_mirror_violation": 0.03235408785610605,
+      "detections": {
+        "boundary_band_corrupt": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.003153941184323158,
+          "mirror_violation_ratio": 0.9878268277256737,
+          "conservation_q_change": 0.0002221006619984589,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "global_renorm": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.20000005493407186,
+          "mirror_violation_ratio": 0.9999999718395791,
+          "conservation_q_change": 0.2000000095473743,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "channel_swap": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 1.4132748272991305,
+          "mirror_violation_ratio": 61.92791887232343,
+          "conservation_q_change": 0.9972010180808798,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "region_dropout": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.022149776439827087,
+          "mirror_violation_ratio": 1.0852479004546465,
+          "conservation_q_change": 0.005270729764451865,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "gaussian_noise": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.20123022029589094,
+          "mirror_violation_ratio": 8.667942014820529,
+          "conservation_q_change": 0.00084135561691423,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "mode_truncation": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.002289474406990291,
+          "mirror_violation_ratio": 0.9964633653740487,
+          "conservation_q_change": 4.572962264415281e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "spatial_shift": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.6239501555949653,
+          "mirror_violation_ratio": 1.0,
+          "conservation_q_change": 0.0,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "sharpen": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.023305066716797503,
+          "mirror_violation_ratio": 1.3757275385775536,
+          "conservation_q_change": 0.0,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      }
+    },
+    {
+      "sut_id": "burgers_s5",
+      "seed": 5,
+      "baseline_mirror_violation": 0.026011584983699473,
+      "detections": {
+        "boundary_band_corrupt": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.0043077135071510125,
+          "mirror_violation_ratio": 0.9917297653135078,
+          "conservation_q_change": 0.0005923132165882028,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "global_renorm": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.20000006413659158,
+          "mirror_violation_ratio": 0.9999999575842371,
+          "conservation_q_change": 0.20000003731915084,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "channel_swap": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 1.4102459301897823,
+          "mirror_violation_ratio": 76.88595766743893,
+          "conservation_q_change": 0.994188363080866,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "region_dropout": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.018147074018032124,
+          "mirror_violation_ratio": 1.3241645034260527,
+          "conservation_q_change": 0.004203350910155501,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "gaussian_noise": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.20123021973386268,
+          "mirror_violation_ratio": 10.740207100998916,
+          "conservation_q_change": 0.0008298835215398981,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "mode_truncation": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.0029891909441391532,
+          "mirror_violation_ratio": 0.9977099048941152,
+          "conservation_q_change": 4.346496229601371e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "spatial_shift": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.6162826634750344,
+          "mirror_violation_ratio": 0.999999936871479,
+          "conservation_q_change": 0.0,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        },
+        "sharpen": {
+          "applicable": true,
+          "output_perturbation_rel_l2": 0.02958829566714955,
+          "mirror_violation_ratio": 1.2704193959548131,
+          "conservation_q_change": 9.097329856100345e-08,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      }
+    }
+  ],
+  "honesty_boundary": "K=6 trained Burgers PINN checkpoints on one shared FD reference grid, one realistic mechanism-level fault catalogue (shared verbatim with the FNO runner) at recorded magnitudes. Bounded by-class emergence evidence; faults are NOT tailored to the MRs and thresholds are unchanged. NOT a real-world fault-detection rate, reliability, baseline-superiority, or cross-architecture generalization claim. On this smooth field the high-frequency faults reach only small magnitudes while the transport fault overshoots the nominal band; both are reported, not hidden."
+}

@@ -1498,6 +1498,45 @@ claims:
       - "That every fault reaches the realistic damage band (transport/high-frequency faults stay sub-band on the smooth roster members; the measured magnitudes are reported, not assumed)."
     blocked_reason: null
 
+  - claim_id: "C49-pinn-realistic-fault-emergence"
+    status: "observed"
+    scope: "K=6 trained Burgers PINN checkpoints on the shared FD reference grid (129x129, symmetric in y); the SAME catalogue of 8 realistic mechanism-level faults as C48 (imported verbatim from the FNO runner, not tailored per architecture); MR-B mirror-y and MR-C conservation with the same predeclared thresholds as C46 (no threshold or amplitude tuned)"
+    evidence:
+      - "tools/run_realistic_fault_pinn.py"
+      - "research_assets/runs/pinn-realistic-fault/pinn_realistic_fault_report.json"
+      - "research_assets/runs/pinn-realistic-fault/PROVENANCE.md"
+      - "research_assets/runs/pinn-k6-roster"
+      - "research_assets/runs/pinn-cross-family/reference_solution.npz"
+    wording_allowed: >
+      Repeating the realistic-fault emergence test on the K=6 Burgers PINN roster, with the SAME
+      eight realistic mechanism-level faults as C48 (imported verbatim, not tailored to the PINN)
+      and the PINN's two non-trivial admitted MRs at their C46 predeclared thresholds (MR-B
+      mirror-y ratio 3.0, MR-C conservation 0.10; MR-A permutation is vacuous for a pointwise MLP
+      and is not a detector), reproduces the same emergent by-class structure as the FNO run.
+      Four of the eight faults reach a testable output magnitude on this smooth 129x129 field; of
+      those, three are detected and localize as a 2x2 partition by (changes the conserved
+      x-integral) times (breaks mirror-y symmetry): global renorm to the conservation MR only,
+      Gaussian noise to the mirror MR only, and channel swap (which both collapses the x-integral
+      and breaks the symmetry) to both MRs (all three detected 6/6, Wilson 95% CI [0.61, 1.00]).
+      The fourth testable fault, a spatial shift, reaches a large transport-error magnitude
+      (rel-L2 up to 0.63) and is detected by neither MR -- a roll keeps u_x even and u_y odd in y
+      and preserves the x-integral, so it is structurally invisible to both MRs -- confirming the
+      blind region is real rather than a construction artifact. The remaining four faults
+      (boundary-band mis-scale, region dropout, sharpen, mode truncation) stay below the realistic
+      damage band on this smooth fine-grid field (a 1-cell boundary band and a low-energy zeroed
+      corner are negligible; a fixed-kernel high-/low-pass barely moves an already-smooth field),
+      so they are reported as untestable-at-magnitude here rather than as detection misses. As on
+      the FNO roster, the by-class structure is emergent rather than constructed, and it is messier
+      than the constructed C46 result: a 2x2 partition with a confirmed structural blind region,
+      not a clean 1:1 diagonal.
+    wording_forbidden:
+      - "A real-world or general fault-detection rate (one realistic catalogue, 6 SUTs)."
+      - "Baseline superiority, or that the MRs outperform an accuracy or other monitor."
+      - "A clean 1:1 by-class diagonal (the emergent structure is a 2x2 partition messier than the constructed C46 catalogue)."
+      - "That the four sub-magnitude faults are blind (they are untestable at realistic magnitude on this smooth field, not shown to be blind)."
+      - "Proof that the blind region is exhaustive or that the by-class partition generalizes across architectures or faults."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
