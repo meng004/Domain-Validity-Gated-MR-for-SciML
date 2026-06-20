@@ -1233,6 +1233,41 @@ claims:
       download), verified against the closed-form k_inf; it is a multi-group criticality
       subject, not a continuous-energy whole-core or reactor-physics reliability result.
 
+  - claim_id: "C41-pointmlp-seeded-fault"
+    status: "observed"
+    scope: "seeded-fault detection on the converged, different-architecture PointMLP cylinder SUT (row-wise, no message passing; rollout median rel-L2 0.0298) using the same 10-mutant five-class catalogue and the same predeclared MR-detector thresholds as the MGN runner (claim C10) / one checkpoint, one eval trajectory (9 transitions); eight mutants apply, the two mesh-adjacency mutants are no-ops on a row-wise architecture and recorded not-applicable / a reproduction across two architecture families, not a generalization or reliability claim"
+    evidence:
+      - "tools/run_seeded_fault_detection_pointmlp.py"
+      - "tests/test_seeded_fault_detection_pointmlp_cross_sut.py"
+      - "research_assets/runs/pointmlp-cylinder-seeded-fault-detection/raw/metric_ledger.json"
+      - "research_assets/runs/pointmlp-cylinder-primary-workflow/pointmlp_cylinder_primary_workflow_report.json"
+    wording_allowed: >
+      Running the paper's three domain-validity MR detectors with their predeclared thresholds
+      (node-permutation 1e-5, reference-relative conservation ratio 1.5, mirror-y relative-change
+      0.5) on a second, genuinely different architecture family -- a converged row-wise PointMLP
+      cylinder surrogate (rollout median relative L2 0.0298) -- reproduces the main MeshGraphNets
+      reading. Of the ten catalogue mutants, eight apply (the two mesh-adjacency mutants are
+      no-ops on a row-wise network with no edge set and are recorded not-applicable); four of the
+      eight are detected by at least one MR (union 4/8, Wilson 95% CI [0.22, 0.78]). The by-class
+      localization matches the MGN result on the shared classes: node-permutation detects none on
+      both; conservation localizes the boundary-condition and normalization-scale faults on both;
+      mirror-y localizes a physical-channel fault on both. This reproduces the "about half the
+      catalogue, localized by MR class" pattern on two architecture families. Architecture-specific
+      differences are reported honestly: the mesh-adjacency fault class exists only for the
+      message-passing MGN; on PointMLP the channel-swap fault additionally trips the conservation
+      detector (ratio above 1.5) and mirror-y additionally flags the skip-denormalization fault,
+      while the partial-channel-zeroing fault stays below threshold.
+    wording_forbidden:
+      - "The by-class detection pattern generalizes across architecture families (it is reproduced on these two, not generalized)."
+      - "A real-world or reliability fault-detection rate."
+      - "The MR detectors are superior to / outperform / better than any baseline."
+      - "PointMLP and MGN detect the same mutants (the applicable set and per-mutant detail differ by architecture)."
+    blocked_reason: >
+      One converged SUT, one checkpoint, one eval trajectory, one injected-fault catalogue with
+      eight applicable mutants on a row-wise architecture. The result reproduces the by-class
+      pattern across two architecture families; it is not a generalization, reliability, or
+      baseline-superiority claim, and the mesh-adjacency fault class is architecture-specific.
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
