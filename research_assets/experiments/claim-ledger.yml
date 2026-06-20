@@ -1233,6 +1233,36 @@ claims:
       download), verified against the closed-form k_inf; it is a multi-group criticality
       subject, not a continuous-energy whole-core or reactor-physics reliability result.
 
+  - claim_id: "C44-operator-floor-cross-topology"
+    status: "observed"
+    scope: "two mesh topologies (structured y=0-symmetric triangular channel + unstructured Delaunay of a jittered grid), eight resolutions, one smooth analytic stream-function field, one domain"
+    evidence:
+      - "tools/run_operator_floor_sweep_mesh2.py"
+      - "tools/conservation_rubric.py"
+      - "research_assets/runs/operator-floor-sweep-mesh2/operator_floor_mesh2_report.json"
+      - "research_assets/runs/operator-floor-sweep-extended/operator_floor_extended_report.json"
+    wording_allowed: >
+      The P1 constant-per-cell discrete divergence operator floor, calibrated on the
+      structured y=0-symmetric triangular channel mesh family (C12), reproduces on a
+      genuinely different unstructured topology: a Delaunay triangulation of a jittered
+      grid (seed 20260620, interior-node jitter 0.22 of grid spacing, worst triangle
+      angle about 14 degrees) over the same domain and the same analytically
+      divergence-free reference field u = (psi_y, -psi_x) with
+      psi(x,y) = sin(pi x / Lx) sin(pi y / Ly). Over eight resolutions (h from 0.064 to
+      0.0052; 920 to 137,760 cells) the area-weighted RMS divergence decays at a log-log
+      slope of 0.983 with Student-t 95% CI [0.953, 1.014], R-squared = 0.999 (interior-cell
+      fit reported alongside and consistent), matching both the theoretical O(h) rate and
+      the structured-mesh slope of 0.984. At matched resolution the unstructured-over-
+      structured floor-magnitude ratio is 1.06 median and 1.33 maximum. The
+      numerical-decidability verdict (the tolerance must dominate the operator floor)
+      therefore does not flip between the two topologies; the floor is topology-stable
+      across these two mesh families.
+    wording_forbidden:
+      - "Generalization across arbitrary mesh families, geometries, or analytic fields (this is two specific topologies only)."
+      - "A closed-form bound or a general unstructured-mesh guarantee (that remains future work; cf. C32-operator-floor-analytic-bound)."
+      - "An absolute divergence-free tolerance claim on the real DeepMind eval mesh."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"

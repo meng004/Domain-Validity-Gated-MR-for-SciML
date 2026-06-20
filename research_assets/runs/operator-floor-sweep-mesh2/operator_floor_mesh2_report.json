@@ -1,0 +1,224 @@
+{
+  "experiment_id": "EXT2-operator-floor-cross-topology",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-20T08:22:18Z",
+  "purpose": "Re-measure the P1 discrete-divergence operator floor on a SECOND, unstructured Delaunay mesh topology to test whether the calibrated floor magnitude and the O(h) numerical-decidability verdict are topology-stable (cross-topology evidence for the admissibility predicate, bounded to two topologies).",
+  "mesh_topology": "unstructured Delaunay triangulation of a jittered structured grid (seed=20260620, jitter=0.22 of grid spacing) on [0,Lx]x[-Ly,Ly]; boundary nodes fixed on domain edges, interior nodes jittered",
+  "analytic_reference": {
+    "stream_function": "psi(x,y) = sin(pi x / Lx) * sin(pi y / Ly)",
+    "velocity": "u = (psi_y, -psi_x); div(u) = 0 analytically",
+    "Lx": 1.6,
+    "Ly": 0.4
+  },
+  "operator": "P1 constant-per-cell divergence (tools.conservation_rubric.cell_divergence)",
+  "norm": "area-weighted RMS",
+  "levels": [
+    {
+      "level": "m0",
+      "nx": 24,
+      "ny": 21,
+      "num_nodes": 504,
+      "num_cells": 920,
+      "h_rms_edge": 0.06438536287179994,
+      "divergence_rms_all": 1.4187478952797996,
+      "divergence_rms_interior": 1.4611038157960725,
+      "interior_cell_count": 794,
+      "min_triangle_angle_deg": 15.868877101093974
+    },
+    {
+      "level": "m0/1.5",
+      "nx": 36,
+      "ny": 31,
+      "num_nodes": 1116,
+      "num_cells": 2100,
+      "h_rms_edge": 0.042506023176148135,
+      "divergence_rms_all": 0.8716830648758516,
+      "divergence_rms_interior": 0.8798880476100873,
+      "interior_cell_count": 1905,
+      "min_triangle_angle_deg": 15.59297673448109
+    },
+    {
+      "level": "m0/2",
+      "nx": 48,
+      "ny": 41,
+      "num_nodes": 1968,
+      "num_cells": 3760,
+      "h_rms_edge": 0.03171117534860264,
+      "divergence_rms_all": 0.6957673381618517,
+      "divergence_rms_interior": 0.7073596505829625,
+      "interior_cell_count": 3497,
+      "min_triangle_angle_deg": 15.463274979375187
+    },
+    {
+      "level": "m0/3",
+      "nx": 72,
+      "ny": 61,
+      "num_nodes": 4392,
+      "num_cells": 8520,
+      "h_rms_edge": 0.02102624541716179,
+      "divergence_rms_all": 0.4763300233050199,
+      "divergence_rms_interior": 0.48171604598088485,
+      "interior_cell_count": 8122,
+      "min_triangle_angle_deg": 15.561105400803614
+    },
+    {
+      "level": "m0/4",
+      "nx": 96,
+      "ny": 81,
+      "num_nodes": 7776,
+      "num_cells": 15200,
+      "h_rms_edge": 0.015710645097030202,
+      "divergence_rms_all": 0.3451507704267999,
+      "divergence_rms_interior": 0.3467755573633583,
+      "interior_cell_count": 14664,
+      "min_triangle_angle_deg": 14.349185236224708
+    },
+    {
+      "level": "m0/6",
+      "nx": 144,
+      "ny": 121,
+      "num_nodes": 17424,
+      "num_cells": 34320,
+      "h_rms_edge": 0.010453207690912176,
+      "divergence_rms_all": 0.2332904877610577,
+      "divergence_rms_interior": 0.23373762599951736,
+      "interior_cell_count": 33509,
+      "min_triangle_angle_deg": 15.259370155647508
+    },
+    {
+      "level": "m0/8",
+      "nx": 192,
+      "ny": 161,
+      "num_nodes": 30912,
+      "num_cells": 61120,
+      "h_rms_edge": 0.007829618939080846,
+      "divergence_rms_all": 0.17384893647681823,
+      "divergence_rms_interior": 0.17408258663328494,
+      "interior_cell_count": 60035,
+      "min_triangle_angle_deg": 13.902056834139637
+    },
+    {
+      "level": "m0/12",
+      "nx": 288,
+      "ny": 241,
+      "num_nodes": 69408,
+      "num_cells": 137760,
+      "h_rms_edge": 0.005214141718553594,
+      "divergence_rms_all": 0.11629339808914917,
+      "divergence_rms_interior": 0.11642669379903713,
+      "interior_cell_count": 136134,
+      "min_triangle_angle_deg": 14.156082615048428
+    }
+  ],
+  "fit_all_cells": {
+    "n_points": 8,
+    "slope": 0.9833306746292715,
+    "intercept": 3.023518553116385,
+    "r_squared": 0.9990506667402641,
+    "slope_se": 0.012374838879718103,
+    "dof": 6,
+    "t_975": 2.447,
+    "slope_ci95": [
+      0.9530494438906013,
+      1.0136119053679418
+    ],
+    "expected_slope_oh": 1.0
+  },
+  "fit_interior_only": {
+    "n_points": 8,
+    "slope": 0.9931326854456882,
+    "intercept": 3.0722256496860734,
+    "r_squared": 0.9987918314959743,
+    "slope_se": 0.014101259804151074,
+    "dof": 6,
+    "t_975": 2.447,
+    "slope_ci95": [
+      0.9586269027049306,
+      1.0276384681864459
+    ],
+    "expected_slope_oh": 1.0
+  },
+  "cross_topology_vs_structured": {
+    "available": true,
+    "structured_report": "research_assets/runs/operator-floor-sweep-extended/operator_floor_extended_report.json",
+    "structured_slope_all": 0.9836727691700503,
+    "structured_slope_interior": 0.9893036036887491,
+    "matched_pairs": [
+      {
+        "unstructured_level": "m0",
+        "unstructured_h": 0.06438536287179994,
+        "matched_structured_level": "h0",
+        "structured_h": 0.06552007056721593,
+        "rms_all_ratio_unstruct_over_struct": 1.0786806135527915,
+        "rms_interior_ratio_unstruct_over_struct": 1.0924695741217474
+      },
+      {
+        "unstructured_level": "m0/1.5",
+        "unstructured_h": 0.042506023176148135,
+        "matched_structured_level": "h0/2",
+        "structured_h": 0.032237611861461686,
+        "rms_all_ratio_unstruct_over_struct": 1.3258140937409624,
+        "rms_interior_ratio_unstruct_over_struct": 1.3255799932525143
+      },
+      {
+        "unstructured_level": "m0/2",
+        "unstructured_h": 0.03171117534860264,
+        "matched_structured_level": "h0/2",
+        "structured_h": 0.032237611861461686,
+        "rms_all_ratio_unstruct_over_struct": 1.0582494717056332,
+        "rms_interior_ratio_unstruct_over_struct": 1.0656603455333886
+      },
+      {
+        "unstructured_level": "m0/3",
+        "unstructured_h": 0.02102624541716179,
+        "matched_structured_level": "h0/3",
+        "structured_h": 0.02137932840624946,
+        "rms_all_ratio_unstruct_over_struct": 1.0872868396376898,
+        "rms_interior_ratio_unstruct_over_struct": 1.0923899714446557
+      },
+      {
+        "unstructured_level": "m0/4",
+        "unstructured_h": 0.015710645097030202,
+        "matched_structured_level": "h0/4",
+        "structured_h": 0.01599284235098712,
+        "rms_all_ratio_unstruct_over_struct": 1.0508200324436523,
+        "rms_interior_ratio_unstruct_over_struct": 1.0505167647805713
+      },
+      {
+        "unstructured_level": "m0/6",
+        "unstructured_h": 0.010453207690912176,
+        "matched_structured_level": "h0/6",
+        "structured_h": 0.010634344996701675,
+        "rms_all_ratio_unstruct_over_struct": 1.0657981280373698,
+        "rms_interior_ratio_unstruct_over_struct": 1.0642575116822997
+      },
+      {
+        "unstructured_level": "m0/8",
+        "unstructured_h": 0.007829618939080846,
+        "matched_structured_level": "h0/8",
+        "structured_h": 0.007965488684753361,
+        "rms_all_ratio_unstruct_over_struct": 1.0592066731684315,
+        "rms_interior_ratio_unstruct_over_struct": 1.0579460596902346
+      },
+      {
+        "unstructured_level": "m0/12",
+        "unstructured_h": 0.005214141718553594,
+        "matched_structured_level": "h0/12",
+        "structured_h": 0.005303506064503838,
+        "rms_all_ratio_unstruct_over_struct": 1.0630473247846381,
+        "rms_interior_ratio_unstruct_over_struct": 1.0624609524868023
+      }
+    ],
+    "rms_all_ratio_max": 1.3258140937409624,
+    "rms_all_ratio_median": 1.064422726411004,
+    "rms_interior_ratio_max": 1.3255799932525143,
+    "rms_interior_ratio_median": 1.0649589286078442
+  },
+  "topology_stability": {
+    "slope_first_order": true,
+    "rms_same_order_max_ratio_le_3": true,
+    "topology_stable": true
+  },
+  "verdict": "operator-floor-topology-stable",
+  "honesty_boundary": "Two specific mesh topologies (structured y=0-symmetric triangular channel + unstructured Delaunay), one smooth analytic field, one domain. This is bounded cross-topology evidence for the admissibility-predicate operator floor; it is NOT a generalization claim across arbitrary mesh families or geometries, and NOT a closed-form bound for unstructured meshes (that remains future work; cf. C32)."
+}
