@@ -18,7 +18,7 @@
   },
   "data": {
     "meta": {
-      "path": "/Users/limeng/.cache/dvgmr/airfoil_staged/meta.json",
+      "path": "~/.cache/dvgmr/airfoil_staged/meta.json",
       "sha256_prefix": "48441775d99fc822"
     },
     "records": [
