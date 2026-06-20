@@ -1,0 +1,62 @@
+[
+  {
+    "role": "EIC",
+    "model": "gpt-5.5",
+    "max_tokens": 16000,
+    "error": "<urlopen error [Errno 1] Operation not permitted>"
+  },
+  {
+    "role": "EIC",
+    "model": "gpt-5.5",
+    "max_tokens": 28000,
+    "error": "<urlopen error [Errno 1] Operation not permitted>"
+  },
+  {
+    "role": "MethodologyRigor",
+    "model": "claude-opus-4-8",
+    "max_tokens": 16000,
+    "error": "<urlopen error [Errno 1] Operation not permitted>"
+  },
+  {
+    "role": "MethodologyRigor",
+    "model": "claude-opus-4-8",
+    "max_tokens": 28000,
+    "error": "<urlopen error [Errno 1] Operation not permitted>"
+  },
+  {
+    "role": "DomainExpert",
+    "model": "glm-5.2",
+    "max_tokens": 16000,
+    "error": "<urlopen error [Errno 1] Operation not permitted>"
+  },
+  {
+    "role": "DomainExpert",
+    "model": "glm-5.2",
+    "max_tokens": 28000,
+    "error": "<urlopen error [Errno 1] Operation not permitted>"
+  },
+  {
+    "role": "Perspective",
+    "model": "deepseek-v4-pro",
+    "max_tokens": 16000,
+    "error": "<urlopen error [Errno 1] Operation not permitted>"
+  },
+  {
+    "role": "Perspective",
+    "model": "deepseek-v4-pro",
+    "max_tokens": 28000,
+    "error": "<urlopen error [Errno 1] Operation not permitted>"
+  },
+  {
+    "role": "DevilsAdvocate",
+    "model": "qwen3-max",
+    "max_tokens": 16000,
+    "error": "<urlopen error [Errno 1] Operation not permitted>"
+  },
+  {
+    "role": "DevilsAdvocate",
+    "model": "qwen3-max",
+    "max_tokens": 28000,
+    "error": "<urlopen error [Errno 1] Operation not permitted>"
+  }
+]

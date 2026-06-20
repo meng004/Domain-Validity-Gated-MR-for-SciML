@@ -64,7 +64,12 @@ class Stage4RevisionReadinessTest(unittest.TestCase):
     def test_final_latex_artifacts_exist_without_unresolved_references_or_overfull_boxes(self) -> None:
         self.assertTrue(PDF.exists() and PDF.stat().st_size > 100_000)
         self.assertTrue(BIB.exists() and BIB.stat().st_size > 5_000)
-        log = read(LATEX_LOG)
+        # pdflatex logs are not guaranteed UTF-8: Under/Overfull-box warnings
+        # echo font-encoded glyph bytes (e.g. the "o-umlaut" in the Engstrom
+        # reference), which are never part of the strings checked below. Decode
+        # tolerantly so a benign accented byte cannot mask the substantive build
+        # checks. The forbidden-string assertions are unchanged.
+        log = LATEX_LOG.read_text(encoding="utf-8", errors="ignore")
         self.assertNotIn("Citation(s) may have changed", log)
         self.assertNotIn("Label(s) may have changed", log)
         self.assertNotIn("undefined", log.lower())

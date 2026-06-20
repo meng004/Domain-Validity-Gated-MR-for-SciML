@@ -56,10 +56,10 @@ We investigate how physics-derived metamorphic relations (MRs) can be transforme
 We propose (i) a domain-validity rubric admitting a candidate only when its tolerance dominates the operator's numerical floor and its preconditions hold; (ii) an MR-card executable-asset format recording transformations, mappings, metrics, tolerances, exclusion rules, and relation-level verdicts; and (iii) a case-study protocol on MeshGraphNets cylinder-flow surrogates, with a claim ledger binding every result to an artifact.
 
 \textbf{Results:}
-On a MeshGraphNets checkpoint, node permutation holds to machine precision, mirror-y is a bounded OOD-stress finding rather than an admitted symmetry, and absolute conservation stays deferred while a reference-relative guard passes; these readings hold across the roster, further architectures, and PhysicsNeMo. The same predicate transfers to PINN and FNO surrogates, and on a second CFD task it rejects incompressible continuity on physical grounds rather than applying a fixed checklist. Seeded-fault and cross-SUT stress tests show how the admitted MR set bounds detector coverage in the studied settings, but these results are reported as an implication of the validity gate, not as a general fault-detection rate.
+On a MeshGraphNets checkpoint, node permutation holds to machine precision, mirror-y is a bounded OOD-stress finding rather than an admitted symmetry, and absolute conservation stays deferred while a reference-relative guard passes; these readings recur unchanged across the same-family roster and a PhysicsNeMo replication. The same predicate applies unchanged to PINN and FNO surrogates, and on a second CFD task it rejects incompressible continuity on physical grounds rather than applying a fixed checklist. Seeded-fault and cross-SUT stress tests show how the admitted MR set bounds detector coverage in the studied settings, but these results are reported as an implication of the validity gate, not as a general fault-detection rate.
 
 \textbf{Conclusion:}
-Validity-gated MR assets make oracle-free SciML V\&V more auditable by recording why a relation is admitted, rejected, deferred, or interpreted as out-of-relation-domain. The study supports a reusable workflow for converting physics-derived relations into executable assets with typed verdicts, while broader cross-domain generalization remains future work.
+Validity-gated MR assets make oracle-free SciML V\&V more auditable by recording why a relation is admitted, rejected, deferred, or interpreted as out-of-relation-domain. The study supports a reusable workflow for converting physics-derived relations into executable assets with typed verdicts. Broader generalization is future work.
 \end{abstract}
 
 \begin{highlights}
@@ -67,7 +67,7 @@ Validity-gated MR assets make oracle-free SciML V\&V more auditable by recording
 \item MR tolerances are gated by the measuring operator's floor ($O(h)$ for divergence).
 \item MR cards convert retained candidates into auditable executable test assets.
 \item A fail-closed claim ledger ties every reported number to a tracked artifact.
-\item K=6 rosters expose where MR detectors are structurally insensitive.
+\item K=6 rosters show where the admitted MR set bounds detector coverage.
 \end{highlights}
 
 \begin{keyword}
@@ -107,7 +107,7 @@ We decompose this into four questions:
 \subsection{Contributions}
 \label{subsec:contributions}
 
-This paper makes four scoped contributions. Table~\ref{tab:rq-contribution-evidence} records how each contribution is tied to a research question and to evidence reported later in the paper.
+This paper makes four scoped contributions. Table~\ref{tab:rq-contribution-evidence} records how each contribution is tied to a research question and to evidence reported later in the paper. The positive claim is methodological: a measurement-floor admissibility gate, a typed domain-inadmissibility verdict, and a seeded-fault diagnostic stress test whose MR-class-to-fault-class diagnostic is reported as stress-test evidence rather than a validated localization model.
 
 \textbf{Validity-gated V\&V asset construction.} The primary contribution is a workflow that transforms physics-derived candidate MRs into auditable executable testing assets. Each admitted MR is represented as an MR card and executable runner that records the transformation, mapping, metric, tolerance, exclusion rule, and ledger fields needed for independent inspection.
 
@@ -170,11 +170,12 @@ The present work combines these ideas in a SciML-specific V\&V workflow. From ph
 \label{tab:closest-prior-positioning}
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth}YYY@{}}
 \toprule
-Approach & What it supplies & What remains missing for RQ0--RQ4 & How this paper uses or extends it \\
+Approach & What it supplies & What remains missing for RQ0--RQ4 & What this paper adds \\
 \midrule
 Scientific-software MR identification & Candidate relations from domain rules, source-code learning, LLM variables, and data-driven search & Candidate validity, numerical decidability, executable asset format, and typed SciML verdicts & Treats these methods as candidate sources, not validity authorities \\
 Reichert et al. & Physics-derived MRs and informal filtering in a learned hydrologic surrogate & Explicit admissibility predicate, operator-floor tolerance, reusable MR cards, and typed verdicts & Formalizes the candidate-to-verdict path for mesh-based SciML surrogates \\
 Eniser et al. & Relaxed MR oracles with numerical thresholds & Measurement-operator floor and relation-domain interpretation for deterministic SciML surrogates & Grounds tolerance in the scoring operator's own numerical floor \\
+Duque-Torres / MetaTrimmer & Binary bug-versus-inapplicability separation with explicit MR constraints and automated constraint derivation & A typed inadmissibility verdict and operator-floor admissibility for physics-governed SciML & Replaces the binary skip/proceed pre-filter with a two-axis typed verdict tied to physical, geometric, boundary, and operator limits \\
 Formal MR specification and constraint tooling & Machine-readable MR descriptions, constraint phases, and supporting systems & Physics-specific admissibility dimensions, measurement floors, and executable evidence ledgers for SciML & Uses specification ideas but binds each verdict to relation-domain and numerical-decidability evidence \\
 \textbf{This paper} & Physics, expert, and LLM-assisted candidates plus artifact-backed execution & Bounded case-study evidence, not general SciML reliability or baseline superiority & Constructs MR cards, runners, ledgers, and typed verdicts under a four-condition gate \\
 \bottomrule
@@ -270,7 +271,7 @@ An MR execution can produce: \textbf{pass} (relation holds within tolerance); \t
 
 These verdicts form the two-dimensional space in Figure~\ref{fig:verdict-2d}. One axis is relation-violation magnitude, typically expressed as a violation-to-floor or violation-to-tolerance ratio. The other is domain-violation magnitude, meaning how far the transformed case lies outside the relation's validity domain. Low domain violation with high relation violation is the region that may be read as SUT inconsistency; high domain violation is out-of-relation-domain; a violation inside the error floor is a numerical-tolerance issue. This decomposition is the method's answer to RQ3.
 
-In the present study, the domain-violation coordinate is operationalized per relation from committed measurements. For mirror-y, $D = m/(m+1)$, where $m$ is the worst reflected-node placement error in median-edge-length units. The synthetic symmetric mesh scores $D \approx 0$, whereas the real asymmetric evaluation mesh scores $D = 0.51$. Other MR classes use their own precondition measurements. These $D$ values are not calibrated across MR classes and must not be averaged or ranked globally; they are read per relation, not as a calibrated boundary measurement. A cross-relation calibration would need to normalize each class by its own admissibility boundary, mapping every gate threshold to a common $D_{\mathrm{cal}} = 1$; that calibration is future work.
+In the present study, the domain-violation coordinate is operationalized per relation from committed measurements. For mirror-y, $D = m/(m+1)$, where $m$ is the worst reflected-node placement error in median-edge-length units. The synthetic symmetric mesh scores $D \approx 0$, whereas the real asymmetric evaluation mesh scores $D = 0.51$. Other MR classes use their own precondition measurements. These $D$ values denote structural placement within each relation's own validity domain: $D$ is a per-relation normalized coordinate, not a cross-relation calibrated metric, and the values cannot be averaged or ranked across MR classes; they are read per relation, not as a calibrated boundary measurement. A cross-relation calibration would need to normalize each class by its own admissibility boundary, mapping every gate threshold to a common $D_{\mathrm{cal}} = 1$; that calibration is future work.
 
 \begin{figure}[!htbp]
 \centering
@@ -287,7 +288,7 @@ Retained MRs are interpreted with the three-level scientific-computing MR classi
 \subsection{Evaluation logic}
 \label{subsec:evaluation-logic}
 
-The experiments evaluate whether the method yields auditable, executable, and interpretable MR evidence under bounded conditions. They are not a model benchmark and do not claim that the tested surrogates are generally reliable. The design separates four evidence tiers: primary cylinder-flow evidence, supporting cross-family checks, secondary candidate-generation and rollout comparators, and stress tests used to interpret coverage boundaries.
+The experiments evaluate whether the method yields auditable, executable, and interpretable MR evidence under bounded conditions. They do not constitute a model benchmark and do not claim that the tested surrogates are generally reliable. The design separates four evidence tiers: primary cylinder-flow evidence, supporting cross-family checks, secondary candidate-generation and rollout comparators, and stress tests used to interpret coverage boundaries.
 
 \subsection{Subject systems and evidence tiers}
 \label{subsec:suts}
@@ -308,7 +309,7 @@ Rollout accuracy, residual/UQ diagnostics, expert-designed candidates, generic M
 \subsection{RQ-to-evidence map}
 \label{subsec:rq-evidence}
 
-Table~\ref{tab:rqmap} maps the research questions to evaluation evidence, artifacts, units of analysis, and claim boundaries. It is a design table, not a result table.
+Table~\ref{tab:rqmap} maps the research questions to evaluation evidence, artifacts, units of analysis, and claim boundaries. It is a design table rather than a result table.
 
 \begin{table}[t]
 \centering
@@ -347,12 +348,12 @@ The study does not involve human subjects or personal data. All SUT versions, da
 
 This section reports the evidence by research question rather than by execution chronology. RQ1 is evaluated through gate decisions, task-specific admissibility, and the operator-floor calibration. RQ2 is evaluated through MR cards, executable runners, and the claim ledger. RQ3 is evaluated through typed verdicts that distinguish SUT inconsistency, out-of-relation-domain application, numerical deferral, and inconclusive evidence. RQ4 is evaluated through bounded SciML executions and secondary comparators. Fault-detection and cross-SUT coverage results are discussed only as a bounded implication of the admitted MR set.
 
-\subsection{RQ0--RQ4 claim-to-evidence map}
+\subsection{Claim-to-evidence map}
 \label{subsec:claim-evidence-map}
 
 The compact claim-to-evidence map binds every claim to a tracked artifact using reviewer-facing claim names; the full table is given in \ref{app:claim-evidence} (Table~\ref{tab:claim-evidence}), and the authoritative runtime mapping remains in \texttt{claim-ledger.yml}.
 
-\subsection{RQ1--RQ3 MR-card-to-verdict map}
+\subsection{MR-card-to-verdict map}
 \label{subsec:mr-card-verdict-map}
 
 {
@@ -440,7 +441,7 @@ To check whether the seeded-fault detection result of Section~\ref{subsec:within
 
 \textbf{Adversarial mutants (R4).} Two adversarial mutants test whether the blind spot is a subspace, not a point. A1 is magnitude-driven, with node-permutation 0/6 and conservation 0/6; A2 escapes every detector. These results bound the detector set rather than establishing validated localization.
 
-\textbf{Bounded cross-SUT coverage implication.} The seeded-fault stress tests suggest a bounded implication: coverage follows the admissible MR set in the studied settings. We test this on the primary-scale PhysicsNeMo airfoil (Section~\ref{subsec:second-task}), with the same 10-mutant catalogue and predeclared thresholds, over five test trajectories (claim~C36). The non-zero angle of attack makes mirror-y domain-inadmissible, so the gate excludes that relation and the mirror-only cylinder-flow fault coverage is absent on airfoil. The admissible relations keep their scoped readings: conservation still detects the gross normalization fault (NS\_skip\_denorm, all five trajectories) and node-permutation still detects none; the one localization shared across both SUTs is continuity~$\to$~normalization-scale faults, whose MR is admissible on both. This supports a relation-level coverage interpretation, but it is not a real-world defect-rate estimate or a formal research question.
+\textbf{Bounded cross-SUT coverage implication.} The seeded-fault stress tests suggest a bounded implication: coverage follows the admissible MR set in the studied settings. We test this on the primary-scale PhysicsNeMo airfoil (Section~\ref{subsec:second-task}), with the same 10-mutant catalogue and predeclared thresholds, over five test trajectories (claim~C36). The non-zero angle of attack makes mirror-y domain-inadmissible, so the gate excludes that relation and the mirror-only cylinder-flow fault coverage is absent on airfoil. The admissible relations keep their scoped readings: conservation still detects the gross normalization fault (NS\_skip\_denorm, all five trajectories) and node-permutation still detects none; the one localization shared across both SUTs is continuity~$\to$~normalization-scale faults, whose MR is admissible on both. This supports a relation-level coverage interpretation, but it is not a real-world defect-rate estimate or a formal research question. We read it as a proposed, falsifiable organizing principle, the validity-coverage duality: the same admissibility gate that decides whether an MR yields a meaningful verdict also fixes which faults that MR can detect; the cross-SUT removal of mirror-y above is one refutable prediction it makes, stated as a falsifiable hypothesis rather than a calibrated coverage law.
 
 \textbf{Falsifiable boundaries for the implication.} The coverage implication would be weakened by coverage that survives exclusion of the only MR measuring the affected invariant, by a fault caught while perturbing no admitted measured invariant, or by a blind spot closed by adding same-kind mutants rather than new relation directions. In this evidence set, the cross-SUT airfoil run supports relation-specific exclusion, while the knife-edge sweep at $p=1.0$ and the adversarial mutants delimit blind subspaces. The claim remains qualitative and fault-class level on two CFD SUTs, reported as an interpretive implication of RQ1--RQ4 rather than as a general theorem.
 
@@ -449,11 +450,11 @@ To check whether the seeded-fault detection result of Section~\ref{subsec:within
 \subsection{RQ4 secondary baselines and external-scope audit}
 \label{subsec:llm-mr-baseline}
 
-LLM and generic baselines are secondary scope contrasts, not competitors. Expert-LLMs proposed 25 candidates (24 unique), but rubric voting retained 4 and found no novel retained MR family; generic templates admitted 3/13; a one-shot LLM baseline had low rater agreement (Fleiss kappa 0.077). These results support the need for an admissibility gate, not baseline superiority.
+This subsection reports the Secondary baseline and external-scope audit: LLM baselines are secondary exploratory scope contrasts, not competitors. Expert-LLMs proposed 25 candidates (24 unique), but rubric voting retained 4 and found no novel retained MR family; generic templates admitted 3/13; a one-shot LLM baseline had low rater agreement (Fleiss kappa 0.077). These results support the need for an admissibility gate, not baseline superiority.
 
 The Minimum-MR-SubSet audit/rerun is likewise an external witness: 70 real ABD instances, 20 true-fault-class rows, three SciML/PDE PASS witness rows, and one held-out cylinder-flow MGN PASS witness rerun. It adds artifact-backed scope context without adding a second primary architecture/dataset.
 
-\subsection{RQ4 cross-family PINN extension}
+\subsection{RQ4 Cross-family PINN extension}
 \label{subsec:pinn-extension}
 
 The cross-family executions test two claims the cylinder-flow study cannot test by itself: that the admissibility predicate is family-agnostic (the same four conditions, applied unchanged, produce typed decisions on pointwise PINNs and spectral FNOs), and that the conservation MR class yields full executable verdicts wherever its floor is calibratable: the FNO periodic conservation MR fails 24/24 against a calibrated case-level floor and the PINN reference-relative conservation passes 30/30, while the MGN open-boundary absolute variant is the one member of the class the gate correctly refuses. The deferral on cylinder flow is the fail-closed gate discriminating rather than a missing verdict.
