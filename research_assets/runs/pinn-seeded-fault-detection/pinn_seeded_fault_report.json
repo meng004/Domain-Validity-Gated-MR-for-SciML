@@ -1,0 +1,484 @@
+{
+  "record_type": "pinn-seeded-fault-detection",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-20T09:15:50Z",
+  "architecture_family": "PINN (pointwise physics-informed MLP)",
+  "pde": "burgers2d_viscous",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "trained_sut_count": 6,
+  "detectors": {
+    "mr_B_mirror_y": "faulted mirror-y violation / clean > 3.0",
+    "mr_C_conservation": "median relative change in integral(u_x) > 0.1"
+  },
+  "fault_catalogue": {
+    "scale_ux": "conservation",
+    "asym_y_ux": "mirror",
+    "upper_half_offset": "both",
+    "cos_x_blind": "shape-preserving (blind)"
+  },
+  "per_fault": {
+    "scale_ux": {
+      "fault_class": "conservation",
+      "n_suts": 6,
+      "detected_any": 6,
+      "detection_rate": 1.0,
+      "detection_rate_wilson95": [
+        0.6096569663469354,
+        0.9999999999999999
+      ],
+      "detected_by_mirror": 0,
+      "detected_by_conservation": 6,
+      "by_class_localization": "conservation"
+    },
+    "asym_y_ux": {
+      "fault_class": "mirror",
+      "n_suts": 6,
+      "detected_any": 6,
+      "detection_rate": 1.0,
+      "detection_rate_wilson95": [
+        0.6096569663469354,
+        0.9999999999999999
+      ],
+      "detected_by_mirror": 6,
+      "detected_by_conservation": 0,
+      "by_class_localization": "mirror"
+    },
+    "upper_half_offset": {
+      "fault_class": "both",
+      "n_suts": 6,
+      "detected_any": 6,
+      "detection_rate": 1.0,
+      "detection_rate_wilson95": [
+        0.6096569663469354,
+        0.9999999999999999
+      ],
+      "detected_by_mirror": 6,
+      "detected_by_conservation": 6,
+      "by_class_localization": "both"
+    },
+    "cos_x_blind": {
+      "fault_class": "shape-preserving (blind)",
+      "n_suts": 6,
+      "detected_any": 0,
+      "detection_rate": 0.0,
+      "detection_rate_wilson95": [
+        0.0,
+        0.3903430336530645
+      ],
+      "detected_by_mirror": 0,
+      "detected_by_conservation": 0,
+      "by_class_localization": "none"
+    }
+  },
+  "union_detection": {
+    "faults_detected_majority": 3,
+    "faults_total": 4,
+    "summary": "3/4 faults detected by >=1 MR (>=50% of SUTs)"
+  },
+  "blind_spot": {
+    "fault": "cos_x_blind",
+    "by_class_localization": "none",
+    "detected_across_severity_sweep": false,
+    "interpretation": "A y-independent, x-zero-integral perturbation (cos(pi x) added to u_x) keeps u_x even in y (mirror-y holds) and preserves the conserved integral, yet degrades the field, so neither MR detects it at any swept severity -- a genuine blind subspace, the PINN analogue of the MeshGraphNets knife-edge blind region."
+  },
+  "per_sut": [
+    {
+      "sut_id": "burgers_s0",
+      "seed": 0,
+      "baseline_mirror_violation": 0.03309514071909323,
+      "detections": {
+        "scale_ux": {
+          "mirror_violation_ratio": 0.9942003635554796,
+          "conservation_q_change": 0.14999994734578104,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "asym_y_ux": {
+          "mirror_violation_ratio": 9.63010942490961,
+          "conservation_q_change": 0.0,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "upper_half_offset": {
+          "mirror_violation_ratio": 7.520429425917178,
+          "conservation_q_change": 0.24228580562062918,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "cos_x_blind": {
+          "mirror_violation_ratio": 0.8984430802850008,
+          "conservation_q_change": 0.0037857449598311943,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      },
+      "blind_severity_sweep": [
+        {
+          "severity": 0.15,
+          "output_perturbation_rel_l2": 0.10537167432419713,
+          "mirror_violation_ratio": 0.949875425705388,
+          "conservation_q_change": 0.0018928726508111726,
+          "detected": false
+        },
+        {
+          "severity": 0.3,
+          "output_perturbation_rel_l2": 0.21074334864839425,
+          "mirror_violation_ratio": 0.8984430802850008,
+          "conservation_q_change": 0.0037857449598311943,
+          "detected": false
+        },
+        {
+          "severity": 0.6,
+          "output_perturbation_rel_l2": 0.4214866972967885,
+          "mirror_violation_ratio": 0.798975602514987,
+          "conservation_q_change": 0.007571538598335981,
+          "detected": false
+        },
+        {
+          "severity": 1.0,
+          "output_perturbation_rel_l2": 0.702477783635844,
+          "mirror_violation_ratio": 0.6833430946688446,
+          "conservation_q_change": 0.012619182318553024,
+          "detected": false
+        }
+      ]
+    },
+    {
+      "sut_id": "burgers_s1",
+      "seed": 1,
+      "baseline_mirror_violation": 0.017153791237853263,
+      "detections": {
+        "scale_ux": {
+          "mirror_violation_ratio": 0.9846716656035638,
+          "conservation_q_change": 0.15000007523028025,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "asym_y_ux": {
+          "mirror_violation_ratio": 19.77802199241438,
+          "conservation_q_change": 9.650059884513951e-08,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "upper_half_offset": {
+          "mirror_violation_ratio": 15.52803832845727,
+          "conservation_q_change": 0.24419885585093304,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "cos_x_blind": {
+          "mirror_violation_ratio": 0.8968076554726248,
+          "conservation_q_change": 0.003815550553596614,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      },
+      "blind_severity_sweep": [
+        {
+          "severity": 0.15,
+          "output_perturbation_rel_l2": 0.10537160265001666,
+          "mirror_violation_ratio": 0.948907541371301,
+          "conservation_q_change": 0.0019077995920238622,
+          "detected": false
+        },
+        {
+          "severity": 0.3,
+          "output_perturbation_rel_l2": 0.21074320530003332,
+          "mirror_violation_ratio": 0.8968076554726248,
+          "conservation_q_change": 0.003815550553596614,
+          "detected": false
+        },
+        {
+          "severity": 0.6,
+          "output_perturbation_rel_l2": 0.42148641060006664,
+          "mirror_violation_ratio": 0.7966812980364752,
+          "conservation_q_change": 0.007631197609863194,
+          "detected": false
+        },
+        {
+          "severity": 1.0,
+          "output_perturbation_rel_l2": 0.7024773510001111,
+          "mirror_violation_ratio": 0.6809589720470854,
+          "conservation_q_change": 0.012718759727370021,
+          "detected": false
+        }
+      ]
+    },
+    {
+      "sut_id": "burgers_s2",
+      "seed": 2,
+      "baseline_mirror_violation": 0.014074894811299801,
+      "detections": {
+        "scale_ux": {
+          "mirror_violation_ratio": 0.9858799588324338,
+          "conservation_q_change": 0.14999992749880642,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "asym_y_ux": {
+          "mirror_violation_ratio": 24.885586570512288,
+          "conservation_q_change": 0.0,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "upper_half_offset": {
+          "mirror_violation_ratio": 19.44794935373281,
+          "conservation_q_change": 0.2425879201533765,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "cos_x_blind": {
+          "mirror_violation_ratio": 0.897382657146915,
+          "conservation_q_change": 0.0037904758777094205,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      },
+      "blind_severity_sweep": [
+        {
+          "severity": 0.15,
+          "output_perturbation_rel_l2": 0.10537185857138438,
+          "mirror_violation_ratio": 0.9492482145288027,
+          "conservation_q_change": 0.0018951899742843392,
+          "detected": false
+        },
+        {
+          "severity": 0.3,
+          "output_perturbation_rel_l2": 0.21074371714276877,
+          "mirror_violation_ratio": 0.897382657146915,
+          "conservation_q_change": 0.0037904758777094205,
+          "detected": false
+        },
+        {
+          "severity": 0.6,
+          "output_perturbation_rel_l2": 0.42148740730473666,
+          "mirror_violation_ratio": 0.7974862973494727,
+          "conservation_q_change": 0.0075809039473151985,
+          "detected": false
+        },
+        {
+          "severity": 1.0,
+          "output_perturbation_rel_l2": 0.7024790391553619,
+          "mirror_violation_ratio": 0.6817934211693121,
+          "conservation_q_change": 0.01263482397615745,
+          "detected": false
+        }
+      ]
+    },
+    {
+      "sut_id": "burgers_s3",
+      "seed": 3,
+      "baseline_mirror_violation": 0.015699734784645567,
+      "detections": {
+        "scale_ux": {
+          "mirror_violation_ratio": 0.9838756133732381,
+          "conservation_q_change": 0.1499999248840469,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "asym_y_ux": {
+          "mirror_violation_ratio": 21.84817166834965,
+          "conservation_q_change": 4.8298669730328925e-08,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "upper_half_offset": {
+          "mirror_violation_ratio": 17.268098046918887,
+          "conservation_q_change": 0.24327491471116525,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "cos_x_blind": {
+          "mirror_violation_ratio": 0.8973254220212201,
+          "conservation_q_change": 0.0038011644905585062,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      },
+      "blind_severity_sweep": [
+        {
+          "severity": 0.15,
+          "output_perturbation_rel_l2": 0.10537243653320792,
+          "mirror_violation_ratio": 0.9492105009514986,
+          "conservation_q_change": 0.0019006550007213407,
+          "detected": false
+        },
+        {
+          "severity": 0.3,
+          "output_perturbation_rel_l2": 0.21074487306641584,
+          "mirror_violation_ratio": 0.8973254220212201,
+          "conservation_q_change": 0.0038011644905585062,
+          "detected": false
+        },
+        {
+          "severity": 0.6,
+          "output_perturbation_rel_l2": 0.4214897461328317,
+          "mirror_violation_ratio": 0.7974309636578752,
+          "conservation_q_change": 0.007602425943772917,
+          "detected": false
+        },
+        {
+          "severity": 1.0,
+          "output_perturbation_rel_l2": 0.7024830007781323,
+          "mirror_violation_ratio": 0.6817840990934126,
+          "conservation_q_change": 0.012670564261603123,
+          "detected": false
+        }
+      ]
+    },
+    {
+      "sut_id": "burgers_s4",
+      "seed": 4,
+      "baseline_mirror_violation": 0.03345194002544889,
+      "detections": {
+        "scale_ux": {
+          "mirror_violation_ratio": 0.9962205523020453,
+          "conservation_q_change": 0.1500000263081187,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "asym_y_ux": {
+          "mirror_violation_ratio": 9.568962227835263,
+          "conservation_q_change": 4.8089134951911916e-08,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "upper_half_offset": {
+          "mirror_violation_ratio": 7.599195530347038,
+          "conservation_q_change": 0.24227681871176432,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "cos_x_blind": {
+          "mirror_violation_ratio": 0.8979024723215178,
+          "conservation_q_change": 0.003785635301887025,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      },
+      "blind_severity_sweep": [
+        {
+          "severity": 0.15,
+          "output_perturbation_rel_l2": 0.10537197744637292,
+          "mirror_violation_ratio": 0.9495573669132881,
+          "conservation_q_change": 0.0018927934433312643,
+          "detected": false
+        },
+        {
+          "severity": 0.3,
+          "output_perturbation_rel_l2": 0.21074395489274583,
+          "mirror_violation_ratio": 0.8979024723215178,
+          "conservation_q_change": 0.003785635301887025,
+          "detected": false
+        },
+        {
+          "severity": 0.6,
+          "output_perturbation_rel_l2": 0.42148790978549167,
+          "mirror_violation_ratio": 0.7982079395310175,
+          "conservation_q_change": 0.007571222840728586,
+          "detected": false
+        },
+        {
+          "severity": 1.0,
+          "output_perturbation_rel_l2": 0.7024798224746859,
+          "mirror_violation_ratio": 0.6825291803503046,
+          "conservation_q_change": 0.012618656536716288,
+          "detected": false
+        }
+      ]
+    },
+    {
+      "sut_id": "burgers_s5",
+      "seed": 5,
+      "baseline_mirror_violation": 0.025423250046905668,
+      "detections": {
+        "scale_ux": {
+          "mirror_violation_ratio": 0.9805373859582447,
+          "conservation_q_change": 0.14999998616498822,
+          "detected_by_mirror": false,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "asym_y_ux": {
+          "mirror_violation_ratio": 13.14054055789954,
+          "conservation_q_change": 9.29699719431909e-08,
+          "detected_by_mirror": true,
+          "detected_by_conservation": false,
+          "detected": true
+        },
+        "upper_half_offset": {
+          "mirror_violation_ratio": 10.265314398625508,
+          "conservation_q_change": 0.2389899553998034,
+          "detected_by_mirror": true,
+          "detected_by_conservation": true,
+          "detected": true
+        },
+        "cos_x_blind": {
+          "mirror_violation_ratio": 0.899347020801893,
+          "conservation_q_change": 0.003734184681665753,
+          "detected_by_mirror": false,
+          "detected_by_conservation": false,
+          "detected": false
+        }
+      },
+      "blind_severity_sweep": [
+        {
+          "severity": 0.15,
+          "output_perturbation_rel_l2": 0.10537106027014705,
+          "mirror_violation_ratio": 0.9504087376992281,
+          "conservation_q_change": 0.001867068781320036,
+          "detected": false
+        },
+        {
+          "severity": 0.3,
+          "output_perturbation_rel_l2": 0.2107421205402941,
+          "mirror_violation_ratio": 0.899347020801893,
+          "conservation_q_change": 0.003734184681665753,
+          "detected": false
+        },
+        {
+          "severity": 0.6,
+          "output_perturbation_rel_l2": 0.4214842410805882,
+          "mirror_violation_ratio": 0.8002519711724326,
+          "conservation_q_change": 0.007468461910610236,
+          "detected": false
+        },
+        {
+          "severity": 1.0,
+          "output_perturbation_rel_l2": 0.7024737705693146,
+          "mirror_violation_ratio": 0.6846811740419777,
+          "conservation_q_change": 0.012447436940376921,
+          "detected": false
+        }
+      ]
+    }
+  ],
+  "honesty_boundary": "K=6 Burgers PINN checkpoints, one shared FD reference grid, one author-designed output-level fault catalogue. Bounded by-class detection on a fourth (pointwise) architecture family; NOT a real-world fault-detection rate, NOT a reliability, baseline-superiority, or cross-architecture generalization claim."
+}

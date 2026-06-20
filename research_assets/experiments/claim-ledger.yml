@@ -1333,6 +1333,37 @@ claims:
       pattern across two architecture families; it is not a generalization, reliability, or
       baseline-superiority claim, and the mesh-adjacency fault class is architecture-specific.
 
+  - claim_id: "C46-pinn-seeded-fault-detection"
+    status: "observed"
+    scope: "K=6 converged Burgers PINN checkpoints (pointwise physics-informed MLP, seeds 0-5), one shared FD reference grid, one author-designed output-level fault catalogue of 4 faults"
+    evidence:
+      - "tools/run_seeded_fault_detection_pinn.py"
+      - "tools/run_pinn_mr_extension.py"
+      - "research_assets/runs/pinn-seeded-fault-detection/pinn_seeded_fault_report.json"
+      - "research_assets/runs/pinn-k6-roster"
+    wording_allowed: >
+      On the converged K=6 Burgers PINN roster (pointwise physics-informed MLPs, seeds
+      0-5), the PINN's two non-trivial admitted MRs used as fault detectors -- MR-B
+      mirror-y equivariance (u_x even, u_y odd in y; a fault is detected when it
+      multiplies the clean mirror-y violation by more than 3x) and MR-C mass
+      conservation (Q = integral of u_x over the domain; a fault is detected when it
+      changes Q by more than 10%) -- localize an author-designed output-level fault
+      catalogue by class: scale_ux is detected by conservation only (6/6 SUTs; clean
+      mirror ratio 0.99, Q change 15%), asym_y_ux (an odd-in-y bias that integrates to
+      zero) by mirror only (6/6; mirror violation ratio about 9.6x, Q change 0.00%),
+      upper_half_offset by both (6/6), and a cos(pi x) perturbation that keeps u_x even
+      in y and integrates to zero in x is detected by neither MR (0/6, Wilson 95% CI
+      [0.00, 0.39]) at any swept severity, despite degrading the field by up to about
+      0.70 relative L2: a genuine blind subspace. This reproduces the MeshGraphNets
+      by-class detection structure and the existence of a structural blind region on a
+      fourth, pointwise architecture family and a different (Burgers) PDE.
+    wording_forbidden:
+      - "A real-world or general fault-detection rate (one author-designed catalogue, K=6 PINNs)."
+      - "Baseline superiority, or that the MRs outperform an accuracy or other monitor."
+      - "Proof that the by-class detection structure generalizes across architectures (it is reproduced on MGN, PointMLP, FNO and PINN, not proven general)."
+      - "A reliability, cross-architecture, or external-validity rate for PINN surrogates."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
