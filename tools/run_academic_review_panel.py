@@ -1,14 +1,14 @@
 """Academic review panel: score this manuscript on IST regular-track dimensions
 using a vendor-diverse multi-LLM panel via the bltcy OpenAI-compatible gateway.
 
-Five reviewer roles, five distinct vendors (per the Minimum-MR-SubSet
-cross-vendor benchmark, scripts/llm and the LLM interface report):
+Five reviewer roles, five distinct models requested for the current
+submission-maturity audit:
 
   EIC               gpt-5.5            (OpenAI)
-  MethodologyRigor  glm-5.1            (ZhipuAI)
-  DomainExpert      deepseek-v4-flash  (DeepSeek)
-  Perspective       qwen3-max          (Alibaba)
-  DevilsAdvocate    kimi-k2.6          (Moonshot)
+  MethodologyRigor  claude-opus-4-7    (Anthropic-compatible gateway model)
+  DomainExpert      glm-5.2            (ZhipuAI)
+  Perspective       deepseek-v4-pro    (DeepSeek)
+  DevilsAdvocate    qwen3-max          (Alibaba)
 
 Each reviewer scores seven IST-standard dimensions on 1-10, gives an accept
 probability and a verdict (Accept / Minor / Major / Reject), and lists its top
@@ -43,18 +43,18 @@ PANEL = [
      "You are the Editor-in-Chief of Information and Software Technology (IST). "
      "Judge overall fit, significance, and whether the contribution clears the "
      "bar for a regular research paper at IST."),
-    ("MethodologyRigor", "glm-5.1",
+    ("MethodologyRigor", "claude-opus-4-7",
      "You are a methodology-focused reviewer. Scrutinise experimental design, "
      "statistics, threats to validity, and whether the claims are matched by the "
      "evidence."),
-    ("DomainExpert", "deepseek-v4-flash",
+    ("DomainExpert", "glm-5.2",
      "You are a SciML / scientific-software-testing domain expert. Judge whether "
      "the metamorphic relations, the admissibility predicate, and the PINN/MGN "
      "evidence are technically sound for this domain."),
-    ("Perspective", "qwen3-max",
+    ("Perspective", "deepseek-v4-pro",
      "You are a software-engineering-research reviewer focused on novelty, "
      "positioning against related work, and practical relevance."),
-    ("DevilsAdvocate", "kimi-k2.6",
+    ("DevilsAdvocate", "qwen3-max",
      "You are an adversarial, skeptical reviewer. Hunt for over-claims, "
      "unsupported generalisations, reproducibility gaps, and reasons to reject."),
 ]
