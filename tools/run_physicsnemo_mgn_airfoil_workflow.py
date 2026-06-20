@@ -73,6 +73,10 @@ NODE_TYPES = (0, 2, 4)  # observed airfoil node types: NORMAL, OUTFLOW, AIRFOIL/
 # caught rather than crashing the whole run.
 # ---------------------------------------------------------------------------
 def _select_device() -> torch.device:
+    if torch.cuda.is_available():
+        # Preferred on a CUDA box (Windows/WSL2 or Linux GPU): airfoil training
+        # to convergence is the EXT-1 bottleneck and needs a real GPU.
+        return torch.device("cuda")
     if torch.backends.mps.is_available():
         # Quick probe: build a tiny model and run one forward pass on MPS.
         try:
