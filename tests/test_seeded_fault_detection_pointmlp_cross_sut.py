@@ -93,6 +93,13 @@ class PointMLPSeededFaultCrossSutTest(unittest.TestCase):
         self.assertIn("reproduce", c["interpretation"].lower())
         self.assertIn("not prove it generalizes", c["interpretation"].lower())
 
+    def test_reproduction_provenance_present(self) -> None:
+        prov = LEDGER.parent.parent / "PROVENANCE.md"
+        self.assertTrue(prov.exists(), f"missing reproduction provenance: {prov}")
+        text = prov.read_text(encoding="utf-8")
+        self.assertIn("run_seeded_fault_detection_pointmlp.py", text)
+        self.assertIn("checkpoint.pt", text)   # the committed input is named
+
     def test_honesty_boundary_present(self) -> None:
         lim = self.d["claim_limitations"].lower()
         for marker in ("one converged sut", "not a real-world", "baseline-superiority"):

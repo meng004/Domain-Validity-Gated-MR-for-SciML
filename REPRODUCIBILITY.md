@@ -14,6 +14,7 @@ artifact under `research_assets/runs/` via
 | 1 Smoke | CPU, Python 3.12 | none | ≤ 5 min |
 | 2 Cache replay | CPU, Python 3.12 (+ a TeX dist for the PDF) | none | ≤ 30 min |
 | 2c C40 cross-program | CPU + scipy (+ a source-built OpenMC for E5) | none | ≤ 30 min |
+| 2d MVP cross-arch | CPU + CPU `torch` | none | ≤ 5 min |
 | 3 Full re-run | CUDA GPU | `METBENCH_MGN_*`; gateway key for the review panel | hours |
 
 ## Environment setup
@@ -95,6 +96,35 @@ If `openmc` is not importable the runner records E5 as `not-executed-openmc-not-
 and the four classical SUTs still run; the committed five-SUT artifact was produced with a
 from-source OpenMC 0.15.2. The guard `tests/test_endtoend_pipeline_pseries.py` pins the
 committed result (it reads the ledgers, it does not re-run OpenMC).
+
+## Tier 2d — MVP cross-architecture seeded-fault + three-arm (CPU + torch, no credentials)
+
+The 1-region empirical-expansion MVP runs entirely on CPU on the committed, converged
+PointMLP cylinder checkpoint (no GPU, no METBENCH, no sibling repo). The only dependency
+beyond the verifiable tier is CPU `torch`. Per-run provenance (inputs, expected numbers) is
+in each run directory's `PROVENANCE.md`.
+
+```bash
+pip install "scipy>=1.11" torch          # CPU torch; numpy already in requirements.txt
+
+# MVP-A: cross-architecture seeded-fault detection (claim C41)
+python tools/run_seeded_fault_detection_pointmlp.py \
+    --out research_assets/runs/pointmlp-cylinder-seeded-fault-detection
+#   expect: union 4/8 applicable; 2 mesh-adjacency mutants not-applicable (row-wise no-op)
+
+# MVP-B/C: three-arm complementarity + gate value + knife-edge (claims C42, C43)
+python tools/run_three_arm_complementarity_pointmlp.py \
+    --out research_assets/runs/pointmlp-three-arm-complementarity
+#   expect: MR 13/20, accuracy 6/20; 2x2 both=4/mr_only=9/acc_only=2/neither=5;
+#           gate value: admitted-detector FP 0% vs 6/6 rejected templates 100%; knife-edge miss only at 1.0
+
+python tools/validate_research_assets.py                                  # expect: 0
+python -m pytest tests/test_seeded_fault_detection_pointmlp_cross_sut.py \
+    tests/test_three_arm_complementarity.py -q                           # expect: OK
+```
+
+Both runners are deterministic (fixed seeds, read-only checkpoint); reruns are byte-identical
+modulo the ledger timestamp. The committed ledgers were produced with CPU `torch 2.12.0+cpu`.
 
 ## Tier 3 — Full re-run (hours, GPU + credentials)
 

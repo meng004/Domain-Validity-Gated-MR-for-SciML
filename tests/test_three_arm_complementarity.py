@@ -68,6 +68,13 @@ class ThreeArmComplementarityTest(unittest.TestCase):
         # the framing is explicit: complementarity, not a competition
         self.assertIn("complementarity, not superiority", low)
 
+    def test_reproduction_provenance_present(self) -> None:
+        prov = LEDGER.parent.parent / "PROVENANCE.md"
+        self.assertTrue(prov.exists(), f"missing reproduction provenance: {prov}")
+        text = prov.read_text(encoding="utf-8")
+        self.assertIn("run_three_arm_complementarity_pointmlp.py", text)
+        self.assertIn("baseline false-positive", text.lower())
+
     def test_honesty_boundary(self) -> None:
         lim = self.d["claim_limitations"].lower()
         self.assertIn("one converged sut", lim)
