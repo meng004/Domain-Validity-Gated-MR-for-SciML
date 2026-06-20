@@ -203,6 +203,33 @@ byte-identical modulo the report timestamp. The committed reports were produced 
 NOT assert a clean by-class diagonal (the realistic result is a messier 2x2 partition with a
 confirmed structural blind region).
 
+## Tier 2g — Duality predictive coverage-completeness (CPU + torch, no credentials)
+
+Re-analyses the C48/C49 realistic-fault catalogues to test whether the by-class structure is
+predictable a priori from the fault operator's mathematics, and confirms the two non-trivial parts
+— blind-completeness and amplitude-independence (claim C50). The a-priori signatures are computed
+on generic model-independent fields (never from the detections); the committed C48/C49 reports are
+read only for verification, and one large-amplitude FNO probe loads the read-only FNO roster.
+
+```bash
+pip install torch          # CPU torch; numpy already in requirements.txt
+
+python tools/run_duality_predictive_completeness.py \
+    --outdir research_assets/runs/duality-predictive-completeness
+#   expect: 4 exact-double-zero faults (mode_truncation, spatial_shift, sharpen, halffield_roll)
+#           predicted blind and all 0-detected (no falsifier); amplitude-independence holds
+#           (PINN spatial_shift blind at rel-L2 0.63, FNO halffield_roll blind at 0.43);
+#           single-invariant cells agree but are labelled near-definitional
+
+python tools/validate_research_assets.py                                  # expect: 0
+python -m pytest tests/test_duality_predictive_completeness.py -q          # expect: OK
+```
+
+Deterministic (fixed generic-field seed, read-only inputs); reruns are byte-identical modulo the
+report timestamp. The guard pins the a-priori table, blind-completeness, and amplitude-independence
+without re-running any SUT, and deliberately does NOT assert that every prediction agrees (only that
+the predict-vs-actual outcome, including any mismatch, is recorded).
+
 ## Tier 3 — Full re-run (hours, GPU + credentials)
 
 Real SUT runs require a CUDA GPU and the `METBENCH_MGN_*` environment variables;

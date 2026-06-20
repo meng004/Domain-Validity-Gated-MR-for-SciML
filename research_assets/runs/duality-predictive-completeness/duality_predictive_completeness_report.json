@@ -1,0 +1,862 @@
+{
+  "record_type": "duality-predictive-completeness",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-20T14:49:25Z",
+  "architectures": [
+    "FNO-2D (spectral)",
+    "PINN (pointwise)"
+  ],
+  "generic_test_fields": [
+    "lowfreq_coherent",
+    "analytic_asymmetric"
+  ],
+  "thresholds": {
+    "fno_conservation": 0.05,
+    "fno_translation": 1e-05,
+    "pinn_conservation": 0.1,
+    "commutator_eps": 1e-06,
+    "exact_zero_eps": 1e-09
+  },
+  "non_circularity": "a-priori signatures computed from operator maths on generic model-independent fields; last round's detections used only for verification",
+  "task_a_apriori_table": {
+    "boundary_band_corrupt": {
+      "fno": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.13858607381120996,
+            "symmetry_commutator": 0.4339854817482721
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.13486133468280356,
+            "symmetry_commutator": 0.39755715940535047
+          }
+        },
+        "breaks_symmetry": true,
+        "preserves_sum_exactly": false,
+        "perturbs_conservation_at_threshold": true,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.13858607381120996,
+        "max_symmetry_commutator": 0.4339854817482721,
+        "a_priori_blind": false,
+        "predicted_class": "both"
+      },
+      "pinn": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.020645845686141497,
+            "symmetry_commutator": 0.0
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.01710655650703473,
+            "symmetry_commutator": 0.0
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": false,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.020645845686141497,
+        "max_symmetry_commutator": 0.0,
+        "a_priori_blind": false,
+        "predicted_class": "subthreshold-undetected"
+      }
+    },
+    "global_renorm": {
+      "fno": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.19999999999999968,
+            "symmetry_commutator": 0.0
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.1999999999999996,
+            "symmetry_commutator": 0.0
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": false,
+        "perturbs_conservation_at_threshold": true,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.19999999999999968,
+        "max_symmetry_commutator": 0.0,
+        "a_priori_blind": false,
+        "predicted_class": "conservation"
+      },
+      "pinn": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.20000000000000032,
+            "symmetry_commutator": 0.0
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.19999999999999982,
+            "symmetry_commutator": 0.0
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": false,
+        "perturbs_conservation_at_threshold": true,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.20000000000000032,
+        "max_symmetry_commutator": 0.0,
+        "a_priori_blind": false,
+        "predicted_class": "conservation"
+      }
+    },
+    "channel_swap": {
+      "fno": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.4150084167101258,
+            "symmetry_commutator": 0.0
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.436611681033394,
+            "symmetry_commutator": 0.0
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": false,
+        "perturbs_conservation_at_threshold": true,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.436611681033394,
+        "max_symmetry_commutator": 0.0,
+        "a_priori_blind": false,
+        "predicted_class": "conservation"
+      },
+      "pinn": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.34999999999999964,
+            "symmetry_commutator": 1.9999999999999953
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.3611225785417652,
+            "symmetry_commutator": 1.9999999999999933
+          }
+        },
+        "breaks_symmetry": true,
+        "preserves_sum_exactly": false,
+        "perturbs_conservation_at_threshold": true,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.3611225785417652,
+        "max_symmetry_commutator": 1.9999999999999953,
+        "a_priori_blind": false,
+        "predicted_class": "both"
+      }
+    },
+    "region_dropout": {
+      "fno": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.09321096102221639,
+            "symmetry_commutator": 0.3688469264870095
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.06682090499417673,
+            "symmetry_commutator": 0.35164179518121114
+          }
+        },
+        "breaks_symmetry": true,
+        "preserves_sum_exactly": false,
+        "perturbs_conservation_at_threshold": true,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.09321096102221639,
+        "max_symmetry_commutator": 0.3688469264870095,
+        "a_priori_blind": false,
+        "predicted_class": "both"
+      },
+      "pinn": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.09568893383250619,
+            "symmetry_commutator": 0.3490796213018178
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.06626015415958858,
+            "symmetry_commutator": 0.3642224271794925
+          }
+        },
+        "breaks_symmetry": true,
+        "preserves_sum_exactly": false,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.09568893383250619,
+        "max_symmetry_commutator": 0.3642224271794925,
+        "a_priori_blind": false,
+        "predicted_class": "symmetry-mirror"
+      }
+    },
+    "gaussian_noise": {
+      "fno": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.01927013595206099,
+            "symmetry_commutator": 0.27463297565336425
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.01355299973491873,
+            "symmetry_commutator": 0.27357969536766036
+          }
+        },
+        "breaks_symmetry": true,
+        "preserves_sum_exactly": false,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.01927013595206099,
+        "max_symmetry_commutator": 0.27463297565336425,
+        "a_priori_blind": false,
+        "predicted_class": "symmetry-translation"
+      },
+      "pinn": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.0009001466770505673,
+            "symmetry_commutator": 0.2783872555050339
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.0006298532142465226,
+            "symmetry_commutator": 0.27804745473698655
+          }
+        },
+        "breaks_symmetry": true,
+        "preserves_sum_exactly": false,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.0009001466770505673,
+        "max_symmetry_commutator": 0.2783872555050339,
+        "a_priori_blind": false,
+        "predicted_class": "symmetry-mirror"
+      }
+    },
+    "mode_truncation": {
+      "fno": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 9.30859407666946e-17,
+            "symmetry_commutator": 1.8513654968602218e-16
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 9.587603882485773e-17,
+            "symmetry_commutator": 1.2676186675994813e-16
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": true,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 9.587603882485773e-17,
+        "max_symmetry_commutator": 1.8513654968602218e-16,
+        "a_priori_blind": true,
+        "predicted_class": "blind"
+      },
+      "pinn": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 2.1861539613555157e-16,
+            "symmetry_commutator": 3.0672674758485565e-16
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 1.1183878854168573e-16,
+            "symmetry_commutator": 2.8077115188103204e-16
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": true,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 2.1861539613555157e-16,
+        "max_symmetry_commutator": 3.0672674758485565e-16,
+        "a_priori_blind": true,
+        "predicted_class": "blind"
+      }
+    },
+    "spatial_shift": {
+      "fno": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 0.0,
+            "symmetry_commutator": 0.0
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.0,
+            "symmetry_commutator": 0.0
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": true,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 0.0,
+        "max_symmetry_commutator": 0.0,
+        "a_priori_blind": true,
+        "predicted_class": "blind"
+      },
+      "pinn": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 2.1861539613555157e-16,
+            "symmetry_commutator": 0.0
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 1.1183878854168573e-16,
+            "symmetry_commutator": 0.0
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": true,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 2.1861539613555157e-16,
+        "max_symmetry_commutator": 0.0,
+        "a_priori_blind": true,
+        "predicted_class": "blind"
+      }
+    },
+    "sharpen": {
+      "fno": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 9.30859407666946e-17,
+            "symmetry_commutator": 0.0
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 9.587603882485773e-17,
+            "symmetry_commutator": 0.0
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": true,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 9.587603882485773e-17,
+        "max_symmetry_commutator": 0.0,
+        "a_priori_blind": true,
+        "predicted_class": "blind"
+      },
+      "pinn": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 2.1861539613555157e-16,
+            "symmetry_commutator": 6.172566689222138e-16
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 1.1183878854168573e-16,
+            "symmetry_commutator": 6.789492403269181e-16
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": true,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 2.1861539613555157e-16,
+        "max_symmetry_commutator": 6.789492403269181e-16,
+        "a_priori_blind": true,
+        "predicted_class": "blind"
+      }
+    },
+    "halffield_roll": {
+      "fno": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 9.30859407666946e-17,
+            "symmetry_commutator": 0.0
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 0.0,
+            "symmetry_commutator": 0.0
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": true,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 9.30859407666946e-17,
+        "max_symmetry_commutator": 0.0,
+        "a_priori_blind": true,
+        "predicted_class": "blind"
+      },
+      "pinn": {
+        "per_field": {
+          "lowfreq_coherent": {
+            "conservation_change": 2.1861539613555157e-16,
+            "symmetry_commutator": 0.0
+          },
+          "analytic_asymmetric": {
+            "conservation_change": 1.1183878854168573e-16,
+            "symmetry_commutator": 0.0
+          }
+        },
+        "breaks_symmetry": false,
+        "preserves_sum_exactly": true,
+        "perturbs_conservation_at_threshold": false,
+        "conservation_field_dependent": false,
+        "max_conservation_change": 2.1861539613555157e-16,
+        "max_symmetry_commutator": 0.0,
+        "a_priori_blind": true,
+        "predicted_class": "blind"
+      }
+    }
+  },
+  "task_b_predict_then_verify": {
+    "rows": [
+      {
+        "fault": "boundary_band_corrupt",
+        "arch": "fno",
+        "predicted_class": "both",
+        "a_priori_blind": false,
+        "actual_by_class": "both",
+        "actual_detection_rate": 1.0,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": true
+      },
+      {
+        "fault": "boundary_band_corrupt",
+        "arch": "pinn",
+        "predicted_class": "subthreshold-undetected",
+        "a_priori_blind": false,
+        "actual_by_class": "none",
+        "actual_detection_rate": 0.0,
+        "reached_testable_magnitude": false,
+        "conservation_field_dependent": false,
+        "agreement": null,
+        "near_definitional": true
+      },
+      {
+        "fault": "global_renorm",
+        "arch": "fno",
+        "predicted_class": "conservation",
+        "a_priori_blind": false,
+        "actual_by_class": "conservation",
+        "actual_detection_rate": 1.0,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": true
+      },
+      {
+        "fault": "global_renorm",
+        "arch": "pinn",
+        "predicted_class": "conservation",
+        "a_priori_blind": false,
+        "actual_by_class": "conservation",
+        "actual_detection_rate": 1.0,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": true
+      },
+      {
+        "fault": "channel_swap",
+        "arch": "fno",
+        "predicted_class": "conservation",
+        "a_priori_blind": false,
+        "actual_by_class": "conservation",
+        "actual_detection_rate": 0.6666666666666666,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": true
+      },
+      {
+        "fault": "channel_swap",
+        "arch": "pinn",
+        "predicted_class": "both",
+        "a_priori_blind": false,
+        "actual_by_class": "both",
+        "actual_detection_rate": 1.0,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": true
+      },
+      {
+        "fault": "region_dropout",
+        "arch": "fno",
+        "predicted_class": "both",
+        "a_priori_blind": false,
+        "actual_by_class": "both",
+        "actual_detection_rate": 1.0,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": true
+      },
+      {
+        "fault": "region_dropout",
+        "arch": "pinn",
+        "predicted_class": "symmetry-mirror",
+        "a_priori_blind": false,
+        "actual_by_class": "none",
+        "actual_detection_rate": 0.0,
+        "reached_testable_magnitude": false,
+        "conservation_field_dependent": false,
+        "agreement": null,
+        "near_definitional": true
+      },
+      {
+        "fault": "gaussian_noise",
+        "arch": "fno",
+        "predicted_class": "symmetry-translation",
+        "a_priori_blind": false,
+        "actual_by_class": "translation",
+        "actual_detection_rate": 1.0,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": true
+      },
+      {
+        "fault": "gaussian_noise",
+        "arch": "pinn",
+        "predicted_class": "symmetry-mirror",
+        "a_priori_blind": false,
+        "actual_by_class": "mirror",
+        "actual_detection_rate": 1.0,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": true
+      },
+      {
+        "fault": "mode_truncation",
+        "arch": "fno",
+        "predicted_class": "blind",
+        "a_priori_blind": true,
+        "actual_by_class": "none",
+        "actual_detection_rate": 0.0,
+        "reached_testable_magnitude": false,
+        "conservation_field_dependent": false,
+        "agreement": null,
+        "near_definitional": false
+      },
+      {
+        "fault": "mode_truncation",
+        "arch": "pinn",
+        "predicted_class": "blind",
+        "a_priori_blind": true,
+        "actual_by_class": "none",
+        "actual_detection_rate": 0.0,
+        "reached_testable_magnitude": false,
+        "conservation_field_dependent": false,
+        "agreement": null,
+        "near_definitional": false
+      },
+      {
+        "fault": "spatial_shift",
+        "arch": "fno",
+        "predicted_class": "blind",
+        "a_priori_blind": true,
+        "actual_by_class": "none",
+        "actual_detection_rate": 0.0,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": false
+      },
+      {
+        "fault": "spatial_shift",
+        "arch": "pinn",
+        "predicted_class": "blind",
+        "a_priori_blind": true,
+        "actual_by_class": "none",
+        "actual_detection_rate": 0.0,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": false
+      },
+      {
+        "fault": "sharpen",
+        "arch": "fno",
+        "predicted_class": "blind",
+        "a_priori_blind": true,
+        "actual_by_class": "none",
+        "actual_detection_rate": 0.0,
+        "reached_testable_magnitude": true,
+        "conservation_field_dependent": false,
+        "agreement": true,
+        "near_definitional": false
+      },
+      {
+        "fault": "sharpen",
+        "arch": "pinn",
+        "predicted_class": "blind",
+        "a_priori_blind": true,
+        "actual_by_class": "none",
+        "actual_detection_rate": 0.0,
+        "reached_testable_magnitude": false,
+        "conservation_field_dependent": false,
+        "agreement": null,
+        "near_definitional": false
+      }
+    ],
+    "near_definitional_single_invariant": {
+      "count": 8,
+      "agree": 8,
+      "note": "near-definitional (the conservation/symmetry detector IS the moved-invariant test); reported, not a finding"
+    },
+    "blind_completeness": {
+      "a_priori_blind_faults": [
+        "mode_truncation",
+        "sharpen",
+        "spatial_shift"
+      ],
+      "all_actually_zero_detected": true,
+      "falsifying_cases": []
+    },
+    "mismatches": []
+  },
+  "task_c_amplitude_independence": {
+    "pinn_large_blind_fault": {
+      "fault": "spatial_shift",
+      "a_priori_blind": true,
+      "max_output_perturbation_rel_l2": 0.6311288459338757,
+      "detection_rate": 0.0,
+      "detected_any": 0,
+      "stays_blind": true,
+      "reaches_realistic_magnitude": true,
+      "source": "research_assets/runs/pinn-realistic-fault/pinn_realistic_fault_report.json",
+      "note": "A pure spatial roll preserves integral(u_x) and keeps u_x even / u_y odd, so it is a-priori blind; it corrupts the output by rel-L2 up to 0.631 yet is detected by neither MR (0/6) -- direct evidence that blindness is amplitude-independent."
+    },
+    "fno_large_blind_fault": {
+      "fault": "halffield_roll",
+      "a_priori_blind": true,
+      "per_sut": [
+        {
+          "sut_id": "burgers_s0",
+          "pde": "burgers",
+          "max_pert": 0.007235731332758307,
+          "detected_any": 0,
+          "n_cases": 4,
+          "cases": [
+            {
+              "pert": 0.004320288268526429,
+              "translation_violation": 1.5041376712134814e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.005835650247070676,
+              "translation_violation": 1.5837503819333735e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.007235731332758307,
+              "translation_violation": 1.6883505276914276e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.006386210332798342,
+              "translation_violation": 1.6594744919846978e-08,
+              "conservation_break": 3.5481267558348106e-08,
+              "detected": false
+            }
+          ]
+        },
+        {
+          "sut_id": "burgers_s1",
+          "pde": "burgers",
+          "max_pert": 0.017631883883652315,
+          "detected_any": 0,
+          "n_cases": 4,
+          "cases": [
+            {
+              "pert": 0.017631883883652315,
+              "translation_violation": 2.330113330551983e-08,
+              "conservation_break": 8.483971910586891e-08,
+              "detected": false
+            },
+            {
+              "pert": 0.011292924713741022,
+              "translation_violation": 1.866485006540935e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.010618455185385038,
+              "translation_violation": 9.752799232118987e-09,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.008678301023253298,
+              "translation_violation": 1.7610661409107486e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            }
+          ]
+        },
+        {
+          "sut_id": "burgers_s2",
+          "pde": "burgers",
+          "max_pert": 0.010473465240693584,
+          "detected_any": 0,
+          "n_cases": 4,
+          "cases": [
+            {
+              "pert": 0.005223270866342519,
+              "translation_violation": 1.4617442457708646e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.008198207072631483,
+              "translation_violation": 1.069203099912828e-08,
+              "conservation_break": 8.834239107868858e-08,
+              "detected": false
+            },
+            {
+              "pert": 0.010473465240693584,
+              "translation_violation": 1.35270077836561e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.008640623828572407,
+              "translation_violation": 1.2355587742567572e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            }
+          ]
+        },
+        {
+          "sut_id": "heat_s0",
+          "pde": "heat",
+          "max_pert": 0.4311759313337616,
+          "detected_any": 0,
+          "n_cases": 4,
+          "cases": [
+            {
+              "pert": 0.29737285834818183,
+              "translation_violation": 4.1830309051082097e-07,
+              "conservation_break": 1.0783775593938523e-07,
+              "detected": false
+            },
+            {
+              "pert": 0.4311759313337616,
+              "translation_violation": 4.587885285176444e-07,
+              "conservation_break": 1.0390251616562769e-07,
+              "detected": false
+            },
+            {
+              "pert": 0.28047481510171607,
+              "translation_violation": 4.5903074315089717e-07,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.298672715892929,
+              "translation_violation": 4.1694501111058734e-07,
+              "conservation_break": 1.0842392061542558e-07,
+              "detected": false
+            }
+          ]
+        },
+        {
+          "sut_id": "heat_s1",
+          "pde": "heat",
+          "max_pert": 0.02323631745106172,
+          "detected_any": 0,
+          "n_cases": 4,
+          "cases": [
+            {
+              "pert": 0.021621972524180365,
+              "translation_violation": 4.727328774387848e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.011473150046344005,
+              "translation_violation": 4.430119732281861e-08,
+              "conservation_break": 9.645993951189137e-08,
+              "detected": false
+            },
+            {
+              "pert": 0.02323631745106172,
+              "translation_violation": 3.734629752303544e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.013070860271729653,
+              "translation_violation": 4.2655718543239344e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            }
+          ]
+        },
+        {
+          "sut_id": "heat_s2",
+          "pde": "heat",
+          "max_pert": 0.03463045029701089,
+          "detected_any": 0,
+          "n_cases": 4,
+          "cases": [
+            {
+              "pert": 0.03451565447624015,
+              "translation_violation": 2.91475646713216e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.03463045029701089,
+              "translation_violation": 3.2690253867906554e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            },
+            {
+              "pert": 0.0317628404922823,
+              "translation_violation": 2.6319831259268804e-08,
+              "conservation_break": 1.79596894769681e-07,
+              "detected": false
+            },
+            {
+              "pert": 0.031725648980105,
+              "translation_violation": 2.508658659586492e-08,
+              "conservation_break": 0.0,
+              "detected": false
+            }
+          ]
+        }
+      ],
+      "max_output_perturbation_rel_l2": 0.4311759313337616,
+      "total_detections": 0,
+      "total_cells": 24,
+      "stays_blind": true,
+      "reaches_realistic_magnitude": true,
+      "note": "Half-domain roll preserves the channel sum and commutes with the translation MR, so it is a-priori blind. On these smooth low-resolution FNO outputs it reaches rel-L2 up to 0.431 (largest where the field retains structure); the smooth Burgers members stay near no-op. FNO cannot host a ~0.5 invariant-preserving fault here -- the large-amplitude confirmation comes from the PINN."
+    },
+    "holds": true,
+    "fno_amplitude_limited": false,
+    "verdict": "Amplitude-independence is confirmed: the PINN's preserve-all spatial roll corrupts the output by rel-L2 0.63 and is still 0/6. On FNO the same class of preserve-all fault stays blind too, but its smooth low-resolution fields cap the reachable corruption at rel-L2 0.43 (< 0.5), so FNO contributes only a moderate-amplitude confirmation -- reported, not hidden."
+  },
+  "blind_completeness_consolidated": {
+    "a_priori_blind_faults": [
+      "halffield_roll",
+      "mode_truncation",
+      "sharpen",
+      "spatial_shift"
+    ],
+    "verified_against_c48_c49": {
+      "faults": [
+        "mode_truncation",
+        "sharpen",
+        "spatial_shift"
+      ],
+      "all_zero_detected": true,
+      "falsifying_cases": []
+    },
+    "verified_in_task_c_halffield_roll": {
+      "fno_stays_blind": true,
+      "fno_total_detections": 0
+    },
+    "holds": true
+  },
+  "overall_verdict": "Holds (bounded): the four a-priori-blind faults (exact double-zero invariant signature) are all actually 0-detected by the whole suite on both architectures (no falsifying case), and blindness is amplitude-independent (PINN preserve-all fault blind at rel-L2 0.63). The single-invariant cell predictions agree but are near-definitional and, for the boundary/region faults, field-magnitude dependent -- so this is a qualitative, falsifiable coverage-completeness statement, NOT a quantitative coverage model.",
+  "honesty_boundary": "Bounded, qualitative confirmation on two architecture families of (1) blind-completeness -- a fault that preserves all measured invariants escapes the whole MR suite -- and (2) amplitude-independence of blindness. Single-invariant detection is near-definitional and reported as such; boundary/region conservation cells are field-magnitude dependent. NOT a quantitative/validated predictive coverage model, NOT a coverage rate or detection probability, NOT proof of the duality for all MRs/faults/architectures, NOT a cross-architecture generalization or baseline-superiority claim."
+}

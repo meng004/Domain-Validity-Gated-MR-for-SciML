@@ -1537,6 +1537,43 @@ claims:
       - "Proof that the blind region is exhaustive or that the by-class partition generalizes across architectures or faults."
     blocked_reason: null
 
+  - claim_id: "C50-duality-predictive-completeness"
+    status: "observed"
+    scope: "the FNO and PINN realistic-fault catalogues (C48/C49) re-analysed; each fault's invariant signature computed A PRIORI from the operator's mathematics on two generic model-independent test fields (a low-frequency coherent field and an analytic asymmetric field) at each architecture's native resolution; verified against the committed C48/C49 detections plus one Task-C large-amplitude probe; thresholds reused, none tuned"
+    evidence:
+      - "tools/run_duality_predictive_completeness.py"
+      - "research_assets/runs/duality-predictive-completeness/duality_predictive_completeness_report.json"
+      - "research_assets/runs/duality-predictive-completeness/PROVENANCE.md"
+      - "research_assets/runs/fno-realistic-fault/fno_realistic_fault_report.json"
+      - "research_assets/runs/pinn-realistic-fault/pinn_realistic_fault_report.json"
+    wording_allowed: >
+      The realistic-fault by-class structure (C48/C49) can be stated as a falsifiable, a-priori
+      prediction computed only from the fault operator's mathematics on generic, model-independent
+      test fields (never from the detections): for each fault, whether it changes the conserved sum
+      and whether it commutes with the architecture's symmetry/translation map place it, in advance,
+      into one of conservation / symmetry / both / blind. This run argues only the two non-trivial,
+      falsifiable parts. (1) BLIND-COMPLETENESS: the four faults with an exact double-zero signature
+      (preserve the channel sum AND commute with the symmetry map) -- mode truncation, spatial
+      shift, sharpen, and a half-domain roll -- are predicted invisible to the WHOLE MR suite, and
+      every one is in fact detected by no MR on both architectures (the three present in C48/C49 at
+      0/24 FNO and 0/6 PINN; the half-domain roll at 0/24 FNO), with zero falsifying cases (no
+      preserve-all fault is caught by any MR). (2) AMPLITUDE-INDEPENDENCE: blindness is an invariant
+      property, not a smallness artefact -- the PINN spatial shift corrupts the output by rel-L2 0.63
+      and the FNO half-domain roll by rel-L2 0.43 (on the one roster member whose field retains
+      structure), and both still escape every MR. The single-invariant cell predictions
+      (conservation alone, symmetry alone) also agree where the faults reach testable magnitude, but
+      these are NEAR-DEFINITIONAL (the conservation detector IS the moved-integral test) and are
+      reported as such, not as a finding; the boundary/region conservation cells are explicitly
+      flagged as field/resolution dependent. This is a bounded, qualitative coverage-completeness
+      statement on two architecture families.
+    wording_forbidden:
+      - "A validated or quantitative predictive coverage model, or coverage predicted at detection rates or probabilities."
+      - "That the duality is proven for all MRs, faults, or architectures (it is a qualitative falsifiable statement confirmed on two families)."
+      - "That single-invariant detection prediction is a finding (it is near-definitional and labelled as such)."
+      - "A real-world or general fault-detection rate, or a cross-architecture generalization claim."
+      - "Baseline superiority, or that the MR suite outperforms any monitor."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
