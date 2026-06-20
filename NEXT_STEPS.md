@@ -1,29 +1,32 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-20 by claude-code (期刊重估→选定冲中科院1区→实证扩张计划;EIC 三轮 major 经核实是稳定上限/LLM 噪声)
+> Last updated: 2026-06-20 by claude-code (实证扩张:MVP+EXT-2/FNO/PINN 全完成,by-class+盲区在 4 架构族复现 C41-C46;下一步=整合进 main.tex → 重跑 panel)
 
 ## 🟡 2026-06-20 冲中科院1区实证扩张计划(目标 TSE/TOSEM,根治 incremental+单SUT)
 
 > 背景:F-1 sharp claim(commit `42b6f41`)+ hedge 瘦身(commit `1944e5d`)后,gate-1/gate-2 真实 5-LLM panel EIC 仍 major(accept 0.65→0.58,clarity 7→6),三轮 major 经核实是**稳定上限**(分数波动是 LLM 噪声,非可改缺陷)。期刊重估(deep-research + CAS 分区):**2区Q1 的 IST 是高分区∩可发表甜点**;真1区 TSE/TOSEM(1区Top)需先补第二收敛SUT+量化baseline。用户拍板:**为冲1区做实证扩张**。
 > 关键战略:**整个 MVP 全本地 CPU/MPS、零 GPU、零新凭据**(第二SUT直接用已收敛的 PointMLP);GPU 只在 EXT-1 airfoil 续训需要,且放在 MVP 验证有效之后(避免重蹈 airfoil −0.4 / C34 撤回的历史反伤)。完整计划:本会话工作流 `wcqn9zm0f` 输出。
 
-### 🟡 In Progress — MVP(全本地 CPU/MPS,无 GPU/凭据)
-- [ ] **MVP-A**: PointMLP 端到端 seeded-fault(候选B;已收敛 rollout L2 0.0298,不同架构族/无消息传递,**只缺 runner 一环**)
-  - next-action: 写 `tools/run_seeded_fault_detection_pointmlp.py`(复用 `run_seeded_fault_detection.py` 的 10-mutant 五类催化剂,同域直接沿用);草拟 claim `C41`(status:blocked)+ xfail test
-  - 验收: detection_matrix 非平凡(baseline L2≠0);by-class 模式与 MGN 可比 → 把"5/10+by-class"从 1 个扩到 **2 个真不同架构族**(闭 speculative_claims 的 "share one architecture family" 缺口)
-- [ ] **MVP-B/C**: 三臂互补矩阵(validity-gated MR / accuracy-monitor / generic-expert MR)+ fault 集 ≥20/≥4 类 + Wilson CI + knife-edge severity 曲线
-  - 验收: 2×2 互补表三臂各带 CI;**全文 0 句 superior/outperforms/better**(触发 wording_forbidden 即不合格);knife-edge 盲区曲线(别人没有的差异化 finding)
-  - 草拟 claim `C42-three-arm-complementarity` / `C43-knife-edge-blind-region`
+### ✅ Done — MVP(云端)+ EXT 本地部分(2026-06-20,全 CPU/MPS,399 tests pass)
+- [x] **MVP-A** PointMLP 端到端 seeded-fault — `C41`(by-class 与 MGN 一致,union 4/8)— 云端,merge `917c5f5`
+- [x] **MVP-B/C** 三臂互补 + gate value + knife-edge — `C42`/`C43` — 云端,merge `a10fa23`
+- [x] **EXT-2** operator-floor 跨拓扑(非结构 Delaunay)— `C44`(slope 0.983 vs 结构 0.984,floor 比值 1.06/1.33,topology-stable)— commit `ac92eef`
+- [x] **B-FNO** 端到端 seeded-fault — `C45`(by-class + 盲区 0/24,transport-shift 27% 场变化仍漏)— commit `45999c3`
+- [x] **B-PINN** 端到端 seeded-fault — `C46`(by-class + 盲区 0/6,cos(πx) 70% 场变化仍漏)— commit `65ff515`
+- [x] **airfoil cuda 修复** — `_select_device` 加 cuda→mps→cpu,EXT-1 在 CUDA 机器就绪 — commit `e3f16a3`
+- **里程碑**: by-class 检测 + 结构性盲区已在 **4 架构族**复现(MGN/PointMLP/FNO/PINN,跨谱方法/逐点/消息传递 + cylinder/Burgers/heat)→ 直接拆掉 EIC 的 single-SUT/fragmented 前缀。
 
-### 🔴 Blockers — EXT(需用户提供,阻塞1区但不阻塞 MVP)
-- [ ] **EXT-1**: airfoil 训到收敛(不同物理 compressible 第三 SUT)(owner: **user GPU**)
-  - context: airfoil 卡 loss≈1.0(z-score 均值预测),瓶颈=训练配方+GPU,非授权;**MVP 不依赖此项**
-  - blocker: 需 CUDA GPU ≥16GB + 产出后 `pip freeze`;端到端 runner/claim/test 已就位(commit `f002c80`),唯缺训练预算
-  - 风险: 即便上 GPU 也可能因训练配方问题训不收敛(非单纯算力)
+### 🟡 In Progress — 把证据整合进稿件(最该做,本地)
+- [ ] **整合 C41–C46 进 `main.tex`**(claim-ledger 授权边界内:4 架构 by-class + operator-floor 跨拓扑 + 三臂互补 CI)
+  - **硬约束**: ID-free(`\bC\d+`≤10,当前 9,**不能逐个引 C4x**,用描述 + appendix claim 名);`not a `≤28;word budget headroom ~2,455(每图/表 200 词,谨慎加 float);phase8/9 guard 串保留;0 句 superior/outperforms/better
+  - next-action: 工作流定位落点 + ID-free 措辞 + guard/budget 核对 → 执行编辑 → pytest/wordcount/build 验证
+- [ ] 整合后**重跑 gate panel**,看 EIC 是否从 major 上移(这才是改判关键)
+
+### 🔴 Blockers — EXT-1(需 Windows/WSL2 或云端 CUDA)
+- [ ] **EXT-1** airfoil 训到收敛(不同物理 compressible)— 代码已就绪(cuda 分支已补);唯缺训练配方 + GPU 时间;风险:配方问题可能仍训不收敛
 
 ### 🟢 Backlog
-- [ ] P1: **EXT-2** operator-floor ≥2 mesh 拓扑一致性(本地纯计算,加固唯一真新原子;扩 C12 措辞,**不碰** C32 general-bound future-work)
-- [ ] P2: **EXT-3** 三臂互补+duality 跨全部收敛 SUT(与 EXT-1 同批数据顺带)
+- [ ] **EXT-3** 三臂互补 + duality 跨全部收敛 SUT(MGN/PointMLP/FNO/PINN 已可立做,airfoil 收敛后更全)
 
 ### 🔵 Open Questions
 - [ ] 目标锁 **TSE** 还是 **TOSEM**?TSE=IEEEtran 单栏单盲(`venues/IEEE-TSE.md` 已有);TOSEM=acmart 双盲(需新建 `venues/TOSEM.md` + §15 双盲化审计);回退 IST 零切换成本。**venue 未定前不要双盲化**(过早匿名化反伤)。
