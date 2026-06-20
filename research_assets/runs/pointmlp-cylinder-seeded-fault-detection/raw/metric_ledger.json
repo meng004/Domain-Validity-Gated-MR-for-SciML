@@ -1,0 +1,257 @@
+{
+  "ledger_id": "pointmlp-cylinder-seeded-fault-detection",
+  "evidence_level": "different-architecture-cylinder-flow-seeded-fault-detection",
+  "schema_version": "0.1.0",
+  "sut_id": "pointmlp-cylinder-sut-v1",
+  "architecture_family": "PointMLP row-wise coordinate network (no message passing)",
+  "checkpoint_path": "research_assets/runs/pointmlp-cylinder-primary-workflow/sut/checkpoint.pt",
+  "checkpoint_sha256": "76c0c6c76149f076722ae98a787a061546d0a487cde08673b2cfedae3e01201e",
+  "rollout_convergence": {
+    "median_relative_l2": 0.02975835263724644,
+    "max_relative_l2": 0.09275380284264478,
+    "source": "research_assets/runs/pointmlp-cylinder-primary-workflow/pointmlp_cylinder_primary_workflow_report.json",
+    "note": "converged SUT (iron rule: comparisons only on converged SUTs)"
+  },
+  "fault_taxonomy_source": "same 10-mutant five-class catalogue as the MGN runner tools/run_seeded_fault_detection.py (re-implemented from read-only Minimum-MR-SubSet witness_stage_b.py)",
+  "thresholds_aligned_to_mgn": true,
+  "detectors": {
+    "node_permutation_equivariance": {
+      "class": "representation MR",
+      "tolerance": 1e-05
+    },
+    "conservation_divergence": {
+      "class": "continuity MR",
+      "reference_relative_regression_threshold": 1.5
+    },
+    "mirror_y_ood_stress": {
+      "class": "geometric/symmetry MR",
+      "baseline_violation": 0.3684562534404197,
+      "relative_change_detection_threshold": 0.5
+    }
+  },
+  "num_frames": 9,
+  "baseline": {
+    "node_perm_relative_l2_median": 0.0,
+    "conservation_ratio_median": 1.0610474941534462,
+    "mirror_y_violation_median": 0.3684562534404197
+  },
+  "not_applicable_mutants": {
+    "MA_drop_edges": "row-wise PointMLP has no mesh adjacency / edge set to drop (no-op)",
+    "MA_permute_edges": "row-wise PointMLP has no mesh adjacency / edge set to permute (no-op)"
+  },
+  "detection_matrix": [
+    {
+      "mutant": "BC_zero_inflow",
+      "fault_class": "boundary_condition_fault",
+      "applicable": true,
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 4.736801710325478,
+      "mirror_y_violation_median": 0.3684562534404197,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": true,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": true,
+      "frame_detection_fraction": {
+        "node_permutation": 0.0,
+        "conservation": 1.0,
+        "mirror_y": 0.0
+      }
+    },
+    {
+      "mutant": "BC_nonzero_wall",
+      "fault_class": "boundary_condition_fault",
+      "applicable": true,
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 6.77689378195123,
+      "mirror_y_violation_median": 0.3684562534404197,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": true,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": true,
+      "frame_detection_fraction": {
+        "node_permutation": 0.0,
+        "conservation": 1.0,
+        "mirror_y": 0.0
+      }
+    },
+    {
+      "mutant": "MA_drop_edges",
+      "fault_class": "mesh_adjacency_fault",
+      "applicable": false,
+      "not_applicable_reason": "row-wise PointMLP has no mesh adjacency / edge set to drop (no-op)"
+    },
+    {
+      "mutant": "MA_permute_edges",
+      "fault_class": "mesh_adjacency_fault",
+      "applicable": false,
+      "not_applicable_reason": "row-wise PointMLP has no mesh adjacency / edge set to permute (no-op)"
+    },
+    {
+      "mutant": "NS_skip_denorm",
+      "fault_class": "normalization_scale_fault",
+      "applicable": true,
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 14.708476306954266,
+      "mirror_y_violation_median": 0.5891646278439175,
+      "mirror_y_relative_change_from_baseline": 0.5990083553818335,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": true,
+      "mirror_y_MR_detects": true,
+      "detected_by_any": true,
+      "frame_detection_fraction": {
+        "node_permutation": 0.0,
+        "conservation": 1.0,
+        "mirror_y": 0.7777777777777778
+      }
+    },
+    {
+      "mutant": "NS_double_scale",
+      "fault_class": "normalization_scale_fault",
+      "applicable": true,
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.2522565375951396,
+      "mirror_y_violation_median": 0.3684562534404197,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false,
+      "frame_detection_fraction": {
+        "node_permutation": 0.0,
+        "conservation": 0.0,
+        "mirror_y": 0.0
+      }
+    },
+    {
+      "mutant": "TR_sign_flip",
+      "fault_class": "temporal_rollout_fault",
+      "applicable": true,
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.1409075301301048,
+      "mirror_y_violation_median": 0.3684562534404197,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false,
+      "frame_detection_fraction": {
+        "node_permutation": 0.0,
+        "conservation": 0.0,
+        "mirror_y": 0.0
+      }
+    },
+    {
+      "mutant": "TR_double_step",
+      "fault_class": "temporal_rollout_fault",
+      "applicable": true,
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.243085773969142,
+      "mirror_y_violation_median": 0.3684562534404197,
+      "mirror_y_relative_change_from_baseline": 0.0,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false,
+      "frame_detection_fraction": {
+        "node_permutation": 0.0,
+        "conservation": 0.0,
+        "mirror_y": 0.0
+      }
+    },
+    {
+      "mutant": "PC_swap_xy",
+      "fault_class": "physical_channel_fault",
+      "applicable": true,
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.6342281831699763,
+      "mirror_y_violation_median": 1.9514085054938002,
+      "mirror_y_relative_change_from_baseline": 4.296174205954542,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": true,
+      "mirror_y_MR_detects": true,
+      "detected_by_any": true,
+      "frame_detection_fraction": {
+        "node_permutation": 0.0,
+        "conservation": 1.0,
+        "mirror_y": 1.0
+      }
+    },
+    {
+      "mutant": "PC_zero_vy",
+      "fault_class": "physical_channel_fault",
+      "applicable": true,
+      "node_perm_relative_l2_median": 0.0,
+      "conservation_ratio_median": 1.0811066576974644,
+      "mirror_y_violation_median": 0.304500272697052,
+      "mirror_y_relative_change_from_baseline": 0.17357822033466874,
+      "node_permutation_MR_detects": false,
+      "conservation_MR_detects": false,
+      "mirror_y_MR_detects": false,
+      "detected_by_any": false,
+      "frame_detection_fraction": {
+        "node_permutation": 0.0,
+        "conservation": 0.0,
+        "mirror_y": 0.0
+      }
+    }
+  ],
+  "summary": {
+    "num_mutants_total": 10,
+    "num_applicable_mutants": 8,
+    "num_not_applicable_mutants": 2,
+    "not_applicable_mutants": [
+      "MA_drop_edges",
+      "MA_permute_edges"
+    ],
+    "node_permutation_MR_detection_rate": 0.0,
+    "conservation_MR_detection_rate": 0.5,
+    "mirror_y_MR_detection_rate": 0.25,
+    "union_detection_rate": 0.5,
+    "union_detected_count_over_applicable": [
+      4,
+      8
+    ],
+    "union_detection_rate_wilson_ci95": [
+      0.21521606221387757,
+      0.7847839377861224
+    ],
+    "fault_classes_localized_by_node_permutation": [],
+    "fault_classes_localized_by_conservation": [
+      "boundary_condition_fault",
+      "normalization_scale_fault",
+      "physical_channel_fault"
+    ],
+    "fault_classes_localized_by_mirror_y": [
+      "normalization_scale_fault",
+      "physical_channel_fault"
+    ]
+  },
+  "comparison_to_mgn": {
+    "mgn_ledger": "research_assets/runs/seeded-fault-detection/raw/metric_ledger.json",
+    "mgn_union_detection_rate_over_10": 0.5,
+    "mgn_by_class_conservation": [
+      "boundary_condition_fault",
+      "normalization_scale_fault"
+    ],
+    "mgn_by_class_mirror_y": [
+      "mesh_adjacency_fault",
+      "physical_channel_fault"
+    ],
+    "pointmlp_union_detection_rate_over_applicable": 0.5,
+    "pointmlp_by_class_conservation": [
+      "boundary_condition_fault",
+      "normalization_scale_fault",
+      "physical_channel_fault"
+    ],
+    "pointmlp_by_class_mirror_y": [
+      "normalization_scale_fault",
+      "physical_channel_fault"
+    ],
+    "node_permutation_zero_on_both": true,
+    "interpretation": "The mesh-adjacency fault class exists only for the message-passing MGN; on the row-wise PointMLP it is a no-op, so the fault surface differs by architecture. Among the eight applicable mutants the by-class localization (conservation to boundary/scale faults, mirror-y to physical-channel faults, node-permutation to none) is compared with the MGN result above; agreement REPRODUCES the pattern across two architecture families, it does not prove it generalizes."
+  },
+  "claim_limitations": "One converged SUT, one checkpoint, one eval trajectory, the same injected-fault catalogue (eight applicable mutants on a row-wise architecture). Detection rates are for this mutant set only; not a real-world fault-detection rate, reliability, baseline-superiority, or proof of cross-architecture generalization (at most a reproduction across two architecture families).",
+  "generated_at": "2026-06-20T08:34:17Z"
+}
