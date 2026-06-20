@@ -1,6 +1,33 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-18 by claude-code (投稿工作并入 main + 仓库清理为单一 main 分支;前序:真实网关面板 v37+v38 + deep-research + IST 14/14)
+> Last updated: 2026-06-20 by claude-code (期刊重估→选定冲中科院1区→实证扩张计划;EIC 三轮 major 经核实是稳定上限/LLM 噪声)
+
+## 🟡 2026-06-20 冲中科院1区实证扩张计划(目标 TSE/TOSEM,根治 incremental+单SUT)
+
+> 背景:F-1 sharp claim(commit `42b6f41`)+ hedge 瘦身(commit `1944e5d`)后,gate-1/gate-2 真实 5-LLM panel EIC 仍 major(accept 0.65→0.58,clarity 7→6),三轮 major 经核实是**稳定上限**(分数波动是 LLM 噪声,非可改缺陷)。期刊重估(deep-research + CAS 分区):**2区Q1 的 IST 是高分区∩可发表甜点**;真1区 TSE/TOSEM(1区Top)需先补第二收敛SUT+量化baseline。用户拍板:**为冲1区做实证扩张**。
+> 关键战略:**整个 MVP 全本地 CPU/MPS、零 GPU、零新凭据**(第二SUT直接用已收敛的 PointMLP);GPU 只在 EXT-1 airfoil 续训需要,且放在 MVP 验证有效之后(避免重蹈 airfoil −0.4 / C34 撤回的历史反伤)。完整计划:本会话工作流 `wcqn9zm0f` 输出。
+
+### 🟡 In Progress — MVP(全本地 CPU/MPS,无 GPU/凭据)
+- [ ] **MVP-A**: PointMLP 端到端 seeded-fault(候选B;已收敛 rollout L2 0.0298,不同架构族/无消息传递,**只缺 runner 一环**)
+  - next-action: 写 `tools/run_seeded_fault_detection_pointmlp.py`(复用 `run_seeded_fault_detection.py` 的 10-mutant 五类催化剂,同域直接沿用);草拟 claim `C41`(status:blocked)+ xfail test
+  - 验收: detection_matrix 非平凡(baseline L2≠0);by-class 模式与 MGN 可比 → 把"5/10+by-class"从 1 个扩到 **2 个真不同架构族**(闭 speculative_claims 的 "share one architecture family" 缺口)
+- [ ] **MVP-B/C**: 三臂互补矩阵(validity-gated MR / accuracy-monitor / generic-expert MR)+ fault 集 ≥20/≥4 类 + Wilson CI + knife-edge severity 曲线
+  - 验收: 2×2 互补表三臂各带 CI;**全文 0 句 superior/outperforms/better**(触发 wording_forbidden 即不合格);knife-edge 盲区曲线(别人没有的差异化 finding)
+  - 草拟 claim `C42-three-arm-complementarity` / `C43-knife-edge-blind-region`
+
+### 🔴 Blockers — EXT(需用户提供,阻塞1区但不阻塞 MVP)
+- [ ] **EXT-1**: airfoil 训到收敛(不同物理 compressible 第三 SUT)(owner: **user GPU**)
+  - context: airfoil 卡 loss≈1.0(z-score 均值预测),瓶颈=训练配方+GPU,非授权;**MVP 不依赖此项**
+  - blocker: 需 CUDA GPU ≥16GB + 产出后 `pip freeze`;端到端 runner/claim/test 已就位(commit `f002c80`),唯缺训练预算
+  - 风险: 即便上 GPU 也可能因训练配方问题训不收敛(非单纯算力)
+
+### 🟢 Backlog
+- [ ] P1: **EXT-2** operator-floor ≥2 mesh 拓扑一致性(本地纯计算,加固唯一真新原子;扩 C12 措辞,**不碰** C32 general-bound future-work)
+- [ ] P2: **EXT-3** 三臂互补+duality 跨全部收敛 SUT(与 EXT-1 同批数据顺带)
+
+### 🔵 Open Questions
+- [ ] 目标锁 **TSE** 还是 **TOSEM**?TSE=IEEEtran 单栏单盲(`venues/IEEE-TSE.md` 已有);TOSEM=acmart 双盲(需新建 `venues/TOSEM.md` + §15 双盲化审计);回退 IST 零切换成本。**venue 未定前不要双盲化**(过早匿名化反伤)。
+- [ ] 诚实风险: 即便 MVP+EXT 全做完,**1区 仍可能因 novelty 立场(incremental)被拒**——扩张拆的是 evidence 前缀(single-SUT/under-trained/fragmented),不是 novelty 不足。兜底: MVP 资产全部直接强化 IST 稿(把模拟评审从 major↔minor 上移),回退2区净收益;**GPU 投入放在 MVP 验证有效之后**。
 
 ## 🟢 2026-06-17 真实多厂商网关面板 (v37+v38) + deep-research 学术评估 + 成熟度复评
 - **✅ 真实多厂商网关面板首次跑通(历史一直被"key 耗尽"阻塞)**:`tools/run_academic_review_panel.py` 在两个独立网关各跑一次,5 厂商(gpt-5.5/glm-5.1/deepseek-v4-flash/qwen3-max/kimi-k2.6),5/5 reviewer、0 失败。**v38**(用户提供网关,OpenAI 兼容,需 `/v1` 后缀)overall **7.86** / accept **0.604** / 多数 **major**(3M/2m);**v37**(兄弟 bltcy 网关)overall **7.6** / accept **0.67** / 多数 **minor**(2M/3m)。记录 `research_assets/runs/academic-review-panel-v37|v38/`。
