@@ -64,6 +64,8 @@
 ### 🟢 Backlog
 （空 — EXT-3 已完成;为 IST 无剩余实证档任务。昂贵跨网格先验界 / 全新 SUT 族仅 1 区 pivot 才议,且跨网格理论是 1 区前置门,见 2026-06-21（晚）顶部小节。）
 
+- [ ] **(IST 之后 / 另起一条线,未启动,需用户拍板)** Tier-1 研究程序锚点:`paper/51_post_ist_tier1_research_program.md` —— RQ-A 覆盖即理论 / RQ-B 跨类校准 D_cal / RQ-C 真实故障语料 + 前置跨网格地板界;拆篇 + venue(TSE/TOSEM)。**对当前 IST 投稿零影响零必要**;最现实起点=RQ-C 可行性(是否存在足量真实 buggy-vs-fixed SciML 故障)。
+
 ### 🔵 Open Questions
 - [x] ~~目标锁 TSE 还是 TOSEM?~~ **已决(2026-06-21 晚):锁定 IST**(单盲、不双盲化、零切换成本)。冲 1 区实证扩张档(operator-floor 跨网格/多 SUT)就此**不为 IST 投入**;如未来改投 1 区再议。
 - [ ] 诚实风险: 即便 MVP+EXT 全做完,**1区 仍可能因 novelty 立场(incremental)被拒**——扩张拆的是 evidence 前缀(single-SUT/under-trained/fragmented),不是 novelty 不足。兜底: MVP 资产全部直接强化 IST 稿(把模拟评审从 major↔minor 上移),回退2区净收益;**GPU 投入放在 MVP 验证有效之后**。
