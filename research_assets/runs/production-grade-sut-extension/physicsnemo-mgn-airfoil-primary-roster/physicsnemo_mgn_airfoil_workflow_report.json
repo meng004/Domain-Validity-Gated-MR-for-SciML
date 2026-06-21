@@ -23,12 +23,12 @@
     },
     "records": [
       {
-        "bytes": 1262652550,
-        "n_records": 25,
-        "sha256_prefix": "7a09bdb494b9a97e",
+        "bytes": 5050610200,
+        "n_records": 100,
+        "sha256_prefix": "7e4aa07797971f9d",
         "source_url": "https://storage.googleapis.com/dm-meshgraphnets/airfoil/train.tfrecord",
         "split": "train",
-        "staged_at": "2026-06-16T13:00:10Z"
+        "staged_at": "2026-06-21T05:13:11Z"
       },
       {
         "bytes": 2020244080,
@@ -36,15 +36,15 @@
         "sha256_prefix": "7a5a2de3be6d40d0",
         "source_url": "https://storage.googleapis.com/dm-meshgraphnets/airfoil/test.tfrecord",
         "split": "test",
-        "staged_at": "2026-06-16T13:01:07Z"
+        "staged_at": "2026-06-21T05:14:13Z"
       }
     ],
     "simulator": "su2",
     "source_url_prefix": "https://storage.googleapis.com/dm-meshgraphnets/airfoil",
     "stage_dir": "~/.cache/dvgmr/airfoil_staged",
-    "subset_boundary": "first 25 official train and 40 official test airfoil trajectories; CPU-scale second-task evaluation, not the full SU2 airfoil production benchmark"
+    "subset_boundary": "first 100 official train and 40 official test airfoil trajectories; CPU-scale second-task evaluation, not the full SU2 airfoil production benchmark"
   },
-  "device_used": "mps",
+  "device_used": "cuda",
   "evaluation": {
     "n_test_trajectories": 40
   },
@@ -55,18 +55,18 @@
     "cross-dataset reliability",
     "absolute compressible mass conservation"
   ],
-  "generated_at": "2026-06-16T16:57:43Z",
+  "generated_at": "2026-06-21T05:36:33Z",
   "headline_typed_verdict_structure": {
     "compressible_mass_conservation": "deferred-absolute / reference-relative-diagnostic",
     "incompressible_continuity": "rejected-domain-invalid (physical-basis, condition i)",
     "mirror_y_symmetry": "rejected-domain-invalid (boundary-precondition, condition iii)",
     "node_permutation_equivariance": "admitted (exact-by-construction)"
   },
-  "honesty_boundary": "A bounded MPS/CPU-scale second-task evaluation of the official PhysicsNeMo MeshGraphNet architecture on official DeepMind airfoil (SU2 compressible) trajectories. The contribution is the cross-task demonstration that the same admissibility predicate yields a different typed inadmissibility structure, NOT a production-scale airfoil benchmark, NOT an official NVIDIA checkpoint, and NOT a cross-dataset reliability rate. One-step rollout only.",
+  "honesty_boundary": "A bounded GPU-trained second-task evaluation of the official PhysicsNeMo MeshGraphNet architecture on official DeepMind airfoil (SU2 compressible) trajectories. The contribution is the cross-task demonstration that the same admissibility predicate yields a different typed inadmissibility structure, NOT a production-scale airfoil benchmark, NOT an official NVIDIA checkpoint, and NOT a cross-dataset reliability rate. One-step rollout only.",
   "metrics": {
-    "median_compressible_residual_ratio": 1.0035544979766935,
+    "median_compressible_residual_ratio": 1.0086609729954334,
     "median_density_max_over_min": 2.126607656478882,
-    "median_one_step_rollout_relative_l2": 1.0000908374786377,
+    "median_one_step_rollout_relative_l2": 0.9226166009902954,
     "median_reference_incompressible_div_u_rms": 1.420030625608414,
     "node_permutation_max_relative_l2": 0.0,
     "node_permutation_passes": "240/240"
@@ -76,12 +76,12 @@
   "record_type": "physicsnemo-mgn-airfoil-second-task-workflow",
   "roster": {
     "ckpt_wall_clocks_s": [
-      2448.5,
-      2388.1,
-      2432.5,
-      2367.8,
-      2263.2,
-      2269.3
+      221.2,
+      198.0,
+      196.1,
+      192.5,
+      199.3,
+      197.4
     ],
     "k_checkpoints": 6,
     "k_checkpoints_completed": 6,
@@ -89,100 +89,125 @@
       {
         "checkpoint_file": "checkpoint_k01_seed20260616.pt",
         "checkpoint_index": 1,
-        "final_loss": 1.0001831380763324,
-        "median_cons_ratio": 1.0251968396661033,
+        "final_loss": 0.13983430470450445,
+        "median_cons_ratio": 1.0481912582028294,
         "median_density_max_over_min": 2.126607656478882,
         "node_perm_passes": "40/40",
         "seed": 20260616,
-        "total_wall_clock_s": 2448.5,
-        "train_wall_clock_s": 2434.9
+        "total_wall_clock_s": 221.2,
+        "train_wall_clock_s": 0.0
       },
       {
         "checkpoint_file": "checkpoint_k02_seed20268535.pt",
         "checkpoint_index": 2,
-        "final_loss": 1.000259001113067,
-        "median_cons_ratio": 1.0017304251673533,
+        "final_loss": 0.1402148773118541,
+        "median_cons_ratio": 1.0018534382965996,
         "median_density_max_over_min": 2.126607656478882,
         "node_perm_passes": "40/40",
         "seed": 20268535,
-        "total_wall_clock_s": 2388.1,
-        "train_wall_clock_s": 2374.6
+        "total_wall_clock_s": 198.0,
+        "train_wall_clock_s": 0.0
       },
       {
         "checkpoint_file": "checkpoint_k03_seed20276454.pt",
         "checkpoint_index": 3,
-        "final_loss": 1.000288666851382,
-        "median_cons_ratio": 1.0243489270311499,
+        "final_loss": 0.13357241049096613,
+        "median_cons_ratio": 1.0065985721408897,
         "median_density_max_over_min": 2.126607656478882,
         "node_perm_passes": "40/40",
         "seed": 20276454,
-        "total_wall_clock_s": 2432.5,
-        "train_wall_clock_s": 2419.2
+        "total_wall_clock_s": 196.1,
+        "train_wall_clock_s": 0.0
       },
       {
         "checkpoint_file": "checkpoint_k04_seed20284373.pt",
         "checkpoint_index": 4,
-        "final_loss": 1.0003188539920083,
-        "median_cons_ratio": 1.0010169506887143,
+        "final_loss": 0.1223115102125856,
+        "median_cons_ratio": 1.009288400646258,
         "median_density_max_over_min": 2.126607656478882,
         "node_perm_passes": "40/40",
         "seed": 20284373,
-        "total_wall_clock_s": 2367.8,
-        "train_wall_clock_s": 2354.2
+        "total_wall_clock_s": 192.5,
+        "train_wall_clock_s": 0.0
       },
       {
         "checkpoint_file": "checkpoint_k05_seed20292292.pt",
         "checkpoint_index": 5,
-        "final_loss": 1.0002704903932753,
-        "median_cons_ratio": 1.0010291632032544,
+        "final_loss": 0.1424744108316773,
+        "median_cons_ratio": 1.0069738204090808,
         "median_density_max_over_min": 2.126607656478882,
         "node_perm_passes": "40/40",
         "seed": 20292292,
-        "total_wall_clock_s": 2263.2,
-        "train_wall_clock_s": 2249.7
+        "total_wall_clock_s": 199.3,
+        "train_wall_clock_s": 0.0
       },
       {
         "checkpoint_file": "checkpoint_k06_seed20300211.pt",
         "checkpoint_index": 6,
-        "final_loss": 1.0002848350845233,
-        "median_cons_ratio": 1.0002960584169645,
+        "final_loss": 0.13837599027016573,
+        "median_cons_ratio": 1.0096594206230316,
         "median_density_max_over_min": 2.126607656478882,
         "node_perm_passes": "40/40",
         "seed": 20300211,
-        "total_wall_clock_s": 2269.3,
-        "train_wall_clock_s": 2255.8
+        "total_wall_clock_s": 197.4,
+        "train_wall_clock_s": 0.0
       }
     ],
-    "total_wall_clock_s": 14172.0
+    "total_wall_clock_s": 1230.9
   },
   "schema_version": "0.2.0",
   "second_task_contrast_to_cylinder": "compressible vs incompressible; second official dataset",
   "sut_name": "NVIDIA PhysicsNeMo MeshGraphNet (official architecture)",
   "task": "DeepMind airfoil / SU2 compressible transonic flow over an aerofoil",
   "training": {
-    "epochs": 15,
-    "final_loss": 1.0002848350845233,
+    "epochs": 40,
+    "final_loss": 0.13837599027016573,
     "losses": [
-      1.0157744449908497,
-      1.0016892378156481,
-      1.0009641961429443,
-      1.002196834254224,
-      1.000374955288833,
-      1.0003014705056412,
-      1.0003499627405545,
-      1.0003188427524727,
-      1.0003783627193807,
-      1.0002566321571649,
-      1.0002885736830067,
-      1.0003060492294316,
-      1.0002073586551414,
-      1.0002203612991434,
-      1.0002848350845233
+      0.15364046532292655,
+      0.14415517326271507,
+      0.14352022638421752,
+      0.14312420744158907,
+      0.1428146012751999,
+      0.14272314324573485,
+      0.1426051422677555,
+      0.14232410491837333,
+      0.14284183351953184,
+      0.14269366655303556,
+      0.1418955947982125,
+      0.14208833689726108,
+      0.1419866050065155,
+      0.14195592067633828,
+      0.1422372397068821,
+      0.14167705574769995,
+      0.14192831177755208,
+      0.1417729638452073,
+      0.14145567308007154,
+      0.14147205573846838,
+      0.14166861979157,
+      0.14203718211223,
+      0.14194042772447835,
+      0.14122909099047634,
+      0.14307016310209553,
+      0.14188349611142617,
+      0.1418103293995345,
+      0.14126374408000422,
+      0.14063459797762334,
+      0.14110714180602743,
+      0.1400888144104145,
+      0.14135523462210764,
+      0.1400358117377932,
+      0.1392001753736045,
+      0.13818008084028602,
+      0.13915954141258569,
+      0.13852013242403102,
+      0.13796001924048484,
+      0.1374002916732814,
+      0.13837599027016573
     ],
     "lr": 0.001,
-    "n_train_trajectories": 25,
+    "n_train_trajectories": 100,
     "seed": 20260616,
     "snaps_per_traj_train": 20
   },
-  "workflow_status": "completed-second-task-mps-or-cpu-subset"
+  "workflow_status": "completed-second-task-gpu-subset"
 }
