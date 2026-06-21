@@ -53,8 +53,16 @@
   - 验证:两 validator rc=0、airfoil(5/5)+seeded-fault(5/5)守卫过、全量无新增失败、IST 10874≤15000。
   - 已 rebase 整合远程 19 个提交(C48-C50 等)并 push。EXT-1 复现 harness `_ext1_*` 一并提交。
 
+### ✅ Done — EXT-3 跨-SUT 三臂 + 跨架构 duality(2026-06-21,已整合入正文,无残桩;此前误列 backlog)
+- [x] **C47** 跨架构 duality synthesis — 两条可证伪预测在 **4/4 架构族**(MGN/PointMLP/FNO/PINN)复现(P1 覆盖按 admitted MR、P2 结构盲区);纯 synthesis 读已提交报告。`research_assets/runs/cross-architecture-duality/`
+- [x] **C50** duality 预测完备性 — blind-completeness(保全全部不变量⇒整套 MR 全漏)+ amplitude-independence(PINN shift 0.63 / FNO roll 0.43 rel-L2 仍全漏);盲区签名**先验从算子数学算出**(双零 <1e-9 且 commute)再事后验证(非循环),**0 证伪**;FNO/PINN 两族。`research_assets/runs/duality-predictive-completeness/`
+- [x] **C51** 跨-SUT 三臂 consolidation — 3 收敛 SUT(cylinder MGN/PointMLP/airfoil)全部三臂齐全。`research_assets/runs/ext3-cross-sut-three-arm/`
+- [x] **C52** airfoil 三臂补全 — 闭合 C51 的 GPU-pending 臂(收敛 C35 模型):MR 1/10、accuracy 2/10 **不相交**、gate value 4/4(含 inadmissible mirror-y 模板误报);airfoil 上 duality **无证伪**。commit `4d1556c`
+- **正文整合(刻意封顶在 bounded-implication 高度)**:§436(C50 预测完备性)、§440(duality 跨-SUT 边界)、§555 表行 + §590 Appendix-secondary(C51/C52 三臂);integrate commit `eef25d0`。
+- **评估结论(2026-06-21 晚,本会话)**:对 IST,EXT-3 证据档**已充分且刻意封顶提取,无需补强**——证据完整、0 证伪、无残桩;进一步抬升触 over-claim。剩余 forbidden-by-design 量化升级(validated 覆盖模型/cross-MR 校准)属 1 区研究项目,非补强。唯一刻意未提取=C47"4/4 架构族"统一句式(写出会重新中心化 duality,伤 IST positioning;仅 1 区 pivot + 跨网格理论门后才解锁)。
+
 ### 🟢 Backlog
-- [ ] **EXT-3** 三臂互补 + duality 跨全部收敛 SUT(MGN/PointMLP/FNO/PINN **+ airfoil 现已收敛**,五 SUT 全可立做)
+（空 — EXT-3 已完成;为 IST 无剩余实证档任务。昂贵跨网格先验界 / 全新 SUT 族仅 1 区 pivot 才议,且跨网格理论是 1 区前置门,见 2026-06-21（晚）顶部小节。）
 
 ### 🔵 Open Questions
 - [x] ~~目标锁 TSE 还是 TOSEM?~~ **已决(2026-06-21 晚):锁定 IST**(单盲、不双盲化、零切换成本)。冲 1 区实证扩张档(operator-floor 跨网格/多 SUT)就此**不为 IST 投入**;如未来改投 1 区再议。
