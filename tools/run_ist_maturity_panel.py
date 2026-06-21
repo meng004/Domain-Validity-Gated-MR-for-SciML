@@ -1,4 +1,4 @@
-"""IST submission-maturity panel — DESIGNER / EXECUTOR split.
+"""IST submission-maturity panel — DESIGNER / EXECUTOR split, ensemble EIC.
 
   * DESIGNER  — the 5 reviewer personas and the quantitative IST submission-
     maturity rubric below were authored by the `academic-paper-reviewer` skill
@@ -6,25 +6,31 @@
     decision mapping), calibrated to Elsevier Information and Software
     Technology (IST) regular track (CAS Tier-2 / JCR Q1-Q2, software-V&V remit,
     single-anonymized). The skill does NOT itself score the paper.
-  * EXECUTOR  — five vendor-diverse gateway models play the designed roles, one
-    model per persona, and return quantitative maturity scores. This script is
-    only the executor; it does not itself judge the paper.
+  * EXECUTOR  — vendor-diverse gateway models play the designed roles and
+    return quantitative maturity scores. This script is only the executor;
+    it does not itself judge the paper.
 
-Five reviewer roles / five distinct vendors (user-specified roster):
+Five reviewer SEATS. Four specialist seats are single-model; the EIC seat is an
+ENSEMBLE of three different LLMs whose results are mean-combined into one seat,
+because gpt-5.5 is known to carry bias and must not decide the gatekeeper
+verdict alone (the other two votes hold it to 1/3 weight):
 
-  EIC                 gpt-5.5            (OpenAI)     gatekeeper / IST remit
+  EIC (ensemble)      gpt-5.5 + claude-opus-4-7 + grok-4.3   gatekeeper / IST remit
   EmpiricalRigor      claude-opus-4-7    (Anthropic)  design / stats / threats
   SciMLDomain         glm-5.1            (ZhipuAI)    MR / floor / admissibility
   NoveltyPositioning  grok-4.3           (xAI)        novelty vs MT/oracle prior
   DevilsAdvocate      qwen3-max          (Alibaba)    over-claim / reject hunter
 
 (The user wrote "opus 4.7": the gateway alias `opus-4.7` 503s in this group;
-the served Anthropic model is `claude-opus-4-7`, used here.)
+the served Anthropic model is `claude-opus-4-7`, used here. opus and grok play
+both a specialist seat and an EIC-ensemble vote — distinct system prompts,
+independent calls.)
 
 Each reviewer scores seven IST-tuned dimensions (1-10), an accept probability, a
 verdict, a 0-100 submission-maturity index, the blocking gaps, and the single
-highest-ROI fix. The script aggregates a panel maturity index and persists every
-raw response for audit.
+highest-ROI fix. The EIC seat reports the three sub-reviews and their spread so
+gpt-5.5's divergence from the non-gpt votes is auditable. The script aggregates a
+panel maturity index and persists every raw response.
 
 Credentials: OPENAI_API_KEY + OPENAI_BASE_URL. Fails closed without them.
 """
@@ -38,20 +44,24 @@ import re
 import sys
 import urllib.error
 import urllib.request
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 # Review exactly what is submitted: the LaTeX source is the single source of truth.
 PAPER = ROOT / "paper" / "ist-submission" / "main.tex"
-OUTDIR = ROOT / "research_assets" / "runs" / "ist-maturity-panel"
-# glm-5.1 is a reasoning model that can spend the whole budget on hidden
-# reasoning and emit empty content; the ladder gives it headroom.
+OUTDIR = ROOT / "research_assets" / "runs" / "ist-maturity-panel-eic3"
+# glm-5.1 / grok are reasoning models that can spend the whole budget on hidden
+# reasoning and emit empty content; the ladder gives them headroom.
 TOKEN_LADDER = (16000, 28000, 40000)
+
+# EIC gatekeeper ensemble: gpt-5.5 kept but held to 1/3 by two non-gpt votes.
+EIC_ENSEMBLE = ["gpt-5.5", "claude-opus-4-7", "grok-4.3"]
 
 # --- DESIGNER output: field-matched IST personas (academic-paper-reviewer) ---
 PANEL = [
-    ("EIC", "gpt-5.5",
+    ("EIC", EIC_ENSEMBLE,
      "You are the Editor-in-Chief of Elsevier Information and Software "
      "Technology (IST), regular research-paper track. IST's remit is software "
      "engineering, in particular software verification & validation. Judge "
@@ -112,6 +122,9 @@ DIMENSIONS = [
     "reproducibility",
     "scope_fit_ist",
 ]
+
+VERDICTS = ("accept", "minor_revision", "major_revision", "reject")
+SEVERITY = {"accept": 0, "minor_revision": 1, "major_revision": 2, "reject": 3}
 
 # --- DESIGNER output: quantitative IST submission-maturity rubric ---
 RUBRIC = """Score each dimension on an integer 1-10 scale CALIBRATED TO IST, a
@@ -198,7 +211,7 @@ def _validate(d: dict) -> dict:
         v = d["scores"].get(dim)
         if not isinstance(v, (int, float)) or not (1 <= v <= 10):
             raise RuntimeError(f"score for {dim} out of range: {v!r}")
-    if d.get("verdict") not in {"accept", "minor_revision", "major_revision", "reject"}:
+    if d.get("verdict") not in set(VERDICTS):
         raise RuntimeError(f"bad verdict: {d.get('verdict')!r}")
     if not isinstance(d.get("accept_probability"), (int, float)):
         raise RuntimeError("missing accept_probability")
@@ -206,6 +219,55 @@ def _validate(d: dict) -> dict:
     if not isinstance(m, (int, float)) or not (0 <= m <= 100):
         raise RuntimeError(f"submission_maturity_0_100 out of range: {m!r}")
     return d
+
+
+def _review_one(api_key, base_url, model, prompt, label, failures):
+    """Token-ladder a single model review; return (parsed, raw) or (None, None)."""
+    for mt in TOKEN_LADDER:
+        try:
+            print(f"== {label} :: {model} (max_tokens={mt}) ==", flush=True)
+            raw = _post(api_key, base_url, model, prompt, mt)
+            return _validate(_extract_json(raw)), raw
+        except (urllib.error.URLError, OSError, http.client.HTTPException,
+                RuntimeError, json.JSONDecodeError) as e:
+            failures.append({"label": label, "model": model, "max_tokens": mt,
+                             "error": str(e)[:300]})
+            print(f"!! {label}/{model} mt={mt}: {type(e).__name__}: {str(e)[:160]}",
+                  flush=True)
+    return None, None
+
+
+def _combine_verdict(verdicts):
+    """Modal verdict; ties broken toward the more conservative (higher severity)."""
+    c = Counter(verdicts)
+    top = max(c.values())
+    cands = [v for v, n in c.items() if n == top]
+    return max(cands, key=lambda v: SEVERITY[v])
+
+
+def _combine_ensemble(sub_reviews):
+    """Mean-combine N sub-reviews into one seat-level review."""
+    revs = list(sub_reviews.values())
+    n = len(revs)
+    scores = {dim: round(sum(r["scores"][dim] for r in revs) / n, 2)
+              for dim in DIMENSIONS}
+    gaps, fixes, strengths = [], [], []
+    for m, r in sub_reviews.items():
+        for g in r.get("blocking_gaps", []):
+            gaps.append(f"[{m}] {g}")
+        fixes.append(f"[{m}] {r.get('highest_roi_fix', '')}")
+        for s in r.get("top_strengths", []):
+            strengths.append(f"[{m}] {s}")
+    return {
+        "scores": scores,
+        "accept_probability": round(sum(r["accept_probability"] for r in revs) / n, 3),
+        "verdict": _combine_verdict([r["verdict"] for r in revs]),
+        "submission_maturity_0_100": round(sum(r["submission_maturity_0_100"]
+                                               for r in revs) / n, 1),
+        "blocking_gaps": gaps,
+        "highest_roi_fix": fixes,
+        "top_strengths": strengths,
+    }
 
 
 def main(argv=None) -> int:
@@ -230,33 +292,49 @@ def main(argv=None) -> int:
 
     results = {}
     failures = []
-    for role, model, role_desc in PANEL:
+    eic_detail = None
+    for role, model_spec, role_desc in PANEL:
         prompt = base_prompt.replace("{role_desc}", role_desc)
-        ok = False
-        for mt in TOKEN_LADDER:
-            try:
-                print(f"== {role} :: {model} (max_tokens={mt}) ==", flush=True)
-                raw = _post(api_key, base_url, model, prompt, mt)
-                parsed = _validate(_extract_json(raw))
-                results[role] = {"model": model, "review": parsed,
-                                 "raw_response_for_audit": raw}
-                ok = True
-                break
-            except (urllib.error.URLError, OSError, http.client.HTTPException,
-                    RuntimeError, json.JSONDecodeError) as e:
-                failures.append({"role": role, "model": model, "max_tokens": mt,
-                                 "error": str(e)[:300]})
-                print(f"!! {role}/{model} mt={mt}: {type(e).__name__}: {str(e)[:160]}",
-                      flush=True)
-        if not ok:
-            print(f"!! {role}: all attempts failed", flush=True)
+        if isinstance(model_spec, (list, tuple)):
+            subs, raws = {}, {}
+            for m in model_spec:
+                parsed, raw = _review_one(api_key, base_url, m, prompt, role, failures)
+                if parsed is not None:
+                    subs[m] = parsed
+                    raws[m] = raw
+            if not subs:
+                print(f"!! {role}: all ensemble members failed", flush=True)
+                continue
+            combined = _combine_ensemble(subs)
+            results[role] = {"model": " + ".join(model_spec), "ensemble": True,
+                             "review": combined, "raw_response_for_audit": raws}
+            eic_detail = {
+                "members": list(model_spec),
+                "succeeded": list(subs.keys()),
+                "per_member": {m: subs[m] for m in subs},
+                "per_member_verdict": {m: subs[m]["verdict"] for m in subs},
+                "per_member_maturity": {m: subs[m]["submission_maturity_0_100"]
+                                        for m in subs},
+                "per_member_accept_prob": {m: subs[m]["accept_probability"]
+                                           for m in subs},
+                "combined_verdict": combined["verdict"],
+                "combined_maturity": combined["submission_maturity_0_100"],
+            }
+        else:
+            parsed, raw = _review_one(api_key, base_url, model_spec, prompt, role,
+                                      failures)
+            if parsed is not None:
+                results[role] = {"model": model_spec, "ensemble": False,
+                                 "review": parsed, "raw_response_for_audit": raw}
+            else:
+                print(f"!! {role}: all attempts failed", flush=True)
 
     if len(results) < 2:
         sys.stderr.write(f"BLOCKED_INSUFFICIENT_REVIEWERS: only {len(results)}.\n")
         (outdir / "review_failures.json").write_text(json.dumps(failures, indent=2))
         return 5
 
-    # Aggregate.
+    # Aggregate (each seat = one vote; EIC seat value is its 3-model mean).
     dim_means = {}
     for dim in DIMENSIONS:
         vals = [r["review"]["scores"][dim] for r in results.values()]
@@ -271,16 +349,20 @@ def main(argv=None) -> int:
     panel_verdict = max(verdict_counts.items(), key=lambda kv: kv[1])[0]
 
     report = {
-        "record_type": "ist-maturity-panel",
-        "schema_version": "0.1.0",
+        "record_type": "ist-maturity-panel-eic3",
+        "schema_version": "0.2.0",
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "venue": "Elsevier IST regular track (CAS Tier-2 / JCR Q1-Q2)",
         "designer": "academic-paper-reviewer skill (field_analyst + quality_rubrics)",
-        "executor": "5 vendor-diverse gateway models, one per persona, temperature 0",
+        "executor": ("vendor-diverse gateway models, temperature 0; EIC seat is a "
+                     "3-model mean ensemble (gpt-5.5 + claude-opus-4-7 + grok-4.3) "
+                     "to dilute gpt-5.5 bias to 1/3"),
         "paper": str(PAPER.relative_to(ROOT)),
-        "panel": [{"role": r, "model": m} for r, m, _ in PANEL],
+        "panel": [{"role": r, "model": (m if isinstance(m, str) else " + ".join(m)),
+                   "ensemble": not isinstance(m, str)} for r, m, _ in PANEL],
         "reviewers_succeeded": list(results.keys()),
         "review_failures": failures,
+        "eic_ensemble": eic_detail,
         "per_dimension_mean": dim_means,
         "overall_dimension_mean": overall_mean,
         "accept_probability_mean": round(sum(probs) / len(probs), 3),
@@ -293,18 +375,23 @@ def main(argv=None) -> int:
             r: d["review"].get("blocking_gaps", []) for r, d in results.items()},
         "highest_roi_fix_by_reviewer": {
             r: d["review"].get("highest_roi_fix", "") for r, d in results.items()},
-        "per_reviewer": {r: {"model": d["model"], "review": d["review"]}
-                         for r, d in results.items()},
+        "per_reviewer": {r: {"model": d["model"], "ensemble": d.get("ensemble", False),
+                             "review": d["review"]} for r, d in results.items()},
         "raw_responses": {r: d["raw_response_for_audit"] for r, d in results.items()},
         "honesty_boundary": (
-            "Five single-call temperature-0 LLM reviews via one gateway, scored "
-            "against an IST submission-maturity rubric; an automated maturity "
-            "estimate, NOT human peer review and NOT a prediction of an actual "
-            "IST editorial decision."),
+            "Single-call temperature-0 LLM reviews via one gateway, scored against "
+            "an IST submission-maturity rubric; the EIC seat mean-combines three "
+            "models. An automated maturity estimate, NOT human peer review and NOT "
+            "a prediction of an actual IST editorial decision."),
     }
     (outdir / "review_panel_report.json").write_text(json.dumps(report, indent=2))
     print(f"\nwrote {outdir / 'review_panel_report.json'}")
-    print(f"reviewers: {len(results)}/{len(PANEL)}")
+    print(f"seats: {len(results)}/{len(PANEL)}")
+    if eic_detail:
+        print(f"EIC ensemble per-member maturity: {eic_detail['per_member_maturity']}")
+        print(f"EIC ensemble per-member verdict:  {eic_detail['per_member_verdict']}")
+        print(f"EIC combined -> verdict {eic_detail['combined_verdict']} "
+              f"maturity {eic_detail['combined_maturity']}")
     print(f"per-dimension mean: {dim_means}")
     print(f"overall mean: {overall_mean}/10")
     print(f"maturity index mean: {report['maturity_index_mean']}/100 "

@@ -1,0 +1,630 @@
+{
+  "record_type": "ist-maturity-panel-eic3",
+  "schema_version": "0.2.0",
+  "generated_at": "2026-06-21T07:54:09Z",
+  "venue": "Elsevier IST regular track (CAS Tier-2 / JCR Q1-Q2)",
+  "designer": "academic-paper-reviewer skill (field_analyst + quality_rubrics)",
+  "executor": "vendor-diverse gateway models, temperature 0; EIC seat is a 3-model mean ensemble (gpt-5.5 + claude-opus-4-7 + grok-4.3) to dilute gpt-5.5 bias to 1/3",
+  "paper": "paper/ist-submission/main.tex",
+  "panel": [
+    {
+      "role": "EIC",
+      "model": "gpt-5.5 + claude-opus-4-7 + grok-4.3",
+      "ensemble": true
+    },
+    {
+      "role": "EmpiricalRigor",
+      "model": "claude-opus-4-7",
+      "ensemble": false
+    },
+    {
+      "role": "SciMLDomain",
+      "model": "glm-5.1",
+      "ensemble": false
+    },
+    {
+      "role": "NoveltyPositioning",
+      "model": "grok-4.3",
+      "ensemble": false
+    },
+    {
+      "role": "DevilsAdvocate",
+      "model": "qwen3-max",
+      "ensemble": false
+    }
+  ],
+  "reviewers_succeeded": [
+    "EIC",
+    "EmpiricalRigor",
+    "SciMLDomain",
+    "NoveltyPositioning",
+    "DevilsAdvocate"
+  ],
+  "review_failures": [],
+  "eic_ensemble": {
+    "members": [
+      "gpt-5.5",
+      "claude-opus-4-7",
+      "grok-4.3"
+    ],
+    "succeeded": [
+      "gpt-5.5",
+      "claude-opus-4-7",
+      "grok-4.3"
+    ],
+    "per_member": {
+      "gpt-5.5": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 7,
+          "empirical_rigor": 6,
+          "related_work_positioning": 7,
+          "clarity_writing": 5,
+          "reproducibility": 8,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.58,
+        "verdict": "major_revision",
+        "submission_maturity_0_100": 62,
+        "blocking_gaps": [
+          "Empirical narrative is overloaded with secondary audits, smoke runs, sibling-artifact reuse, and fault catalogues that dilute the central V&V method claim.",
+          "Many reported cells are non-independent or descriptive; the manuscript acknowledges this but still risks appearing more powered and general than it is.",
+          "The central contribution must be sharpened as a software V&V asset-construction workflow, not as a broad SciML reliability or detector-coverage result.",
+          "Seeded-fault and cross-program evidence are useful but too author-constructed/read-only to support strong coverage or generalization implications."
+        ],
+        "highest_roi_fix": "Restructure and trim the paper around the validity-gated MR-card workflow plus primary cylinder/airfoil/FNO/PINN evidence, moving most secondary audits and coverage material to appendix or dropping it.",
+        "top_strengths": [
+          "Strong fit to IST's software verification and validation remit through oracle-free metamorphic testing assets.",
+          "Clear and useful methodological idea: admissibility gating by physical preconditions, mapping compatibility, and measurement-floor decidability.",
+          "Good artifact orientation with MR cards, ledgers, committed outputs, and explicit claim boundaries."
+        ]
+      },
+      "claude-opus-4-7": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 8,
+          "empirical_rigor": 7,
+          "related_work_positioning": 8,
+          "clarity_writing": 8,
+          "reproducibility": 7,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.78,
+        "verdict": "minor_revision",
+        "submission_maturity_0_100": 75,
+        "blocking_gaps": [
+          "Numerical decisability gate limited to specific mesh/operator context, generalization to broader settings is future work",
+          "Admissibility depends on physics and software preconditions that require explicit articulation per relation",
+          "Typed verdict domain violation axis not yet cross-MR calibrated or validated by independent raters",
+          "Seeded-fault catalog is a bounded stress test, not a comprehensive real-world defect-detection reliability assessment"
+        ],
+        "highest_roi_fix": "Broaden numerical-floor admissibility reasoning beyond P1 symmetric mesh to more unstructured or scalable mesh/operator types",
+        "top_strengths": [
+          "Well scoped domain-validity gating method for SciML surrogate metamorphic testing",
+          "Solid empirical evaluation across multiple tasks, architectures, and datasets reinforcing gate discriminativeness",
+          "Clear and auditable workflow with MR cards, typed verdicts, and artifact-backed evidence ledgers"
+        ]
+      },
+      "grok-4.3": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 8,
+          "empirical_rigor": 7,
+          "related_work_positioning": 8,
+          "clarity_writing": 6,
+          "reproducibility": 9,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.6,
+        "verdict": "major_revision",
+        "submission_maturity_0_100": 53,
+        "blocking_gaps": [
+          "excessively dense prose and overlong structure diluting focus",
+          "non-independent cells limit strength of some statistical claims",
+          "incremental delta on MT extensions needs tighter bounding",
+          "some claims stray toward SciML evaluation rather than pure V&V method"
+        ],
+        "highest_roi_fix": "Condense by ~30%, move secondary tables/ledgers to appendix, sharpen writing on core V&V workflow",
+        "top_strengths": [
+          "strong reproducibility via claim ledger, artifacts, and DOI",
+          "honest bounded scoping with explicit threats and boundaries",
+          "clear IST V&V fit for auditable MT assets on SciML surrogates"
+        ]
+      }
+    },
+    "per_member_verdict": {
+      "gpt-5.5": "major_revision",
+      "claude-opus-4-7": "minor_revision",
+      "grok-4.3": "major_revision"
+    },
+    "per_member_maturity": {
+      "gpt-5.5": 62,
+      "claude-opus-4-7": 75,
+      "grok-4.3": 53
+    },
+    "per_member_accept_prob": {
+      "gpt-5.5": 0.58,
+      "claude-opus-4-7": 0.78,
+      "grok-4.3": 0.6
+    },
+    "combined_verdict": "major_revision",
+    "combined_maturity": 63.3
+  },
+  "per_dimension_mean": {
+    "novelty_contribution": 6.8,
+    "technical_soundness": 7.93,
+    "empirical_rigor": 6.53,
+    "related_work_positioning": 7.73,
+    "clarity_writing": 6.27,
+    "reproducibility": 7.6,
+    "scope_fit_ist": 9.0
+  },
+  "overall_dimension_mean": 7.41,
+  "accept_probability_mean": 0.599,
+  "accept_probability_range": [
+    0.35,
+    0.75
+  ],
+  "maturity_index_mean": 60.9,
+  "maturity_index_range": [
+    55,
+    70
+  ],
+  "verdict_distribution": {
+    "major_revision": 4,
+    "minor_revision": 1
+  },
+  "panel_majority_verdict": "major_revision",
+  "blocking_gaps_by_reviewer": {
+    "EIC": [
+      "[gpt-5.5] Empirical narrative is overloaded with secondary audits, smoke runs, sibling-artifact reuse, and fault catalogues that dilute the central V&V method claim.",
+      "[gpt-5.5] Many reported cells are non-independent or descriptive; the manuscript acknowledges this but still risks appearing more powered and general than it is.",
+      "[gpt-5.5] The central contribution must be sharpened as a software V&V asset-construction workflow, not as a broad SciML reliability or detector-coverage result.",
+      "[gpt-5.5] Seeded-fault and cross-program evidence are useful but too author-constructed/read-only to support strong coverage or generalization implications.",
+      "[claude-opus-4-7] Numerical decisability gate limited to specific mesh/operator context, generalization to broader settings is future work",
+      "[claude-opus-4-7] Admissibility depends on physics and software preconditions that require explicit articulation per relation",
+      "[claude-opus-4-7] Typed verdict domain violation axis not yet cross-MR calibrated or validated by independent raters",
+      "[claude-opus-4-7] Seeded-fault catalog is a bounded stress test, not a comprehensive real-world defect-detection reliability assessment",
+      "[grok-4.3] excessively dense prose and overlong structure diluting focus",
+      "[grok-4.3] non-independent cells limit strength of some statistical claims",
+      "[grok-4.3] incremental delta on MT extensions needs tighter bounding",
+      "[grok-4.3] some claims stray toward SciML evaluation rather than pure V&V method"
+    ],
+    "EmpiricalRigor": [
+      "Limited statistical independence and underpowered cells reduce inferential strength",
+      "Numerical floor generalization limited mainly to symmetric and one unstructured mesh",
+      "Admissibility gate efficacy tested on bounded case studies; broader task evidence absent",
+      "Automation of MR-card authoring and precondition checking needs development"
+    ],
+    "SciMLDomain": [
+      "Writing is severely repetitive: claim boundaries and hedges are restated 3-4 times across sections, inflating length and diluting the signal; a 30-40% cut is needed",
+      "Analytic Hessian bound for the P1 divergence floor is asserted but not derived; for a numerics-centered contribution the leading-order predictor and a-priori spectral-norm bound need explicit derivation or a committed appendix proof",
+      "Empirical evidence is concentrated on one task (cylinder flow) and one architecture family (MeshGraphNets); the PINN/FNO/airfoil cells are supporting but underpowered for the workflow-generality framing",
+      "Domain-violation coordinate D=m/(m+1) is ad hoc and per-relation only; the two-axis verdict space figure promises more structure than the current uncalibrated coordinate delivers"
+    ],
+    "NoveltyPositioning": [
+      "excessive length/density with repetitive tables and claim maps diluting focus",
+      "delta from Duque-Torres constraint/MetaTrimmer and Eniser relaxations not crisp enough on numerical-floor gate",
+      "some non-independent cells and descriptive stats over-interpreted as robustness evidence",
+      "tautological coverage reading (admitted MRs bound what they detect by construction)"
+    ],
+    "DevilsAdvocate": [
+      "Empirical cells lack independence; repeated runs on same trajectories/checkpoints inflate confidence without statistical justification",
+      "Reproducibility limited by non-redistributable checkpoints and GPU-dependent workflows; CPU-only reruns insufficient for full validation",
+      "Overloaded presentation dilutes core contribution with secondary baselines, cross-program audits, and speculative coverage implications",
+      "Unsupported generalization: claims about 'workflow' utility rely on narrow SciML contexts without evidence of transferability"
+    ]
+  },
+  "highest_roi_fix_by_reviewer": {
+    "EIC": [
+      "[gpt-5.5] Restructure and trim the paper around the validity-gated MR-card workflow plus primary cylinder/airfoil/FNO/PINN evidence, moving most secondary audits and coverage material to appendix or dropping it.",
+      "[claude-opus-4-7] Broaden numerical-floor admissibility reasoning beyond P1 symmetric mesh to more unstructured or scalable mesh/operator types",
+      "[grok-4.3] Condense by ~30%, move secondary tables/ledgers to appendix, sharpen writing on core V&V workflow"
+    ],
+    "EmpiricalRigor": "Add stronger independent statistical analyses and clarify CI interpretation to better support claim boundaries",
+    "SciMLDomain": "Cut repetitive boundary-hedging and consolidate the evidence presentation by 30-40%, freeing space for the missing Hessian-bound derivation and a tighter results narrative",
+    "NoveltyPositioning": "condense by 25-35% pruning redundant tables/ledgers while sharpening novelty delta in related-work table",
+    "DevilsAdvocate": "Restructure results around independent, minimally sufficient evidence cells; remove non-independent replications and secondary audits to sharpen focus on the admissibility gate\u2019s impact"
+  },
+  "per_reviewer": {
+    "EIC": {
+      "model": "gpt-5.5 + claude-opus-4-7 + grok-4.3",
+      "ensemble": true,
+      "review": {
+        "scores": {
+          "novelty_contribution": 7.0,
+          "technical_soundness": 7.67,
+          "empirical_rigor": 6.67,
+          "related_work_positioning": 7.67,
+          "clarity_writing": 6.33,
+          "reproducibility": 8.0,
+          "scope_fit_ist": 9.0
+        },
+        "accept_probability": 0.653,
+        "verdict": "major_revision",
+        "submission_maturity_0_100": 63.3,
+        "blocking_gaps": [
+          "[gpt-5.5] Empirical narrative is overloaded with secondary audits, smoke runs, sibling-artifact reuse, and fault catalogues that dilute the central V&V method claim.",
+          "[gpt-5.5] Many reported cells are non-independent or descriptive; the manuscript acknowledges this but still risks appearing more powered and general than it is.",
+          "[gpt-5.5] The central contribution must be sharpened as a software V&V asset-construction workflow, not as a broad SciML reliability or detector-coverage result.",
+          "[gpt-5.5] Seeded-fault and cross-program evidence are useful but too author-constructed/read-only to support strong coverage or generalization implications.",
+          "[claude-opus-4-7] Numerical decisability gate limited to specific mesh/operator context, generalization to broader settings is future work",
+          "[claude-opus-4-7] Admissibility depends on physics and software preconditions that require explicit articulation per relation",
+          "[claude-opus-4-7] Typed verdict domain violation axis not yet cross-MR calibrated or validated by independent raters",
+          "[claude-opus-4-7] Seeded-fault catalog is a bounded stress test, not a comprehensive real-world defect-detection reliability assessment",
+          "[grok-4.3] excessively dense prose and overlong structure diluting focus",
+          "[grok-4.3] non-independent cells limit strength of some statistical claims",
+          "[grok-4.3] incremental delta on MT extensions needs tighter bounding",
+          "[grok-4.3] some claims stray toward SciML evaluation rather than pure V&V method"
+        ],
+        "highest_roi_fix": [
+          "[gpt-5.5] Restructure and trim the paper around the validity-gated MR-card workflow plus primary cylinder/airfoil/FNO/PINN evidence, moving most secondary audits and coverage material to appendix or dropping it.",
+          "[claude-opus-4-7] Broaden numerical-floor admissibility reasoning beyond P1 symmetric mesh to more unstructured or scalable mesh/operator types",
+          "[grok-4.3] Condense by ~30%, move secondary tables/ledgers to appendix, sharpen writing on core V&V workflow"
+        ],
+        "top_strengths": [
+          "[gpt-5.5] Strong fit to IST's software verification and validation remit through oracle-free metamorphic testing assets.",
+          "[gpt-5.5] Clear and useful methodological idea: admissibility gating by physical preconditions, mapping compatibility, and measurement-floor decidability.",
+          "[gpt-5.5] Good artifact orientation with MR cards, ledgers, committed outputs, and explicit claim boundaries.",
+          "[claude-opus-4-7] Well scoped domain-validity gating method for SciML surrogate metamorphic testing",
+          "[claude-opus-4-7] Solid empirical evaluation across multiple tasks, architectures, and datasets reinforcing gate discriminativeness",
+          "[claude-opus-4-7] Clear and auditable workflow with MR cards, typed verdicts, and artifact-backed evidence ledgers",
+          "[grok-4.3] strong reproducibility via claim ledger, artifacts, and DOI",
+          "[grok-4.3] honest bounded scoping with explicit threats and boundaries",
+          "[grok-4.3] clear IST V&V fit for auditable MT assets on SciML surrogates"
+        ]
+      }
+    },
+    "EmpiricalRigor": {
+      "model": "claude-opus-4-7",
+      "ensemble": false,
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 9,
+          "empirical_rigor": 7,
+          "related_work_positioning": 8,
+          "clarity_writing": 8,
+          "reproducibility": 7,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.75,
+        "verdict": "minor_revision",
+        "submission_maturity_0_100": 70,
+        "blocking_gaps": [
+          "Limited statistical independence and underpowered cells reduce inferential strength",
+          "Numerical floor generalization limited mainly to symmetric and one unstructured mesh",
+          "Admissibility gate efficacy tested on bounded case studies; broader task evidence absent",
+          "Automation of MR-card authoring and precondition checking needs development"
+        ],
+        "highest_roi_fix": "Add stronger independent statistical analyses and clarify CI interpretation to better support claim boundaries",
+        "top_strengths": [
+          "Well-scoped and novel admissibility gating based on numerical operator floors",
+          "Clear executable MR-card workflow linking physical basis, tolerance, and verdict",
+          "Robust multi-task, multi-architecture replication with explicit domain and numerical validity reasoning"
+        ]
+      }
+    },
+    "SciMLDomain": {
+      "model": "glm-5.1",
+      "ensemble": false,
+      "review": {
+        "scores": {
+          "novelty_contribution": 6,
+          "technical_soundness": 7,
+          "empirical_rigor": 6,
+          "related_work_positioning": 7,
+          "clarity_writing": 5,
+          "reproducibility": 8,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.62,
+        "verdict": "major_revision",
+        "submission_maturity_0_100": 58,
+        "blocking_gaps": [
+          "Writing is severely repetitive: claim boundaries and hedges are restated 3-4 times across sections, inflating length and diluting the signal; a 30-40% cut is needed",
+          "Analytic Hessian bound for the P1 divergence floor is asserted but not derived; for a numerics-centered contribution the leading-order predictor and a-priori spectral-norm bound need explicit derivation or a committed appendix proof",
+          "Empirical evidence is concentrated on one task (cylinder flow) and one architecture family (MeshGraphNets); the PINN/FNO/airfoil cells are supporting but underpowered for the workflow-generality framing",
+          "Domain-violation coordinate D=m/(m+1) is ad hoc and per-relation only; the two-axis verdict space figure promises more structure than the current uncalibrated coordinate delivers"
+        ],
+        "highest_roi_fix": "Cut repetitive boundary-hedging and consolidate the evidence presentation by 30-40%, freeing space for the missing Hessian-bound derivation and a tighter results narrative",
+        "top_strengths": [
+          "Measurement-floor admissibility gate is a genuinely novel and technically sound contribution that correctly prevents false-alarm verdicts when the operator floor swamps the signal",
+          "Exceptional intellectual honesty: every claim is explicitly bounded, overclaims are enumerated and avoided, and the fail-closed claim ledger ties every number to a tracked artifact",
+          "Airfoil gate discrimination (rejecting incompressible continuity for compressible flow, rejecting mirror-y for non-zero angle of attack) is a compelling demonstration that the gate changes V&V outcomes, not merely annotates them"
+        ]
+      }
+    },
+    "NoveltyPositioning": {
+      "model": "grok-4.3",
+      "ensemble": false,
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 8,
+          "empirical_rigor": 8,
+          "related_work_positioning": 8,
+          "clarity_writing": 6,
+          "reproducibility": 9,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.62,
+        "verdict": "major_revision",
+        "submission_maturity_0_100": 58,
+        "blocking_gaps": [
+          "excessive length/density with repetitive tables and claim maps diluting focus",
+          "delta from Duque-Torres constraint/MetaTrimmer and Eniser relaxations not crisp enough on numerical-floor gate",
+          "some non-independent cells and descriptive stats over-interpreted as robustness evidence",
+          "tautological coverage reading (admitted MRs bound what they detect by construction)"
+        ],
+        "highest_roi_fix": "condense by 25-35% pruning redundant tables/ledgers while sharpening novelty delta in related-work table",
+        "top_strengths": [
+          "strong auditable asset workflow with MR cards and typed 2D verdicts",
+          "excellent reproducibility via Zenodo ledger and bounded claims",
+          "thorough positioning vs Kanewala/relaxed-oracle/SciML-V&V priors"
+        ]
+      }
+    },
+    "DevilsAdvocate": {
+      "model": "qwen3-max",
+      "ensemble": false,
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 8,
+          "empirical_rigor": 5,
+          "related_work_positioning": 8,
+          "clarity_writing": 6,
+          "reproducibility": 6,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.35,
+        "verdict": "major_revision",
+        "submission_maturity_0_100": 55,
+        "blocking_gaps": [
+          "Empirical cells lack independence; repeated runs on same trajectories/checkpoints inflate confidence without statistical justification",
+          "Reproducibility limited by non-redistributable checkpoints and GPU-dependent workflows; CPU-only reruns insufficient for full validation",
+          "Overloaded presentation dilutes core contribution with secondary baselines, cross-program audits, and speculative coverage implications",
+          "Unsupported generalization: claims about 'workflow' utility rely on narrow SciML contexts without evidence of transferability"
+        ],
+        "highest_roi_fix": "Restructure results around independent, minimally sufficient evidence cells; remove non-independent replications and secondary audits to sharpen focus on the admissibility gate\u2019s impact",
+        "top_strengths": [
+          "Clear domain-validity rubric linking MR admissibility to numerical floors and physical preconditions",
+          "Well-scoped fit to IST\u2019s software V&V remit with executable MR-card assets and typed verdicts",
+          "Honest bounding of claims and explicit threat discussion"
+        ]
+      }
+    }
+  },
+  "raw_responses": {
+    "EIC": {
+      "gpt-5.5": {
+        "id": "resp_0c4838384f1981fc016a379821dbd88193b500faafa50c58c8",
+        "object": "chat.completion",
+        "created": 1782028336,
+        "model": "gpt-5.5",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"scores\":{\"novelty_contribution\":7,\"technical_soundness\":7,\"empirical_rigor\":6,\"related_work_positioning\":7,\"clarity_writing\":5,\"reproducibility\":8,\"scope_fit_ist\":9},\"accept_probability\":0.58,\"verdict\":\"major_revision\",\"submission_maturity_0_100\":62,\"blocking_gaps\":[\"Empirical narrative is overloaded with secondary audits, smoke runs, sibling-artifact reuse, and fault catalogues that dilute the central V&V method claim.\",\"Many reported cells are non-independent or descriptive; the manuscript acknowledges this but still risks appearing more powered and general than it is.\",\"The central contribution must be sharpened as a software V&V asset-construction workflow, not as a broad SciML reliability or detector-coverage result.\",\"Seeded-fault and cross-program evidence are useful but too author-constructed/read-only to support strong coverage or generalization implications.\"],\"highest_roi_fix\":\"Restructure and trim the paper around the validity-gated MR-card workflow plus primary cylinder/airfoil/FNO/PINN evidence, moving most secondary audits and coverage material to appendix or dropping it.\",\"top_strengths\":[\"Strong fit to IST's software verification and validation remit through oracle-free metamorphic testing assets.\",\"Clear and useful methodological idea: admissibility gating by physical preconditions, mapping compatibility, and measurement-floor decidability.\",\"Good artifact orientation with MR cards, ledgers, committed outputs, and explicit claim boundaries.\"]}"
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 21894,
+          "completion_tokens": 522,
+          "total_tokens": 22416
+        }
+      },
+      "claude-opus-4-7": {
+        "id": "chatcmpl-8v8bsnu0fzu",
+        "model": "claude-opus-4-7",
+        "object": "chat.completion",
+        "created": 1782028349,
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 7,\n    \"related_work_positioning\": 8,\n    \"clarity_writing\": 8,\n    \"reproducibility\": 7,\n    \"scope_fit_ist\": 9\n  },\n  \"accept_probability\": 0.78,\n  \"verdict\": \"minor_revision\",\n  \"submission_maturity_0_100\": 75,\n  \"blocking_gaps\": [\n    \"Numerical decisability gate limited to specific mesh/operator context, generalization to broader settings is future work\",\n    \"Admissibility depends on physics and software preconditions that require explicit articulation per relation\",\n    \"Typed verdict domain violation axis not yet cross-MR calibrated or validated by independent raters\",\n    \"Seeded-fault catalog is a bounded stress test, not a comprehensive real-world defect-detection reliability assessment\"\n  ],\n  \"highest_roi_fix\": \"Broaden numerical-floor admissibility reasoning beyond P1 symmetric mesh to more unstructured or scalable mesh/operator types\",\n  \"top_strengths\": [\n    \"Well scoped domain-validity gating method for SciML surrogate metamorphic testing\",\n    \"Solid empirical evaluation across multiple tasks, architectures, and datasets reinforcing gate discriminativeness\",\n    \"Clear and auditable workflow with MR cards, typed verdicts, and artifact-backed evidence ledgers\"\n  ]\n}"
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 25091,
+          "completion_tokens": 342,
+          "total_tokens": 25433,
+          "usage_semantic": "openai",
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          },
+          "completion_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0
+          },
+          "input_tokens": 25091,
+          "output_tokens": 0,
+          "input_tokens_details": null,
+          "claude_cache_creation_5_m_tokens": 0,
+          "claude_cache_creation_1_h_tokens": 0
+        }
+      },
+      "grok-4.3": {
+        "id": "b11c4a68-2ed8-45f1-9e88-bfca690f1e11",
+        "model": "grok-4.3",
+        "object": "chat.completion",
+        "created": 1782028358,
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 7,\n    \"related_work_positioning\": 8,\n    \"clarity_writing\": 6,\n    \"reproducibility\": 9,\n    \"scope_fit_ist\": 9\n  },\n  \"accept_probability\": 0.6,\n  \"verdict\": \"major_revision\",\n  \"submission_maturity_0_100\": 53,\n  \"blocking_gaps\": [\n    \"excessively dense prose and overlong structure diluting focus\",\n    \"non-independent cells limit strength of some statistical claims\",\n    \"incremental delta on MT extensions needs tighter bounding\",\n    \"some claims stray toward SciML evaluation rather than pure V&V method\"\n  ],\n  \"highest_roi_fix\": \"Condense by ~30%, move secondary tables/ledgers to appendix, sharpen writing on core V&V workflow\",\n  \"top_strengths\": [\n    \"strong reproducibility via claim ledger, artifacts, and DOI\",\n    \"honest bounded scoping with explicit threats and boundaries\",\n    \"clear IST V&V fit for auditable MT assets on SciML surrogates\"\n  ]\n}"
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 20491,
+          "completion_tokens": 257,
+          "total_tokens": 20748,
+          "usage_semantic": "openai",
+          "prompt_tokens_details": {
+            "cached_tokens": 64,
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          },
+          "completion_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "reasoning_tokens": 0
+          },
+          "input_tokens": 20491,
+          "output_tokens": 0,
+          "input_tokens_details": null,
+          "claude_cache_creation_5_m_tokens": 0,
+          "claude_cache_creation_1_h_tokens": 0
+        }
+      }
+    },
+    "EmpiricalRigor": {
+      "id": "chatcmpl-q5yev4zequp",
+      "model": "claude-opus-4-7",
+      "object": "chat.completion",
+      "created": 1782028365,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 9,\n    \"empirical_rigor\": 7,\n    \"related_work_positioning\": 8,\n    \"clarity_writing\": 8,\n    \"reproducibility\": 7,\n    \"scope_fit_ist\": 9\n  },\n  \"accept_probability\": 0.75,\n  \"verdict\": \"minor_revision\",\n  \"submission_maturity_0_100\": 70,\n  \"blocking_gaps\": [\n    \"Limited statistical independence and underpowered cells reduce inferential strength\",\n    \"Numerical floor generalization limited mainly to symmetric and one unstructured mesh\",\n    \"Admissibility gate efficacy tested on bounded case studies; broader task evidence absent\",\n    \"Automation of MR-card authoring and precondition checking needs development\"\n  ],\n  \"highest_roi_fix\": \"Add stronger independent statistical analyses and clarify CI interpretation to better support claim boundaries\",\n  \"top_strengths\": [\n    \"Well-scoped and novel admissibility gating based on numerical operator floors\",\n    \"Clear executable MR-card workflow linking physical basis, tolerance, and verdict\",\n    \"Robust multi-task, multi-architecture replication with explicit domain and numerical validity reasoning\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 25040,
+        "completion_tokens": 302,
+        "total_tokens": 25342,
+        "usage_semantic": "openai",
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        },
+        "completion_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "input_tokens": 25040,
+        "output_tokens": 0,
+        "input_tokens_details": null,
+        "claude_cache_creation_5_m_tokens": 0,
+        "claude_cache_creation_1_h_tokens": 0
+      }
+    },
+    "SciMLDomain": {
+      "id": "202606211552497b6c0d55769d4023",
+      "object": "chat.completion",
+      "created": 1782028426,
+      "model": "glm-5.1",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"scores\": {\n    \"novelty_contribution\": 6,\n    \"technical_soundness\": 7,\n    \"empirical_rigor\": 6,\n    \"related_work_positioning\": 7,\n    \"clarity_writing\": 5,\n    \"reproducibility\": 8,\n    \"scope_fit_ist\": 9\n  },\n  \"accept_probability\": 0.62,\n  \"verdict\": \"major_revision\",\n  \"submission_maturity_0_100\": 58,\n  \"blocking_gaps\": [\n    \"Writing is severely repetitive: claim boundaries and hedges are restated 3-4 times across sections, inflating length and diluting the signal; a 30-40% cut is needed\",\n    \"Analytic Hessian bound for the P1 divergence floor is asserted but not derived; for a numerics-centered contribution the leading-order predictor and a-priori spectral-norm bound need explicit derivation or a committed appendix proof\",\n    \"Empirical evidence is concentrated on one task (cylinder flow) and one architecture family (MeshGraphNets); the PINN/FNO/airfoil cells are supporting but underpowered for the workflow-generality framing\",\n    \"Domain-violation coordinate D=m/(m+1) is ad hoc and per-relation only; the two-axis verdict space figure promises more structure than the current uncalibrated coordinate delivers\"\n  ],\n  \"highest_roi_fix\": \"Cut repetitive boundary-hedging and consolidate the evidence presentation by 30-40%, freeing space for the missing Hessian-bound derivation and a tighter results narrative\",\n  \"top_strengths\": [\n    \"Measurement-floor admissibility gate is a genuinely novel and technically sound contribution that correctly prevents false-alarm verdicts when the operator floor swamps the signal\",\n    \"Exceptional intellectual honesty: every claim is explicitly bounded, overclaims are enumerated and avoided, and the fail-closed claim ledger ties every number to a tracked artifact\",\n    \"Airfoil gate discrimination (rejecting incompressible continuity for compressible flow, rejecting mirror-y for non-zero angle of attack) is a compelling demonstration that the gate changes V&V outcomes, not merely annotates them\"\n  ]\n}\n```",
+            "reasoning_content": "Let me carefully analyze this manuscript as a domain expert in scientific ML and scientific software testing with a numerical methods background.\n\nThe paper proposes a domain-validity-gated metamorphic testing workflow for scientific ML surrogates. Let me evaluate each dimension:\n\n**Novelty/Contribution:**\nThe core idea is that metamorphic relations for SciML surrogates need an admissibility gate that checks: (1) physical basis, (2) transformation preconditions, (3) boundary/mapping compatibility, (4) numerical decidability (tolerance dominates operator floor). The MR-card format and typed verdicts are organizational contributions. The measurement-floor admissibility check is the most novel element - requiring that a relation's tolerance dominate the measuring operator's intrinsic error floor before it can yield a meaningful verdict. This is a reasonable but incremental contribution for IST. The idea that you shouldn't test a conservation relation when your discrete divergence operator has an O(h) floor that swamps the signal is sound and useful, but not revolutionary.\n\n**Technical Soundness:**\nLet me check the key technical claims:\n\n1. **Mirror-y equivariance**: The paper correctly identifies that mirror-y is not an exact relation on an asymmetric mesh (cylinder off-center by 7.2mm, non-bijective reflection). Downgrading to OOD-stress probe is reasonable. The synthetic symmetric mesh test is well-designed. The relative L2 of 1.10 on the symmetric mesh is a genuine equivariance violation - this is physically plausible for MeshGraphNets which doesn't have built-in equivariance.\n\n2. **Node-permutation equivariance**: This is essentially a representation contract of message-passing networks. The paper correctly notes this is a sanity check. Relative L2 = 0.0 is expected for permutation-equivariant architectures. This is numerically correct.\n\n3. **Discrete divergence boundedness**: The P1 divergence operator floor analysis is the most technically substantive part. The claim that the floor is O(h) with slope 0.984 (CI [0.975, 0.992]) is consistent with P1 finite element theory - the divergence of a P1 field is piecewise constant, and for a divergence-free reference field, the measured divergence comes from the Taylor remainder of the interpolation error, which is indeed O(h). The closed-form floor from the Hessian is correct in principle. The leading-order predictor matching to 0.5% (1.337 vs 1.343) is plausible. The deferral of absolute conservation is the correct decision given this floor.\n\n4. **Airfoil task discrimination**: The gate correctly rejects incompressible continuity (\u2207\u00b7u = 0) for compressible flow where density varies by 2.13x. This is physically correct. The rejection of mirror-y due to non-zero angle of attack is also correct.\n\n5. **FNO conservation failures (24/24)**: This is interesting - the FNO doesn't conserve the discrete quantity. This is expected since FNO has no built-in conservation structure. The Dirichlet translation rejection is correct - changing boundary conditions changes the PDE solution.\n\n6. **PINN results**: MR-B (boundary residual) showing different pass rates for Burgers vs heat is physically plausible - Neumann BCs for heat allow larger boundary residuals than Dirichlet BCs for Burgers.\n\nSome concerns:\n- The analytic Hessian bound is mentioned but the actual derivation is not shown in detail in the manuscript. The claim that \"the measured floor equals the geometry-weighted second-order Taylor remainder exactly\" needs more careful justification - this is true for P1 interpolation of a smooth divergence-free field, but the wording could be more precise.\n- The domain-violation coordinate D = m/(m+1) is ad hoc and not rigorously justified.\n- The \"validity-coverage duality\" is stated as a falsifiable hypothesis but the evidence is limited.\n\n**Empirical Rigor:**\nThe paper is unusually honest about its boundaries. It explicitly states what it does NOT claim. The statistical treatment is appropriate - Wilson CIs for binary outcomes, Wilcoxon for paired comparisons, bootstrap for medians. The paper correctly notes that K=6 checkpoints from the same training run are not independent samples. The seeded-fault catalogue is limited (10 mutants) but the paper acknowledges this.\n\nHowever:\n- The primary evidence is heavily concentrated on one task (cylinder flow) with one architecture family (MeshGraphNets).\n- The PINN and FNO evidence, while present, is more limited.\n- The airfoil evidence uses a poorly trained model (relative L2 0.92), though the paper correctly notes the gate decisions don't depend on accuracy.\n- The cross-program breadth check is read-only reuse of a sibling repository, not new executions.\n- The LLM baseline (Fleiss kappa 0.077) is essentially noise, which weakens the comparative claim.\n\n**Related Work Positioning:**\nThe positioning against Duque-Torres/MetaTrimmer, Eniser relaxations, and Reichert et al. is adequate. The distinction between candidate identification and admissibility gating is clearly drawn. The table comparing closest prior work is helpful. However, the paper could better position against the formal verification community's work on neural network certification and equivariance testing.\n\n**Clarity/Writing:**\nThe paper is dense and sometimes repetitive. The same claims are restated multiple times with slightly different hedging language. The MR-card-to-verdict map (Table 3) is useful but could be more concise. The appendices are extensive. The writing is generally clear but could benefit from tightening - many paragraphs restate the same boundary conditions on claims.\n\n**Reproducibility:**\nStrong commitment to artifacts: Zenodo DOI, claim ledger, committed outputs, manifests. The paper explicitly states what can and cannot be reproduced. This is above average for IST.\n\n**Scope Fit:**\nExcellent fit for IST's software V&V remit. The paper addresses a real testing problem (oracle problem for SciML) with a methodological contribution.\n\n**Overall Assessment:**\nThis is a solid, well-scoped V&V method paper that makes a genuine (if incremental) contribution. The measurement-floor admissibility gate is the key novelty, and it's technically sound. The empirical evidence is bounded but honestly presented. The main weaknesses are: (1) the evidence is heavily concentrated on one task/architecture, (2) the writing is repetitive and could be tightened, (3) some technical details (Hessian bound derivation) are under-specified.\n\nFor IST calibration: This is clearly above borderline but not exemplary. The contribution is real but incremental. The empirical scope is limited but honestly bounded. I'd place this in the \"clearly publishable with revision\" range.\n\nScores:\n- novelty_contribution: 6 (the measurement-floor gate is new and useful but the other elements are organizational)\n- technical_soundness: 7 (generally sound, some under-specification in the Hessian bound)\n- empirical_rigor: 6 (honest boundaries but concentrated evidence, limited independence)\n- related_work_positioning: 7 (adequate positioning, clear delta)\n- clarity_writing: 5 (dense, repetitive, could be significantly tightened)\n- reproducibility: 8 (strong artifact commitment)\n- scope_fit_ist: 9 (excellent fit)\n\nAccept probability: ~0.65 - this would likely get a major revision asking for: (1) tightening the writing significantly, (2) more detail on the Hessian bound, (3) possibly more cross-architecture evidence.\n\nVerdict: major_revision (the writing needs significant tightening and some technical details need expansion)\n\nSubmission maturity: 60 (major revision territory, needs significant work on presentation and some technical elaboration)\n\nBlocking gaps:\n1. Writing is repetitive and overloaded - same claims restated with different hedging 3-4 times\n2. Analytic Hessian bound derivation is under-specified for a numerics claim\n3. Empirical evidence too concentrated on one task/architecture family for the generality implied\n4. Domain-violation coordinate D is ad hoc without rigorous justification\n\nHighest ROI fix: Tighten the writing by 30-40% by eliminating repetitive restatements of claim boundaries and consolidating the evidence presentation\n\nTop strengths:\n1. Measurement-floor admissibility gate is a genuinely useful and technically sound contribution\n2. Exceptional honesty about claim boundaries and what the evidence does NOT support\n3. Strong reproducibility commitment with artifacts, ledgers, and DOI"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21906,
+        "completion_tokens": 2231,
+        "total_tokens": 24137,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1766
+        }
+      },
+      "request_id": "202606211552497b6c0d55769d4023"
+    },
+    "NoveltyPositioning": {
+      "id": "6f1088a4-66ee-4c51-b438-f7fa041d95d3",
+      "model": "grok-4.3",
+      "object": "chat.completion",
+      "created": 1782028436,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\"novelty_contribution\": 7, \"technical_soundness\": 8, \"empirical_rigor\": 8, \"related_work_positioning\": 8, \"clarity_writing\": 6, \"reproducibility\": 9, \"scope_fit_ist\": 9},\n  \"accept_probability\": 0.62,\n  \"verdict\": \"major_revision\",\n  \"submission_maturity_0_100\": 58,\n  \"blocking_gaps\": [\"excessive length/density with repetitive tables and claim maps diluting focus\", \"delta from Duque-Torres constraint/MetaTrimmer and Eniser relaxations not crisp enough on numerical-floor gate\", \"some non-independent cells and descriptive stats over-interpreted as robustness evidence\", \"tautological coverage reading (admitted MRs bound what they detect by construction)\"],\n  \"highest_roi_fix\": \"condense by 25-35% pruning redundant tables/ledgers while sharpening novelty delta in related-work table\",\n  \"top_strengths\": [\"strong auditable asset workflow with MR cards and typed 2D verdicts\", \"excellent reproducibility via Zenodo ledger and bounded claims\", \"thorough positioning vs Kanewala/relaxed-oracle/SciML-V&V priors\"]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 20478,
+        "completion_tokens": 266,
+        "total_tokens": 20744,
+        "usage_semantic": "openai",
+        "prompt_tokens_details": {
+          "cached_tokens": 64,
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        },
+        "completion_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "input_tokens": 20478,
+        "output_tokens": 0,
+        "input_tokens_details": null,
+        "claude_cache_creation_5_m_tokens": 0,
+        "claude_cache_creation_1_h_tokens": 0
+      }
+    },
+    "DevilsAdvocate": {
+      "id": "chatcmpl-8b4f5e37-e741-9a8e-9381-c031248000b6",
+      "object": "chat.completion",
+      "created": 1782028440,
+      "model": "qwen3-max",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 5,\n    \"related_work_positioning\": 8,\n    \"clarity_writing\": 6,\n    \"reproducibility\": 6,\n    \"scope_fit_ist\": 9\n  },\n  \"accept_probability\": 0.35,\n  \"verdict\": \"major_revision\",\n  \"submission_maturity_0_100\": 55,\n  \"blocking_gaps\": [\n    \"Empirical cells lack independence; repeated runs on same trajectories/checkpoints inflate confidence without statistical justification\",\n    \"Reproducibility limited by non-redistributable checkpoints and GPU-dependent workflows; CPU-only reruns insufficient for full validation\",\n    \"Overloaded presentation dilutes core contribution with secondary baselines, cross-program audits, and speculative coverage implications\",\n    \"Unsupported generalization: claims about 'workflow' utility rely on narrow SciML contexts without evidence of transferability\"\n  ],\n  \"highest_roi_fix\": \"Restructure results around independent, minimally sufficient evidence cells; remove non-independent replications and secondary audits to sharpen focus on the admissibility gate\u2019s impact\",\n  \"top_strengths\": [\n    \"Clear domain-validity rubric linking MR admissibility to numerical floors and physical preconditions\",\n    \"Well-scoped fit to IST\u2019s software V&V remit with executable MR-card assets and typed verdicts\",\n    \"Honest bounding of claims and explicit threat discussion\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 22406,
+        "completion_tokens": 326,
+        "total_tokens": 22732,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    }
+  },
+  "honesty_boundary": "Single-call temperature-0 LLM reviews via one gateway, scored against an IST submission-maturity rubric; the EIC seat mean-combines three models. An automated maturity estimate, NOT human peer review and NOT a prediction of an actual IST editorial decision."
+}
