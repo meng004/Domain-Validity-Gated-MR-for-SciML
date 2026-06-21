@@ -1,6 +1,8 @@
 # Cover Letter: Information and Software Technology (regular paper)
 
-> Draft. Author-specific fields are marked `[...]`; fill before submission.
+> Signature filled from the manuscript author block. **Only remaining author input:** the
+> suggested/opposed reviewers line below (optional; Editorial Manager collects these in its
+> own form, so replace `[Reviewer 1/2/3, ...]` with real, conflict-free names or delete the line).
 
 To the Editor-in-Chief
 Information and Software Technology
@@ -26,6 +28,6 @@ We suggest the following potential reviewers, with no conflict of interest: [Rev
 Thank you for considering our submission.
 
 Sincerely,
-[Corresponding author name], on behalf of all authors
-[Affiliation]
-[Email]
+Meng Li, on behalf of all authors (Xiaohua Yang, Jie Liu, Shiyu Yan)
+School of Computing, University of South China, Hengyang, China
+mlemon@usc.edu.cn
