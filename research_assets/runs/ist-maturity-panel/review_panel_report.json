@@ -1,0 +1,410 @@
+{
+  "record_type": "ist-maturity-panel",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-21T06:56:18Z",
+  "venue": "Elsevier IST regular track (CAS Tier-2 / JCR Q1-Q2)",
+  "designer": "academic-paper-reviewer skill (field_analyst + quality_rubrics)",
+  "executor": "5 vendor-diverse gateway models, one per persona, temperature 0",
+  "paper": "paper/ist-submission/main.tex",
+  "panel": [
+    {
+      "role": "EIC",
+      "model": "gpt-5.5"
+    },
+    {
+      "role": "EmpiricalRigor",
+      "model": "claude-opus-4-7"
+    },
+    {
+      "role": "SciMLDomain",
+      "model": "glm-5.1"
+    },
+    {
+      "role": "NoveltyPositioning",
+      "model": "grok-4.3"
+    },
+    {
+      "role": "DevilsAdvocate",
+      "model": "qwen3-max"
+    }
+  ],
+  "reviewers_succeeded": [
+    "EIC",
+    "EmpiricalRigor",
+    "SciMLDomain",
+    "NoveltyPositioning",
+    "DevilsAdvocate"
+  ],
+  "review_failures": [
+    {
+      "role": "NoveltyPositioning",
+      "model": "grok-4.3",
+      "max_tokens": 16000,
+      "error": "HTTP Error 429: Too Many Requests"
+    }
+  ],
+  "per_dimension_mean": {
+    "novelty_contribution": 6.8,
+    "technical_soundness": 8.0,
+    "empirical_rigor": 6.4,
+    "related_work_positioning": 7.6,
+    "clarity_writing": 6.4,
+    "reproducibility": 7.6,
+    "scope_fit_ist": 9.0
+  },
+  "overall_dimension_mean": 7.4,
+  "accept_probability_mean": 0.59,
+  "accept_probability_range": [
+    0.35,
+    0.75
+  ],
+  "maturity_index_mean": 61.2,
+  "maturity_index_range": [
+    55,
+    70
+  ],
+  "verdict_distribution": {
+    "major_revision": 4,
+    "minor_revision": 1
+  },
+  "panel_majority_verdict": "major_revision",
+  "blocking_gaps_by_reviewer": {
+    "EIC": [
+      "Manuscript is overloaded with many secondary studies, mutants, cross-program audits, and baselines that dilute the central V&V method contribution",
+      "Several empirical cells are descriptive and non-independent despite large denominators, so the evidence must be further disciplined around what it actually licenses",
+      "The boundary between the proposed software-V&V workflow and SciML/physics-specific case-study findings needs sharper separation",
+      "Coverage and fault-detection implications remain suggestive and should be framed more clearly as stress-test evidence, not a general detector evaluation"
+    ],
+    "EmpiricalRigor": [
+      "Empirical scope bounded to limited architectures, tasks, and mesh topologies",
+      "Operator-floor generalization to unstructured meshes and boundary treatments incomplete",
+      "Numerical decidability axis not cross-calibrated across MR classes",
+      "Reproducibility limited by reliance on GPU training and non-redistributable checkpoints"
+    ],
+    "SciMLDomain": [
+      "Extreme verbosity and repetition\u2014the same claims, hedges, and boundary-statements are restated 3\u20135 times; the paper needs ~35% condensation to let the contribution emerge",
+      "Narrow primary evidence base\u2014one CFD task (cylinder flow) carries the load; the airfoil/PINN/FNO supporting tiers are thin and feel bolted-on rather than integrated",
+      "Seeded-fault catalogue is underpowered (10 mutants, 5/10 detected) and the coverage-geometry claim rests on a falsifiability argument rather than calibrated evidence",
+      "Contribution obscured by relentless boundary-claiming inline; every result paragraph interrupts itself to list what it is not, making the affirmative contribution hard to extract"
+    ],
+    "NoveltyPositioning": [
+      "core idea is incremental recombination of existing MT constraint/relaxed-oracle/validity concepts (Duque-Torres, Eniser, Kanewala) with SciML diagnostics rather than crisp new delta",
+      "tautological framing in parts: gate measures exactly the domain/numerical conditions it was built to detect",
+      "closest-prior delta not crisp enough vs. Kanewala scientific-MT cluster, MetaTrimmer, and recent physics-MR SciML papers (Reichert, Yang&Chui)",
+      "over-claims bounded utility as methodological contribution while evidence is mostly single-family replication"
+    ],
+    "DevilsAdvocate": [
+      "Non-independent empirical cells misreported as inferential evidence (e.g., K=6 roster treated as independent trials)",
+      "Fragile statistics: descriptive counts lack proper uncertainty quantification; Wilson CIs applied to non-binomial structures",
+      "Reproducibility gaps: GPU-dependent workflows (PhysicsNeMo, airfoil) not fully replicable from artifacts; no deterministic seeds for all runs",
+      "'So what?' test: contribution diluted by over-extended case studies (PINN/FNO/airfoil) that don't strengthen core validity-gating claim"
+    ]
+  },
+  "highest_roi_fix_by_reviewer": {
+    "EIC": "Restructure and shorten the Results around the core IST claim: validity-gated MR asset construction, with secondary SciML and fault-coverage material moved to appendices and explicitly scoped.",
+    "EmpiricalRigor": "Broaden operator-floor calibration and numerical decidability validation to diverse meshes and real CFD boundary treatments",
+    "SciMLDomain": "Condense the manuscript by 30\u201340%: eliminate repetition, consolidate all boundary/disclaimer text into a single dedicated subsection, and let the technical contribution (operator-floor gate, typed verdicts, gate-discrimination result) stand clearly on its own",
+    "NoveltyPositioning": "sharpen related-work positioning and novelty claims with explicit crisp delta vs. closest priors (Duque-Torres constraint pipelines, Eniser relaxations, Kanewala SciMT) and remove any tautological language",
+    "DevilsAdvocate": "Restructure empirical analysis to treat non-independent cells as descriptive summaries only and remove misleading inferential language"
+  },
+  "per_reviewer": {
+    "EIC": {
+      "model": "gpt-5.5",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 7,
+          "empirical_rigor": 7,
+          "related_work_positioning": 8,
+          "clarity_writing": 6,
+          "reproducibility": 8,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.62,
+        "verdict": "major_revision",
+        "submission_maturity_0_100": 68,
+        "blocking_gaps": [
+          "Manuscript is overloaded with many secondary studies, mutants, cross-program audits, and baselines that dilute the central V&V method contribution",
+          "Several empirical cells are descriptive and non-independent despite large denominators, so the evidence must be further disciplined around what it actually licenses",
+          "The boundary between the proposed software-V&V workflow and SciML/physics-specific case-study findings needs sharper separation",
+          "Coverage and fault-detection implications remain suggestive and should be framed more clearly as stress-test evidence, not a general detector evaluation"
+        ],
+        "highest_roi_fix": "Restructure and shorten the Results around the core IST claim: validity-gated MR asset construction, with secondary SciML and fault-coverage material moved to appendices and explicitly scoped.",
+        "top_strengths": [
+          "Excellent fit to IST's software V&V remit through a concrete oracle-free testing workflow",
+          "Useful and credible methodological contribution: admissibility gating, MR cards, typed verdicts, and claim ledgers",
+          "Strong reproducibility posture with artifacts, ledgers, DOI, and explicit claim-to-evidence mapping"
+        ]
+      }
+    },
+    "EmpiricalRigor": {
+      "model": "claude-opus-4-7",
+      "review": {
+        "scores": {
+          "novelty_contribution": 8,
+          "technical_soundness": 9,
+          "empirical_rigor": 7,
+          "related_work_positioning": 8,
+          "clarity_writing": 8,
+          "reproducibility": 7,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.75,
+        "verdict": "minor_revision",
+        "submission_maturity_0_100": 70,
+        "blocking_gaps": [
+          "Empirical scope bounded to limited architectures, tasks, and mesh topologies",
+          "Operator-floor generalization to unstructured meshes and boundary treatments incomplete",
+          "Numerical decidability axis not cross-calibrated across MR classes",
+          "Reproducibility limited by reliance on GPU training and non-redistributable checkpoints"
+        ],
+        "highest_roi_fix": "Broaden operator-floor calibration and numerical decidability validation to diverse meshes and real CFD boundary treatments",
+        "top_strengths": [
+          "Clear, methodologically sound admissibility gate combining physical, software, and numerical criteria",
+          "Comprehensive, artifact-backed validity-gated MR workflow with executable assets and typed verdicts",
+          "Thorough empirical study with bounded case studies, cross-checkpoint and cross-architecture replication, and seeded-fault stress testing"
+        ]
+      }
+    },
+    "SciMLDomain": {
+      "model": "glm-5.1",
+      "review": {
+        "scores": {
+          "novelty_contribution": 6,
+          "technical_soundness": 8,
+          "empirical_rigor": 6,
+          "related_work_positioning": 7,
+          "clarity_writing": 4,
+          "reproducibility": 8,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.58,
+        "verdict": "major_revision",
+        "submission_maturity_0_100": 55,
+        "blocking_gaps": [
+          "Extreme verbosity and repetition\u2014the same claims, hedges, and boundary-statements are restated 3\u20135 times; the paper needs ~35% condensation to let the contribution emerge",
+          "Narrow primary evidence base\u2014one CFD task (cylinder flow) carries the load; the airfoil/PINN/FNO supporting tiers are thin and feel bolted-on rather than integrated",
+          "Seeded-fault catalogue is underpowered (10 mutants, 5/10 detected) and the coverage-geometry claim rests on a falsifiability argument rather than calibrated evidence",
+          "Contribution obscured by relentless boundary-claiming inline; every result paragraph interrupts itself to list what it is not, making the affirmative contribution hard to extract"
+        ],
+        "highest_roi_fix": "Condense the manuscript by 30\u201340%: eliminate repetition, consolidate all boundary/disclaimer text into a single dedicated subsection, and let the technical contribution (operator-floor gate, typed verdicts, gate-discrimination result) stand clearly on its own",
+        "top_strengths": [
+          "Numerically rigorous operator-floor analysis: O(h) P1-divergence floor with closed-form Hessian bound matching measured floor to 0.5%, topology-stable on unstructured Delaunay\u2014this is the paper's deepest technical contribution",
+          "Gate demonstrably changes V&V outcomes across tasks: incompressible continuity deferred on cylinder flow but rejected on physical grounds for compressible airfoil\u2014the strongest evidence that the gate does real work, not just annotation",
+          "Exceptionally honest scoping: every claim is tied to a tracked artifact via the claim ledger, and statistical reporting correctly distinguishes descriptive counts from inferential statements"
+        ]
+      }
+    },
+    "NoveltyPositioning": {
+      "model": "grok-4.3",
+      "review": {
+        "scores": {
+          "novelty_contribution": 6,
+          "technical_soundness": 8,
+          "empirical_rigor": 7,
+          "related_work_positioning": 7,
+          "clarity_writing": 8,
+          "reproducibility": 9,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.65,
+        "verdict": "major_revision",
+        "submission_maturity_0_100": 58,
+        "blocking_gaps": [
+          "core idea is incremental recombination of existing MT constraint/relaxed-oracle/validity concepts (Duque-Torres, Eniser, Kanewala) with SciML diagnostics rather than crisp new delta",
+          "tautological framing in parts: gate measures exactly the domain/numerical conditions it was built to detect",
+          "closest-prior delta not crisp enough vs. Kanewala scientific-MT cluster, MetaTrimmer, and recent physics-MR SciML papers (Reichert, Yang&Chui)",
+          "over-claims bounded utility as methodological contribution while evidence is mostly single-family replication"
+        ],
+        "highest_roi_fix": "sharpen related-work positioning and novelty claims with explicit crisp delta vs. closest priors (Duque-Torres constraint pipelines, Eniser relaxations, Kanewala SciMT) and remove any tautological language",
+        "top_strengths": [
+          "strong reproducibility with claim-ledger, artifacts, and Zenodo DOI",
+          "well-scoped honest V&V method paper fitting IST software-testing remit",
+          "clear writing and structured presentation of workflow, MR-cards, and typed verdicts"
+        ]
+      }
+    },
+    "DevilsAdvocate": {
+      "model": "qwen3-max",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 8,
+          "empirical_rigor": 5,
+          "related_work_positioning": 8,
+          "clarity_writing": 6,
+          "reproducibility": 6,
+          "scope_fit_ist": 9
+        },
+        "accept_probability": 0.35,
+        "verdict": "major_revision",
+        "submission_maturity_0_100": 55,
+        "blocking_gaps": [
+          "Non-independent empirical cells misreported as inferential evidence (e.g., K=6 roster treated as independent trials)",
+          "Fragile statistics: descriptive counts lack proper uncertainty quantification; Wilson CIs applied to non-binomial structures",
+          "Reproducibility gaps: GPU-dependent workflows (PhysicsNeMo, airfoil) not fully replicable from artifacts; no deterministic seeds for all runs",
+          "'So what?' test: contribution diluted by over-extended case studies (PINN/FNO/airfoil) that don't strengthen core validity-gating claim"
+        ],
+        "highest_roi_fix": "Restructure empirical analysis to treat non-independent cells as descriptive summaries only and remove misleading inferential language",
+        "top_strengths": [
+          "Clear domain-validity rubric linking MR admissibility to numerical decidability",
+          "Well-scoped methodological contribution fitting IST's V&V remit",
+          "Strong related work positioning against MT/SciML-V&V literature"
+        ]
+      }
+    }
+  },
+  "raw_responses": {
+    "EIC": {
+      "id": "resp_009a57f5d37ade72016a378aa69dd08195954d409be61d088d",
+      "object": "chat.completion",
+      "created": 1782024880,
+      "model": "gpt-5.5",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 7,\n    \"empirical_rigor\": 7,\n    \"related_work_positioning\": 8,\n    \"clarity_writing\": 6,\n    \"reproducibility\": 8,\n    \"scope_fit_ist\": 9\n  },\n  \"accept_probability\": 0.62,\n  \"verdict\": \"major_revision\",\n  \"submission_maturity_0_100\": 68,\n  \"blocking_gaps\": [\n    \"Manuscript is overloaded with many secondary studies, mutants, cross-program audits, and baselines that dilute the central V&V method contribution\",\n    \"Several empirical cells are descriptive and non-independent despite large denominators, so the evidence must be further disciplined around what it actually licenses\",\n    \"The boundary between the proposed software-V&V workflow and SciML/physics-specific case-study findings needs sharper separation\",\n    \"Coverage and fault-detection implications remain suggestive and should be framed more clearly as stress-test evidence, not a general detector evaluation\"\n  ],\n  \"highest_roi_fix\": \"Restructure and shorten the Results around the core IST claim: validity-gated MR asset construction, with secondary SciML and fault-coverage material moved to appendices and explicitly scoped.\",\n  \"top_strengths\": [\n    \"Excellent fit to IST's software V&V remit through a concrete oracle-free testing workflow\",\n    \"Useful and credible methodological contribution: admissibility gating, MR cards, typed verdicts, and claim ledgers\",\n    \"Strong reproducibility posture with artifacts, ledgers, DOI, and explicit claim-to-evidence mapping\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21894,
+        "completion_tokens": 495,
+        "total_tokens": 22389
+      }
+    },
+    "EmpiricalRigor": {
+      "id": "chatcmpl-0si0vruqxb4s",
+      "model": "claude-opus-4-7",
+      "object": "chat.completion",
+      "created": 1782024891,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 8,\n    \"technical_soundness\": 9,\n    \"empirical_rigor\": 7,\n    \"related_work_positioning\": 8,\n    \"clarity_writing\": 8,\n    \"reproducibility\": 7,\n    \"scope_fit_ist\": 9\n  },\n  \"accept_probability\": 0.75,\n  \"verdict\": \"minor_revision\",\n  \"submission_maturity_0_100\": 70,\n  \"blocking_gaps\": [\n    \"Empirical scope bounded to limited architectures, tasks, and mesh topologies\",\n    \"Operator-floor generalization to unstructured meshes and boundary treatments incomplete\",\n    \"Numerical decidability axis not cross-calibrated across MR classes\",\n    \"Reproducibility limited by reliance on GPU training and non-redistributable checkpoints\"\n  ],\n  \"highest_roi_fix\": \"Broaden operator-floor calibration and numerical decidability validation to diverse meshes and real CFD boundary treatments\",\n  \"top_strengths\": [\n    \"Clear, methodologically sound admissibility gate combining physical, software, and numerical criteria\",\n    \"Comprehensive, artifact-backed validity-gated MR workflow with executable assets and typed verdicts\",\n    \"Thorough empirical study with bounded case studies, cross-checkpoint and cross-architecture replication, and seeded-fault stress testing\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 25040,
+        "completion_tokens": 314,
+        "total_tokens": 25354,
+        "usage_semantic": "openai",
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        },
+        "completion_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "input_tokens": 25040,
+        "output_tokens": 0,
+        "input_tokens_details": null,
+        "claude_cache_creation_5_m_tokens": 0,
+        "claude_cache_creation_1_h_tokens": 0
+      }
+    },
+    "SciMLDomain": {
+      "id": "20260621145454ce3d011d4382432a",
+      "object": "chat.completion",
+      "created": 1782024960,
+      "model": "glm-5.1",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"scores\": {\n    \"novelty_contribution\": 6,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 6,\n    \"related_work_positioning\": 7,\n    \"clarity_writing\": 4,\n    \"reproducibility\": 8,\n    \"scope_fit_ist\": 9\n  },\n  \"accept_probability\": 0.58,\n  \"verdict\": \"major_revision\",\n  \"submission_maturity_0_100\": 55,\n  \"blocking_gaps\": [\n    \"Extreme verbosity and repetition\u2014the same claims, hedges, and boundary-statements are restated 3\u20135 times; the paper needs ~35% condensation to let the contribution emerge\",\n    \"Narrow primary evidence base\u2014one CFD task (cylinder flow) carries the load; the airfoil/PINN/FNO supporting tiers are thin and feel bolted-on rather than integrated\",\n    \"Seeded-fault catalogue is underpowered (10 mutants, 5/10 detected) and the coverage-geometry claim rests on a falsifiability argument rather than calibrated evidence\",\n    \"Contribution obscured by relentless boundary-claiming inline; every result paragraph interrupts itself to list what it is not, making the affirmative contribution hard to extract\"\n  ],\n  \"highest_roi_fix\": \"Condense the manuscript by 30\u201340%: eliminate repetition, consolidate all boundary/disclaimer text into a single dedicated subsection, and let the technical contribution (operator-floor gate, typed verdicts, gate-discrimination result) stand clearly on its own\",\n  \"top_strengths\": [\n    \"Numerically rigorous operator-floor analysis: O(h) P1-divergence floor with closed-form Hessian bound matching measured floor to 0.5%, topology-stable on unstructured Delaunay\u2014this is the paper's deepest technical contribution\",\n    \"Gate demonstrably changes V&V outcomes across tasks: incompressible continuity deferred on cylinder flow but rejected on physical grounds for compressible airfoil\u2014the strongest evidence that the gate does real work, not just annotation\",\n    \"Exceptionally honest scoping: every claim is tied to a tracked artifact via the claim ledger, and statistical reporting correctly distinguishes descriptive counts from inferential statements\"\n  ]\n}\n```",
+            "reasoning_content": "Let me carefully analyze this manuscript as a domain expert in scientific ML and scientific software testing with a numerical methods background.\n\n**Key claims and method:**\nThe paper proposes a domain-validity-gated metamorphic testing workflow for SciML surrogates. The core idea is that before a candidate metamorphic relation (MR) can be used as a test oracle, it must pass an admissibility gate checking: (1) physical/software basis, (2) transformation preconditions, (3) boundary/mapping compatibility, (4) numerical decidability (tolerance dominates operator floor). Admitted MRs become \"MR cards\" with typed verdicts (pass/fail/skip/out-of-relation-domain/numerical-tolerance-issue/inconclusive).\n\n**Three MR families examined:**\n1. Node-permutation equivariance\n2. Mirror-y reflection symmetry\n3. Discrete divergence/conservation\n\nLet me evaluate each for numerical correctness:\n\n**Node-permutation equivariance:** This is a representation contract of message-passing networks. The claim that it holds to machine precision (rel L2 = 0.0) is correct for standard MGN implementations where the same weights are applied regardless of node ordering. This is essentially a sanity check. Numerically sound.\n\n**Mirror-y equivariance:** The paper correctly identifies that on an asymmetric mesh, exact mirror-y is out-of-relation-domain (non-bijective reflection, cylinder off-center). They downgrade it to an approximate OOD-stress probe. On a synthetic symmetric mesh, they admit exact mirror-y and find it fails (rel L2 1.10). This is physically plausible - MGNs are not equivariant by construction to reflections unless specifically trained to be. The domain-violation metric D = m/(m+1) is reasonable as a per-relation coordinate. The finding that the violation is dominated by learned weights (normalizer control changes violation only from 1.1032 to 1.1014) is a good control.\n\n**Discrete divergence boundedness:** This is where I need to be most careful numerically.\n\nThe P1 discrete divergence operator on a mesh: for a P1 (piecewise linear) finite element, the divergence of a P1 vector field is piecewise constant on each element. For a divergence-free reference field, the discrete divergence should be zero on each element IF the field is truly divergence-free and the mesh is exact. However, on a coarse mesh, the interpolated/projected field may not be exactly divergence-free in the discrete sense.\n\nThe claim of O(h) convergence: The log-log slope of 0.984 with CI [0.975, 0.992] and R\u00b2=0.9999 is consistent with O(h) convergence. For a P1 operator on a divergence-free field, the discrete divergence error should indeed be O(h) (it's the interpolation error of the divergence, which for smooth fields is O(h) in the L\u00b2 norm for P1 elements). This is numerically correct.\n\nThe \"closed-form\" floor claim: They say the measured floor equals the geometry-weighted second-order Taylor remainder exactly, and a leading-order predictor from the analytic Hessian matches to within 0.5%. This is plausible for P1 elements on a known mesh with a known analytic reference field. The Hessian of the velocity field determines the interpolation error, and for P1 elements the error is indeed proportional to the second derivatives weighted by element geometry. This reasoning is sound.\n\nThe a-priori bound from the Hessian's global spectral norm dominating the measured floor at every resolution is also correct - this is a standard result in FEM error analysis.\n\nThe unstructured Delaunay topology test (slope 0.983, floor ratio 1.06 median / 1.33 max) is a reasonable robustness check. The fact that the floor doesn't flip the decidability verdict between topologies is important and correctly noted.\n\n**The analytic Hessian bound reasoning:** For a P1 interpolation of a smooth divergence-free field u on a mesh with element diameter h, the discrete divergence of the interpolant is O(h) (it's the projection of \u2207\u00b7u_h onto piecewise constants, and since \u2207\u00b7u = 0, the residual comes from the interpolation error). The leading term involves the Hessian D\u00b2u. The claim that the measured floor equals the geometry-weighted second-order Taylor remainder is correct for the specific case of a P1 interpolant of a known analytic field on a known mesh. This is a standard FEM interpolation error result.\n\n**Physical plausibility of evidence:**\n\n- MGN failing mirror-y equivariance: Expected. Standard MGNs have no built-in reflection equivariance.\n- Node-permutation passing: Expected for message-passing architectures.\n- Conservation being deferred on open-boundary cylinder flow: Physically reasonable - open boundaries make absolute conservation unenforceable.\n- Airfoil rejecting incompressible continuity: Correct - compressible flow with density variation means \u2207\u00b7u \u2260 0.\n- FNO periodic translation passing: Expected for periodic boundary conditions with spectral methods.\n- FNO conservation failing: Plausible - FNOs don't enforce conservation by construction.\n\n**Concerns and issues:**\n\n1. The paper is extremely verbose and repetitive. The same claims are restated many times with slightly different hedging language. This significantly hurts clarity.\n\n2. The \"measurement-floor admissibility\" idea, while correctly executed for the P1 divergence case, is presented as more novel than it is. The concept that a test's tolerance must exceed measurement noise is well-established in metrology and verification. The specific application to SciML MRs is new, but the general principle is not.\n\n3. The seeded-fault results (5/10 detection) are weak evidence. The paper acknowledges this but still devotes substantial space to it.\n\n4. The paper claims the gate \"changes V&V outcomes\" but the primary demonstration is that it correctly rejects inapplicable MRs. This is important but somewhat expected - if you check whether a relation applies before using it, you'll avoid false conclusions. The value is in making this explicit and auditable.\n\n5. The domain-violation axis D = m/(m+1) is ad hoc and per-relation. The paper acknowledges this but doesn't offer a path to cross-relation calibration beyond \"future work.\"\n\n6. The PINN and FNO evidence feels bolted on rather than integrated. The PINN MR-B result (13/15 Burgers pass, 7/15 heat pass) is presented with appropriate statistics but the physical explanation (Neumann BCs predict larger boundary residuals) is given post-hoc.\n\n7. The paper's scope claims are very carefully bounded - almost to a fault. The constant hedging makes it hard to extract the actual contribution.\n\n8. The cross-program breadth check (Appendix B) reuses a sibling repository's mutants and MRs, which limits its independence.\n\n**Novelty assessment:**\nThe core idea - gating MR admissibility on numerical decidability - is a reasonable contribution for IST. It's not groundbreaking (the general principle is known in metrology), but the specific application to SciML surrogates with concrete operator-floor analysis is new and useful. The MR-card format and typed verdicts are engineering contributions rather than scientific ones. The paper is honest about its boundaries.\n\n**Technical soundness:**\nThe numerical analysis is correct. The O(h) floor for P1 divergence is right. The Hessian-based bound is sound. The physical reasoning about which relations apply where is correct. The statistical analysis is appropriate (Wilson CIs, Wilcoxon, Cliff's \u03b4 where applicable, descriptive counts where independence doesn't hold).\n\n**Empirical rigor:**\nThe paper is very honest about its limitations. The primary evidence is one CFD task (cylinder flow) with supporting evidence on a second (airfoil) and PINN/FNO checks. The K=6 roster provides some robustness but within one architecture family. The seeded-fault catalogue is small. The paper correctly identifies that cells sharing checkpoints/trajectories are not independent.\n\n**Related work positioning:**\nGood. The paper clearly distinguishes itself from MR identification work, relaxed oracles, and constraint-based inapplicability handling. The positioning table (Table 3) is helpful.\n\n**Clarity:**\nThis is the weakest point. The paper is extremely long and repetitive. The same ideas are stated multiple times with different hedging. The constant boundary-claiming interrupts the flow. The paper would benefit enormously from condensation.\n\n**Reproducibility:**\nGood. Zenodo archive, claim ledger, committed artifacts. The paper is transparent about what can and cannot be reproduced.\n\n**Scope fit:**\nExcellent fit for IST's software V&V remit.\n\nLet me now score:\n\n- novelty_contribution: 6 - The measurement-floor admissibility gate applied to SciML is new and non-trivial, but the general principle is established. The MR-card format and typed verdicts are useful engineering but incremental.\n- technical_soundness: 8 - The numerical analysis is correct, the physical reasoning is sound, and the claims are carefully bounded.\n- empirical_rigor: 6 - Honest scoping and appropriate statistics, but the evidence base is narrow (primarily one CFD task), the seeded-fault catalogue is small, and many cells are not independent.\n- related_work_positioning: 7 - Good positioning against closest prior work with a clear delta.\n- clarity_writing: 4 - Extremely verbose and repetitive. The constant hedging and boundary-claiming makes it hard to read. Needs significant condensation.\n- reproducibility: 8 - Good artifact commitment, ledger, and honest reporting of reproducibility boundaries.\n- scope_fit_ist: 9 - Excellent fit for IST's V&V remit.\n\nAccept probability: The technical content is solid but the writing needs major condensation. The contribution is real but presented in a way that obscures it. I'd estimate about 0.55-0.65 probability of acceptance after revision.\n\nVerdict: major_revision (primarily for clarity/condensation, some empirical strengthening)\n\nSubmission maturity: 55 - The technical content is sound but the presentation needs major work.\n\nBlocking gaps:\n1. Extreme verbosity and repetition - the paper needs to be condensed by ~30-40%\n2. The empirical base is narrow - primarily one CFD task with supporting checks\n3. The seeded-fault evidence is weak (5/10, small catalogue)\n4. The contribution is obscured by constant hedging and boundary-claiming\n\nHighest ROI fix: Condense the paper by 30-40% by eliminating repetition and consolidating boundary claims into a single section, letting the technical contribution speak more clearly.\n\nTop strengths:\n1. Numerically correct operator-floor analysis with closed-form bounds\n2. Honest, carefully bounded claims with appropriate statistics\n3. The gate demonstrably changes V&V outcomes (airfoil vs cylinder flow)"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21906,
+        "completion_tokens": 2749,
+        "total_tokens": 24655,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2272
+        }
+      },
+      "request_id": "20260621145454ce3d011d4382432a"
+    },
+    "NoveltyPositioning": {
+      "id": "597ad1e0-7582-4022-9940-2815b06b7665",
+      "model": "grok-4.3",
+      "object": "chat.completion",
+      "created": 1782024966,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 6,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 7,\n    \"related_work_positioning\": 7,\n    \"clarity_writing\": 8,\n    \"reproducibility\": 9,\n    \"scope_fit_ist\": 9\n  },\n  \"accept_probability\": 0.65,\n  \"verdict\": \"major_revision\",\n  \"submission_maturity_0_100\": 58,\n  \"blocking_gaps\": [\n    \"core idea is incremental recombination of existing MT constraint/relaxed-oracle/validity concepts (Duque-Torres, Eniser, Kanewala) with SciML diagnostics rather than crisp new delta\",\n    \"tautological framing in parts: gate measures exactly the domain/numerical conditions it was built to detect\",\n    \"closest-prior delta not crisp enough vs. Kanewala scientific-MT cluster, MetaTrimmer, and recent physics-MR SciML papers (Reichert, Yang&Chui)\",\n    \"over-claims bounded utility as methodological contribution while evidence is mostly single-family replication\"\n  ],\n  \"highest_roi_fix\": \"sharpen related-work positioning and novelty claims with explicit crisp delta vs. closest priors (Duque-Torres constraint pipelines, Eniser relaxations, Kanewala SciMT) and remove any tautological language\",\n  \"top_strengths\": [\n    \"strong reproducibility with claim-ledger, artifacts, and Zenodo DOI\",\n    \"well-scoped honest V&V method paper fitting IST software-testing remit\",\n    \"clear writing and structured presentation of workflow, MR-cards, and typed verdicts\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 20476,
+        "completion_tokens": 353,
+        "total_tokens": 20829,
+        "usage_semantic": "openai",
+        "prompt_tokens_details": {
+          "cached_tokens": 64,
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        },
+        "completion_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "input_tokens": 20476,
+        "output_tokens": 0,
+        "input_tokens_details": null,
+        "claude_cache_creation_5_m_tokens": 0,
+        "claude_cache_creation_1_h_tokens": 0
+      }
+    },
+    "DevilsAdvocate": {
+      "id": "chatcmpl-330efd5f-bc8c-92ea-a6e7-6afa613dbc88",
+      "object": "chat.completion",
+      "created": 1782024971,
+      "model": "qwen3-max",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 5,\n    \"related_work_positioning\": 8,\n    \"clarity_writing\": 6,\n    \"reproducibility\": 6,\n    \"scope_fit_ist\": 9\n  },\n  \"accept_probability\": 0.35,\n  \"verdict\": \"major_revision\",\n  \"submission_maturity_0_100\": 55,\n  \"blocking_gaps\": [\n    \"Non-independent empirical cells misreported as inferential evidence (e.g., K=6 roster treated as independent trials)\",\n    \"Fragile statistics: descriptive counts lack proper uncertainty quantification; Wilson CIs applied to non-binomial structures\",\n    \"Reproducibility gaps: GPU-dependent workflows (PhysicsNeMo, airfoil) not fully replicable from artifacts; no deterministic seeds for all runs\",\n    \"'So what?' test: contribution diluted by over-extended case studies (PINN/FNO/airfoil) that don't strengthen core validity-gating claim\"\n  ],\n  \"highest_roi_fix\": \"Restructure empirical analysis to treat non-independent cells as descriptive summaries only and remove misleading inferential language\",\n  \"top_strengths\": [\n    \"Clear domain-validity rubric linking MR admissibility to numerical decidability\",\n    \"Well-scoped methodological contribution fitting IST's V&V remit\",\n    \"Strong related work positioning against MT/SciML-V&V literature\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 22406,
+        "completion_tokens": 329,
+        "total_tokens": 22735,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    }
+  },
+  "honesty_boundary": "Five single-call temperature-0 LLM reviews via one gateway, scored against an IST submission-maturity rubric; an automated maturity estimate, NOT human peer review and NOT a prediction of an actual IST editorial decision."
+}

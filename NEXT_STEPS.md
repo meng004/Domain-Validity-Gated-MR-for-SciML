@@ -1,6 +1,15 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-21 by claude-code (**EXT-1 airfoil 已训到收敛**:C35 roster 40ep/100tr GPU,loss 1.0→0.14,commit `1e7f7ed` on `cloud/1q-empirical-expansion`;下一步=整合 C41-C46+C35-converged 进 main.tex → 重跑 panel)
+> Last updated: 2026-06-21 by claude-code (**IST 成熟度面板(5模型设计者/执行者拆分)已跑通**:maturity 61.2/100、overall 7.4、major(4:1);最具 ROI=密度/结构手术。详见顶部 2026-06-21 小节。上一条:EXT-1 airfoil 已训到收敛 C35 commit `1e7f7ed`)
+
+## 🟢 2026-06-21 IST 成熟度量化考核(academic-paper-reviewer 设计者 + 5 模型网关执行者)
+
+- **结构**:academic-paper-reviewer(field_analyst 角色配置 + quality_rubrics 0-100)=**设计者**,产出 5 IST 校准 persona + 量化成熟度 rubric;5 厂商网关=**执行者**,一模型一角色 temp0 读 `main.tex`。非两 skill 各跑一遍。新 runner `tools/run_ist_maturity_panel.py`(无测试引用,新增安全);产物 `research_assets/runs/ist-maturity-panel/review_panel_report.json`。
+- **roster**:EIC=gpt-5.5 / EmpiricalRigor=claude-opus-4-7(用户"opus 4.7";裸 `opus-4.7` 在该网关分组 503,用 `claude-opus-4-7` 别名)/ SciMLDomain=glm-5.1 / NoveltyPositioning=grok-4.3 / DevilsAdvocate=qwen3-max。5/5 成功(grok 首调 429,token 阶梯重试过)。
+- **量化结果**:maturity **61.2/100**(range 55-70,major 带 50-64 紧贴 minor 下沿)、overall **7.4/10**、accept **0.59**(0.35-0.75)、verdict **major(4:1)**;唯一 minor=opus(70)。逐维均值:scope 9.0(最强)>techn 8.0>relat/repro 7.6>novel 6.8>**empir 6.4 = clari 6.4(并列绑定低维)**。落历史 7.3-7.5 带低端(广度稀释,vs 精简 v18=7.83),5 模型独立复现"密度/篇幅是绑定约束,非缺证据"的历史天花板。
+- **差距(跨评审共识)**:G1 过度扩张稀释核心(4/5);G2 冗长+内联 boundary-claiming 拖 clarity(glm clarity=4,需压~35%);G3 非独立格(K=6/Wilson)被读成推断性 over-claim(3/5,实为标注不显眼);G4 novelty 增量(结构天花板);G5 单 CFD 承重+operator-floor 未跨网格泛化(对 IST 过度要求)。
+- **最具 ROI=密度/结构手术**(纯 prose+重排,零新实验/GPU/凭据):二级层(PINN/FNO/airfoil/OpenMC+跨程序审计)入限定附录 + 内联 caveat 归并进单一 "Scope and boundary of evidence" 子节(**重定位非删除**,绕诚实守卫)+ 非独立格描述性框定做显眼一致。3/5 highest-ROI 投票指向此,命中两绑定低维+G1。**诚实边界**:prose-only 历史已触平台(v29→v30 clarity 仅 +0.6),能把 major 下沿推到 minor 边界,**不破 novelty 天花板**(G4 无廉价解,投 IST 已接受风险)。次优=related-work 锐化(grok,1-2 引用抬 novelty);最低 ROI=operator-floor 跨网格(新实验+GPU,冲 1 区成本)。
+- **未改动 manuscript**。待用户拍板是否执行密度手术。
 
 ## 🟡 2026-06-20 冲中科院1区实证扩张计划(目标 TSE/TOSEM,根治 incremental+单SUT)
 
