@@ -1,6 +1,13 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-21 by claude-code (**最高-ROI 已执行**:任务2 related-work 锐化(已在 `eef25d0`)+ 任务1a 密度手术 §444/§449→Appendix C;EIC-集成面板 maturity 60.9→63.3、clarity 6.27→6.8、verdict 4:1→3:2 向 minor。详见顶部 2026-06-21 小节。)
+> Last updated: 2026-06-21（晚）by claude-code (**venue 锁定 IST**;EIC 通读裁定=related-work 合规(强项)、决定 Major Revision(有接收路径)、最高-ROI=零成本 novelty 框定。**已执行+投稿流水线全过**:cover-letter 对齐正文保守框定 commit `c2e087b`。详见顶部 2026-06-21（晚）小节。)
+
+## 🟢 2026-06-21（晚）EIC 通读裁定 + venue 锁定 IST + 最高-ROI cover-letter 对齐(投稿流水线全过)
+- **用户拍板:目标期刊锁定 IST**(解决历史 🔵 TSE/TOSEM 开放问题;不双盲化、零切换成本)。
+- **EIC（本会话）三问裁定**:① 相关工作比较**符合 IST 要求且为相对强项**(七小节 + 闭合最近邻能力矩阵 Table `tab:closest-prior-positioning` 6 行三列 + Kanewala 覆盖簇已补齐 srinivasan2022/saha2019/kanewalaBieman2014slr/kanewala2016graphkernel);唯一残余=差异化楔子窄(压在 measurement-floor gate 单点),属 novelty 维度非覆盖合规。② **决定 = Major Revision(倾向修回后接收),非原样接收、非拒稿**:scope 9.0 + repro 8.4 + 形式全合规支撑可发表;novelty(operational 非突破)+ 单主导任务族 + D 轴未跨类校准 + 自实现 fault catalogue 四关切阻原样接收,但均已诚实划界、非 blocker。③ **最高-ROI = 零成本 novelty 框定**(main.tex abstract/intro/contributions prose runway 已尽,昂贵实证档为 IST 过度投入)。
+- **落地(仅 cover_letter.md,零测试风险)**:发现真 misalignment——cover letter 把 validity-coverage duality 抬为 headline 贡献(iii)+ "first end-to-end pipeline"强措辞,**与正文已降级框定脱钩**(正文 §Contributions 已写"single methodological idea... new for learned SciML surrogates"、coverage="bounded implication, not a formal research question")。对齐三处:Contribution 段 gate-led 重写、duality 降为 bounded falsifiable 实现、"first"scoped 到 numerical-decidability test;另修标题 em-dash。
+- **投稿流水线（§11）全过**:444 tests / cover-letter em-dash 0·AI-ism 0 / wordcount 12743≤15000(main.tex 未改) / 两 validator rc=0 / main.log 0 Missing·0 undefined·0 Overfull>50pt·49pp / secrets 0 命中。commit `c2e087b`。
+- **诚实结论**:稿件 submission-ready,处 major/minor 边界(去偏面板 3:2,距 minor 多数一票)。**所有 prose 杠杆已尽**;进一步改稿边际 ROI≈0。剩余仅作者侧投稿系统逻辑项(Editorial Manager 元数据、cover letter `[...]` 作者字段填写、可选 graphical abstract 禁 AI 图)。**为 IST 的写作工作到此收口。**
 
 ## 🟢 2026-06-21 IST 成熟度量化考核(academic-paper-reviewer 设计者 + 5 模型网关执行者)
 
@@ -50,7 +57,7 @@
 - [ ] **EXT-3** 三臂互补 + duality 跨全部收敛 SUT(MGN/PointMLP/FNO/PINN **+ airfoil 现已收敛**,五 SUT 全可立做)
 
 ### 🔵 Open Questions
-- [ ] 目标锁 **TSE** 还是 **TOSEM**?TSE=IEEEtran 单栏单盲(`venues/IEEE-TSE.md` 已有);TOSEM=acmart 双盲(需新建 `venues/TOSEM.md` + §15 双盲化审计);回退 IST 零切换成本。**venue 未定前不要双盲化**(过早匿名化反伤)。
+- [x] ~~目标锁 TSE 还是 TOSEM?~~ **已决(2026-06-21 晚):锁定 IST**(单盲、不双盲化、零切换成本)。冲 1 区实证扩张档(operator-floor 跨网格/多 SUT)就此**不为 IST 投入**;如未来改投 1 区再议。
 - [ ] 诚实风险: 即便 MVP+EXT 全做完,**1区 仍可能因 novelty 立场(incremental)被拒**——扩张拆的是 evidence 前缀(single-SUT/under-trained/fragmented),不是 novelty 不足。兜底: MVP 资产全部直接强化 IST 稿(把模拟评审从 major↔minor 上移),回退2区净收益;**GPU 投入放在 MVP 验证有效之后**。
 
 ## 🟢 2026-06-17 真实多厂商网关面板 (v37+v38) + deep-research 学术评估 + 成熟度复评
