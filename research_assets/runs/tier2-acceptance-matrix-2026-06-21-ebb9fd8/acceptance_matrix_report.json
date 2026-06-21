@@ -1,0 +1,1491 @@
+{
+  "record_type": "tier2-acceptance-matrix",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-21T02:18:16Z",
+  "paper": "paper/ist-submission/main.tex",
+  "venues": [
+    "IST",
+    "EMSE",
+    "JSS"
+  ],
+  "roles": [
+    "Editor",
+    "Adversary"
+  ],
+  "models_requested": [
+    "grok-4.3",
+    "gpt-5.5",
+    "claude-opus-4-7",
+    "qwen3-max"
+  ],
+  "role_selection_rationale": "Editor = acceptance gatekeeper and persistent major blocker across prior IST gate panels (Tier-1 accept 0.28). Adversary = lowest-scoring reviewer and only reject in the Tier-1 panel (accept 0.25). These two roles govern the acceptance decision at the margin.",
+  "per_venue": {
+    "IST": {
+      "n_reviews": 8,
+      "accept_prob_mean": 0.716,
+      "accept_prob_range": [
+        0.58,
+        0.85
+      ],
+      "venue_fit_mean": 8.88,
+      "verdict_distribution": {
+        "minor_revision": 4,
+        "major_revision": 4
+      },
+      "per_role": {
+        "Editor": {
+          "n": 4,
+          "accept_prob_mean": 0.75,
+          "by_model": {
+            "grok-4.3": 0.72,
+            "gpt-5.5": 0.58,
+            "claude-opus-4-7": 0.85,
+            "qwen3-max": 0.85
+          }
+        },
+        "Adversary": {
+          "n": 4,
+          "accept_prob_mean": 0.682,
+          "by_model": {
+            "grok-4.3": 0.65,
+            "gpt-5.5": 0.58,
+            "claude-opus-4-7": 0.65,
+            "qwen3-max": 0.85
+          }
+        }
+      },
+      "blocking_gaps_collected": [
+        "No major blocking gaps for IST; the validity-gated MR asset workflow is well-executed, honestly scoped, and directly addresses software V&V for SciML surrogates",
+        "Minor gaps are presentational (trimming redundancy, tightening discussion of boundaries) rather than technical or methodological",
+        "Condense and refocus the paper around the core method and primary cylinder-flow/FNO-PINN evidence; move or remove secondary cross-program, LLM, and broad coverage material unless it is essential and rigorously bounded.",
+        "Provide a clearer threat-to-evidence mapping that distinguishes primary evidence, supporting evidence, stress-test evidence, and read-only external audit evidence, with no implied general detection-rate or reliability claim.",
+        "Strengthen the comparison to prior MR applicability, relaxed oracle, constraint, and scientific-software MT work by specifying exactly what is technically new beyond recording preconditions, tolerances, and inapplicability.",
+        "Reduce overclaiming in the seeded-fault and coverage sections; precision/recall and cross-SUT coverage language should be reframed as exploratory unless backed by independent fault corpora or independent mutant design.",
+        "Clarify reproducibility requirements: which experiments are fully rerunnable, which depend on precomputed artifacts, which datasets/checkpoints are redistributable, and what reviewers must inspect to verify each central claim.",
+        "Address manuscript length and organization to comply with IST limits and improve reviewability.",
+        "Make the operator-floor admissibility argument self-contained enough for readers to assess without relying primarily on external ledgers.",
+        "Lack of a fully calibrated domain-violation axis metric across MR classes reduces cross-relation verdict interpretability.",
+        "Deferred absolute discrete-conservation MR verdict means a key physical property is tested only approximately in some experiments.",
+        "Operator-floor admissibility predicates and tolerances currently rely on mesh-specific analytical bounds without universal proofs for all mesh types.",
+        "Coverage implication from seeded-fault detection is suggestive but not validated with independent real-world defect corpora or external fault sets.",
+        "No demonstrated automation of MR-card authoring or precondition checks; manual effort remains a significant barrier for adoption.",
+        "No direct comparison against any publicly available SciML testing baseline (e.g., an open-source physics-informed residual checker or an off-the-shelf equivariance test suite) on the same checkpoints; the three-arm PointMLP experiment is useful but still internal.",
+        "The PINN and FNO extensions remain extremely lightweight (K=15 seeds, small FNO-2D checkpoints, deliberately under-trained airfoil surrogate); these feel like sanity checks rather than robust cross-family evidence and should either be strengthened or explicitly relabeled as illustrative.",
+        "Threats-to-validity section correctly acknowledges most limitations yet buries the fact that the seeded-mutant catalogue was authored by the same team that designed the MRs; independent fault injection or external defect data would materially raise confidence.",
+        "Condense and restructure the paper around the central method and a smaller set of primary evidence; move most secondary breadth, LLM, cross-program, and stress-test material to appendix or replication package.",
+        "Clarify the precise novelty over MR constraint/specification frameworks, relaxed metamorphic oracles, and bug-versus-inapplicability work; state exactly what is new algorithmically or methodologically.",
+        "Provide a cleaner validation of the admissibility gate itself, ideally including independent expert review, inter-rater agreement on gate decisions after training, or a blinded re-application of the rubric to held-out candidate MRs.",
+        "Separate primary evidence from illustrative/stress evidence much more sharply; avoid giving equal evidential status to synthetic meshes, smoke tests, under-trained airfoil models, sibling-artifact reuse, and full primary executions.",
+        "Reduce or reframe fault-detection and coverage claims so they cannot be read as empirical defect-detection performance; many are structurally entailed by the chosen invariants.",
+        "Make artifact availability, exact reproducibility status, and what reviewers can independently rerun explicit and concise; artifact-backed claims should not substitute for a readable main-paper evidentiary chain.",
+        "Tighten statistical reporting by removing weak denominator inflation and reporting only analyses whose sampling units are defensible.",
+        "Improve readability and focus: the current manuscript may exceed the practical tolerance of IST reviewers even if it technically fits the word limit.",
+        "Absence of a generalized, provably conservative numerical-decidability operator-floor bound across a wide range of mesh topologies and measuring operators restricts confidence in valid MR asset construction beyond studied examples.",
+        "No calibrated cross-MR domain-violation metric or interpretable common scale, which hampers aggregate verdict interpretation or automated domain-violation detection.",
+        "The deferred absolute conservation relation highlights that not all physically motivated MRs can currently be admitted or produce executable verdicts due to measurement-floor calibration challenges.",
+        "The fault-detection results do not provide formal fault-localization or general real-world detection guarantees, limiting practical impact claims.",
+        "Limited automation or guidelines for MR input mapping, precondition checking, and verdict ledger generation currently place a significant manual burden on practitioners.",
+        "Evidence is restricted to a few surrogate architectures and CFD tasks; lacks broader evaluation on other SciML surrogate models, physics domains, or real production-scale surrogates.",
+        "Covering the admitted MR set's blind spots requires integration of additional MRs or orthogonal testing techniques, which is yet unaddressed."
+      ]
+    },
+    "EMSE": {
+      "n_reviews": 8,
+      "accept_prob_mean": 0.681,
+      "accept_prob_range": [
+        0.42,
+        0.85
+      ],
+      "venue_fit_mean": 8.5,
+      "verdict_distribution": {
+        "major_revision": 4,
+        "minor_revision": 4
+      },
+      "per_role": {
+        "Editor": {
+          "n": 4,
+          "accept_prob_mean": 0.74,
+          "by_model": {
+            "grok-4.3": 0.68,
+            "gpt-5.5": 0.58,
+            "claude-opus-4-7": 0.85,
+            "qwen3-max": 0.85
+          }
+        },
+        "Adversary": {
+          "n": 4,
+          "accept_prob_mean": 0.622,
+          "by_model": {
+            "grok-4.3": 0.52,
+            "gpt-5.5": 0.42,
+            "claude-opus-4-7": 0.7,
+            "qwen3-max": 0.85
+          }
+        }
+      },
+      "blocking_gaps_collected": [
+        "No practitioner-oriented usability or cost-benefit evaluation of the validity-gated workflow in realistic SciML pipelines",
+        "Limited head-to-head quantitative comparison against residual-based or UQ-driven SciML V&V techniques on the same faults and SUTs",
+        "Operator-floor calibration and domain-violation scoring are shown only for specific meshes and operators; general unstructured-mesh proofs or cross-MR calibrated metrics are explicitly deferred to future work",
+        "Clarify the primary unit of empirical inference and separate true executions from read-only audits, smoke tests, synthetic stress tests, and sibling-repository reuse; otherwise the empirical basis is too difficult to evaluate.",
+        "Reduce or explicitly demote broad coverage, cross-SUT, and cross-program language unless supported by independently authored defects or stronger external subjects; current seeded-fault evidence should remain a diagnostic stress test.",
+        "Strengthen the comparison to prior MR constraint/applicability and relaxed-oracle work to show precisely what is new beyond disciplined MR specification and tolerance calibration.",
+        "Provide a concise replication-package map and minimal reproducibility path for the central claims, including which claims can be rerun, which are inspection-only, and which require unavailable checkpoints or old runtimes.",
+        "Substantially streamline the manuscript so the methodological contribution, case-study protocol, primary results, and threats-to-validity are understandable without following dozens of claim IDs and evidence tiers.",
+        "The absolute mass-conservation relation is deferred due to numerical decidability challenges on the deployed mesh; a fully executable absolute conservation verdict would strengthen the empirical pipeline.",
+        "The domain-violation axis for verdict interpretation is per-relation and currently uncalibrated across MR classes, limiting cross-relation comparability.",
+        "Generalization beyond the studied architectures, datasets, and physical tasks remains future work, limiting immediate applicability claims.",
+        "Replication workflow depends on some older runtimes and checkpoint availability, potentially hindering straightforward reproduction.",
+        "Some LLM-based candidate generation and coverage discussions are exploratory and do not provide mature automated MR identification.",
+        "Absence of real (non-seeded) defects drawn from actual SciML surrogate development or production failures; without this the utility claim remains largely demonstrative.",
+        "Insufficient contrast against stronger baselines (e.g., physics-informed residuals, conformal UQ, or existing open-source SciML test suites) on the same checkpoints to show added value beyond auditability.",
+        "Domain-violation coordinate is per-relation and uncalibrated across MR families; the two-axis verdict figure is illustrative but the empirical sections never produce a reusable, reviewer-inspectable calibration set.",
+        "Manuscript must be substantially condensed, with redundant claim-to-evidence maps moved to appendix or supplemental material, before it meets EMSE readability norms.",
+        "Substantially simplify and refocus the manuscript around one clear primary case study plus a small number of well-justified supporting replications; move most fault-catalogue, cross-program, and LLM material to appendices or remove it.",
+        "Provide a crisper novelty argument against prior constraint-based MR applicability, relaxed MR thresholds, and physics-based metamorphic testing, specifying exactly what is new beyond explicit preconditions, tolerances, and artifact ledgers.",
+        "Demonstrate that the replication package is complete and independently executable for the main claims, with a minimal reproduction path rather than only a large claim-ledger assertion.",
+        "Clarify the independence structure and avoid treating repeated frames, checkpoints, seeds, and trajectories as stronger evidence than they are; separate descriptive engineering evidence from inferential empirical claims.",
+        "Reduce or clearly demote the seeded-fault coverage claims unless independently authored or less relation-tailored mutants can be used; otherwise frame them strictly as sanity/stress tests of detector geometry.",
+        "Make the admissibility gate operational enough that another team could apply it and reach similar admit/reject/defer decisions; currently expert judgment and relation-specific normalization choices remain under-specified.",
+        "Tighten the empirical utility claim: explicitly state what the workflow lets practitioners decide that rollout accuracy, residual checks, or standard MR constraint systems would not already decide.",
+        "Resolve the evidentiary status of sibling Minimum-MR-SubSet artifacts and prior/preprint overlap so readers can distinguish new evidence from reused or externally witnessed evidence.",
+        "Lack of a fully automated or systematic MR candidate identification and validity decision pipeline limits replicability and practical adoption beyond expert-driven scenarios.",
+        "Operator-floor numerical bounds are rigorous only for a particular mesh type and discrete operator; lack of formal guarantees or generalization to other common CFD meshes or physics domains restricts the universality of the admissibility gate.",
+        "The empirical evaluation does not include externally sourced real defect data or independent fault catalogues beyond the authors' seeded faults, limiting external validity of claimed fault-detection interpretations.",
+        "Domain-violation vertical axis in verdict interpretation is per-relation and uncalibrated, preventing aggregated or comparative MR verdict fusion needed for supervision or runtime monitoring.",
+        "No end-to-end evaluation on production-scale industrial SciML surrogates or complex multi-physics combines with MR assets precludes claims on real-world deployment readiness.",
+        "The deferred absolute conservation verdict (due to operator floor) reveals gaps in executable MR formulation that must be resolved for completeness in physics-based surrogate V&V."
+      ]
+    },
+    "JSS": {
+      "n_reviews": 8,
+      "accept_prob_mean": 0.664,
+      "accept_prob_range": [
+        0.46,
+        0.85
+      ],
+      "venue_fit_mean": 8.5,
+      "verdict_distribution": {
+        "minor_revision": 5,
+        "major_revision": 3
+      },
+      "per_role": {
+        "Editor": {
+          "n": 4,
+          "accept_prob_mean": 0.718,
+          "by_model": {
+            "grok-4.3": 0.65,
+            "gpt-5.5": 0.52,
+            "claude-opus-4-7": 0.85,
+            "qwen3-max": 0.85
+          }
+        },
+        "Adversary": {
+          "n": 4,
+          "accept_prob_mean": 0.61,
+          "by_model": {
+            "grok-4.3": 0.58,
+            "gpt-5.5": 0.46,
+            "claude-opus-4-7": 0.65,
+            "qwen3-max": 0.75
+          }
+        }
+      },
+      "blocking_gaps_collected": [
+        "No comparison against contemporary SciML-specific V&V baselines (e.g., physics-informed residual checks or modern equivariance metrics) beyond rollout accuracy",
+        "Reproducibility package is mentioned but not yet publicly available at submission; reviewer cannot inspect raw ledgers or MR cards",
+        "Threats to validity section acknowledges many limitations but does not discuss potential confirmation bias in the design of the seeded-fault catalogue",
+        "Substantially narrow and reorganize the empirical story around a small number of primary RQs; move secondary audits, cross-program breadth, LLM contrasts, and extended fault-catalogue material to appendix or remove unless directly needed.",
+        "Provide a clearer formal definition of the admissibility gate, MR-card schema, tolerance/floor criterion, and typed verdict logic, with enough operational detail that the method can be understood without inspecting the artifact repository.",
+        "Clarify the exact novelty relative to MR applicability constraints, relaxed MT oracles, MR specification languages, and bug-versus-inapplicability frameworks; the current positioning is plausible but not yet crisp enough.",
+        "Strengthen the evaluation validity argument by separating independent evidence from descriptive repetitions, explicitly identifying sampling units, and avoiding precision/recall or detection-rate language where mutants or cells are non-independent or relation-tailored.",
+        "Reduce or qualify the coverage-geometry/validity-coverage duality claims unless supported by independently authored mutants or real defects; currently these should remain discussion-level observations, not central empirical findings.",
+        "Improve manuscript focus and readability to meet JSS standards: shorter results section, fewer nested claims, clearer tables, and a more conventional experimental narrative.",
+        "Ensure all datasets, checkpoints, thresholds, mutant operators, and executable MR definitions needed to reproduce the primary study are documented in the paper or a stable artifact with clear mapping from manuscript claims to files.",
+        "No critical methodological flaws; the main gaps are around scope of generalizability and clarity, which are addressable via revisions.",
+        "The admitted limitation that absolute discrete-divergence conservation remains deferred without a fully calibrated floor is a known issue but does not block acceptance; the paper documents this clearly.",
+        "No experimental artifacts or evidence appear missing; all major claims are backed by tracked, artifact-supported results.",
+        "No ethical or reproducibility concerns beyond dataset license limits; replication package is well described.",
+        "No fundamental mismatch with JSS topical scope or standards; the paper targets a mainstream SE venue with an empirically supported methodological contribution.",
+        "No practitioner study, usability evaluation, or real-world deployment evidence showing that MR cards and the validity gate improve V&V outcomes, audit effort, or defect detection over standard rollout + residual checks in an actual SciML workflow.",
+        "Seeded-fault and cross-SUT stress tests use author-constructed mutants that preserve or break the exact invariants the MRs target; this creates a circularity that weakens the coverage-geometry implication the authors treat as a key takeaway.",
+        "Positioning against closest priors (constraint-based MT, relaxations, NOETHER-style organization) is handled via a capability matrix that is descriptive rather than comparative on shared benchmarks or metrics; a sharper, possibly quantitative contrast is required to establish that the gated workflow is a genuine methodological advance rather than re-packaging.",
+        "Must reorganize and shorten the results into a clear primary evaluation plus explicitly secondary evidence; otherwise the contribution will look unfocused and hard to verify.",
+        "Must provide a crisper novelty statement against MR specifications, relaxed MT, constraint-based applicability, and SciML physical residual diagnostics, ideally with a minimal formal definition of the admissibility gate and verdict semantics.",
+        "Must tone down or quarantine coverage/fault-detection claims, because current mutants and probes do not support general defect-detection effectiveness or validated localization.",
+        "Must clarify artifact availability and reproducibility boundaries, especially which results are fully rerunnable, which depend on non-redistributable checkpoints or old runtimes, and which are inherited from the sibling repository.",
+        "Should add or strengthen an ablation/comparison showing what decisions would be wrong without the numerical-floor/domain-validity gate, not just examples where the gate produces typed verdicts.",
+        "Should fix venue/template inconsistency and presentation issues: the manuscript says Elsevier IST in the source while being submitted to JSS, and the current length/claim-ledger style is likely to irritate reviewers.",
+        "Lack of demonstrated generalization of the numerical admissibility gate to a variety of meshes and operators beyond the studied setting, leaving open whether this method is broadly applicable in production SciML surrogate testing.",
+        "No large-scale evaluation on real defect datasets or production benchmarks to validate coverage or practical fault detection beyond synthetic injected faults.",
+        "Incomplete calibration and validation of the domain-violation dimension of verdicts across different metamorphic relation classes impedes unified verdict interpretation.",
+        "The proposed framework depends on detailed manual authoring and expert judgment for MR admissibility and precondition setting; automation or scaling remains unaddressed.",
+        "Limited evaluation of the interaction between MR verdicts and other diagnostic tools (residuals, UQ) in operational settings hinders clear practical deployment recommendations.",
+        "The manuscript contains some dense technical parts that might benefit from clarifications or additional illustrations for broad software engineering readership.",
+        "No major technical gaps block acceptance; all claims are carefully bounded and backed by artifacts.",
+        "The evaluation meets JSS standards: it demonstrates a clear method, practical relevance to SciML V&V, and adequate empirical grounding via multiple case studies and stress tests.",
+        "Reproducibility is strong with a public package, claim ledger, and explicit artifact tracing."
+      ]
+    }
+  },
+  "ranking": [
+    {
+      "venue": "IST",
+      "accept_prob_mean": 0.716,
+      "accept_prob_range": [
+        0.58,
+        0.85
+      ],
+      "venue_fit_mean": 8.88,
+      "verdict_distribution": {
+        "minor_revision": 4,
+        "major_revision": 4
+      },
+      "n_reviews": 8
+    },
+    {
+      "venue": "EMSE",
+      "accept_prob_mean": 0.681,
+      "accept_prob_range": [
+        0.42,
+        0.85
+      ],
+      "venue_fit_mean": 8.5,
+      "verdict_distribution": {
+        "major_revision": 4,
+        "minor_revision": 4
+      },
+      "n_reviews": 8
+    },
+    {
+      "venue": "JSS",
+      "accept_prob_mean": 0.664,
+      "accept_prob_range": [
+        0.46,
+        0.85
+      ],
+      "venue_fit_mean": 8.5,
+      "verdict_distribution": {
+        "minor_revision": 5,
+        "major_revision": 3
+      },
+      "n_reviews": 8
+    }
+  ],
+  "best_venue": "IST",
+  "failures": [
+    {
+      "cell": "IST/Editor",
+      "model": "grok-4.3",
+      "max_tokens": 12000,
+      "error": "HTTP Error 429: Too Many Requests"
+    }
+  ],
+  "matrix": {
+    "IST": {
+      "Editor": {
+        "grok-4.3": {
+          "accept_probability": 0.72,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "Excessive self-referential length and repetitive claim-to-evidence mapping tables that could be condensed without loss of rigor",
+            "Over-reliance on a single primary MeshGraphNets cylinder-flow setting with supporting checks presented as stronger generalization than the bounded scope actually supports",
+            "Some claims around coverage implications and fault-detection boundaries are carefully hedged but still risk over-interpretation by readers",
+            "Operator-floor calibration is strong for the studied meshes but the manuscript acknowledges the general unstructured-mesh bound remains future work; this should be foregrounded earlier"
+          ],
+          "blocking_gaps": [
+            "No major blocking gaps for IST; the validity-gated MR asset workflow is well-executed, honestly scoped, and directly addresses software V&V for SciML surrogates",
+            "Minor gaps are presentational (trimming redundancy, tightening discussion of boundaries) rather than technical or methodological"
+          ]
+        },
+        "gpt-5.5": {
+          "accept_probability": 0.58,
+          "verdict": "major_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "The topic is a strong fit for IST's software V&V remit, and the core idea of validity-gated metamorphic-relation assets for SciML surrogates is credible and potentially publishable at this venue.",
+            "The manuscript is substantially over-expanded: too many secondary studies, cross-program audits, seeded-fault analyses, LLM/generic-baseline contrasts, and artifact-ledger claims obscure the main contribution and make the empirical story difficult to audit.",
+            "The evidence base is heterogeneous and often descriptive rather than inferential; many counts share checkpoints, trajectories, mutants, or generated cases, so the paper must more sharply separate demonstrated evidence from illustrative stress tests.",
+            "Several empirical claims appear stronger than the underlying design supports, especially around coverage geometry, cross-SUT implications, precision/recall summaries, and cross-program generalization from sibling artifacts.",
+            "The primary methodological novelty relative to existing MR constraint/applicability/tolerance work needs tighter positioning; the paper currently relies on extensive narrative distinctions rather than a crisp technical delta.",
+            "The paper may exceed IST's length limits once references, appendices, and float word-equivalents are counted, and it requires major restructuring for readability.",
+            "Artifact-backed claims are a strength, but the manuscript depends heavily on ledgers and external packages that reviewers may not be able to validate within normal review effort; key evidence should be summarized more transparently in the paper itself."
+          ],
+          "blocking_gaps": [
+            "Condense and refocus the paper around the core method and primary cylinder-flow/FNO-PINN evidence; move or remove secondary cross-program, LLM, and broad coverage material unless it is essential and rigorously bounded.",
+            "Provide a clearer threat-to-evidence mapping that distinguishes primary evidence, supporting evidence, stress-test evidence, and read-only external audit evidence, with no implied general detection-rate or reliability claim.",
+            "Strengthen the comparison to prior MR applicability, relaxed oracle, constraint, and scientific-software MT work by specifying exactly what is technically new beyond recording preconditions, tolerances, and inapplicability.",
+            "Reduce overclaiming in the seeded-fault and coverage sections; precision/recall and cross-SUT coverage language should be reframed as exploratory unless backed by independent fault corpora or independent mutant design.",
+            "Clarify reproducibility requirements: which experiments are fully rerunnable, which depend on precomputed artifacts, which datasets/checkpoints are redistributable, and what reviewers must inspect to verify each central claim.",
+            "Address manuscript length and organization to comply with IST limits and improve reviewability.",
+            "Make the operator-floor admissibility argument self-contained enough for readers to assess without relying primarily on external ledgers."
+          ]
+        },
+        "claude-opus-4-7": {
+          "accept_probability": 0.85,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "Some critical admissibility components, such as the numerical decidability floor, depend on specific mesh topology and operator assumptions that are only partially generalized; future work is needed for wider unstructured mesh coverage.",
+            "The absolute conservation metamorphic relation is deferred rather than fully implemented, limiting the completeness of the MR asset suite in some settings.",
+            "The seeded-fault catalog is limited in scale and scope and does not prove general defect-detection effectiveness or localization beyond the studied SUTs.",
+            "The LLM-assisted candidate generation and generic MR templates provide mostly baseline contrast rather than robust automatic MR discovery.",
+            "The empirical results focus on bounded workflows targeting mesh-based scientific ML surrogates; broader generality to other SciML classes, datasets, or production-scale CFD is not yet demonstrated."
+          ],
+          "blocking_gaps": [
+            "Lack of a fully calibrated domain-violation axis metric across MR classes reduces cross-relation verdict interpretability.",
+            "Deferred absolute discrete-conservation MR verdict means a key physical property is tested only approximately in some experiments.",
+            "Operator-floor admissibility predicates and tolerances currently rely on mesh-specific analytical bounds without universal proofs for all mesh types.",
+            "Coverage implication from seeded-fault detection is suggestive but not validated with independent real-world defect corpora or external fault sets.",
+            "No demonstrated automation of MR-card authoring or precondition checks; manual effort remains a significant barrier for adoption."
+          ]
+        },
+        "qwen3-max": {
+          "accept_probability": 0.85,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "The paper is well-aligned with IST's scope but requires minor clarifications in threat-to-validity and reproducibility sections.",
+            "Some claims about cross-architecture generalization, while carefully bounded, could be misread; tightening phrasing would help.",
+            "Appendix-heavy presentation may challenge readability; consider integrating key tables into main text."
+          ],
+          "blocking_gaps": []
+        }
+      },
+      "Adversary": {
+        "grok-4.3": {
+          "accept_probability": 0.65,
+          "verdict": "major_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "Excessive self-referential length and repetitive claim-to-evidence mapping (main text + two large appendices) exceeds the practical expectations of IST even though formally under the word cap; many tables could be condensed or moved to online supplementary material.",
+            "Seeded-fault and cross-SUT coverage discussion is presented as an 'implication' yet occupies substantial space and uses statistical apparatus (Wilson CIs, Wilcoxon, Cliff's \u03b4) that the authors themselves label as bounded/descriptive; this borders on over-claiming generality for a single-architecture family and must be tightened.",
+            "Operator-floor calibration and domain-violation coordinate are technically sound but receive disproportionate space relative to the core methodological contribution; the novelty of the four-condition gate versus prior constraint-based MT work (Duque-Torres et al.) needs clearer demarcation without repeating the positioning table.",
+            "Reproducibility package is mentioned extensively yet depends on a 'Minimum-MR-SubSet' sibling artifact whose full contents are not guaranteed to be reviewer-accessible in one click; the replication statement must be made crisper."
+          ],
+          "blocking_gaps": [
+            "No direct comparison against any publicly available SciML testing baseline (e.g., an open-source physics-informed residual checker or an off-the-shelf equivariance test suite) on the same checkpoints; the three-arm PointMLP experiment is useful but still internal.",
+            "The PINN and FNO extensions remain extremely lightweight (K=15 seeds, small FNO-2D checkpoints, deliberately under-trained airfoil surrogate); these feel like sanity checks rather than robust cross-family evidence and should either be strengthened or explicitly relabeled as illustrative.",
+            "Threats-to-validity section correctly acknowledges most limitations yet buries the fact that the seeded-mutant catalogue was authored by the same team that designed the MRs; independent fault injection or external defect data would materially raise confidence."
+          ]
+        },
+        "gpt-5.5": {
+          "accept_probability": 0.58,
+          "verdict": "major_revision",
+          "venue_fit": 8,
+          "top_concerns": [
+            "The paper is highly topical for IST software V&V, but the manuscript is over-expanded and difficult to audit: the core methodological contribution is buried under many secondary executions, stress tests, cross-program claims, LLM baselines, and artifact-ledger references.",
+            "The novelty is plausible but narrow: measurement-floor-gated admissibility and typed MR verdicts are useful engineering contributions, yet much of the framework resembles careful MR specification, constraint checking, tolerance calibration, and inapplicability handling already present in related MT work.",
+            "The empirical evidence is broad but uneven: many results are descriptive, non-independent, synthetic, OOD, smoke-level, under-trained, or inherited from sibling artifacts, which weakens the evidential force despite the authors' honest scoping.",
+            "The main evaluation does not convincingly validate the proposed gate as a method beyond showing that the authors can apply it to their own selected relations; there is little independent assessment of whether other practitioners would make the same admissibility decisions.",
+            "Several reported counts appear rhetorically impressive but are not statistically strong because they share checkpoints, trajectories, architectures, generated cases, or relation definitions; the manuscript acknowledges this, but still risks over-weighting denominator size.",
+            "The coverage and seeded-fault sections are especially vulnerable: many mutants are relation-tailored or near-definitional, so the detection/coverage interpretation is useful as a stress test but weak as empirical validation.",
+            "The paper relies heavily on external artifacts, claim ledgers, sibling repositories, and many named claims; unless the review process can inspect these artifacts, the manuscript alone is hard to verify.",
+            "The writing is careful about boundaries, but the accumulation of caveats creates a concern that the actual validated claim is much smaller than the manuscript length and complexity suggest."
+          ],
+          "blocking_gaps": [
+            "Condense and restructure the paper around the central method and a smaller set of primary evidence; move most secondary breadth, LLM, cross-program, and stress-test material to appendix or replication package.",
+            "Clarify the precise novelty over MR constraint/specification frameworks, relaxed metamorphic oracles, and bug-versus-inapplicability work; state exactly what is new algorithmically or methodologically.",
+            "Provide a cleaner validation of the admissibility gate itself, ideally including independent expert review, inter-rater agreement on gate decisions after training, or a blinded re-application of the rubric to held-out candidate MRs.",
+            "Separate primary evidence from illustrative/stress evidence much more sharply; avoid giving equal evidential status to synthetic meshes, smoke tests, under-trained airfoil models, sibling-artifact reuse, and full primary executions.",
+            "Reduce or reframe fault-detection and coverage claims so they cannot be read as empirical defect-detection performance; many are structurally entailed by the chosen invariants.",
+            "Make artifact availability, exact reproducibility status, and what reviewers can independently rerun explicit and concise; artifact-backed claims should not substitute for a readable main-paper evidentiary chain.",
+            "Tighten statistical reporting by removing weak denominator inflation and reporting only analyses whose sampling units are defensible.",
+            "Improve readability and focus: the current manuscript may exceed the practical tolerance of IST reviewers even if it technically fits the word limit."
+          ]
+        },
+        "claude-opus-4-7": {
+          "accept_probability": 0.65,
+          "verdict": "major_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "Numerical decidability gate depends on mesh-specific and operator-specific bounds that are not fully generalized beyond studied cases, limiting external validity and broad applicability.",
+            "Empirical evaluation is comprehensive within the specific MeshGraphNets and CFD surrogate families but remains bounded; key claims are framed as implications rather than validated generalization or fault-detection rates.",
+            "Some admitted MRs such as absolute conservation remain deferred due to uncalibratable operator floors, indicating incomplete end-to-end verdict capability.",
+            "Seeded fault detection and coverage results highlight blind spots and limitations in the admitted MR set, without establishing formal localization or real-world fault-detection reliability.",
+            "The complex admissibility gating and verdict typing increase auditability but come at the cost of workflow complexity, which may hinder broader uptake without tooling support.",
+            "Secondary and supporting evidence on PINN/FNO and airfoil tasks are encouraging but still limited to selected architectures and datasets, weakening claims of general SciML surrogate applicability.",
+            "The paper avoids overclaims but leaves open the challenge of automating MR valid gating, cross-relation domain-score calibration, and extension to production-scale CFD and more diverse SciML settings."
+          ],
+          "blocking_gaps": [
+            "Absence of a generalized, provably conservative numerical-decidability operator-floor bound across a wide range of mesh topologies and measuring operators restricts confidence in valid MR asset construction beyond studied examples.",
+            "No calibrated cross-MR domain-violation metric or interpretable common scale, which hampers aggregate verdict interpretation or automated domain-violation detection.",
+            "The deferred absolute conservation relation highlights that not all physically motivated MRs can currently be admitted or produce executable verdicts due to measurement-floor calibration challenges.",
+            "The fault-detection results do not provide formal fault-localization or general real-world detection guarantees, limiting practical impact claims.",
+            "Limited automation or guidelines for MR input mapping, precondition checking, and verdict ledger generation currently place a significant manual burden on practitioners.",
+            "Evidence is restricted to a few surrogate architectures and CFD tasks; lacks broader evaluation on other SciML surrogate models, physics domains, or real production-scale surrogates.",
+            "Covering the admitted MR set's blind spots requires integration of additional MRs or orthogonal testing techniques, which is yet unaddressed."
+          ]
+        },
+        "qwen3-max": {
+          "accept_probability": 0.85,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "Overly dense presentation may hinder readability for IST's broad software-engineering audience",
+            "Some empirical claims (e.g., cross-architecture replication) could be more clearly bounded in discussion",
+            "MR-card schema details are described textually but would benefit from a formalized example or pseudo-grammar"
+          ],
+          "blocking_gaps": []
+        }
+      }
+    },
+    "EMSE": {
+      "Editor": {
+        "grok-4.3": {
+          "accept_probability": 0.68,
+          "verdict": "major_revision",
+          "venue_fit": 8,
+          "top_concerns": [
+            "Excessive length and repetitive boundary disclaimers reduce readability without adding proportional value",
+            "Empirical evidence remains narrowly scoped to cylinder-flow and a few supporting PDE cases despite repeated cross-family assertions",
+            "Methodological transparency is strong but the MR-card and ledger machinery appears over-engineered relative to demonstrated incremental utility over existing MT constraint approaches"
+          ],
+          "blocking_gaps": [
+            "No practitioner-oriented usability or cost-benefit evaluation of the validity-gated workflow in realistic SciML pipelines",
+            "Limited head-to-head quantitative comparison against residual-based or UQ-driven SciML V&V techniques on the same faults and SUTs",
+            "Operator-floor calibration and domain-violation scoring are shown only for specific meshes and operators; general unstructured-mesh proofs or cross-MR calibrated metrics are explicitly deferred to future work"
+          ]
+        },
+        "gpt-5.5": {
+          "accept_probability": 0.58,
+          "verdict": "major_revision",
+          "venue_fit": 8,
+          "top_concerns": [
+            "The topic fits EMSE well, but the manuscript is overloaded with many primary, supporting, secondary, smoke, read-only, and stress-test evidence tiers, making the central empirical contribution hard to isolate and audit.",
+            "The core methodological novelty\u2014measurement-floor-based admissibility and typed MR verdicts\u2014is plausible but incremental relative to relaxed metamorphic oracles, applicability constraints, and scientific-software MR engineering; the paper needs sharper positioning and fewer diffuse claims.",
+            "Much empirical evidence relies on author-implemented mutants, synthetic/OOD meshes, under-trained models, smoke subsets, read-only sibling artifacts, and descriptive dependent cells; this is acceptable for a bounded case study only if the paper more consistently avoids rate-like or general coverage language.",
+            "The evidence chain is artifact-heavy and ledger-based, but the manuscript itself does not provide enough compact, independently intelligible detail for reviewers to assess whether every claimed result is reproducible without deeply inspecting a large package.",
+            "The paper repeatedly states boundaries, which is good, but the volume of cross-family, cross-program, and coverage-geometry claims still risks overclaiming beyond the strongest primary cylinder-flow and FNO/PINN evidence.",
+            "Presentation is too long and complex for a journal article in its current form; the RQs, claims, tables, appendices, and result subsections need consolidation around a small number of defensible empirical claims."
+          ],
+          "blocking_gaps": [
+            "Clarify the primary unit of empirical inference and separate true executions from read-only audits, smoke tests, synthetic stress tests, and sibling-repository reuse; otherwise the empirical basis is too difficult to evaluate.",
+            "Reduce or explicitly demote broad coverage, cross-SUT, and cross-program language unless supported by independently authored defects or stronger external subjects; current seeded-fault evidence should remain a diagnostic stress test.",
+            "Strengthen the comparison to prior MR constraint/applicability and relaxed-oracle work to show precisely what is new beyond disciplined MR specification and tolerance calibration.",
+            "Provide a concise replication-package map and minimal reproducibility path for the central claims, including which claims can be rerun, which are inspection-only, and which require unavailable checkpoints or old runtimes.",
+            "Substantially streamline the manuscript so the methodological contribution, case-study protocol, primary results, and threats-to-validity are understandable without following dozens of claim IDs and evidence tiers."
+          ]
+        },
+        "claude-opus-4-7": {
+          "accept_probability": 0.85,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "The study is a strongly executed, well-bounded empirical case study with rigorous methodological transparency and honest discussion of threats-to-validity.",
+            "It aligns very well with EMSE's scope in empirical software engineering on SciML surrogate testing and metamorphic testing, featuring a clear validity gate, explicit MR cards, and typed verdicts.",
+            "While the evidence is carefully scoped and bounded, it lacks broad claims to general reliability or production-scale validation, which fits EMSE's acceptance bar allowing such well-bounded case studies.",
+            "The manuscript thoroughly discusses threats and boundaries, includes replication packages and thorough artifact records, and uses a multi-architecture, multi-task experimental design.",
+            "Minor revisions are suggested to improve clarity in sections on verdict calibration across relations and to strengthen reproducibility instructions, but these do not block acceptance."
+          ],
+          "blocking_gaps": [
+            "The absolute mass-conservation relation is deferred due to numerical decidability challenges on the deployed mesh; a fully executable absolute conservation verdict would strengthen the empirical pipeline.",
+            "The domain-violation axis for verdict interpretation is per-relation and currently uncalibrated across MR classes, limiting cross-relation comparability.",
+            "Generalization beyond the studied architectures, datasets, and physical tasks remains future work, limiting immediate applicability claims.",
+            "Replication workflow depends on some older runtimes and checkpoint availability, potentially hindering straightforward reproduction.",
+            "Some LLM-based candidate generation and coverage discussions are exploratory and do not provide mature automated MR identification."
+          ]
+        },
+        "qwen3-max": {
+          "accept_probability": 0.85,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "Some claims about generalizability beyond the studied SciML surrogates are cautiously worded but still risk overinterpretation; authors must further tighten language in Discussion and Conclusion.",
+            "The replication package is strong, but certain artifacts (e.g., PhysicsNeMo checkpoint) depend on external benchmarks\u2014reviewers may request clearer fallback instructions for full reproducibility.",
+            "While threats-to-validity are honestly discussed, the construct validity section should explicitly address potential subjectivity in rubric application (e.g., tolerance selection)."
+          ],
+          "blocking_gaps": []
+        }
+      },
+      "Adversary": {
+        "grok-4.3": {
+          "accept_probability": 0.52,
+          "verdict": "major_revision",
+          "venue_fit": 8,
+          "top_concerns": [
+            "Excessive length, verbosity, and dense interlocking tables/claim-ledgers obscure the core methodological contribution; a mid-tier EMSE paper should be readable without 50+ pages of self-referential apparatus.",
+            "Empirical evidence is narrowly scoped to author-seeded synthetic faults and constructed meshes; results frequently read as by-construction (e.g., mirror-y fails exactly when rubric marks it OOD) rather than revealing unexpected SciML surrogate behaviors.",
+            "Novelty is incremental: the validity gate, MR-card format, and typed verdicts combine existing ideas (Duque-Torres constraints, Eniser relaxations, Yang hierarchical MRs) without a clear empirical demonstration that the added machinery improves V&V outcomes over simpler MT or residual checks on real defects.",
+            "Seeded-fault and cross-SUT coverage claims are presented as implications yet rely on author-designed mutants that preserve obvious invariants; this weakens the 'bounded utility' story for an empirical journal.",
+            "Replication package is strong on artifacts but the sheer volume of YAML/ledgers makes independent re-execution cumbersome; honest threats discussion acknowledges external-validity limits but does not sufficiently motivate why this specific bounded cylinder-flow case advances the broader SE testing community."
+          ],
+          "blocking_gaps": [
+            "Absence of real (non-seeded) defects drawn from actual SciML surrogate development or production failures; without this the utility claim remains largely demonstrative.",
+            "Insufficient contrast against stronger baselines (e.g., physics-informed residuals, conformal UQ, or existing open-source SciML test suites) on the same checkpoints to show added value beyond auditability.",
+            "Domain-violation coordinate is per-relation and uncalibrated across MR families; the two-axis verdict figure is illustrative but the empirical sections never produce a reusable, reviewer-inspectable calibration set.",
+            "Manuscript must be substantially condensed, with redundant claim-to-evidence maps moved to appendix or supplemental material, before it meets EMSE readability norms."
+          ]
+        },
+        "gpt-5.5": {
+          "accept_probability": 0.42,
+          "verdict": "major_revision",
+          "venue_fit": 8,
+          "top_concerns": [
+            "The paper is highly overgrown and difficult to evaluate: many SUTs, rosters, sibling repositories, stress tests, LLM baselines, cross-program audits, and fault catalogues obscure the central empirical contribution.",
+            "The core novelty over existing metamorphic-testing constraint/applicability work, relaxed MRs, and physics-based MR testing is plausible but not yet sharply isolated; the manuscript often repackages careful engineering and bookkeeping as methodological novelty.",
+            "The primary empirical evidence remains dominated by one main cylinder-flow setting, with many repetitions that are not independent and several supporting studies that are smoke tests, synthetic cases, under-trained models, or read-only reuse of sibling artifacts.",
+            "The seeded-fault and coverage-geometry claims are interesting but risky: many results appear near-definitional because the detectors directly measure the invariant intentionally perturbed or preserved by the injected fault.",
+            "The statistical treatment is cautious in places, but the manuscript still reports many denominator-heavy counts that may invite overinterpretation despite caveats about non-independence.",
+            "The paper relies heavily on a claim ledger and replication package, but the manuscript itself gives insufficient confidence that the artifacts are independently understandable, minimal, and reproducible without author guidance.",
+            "Several important verdicts are defer/reject/out-of-domain rather than successful executable MR validations, so the empirical utility claim depends on accepting negative/admissibility decisions as substantial results.",
+            "The cross-family and cross-program evidence is uneven: some parts are full executions, others are smoke tests, closed-form probes, output-level perturbations, or reuse of external/sibling assets, making the evidentiary hierarchy hard to audit.",
+            "The writing is defensive and overloaded with boundaries, which is honest but also signals that the positive claim may be narrower than the manuscript length and empirical apparatus suggest."
+          ],
+          "blocking_gaps": [
+            "Substantially simplify and refocus the manuscript around one clear primary case study plus a small number of well-justified supporting replications; move most fault-catalogue, cross-program, and LLM material to appendices or remove it.",
+            "Provide a crisper novelty argument against prior constraint-based MR applicability, relaxed MR thresholds, and physics-based metamorphic testing, specifying exactly what is new beyond explicit preconditions, tolerances, and artifact ledgers.",
+            "Demonstrate that the replication package is complete and independently executable for the main claims, with a minimal reproduction path rather than only a large claim-ledger assertion.",
+            "Clarify the independence structure and avoid treating repeated frames, checkpoints, seeds, and trajectories as stronger evidence than they are; separate descriptive engineering evidence from inferential empirical claims.",
+            "Reduce or clearly demote the seeded-fault coverage claims unless independently authored or less relation-tailored mutants can be used; otherwise frame them strictly as sanity/stress tests of detector geometry.",
+            "Make the admissibility gate operational enough that another team could apply it and reach similar admit/reject/defer decisions; currently expert judgment and relation-specific normalization choices remain under-specified.",
+            "Tighten the empirical utility claim: explicitly state what the workflow lets practitioners decide that rollout accuracy, residual checks, or standard MR constraint systems would not already decide.",
+            "Resolve the evidentiary status of sibling Minimum-MR-SubSet artifacts and prior/preprint overlap so readers can distinguish new evidence from reused or externally witnessed evidence."
+          ]
+        },
+        "claude-opus-4-7": {
+          "accept_probability": 0.7,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "The validity gate and MR-card workflow are well motivated and fit the EMSE scope, but the empirical evaluation remains narrowly scoped to a single primary CFD surrogate architecture (MeshGraphNets) and two CFD tasks with bounded replication; broader generalization claims are appropriately deferred but reduce impact.",
+            "The numerical-decidability gate depends on operator-floor derivations for specific mesh discretizations; extension to more general unstructured meshes and flux forms is future work, limiting immediate usability on broader scientific ML surrogates.",
+            "The fault-detection results are based on injected and adversarial mutants within a limited catalogue; real-world defect detection rates and general coverage remain unvalidated, cautioning against overclaims in practical applicability.",
+            "While the typed verdict space and domain-violation interpretation improve MR result transparency, the vertical domain violation axis remains uncalibrated across relation classes, limiting direct cross-relation verdict comparisons and fusion.",
+            "The comparative baselines (rollout accuracy, LLM-assisted candidate generation, generic MR templates) are used judiciously as explanatory contrasts but are not fully explored as integrated competitors or combined workflows.",
+            "Some methodological components (MR-card asset creation, ledger automation) remain manual or semi-automated, possibly hindering immediate tooling uptake and reproducibility in other settings without substantial developer effort."
+          ],
+          "blocking_gaps": [
+            "Lack of a fully automated or systematic MR candidate identification and validity decision pipeline limits replicability and practical adoption beyond expert-driven scenarios.",
+            "Operator-floor numerical bounds are rigorous only for a particular mesh type and discrete operator; lack of formal guarantees or generalization to other common CFD meshes or physics domains restricts the universality of the admissibility gate.",
+            "The empirical evaluation does not include externally sourced real defect data or independent fault catalogues beyond the authors' seeded faults, limiting external validity of claimed fault-detection interpretations.",
+            "Domain-violation vertical axis in verdict interpretation is per-relation and uncalibrated, preventing aggregated or comparative MR verdict fusion needed for supervision or runtime monitoring.",
+            "No end-to-end evaluation on production-scale industrial SciML surrogates or complex multi-physics combines with MR assets precludes claims on real-world deployment readiness.",
+            "The deferred absolute conservation verdict (due to operator floor) reveals gaps in executable MR formulation that must be resolved for completeness in physics-based surrogate V&V."
+          ]
+        },
+        "qwen3-max": {
+          "accept_probability": 0.85,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "Overly dense presentation may hinder readability for EMSE's broad audience",
+            "Some methodological novelty (e.g., measurement-floor admissibility) could be clarified earlier",
+            "Replication package completeness assumed but not independently verified"
+          ],
+          "blocking_gaps": []
+        }
+      }
+    },
+    "JSS": {
+      "Editor": {
+        "grok-4.3": {
+          "accept_probability": 0.65,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "Excessive self-referential length and repetitive claim-to-evidence mapping that could be condensed without loss of rigor",
+            "Over-reliance on a single primary task (cylinder flow) with supporting studies presented as stronger than their bounded nature warrants",
+            "Some claims around coverage implications and fault-detection boundaries are phrased in ways that risk over-interpretation despite explicit disclaimers",
+            "Figures and tables are numerous and dense; several could be moved to appendix or streamlined for readability"
+          ],
+          "blocking_gaps": [
+            "No comparison against contemporary SciML-specific V&V baselines (e.g., physics-informed residual checks or modern equivariance metrics) beyond rollout accuracy",
+            "Reproducibility package is mentioned but not yet publicly available at submission; reviewer cannot inspect raw ledgers or MR cards",
+            "Threats to validity section acknowledges many limitations but does not discuss potential confirmation bias in the design of the seeded-fault catalogue"
+          ]
+        },
+        "gpt-5.5": {
+          "accept_probability": 0.52,
+          "verdict": "major_revision",
+          "venue_fit": 8,
+          "top_concerns": [
+            "The topic fits JSS well, but the manuscript is overextended: the core contribution is a validity-gated MR workflow, while the results section adds many loosely connected secondary audits, fault catalogues, PINN/FNO/airfoil/OpenMC checks, LLM baselines, and coverage claims that dilute rather than strengthen the main argument.",
+            "The methodological novelty is plausible but narrow: explicit MR admissibility, tolerance/floor reasoning, typed verdicts, and MR cards are useful engineering contributions, but the paper must more clearly distinguish what is genuinely new from existing MR constraints, relaxed oracles, specification languages, and bug-versus-inapplicability work.",
+            "The empirical evaluation is artifact-heavy and difficult to audit from the manuscript alone; many reported numbers are descriptive, non-independent, or based on author-implemented mutants, yet the density of statistics may give an impression of stronger inference than warranted.",
+            "Several evaluations are weak as evidence for generality: the primary MeshGraphNets results remain same-task/same-family dominated; the airfoil model is deliberately under-trained; PhysicsNeMo evidence is described as smoke-level; PINN/FNO and cross-program evidence appear heterogeneous and partly read-only or output-level rather than comparable end-to-end studies.",
+            "The paper repeatedly states appropriate boundaries, but the volume of coverage, detection, precision/recall, and cross-SUT claims still risks overclaiming a qualitative coverage principle that has not been independently validated.",
+            "Presentation quality is a major issue for JSS: the manuscript is too long, contains excessive claim-ledger terminology, many appendix-like details in the main text, and would be hard for typical JSS readers to follow without substantial restructuring.",
+            "There are reproducibility and reviewability concerns: many claims depend on external ledgers, artifacts, and preprint/Zenodo contents, but the manuscript itself does not provide enough compact detail to assess all experimental protocols, thresholds, mutant definitions, and raw data provenance."
+          ],
+          "blocking_gaps": [
+            "Substantially narrow and reorganize the empirical story around a small number of primary RQs; move secondary audits, cross-program breadth, LLM contrasts, and extended fault-catalogue material to appendix or remove unless directly needed.",
+            "Provide a clearer formal definition of the admissibility gate, MR-card schema, tolerance/floor criterion, and typed verdict logic, with enough operational detail that the method can be understood without inspecting the artifact repository.",
+            "Clarify the exact novelty relative to MR applicability constraints, relaxed MT oracles, MR specification languages, and bug-versus-inapplicability frameworks; the current positioning is plausible but not yet crisp enough.",
+            "Strengthen the evaluation validity argument by separating independent evidence from descriptive repetitions, explicitly identifying sampling units, and avoiding precision/recall or detection-rate language where mutants or cells are non-independent or relation-tailored.",
+            "Reduce or qualify the coverage-geometry/validity-coverage duality claims unless supported by independently authored mutants or real defects; currently these should remain discussion-level observations, not central empirical findings.",
+            "Improve manuscript focus and readability to meet JSS standards: shorter results section, fewer nested claims, clearer tables, and a more conventional experimental narrative.",
+            "Ensure all datasets, checkpoints, thresholds, mutant operators, and executable MR definitions needed to reproduce the primary study are documented in the paper or a stable artifact with clear mapping from manuscript claims to files."
+          ]
+        },
+        "claude-opus-4-7": {
+          "accept_probability": 0.85,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "The empirical evaluation is rigorous yet bounded in SUT diversity and datasets; while this fits JSS\u2019s acceptance bar, the manuscript should better emphasize limitations on generalization beyond studied cases.",
+            "The admissibility gate and MR-card framework are well motivated but rely on numerical floor calibrations derived for specific mesh settings; generalization to unstructured and production meshes is future work and should be clearly stated as a limitation.",
+            "The paper is dense and complex, with many acronyms and methodological details; clarity and accessibility could be improved, especially in method and results presentation, to benefit a broader JSS readership.",
+            "The paper prudently avoids overclaiming but discussing practical adoption guidance or integration with existing SciML testing pipelines could strengthen the practical relevance expectation of JSS.",
+            "Some baseline comparisons (e.g. with LLM-based MR identification) are presented but not fully explored; more analysis of when and why the validity-gated approach outperforms alternatives might enhance contribution impact."
+          ],
+          "blocking_gaps": [
+            "No critical methodological flaws; the main gaps are around scope of generalizability and clarity, which are addressable via revisions.",
+            "The admitted limitation that absolute discrete-divergence conservation remains deferred without a fully calibrated floor is a known issue but does not block acceptance; the paper documents this clearly.",
+            "No experimental artifacts or evidence appear missing; all major claims are backed by tracked, artifact-supported results.",
+            "No ethical or reproducibility concerns beyond dataset license limits; replication package is well described.",
+            "No fundamental mismatch with JSS topical scope or standards; the paper targets a mainstream SE venue with an empirically supported methodological contribution."
+          ]
+        },
+        "qwen3-max": {
+          "accept_probability": 0.85,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "Overly dense presentation may hinder readability for JSS's broad SE audience",
+            "Some methodological novelty claims could be more clearly contrasted with prior MT work",
+            "Empirical scope, while well-bounded, should explicitly acknowledge limitations in generalizability"
+          ],
+          "blocking_gaps": []
+        }
+      },
+      "Adversary": {
+        "grok-4.3": {
+          "accept_probability": 0.58,
+          "verdict": "major_revision",
+          "venue_fit": 7,
+          "top_concerns": [
+            "Core idea is largely a framing device (rubric + MR cards + typed verdicts) that incrementally extends existing constraint-based MT and physics-MR work (Duque-Torres, MetaTrimmer, Reichert et al.); differentiation is asserted rather than shown to deliver measurable gains in auditability or fault finding beyond what a careful tester would do anyway.",
+            "Empirical results are overwhelmingly confirmatory of expected physics/software behaviors on synthetic or seeded faults; the 'bounded case-study' disclaimers are honest but leave the practical relevance for real SciML V&V pipelines under-specified and unvalidated by practitioners.",
+            "Manuscript is excessively long, dense, and self-referential (dozens of claim-ledger tables, repeated disclaimers, internal cross-references); this harms readability and suggests the contribution could be condensed by at least 40% without loss.",
+            "Operator-floor and domain-violation machinery is highly specific to the studied meshes/operators; the paper acknowledges generalization limits but does not supply a reusable method or tool that practitioners could adopt off-the-shelf."
+          ],
+          "blocking_gaps": [
+            "No practitioner study, usability evaluation, or real-world deployment evidence showing that MR cards and the validity gate improve V&V outcomes, audit effort, or defect detection over standard rollout + residual checks in an actual SciML workflow.",
+            "Seeded-fault and cross-SUT stress tests use author-constructed mutants that preserve or break the exact invariants the MRs target; this creates a circularity that weakens the coverage-geometry implication the authors treat as a key takeaway.",
+            "Positioning against closest priors (constraint-based MT, relaxations, NOETHER-style organization) is handled via a capability matrix that is descriptive rather than comparative on shared benchmarks or metrics; a sharper, possibly quantitative contrast is required to establish that the gated workflow is a genuine methodological advance rather than re-packaging."
+          ]
+        },
+        "gpt-5.5": {
+          "accept_probability": 0.46,
+          "verdict": "major_revision",
+          "venue_fit": 8,
+          "top_concerns": [
+            "The paper has a plausible JSS-level contribution, but the central novelty is more of a disciplined packaging/workflow for SciML metamorphic testing than a clearly validated new method; the manuscript must sharpen what is genuinely new beyond admissibility constraints, relaxed MRs, MR specifications, and bug-versus-inapplicability work.",
+            "The empirical section is sprawling and difficult to audit from the manuscript alone: many datasets, SUTs, smoke runs, sibling repositories, closed-form probes, seeded mutants, and secondary audits are mixed together, making the evidential hierarchy hard to follow and risking the impression of result accumulation rather than a clean evaluation.",
+            "Several results are based on author-designed or sibling-repository mutants and relation-specific probes, so the fault-detection and coverage-geometry claims are only weakly externally validated; the manuscript mostly acknowledges this, but the amount of quantitative reporting can still over-signal generality.",
+            "The primary evidence remains concentrated around cylinder-flow MeshGraphNets-family workflows, with supporting PINN/FNO/airfoil evidence that often tests gate discrimination or representation contracts rather than independent practical utility in realistic SciML V&V settings.",
+            "The paper is overlong and overloaded for JSS: many claims, claim IDs, appendices, ledgers, baselines, and cross-program audits dilute the main method and may make reviewers distrust the narrative unless substantially streamlined.",
+            "The evaluation lacks a strong practitioner-facing validation of the MR-card workflow itself, such as independent users, independent MR authors, ablation of the gate components, or a clearer comparison showing reduced false alarms/misinterpretations in realistic workflows."
+          ],
+          "blocking_gaps": [
+            "Must reorganize and shorten the results into a clear primary evaluation plus explicitly secondary evidence; otherwise the contribution will look unfocused and hard to verify.",
+            "Must provide a crisper novelty statement against MR specifications, relaxed MT, constraint-based applicability, and SciML physical residual diagnostics, ideally with a minimal formal definition of the admissibility gate and verdict semantics.",
+            "Must tone down or quarantine coverage/fault-detection claims, because current mutants and probes do not support general defect-detection effectiveness or validated localization.",
+            "Must clarify artifact availability and reproducibility boundaries, especially which results are fully rerunnable, which depend on non-redistributable checkpoints or old runtimes, and which are inherited from the sibling repository.",
+            "Should add or strengthen an ablation/comparison showing what decisions would be wrong without the numerical-floor/domain-validity gate, not just examples where the gate produces typed verdicts.",
+            "Should fix venue/template inconsistency and presentation issues: the manuscript says Elsevier IST in the source while being submitted to JSS, and the current length/claim-ledger style is likely to irritate reviewers."
+          ]
+        },
+        "claude-opus-4-7": {
+          "accept_probability": 0.65,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "The numerical-decibility admissibility gate, while novel and well-argued, depends heavily on one well-characterized mesh topology (P1 divergence on symmetric and one unstructured mesh), limiting direct applicability to broader unstructured meshes or other discretizations without further validation.",
+            "The empirical evidence is necessarily bounded: one primary CFD task (cylinder flow), a second smaller-scale CFD (airfoil), and limited cross-architecture PINN/FNO checks. No broad generalization to diverse SciML surrogates or real-world production-scale datasets is shown.",
+            "Fault-detection interpretation is carefully scoped, but it relies on a small catalog of injected faults and adversarial cases without connection to field fault occurrence statistics or independently collected bug corpora, limiting operational predictive power.",
+            "While the MR card and typed verdict framework formalizes and organizes candidate metamorphic relations well, the automatic or semi-automatic generation/derivation of admissible MRs beyond expert/LLM-aided candidate generation is not addressed and remains future work.",
+            "The usefulness vs. standard rollout accuracy or residual UQ diagnostics is argued convincingly but empirical comparative evaluation across broader real tasks is not provided, limiting claims about practical impact outside studied cases.",
+            "Although the typed verdict scheme is promising, the vertical domain-violation axis is not calibrated across relation classes, which may limit its interpretability or cross-relation comparability in practice."
+          ],
+          "blocking_gaps": [
+            "Lack of demonstrated generalization of the numerical admissibility gate to a variety of meshes and operators beyond the studied setting, leaving open whether this method is broadly applicable in production SciML surrogate testing.",
+            "No large-scale evaluation on real defect datasets or production benchmarks to validate coverage or practical fault detection beyond synthetic injected faults.",
+            "Incomplete calibration and validation of the domain-violation dimension of verdicts across different metamorphic relation classes impedes unified verdict interpretation.",
+            "The proposed framework depends on detailed manual authoring and expert judgment for MR admissibility and precondition setting; automation or scaling remains unaddressed.",
+            "Limited evaluation of the interaction between MR verdicts and other diagnostic tools (residuals, UQ) in operational settings hinders clear practical deployment recommendations.",
+            "The manuscript contains some dense technical parts that might benefit from clarifications or additional illustrations for broad software engineering readership."
+          ]
+        },
+        "qwen3-max": {
+          "accept_probability": 0.75,
+          "verdict": "minor_revision",
+          "venue_fit": 9,
+          "top_concerns": [
+            "The paper's contribution is methodological and well-scoped, but the presentation is dense and occasionally obscures the practical takeaways for JSS readers.",
+            "While the case studies are thorough, the connection between the proposed 'validity gate' and actionable software engineering practice could be clarified for a broader SE audience.",
+            "Some terminology (e.g., 'relation-level verdicts', 'domain-violation magnitude') is novel but not always intuitively grounded for non-SciML-specialist reviewers."
+          ],
+          "blocking_gaps": [
+            "No major technical gaps block acceptance; all claims are carefully bounded and backed by artifacts.",
+            "The evaluation meets JSS standards: it demonstrates a clear method, practical relevance to SciML V&V, and adequate empirical grounding via multiple case studies and stress tests.",
+            "Reproducibility is strong with a public package, claim ledger, and explicit artifact tracing."
+          ]
+        }
+      }
+    }
+  },
+  "raw_responses": {
+    "IST": {
+      "Editor": {
+        "grok-4.3": {
+          "id": "254b907f-394b-4918-8921-6675a9e5f4d0",
+          "model": "grok-4.3",
+          "object": "chat.completion",
+          "created": 1782007896,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.72,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"Excessive self-referential length and repetitive claim-to-evidence mapping tables that could be condensed without loss of rigor\",\n    \"Over-reliance on a single primary MeshGraphNets cylinder-flow setting with supporting checks presented as stronger generalization than the bounded scope actually supports\",\n    \"Some claims around coverage implications and fault-detection boundaries are carefully hedged but still risk over-interpretation by readers\",\n    \"Operator-floor calibration is strong for the studied meshes but the manuscript acknowledges the general unstructured-mesh bound remains future work; this should be foregrounded earlier\"\n  ],\n  \"blocking_gaps\": [\n    \"No major blocking gaps for IST; the validity-gated MR asset workflow is well-executed, honestly scoped, and directly addresses software V&V for SciML surrogates\",\n    \"Minor gaps are presentational (trimming redundancy, tightening discussion of boundaries) rather than technical or methodological\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 20503,
+            "completion_tokens": 218,
+            "total_tokens": 20721,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 64,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 20503,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "gpt-5.5": {
+          "id": "resp_0ed9f2c9747a4af2016a37485bd0988197979f043348d4b15f",
+          "object": "chat.completion",
+          "created": 1782007937,
+          "model": "gpt-5.5",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.58,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"The topic is a strong fit for IST's software V&V remit, and the core idea of validity-gated metamorphic-relation assets for SciML surrogates is credible and potentially publishable at this venue.\",\n    \"The manuscript is substantially over-expanded: too many secondary studies, cross-program audits, seeded-fault analyses, LLM/generic-baseline contrasts, and artifact-ledger claims obscure the main contribution and make the empirical story difficult to audit.\",\n    \"The evidence base is heterogeneous and often descriptive rather than inferential; many counts share checkpoints, trajectories, mutants, or generated cases, so the paper must more sharply separate demonstrated evidence from illustrative stress tests.\",\n    \"Several empirical claims appear stronger than the underlying design supports, especially around coverage geometry, cross-SUT implications, precision/recall summaries, and cross-program generalization from sibling artifacts.\",\n    \"The primary methodological novelty relative to existing MR constraint/applicability/tolerance work needs tighter positioning; the paper currently relies on extensive narrative distinctions rather than a crisp technical delta.\",\n    \"The paper may exceed IST's length limits once references, appendices, and float word-equivalents are counted, and it requires major restructuring for readability.\",\n    \"Artifact-backed claims are a strength, but the manuscript depends heavily on ledgers and external packages that reviewers may not be able to validate within normal review effort; key evidence should be summarized more transparently in the paper itself.\"\n  ],\n  \"blocking_gaps\": [\n    \"Condense and refocus the paper around the core method and primary cylinder-flow/FNO-PINN evidence; move or remove secondary cross-program, LLM, and broad coverage material unless it is essential and rigorously bounded.\",\n    \"Provide a clearer threat-to-evidence mapping that distinguishes primary evidence, supporting evidence, stress-test evidence, and read-only external audit evidence, with no implied general detection-rate or reliability claim.\",\n    \"Strengthen the comparison to prior MR applicability, relaxed oracle, constraint, and scientific-software MT work by specifying exactly what is technically new beyond recording preconditions, tolerances, and inapplicability.\",\n    \"Reduce overclaiming in the seeded-fault and coverage sections; precision/recall and cross-SUT coverage language should be reframed as exploratory unless backed by independent fault corpora or independent mutant design.\",\n    \"Clarify reproducibility requirements: which experiments are fully rerunnable, which depend on precomputed artifacts, which datasets/checkpoints are redistributable, and what reviewers must inspect to verify each central claim.\",\n    \"Address manuscript length and organization to comply with IST limits and improve reviewability.\",\n    \"Make the operator-floor admissibility argument self-contained enough for readers to assess without relying primarily on external ledgers.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 21967,
+            "completion_tokens": 853,
+            "total_tokens": 22820
+          }
+        },
+        "claude-opus-4-7": {
+          "id": "chatcmpl-pu21p4iz82",
+          "model": "claude-opus-4-7",
+          "object": "chat.completion",
+          "created": 1782007945,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"Some critical admissibility components, such as the numerical decidability floor, depend on specific mesh topology and operator assumptions that are only partially generalized; future work is needed for wider unstructured mesh coverage.\",\n    \"The absolute conservation metamorphic relation is deferred rather than fully implemented, limiting the completeness of the MR asset suite in some settings.\",\n    \"The seeded-fault catalog is limited in scale and scope and does not prove general defect-detection effectiveness or localization beyond the studied SUTs.\",\n    \"The LLM-assisted candidate generation and generic MR templates provide mostly baseline contrast rather than robust automatic MR discovery.\",\n    \"The empirical results focus on bounded workflows targeting mesh-based scientific ML surrogates; broader generality to other SciML classes, datasets, or production-scale CFD is not yet demonstrated.\"\n  ],\n  \"blocking_gaps\": [\n    \"Lack of a fully calibrated domain-violation axis metric across MR classes reduces cross-relation verdict interpretability.\",\n    \"Deferred absolute discrete-conservation MR verdict means a key physical property is tested only approximately in some experiments.\",\n    \"Operator-floor admissibility predicates and tolerances currently rely on mesh-specific analytical bounds without universal proofs for all mesh types.\",\n    \"Coverage implication from seeded-fault detection is suggestive but not validated with independent real-world defect corpora or external fault sets.\",\n    \"No demonstrated automation of MR-card authoring or precondition checks; manual effort remains a significant barrier for adoption.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 25106,
+            "completion_tokens": 424,
+            "total_tokens": 25530,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 25106,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "qwen3-max": {
+          "id": "chatcmpl-e7d6e9af-f77d-9e62-a48a-b6d765bc4b3b",
+          "object": "chat.completion",
+          "created": 1782007949,
+          "model": "qwen3-max",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"The paper is well-aligned with IST's scope but requires minor clarifications in threat-to-validity and reproducibility sections.\",\n    \"Some claims about cross-architecture generalization, while carefully bounded, could be misread; tightening phrasing would help.\",\n    \"Appendix-heavy presentation may challenge readability; consider integrating key tables into main text.\"\n  ],\n  \"blocking_gaps\": []\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 22542,
+            "completion_tokens": 118,
+            "total_tokens": 22660,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        }
+      },
+      "Adversary": {
+        "grok-4.3": {
+          "id": "3efe227a-2b65-4571-b32d-51d3eef01150",
+          "object": "chat.completion",
+          "created": 1782007961,
+          "model": "grok-4.3",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.65,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"Excessive self-referential length and repetitive claim-to-evidence mapping (main text + two large appendices) exceeds the practical expectations of IST even though formally under the word cap; many tables could be condensed or moved to online supplementary material.\",\n    \"Seeded-fault and cross-SUT coverage discussion is presented as an 'implication' yet occupies substantial space and uses statistical apparatus (Wilson CIs, Wilcoxon, Cliff's \u03b4) that the authors themselves label as bounded/descriptive; this borders on over-claiming generality for a single-architecture family and must be tightened.\",\n    \"Operator-floor calibration and domain-violation coordinate are technically sound but receive disproportionate space relative to the core methodological contribution; the novelty of the four-condition gate versus prior constraint-based MT work (Duque-Torres et al.) needs clearer demarcation without repeating the positioning table.\",\n    \"Reproducibility package is mentioned extensively yet depends on a 'Minimum-MR-SubSet' sibling artifact whose full contents are not guaranteed to be reviewer-accessible in one click; the replication statement must be made crisper.\"\n  ],\n  \"blocking_gaps\": [\n    \"No direct comparison against any publicly available SciML testing baseline (e.g., an open-source physics-informed residual checker or an off-the-shelf equivariance test suite) on the same checkpoints; the three-arm PointMLP experiment is useful but still internal.\",\n    \"The PINN and FNO extensions remain extremely lightweight (K=15 seeds, small FNO-2D checkpoints, deliberately under-trained airfoil surrogate); these feel like sanity checks rather than robust cross-family evidence and should either be strengthened or explicitly relabeled as illustrative.\",\n    \"Threats-to-validity section correctly acknowledges most limitations yet buries the fact that the seeded-mutant catalogue was authored by the same team that designed the MRs; independent fault injection or external defect data would materially raise confidence.\"\n  ]\n}"
+              },
+              "logprobs": null,
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 20462,
+            "completion_tokens": 418,
+            "total_tokens": 20880,
+            "prompt_tokens_details": {
+              "cached_tokens": 64,
+              "audio_tokens": 0,
+              "text_tokens": 20462,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            },
+            "num_sources_used": 0,
+            "cost_in_usd_ticks": 0
+          },
+          "system_fingerprint": "fp_344299b28b"
+        },
+        "gpt-5.5": {
+          "id": "resp_0b30ea56a9e28912016a37489c9fd48195abbe506481d4ad15",
+          "object": "chat.completion",
+          "created": 1782007994,
+          "model": "gpt-5.5",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.58,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 8,\n  \"top_concerns\": [\n    \"The paper is highly topical for IST software V&V, but the manuscript is over-expanded and difficult to audit: the core methodological contribution is buried under many secondary executions, stress tests, cross-program claims, LLM baselines, and artifact-ledger references.\",\n    \"The novelty is plausible but narrow: measurement-floor-gated admissibility and typed MR verdicts are useful engineering contributions, yet much of the framework resembles careful MR specification, constraint checking, tolerance calibration, and inapplicability handling already present in related MT work.\",\n    \"The empirical evidence is broad but uneven: many results are descriptive, non-independent, synthetic, OOD, smoke-level, under-trained, or inherited from sibling artifacts, which weakens the evidential force despite the authors' honest scoping.\",\n    \"The main evaluation does not convincingly validate the proposed gate as a method beyond showing that the authors can apply it to their own selected relations; there is little independent assessment of whether other practitioners would make the same admissibility decisions.\",\n    \"Several reported counts appear rhetorically impressive but are not statistically strong because they share checkpoints, trajectories, architectures, generated cases, or relation definitions; the manuscript acknowledges this, but still risks over-weighting denominator size.\",\n    \"The coverage and seeded-fault sections are especially vulnerable: many mutants are relation-tailored or near-definitional, so the detection/coverage interpretation is useful as a stress test but weak as empirical validation.\",\n    \"The paper relies heavily on external artifacts, claim ledgers, sibling repositories, and many named claims; unless the review process can inspect these artifacts, the manuscript alone is hard to verify.\",\n    \"The writing is careful about boundaries, but the accumulation of caveats creates a concern that the actual validated claim is much smaller than the manuscript length and complexity suggest.\"\n  ],\n  \"blocking_gaps\": [\n    \"Condense and restructure the paper around the central method and a smaller set of primary evidence; move most secondary breadth, LLM, cross-program, and stress-test material to appendix or replication package.\",\n    \"Clarify the precise novelty over MR constraint/specification frameworks, relaxed metamorphic oracles, and bug-versus-inapplicability work; state exactly what is new algorithmically or methodologically.\",\n    \"Provide a cleaner validation of the admissibility gate itself, ideally including independent expert review, inter-rater agreement on gate decisions after training, or a blinded re-application of the rubric to held-out candidate MRs.\",\n    \"Separate primary evidence from illustrative/stress evidence much more sharply; avoid giving equal evidential status to synthetic meshes, smoke tests, under-trained airfoil models, sibling-artifact reuse, and full primary executions.\",\n    \"Reduce or reframe fault-detection and coverage claims so they cannot be read as empirical defect-detection performance; many are structurally entailed by the chosen invariants.\",\n    \"Make artifact availability, exact reproducibility status, and what reviewers can independently rerun explicit and concise; artifact-backed claims should not substitute for a readable main-paper evidentiary chain.\",\n    \"Tighten statistical reporting by removing weak denominator inflation and reporting only analyses whose sampling units are defensible.\",\n    \"Improve readability and focus: the current manuscript may exceed the practical tolerance of IST reviewers even if it technically fits the word limit.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 21991,
+            "completion_tokens": 928,
+            "total_tokens": 22919
+          }
+        },
+        "claude-opus-4-7": {
+          "id": "chatcmpl-vrv08t37w6a",
+          "model": "claude-opus-4-7",
+          "object": "chat.completion",
+          "created": 1782008003,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.65,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"Numerical decidability gate depends on mesh-specific and operator-specific bounds that are not fully generalized beyond studied cases, limiting external validity and broad applicability.\",\n    \"Empirical evaluation is comprehensive within the specific MeshGraphNets and CFD surrogate families but remains bounded; key claims are framed as implications rather than validated generalization or fault-detection rates.\",\n    \"Some admitted MRs such as absolute conservation remain deferred due to uncalibratable operator floors, indicating incomplete end-to-end verdict capability.\",\n    \"Seeded fault detection and coverage results highlight blind spots and limitations in the admitted MR set, without establishing formal localization or real-world fault-detection reliability.\",\n    \"The complex admissibility gating and verdict typing increase auditability but come at the cost of workflow complexity, which may hinder broader uptake without tooling support.\",\n    \"Secondary and supporting evidence on PINN/FNO and airfoil tasks are encouraging but still limited to selected architectures and datasets, weakening claims of general SciML surrogate applicability.\",\n    \"The paper avoids overclaims but leaves open the challenge of automating MR valid gating, cross-relation domain-score calibration, and extension to production-scale CFD and more diverse SciML settings.\"\n  ],\n  \"blocking_gaps\": [\n    \"Absence of a generalized, provably conservative numerical-decidability operator-floor bound across a wide range of mesh topologies and measuring operators restricts confidence in valid MR asset construction beyond studied examples.\",\n    \"No calibrated cross-MR domain-violation metric or interpretable common scale, which hampers aggregate verdict interpretation or automated domain-violation detection.\",\n    \"The deferred absolute conservation relation highlights that not all physically motivated MRs can currently be admitted or produce executable verdicts due to measurement-floor calibration challenges.\",\n    \"The fault-detection results do not provide formal fault-localization or general real-world detection guarantees, limiting practical impact claims.\",\n    \"Limited automation or guidelines for MR input mapping, precondition checking, and verdict ledger generation currently place a significant manual burden on practitioners.\",\n    \"Evidence is restricted to a few surrogate architectures and CFD tasks; lacks broader evaluation on other SciML surrogate models, physics domains, or real production-scale surrogates.\",\n    \"Covering the admitted MR set's blind spots requires integration of additional MRs or orthogonal testing techniques, which is yet unaddressed.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 25136,
+            "completion_tokens": 642,
+            "total_tokens": 25778,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 25136,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "qwen3-max": {
+          "id": "chatcmpl-ce810181-ff05-977c-9493-54a93725640d",
+          "object": "chat.completion",
+          "created": 1782008007,
+          "model": "qwen3-max",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"Overly dense presentation may hinder readability for IST's broad software-engineering audience\",\n    \"Some empirical claims (e.g., cross-architecture replication) could be more clearly bounded in discussion\",\n    \"MR-card schema details are described textually but would benefit from a formalized example or pseudo-grammar\"\n  ],\n  \"blocking_gaps\": []\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 22567,
+            "completion_tokens": 110,
+            "total_tokens": 22677,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        }
+      }
+    },
+    "EMSE": {
+      "Editor": {
+        "grok-4.3": {
+          "id": "3e1d4888-a193-405f-ac8d-1a0d33b3c3e8",
+          "model": "grok-4.3",
+          "object": "chat.completion",
+          "created": 1782008024,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.68,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 8,\n  \"top_concerns\": [\"Excessive length and repetitive boundary disclaimers reduce readability without adding proportional value\", \"Empirical evidence remains narrowly scoped to cylinder-flow and a few supporting PDE cases despite repeated cross-family assertions\", \"Methodological transparency is strong but the MR-card and ledger machinery appears over-engineered relative to demonstrated incremental utility over existing MT constraint approaches\"],\n  \"blocking_gaps\": [\"No practitioner-oriented usability or cost-benefit evaluation of the validity-gated workflow in realistic SciML pipelines\", \"Limited head-to-head quantitative comparison against residual-based or UQ-driven SciML V&V techniques on the same faults and SUTs\", \"Operator-floor calibration and domain-violation scoring are shown only for specific meshes and operators; general unstructured-mesh proofs or cross-MR calibrated metrics are explicitly deferred to future work\"]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 20499,
+            "completion_tokens": 192,
+            "total_tokens": 20691,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 64,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 20499,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "gpt-5.5": {
+          "id": "resp_0da525554734c0f8016a3748dd97f08190bdfadd4d3a3a1ee3",
+          "object": "chat.completion",
+          "created": 1782008063,
+          "model": "gpt-5.5",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.58,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 8,\n  \"top_concerns\": [\n    \"The topic fits EMSE well, but the manuscript is overloaded with many primary, supporting, secondary, smoke, read-only, and stress-test evidence tiers, making the central empirical contribution hard to isolate and audit.\",\n    \"The core methodological novelty\u2014measurement-floor-based admissibility and typed MR verdicts\u2014is plausible but incremental relative to relaxed metamorphic oracles, applicability constraints, and scientific-software MR engineering; the paper needs sharper positioning and fewer diffuse claims.\",\n    \"Much empirical evidence relies on author-implemented mutants, synthetic/OOD meshes, under-trained models, smoke subsets, read-only sibling artifacts, and descriptive dependent cells; this is acceptable for a bounded case study only if the paper more consistently avoids rate-like or general coverage language.\",\n    \"The evidence chain is artifact-heavy and ledger-based, but the manuscript itself does not provide enough compact, independently intelligible detail for reviewers to assess whether every claimed result is reproducible without deeply inspecting a large package.\",\n    \"The paper repeatedly states boundaries, which is good, but the volume of cross-family, cross-program, and coverage-geometry claims still risks overclaiming beyond the strongest primary cylinder-flow and FNO/PINN evidence.\",\n    \"Presentation is too long and complex for a journal article in its current form; the RQs, claims, tables, appendices, and result subsections need consolidation around a small number of defensible empirical claims.\"\n  ],\n  \"blocking_gaps\": [\n    \"Clarify the primary unit of empirical inference and separate true executions from read-only audits, smoke tests, synthetic stress tests, and sibling-repository reuse; otherwise the empirical basis is too difficult to evaluate.\",\n    \"Reduce or explicitly demote broad coverage, cross-SUT, and cross-program language unless supported by independently authored defects or stronger external subjects; current seeded-fault evidence should remain a diagnostic stress test.\",\n    \"Strengthen the comparison to prior MR constraint/applicability and relaxed-oracle work to show precisely what is new beyond disciplined MR specification and tolerance calibration.\",\n    \"Provide a concise replication-package map and minimal reproducibility path for the central claims, including which claims can be rerun, which are inspection-only, and which require unavailable checkpoints or old runtimes.\",\n    \"Substantially streamline the manuscript so the methodological contribution, case-study protocol, primary results, and threats-to-validity are understandable without following dozens of claim IDs and evidence tiers.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 21959,
+            "completion_tokens": 763,
+            "total_tokens": 22722
+          }
+        },
+        "claude-opus-4-7": {
+          "id": "chatcmpl-sm1hkdizhim",
+          "model": "claude-opus-4-7",
+          "object": "chat.completion",
+          "created": 1782008071,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"The study is a strongly executed, well-bounded empirical case study with rigorous methodological transparency and honest discussion of threats-to-validity.\",\n    \"It aligns very well with EMSE's scope in empirical software engineering on SciML surrogate testing and metamorphic testing, featuring a clear validity gate, explicit MR cards, and typed verdicts.\",\n    \"While the evidence is carefully scoped and bounded, it lacks broad claims to general reliability or production-scale validation, which fits EMSE's acceptance bar allowing such well-bounded case studies.\",\n    \"The manuscript thoroughly discusses threats and boundaries, includes replication packages and thorough artifact records, and uses a multi-architecture, multi-task experimental design.\",\n    \"Minor revisions are suggested to improve clarity in sections on verdict calibration across relations and to strengthen reproducibility instructions, but these do not block acceptance.\"\n  ],\n  \"blocking_gaps\": [\n    \"The absolute mass-conservation relation is deferred due to numerical decidability challenges on the deployed mesh; a fully executable absolute conservation verdict would strengthen the empirical pipeline.\",\n    \"The domain-violation axis for verdict interpretation is per-relation and currently uncalibrated across MR classes, limiting cross-relation comparability.\",\n    \"Generalization beyond the studied architectures, datasets, and physical tasks remains future work, limiting immediate applicability claims.\",\n    \"Replication workflow depends on some older runtimes and checkpoint availability, potentially hindering straightforward reproduction.\",\n    \"Some LLM-based candidate generation and coverage discussions are exploratory and do not provide mature automated MR identification.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 25096,
+            "completion_tokens": 437,
+            "total_tokens": 25533,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 25096,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "qwen3-max": {
+          "id": "chatcmpl-640fd2b2-17da-964f-99e2-be715fa7a12c",
+          "object": "chat.completion",
+          "created": 1782008075,
+          "model": "qwen3-max",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"Some claims about generalizability beyond the studied SciML surrogates are cautiously worded but still risk overinterpretation; authors must further tighten language in Discussion and Conclusion.\",\n    \"The replication package is strong, but certain artifacts (e.g., PhysicsNeMo checkpoint) depend on external benchmarks\u2014reviewers may request clearer fallback instructions for full reproducibility.\",\n    \"While threats-to-validity are honestly discussed, the construct validity section should explicitly address potential subjectivity in rubric application (e.g., tolerance selection).\"\n  ],\n  \"blocking_gaps\": []\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 22529,
+            "completion_tokens": 155,
+            "total_tokens": 22684,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        }
+      },
+      "Adversary": {
+        "grok-4.3": {
+          "id": "10f6f245-aa12-410a-bf65-01d289b14f2e",
+          "model": "grok-4.3",
+          "object": "chat.completion",
+          "created": 1782008090,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.52,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 8,\n  \"top_concerns\": [\n    \"Excessive length, verbosity, and dense interlocking tables/claim-ledgers obscure the core methodological contribution; a mid-tier EMSE paper should be readable without 50+ pages of self-referential apparatus.\",\n    \"Empirical evidence is narrowly scoped to author-seeded synthetic faults and constructed meshes; results frequently read as by-construction (e.g., mirror-y fails exactly when rubric marks it OOD) rather than revealing unexpected SciML surrogate behaviors.\",\n    \"Novelty is incremental: the validity gate, MR-card format, and typed verdicts combine existing ideas (Duque-Torres constraints, Eniser relaxations, Yang hierarchical MRs) without a clear empirical demonstration that the added machinery improves V&V outcomes over simpler MT or residual checks on real defects.\",\n    \"Seeded-fault and cross-SUT coverage claims are presented as implications yet rely on author-designed mutants that preserve obvious invariants; this weakens the 'bounded utility' story for an empirical journal.\",\n    \"Replication package is strong on artifacts but the sheer volume of YAML/ledgers makes independent re-execution cumbersome; honest threats discussion acknowledges external-validity limits but does not sufficiently motivate why this specific bounded cylinder-flow case advances the broader SE testing community.\"\n  ],\n  \"blocking_gaps\": [\n    \"Absence of real (non-seeded) defects drawn from actual SciML surrogate development or production failures; without this the utility claim remains largely demonstrative.\",\n    \"Insufficient contrast against stronger baselines (e.g., physics-informed residuals, conformal UQ, or existing open-source SciML test suites) on the same checkpoints to show added value beyond auditability.\",\n    \"Domain-violation coordinate is per-relation and uncalibrated across MR families; the two-axis verdict figure is illustrative but the empirical sections never produce a reusable, reviewer-inspectable calibration set.\",\n    \"Manuscript must be substantially condensed, with redundant claim-to-evidence maps moved to appendix or supplemental material, before it meets EMSE readability norms.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 20522,
+            "completion_tokens": 436,
+            "total_tokens": 20958,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 64,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 20522,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "gpt-5.5": {
+          "id": "resp_073d7a954a49dab1016a37491d8b248196a1a2c7f352be49e2",
+          "object": "chat.completion",
+          "created": 1782008136,
+          "model": "gpt-5.5",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.42,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 8,\n  \"top_concerns\": [\n    \"The paper is highly overgrown and difficult to evaluate: many SUTs, rosters, sibling repositories, stress tests, LLM baselines, cross-program audits, and fault catalogues obscure the central empirical contribution.\",\n    \"The core novelty over existing metamorphic-testing constraint/applicability work, relaxed MRs, and physics-based MR testing is plausible but not yet sharply isolated; the manuscript often repackages careful engineering and bookkeeping as methodological novelty.\",\n    \"The primary empirical evidence remains dominated by one main cylinder-flow setting, with many repetitions that are not independent and several supporting studies that are smoke tests, synthetic cases, under-trained models, or read-only reuse of sibling artifacts.\",\n    \"The seeded-fault and coverage-geometry claims are interesting but risky: many results appear near-definitional because the detectors directly measure the invariant intentionally perturbed or preserved by the injected fault.\",\n    \"The statistical treatment is cautious in places, but the manuscript still reports many denominator-heavy counts that may invite overinterpretation despite caveats about non-independence.\",\n    \"The paper relies heavily on a claim ledger and replication package, but the manuscript itself gives insufficient confidence that the artifacts are independently understandable, minimal, and reproducible without author guidance.\",\n    \"Several important verdicts are defer/reject/out-of-domain rather than successful executable MR validations, so the empirical utility claim depends on accepting negative/admissibility decisions as substantial results.\",\n    \"The cross-family and cross-program evidence is uneven: some parts are full executions, others are smoke tests, closed-form probes, output-level perturbations, or reuse of external/sibling assets, making the evidentiary hierarchy hard to audit.\",\n    \"The writing is defensive and overloaded with boundaries, which is honest but also signals that the positive claim may be narrower than the manuscript length and empirical apparatus suggest.\"\n  ],\n  \"blocking_gaps\": [\n    \"Substantially simplify and refocus the manuscript around one clear primary case study plus a small number of well-justified supporting replications; move most fault-catalogue, cross-program, and LLM material to appendices or remove it.\",\n    \"Provide a crisper novelty argument against prior constraint-based MR applicability, relaxed MR thresholds, and physics-based metamorphic testing, specifying exactly what is new beyond explicit preconditions, tolerances, and artifact ledgers.\",\n    \"Demonstrate that the replication package is complete and independently executable for the main claims, with a minimal reproduction path rather than only a large claim-ledger assertion.\",\n    \"Clarify the independence structure and avoid treating repeated frames, checkpoints, seeds, and trajectories as stronger evidence than they are; separate descriptive engineering evidence from inferential empirical claims.\",\n    \"Reduce or clearly demote the seeded-fault coverage claims unless independently authored or less relation-tailored mutants can be used; otherwise frame them strictly as sanity/stress tests of detector geometry.\",\n    \"Make the admissibility gate operational enough that another team could apply it and reach similar admit/reject/defer decisions; currently expert judgment and relation-specific normalization choices remain under-specified.\",\n    \"Tighten the empirical utility claim: explicitly state what the workflow lets practitioners decide that rollout accuracy, residual checks, or standard MR constraint systems would not already decide.\",\n    \"Resolve the evidentiary status of sibling Minimum-MR-SubSet artifacts and prior/preprint overlap so readers can distinguish new evidence from reused or externally witnessed evidence.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 21983,
+            "completion_tokens": 931,
+            "total_tokens": 22914
+          }
+        },
+        "claude-opus-4-7": {
+          "id": "chatcmpl-9pv20d893o4",
+          "model": "claude-opus-4-7",
+          "object": "chat.completion",
+          "created": 1782008147,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.7,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"The validity gate and MR-card workflow are well motivated and fit the EMSE scope, but the empirical evaluation remains narrowly scoped to a single primary CFD surrogate architecture (MeshGraphNets) and two CFD tasks with bounded replication; broader generalization claims are appropriately deferred but reduce impact.\",\n    \"The numerical-decidability gate depends on operator-floor derivations for specific mesh discretizations; extension to more general unstructured meshes and flux forms is future work, limiting immediate usability on broader scientific ML surrogates.\",\n    \"The fault-detection results are based on injected and adversarial mutants within a limited catalogue; real-world defect detection rates and general coverage remain unvalidated, cautioning against overclaims in practical applicability.\",\n    \"While the typed verdict space and domain-violation interpretation improve MR result transparency, the vertical domain violation axis remains uncalibrated across relation classes, limiting direct cross-relation verdict comparisons and fusion.\",\n    \"The comparative baselines (rollout accuracy, LLM-assisted candidate generation, generic MR templates) are used judiciously as explanatory contrasts but are not fully explored as integrated competitors or combined workflows.\",\n    \"Some methodological components (MR-card asset creation, ledger automation) remain manual or semi-automated, possibly hindering immediate tooling uptake and reproducibility in other settings without substantial developer effort.\"\n  ],\n  \"blocking_gaps\": [\n    \"Lack of a fully automated or systematic MR candidate identification and validity decision pipeline limits replicability and practical adoption beyond expert-driven scenarios.\",\n    \"Operator-floor numerical bounds are rigorous only for a particular mesh type and discrete operator; lack of formal guarantees or generalization to other common CFD meshes or physics domains restricts the universality of the admissibility gate.\",\n    \"The empirical evaluation does not include externally sourced real defect data or independent fault catalogues beyond the authors' seeded faults, limiting external validity of claimed fault-detection interpretations.\",\n    \"Domain-violation vertical axis in verdict interpretation is per-relation and uncalibrated, preventing aggregated or comparative MR verdict fusion needed for supervision or runtime monitoring.\",\n    \"No end-to-end evaluation on production-scale industrial SciML surrogates or complex multi-physics combines with MR assets precludes claims on real-world deployment readiness.\",\n    \"The deferred absolute conservation verdict (due to operator floor) reveals gaps in executable MR formulation that must be resolved for completeness in physics-based surrogate V&V.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 25125,
+            "completion_tokens": 659,
+            "total_tokens": 25784,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 25125,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "qwen3-max": {
+          "id": "chatcmpl-23ea7b19-50fa-92f0-bad5-3cfb010ade8a",
+          "object": "chat.completion",
+          "created": 1782008152,
+          "model": "qwen3-max",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"Overly dense presentation may hinder readability for EMSE's broad audience\",\n    \"Some methodological novelty (e.g., measurement-floor admissibility) could be clarified earlier\",\n    \"Replication package completeness assumed but not independently verified\"\n  ],\n  \"blocking_gaps\": []\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 22554,
+            "completion_tokens": 96,
+            "total_tokens": 22650,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        }
+      }
+    },
+    "JSS": {
+      "Editor": {
+        "grok-4.3": {
+          "id": "2a9fe556-f641-4b3f-a7ba-f2e36974209a",
+          "model": "grok-4.3",
+          "object": "chat.completion",
+          "created": 1782008161,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.65,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"Excessive self-referential length and repetitive claim-to-evidence mapping that could be condensed without loss of rigor\",\n    \"Over-reliance on a single primary task (cylinder flow) with supporting studies presented as stronger than their bounded nature warrants\",\n    \"Some claims around coverage implications and fault-detection boundaries are phrased in ways that risk over-interpretation despite explicit disclaimers\",\n    \"Figures and tables are numerous and dense; several could be moved to appendix or streamlined for readability\"\n  ],\n  \"blocking_gaps\": [\n    \"No comparison against contemporary SciML-specific V&V baselines (e.g., physics-informed residual checks or modern equivariance metrics) beyond rollout accuracy\",\n    \"Reproducibility package is mentioned but not yet publicly available at submission; reviewer cannot inspect raw ledgers or MR cards\",\n    \"Threats to validity section acknowledges many limitations but does not discuss potential confirmation bias in the design of the seeded-fault catalogue\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 20488,
+            "completion_tokens": 228,
+            "total_tokens": 20716,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 64,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 20488,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "gpt-5.5": {
+          "id": "resp_010fe68cf19f6c91016a374964fc348195a6dc06fd620cd24f",
+          "object": "chat.completion",
+          "created": 1782008165,
+          "model": "gpt-5.5",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.52,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 8,\n  \"top_concerns\": [\n    \"The topic fits JSS well, but the manuscript is overextended: the core contribution is a validity-gated MR workflow, while the results section adds many loosely connected secondary audits, fault catalogues, PINN/FNO/airfoil/OpenMC checks, LLM baselines, and coverage claims that dilute rather than strengthen the main argument.\",\n    \"The methodological novelty is plausible but narrow: explicit MR admissibility, tolerance/floor reasoning, typed verdicts, and MR cards are useful engineering contributions, but the paper must more clearly distinguish what is genuinely new from existing MR constraints, relaxed oracles, specification languages, and bug-versus-inapplicability work.\",\n    \"The empirical evaluation is artifact-heavy and difficult to audit from the manuscript alone; many reported numbers are descriptive, non-independent, or based on author-implemented mutants, yet the density of statistics may give an impression of stronger inference than warranted.\",\n    \"Several evaluations are weak as evidence for generality: the primary MeshGraphNets results remain same-task/same-family dominated; the airfoil model is deliberately under-trained; PhysicsNeMo evidence is described as smoke-level; PINN/FNO and cross-program evidence appear heterogeneous and partly read-only or output-level rather than comparable end-to-end studies.\",\n    \"The paper repeatedly states appropriate boundaries, but the volume of coverage, detection, precision/recall, and cross-SUT claims still risks overclaiming a qualitative coverage principle that has not been independently validated.\",\n    \"Presentation quality is a major issue for JSS: the manuscript is too long, contains excessive claim-ledger terminology, many appendix-like details in the main text, and would be hard for typical JSS readers to follow without substantial restructuring.\",\n    \"There are reproducibility and reviewability concerns: many claims depend on external ledgers, artifacts, and preprint/Zenodo contents, but the manuscript itself does not provide enough compact detail to assess all experimental protocols, thresholds, mutant definitions, and raw data provenance.\"\n  ],\n  \"blocking_gaps\": [\n    \"Substantially narrow and reorganize the empirical story around a small number of primary RQs; move secondary audits, cross-program breadth, LLM contrasts, and extended fault-catalogue material to appendix or remove unless directly needed.\",\n    \"Provide a clearer formal definition of the admissibility gate, MR-card schema, tolerance/floor criterion, and typed verdict logic, with enough operational detail that the method can be understood without inspecting the artifact repository.\",\n    \"Clarify the exact novelty relative to MR applicability constraints, relaxed MT oracles, MR specification languages, and bug-versus-inapplicability frameworks; the current positioning is plausible but not yet crisp enough.\",\n    \"Strengthen the evaluation validity argument by separating independent evidence from descriptive repetitions, explicitly identifying sampling units, and avoiding precision/recall or detection-rate language where mutants or cells are non-independent or relation-tailored.\",\n    \"Reduce or qualify the coverage-geometry/validity-coverage duality claims unless supported by independently authored mutants or real defects; currently these should remain discussion-level observations, not central empirical findings.\",\n    \"Improve manuscript focus and readability to meet JSS standards: shorter results section, fewer nested claims, clearer tables, and a more conventional experimental narrative.\",\n    \"Ensure all datasets, checkpoints, thresholds, mutant operators, and executable MR definitions needed to reproduce the primary study are documented in the paper or a stable artifact with clear mapping from manuscript claims to files.\"\n  ]\n}",
+                "tool_calls": null,
+                "reasoning_content": "**Considering manuscript evaluation**\n\nI\u2019m thinking about how we need to output JSON specific to the manuscript. It seems a bit too long and overstuffed with claims, and I\u2019m concerned about the match with the venue since it says IST, but JSS is similar. The evaluation feels complex and messy with too many secondary claims and questionable validation. I\u2019ll need to ensure the exact keys in the JSON while considering major revisions after the normal revisions."
+              },
+              "finish_reason": "stop",
+              "native_finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 21893,
+            "completion_tokens": 869,
+            "total_tokens": 22762,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 124
+            }
+          }
+        },
+        "claude-opus-4-7": {
+          "id": "chatcmpl-jcyx56v1rw",
+          "model": "claude-opus-4-7",
+          "object": "chat.completion",
+          "created": 1782008198,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"The empirical evaluation is rigorous yet bounded in SUT diversity and datasets; while this fits JSS\u2019s acceptance bar, the manuscript should better emphasize limitations on generalization beyond studied cases.\",\n    \"The admissibility gate and MR-card framework are well motivated but rely on numerical floor calibrations derived for specific mesh settings; generalization to unstructured and production meshes is future work and should be clearly stated as a limitation.\",\n    \"The paper is dense and complex, with many acronyms and methodological details; clarity and accessibility could be improved, especially in method and results presentation, to benefit a broader JSS readership.\",\n    \"The paper prudently avoids overclaiming but discussing practical adoption guidance or integration with existing SciML testing pipelines could strengthen the practical relevance expectation of JSS.\",\n    \"Some baseline comparisons (e.g. with LLM-based MR identification) are presented but not fully explored; more analysis of when and why the validity-gated approach outperforms alternatives might enhance contribution impact.\"\n  ],\n  \"blocking_gaps\": [\n    \"No critical methodological flaws; the main gaps are around scope of generalizability and clarity, which are addressable via revisions.\",\n    \"The admitted limitation that absolute discrete-divergence conservation remains deferred without a fully calibrated floor is a known issue but does not block acceptance; the paper documents this clearly.\",\n    \"No experimental artifacts or evidence appear missing; all major claims are backed by tracked, artifact-supported results.\",\n    \"No ethical or reproducibility concerns beyond dataset license limits; replication package is well described.\",\n    \"No fundamental mismatch with JSS topical scope or standards; the paper targets a mainstream SE venue with an empirically supported methodological contribution.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 25083,
+            "completion_tokens": 490,
+            "total_tokens": 25573,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 25083,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "qwen3-max": {
+          "id": "chatcmpl-a4be5c24-f651-9d39-bec9-28ecad77d0fd",
+          "object": "chat.completion",
+          "created": 1782008201,
+          "model": "qwen3-max",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.85,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"Overly dense presentation may hinder readability for JSS's broad SE audience\",\n    \"Some methodological novelty claims could be more clearly contrasted with prior MT work\",\n    \"Empirical scope, while well-bounded, should explicitly acknowledge limitations in generalizability\"\n  ],\n  \"blocking_gaps\": []\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 22519,
+            "completion_tokens": 102,
+            "total_tokens": 22621,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        }
+      },
+      "Adversary": {
+        "grok-4.3": {
+          "id": "7dd68863-43f5-4822-9a6c-ad7d5eb2e71d",
+          "model": "grok-4.3",
+          "object": "chat.completion",
+          "created": 1782008217,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.58,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 7,\n  \"top_concerns\": [\"Core idea is largely a framing device (rubric + MR cards + typed verdicts) that incrementally extends existing constraint-based MT and physics-MR work (Duque-Torres, MetaTrimmer, Reichert et al.); differentiation is asserted rather than shown to deliver measurable gains in auditability or fault finding beyond what a careful tester would do anyway.\", \"Empirical results are overwhelmingly confirmatory of expected physics/software behaviors on synthetic or seeded faults; the 'bounded case-study' disclaimers are honest but leave the practical relevance for real SciML V&V pipelines under-specified and unvalidated by practitioners.\", \"Manuscript is excessively long, dense, and self-referential (dozens of claim-ledger tables, repeated disclaimers, internal cross-references); this harms readability and suggests the contribution could be condensed by at least 40% without loss.\", \"Operator-floor and domain-violation machinery is highly specific to the studied meshes/operators; the paper acknowledges generalization limits but does not supply a reusable method or tool that practitioners could adopt off-the-shelf.\"],\n  \"blocking_gaps\": [\"No practitioner study, usability evaluation, or real-world deployment evidence showing that MR cards and the validity gate improve V&V outcomes, audit effort, or defect detection over standard rollout + residual checks in an actual SciML workflow.\", \"Seeded-fault and cross-SUT stress tests use author-constructed mutants that preserve or break the exact invariants the MRs target; this creates a circularity that weakens the coverage-geometry implication the authors treat as a key takeaway.\", \"Positioning against closest priors (constraint-based MT, relaxations, NOETHER-style organization) is handled via a capability matrix that is descriptive rather than comparative on shared benchmarks or metrics; a sharper, possibly quantitative contrast is required to establish that the gated workflow is a genuine methodological advance rather than re-packaging.\"]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 20513,
+            "completion_tokens": 405,
+            "total_tokens": 20918,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 64,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 20513,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "gpt-5.5": {
+          "id": "resp_0228326cd2a39103016a3749aa7a0c8198aec3ab66a478a371",
+          "object": "chat.completion",
+          "created": 1782008273,
+          "model": "gpt-5.5",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.46,\n  \"verdict\": \"major_revision\",\n  \"venue_fit\": 8,\n  \"top_concerns\": [\n    \"The paper has a plausible JSS-level contribution, but the central novelty is more of a disciplined packaging/workflow for SciML metamorphic testing than a clearly validated new method; the manuscript must sharpen what is genuinely new beyond admissibility constraints, relaxed MRs, MR specifications, and bug-versus-inapplicability work.\",\n    \"The empirical section is sprawling and difficult to audit from the manuscript alone: many datasets, SUTs, smoke runs, sibling repositories, closed-form probes, seeded mutants, and secondary audits are mixed together, making the evidential hierarchy hard to follow and risking the impression of result accumulation rather than a clean evaluation.\",\n    \"Several results are based on author-designed or sibling-repository mutants and relation-specific probes, so the fault-detection and coverage-geometry claims are only weakly externally validated; the manuscript mostly acknowledges this, but the amount of quantitative reporting can still over-signal generality.\",\n    \"The primary evidence remains concentrated around cylinder-flow MeshGraphNets-family workflows, with supporting PINN/FNO/airfoil evidence that often tests gate discrimination or representation contracts rather than independent practical utility in realistic SciML V&V settings.\",\n    \"The paper is overlong and overloaded for JSS: many claims, claim IDs, appendices, ledgers, baselines, and cross-program audits dilute the main method and may make reviewers distrust the narrative unless substantially streamlined.\",\n    \"The evaluation lacks a strong practitioner-facing validation of the MR-card workflow itself, such as independent users, independent MR authors, ablation of the gate components, or a clearer comparison showing reduced false alarms/misinterpretations in realistic workflows.\"\n  ],\n  \"blocking_gaps\": [\n    \"Must reorganize and shorten the results into a clear primary evaluation plus explicitly secondary evidence; otherwise the contribution will look unfocused and hard to verify.\",\n    \"Must provide a crisper novelty statement against MR specifications, relaxed MT, constraint-based applicability, and SciML physical residual diagnostics, ideally with a minimal formal definition of the admissibility gate and verdict semantics.\",\n    \"Must tone down or quarantine coverage/fault-detection claims, because current mutants and probes do not support general defect-detection effectiveness or validated localization.\",\n    \"Must clarify artifact availability and reproducibility boundaries, especially which results are fully rerunnable, which depend on non-redistributable checkpoints or old runtimes, and which are inherited from the sibling repository.\",\n    \"Should add or strengthen an ablation/comparison showing what decisions would be wrong without the numerical-floor/domain-validity gate, not just examples where the gate produces typed verdicts.\",\n    \"Should fix venue/template inconsistency and presentation issues: the manuscript says Elsevier IST in the source while being submitted to JSS, and the current length/claim-ledger style is likely to irritate reviewers.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 26997,
+            "completion_tokens": 734,
+            "total_tokens": 27731,
+            "prompt_tokens_details": {
+              "cached_tokens": 4864
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 121
+            }
+          }
+        },
+        "claude-opus-4-7": {
+          "id": "chatcmpl-3ekfvuhj7m4",
+          "model": "claude-opus-4-7",
+          "object": "chat.completion",
+          "created": 1782008282,
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.65,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"The numerical-decibility admissibility gate, while novel and well-argued, depends heavily on one well-characterized mesh topology (P1 divergence on symmetric and one unstructured mesh), limiting direct applicability to broader unstructured meshes or other discretizations without further validation.\",\n    \"The empirical evidence is necessarily bounded: one primary CFD task (cylinder flow), a second smaller-scale CFD (airfoil), and limited cross-architecture PINN/FNO checks. No broad generalization to diverse SciML surrogates or real-world production-scale datasets is shown.\",\n    \"Fault-detection interpretation is carefully scoped, but it relies on a small catalog of injected faults and adversarial cases without connection to field fault occurrence statistics or independently collected bug corpora, limiting operational predictive power.\",\n    \"While the MR card and typed verdict framework formalizes and organizes candidate metamorphic relations well, the automatic or semi-automatic generation/derivation of admissible MRs beyond expert/LLM-aided candidate generation is not addressed and remains future work.\",\n    \"The usefulness vs. standard rollout accuracy or residual UQ diagnostics is argued convincingly but empirical comparative evaluation across broader real tasks is not provided, limiting claims about practical impact outside studied cases.\",\n    \"Although the typed verdict scheme is promising, the vertical domain-violation axis is not calibrated across relation classes, which may limit its interpretability or cross-relation comparability in practice.\"\n  ],\n  \"blocking_gaps\": [\n    \"Lack of demonstrated generalization of the numerical admissibility gate to a variety of meshes and operators beyond the studied setting, leaving open whether this method is broadly applicable in production SciML surrogate testing.\",\n    \"No large-scale evaluation on real defect datasets or production benchmarks to validate coverage or practical fault detection beyond synthetic injected faults.\",\n    \"Incomplete calibration and validation of the domain-violation dimension of verdicts across different metamorphic relation classes impedes unified verdict interpretation.\",\n    \"The proposed framework depends on detailed manual authoring and expert judgment for MR admissibility and precondition setting; automation or scaling remains unaddressed.\",\n    \"Limited evaluation of the interaction between MR verdicts and other diagnostic tools (residuals, UQ) in operational settings hinders clear practical deployment recommendations.\",\n    \"The manuscript contains some dense technical parts that might benefit from clarifications or additional illustrations for broad software engineering readership.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 25112,
+            "completion_tokens": 644,
+            "total_tokens": 25756,
+            "usage_semantic": "openai",
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "image_tokens": 0
+            },
+            "completion_tokens_details": {
+              "text_tokens": 0,
+              "audio_tokens": 0,
+              "reasoning_tokens": 0
+            },
+            "input_tokens": 25112,
+            "output_tokens": 0,
+            "input_tokens_details": null,
+            "claude_cache_creation_5_m_tokens": 0,
+            "claude_cache_creation_1_h_tokens": 0
+          }
+        },
+        "qwen3-max": {
+          "id": "chatcmpl-2e25028e-493c-95a2-af7a-4b495798bcbf",
+          "object": "chat.completion",
+          "created": 1782008287,
+          "model": "qwen3-max",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "{\n  \"accept_probability\": 0.75,\n  \"verdict\": \"minor_revision\",\n  \"venue_fit\": 9,\n  \"top_concerns\": [\n    \"The paper's contribution is methodological and well-scoped, but the presentation is dense and occasionally obscures the practical takeaways for JSS readers.\",\n    \"While the case studies are thorough, the connection between the proposed 'validity gate' and actionable software engineering practice could be clarified for a broader SE audience.\",\n    \"Some terminology (e.g., 'relation-level verdicts', 'domain-violation magnitude') is novel but not always intuitively grounded for non-SciML-specialist reviewers.\"\n  ],\n  \"blocking_gaps\": [\n    \"No major technical gaps block acceptance; all claims are carefully bounded and backed by artifacts.\",\n    \"The evaluation meets JSS standards: it demonstrates a clear method, practical relevance to SciML V&V, and adequate empirical grounding via multiple case studies and stress tests.\",\n    \"Reproducibility is strong with a public package, claim ledger, and explicit artifact tracing.\"\n  ]\n}"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 22544,
+            "completion_tokens": 227,
+            "total_tokens": 22771,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "honesty_boundary": "Single-call temperature-0 LLM reviews via one gateway, two gatekeeping roles x four models per venue, calibrated to a Tier-2 bar; an automated acceptance estimate, NOT human peer review and NOT a prediction of an actual editorial decision."
+}

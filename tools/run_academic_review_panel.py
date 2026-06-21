@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import http.client
 import os
 import re
 import sys
@@ -180,7 +181,8 @@ def main(argv=None) -> int:
                                  "raw_response_for_audit": raw}
                 ok = True
                 break
-            except (urllib.error.URLError, RuntimeError, json.JSONDecodeError) as e:
+            except (urllib.error.URLError, OSError, http.client.HTTPException,
+                    RuntimeError, json.JSONDecodeError) as e:
                 failures.append({"role": role, "model": model, "max_tokens": mt,
                                  "error": str(e)[:300]})
                 print(f"!! {role}/{model} mt={mt}: {type(e).__name__}: {str(e)[:160]}",

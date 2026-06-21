@@ -562,7 +562,7 @@ In that sense the workflow is aimed at producing, over many controlled transform
 
 **Conclusion validity.** Small sample sizes, multiple MRs, and many transformation bins can produce unstable conclusions. The primary MGN scope upgrade expands the weakest trajectory-dependent denominators to K=6 x 3 trajectories x 10 mirror-y frames and K=6 x 3 trajectories x 9 conservation transitions, plus K=6 x 3 exact-symmetry inputs, removing the single-source-trajectory denominator within the stated scope.
 
-**Reproducibility.** Some SUTs may depend on old runtimes or non-redistributable checkpoints. The paper should disclose such barriers and provide the most complete runnable package possible.
+**Reproducibility.** Some SUTs may depend on old runtimes or non-redistributable checkpoints. The paper should disclose such barriers and provide the most complete runnable package possible. By re-run cost: the operator-floor sweep, MR-card validators, and typed-verdict logic replay on CPU in minutes from committed scripts alone; the cylinder-flow MGN pilot, K=6 roster, PointMLP, and FNO/PINN rosters replay on CPU from committed checkpoints and metric ledgers; PhysicsNeMo MGN and airfoil training require a GPU and the public DeepMind TFRecords; and the Minimum-MR-SubSet audit and rerun execute read-only from sibling fixtures at the cited commit.
 
 ## 8. Conclusion
 

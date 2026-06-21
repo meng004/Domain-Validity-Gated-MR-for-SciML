@@ -1,0 +1,405 @@
+{
+  "record_type": "tier1-maturity-panel",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-21T01:41:14Z",
+  "venue_bar": "CAS Tier-1 (\u4e2d\u79d1\u9662\u5927\u7c7b\u4e00\u533a) SE journal, TSE/TOSEM caliber",
+  "paper": "paper/ist-submission/main.tex",
+  "panel": [
+    {
+      "role": "AE_Tier1",
+      "model": "gpt-5.5"
+    },
+    {
+      "role": "EmpiricalMethod",
+      "model": "claude-opus-4-7"
+    },
+    {
+      "role": "SciMLDomain",
+      "model": "glm-5.2"
+    },
+    {
+      "role": "NoveltyPositioning",
+      "model": "deepseek-v4-pro"
+    },
+    {
+      "role": "Adversary",
+      "model": "qwen3-max"
+    }
+  ],
+  "reviewers_succeeded": [
+    "AE_Tier1",
+    "EmpiricalMethod",
+    "SciMLDomain",
+    "NoveltyPositioning",
+    "Adversary"
+  ],
+  "review_failures": [
+    {
+      "role": "Adversary",
+      "model": "qwen3-max",
+      "max_tokens": 16000,
+      "error": "Expecting ',' delimiter: line 26 column 3 (char 1277)"
+    }
+  ],
+  "per_dimension_mean": {
+    "novelty_significance": 6.2,
+    "technical_soundness": 7.8,
+    "empirical_rigor": 6.8,
+    "generalizability": 5.2,
+    "positioning_related_work": 7.6,
+    "reproducibility": 7.6,
+    "writing_clarity": 6.6
+  },
+  "overall_dimension_mean": 6.83,
+  "accept_probability_mean": 0.356,
+  "accept_probability_range": [
+    0.25,
+    0.65
+  ],
+  "maturity_index_mean": 58.4,
+  "maturity_index_range": [
+    50,
+    65
+  ],
+  "tier1_ready_votes": "0/5",
+  "verdict_distribution": {
+    "major_revision": 4,
+    "reject": 1
+  },
+  "panel_majority_verdict": "major_revision",
+  "blocking_gaps_by_reviewer": {
+    "AE_Tier1": [
+      "Core contribution reads as an incremental synthesis of MR constraints, relaxed oracles, typed inapplicability, and artifact ledgers rather than a clearly non-incremental Tier-1 idea",
+      "Generalization evidence remains dominated by one SciML task family, same-family variants, under-trained/supporting tasks, and relation-specific demonstrations rather than independent broad validation",
+      "Fault-detection and coverage claims rely heavily on authored or designed-in mutants and relation-aligned probes, limiting independent evidence for practical V&V impact",
+      "Manuscript is overloaded with many evidence cells, caveats, appendices, and secondary claims, diluting the single methodological message"
+    ],
+    "EmpiricalMethod": [
+      "Limited empirical generalizability beyond cylinder-flow and related CFD tasks",
+      "Dependence on single architecture family for primary evidence, limited cross-domain validation",
+      "Numerical decidability gate validated only on restricted mesh types and operators",
+      "Seeded-fault catalog and coverage interpretation remain bounded and not fully independent"
+    ],
+    "SciMLDomain": [
+      "Core contribution (measurement-floor admissibility gate) is incremental over relaxation-based MR approaches for TSE/TOSEM caliber; the insight that tolerance must exceed operator error is correct but not deep enough as a standalone contribution",
+      "Airfoil gate-discrimination evidence uses a deliberately under-trained model (median L2 1.00), so the strongest cross-physics generalization result is logically valid but practically uninformative",
+      "Cross-family PINN/FNO evidence is shallow\u2014mostly admissibility decisions and closed-form output-level probes rather than full rubric-to-verdict-to-fault-detection workflow execution at trained-model depth",
+      "Validity-coverage duality is proposed as a falsifiable hypothesis but rests on author-designed mutants and read-only sibling-artifact reuse, not independently authored fault corpora"
+    ],
+    "NoveltyPositioning": [
+      "Limited empirical generalizability (single primary CFD case with small supporting rosters, no diverse SciML domains or real-world fault corpora)",
+      "Core novelty of measurement-floor admissibility gate may be perceived as incremental to relaxed-oracle and MR constraint work without a more fundamental theoretical advance",
+      "Absence of validation on production-scale surrogates or large-scale defect datasets weakens the claimed utility for real-world SciML V&V",
+      "The paper's contribution is packaged as a workflow; a stronger unifying formalism or generalization of the admissibility criteria across operator types would elevate significance"
+    ],
+    "Adversary": [
+      "Evidence limited to narrow CFD/PDE settings; no cross-architecture or cross-physics generalization beyond superficial replication",
+      "Empirical cells lack independence (shared checkpoints, trajectories); statistics overstate inferential strength",
+      "Coverage claims rely on author-tailored mutants, not real-world defects or independently validated fault models",
+      "Reproducibility hampered by non-redistributable checkpoints and partial artifact availability"
+    ]
+  },
+  "highest_roi_fix_by_reviewer": {
+    "AE_Tier1": "Run an independently authored, preregistered multi-SUT study across several SciML/PDE families with external MR/fault inputs to test whether the validity gate changes verdict quality and false-alarm rates beyond existing constrained/relaxed MT workflows",
+    "EmpiricalMethod": "Expand empirical scope with independently commissioned datasets and diversified architectures to establish broader generalizability and rule out single-task overfitting",
+    "SciMLDomain": "Train a converged airfoil surrogate and execute the full rubric-to-verdict-to-fault-detection workflow on both airfoil and FNO/PINN at trained-model depth, transforming the gate-discrimination and generalizability claims from logically correct but thin into empirically compelling multi-SUT evidence.",
+    "NoveltyPositioning": "Expand the empirical evaluation to multiple diverse SciML surrogate applications with rigorous baseline comparisons, demonstrating that the admissibility gate consistently prevents false positive verdicts and enables correct fault detection in practice.",
+    "Adversary": "Replace tailored mutants with real-world defect corpora and demonstrate cross-domain applicability beyond cylinder/airfoil CFD"
+  },
+  "per_reviewer": {
+    "AE_Tier1": {
+      "model": "gpt-5.5",
+      "review": {
+        "scores": {
+          "novelty_significance": 6,
+          "technical_soundness": 7,
+          "empirical_rigor": 6,
+          "generalizability": 5,
+          "positioning_related_work": 7,
+          "reproducibility": 8,
+          "writing_clarity": 5
+        },
+        "accept_probability": 0.28,
+        "verdict": "major_revision",
+        "tier1_ready": false,
+        "maturity_0_100": 62,
+        "blocking_gaps": [
+          "Core contribution reads as an incremental synthesis of MR constraints, relaxed oracles, typed inapplicability, and artifact ledgers rather than a clearly non-incremental Tier-1 idea",
+          "Generalization evidence remains dominated by one SciML task family, same-family variants, under-trained/supporting tasks, and relation-specific demonstrations rather than independent broad validation",
+          "Fault-detection and coverage claims rely heavily on authored or designed-in mutants and relation-aligned probes, limiting independent evidence for practical V&V impact",
+          "Manuscript is overloaded with many evidence cells, caveats, appendices, and secondary claims, diluting the single methodological message"
+        ],
+        "highest_roi_fix": "Run an independently authored, preregistered multi-SUT study across several SciML/PDE families with external MR/fault inputs to test whether the validity gate changes verdict quality and false-alarm rates beyond existing constrained/relaxed MT workflows",
+        "top_strengths": [
+          "Careful fail-closed treatment of MR admissibility, numerical floors, and out-of-relation-domain verdicts",
+          "Strong artifact orientation with MR cards, claim ledgers, raw outputs, and explicit reproducibility commitments",
+          "Honest scope control and unusually explicit threat/boundary statements"
+        ]
+      }
+    },
+    "EmpiricalMethod": {
+      "model": "claude-opus-4-7",
+      "review": {
+        "scores": {
+          "novelty_significance": 7,
+          "technical_soundness": 9,
+          "empirical_rigor": 7,
+          "generalizability": 5,
+          "positioning_related_work": 8,
+          "reproducibility": 8,
+          "writing_clarity": 8
+        },
+        "accept_probability": 0.65,
+        "verdict": "major_revision",
+        "tier1_ready": false,
+        "maturity_0_100": 65,
+        "blocking_gaps": [
+          "Limited empirical generalizability beyond cylinder-flow and related CFD tasks",
+          "Dependence on single architecture family for primary evidence, limited cross-domain validation",
+          "Numerical decidability gate validated only on restricted mesh types and operators",
+          "Seeded-fault catalog and coverage interpretation remain bounded and not fully independent"
+        ],
+        "highest_roi_fix": "Expand empirical scope with independently commissioned datasets and diversified architectures to establish broader generalizability and rule out single-task overfitting",
+        "top_strengths": [
+          "Well-structured methodological framing of admissibility gating and typed verdicts",
+          "Strong engineering and artifact commitment supporting auditability and reproducibility",
+          "Insightful multi-axis verdict interpretation separating relation violation from domain and numeric uncertainty"
+        ]
+      }
+    },
+    "SciMLDomain": {
+      "model": "glm-5.2",
+      "review": {
+        "scores": {
+          "novelty_significance": 6,
+          "technical_soundness": 7,
+          "empirical_rigor": 6,
+          "generalizability": 6,
+          "positioning_related_work": 7,
+          "reproducibility": 7,
+          "writing_clarity": 6
+        },
+        "accept_probability": 0.25,
+        "verdict": "major_revision",
+        "tier1_ready": false,
+        "maturity_0_100": 55,
+        "blocking_gaps": [
+          "Core contribution (measurement-floor admissibility gate) is incremental over relaxation-based MR approaches for TSE/TOSEM caliber; the insight that tolerance must exceed operator error is correct but not deep enough as a standalone contribution",
+          "Airfoil gate-discrimination evidence uses a deliberately under-trained model (median L2 1.00), so the strongest cross-physics generalization result is logically valid but practically uninformative",
+          "Cross-family PINN/FNO evidence is shallow\u2014mostly admissibility decisions and closed-form output-level probes rather than full rubric-to-verdict-to-fault-detection workflow execution at trained-model depth",
+          "Validity-coverage duality is proposed as a falsifiable hypothesis but rests on author-designed mutants and read-only sibling-artifact reuse, not independently authored fault corpora"
+        ],
+        "highest_roi_fix": "Train a converged airfoil surrogate and execute the full rubric-to-verdict-to-fault-detection workflow on both airfoil and FNO/PINN at trained-model depth, transforming the gate-discrimination and generalizability claims from logically correct but thin into empirically compelling multi-SUT evidence.",
+        "top_strengths": [
+          "Rigorous operator-floor analysis with closed-form derivation, leading-order predictor matching to 0.5%, and cross-topology (structured + unstructured Delaunay) validation",
+          "Honest, well-bounded empirical scope with typed verdicts that genuinely separate SUT inconsistency from relation invalidity, domain exit, and numerical-floor deferral",
+          "Comprehensive claim ledger and artifact-backed reproducibility with Zenodo archive, committed manifests, and per-claim evidence tracing"
+        ]
+      }
+    },
+    "NoveltyPositioning": {
+      "model": "deepseek-v4-pro",
+      "review": {
+        "scores": {
+          "novelty_significance": 6,
+          "technical_soundness": 8,
+          "empirical_rigor": 8,
+          "generalizability": 5,
+          "positioning_related_work": 8,
+          "reproducibility": 8,
+          "writing_clarity": 7
+        },
+        "accept_probability": 0.35,
+        "verdict": "major_revision",
+        "tier1_ready": false,
+        "maturity_0_100": 50,
+        "blocking_gaps": [
+          "Limited empirical generalizability (single primary CFD case with small supporting rosters, no diverse SciML domains or real-world fault corpora)",
+          "Core novelty of measurement-floor admissibility gate may be perceived as incremental to relaxed-oracle and MR constraint work without a more fundamental theoretical advance",
+          "Absence of validation on production-scale surrogates or large-scale defect datasets weakens the claimed utility for real-world SciML V&V",
+          "The paper's contribution is packaged as a workflow; a stronger unifying formalism or generalization of the admissibility criteria across operator types would elevate significance"
+        ],
+        "highest_roi_fix": "Expand the empirical evaluation to multiple diverse SciML surrogate applications with rigorous baseline comparisons, demonstrating that the admissibility gate consistently prevents false positive verdicts and enables correct fault detection in practice.",
+        "top_strengths": [
+          "Rigorous measurement-floor admissibility argument with operator-floor calibration (O(h) slope, closed-form, topology stability)",
+          "Novel typed verdict scheme that separates SUT inconsistency from domain violation, preventing misinterpretation",
+          "Transparent claim ledger and replication package that ties every result to artifacts"
+        ]
+      }
+    },
+    "Adversary": {
+      "model": "qwen3-max",
+      "review": {
+        "scores": {
+          "novelty_significance": 6,
+          "technical_soundness": 8,
+          "empirical_rigor": 7,
+          "generalizability": 5,
+          "positioning_related_work": 8,
+          "reproducibility": 7,
+          "writing_clarity": 7
+        },
+        "accept_probability": 0.25,
+        "verdict": "reject",
+        "tier1_ready": false,
+        "maturity_0_100": 60,
+        "blocking_gaps": [
+          "Evidence limited to narrow CFD/PDE settings; no cross-architecture or cross-physics generalization beyond superficial replication",
+          "Empirical cells lack independence (shared checkpoints, trajectories); statistics overstate inferential strength",
+          "Coverage claims rely on author-tailored mutants, not real-world defects or independently validated fault models",
+          "Reproducibility hampered by non-redistributable checkpoints and partial artifact availability"
+        ],
+        "highest_roi_fix": "Replace tailored mutants with real-world defect corpora and demonstrate cross-domain applicability beyond cylinder/airfoil CFD",
+        "top_strengths": [
+          "Clear domain-validity rubric linking physics, numerics, and software preconditions",
+          "Well-structured MR-card asset format with auditable verdict ledger",
+          "Honest bounding of claims and explicit separation of admissibility from detection"
+        ]
+      }
+    }
+  },
+  "raw_responses": {
+    "AE_Tier1": {
+      "id": "resp_04a51b2f78b2a3a2016a3740a6ce6881909e9f9db2a48516bf",
+      "object": "chat.completion",
+      "created": 1782005937,
+      "model": "gpt-5.5",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_significance\": 6,\n    \"technical_soundness\": 7,\n    \"empirical_rigor\": 6,\n    \"generalizability\": 5,\n    \"positioning_related_work\": 7,\n    \"reproducibility\": 8,\n    \"writing_clarity\": 5\n  },\n  \"accept_probability\": 0.28,\n  \"verdict\": \"major_revision\",\n  \"tier1_ready\": false,\n  \"maturity_0_100\": 62,\n  \"blocking_gaps\": [\n    \"Core contribution reads as an incremental synthesis of MR constraints, relaxed oracles, typed inapplicability, and artifact ledgers rather than a clearly non-incremental Tier-1 idea\",\n    \"Generalization evidence remains dominated by one SciML task family, same-family variants, under-trained/supporting tasks, and relation-specific demonstrations rather than independent broad validation\",\n    \"Fault-detection and coverage claims rely heavily on authored or designed-in mutants and relation-aligned probes, limiting independent evidence for practical V&V impact\",\n    \"Manuscript is overloaded with many evidence cells, caveats, appendices, and secondary claims, diluting the single methodological message\"\n  ],\n  \"highest_roi_fix\": \"Run an independently authored, preregistered multi-SUT study across several SciML/PDE families with external MR/fault inputs to test whether the validity gate changes verdict quality and false-alarm rates beyond existing constrained/relaxed MT workflows\",\n  \"top_strengths\": [\n    \"Careful fail-closed treatment of MR admissibility, numerical floors, and out-of-relation-domain verdicts\",\n    \"Strong artifact orientation with MR cards, claim ledgers, raw outputs, and explicit reproducibility commitments\",\n    \"Honest scope control and unusually explicit threat/boundary statements\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 22482,
+        "completion_tokens": 467,
+        "total_tokens": 22949
+      }
+    },
+    "EmpiricalMethod": {
+      "id": "chatcmpl-hd532w3qqgq",
+      "model": "claude-opus-4-7",
+      "object": "chat.completion",
+      "created": 1782005947,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_significance\": 7,\n    \"technical_soundness\": 9,\n    \"empirical_rigor\": 7,\n    \"generalizability\": 5,\n    \"positioning_related_work\": 8,\n    \"reproducibility\": 8,\n    \"writing_clarity\": 8\n  },\n  \"accept_probability\": 0.65,\n  \"verdict\": \"major_revision\",\n  \"tier1_ready\": false,\n  \"maturity_0_100\": 65,\n  \"blocking_gaps\": [\n    \"Limited empirical generalizability beyond cylinder-flow and related CFD tasks\",\n    \"Dependence on single architecture family for primary evidence, limited cross-domain validation\",\n    \"Numerical decidability gate validated only on restricted mesh types and operators\",\n    \"Seeded-fault catalog and coverage interpretation remain bounded and not fully independent\"\n  ],\n  \"highest_roi_fix\": \"Expand empirical scope with independently commissioned datasets and diversified architectures to establish broader generalizability and rule out single-task overfitting\",\n  \"top_strengths\": [\n    \"Well-structured methodological framing of admissibility gating and typed verdicts\",\n    \"Strong engineering and artifact commitment supporting auditability and reproducibility\",\n    \"Insightful multi-axis verdict interpretation separating relation violation from domain and numeric uncertainty\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 25680,
+        "completion_tokens": 315,
+        "total_tokens": 25995,
+        "usage_semantic": "openai",
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        },
+        "completion_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "input_tokens": 25680,
+        "output_tokens": 0,
+        "input_tokens_details": null,
+        "claude_cache_creation_5_m_tokens": 0,
+        "claude_cache_creation_1_h_tokens": 0
+      }
+    },
+    "SciMLDomain": {
+      "id": "chatcmpl-08975fdf-d896-4683-8d1d-afb48086bfb6",
+      "object": "chat.completion",
+      "created": 1782006015,
+      "model": "glm-5.2",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "```json\n{\n  \"scores\": {\n    \"novelty_significance\": 6,\n    \"technical_soundness\": 7,\n    \"empirical_rigor\": 6,\n    \"generalizability\": 6,\n    \"positioning_related_work\": 7,\n    \"reproducibility\": 7,\n    \"writing_clarity\": 6\n  },\n  \"accept_probability\": 0.25,\n  \"verdict\": \"major_revision\",\n  \"tier1_ready\": false,\n  \"maturity_0_100\": 55,\n  \"blocking_gaps\": [\n    \"Core contribution (measurement-floor admissibility gate) is incremental over relaxation-based MR approaches for TSE/TOSEM caliber; the insight that tolerance must exceed operator error is correct but not deep enough as a standalone contribution\",\n    \"Airfoil gate-discrimination evidence uses a deliberately under-trained model (median L2 1.00), so the strongest cross-physics generalization result is logically valid but practically uninformative\",\n    \"Cross-family PINN/FNO evidence is shallow\u2014mostly admissibility decisions and closed-form output-level probes rather than full rubric-to-verdict-to-fault-detection workflow execution at trained-model depth\",\n    \"Validity-coverage duality is proposed as a falsifiable hypothesis but rests on author-designed mutants and read-only sibling-artifact reuse, not independently authored fault corpora\"\n  ],\n  \"highest_roi_fix\": \"Train a converged airfoil surrogate and execute the full rubric-to-verdict-to-fault-detection workflow on both airfoil and FNO/PINN at trained-model depth, transforming the gate-discrimination and generalizability claims from logically correct but thin into empirically compelling multi-SUT evidence.\",\n  \"top_strengths\": [\n    \"Rigorous operator-floor analysis with closed-form derivation, leading-order predictor matching to 0.5%, and cross-topology (structured + unstructured Delaunay) validation\",\n    \"Honest, well-bounded empirical scope with typed verdicts that genuinely separate SUT inconsistency from relation invalidity, domain exit, and numerical-floor deferral\",\n    \"Comprehensive claim ledger and artifact-backed reproducibility with Zenodo archive, committed manifests, and per-claim evidence tracing\"\n  ]\n}\n```",
+            "reasoning_content": "\nLet me carefully analyze this manuscript against CAS Tier-1 (\u4e2d\u79d1\u9662\u5927\u7c7b\u4e00\u533a) software-engineering journal standards, calibrated to TSE/TOSEM caliber.\n\nLet me go through each dimension:\n\n**1. Novelty/Significance**\n\nThe core idea: \"domain-validity-gated metamorphic testing\" for SciML surrogates. The central novelty claim is that an MR's tolerance must dominate the measuring operator's numerical floor before it can be admitted as a valid test. This is combined with:\n- An admissibility gate (4 conditions: basis, preconditions, mapping compatibility, numerical decidability)\n- MR-card executable asset format\n- Typed verdicts (pass/fail/skip/out-of-relation-domain/numerical-tolerance/inconclusive)\n- A claim ledger\n\nIs this new AND significant for Tier-1?\n\nThe idea of gating MR admissibility on numerical decidability is interesting and somewhat novel for the SciML context. However, the concept of MR validity conditions is not entirely new - Duque-Torres et al. already addressed bug-vs-inapplicability reasoning, and Eniser et al. introduced relaxed oracles with numerical thresholds. The paper positions itself as combining these ideas in a SciML-specific workflow.\n\nThe numerical floor analysis (O(h) for divergence) is a nice touch - deriving the operator floor analytically and verifying it empirically is solid. But the overall contribution feels more like a workflow engineering paper than a fundamentally new testing paradigm. The \"validity-coverage duality\" is mentioned but remains a hypothesis rather than a proven result.\n\nFor Tier-1 (TSE/TOSEM), I'd say this is borderline. The idea is sound and has some novelty, but the significance is somewhat limited - it's primarily a methodological framing paper with bounded case studies. The single delineated contribution (measurement-floor admissibility gate) is clear but may be seen as incremental over relaxation-based approaches.\n\nScore: 6\n\n**2. Technical Soundness**\n\nThe method is internally consistent:\n- Four-condition admissibility gate is well-defined\n- The operator-floor analysis is rigorous (closed-form, leading-order predictor matching to 0.5%, a-priori bound)\n- Typed verdicts are logically sound\n- The claim ledger approach is good practice\n\nHowever, there are some concerns:\n- The domain-violation metric D = m/(m+1) is ad-hoc and not validated\n- The reference-relative conservation diagnostic with a 50% regression threshold is quite loose\n- The seeded-fault catalogue is author-designed, which the paper acknowledges but still uses to make coverage claims\n- The \"validity-coverage duality\" is stated as a falsifiable hypothesis but the evidence is thin\n- The airfoil experiment uses a deliberately under-trained model (median relative L2 1.00), which means the gate discrimination result, while logically correct, may not be practically meaningful\n\nThe paper is honest about its limitations, which is good. But the technical depth of the admissibility gate itself is not extremely deep - it's essentially saying \"check that your tolerance is bigger than your measurement error,\" which while correct, is not a profound insight.\n\nScore: 7\n\n**3. Empirical Rigor**\n\nPositive aspects:\n- Wilson 95% CIs on binary outcomes\n- Bootstrap intervals on continuous measures\n- Wilcoxon signed-rank tests with Cliff's \u03b4\n- Operator-floor sweep with slope CI and R\u00b2\n- K=6 checkpoint roster across 3 trajectories\n- Honest scope statements throughout\n- Claim ledger binding every result to artifacts\n\nConcerns:\n- Many cells share checkpoints/trajectories, so independence is questionable (acknowledged)\n- The seeded-fault catalogue is author-designed (acknowledged)\n- The LLM baseline has very low inter-rater agreement (Fleiss \u03ba = 0.077) - this undermines the baseline comparison\n- The \"independent evidence cells\" are mostly within the same architecture family and dataset\n- The airfoil model is deliberately under-trained, which limits the practical significance of the gate discrimination result\n- The PINN/FNO probes are \"closed-form output-level probes\" not retrained mutants\n- The three-arm complementarity test uses 20 faults, which is modest\n- No power analysis is reported\n\nScore: 6\n\n**4. Generalizability**\n\nThis is the key Tier-1 discriminator. Let me assess:\n\n- Primary: MeshGraphNets cylinder flow (one dataset, one task)\n- Same-task variants: S4/S5 MGN, PointMLP, PhysicsNeMo MGN - all on cylinder flow\n- Second CFD task: airfoil (compressible flow) - but with under-trained model\n- Cross-family: PINN (Burgers/heat) and FNO (Burgers/heat) - but these are simpler PDEs\n- Cross-program: 7 program types read-only, 5 CPU-only SUTs executed end-to-end\n\nThe evidence covers:\n- Multiple architectures: MGN, PointMLP, PhysicsNeMo MGN, PINN, FNO \u2713\n- Multiple PDEs: incompressible cylinder flow, compressible airfoil, Burgers, heat, wave, point-kinetics \u2713\n- Multiple fault models: seeded pipeline faults, output-level probes, adversarial mutants \u2713\n\nHowever:\n- The primary evidence is heavily concentrated on cylinder flow\n- The airfoil evidence is on an under-trained model\n- The PINN/FNO evidence is mostly about admissibility decisions, not full workflow execution\n- The cross-program evidence reuses sibling artifacts\n- No production-scale SUT is tested\n- The general claim is carefully bounded to \"bounded case studies\"\n\nFor a Tier-1 venue, this is borderline. The breadth is respectable but the depth at each point is thin. The paper is very careful about not overclaiming, which is good, but the evidence may not be strong enough for broad generalization claims.\n\nScore: 6\n\n**5. Positioning/Related Work**\n\nThe related work section is thorough and well-organized:\n- Covers MT basics, MR identification, physics-based MT, SciML V&V, hybrid trust regions\n- The \"what is new and what is not new\" section is refreshingly honest\n- Table 2 (closest-prior positioning) is clear\n- The delta against Duque-Torres, Eniser, Reichert is crisp\n- The distinction from residual/UQ diagnostics is well-artaised\n\nHowever:\n- The positioning against NOETHER (zhao2026noether) is brief and the relationship could be clearer\n- Some references seem to be from 2025-2026, which suggests this is very recent work\n- The positioning against traditional numerical software testing could be deeper\n\nScore: 7\n\n**6. Reproducibility**\n\nStrong aspects:\n- Zenodo archive with DOI\n- Claim ledger (claim-ledger.yml)\n- Committed artifacts, manifests, run logs\n- Deterministic re-runs for CPU workflows\n- Raw source/follow-up outputs for FNO\n- Minimum-MR-SubSet audit with commit hash\n\nConcerns:\n- Some workflows depend on old runtimes\n- Non-redistributable checkpoints mentioned\n- GPU workflows may not be exactly reproducible\n- The trained checkpoints' training environments may not be fully captured\n\nScore: 7\n\n**7. Writing Clarity**\n\nThe writing is generally clear and well-structured, following the RQ structure. The paper is honest about its limitations. However:\n- The paper is quite long and dense\n- Some sections feel overloaded with qualifications and boundary statements\n- The results section mixes primary evidence, supporting evidence, and stress tests in a way that can be hard to follow\n- The claim-to-evidence map is good but the sheer number of claims and caveats can be overwhelming\n- The paper could benefit from a cleaner narrative arc\n\nScore: 6\n\n**Overall Assessment:**\n\nThis is a solid method paper with honest bounded evidence. The core idea (measurement-floor admissibility gate) is novel for SciML but may be seen as incremental. The empirical evidence is broad but thin at each point. The paper is very careful about not overclaiming, which is both a strength (honesty) and a weakness (the claims may seem too bounded for Tier-1).\n\nFor a CAS Tier-1 SE journal (TSE/TOSEM caliber), I would estimate:\n- The novelty is borderline - it's a workflow/method paper rather than a fundamentally new technique\n- The evidence is broad but not deep enough at any single point to be compelling\n- The airfoil experiment with an under-trained model is a significant weakness\n- The coverage/validity duality is interesting but remains a hypothesis\n\nAccept probability: I'd estimate around 0.25-0.35 for TSE/TOSEM caliber. The paper is more likely suited for a Tier-2 venue like Information and Software Technology (where it's submitted) or JSME.\n\nVerdict: major_revision - the paper needs stronger evidence (converged airfoil model, deeper evaluation at each point) and possibly a tighter focus.\n\ntier1_ready: false - after a normal revision, the evidence would still be too thin at each point and the core contribution too incremental for TSE/TOSEM.\n\nmaturity_0_100: I'd say about 55-60. The framework is well-developed but the evidence needs deepening.\n\nBlocking gaps:\n1. Airfoil evidence uses deliberately under-trained model (median L2 1.00), undermining the gate-discrimination result's practical significance\n2. Primary evidence concentrated on one dataset (cylinder flow); cross-family evidence is shallow (admissibility decisions only, not full workflow)\n3. The \"validity-coverage duality\" remains a hypothesis with thin supporting evidence\n4. The numerical admissibility gate, while correct, may be seen as incremental over existing relaxation-based approaches\n\nHighest ROI fix: Train a converged airfoil surrogate to make the gate-discrimination result practically meaningful, and deepen the FNO/PINN evidence from admissibility-only to full workflow execution with fault detection.\n\nWait, let me reconsider. The paper is submitted to Information and Software Technology (IST), which is actually a decent journal but not TSE/TOSEM caliber. The question asks me to judge it against TSE/TOSEM caliber for CAS Tier-1.\n\nLet me reconsider the scores more carefully:\n\nActually, I think I'm being slightly generous on some dimensions. Let me recalibrate:\n\n- Novelty: The measurement-floor admissibility gate is the core novel claim. It's a sensible idea but not deeply technically novel - it's essentially saying \"your tolerance should be bigger than your measurement error.\" The MR-card format and typed verdicts are engineering contributions. For TSE/TOSEM, this is borderline. Score: 6.\n\n- Technical soundness: The operator-floor analysis is rigorous and the method is internally consistent. But the domain-violation metric is ad-hoc and the 50% regression threshold is arbitrary. Score: 7.\n\n- Empirical rigor: Honest scope, CIs where appropriate, but many cells are not independent, the LLM baseline is weak, and the airfoil model is under-trained. Score: 6.\n\n- Generalizability: Multiple architectures and PDEs, but evidence is thin at each point. The cross-program breadth is mostly read-only reuse. Score: 6.\n\n- Positioning: Good related work, clear delta. Score: 7.\n\n- Reproducibility: Good artifact practices, Zenodo archive, claim ledger. Score: 7.\n\n- Writing: Clear but overloaded with qualifications. Score: 6.\n\nOverall: This is a 6-average paper that would likely be a clear accept at a Tier-2 venue but sits at the borderline for Tier-1. The main issues are the incremental core contribution and the thin evidence at each generalization point.\n\nLet me finalize my assessment:\n\naccept_probability: 0.20-0.30 for TSE/TOSEM. The paper is solid but the core contribution may be seen as too incremental and the evidence too bounded for a Tier-1 venue. After major revision with deeper evidence, it could potentially clear the bar.\n\nverdict: major_revision\n\ntier1_ready: false\n\nmaturity_0_100: 55\n\nblocking_gaps:\n1. Core contribution (measurement-floor admissibility gate) is incremental over relaxation-based MR approaches for TSE/TOSEM caliber\n2. Airfoil gate-discrimination evidence uses deliberately under-trained model (median L2 1.00), limiting practical significance\n3. Cross-family evidence (PINN/FNO) is shallow - mostly admissibility decisions, not full workflow with fault detection\n4. \"Validity-coverage duality\" remains an unvalidated hypothesis with thin supporting evidence\n\nhighest_roi_fix: Replace the under-trained airfoil surrogate with a converged model and deepen FNO/PINN evidence to full workflow execution (rubric-to-verdict-to-fault-detection), making the gate-discrimination and generalizability claims empirically compelling rather than merely logically correct.\n\ntop_strengths:\n1. Rigorous operator-floor analysis with closed-form derivation, leading-order predictor, and cross-topology validation\n2. Honest, well-bounded empirical scope with typed verdicts that genuinely separate SUT inconsistency from relation invalidity\n3. Comprehensive claim ledger and artifact-backed reproducibility practices"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 22453,
+        "completion_tokens": 3252,
+        "total_tokens": 25705,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2781
+        }
+      },
+      "system_fingerprint": ""
+    },
+    "NoveltyPositioning": {
+      "id": "f7b34833-0123-420b-b035-68b2fd0b8373",
+      "object": "chat.completion",
+      "created": 1782006017,
+      "model": "deepseek-v4-pro",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_significance\": 6,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 8,\n    \"generalizability\": 5,\n    \"positioning_related_work\": 8,\n    \"reproducibility\": 8,\n    \"writing_clarity\": 7\n  },\n  \"accept_probability\": 0.35,\n  \"verdict\": \"major_revision\",\n  \"tier1_ready\": false,\n  \"maturity_0_100\": 50,\n  \"blocking_gaps\": [\n    \"Limited empirical generalizability (single primary CFD case with small supporting rosters, no diverse SciML domains or real-world fault corpora)\",\n    \"Core novelty of measurement-floor admissibility gate may be perceived as incremental to relaxed-oracle and MR constraint work without a more fundamental theoretical advance\",\n    \"Absence of validation on production-scale surrogates or large-scale defect datasets weakens the claimed utility for real-world SciML V&V\",\n    \"The paper's contribution is packaged as a workflow; a stronger unifying formalism or generalization of the admissibility criteria across operator types would elevate significance\"\n  ],\n  \"highest_roi_fix\": \"Expand the empirical evaluation to multiple diverse SciML surrogate applications with rigorous baseline comparisons, demonstrating that the admissibility gate consistently prevents false positive verdicts and enables correct fault detection in practice.\",\n  \"top_strengths\": [\n    \"Rigorous measurement-floor admissibility argument with operator-floor calibration (O(h) slope, closed-form, topology stability)\",\n    \"Novel typed verdict scheme that separates SUT inconsistency from domain violation, preventing misinterpretation\",\n    \"Transparent claim ledger and replication package that ties every result to artifacts\"\n  ]\n}",
+            "reasoning_content": "We need to review a manuscript about domain-validity-gated metamorphic testing for scientific ML surrogates. The reviewer is an expert in metamorphic testing, oracle problem, relaxed oracles, and ML testing. They must judge novelty and positioning ruthlessly. Score dimensions 1-10 calibrated to CAS Tier-1 (TSE/TOSEM). Computations of novelty_significance, technical_soundness, empirical_rigor, generalizability, positioning_related_work, reproducibility, writing_clarity. Then accept_probability, verdict, tier1_ready, maturity_0_100, blocking_gaps, highest_roi_fix, top_strengths. Output JSON only.\n\nWe need to scrutinize the paper. \nCore idea: gating MR admissibility on numerical decidability, i.e., tolerance must dominate operator's numerical floor. The paper proposes a domain-validity gated workflow: rubric checking physical basis, preconditions, mapping, numerical decidability. MR cards, executable assets, typed verdicts (pass, fail, skip, out-of-relation-domain, numerical-tolerance issue, inconclusive). Bounded empirical evidence on MeshGraphNets cylinder flow, with supporting on airfoil, PINN, FNO, etc.\n\nIs this genuinely new and significant? \nThe paper acknowledges that MT for SciML is known, and that relaxed oracles (Eniser et al.) introduced tolerances, and inapplicability handling (Duque-Torres et al.) separates bug from inapplicability. The claimed novelty is (i) explicit measurement-floor admissibility test for SciML, making the candidate-to-asset step explicit about physical, numerical, and software conditions; (ii) a typed verdict scheme that separate SUT inconsistency from domain violation, combining the two axes; (iii) an MR-card executable-asset format. \n\nThe reviewer must judge if this is incremental or significant. \nThe paper does not claim to invent MT, MR identification, or relaxations. It combines ideas and adds the specific gating on numerical decidability. The idea of gating admissibility on operator floor and classifying verdicts along two axes with explicit physical/geometric/mapping/floor categories is new in the context of SciML surrogates, and the paper argues it's needed to avoid interpreting inapplicability as faults. Could be significant if it provides a methodological advance that improves auditing and interpretability in V&V of SciML.\n\nHowever, the novelty might be considered incremental: the admissibility gate is a form of precondition checking. The idea that you need to ensure MR validity conditions hold and that tolerances must be above noise is known. In software testing, similar ideas exist (e.g., MR constraints). The typed verdict scheme extends work by Duque-Torres et al. The contribution might be seen as a systematic packaging for SciML, but perhaps not a paradigm-shifting idea that Tier-1 demands. We must be ruthless. Tier-1 journals expect fundamental advances. The paper's core is the measurement-floor admissibility: \"a relation is admitted only when its verdict tolerance dominates the measuring operator's own intrinsic error floor, a test that to our knowledge is new for learned SciML surrogates evaluated out of distribution\". That is specific but not necessarily broad. The workflow for SciML could be considered a domain-specific methodology.\n\nNovelty_significance: I'd give maybe 6-7. The idea is sound but might be seen as incremental over existing relaxed oracle and MR specification work. Yet the combination and explicit gating for SciML might be sufficiently novel for Tier-1 if the empirical breadth is strong enough. The paper's generalizability is limited: one primary CFD case, supporting airfoil, PINN, FNO, but still within a few PDE types and small architectures. No large-scale production surrogates, no real-world fault detection rates. The paper says it's bounded. The generalizability score should reflect that the claims are limited, but does the paper make overclaims? It explicitly avoids overclaims, which is good, but for Tier-1, you'd want stronger evidence across multiple domains and tasks to show the workflow is indeed broadly reusable. The paper's generalizability is not high; it's exploratory. Probably 5-6.\n\nTechnical soundness: method seems well-defined. The operator-floor sweep is rigorous (log-log slope, closed-form derivation). The verdict classification is clear. The experiments are designed to match RQs. The claim ledger ties artifacts. So technical soundness is high, maybe 8-9.\n\nEmpirical rigor: they include CIs, bootstrap, multiple checkpoints, trajectories, variants, cross-family replications (PINN, FNO, airfoil). They have a seeded-fault analysis with severity sweeps and adversarial mutants. They report descriptive statistics where appropriate and inferential where sampling structure supports. They note limitations clearly. This is rigorous for a bounded study. However, the primary unit is within a single SUT family; the cross-family evidence is limited (small FNO, PINN rosters). Still, the rigor is good, maybe 8.\n\nGeneralizability: the paper explicitly limits claims. Evidence covers a few PDEs and architectures, but not a wide range. Tier-1 demands multiple domains, multiple fault models, tasks. The generalizability score should be lower, perhaps 5-6. The paper's main claim is methodological, but the evidence doesn't provide strong proof that this methodology is widely applicable. The authors acknowledge that. The question is whether the evidence permits the general claim. The paper claims \"a reusable workflow for converting physics-derived relations into executable assets\" with bounded evidence. That's not a general claim of reliability. However, the methodology itself could be general, but the evidence is limited. Tier-1 expectations would require broader evaluation. So I'd score generalizability as 5-6.\n\nPositioning_related_work: The paper includes a thorough comparison with prior work, capability matrix, discussion of what's new and what's not. Good. Score 8.\n\nReproducibility: They have a replication package, claim ledger, Zenodo, commitment to artifacts. Some workflows may be dependent on old runtimes, but they emphasize scripts and logs. Likely good. Score 8.\n\nWriting_clarity: The paper is dense, with many subsections and tables. It's well-structured but perhaps overloaded with details and self-referential claims. The method, results, and threats are clear. Could be a 7.\n\nAccept probability: Given the novelty and limited generalizability, chance of acceptance at Tier-1 after revision is moderate. The paper is well executed but may be seen as incremental for TSE/TOSEM. I'd estimate accept_probability 0.4. The verdict would be major_revision because the core idea needs to be framed more compellingly and the generalizability might need more evidence, but it's not hopeless. tier1_ready probably false now, but could be with substantial revision? The maturity is maybe 55-65. \n\nBlocking gaps: limited generalizability (narrow empirical scope, lack of diverse SciML domains, lack of real-world fault corpora), incremental novelty relative to prior MR constraint and relaxed-oracle work, need for more theoretical generalization of the admissibility gate, and the fact that the primary claim (methodological) needs stronger evidence of broad utility. Highest_roi_fix: expanding the empirical evaluation to include a larger variety of SciML surrogates and tasks, demonstrating that the method yields consistent benefits across diverse settings, which would strengthen both novelty and generalizability.\n\nTop_strengths: rigorous measurement-floor calibration and typed verdict scheme; clear, well-documented artifact and claim ledger; honest boundaries and avoidance of overclaims.\n\nLet's craft the JSON accordingly.\n\nScores: \nnovelty_significance: 6 (incremental combination, though solid). \ntechnical_soundness: 8 (method coherent, operator-floor derivation rigorous). \nempirical_rigor: 8 (CIs, multi-checkpoint, sweeps, limitations). \ngeneralizability: 5 (limited tasks, architectures, no real-world defects). \npositioning_related_work: 8 (comprehensive, clear gap). \nreproducibility: 8 (package, ledger, but may need docker for old dependencies). \nwriting_clarity: 7 (clear but very dense). \n\nAccept_probability: 0.35\nVerdict: major_revision (if they can strengthen generalizability and reframe novelty)\ntier1_ready: false\nmaturity_0_100: 50 (needs substantial additional evidence and a clearer theoretical novelty contribution)\nblocking_gaps: [\n  \"Limited empirical generalizability (single primary CFD case with small supporting rosters, no diverse SciML domains or real-world fault corpora)\",\n  \"Core novelty of measurement-floor admissibility gate may be perceived as incremental to relaxed-oracle and MR constraint work without a more fundamental theoretical advance\",\n  \"Absence of validation on production-scale surrogates or large-scale defect datasets weakens the claimed utility for real-world SciML V&V\",\n  \"The paper's contribution is packaged as a workflow; a stronger unifying formalism or generalization of the admissibility criteria across operator types would elevate significance\"\n]\nhighest_roi_fix: \"Expand the empirical evaluation to multiple diverse SciML surrogate applications with rigorous baseline comparisons, demonstrating that the admissibility gate consistently prevents false positive verdicts and enables correct fault detection in practice.\"\ntop_strengths: [\n  \"Rigorous measurement-floor admissibility argument with operator-floor calibration (O(h) slope, closed-form, topology stability)\",\n  \"Novel typed verdict scheme that separates SUT inconsistency from domain violation, preventing misinterpretation\",\n  \"Transparent claim ledger and replication package that ties every result to artifacts\"\n]\n\nI'll output JSON."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 22060,
+        "completion_tokens": 2409,
+        "total_tokens": 24469,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2034
+        }
+      },
+      "system_fingerprint": "fp_9954b31ca7_prod0820_fp8_kvcache_20260402"
+    },
+    "Adversary": {
+      "id": "chatcmpl-25f0ff6b-6e37-9ae5-8149-bd38e663f92b",
+      "object": "chat.completion",
+      "created": 1782006064,
+      "model": "qwen3-max",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_significance\": 6,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 7,\n    \"generalizability\": 5,\n    \"positioning_related_work\": 8,\n    \"reproducibility\": 7,\n    \"writing_clarity\": 7\n  },\n  \"accept_probability\": 0.25,\n  \"verdict\": \"reject\",\n  \"tier1_ready\": false,\n  \"maturity_0_100\": 60,\n  \"blocking_gaps\": [\n    \"Evidence limited to narrow CFD/PDE settings; no cross-architecture or cross-physics generalization beyond superficial replication\",\n    \"Empirical cells lack independence (shared checkpoints, trajectories); statistics overstate inferential strength\",\n    \"Coverage claims rely on author-tailored mutants, not real-world defects or independently validated fault models\",\n    \"Reproducibility hampered by non-redistributable checkpoints and partial artifact availability\"\n  ],\n  \"highest_roi_fix\": \"Replace tailored mutants with real-world defect corpora and demonstrate cross-domain applicability beyond cylinder/airfoil CFD\",\n  \"top_strengths\": [\n    \"Clear domain-validity rubric linking physics, numerics, and software preconditions\",\n    \"Well-structured MR-card asset format with auditable verdict ledger\",\n    \"Honest bounding of claims and explicit separation of admissibility from detection\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 23002,
+        "completion_tokens": 305,
+        "total_tokens": 23307,
+        "prompt_tokens_details": {
+          "cached_tokens": 22912
+        }
+      }
+    }
+  },
+  "honesty_boundary": "Five single-call temperature-0 LLM reviews via one gateway, scored against a Tier-1 rubric; an automated maturity estimate, NOT human peer review and NOT a prediction of an actual editorial decision."
+}

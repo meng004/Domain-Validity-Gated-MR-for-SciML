@@ -1,0 +1,293 @@
+{
+  "record_type": "academic-review-panel",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-21T01:18:31Z",
+  "venue": "Elsevier IST regular track",
+  "paper": "paper/ist-submission/main.tex",
+  "panel": [
+    {
+      "role": "EIC",
+      "model": "gpt-5.5"
+    },
+    {
+      "role": "MethodologyRigor",
+      "model": "claude-opus-4-7"
+    },
+    {
+      "role": "DomainExpert",
+      "model": "glm-5.2"
+    },
+    {
+      "role": "Perspective",
+      "model": "deepseek-v4-pro"
+    },
+    {
+      "role": "DevilsAdvocate",
+      "model": "qwen3-max"
+    }
+  ],
+  "reviewers_succeeded": [
+    "EIC",
+    "MethodologyRigor",
+    "Perspective",
+    "DevilsAdvocate"
+  ],
+  "review_failures": [
+    {
+      "role": "DomainExpert",
+      "model": "glm-5.2",
+      "max_tokens": 16000,
+      "error": "empty content (finish_reason='stop')"
+    },
+    {
+      "role": "DomainExpert",
+      "model": "glm-5.2",
+      "max_tokens": 28000,
+      "error": "empty content (finish_reason='stop')"
+    }
+  ],
+  "per_dimension_mean": {
+    "novelty_contribution": 7.0,
+    "technical_soundness": 8.0,
+    "empirical_rigor": 7.75,
+    "related_work": 8.0,
+    "clarity": 8.0,
+    "reproducibility": 7.75,
+    "scope_match_to_ist": 9.0
+  },
+  "overall_dimension_mean": 7.93,
+  "accept_probability_mean": 0.72,
+  "accept_probability_range": [
+    0.68,
+    0.75
+  ],
+  "verdict_distribution": {
+    "major_revision": 2,
+    "minor_revision": 2
+  },
+  "panel_majority_verdict": "major_revision",
+  "per_reviewer": {
+    "EIC": {
+      "model": "gpt-5.5",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 7,
+          "empirical_rigor": 8,
+          "related_work": 8,
+          "clarity": 7,
+          "reproducibility": 9,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.68,
+        "verdict": "major_revision",
+        "top_concerns": [
+          "Contribution is methodologically useful but somewhat incremental relative to MT constraints, relaxed oracles, and SciML diagnostics",
+          "Manuscript is overextended with many secondary studies, stress tests, and claims that dilute the central contribution",
+          "Several empirical cells are descriptive and non-independent, so acceptance depends on preserving the narrow claim boundary",
+          "Coverage and seeded-fault interpretations need sharper separation from validated fault-detection or localization claims"
+        ],
+        "top_strengths": [
+          "Strong fit to IST software V&V and oracle-problem remit",
+          "Careful validity-gating idea with typed verdicts and explicit numerical-floor reasoning",
+          "Excellent artifact orientation with MR cards, ledgers, committed outputs, and reproducibility controls"
+        ]
+      }
+    },
+    "MethodologyRigor": {
+      "model": "claude-opus-4-7",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 9,
+          "empirical_rigor": 8,
+          "related_work": 8,
+          "clarity": 8,
+          "reproducibility": 7,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.75,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "Numerical admissibility gate currently derived for particular mesh/operator setting; generalization to more unstructured meshes is future work",
+          "Absolute conservation relation deferred due to calibration challenges, limiting verdict completeness",
+          "Some empirical cells not fully independent samples, limiting inferential claims",
+          "Cross-MR domain-violation score calibration not yet established for comparative interpretability"
+        ],
+        "top_strengths": [
+          "Methodologically rigorous framing of MR admissibility gate tied to physical, numerical, and software evidence",
+          "Well-designed, multi-checkpoint and multi-architecture empirical study with artifact-backed evidence and clear threat mitigation",
+          "Clear separation and formalization of verdict semantics preventing overclaim and improving auditability"
+        ]
+      }
+    },
+    "Perspective": {
+      "model": "deepseek-v4-pro",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 8,
+          "empirical_rigor": 7,
+          "related_work": 8,
+          "clarity": 8,
+          "reproducibility": 8,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.7,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "The operator-floor derivation is limited to symmetric/unstructured meshes and does not yet cover arbitrary mesh topologies, limiting the generalizability of the numerical decidability gate.",
+          "The seeded-fault experiments, while carefully bounded, overly emphasize coverage implications that are still within-family and may risk overinterpretation as general fault-detection principles.",
+          "The paper could more clearly separate the core methodological contribution (gate, MR cards, typed verdicts) from the extensive case-study details, which sometimes obscure the novelty."
+        ],
+        "top_strengths": [
+          "Excellent positioning against related work with a clear capability matrix that precisely identifies the gap addressed.",
+          "The methodology introduces an auditable, explicit validation workflow that advances MT practice for SciML, with strong emphasis on reproducibility and evidence tracking.",
+          "Thorough threat-to-validity discussion that honestly delimits the scope of empirical claims."
+        ]
+      }
+    },
+    "DevilsAdvocate": {
+      "model": "qwen3-max",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 8,
+          "empirical_rigor": 8,
+          "related_work": 8,
+          "clarity": 9,
+          "reproducibility": 7,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.75,
+        "verdict": "major_revision",
+        "top_concerns": [
+          "Overstates generalizability of findings beyond narrow case studies",
+          "Reproducibility limited by non-redistributable checkpoints and partial artifact availability",
+          "Empirical claims about fault detection lack external validation or real-world defect data",
+          "Admissibility gate relies on manual physical reasoning not easily automatable"
+        ],
+        "top_strengths": [
+          "Clear, auditable workflow linking physics-derived MRs to executable test assets",
+          "Strong empirical rigor within deliberately bounded scope with proper statistical reporting",
+          "Well-written with excellent structure and transparent claim-to-evidence mapping"
+        ]
+      }
+    }
+  },
+  "raw_responses": {
+    "EIC": {
+      "id": "resp_0c38ba54f9e95986016a373b9fc3808190ae498650998b2eeb",
+      "object": "chat.completion",
+      "created": 1782004650,
+      "model": "gpt-5.5",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\"scores\":{\"novelty_contribution\":7,\"technical_soundness\":7,\"empirical_rigor\":8,\"related_work\":8,\"clarity\":7,\"reproducibility\":9,\"scope_match_to_ist\":9},\"accept_probability\":0.68,\"verdict\":\"major_revision\",\"top_concerns\":[\"Contribution is methodologically useful but somewhat incremental relative to MT constraints, relaxed oracles, and SciML diagnostics\",\"Manuscript is overextended with many secondary studies, stress tests, and claims that dilute the central contribution\",\"Several empirical cells are descriptive and non-independent, so acceptance depends on preserving the narrow claim boundary\",\"Coverage and seeded-fault interpretations need sharper separation from validated fault-detection or localization claims\"],\"top_strengths\":[\"Strong fit to IST software V&V and oracle-problem remit\",\"Careful validity-gating idea with typed verdicts and explicit numerical-floor reasoning\",\"Excellent artifact orientation with MR cards, ledgers, committed outputs, and reproducibility controls\"]}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 22117,
+        "completion_tokens": 351,
+        "total_tokens": 22468
+      }
+    },
+    "MethodologyRigor": {
+      "id": "chatcmpl-eyt6z3o3jlp",
+      "model": "claude-opus-4-7",
+      "object": "chat.completion",
+      "created": 1782004656,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 9,\n    \"empirical_rigor\": 8,\n    \"related_work\": 8,\n    \"clarity\": 8,\n    \"reproducibility\": 7,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.75,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Numerical admissibility gate currently derived for particular mesh/operator setting; generalization to more unstructured meshes is future work\",\n    \"Absolute conservation relation deferred due to calibration challenges, limiting verdict completeness\",\n    \"Some empirical cells not fully independent samples, limiting inferential claims\",\n    \"Cross-MR domain-violation score calibration not yet established for comparative interpretability\"\n  ],\n  \"top_strengths\": [\n    \"Methodologically rigorous framing of MR admissibility gate tied to physical, numerical, and software evidence\",\n    \"Well-designed, multi-checkpoint and multi-architecture empirical study with artifact-backed evidence and clear threat mitigation\",\n    \"Clear separation and formalization of verdict semantics preventing overclaim and improving auditability\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 25279,
+        "completion_tokens": 285,
+        "total_tokens": 25564,
+        "usage_semantic": "openai",
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        },
+        "completion_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "input_tokens": 25279,
+        "output_tokens": 0,
+        "input_tokens_details": null,
+        "claude_cache_creation_5_m_tokens": 0,
+        "claude_cache_creation_1_h_tokens": 0
+      }
+    },
+    "Perspective": {
+      "id": "da5b49a3-a2fb-4598-abed-261fd41d1579",
+      "object": "chat.completion",
+      "created": 1782004683,
+      "model": "deepseek-v4-pro",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 7,\n    \"related_work\": 8,\n    \"clarity\": 8,\n    \"reproducibility\": 8,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.70,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"The operator-floor derivation is limited to symmetric/unstructured meshes and does not yet cover arbitrary mesh topologies, limiting the generalizability of the numerical decidability gate.\",\n    \"The seeded-fault experiments, while carefully bounded, overly emphasize coverage implications that are still within-family and may risk overinterpretation as general fault-detection principles.\",\n    \"The paper could more clearly separate the core methodological contribution (gate, MR cards, typed verdicts) from the extensive case-study details, which sometimes obscure the novelty.\"\n  ],\n  \"top_strengths\": [\n    \"Excellent positioning against related work with a clear capability matrix that precisely identifies the gap addressed.\",\n    \"The methodology introduces an auditable, explicit validation workflow that advances MT practice for SciML, with strong emphasis on reproducibility and evidence tracking.\",\n    \"Thorough threat-to-validity discussion that honestly delimits the scope of empirical claims.\"\n  ]\n}",
+            "reasoning_content": "We are asked to review a manuscript as a software-engineering-research reviewer for IST. We need to output a JSON with scores, accept_probability, verdict, top_concerns, top_strengths.\n\nWe must evaluate:\n- novelty_contribution\n- technical_soundness\n- empirical_rigor\n- related_work\n- clarity\n- reproducibility\n- scope_match_to_ist\n\nThe paper proposes a \"validity-gated\" metamorphic testing approach for SciML surrogates. It introduces a rubric to screen candidate metamorphic relations, MR cards, typed verdicts, and a workflow. The contributions are methodological.\n\nLet's analyze each dimension.\n\n1. novelty_contribution: The idea of validity-gating MRs for SciML surrogates, with explicit numerical decidability and typed verdicts, is somewhat novel. It builds on prior MT work but adds the specific gate for SciML. The paper explicitly positions its novel part as the validity gate and the MR-card asset format. While metamorphic testing itself is not new, the application to SciML surrogates with rigorous numerical floor consideration is non-trivial. However, there is prior work on relaxed oracles, inapplicability handling, etc. The paper's contribution is incremental but should be sufficient for IST. I'd rate it around 7-8. It's not groundbreaking, but it's a solid methodological contribution. So maybe 7.\n\n2. technical_soundness: The method is logically structured, with explicit gate conditions, MR cards, verdict types. The experiments test admissibility, not general reliability. The approach seems sound, though the operator floor derivation is for specific mesh types and not fully general. The method is well-described. There might be some overclaim in the \"bounded empirical utility\" but they are careful about boundaries. So soundness is high, maybe 8.\n\n3. empirical_rigor: The experiments are scoped to cylinder-flow and a few other cases. The paper explicitly treats them as case studies, not broad benchmarks. They use multiple checkpoints, trajectories, architectures to show the pattern is consistent within the family. They compute confidence intervals where appropriate. Threats to validity are honestly discussed. The rigor is reasonable for a methodological paper with a narrow evidence boundary. I'd rate it 7.\n\n4. related_work: The paper has a thorough related work section covering MT, scientific software testing, MR identification, relaxation, violation attribution. It clearly positions itself with a capability matrix. The distinction from prior work is well-argued. I'd give 8.\n\n5. clarity: The manuscript is quite long and dense, but well-structured. It uses precise terminology and provides tables and figures. The language is formal. Some parts (like claim-to-evidence map) are very detailed. Clarity is good, maybe 8.\n\n6. reproducibility: The paper commits to an artifact package with scripts, ledgers, claims. It acknowledges limitations (old runtimes, non-redistributable checkpoints) but provides many raw outputs. The paper says the replication package is on Zenodo. I'd say reproducibility is high for the reported results, maybe 8.\n\n7. scope_match_to_ist: The paper is about testing of software, specifically metamorphic testing for scientific ML surrogates, which fits software V&V remit of IST. Strong match, maybe 9.\n\nAccept probability: The paper is solid for a regular track, but it's a very narrow contribution and claims are bounded. Might need minor revisions to clarify some claim boundaries, but generally publishable. I'd estimate 0.7 probability.\n\nVerdict: \"minor_revision\"\n\nTop concerns: Some claims might still overstate the generalizability of the admissibility gate; the operator floor derivation is limited to specific meshes; the seeded-fault tests are not fully independent; the paper could better separate the core contribution from the extensive case study details.\n\nTop strengths: Strong positioning against related work, explicit and auditable methodology, thorough threat discussion.\n\nThus the JSON."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21693,
+        "completion_tokens": 1123,
+        "total_tokens": 22816,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 827
+        }
+      },
+      "system_fingerprint": "fp_9954b31ca7_prod0820_fp8_kvcache_20260402"
+    },
+    "DevilsAdvocate": {
+      "id": "chatcmpl-49c50383-616d-9a64-bb7a-26efcdc0a91b",
+      "object": "chat.completion",
+      "created": 1782004704,
+      "model": "qwen3-max",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 8,\n    \"related_work\": 8,\n    \"clarity\": 9,\n    \"reproducibility\": 7,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.75,\n  \"verdict\": \"major_revision\",\n  \"top_concerns\": [\n    \"Overstates generalizability of findings beyond narrow case studies\",\n    \"Reproducibility limited by non-redistributable checkpoints and partial artifact availability\",\n    \"Empirical claims about fault detection lack external validation or real-world defect data\",\n    \"Admissibility gate relies on manual physical reasoning not easily automatable\"\n  ],\n  \"top_strengths\": [\n    \"Clear, auditable workflow linking physics-derived MRs to executable test assets\",\n    \"Strong empirical rigor within deliberately bounded scope with proper statistical reporting\",\n    \"Well-written with excellent structure and transparent claim-to-evidence mapping\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 22681,
+        "completion_tokens": 226,
+        "total_tokens": 22907,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    }
+  },
+  "honesty_boundary": "Five single-call temperature-0 LLM reviews via one gateway; an automated panel estimate, NOT a substitute for human peer review and NOT a prediction of an actual IST editorial decision."
+}

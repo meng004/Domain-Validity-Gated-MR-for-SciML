@@ -1,0 +1,90 @@
+{
+  "record_type": "eic-model-robustness",
+  "generated_at": "2026-06-21T03:47:26Z",
+  "role": "EIC (IST persona, identical across models)",
+  "paper": "paper/ist-submission/main.tex",
+  "models": [
+    "gpt-5.5",
+    "grok-4.3",
+    "claude-opus-4-7",
+    "qwen3-max"
+  ],
+  "per_model": {
+    "gpt-5.5": {
+      "verdict": "major_revision",
+      "accept_probability": 0.58,
+      "scores": {
+        "novelty_contribution": 7,
+        "technical_soundness": 7,
+        "empirical_rigor": 7,
+        "related_work": 8,
+        "clarity": 6,
+        "reproducibility": 9,
+        "scope_match_to_ist": 9
+      },
+      "top_concerns": [
+        "Core novelty over prior MT constraint, relaxation, and applicability work needs sharper differentiation",
+        "Empirical section is sprawling and mixes primary evidence with many secondary stress/audit claims",
+        "Several coverage and fault-detection claims remain based on authored mutants, synthetic/OOD cases, and non-independent cells",
+        "Presentation is dense and may obscure the central contribution for IST readers"
+      ]
+    },
+    "grok-4.3": {
+      "verdict": "minor_revision",
+      "accept_probability": 0.72,
+      "scores": {
+        "novelty_contribution": 7,
+        "technical_soundness": 9,
+        "empirical_rigor": 8,
+        "related_work": 8,
+        "clarity": 9,
+        "reproducibility": 9,
+        "scope_match_to_ist": 9
+      },
+      "top_concerns": [
+        "Overly narrow empirical scope limits generalizability claims",
+        "Seeded-fault results presented as stress tests but risk over-interpretation as coverage evidence",
+        "Some tables (e.g., claim-to-evidence) belong in appendix rather than main text",
+        "Minor over-emphasis on methodological novelty vs. incremental advance on prior MT constraint work"
+      ]
+    },
+    "claude-opus-4-7": {
+      "verdict": "minor_revision",
+      "accept_probability": 0.85,
+      "scores": {
+        "novelty_contribution": 7,
+        "technical_soundness": 9,
+        "empirical_rigor": 8,
+        "related_work": 8,
+        "clarity": 8,
+        "reproducibility": 7,
+        "scope_match_to_ist": 9
+      },
+      "top_concerns": [
+        "Limited generalization beyond studied CFD and SciML surrogate families",
+        "Deferred or incomplete verdicts for some conservation relations due to numerical floor calibration",
+        "Typology and numerical decidability axes require further calibration and validation",
+        "Reproducibility dependent on some proprietary or heavyweight dependencies"
+      ]
+    },
+    "qwen3-max": {
+      "verdict": "minor_revision",
+      "accept_probability": 0.85,
+      "scores": {
+        "novelty_contribution": 8,
+        "technical_soundness": 9,
+        "empirical_rigor": 8,
+        "related_work": 8,
+        "clarity": 8,
+        "reproducibility": 9,
+        "scope_match_to_ist": 9
+      },
+      "top_concerns": [
+        "Limited external validity beyond CFD and specific surrogate families",
+        "Verdict interpretation relies on per-relation domain metrics not cross-calibrated",
+        "Coverage implications remain qualitative and bounded to seeded faults"
+      ]
+    }
+  },
+  "failures": []
+}
