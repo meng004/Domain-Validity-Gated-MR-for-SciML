@@ -52,6 +52,7 @@ def main(argv=None) -> int:
     c38 = load("detection-vs-accuracy/raw/metric_ledger.json")
     pm = load("pointmlp-three-arm-complementarity/raw/metric_ledger.json")
     af = load("production-grade-sut-extension/physicsnemo-mgn-airfoil-seeded-fault-detection/raw/metric_ledger.json")
+    af3 = load("production-grade-sut-extension/physicsnemo-mgn-airfoil-three-arm/raw/metric_ledger.json")
     c47 = load("cross-architecture-duality/cross_architecture_duality_report.json")
     missing = [n for n, x in [("C38", c38), ("C42/43", pm), ("C36", af), ("C47", c47)] if x is None]
     if missing:
@@ -106,10 +107,10 @@ def main(argv=None) -> int:
         "arms_run": ["arm1", "arm2", "arm3"],
     })
 
-    # --- converged airfoil PhysicsNeMo MGN (C35/C36) ---
+    # --- converged airfoil PhysicsNeMo MGN (C35/C36 arm1; C52 arm2/arm3 on the live model) ---
     rob, xs = af["robustness"], af["cross_sut_comparison"]
     unions = [t["union_detection_rate"] for t in af["per_trajectory"]]
-    suts.append({
+    af_sut = {
         "sut": "compressible airfoil PhysicsNeMo MeshGraphNet (converged, C35)",
         "source_claims": ["C35", "C36"],
         "admissible_mr_set": ["node-permutation", "conservation"],
@@ -122,7 +123,28 @@ def main(argv=None) -> int:
         "arm2_accuracy_monitor": "GPU-pending (requires the live PhysicsNeMo airfoil model)",
         "arm3_gate_value": "GPU-pending (requires the live PhysicsNeMo airfoil model)",
         "arms_run": ["arm1"],
-    })
+    }
+    if af3 is not None:
+        a2 = af3["arm2_accuracy_monitor"]; a3 = af3["arm3_ungated_generic_false_positive"]
+        cc = af3["complementarity_2x2_mr_vs_accuracy"]["counts"]
+        tot3 = af3["fault_catalogue_size"]
+        af_sut["source_claims"] = ["C35", "C36", "C52"]
+        af_sut["arm2_accuracy_monitor"] = {
+            "detect": a2["detection_count"], "total": tot3, "rate": a2["detection_rate"],
+            "wilson95": a2["detection_rate_wilson_ci95"],
+            "note": ("deployed-state rollout (low near-stationary baseline ~%.4f, distinct from "
+                     "C35's delta-prediction rollout 0.92); catches only gross boundary-condition "
+                     "corruption" % af3["baseline"]["deployed_state_rollout_relative_l2_median"])}
+        af_sut["arm3_gate_value"] = {
+            "admitted_max_false_positive": a3["admitted_template_max_false_positive_rate"],
+            "rejected_templates_flagging_fault_free_sut":
+                f"{a3['n_rejected_templates_flagging_fault_free_sut']}/{a3['n_rejected_templates']}",
+            "reading": ("gate-admitted node-permutation raises no baseline false alarm; every "
+                        "gate-rejected template (incl. the inadmissible mirror-y) fires on the "
+                        "correct SUT -- the gate removes the false-alarming detectors")}
+        af_sut["complementarity_2x2"] = cc
+        af_sut["arms_run"] = ["arm1", "arm2", "arm3"]
+    suts.append(af_sut)
 
     duality = {
         "principle": ("the admissibility gate fixes each SUT's admissible MR set from its "
@@ -158,9 +180,13 @@ def main(argv=None) -> int:
         "converged_suts": suts,
         "duality_cross_sut": duality,
         "arm_coverage_matrix": {s["sut"]: s["arms_run"] for s in suts},
-        "gpu_pending": ("airfoil arm2 (accuracy-monitor) + arm3 (ungated-generic gate value) "
-                        "require the live PhysicsNeMo airfoil model (GPU); see "
-                        "docs/cloud_runbook/ext3_airfoil_three_arm_kickoff.md"),
+        "gpu_pending": (
+            "none -- the airfoil arm2 (accuracy-monitor) + arm3 (ungated-generic gate value) are "
+            "now run on the live converged PhysicsNeMo airfoil model (C52); all three converged "
+            "SUTs have all three arms"
+            if af3 is not None else
+            "airfoil arm2 (accuracy-monitor) + arm3 (ungated-generic gate value) require the live "
+            "PhysicsNeMo airfoil model (GPU); see docs/cloud_runbook/ext3_airfoil_three_arm_kickoff.md"),
         "no_overclaim_self_check": ("every arm contrast is internal (gated vs ungated, MR vs "
                                     "accuracy on the same faults); the duality is a falsifiable "
                                     "cross-SUT prediction, not a law; zero baseline-ranking claims"),

@@ -1,9 +1,9 @@
 """EXT-3 guard: cross-SUT three-arm + duality consolidation (claim C51).
 
-Pins that the consolidation references committed artifacts only, marks the airfoil
-accuracy/generic arms as GPU-pending (not over-claimed as run), records the
-cross-SUT validity-coverage duality with a falsifiability condition, and carries
-zero superiority language.
+Pins that the consolidation references committed artifacts only, that the airfoil
+accuracy/generic arms are now folded in from the live-model run (C52) so all three
+converged SUTs carry all three arms, records the cross-SUT validity-coverage duality
+with a falsifiability condition, and carries zero superiority language.
 """
 import json
 import re
@@ -31,16 +31,23 @@ class TestExt3CrossSutThreeArm(unittest.TestCase):
 
     def test_arm_coverage_matrix_honest(self):
         m = self.r["arm_coverage_matrix"]
-        # PointMLP has the full three arms; airfoil only arm1 (rest GPU-pending).
+        # PointMLP and the converged airfoil both now carry the full three arms (C52).
         pm = next(v for k, v in m.items() if "pointmlp" in k.lower())
         af = next(v for k, v in m.items() if "airfoil" in k.lower())
         self.assertEqual(pm, ["arm1", "arm2", "arm3"])
-        self.assertEqual(af, ["arm1"])
+        self.assertEqual(af, ["arm1", "arm2", "arm3"])
 
-    def test_airfoil_arms_marked_gpu_pending(self):
+    def test_airfoil_arms_now_run_from_c52(self):
         af = next(s for s in self.r["converged_suts"] if "airfoil" in s["sut"].lower())
-        self.assertIn("GPU-pending", str(af["arm2_accuracy_monitor"]))
-        self.assertIn("GPU-pending", str(af["arm3_gate_value"]))
+        # arm2/arm3 are populated structured results, not GPU-pending strings.
+        self.assertIsInstance(af["arm2_accuracy_monitor"], dict)
+        self.assertIsInstance(af["arm3_gate_value"], dict)
+        self.assertNotIn("GPU-pending", str(af["arm2_accuracy_monitor"]))
+        self.assertIn("C52", af["source_claims"])
+        # MR and accuracy stay complementary (disjoint) on the low-fidelity airfoil
+        self.assertEqual(af["complementarity_2x2"]["both"], 0)
+        # gate value: every rejected generic template fires on the fault-free SUT
+        self.assertEqual(af["arm3_gate_value"]["rejected_templates_flagging_fault_free_sut"], "4/4")
         # mirror-y excluded on airfoil = the duality point
         self.assertEqual(len(af["admissible_mr_set"]), 2)
         self.assertTrue(any("mirror-y" in x for x in af["gate_excluded_mr"]))
@@ -64,10 +71,12 @@ class TestExt3CrossSutThreeArm(unittest.TestCase):
         for bad in ("outperform", "better than", "state-of-the-art", "beats the"):
             self.assertNotIn(bad, blob)
 
-    def test_c51_claim_registered(self):
+    def test_c51_and_c52_claims_registered(self):
         self.assertIn("C51-cross-sut-three-arm-consolidation", self.led)
-        # the airfoil-full-three-arm overclaim must stay forbidden
-        self.assertIn("GPU-pending, not yet run", self.led)
+        # the airfoil three-arm completion is registered as its own GPU-run claim
+        self.assertIn("C52-airfoil-three-arm", self.led)
+        # superiority stays forbidden in both
+        self.assertIn("outperforms the accuracy monitor or any baseline", self.led)
 
 
 if __name__ == "__main__":

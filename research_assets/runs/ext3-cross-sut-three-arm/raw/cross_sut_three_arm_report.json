@@ -96,7 +96,8 @@
       "sut": "compressible airfoil PhysicsNeMo MeshGraphNet (converged, C35)",
       "source_claims": [
         "C35",
-        "C36"
+        "C36",
+        "C52"
       ],
       "admissible_mr_set": [
         "node-permutation",
@@ -121,11 +122,32 @@
           "normalization_scale_fault"
         ]
       },
-      "arm2_accuracy_monitor": "GPU-pending (requires the live PhysicsNeMo airfoil model)",
-      "arm3_gate_value": "GPU-pending (requires the live PhysicsNeMo airfoil model)",
+      "arm2_accuracy_monitor": {
+        "detect": 2,
+        "total": 10,
+        "rate": 0.2,
+        "wilson95": [
+          0.0567,
+          0.5098
+        ],
+        "note": "deployed-state rollout (low near-stationary baseline ~0.0007, distinct from C35's delta-prediction rollout 0.92); catches only gross boundary-condition corruption"
+      },
+      "arm3_gate_value": {
+        "admitted_max_false_positive": 0.0,
+        "rejected_templates_flagging_fault_free_sut": "4/4",
+        "reading": "gate-admitted node-permutation raises no baseline false alarm; every gate-rejected template (incl. the inadmissible mirror-y) fires on the correct SUT -- the gate removes the false-alarming detectors"
+      },
       "arms_run": [
-        "arm1"
-      ]
+        "arm1",
+        "arm2",
+        "arm3"
+      ],
+      "complementarity_2x2": {
+        "both": 0,
+        "mr_only": 1,
+        "accuracy_only": 2,
+        "neither": 7
+      }
     }
   ],
   "duality_cross_sut": {
@@ -152,10 +174,12 @@
       "arm3"
     ],
     "compressible airfoil PhysicsNeMo MeshGraphNet (converged, C35)": [
-      "arm1"
+      "arm1",
+      "arm2",
+      "arm3"
     ]
   },
-  "gpu_pending": "airfoil arm2 (accuracy-monitor) + arm3 (ungated-generic gate value) require the live PhysicsNeMo airfoil model (GPU); see docs/cloud_runbook/ext3_airfoil_three_arm_kickoff.md",
+  "gpu_pending": "none -- the airfoil arm2 (accuracy-monitor) + arm3 (ungated-generic gate value) are now run on the live converged PhysicsNeMo airfoil model (C52); all three converged SUTs have all three arms",
   "no_overclaim_self_check": "every arm contrast is internal (gated vs ungated, MR vs accuracy on the same faults); the duality is a falsifiable cross-SUT prediction, not a law; zero baseline-ranking claims",
-  "generated_at": "2026-06-21T06:38:39Z"
+  "generated_at": "2026-06-21T07:06:40Z"
 }

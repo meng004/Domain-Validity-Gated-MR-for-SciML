@@ -1,0 +1,266 @@
+{
+  "ledger_id": "airfoil-three-arm-complementarity",
+  "evidence_level": "converged-airfoil-three-arm-complementarity-and-gate-value",
+  "schema_version": "0.1.0",
+  "sut_id": "physicsnemo-mgn-airfoil-primary-roster (claim C35)",
+  "architecture_family": "NVIDIA PhysicsNeMo MeshGraphNet (message passing, relative edge features)",
+  "checkpoint_file": "checkpoint_k01_seed20260616.pt",
+  "checkpoint_sha256": "34317f6c911495c2f845744e1cd379216036f3216f0dea0b6966905839246fa7",
+  "trajectory_indices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "num_frames_per_trajectory": 9,
+  "fault_catalogue_size": 10,
+  "fault_classes_predeclared": [
+    "boundary_condition_fault",
+    "mesh_adjacency_fault",
+    "normalization_scale_fault",
+    "physical_channel_fault",
+    "temporal_rollout_fault"
+  ],
+  "thresholds": {
+    "node_perm": 1e-05,
+    "conservation_ratio": 1.5,
+    "accuracy_rollout_multiplier": 2.0,
+    "generic_exact_tolerance": 1e-05
+  },
+  "baseline": {
+    "deployed_state_rollout_relative_l2_median": 0.0006606845417991281,
+    "conservation_ratio_median": 1.0634651957471708,
+    "metric_note": "arm2 uses the DEPLOYED one-step state rollout (predicted next velocity vs ground-truth next velocity), median ~0.0007. This is small because the compressible airfoil flow is near-stationary per step; it is a DIFFERENT quantity from C35's reported rollout 0.92 (the model's normalized delta-prediction skill). The accuracy monitor at 2x this baseline therefore catches only gross deployed-state corruption (boundary-condition faults), not subtle relation violations -- which is the complementarity with the MR arm.",
+    "c35_delta_prediction_rollout_for_reference": 0.92
+  },
+  "per_fault": [
+    {
+      "fault": "BC_zero_outflow",
+      "fault_class": "boundary_condition_fault",
+      "node_perm_median": 8.610942927589349e-07,
+      "conservation_median": 1.0634651861016053,
+      "rollout_median": 0.20292723178863525,
+      "rollout_over_baseline": 307.1469346566496,
+      "mr_arm_detects": false,
+      "accuracy_arm_detects": true,
+      "mirror_y_MR_detects": null
+    },
+    {
+      "fault": "BC_nonzero_wall",
+      "fault_class": "boundary_condition_fault",
+      "node_perm_median": 8.560362516618625e-07,
+      "conservation_median": 1.0634651624713753,
+      "rollout_median": 0.0987134501338005,
+      "rollout_over_baseline": 149.41086689419313,
+      "mr_arm_detects": false,
+      "accuracy_arm_detects": true,
+      "mirror_y_MR_detects": null
+    },
+    {
+      "fault": "MA_drop_edges",
+      "fault_class": "mesh_adjacency_fault",
+      "node_perm_median": 4.008597898064181e-07,
+      "conservation_median": 1.1043416450899455,
+      "rollout_median": 0.0013078403426334262,
+      "rollout_over_baseline": 1.9795231459056248,
+      "mr_arm_detects": false,
+      "accuracy_arm_detects": false,
+      "mirror_y_MR_detects": null
+    },
+    {
+      "fault": "MA_permute_edges",
+      "fault_class": "mesh_adjacency_fault",
+      "node_perm_median": 8.583754720348225e-07,
+      "conservation_median": 1.0639142196480484,
+      "rollout_median": 0.0006582887144759297,
+      "rollout_over_baseline": 0.9963737197230706,
+      "mr_arm_detects": false,
+      "accuracy_arm_detects": false,
+      "mirror_y_MR_detects": null
+    },
+    {
+      "fault": "NS_skip_denorm",
+      "fault_class": "normalization_scale_fault",
+      "node_perm_median": 4.4199444459991355e-07,
+      "conservation_median": 29.201599288228344,
+      "rollout_median": 0.0004752115928567946,
+      "rollout_over_baseline": 0.7192715476023293,
+      "mr_arm_detects": true,
+      "accuracy_arm_detects": false,
+      "mirror_y_MR_detects": null
+    },
+    {
+      "fault": "NS_double_scale",
+      "fault_class": "normalization_scale_fault",
+      "node_perm_median": 8.566738642912242e-07,
+      "conservation_median": 1.2177881436312548,
+      "rollout_median": 0.0012149532558396459,
+      "rollout_over_baseline": 1.838930955658768,
+      "mr_arm_detects": false,
+      "accuracy_arm_detects": false,
+      "mirror_y_MR_detects": null
+    },
+    {
+      "fault": "TR_sign_flip",
+      "fault_class": "temporal_rollout_fault",
+      "node_perm_median": 8.57467000514589e-07,
+      "conservation_median": 1.0637350832560541,
+      "rollout_median": 0.0006712756585329771,
+      "rollout_over_baseline": 1.0160305199589021,
+      "mr_arm_detects": false,
+      "accuracy_arm_detects": false,
+      "mirror_y_MR_detects": null
+    },
+    {
+      "fault": "TR_double_step",
+      "fault_class": "temporal_rollout_fault",
+      "node_perm_median": 8.671020736983337e-07,
+      "conservation_median": 1.2178048218777315,
+      "rollout_median": 0.001215172465890646,
+      "rollout_over_baseline": 1.8392627479698205,
+      "mr_arm_detects": false,
+      "accuracy_arm_detects": false,
+      "mirror_y_MR_detects": null
+    },
+    {
+      "fault": "PC_swap_xy",
+      "fault_class": "physical_channel_fault",
+      "node_perm_median": 8.666355029163242e-07,
+      "conservation_median": 1.0656855253852793,
+      "rollout_median": 0.0006319854874163866,
+      "rollout_over_baseline": 0.956561637866401,
+      "mr_arm_detects": false,
+      "accuracy_arm_detects": false,
+      "mirror_y_MR_detects": null
+    },
+    {
+      "fault": "PC_zero_vy",
+      "fault_class": "physical_channel_fault",
+      "node_perm_median": 9.512539804745757e-07,
+      "conservation_median": 1.0632366458714109,
+      "rollout_median": 0.0006006289622746408,
+      "rollout_over_baseline": 0.9091009767521603,
+      "mr_arm_detects": false,
+      "accuracy_arm_detects": false,
+      "mirror_y_MR_detects": null
+    }
+  ],
+  "arm1_validity_gated_mr": {
+    "detection_count": 1,
+    "detection_rate": 0.1,
+    "detection_rate_wilson_ci95": [
+      0.0179,
+      0.4042
+    ],
+    "note": "reproduces C36; mirror-y inadmissible (non-zero angle of attack), not run"
+  },
+  "arm2_accuracy_monitor": {
+    "detection_count": 2,
+    "detection_rate": 0.2,
+    "detection_rate_wilson_ci95": [
+      0.0567,
+      0.5098
+    ],
+    "threshold_rollout": 0.0013213690835982561,
+    "note": "detects only faults that grossly corrupt the deployed state (the two boundary-condition faults, ~150-310x baseline); subtle faults stay within 2x the near-stationary fault-free baseline and are caught only by the MR arm"
+  },
+  "arm3_ungated_generic_false_positive": {
+    "per_template": [
+      {
+        "template": "node_permutation",
+        "admitted_by_gate": true,
+        "baseline_false_positive_rate": 0.0,
+        "false_positive_ci95": [
+          0.0,
+          0.2992
+        ],
+        "flags_fault_free_sut": false
+      },
+      {
+        "template": "mirror_y_reflection",
+        "admitted_by_gate": false,
+        "baseline_false_positive_rate": 1.0,
+        "false_positive_ci95": [
+          0.7008,
+          1.0
+        ],
+        "flags_fault_free_sut": true
+      },
+      {
+        "template": "input_global_scaling",
+        "admitted_by_gate": false,
+        "baseline_false_positive_rate": 1.0,
+        "false_positive_ci95": [
+          0.7008,
+          1.0
+        ],
+        "flags_fault_free_sut": true
+      },
+      {
+        "template": "channel_swap_vx_vy",
+        "admitted_by_gate": false,
+        "baseline_false_positive_rate": 1.0,
+        "false_positive_ci95": [
+          0.7008,
+          1.0
+        ],
+        "flags_fault_free_sut": true
+      },
+      {
+        "template": "additive_velocity_constant",
+        "admitted_by_gate": false,
+        "baseline_false_positive_rate": 1.0,
+        "false_positive_ci95": [
+          0.7008,
+          1.0
+        ],
+        "flags_fault_free_sut": true
+      }
+    ],
+    "admitted_template_max_false_positive_rate": 0.0,
+    "rejected_template_min_false_positive_rate": 1.0,
+    "n_rejected_templates_flagging_fault_free_sut": 4,
+    "n_rejected_templates": 4,
+    "gate_value": "the gate-admitted node-permutation invariant does not flag the fault-free SUT (false-positive ~0); the gate-rejected generic templates fire on the correct SUT. mirror-y is the duality-critical rejected template: the gate removes exactly the detector that the airfoil's non-zero angle of attack makes inadmissible"
+  },
+  "complementarity_2x2_mr_vs_accuracy": {
+    "both": [],
+    "mr_only": [
+      "NS_skip_denorm"
+    ],
+    "accuracy_only": [
+      "BC_zero_outflow",
+      "BC_nonzero_wall"
+    ],
+    "neither": [
+      "MA_drop_edges",
+      "MA_permute_edges",
+      "NS_double_scale",
+      "TR_sign_flip",
+      "TR_double_step",
+      "PC_swap_xy",
+      "PC_zero_vy"
+    ],
+    "counts": {
+      "both": 0,
+      "mr_only": 1,
+      "accuracy_only": 2,
+      "neither": 7
+    },
+    "note": "complementarity, not superiority: on this low-fidelity airfoil the MR arm and the accuracy arm catch distinct (mostly disjoint) fault subsets"
+  },
+  "duality_on_airfoil": {
+    "mirror_y_inadmissible": true,
+    "mirror_y_arm1_detects": null,
+    "falsifier_observed": false,
+    "statement": "no fault is caught by mirror-y (the MR the gate excluded on this SUT); mirror-y is removed from arm1 and only appears in arm3 as a high-false-positive rejected template -- consistent with the validity-coverage duality"
+  },
+  "ars_self_check": {
+    "fault_classes_predeclared": true,
+    "statistic": "descriptive detection rates with Wilson 95% CIs (no hypothesis test)",
+    "multiple_comparison_correction": "not applicable -- descriptive rates, not p-values"
+  },
+  "claim_limitations": "One converged airfoil checkpoint, 5 eval trajectories x 9 frames, the same 10-mutant five-class catalogue as C36, two admissible MR detectors (mirror-y inadmissible). Complementarity and a measurable gate value on a deliberately low-fidelity surrogate; NOT a real-world rate, reliability, strong-detection, or any baseline-superiority claim.",
+  "generated_at": "2026-06-21T07:02:55Z"
+}

@@ -1577,13 +1577,14 @@ claims:
 
   - claim_id: "C51-cross-sut-three-arm-consolidation"
     status: "observed"
-    scope: "consolidation over committed artifacts (C38 cylinder MeshGraphNets, C42/C43 PointMLP, C35/C36 converged airfoil, C47 cross-architecture duality); no new model runs; the airfoil accuracy-monitor and ungated-generic arms are GPU-pending and explicitly marked not-yet-run"
+    scope: "consolidation over committed artifacts (C38 cylinder MeshGraphNets, C42/C43 PointMLP, C35/C36 converged airfoil, C47 cross-architecture duality, C52 airfoil three-arm); this consolidation runs no new model; the airfoil accuracy-monitor and ungated-generic arms are now completed in C52 and folded in, so all three converged SUTs have all three arms"
     evidence:
       - "tools/run_ext3_cross_sut_three_arm.py"
       - "research_assets/runs/ext3-cross-sut-three-arm/raw/cross_sut_three_arm_report.json"
       - "research_assets/runs/detection-vs-accuracy/raw/metric_ledger.json"
       - "research_assets/runs/pointmlp-three-arm-complementarity/raw/metric_ledger.json"
       - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-seeded-fault-detection/raw/metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-three-arm/raw/metric_ledger.json"
     wording_allowed: >
       Consolidating the per-SUT three-arm evidence into one cross-SUT view shows that, on
       the converged SUTs, detector coverage tracks each SUT's admissible MR set fixed by the
@@ -1597,12 +1598,44 @@ claims:
       is absent on the airfoil, and the conservation MR robustly localizes the gross
       normalization fault -- the cross-SUT validity-coverage duality, confirmed with no
       falsifying case across the converged SUTs. The airfoil accuracy-monitor and
-      ungated-generic arms are GPU-pending.
+      ungated-generic arms are now run on the live converged model (C52): the MR and accuracy
+      arms are complementary and disjoint, and every gate-rejected generic template (including
+      the inadmissible mirror-y) fires on the fault-free SUT while the admitted invariant does not.
     wording_forbidden:
-      - "A full three-arm result on the airfoil (its accuracy-monitor and ungated-generic arms are GPU-pending, not yet run)."
       - "Baseline superiority, or that the MR suite outperforms the accuracy monitor or any baseline."
       - "A validated or quantitative predictive coverage model, or a real-world fault-detection rate."
       - "New seeded-fault or model executions (this claim is a consolidation over already-committed artifacts)."
+    blocked_reason: null
+
+  - claim_id: "C52-airfoil-three-arm"
+    status: "observed"
+    scope: "live converged PhysicsNeMo airfoil SUT (C35 roster, checkpoint_k01_seed20260616); same 10-mutant five-class catalogue as C36; 5 official test trajectories x 9 frames; arm2 accuracy-monitor (deployed one-step state rollout, threshold 2x fault-free baseline) + arm3 ungated-generic gate value (5 generic MT templates on the fault-free SUT); arm1 recomputed over the same frames for the 2x2 table; mirror-y inadmissible (not run as a detector)"
+    evidence:
+      - "tools/run_airfoil_three_arm.py"
+      - "tests/test_airfoil_three_arm.py"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-three-arm/raw/metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-three-arm/PROVENANCE.md"
+    wording_allowed: >
+      Completing the airfoil row of the cross-SUT three-arm table on the live converged
+      PhysicsNeMo airfoil model: the validity-gated MR arm and the accuracy-monitor arm are
+      complementary and disjoint -- the MR arm detects 1/10 (the gross normalization fault
+      NS_skip_denorm, reproducing C36's robust detection), the accuracy monitor detects 2/10
+      (the two boundary-condition faults that grossly corrupt the deployed state, ~150-310x the
+      baseline), and zero faults are caught by both. The accuracy monitor uses the deployed
+      one-step state rollout, whose fault-free baseline is small (~7e-4) because the compressible
+      airfoil flow is near-stationary per step -- a distinct quantity from the C35 delta-prediction
+      rollout of 0.92 -- so it catches only gross deployed-state corruption while subtle relation
+      violations escape it (the complementarity with the MR arm). The ungated-generic gate value
+      holds: the gate-admitted node-permutation invariant raises no baseline false alarm
+      (false-positive 0), while all four gate-rejected generic templates fire on the fault-free SUT
+      (false-positive 1.0), including the mirror-y template that the airfoil's non-zero angle of
+      attack makes inadmissible -- the gate removes exactly the false-alarming detector. No
+      falsifying case for the validity-coverage duality on the airfoil.
+    wording_forbidden:
+      - "Airfoil strong fault-detection, a high detection rate, or a reliability rate."
+      - "Baseline superiority, or that the MR suite or the gate outperforms the accuracy monitor or any baseline."
+      - "Competitive or state-of-the-art airfoil accuracy (the surrogate is deliberately low-fidelity)."
+      - "A validated quantitative coverage model or a real-world fault-detection rate."
     blocked_reason: null
 
 
