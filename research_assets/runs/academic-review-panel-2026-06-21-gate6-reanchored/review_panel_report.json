@@ -1,0 +1,293 @@
+{
+  "record_type": "academic-review-panel",
+  "schema_version": "0.1.0",
+  "generated_at": "2026-06-21T03:59:51Z",
+  "venue": "Elsevier IST regular track",
+  "paper": "paper/ist-submission/main.tex",
+  "panel": [
+    {
+      "role": "EIC",
+      "model": "gpt-5.5"
+    },
+    {
+      "role": "MethodologyRigor",
+      "model": "claude-opus-4-7"
+    },
+    {
+      "role": "DomainExpert",
+      "model": "glm-5.2"
+    },
+    {
+      "role": "Perspective",
+      "model": "deepseek-v4-pro"
+    },
+    {
+      "role": "DevilsAdvocate",
+      "model": "qwen3-max"
+    }
+  ],
+  "reviewers_succeeded": [
+    "EIC",
+    "MethodologyRigor",
+    "Perspective",
+    "DevilsAdvocate"
+  ],
+  "review_failures": [
+    {
+      "role": "DomainExpert",
+      "model": "glm-5.2",
+      "max_tokens": 16000,
+      "error": "empty content (finish_reason='stop')"
+    },
+    {
+      "role": "DomainExpert",
+      "model": "glm-5.2",
+      "max_tokens": 28000,
+      "error": "empty content (finish_reason='stop')"
+    }
+  ],
+  "per_dimension_mean": {
+    "novelty_contribution": 6.75,
+    "technical_soundness": 7.75,
+    "empirical_rigor": 7.5,
+    "related_work": 8.0,
+    "clarity": 7.25,
+    "reproducibility": 7.25,
+    "scope_match_to_ist": 8.75
+  },
+  "overall_dimension_mean": 7.61,
+  "accept_probability_mean": 0.67,
+  "accept_probability_range": [
+    0.58,
+    0.75
+  ],
+  "verdict_distribution": {
+    "major_revision": 2,
+    "minor_revision": 2
+  },
+  "panel_majority_verdict": "major_revision",
+  "per_reviewer": {
+    "EIC": {
+      "model": "gpt-5.5",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 7,
+          "empirical_rigor": 7,
+          "related_work": 8,
+          "clarity": 6,
+          "reproducibility": 8,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.58,
+        "verdict": "major_revision",
+        "top_concerns": [
+          "Methodological novelty over existing MR applicability, constraint, and relaxation work needs sharper delimitation",
+          "Empirical evidence is broad but fragmented, with many descriptive non-independent cells and some under-trained or smoke-test subjects",
+          "Manuscript is dense and claim-heavy; the central contribution is obscured by extensive secondary evidence",
+          "Fault-detection and coverage-duality claims remain suggestive despite careful caveats"
+        ],
+        "top_strengths": [
+          "Strong fit to IST software V&V and oracle-problem remit",
+          "Careful treatment of MR validity, numerical floors, typed verdicts, and threats",
+          "Substantial reproducibility infrastructure with MR cards, ledgers, artifacts, and scoped claims"
+        ]
+      }
+    },
+    "MethodologyRigor": {
+      "model": "claude-opus-4-7",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 9,
+          "empirical_rigor": 8,
+          "related_work": 8,
+          "clarity": 8,
+          "reproducibility": 7,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.75,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "Numerical-admissibility gate depends on mesh topology stability; generalization to unstructured meshes not yet established",
+          "Absolute conservation verdict deferred due to operator-floor calibration limits on deployed mesh",
+          "Bounded empirical scope limits claims to within-family and dataset rather than general SciML surrogates",
+          "Complexity of MR-card format and verdict classification may pose barrier to adoption without further tooling"
+        ],
+        "top_strengths": [
+          "Clear, rigorous framing of validity-gated metamorphic testing for SciML surrogates addressing oracle problem",
+          "Strong methodological connection between physics, numerical floors, executable assets, and typed verdicts",
+          "Comprehensive bounded empirical evaluation across multiple surrogate architectures, datasets, and PDE families"
+        ]
+      }
+    },
+    "Perspective": {
+      "model": "deepseek-v4-pro",
+      "review": {
+        "scores": {
+          "novelty_contribution": 6,
+          "technical_soundness": 7,
+          "empirical_rigor": 8,
+          "related_work": 8,
+          "clarity": 7,
+          "reproducibility": 8,
+          "scope_match_to_ist": 8
+        },
+        "accept_probability": 0.7,
+        "verdict": "minor_revision",
+        "top_concerns": [
+          "Operator floor derivation is specific to certain meshes; general unstructured mesh applicability remains unproven.",
+          "Coverage implication is proposed as falsifiable but not validated with real defect corpora, limiting strength of practical claims.",
+          "Novelty is incremental, building on existing inapplicability handling and gating concepts, though well applied to SciML surrogates."
+        ],
+        "top_strengths": [
+          "Thorough integration of physical validity conditions into metamorphic testing for SciML surrogates.",
+          "Well-structured empirical design with multiple replications and clear, honest claim boundaries.",
+          "Excellent related work positioning with a capability matrix that clearly articulates the gap filled."
+        ]
+      }
+    },
+    "DevilsAdvocate": {
+      "model": "qwen3-max",
+      "review": {
+        "scores": {
+          "novelty_contribution": 7,
+          "technical_soundness": 8,
+          "empirical_rigor": 7,
+          "related_work": 8,
+          "clarity": 8,
+          "reproducibility": 6,
+          "scope_match_to_ist": 9
+        },
+        "accept_probability": 0.65,
+        "verdict": "major_revision",
+        "top_concerns": [
+          "Reproducibility limited by non-redistributable checkpoints and GPU dependencies",
+          "Empirical claims remain narrowly scoped without sufficient statistical grounding for broader interpretation",
+          "Overstates methodological novelty by underplaying similarity to prior constraint-based MT frameworks",
+          "Coverage implications presented as falsifiable but lack independent validation"
+        ],
+        "top_strengths": [
+          "Clear, auditable workflow linking physics-derived MRs to executable test assets",
+          "Strong integration of numerical analysis (operator floors) into MT admissibility criteria",
+          "Well-structured case studies with explicit artifact tracing and claim ledgers"
+        ]
+      }
+    }
+  },
+  "raw_responses": {
+    "EIC": {
+      "id": "resp_006108c0e72fa5de016a37616672d48194a18548991473996d",
+      "object": "chat.completion",
+      "created": 1782014321,
+      "model": "gpt-5.5",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\"scores\":{\"novelty_contribution\":7,\"technical_soundness\":7,\"empirical_rigor\":7,\"related_work\":8,\"clarity\":6,\"reproducibility\":8,\"scope_match_to_ist\":9},\"accept_probability\":0.58,\"verdict\":\"major_revision\",\"top_concerns\":[\"Methodological novelty over existing MR applicability, constraint, and relaxation work needs sharper delimitation\",\"Empirical evidence is broad but fragmented, with many descriptive non-independent cells and some under-trained or smoke-test subjects\",\"Manuscript is dense and claim-heavy; the central contribution is obscured by extensive secondary evidence\",\"Fault-detection and coverage-duality claims remain suggestive despite careful caveats\"],\"top_strengths\":[\"Strong fit to IST software V&V and oracle-problem remit\",\"Careful treatment of MR validity, numerical floors, typed verdicts, and threats\",\"Substantial reproducibility infrastructure with MR cards, ledgers, artifacts, and scoped claims\"]}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21531,
+        "completion_tokens": 366,
+        "total_tokens": 21897
+      }
+    },
+    "MethodologyRigor": {
+      "id": "chatcmpl-hwxdwzkwnyw",
+      "model": "claude-opus-4-7",
+      "object": "chat.completion",
+      "created": 1782014332,
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 9,\n    \"empirical_rigor\": 8,\n    \"related_work\": 8,\n    \"clarity\": 8,\n    \"reproducibility\": 7,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.75,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Numerical-admissibility gate depends on mesh topology stability; generalization to unstructured meshes not yet established\",\n    \"Absolute conservation verdict deferred due to operator-floor calibration limits on deployed mesh\",\n    \"Bounded empirical scope limits claims to within-family and dataset rather than general SciML surrogates\",\n    \"Complexity of MR-card format and verdict classification may pose barrier to adoption without further tooling\"\n  ],\n  \"top_strengths\": [\n    \"Clear, rigorous framing of validity-gated metamorphic testing for SciML surrogates addressing oracle problem\",\n    \"Strong methodological connection between physics, numerical floors, executable assets, and typed verdicts\",\n    \"Comprehensive bounded empirical evaluation across multiple surrogate architectures, datasets, and PDE families\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 24646,
+        "completion_tokens": 289,
+        "total_tokens": 24935,
+        "usage_semantic": "openai",
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        },
+        "completion_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "input_tokens": 24646,
+        "output_tokens": 0,
+        "input_tokens_details": null,
+        "claude_cache_creation_5_m_tokens": 0,
+        "claude_cache_creation_1_h_tokens": 0
+      }
+    },
+    "Perspective": {
+      "id": "525e3987-914c-4519-b530-84d935be0311",
+      "object": "chat.completion",
+      "created": 1782014363,
+      "model": "deepseek-v4-pro",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 6,\n    \"technical_soundness\": 7,\n    \"empirical_rigor\": 8,\n    \"related_work\": 8,\n    \"clarity\": 7,\n    \"reproducibility\": 8,\n    \"scope_match_to_ist\": 8\n  },\n  \"accept_probability\": 0.7,\n  \"verdict\": \"minor_revision\",\n  \"top_concerns\": [\n    \"Operator floor derivation is specific to certain meshes; general unstructured mesh applicability remains unproven.\",\n    \"Coverage implication is proposed as falsifiable but not validated with real defect corpora, limiting strength of practical claims.\",\n    \"Novelty is incremental, building on existing inapplicability handling and gating concepts, though well applied to SciML surrogates.\"\n  ],\n  \"top_strengths\": [\n    \"Thorough integration of physical validity conditions into metamorphic testing for SciML surrogates.\",\n    \"Well-structured empirical design with multiple replications and clear, honest claim boundaries.\",\n    \"Excellent related work positioning with a capability matrix that clearly articulates the gap filled.\"\n  ]\n}",
+            "reasoning_content": "We are asked to review the manuscript as a software-engineering-research reviewer focusing on novelty, positioning against related work, and practical relevance. We need to score each dimension on a 1-10 scale and provide accept_probability, verdict, top_concerns, top_strengths. Output JSON only.\n\nFirst, let's understand the paper. It presents a method for turning physics-derived metamorphic relations into auditable, executable V&V assets for SciML surrogates, using a domain-validity gating mechanism. The key ideas: admissibility gate (rubric) with four conditions, MR cards, typed verdicts, and bounded empirical case studies primarily on MeshGraphNets cylinder flow, with additional checks on airfoil, PINN, FNO. The paper claims novelty in the measurement-floor admissibility, typed verdicts, and workflow for auditability.\n\nNow evaluate each dimension:\n\n- Novelty contribution: The idea of gating MRs on numerical decidability and domain validity for SciML surrogates is interesting. However, MR gating and applicability conditions are not entirely new; prior work like MetaTrimmer and others have addressed inapplicability. The specific application to SciML with operator floor as a gate is somewhat novel, but it builds heavily on existing concepts. The contribution is incremental but solid for IST's V&V focus. I'd score around 6-7. Given IST's expectations for clear novelty, maybe borderline to clear. The paper carefully positions itself as not inventing MT but reframing. I'd say a 6.\n\n- Technical soundness: The method seems well-defined with clear conditions, MR card schema, and verdict types. The empirical design is thorough for the bounded scope, with operator-floor sweep, seeded faults, and multiple replications. However, there are limitations: the operator floor derivation is for a specific mesh, not general; the absolute conservation is deferred; some verdicts rely on reference-relative guards. The paper honestly acknowledges boundaries. No major flaws detected. Score 7-8. I'll give 7.\n\n- Empirical rigor: The experiments are carefully designed with multiple tiers, checkpoints, trajectories, and supporting subjects (airfoil, PINN, FNO). The paper uses appropriate statistics (Wilson intervals, bootstrap, Cliff's delta) where applicable. It clearly states that many cells are not independent and draws bounded conclusions. The threats to validity section is thorough. However, the scope is still limited; external validity is minimal beyond the few datasets. For rigor within its scope, it's strong. Score 8.\n\n- Related work: The related work section is extensive, covering mesh-based simulation, MT, MR identification, physics-based MT, SciML V&V, hybrid trust. The paper positions itself well against prior art, especially with the capability matrix (Table 2). The gap is clear. Score 8.\n\n- Clarity: The paper is well-structured, with clear research questions, method description, and result reporting. However, it is quite dense and uses a lot of specialized terminology. Some parts may be difficult to follow for readers not deeply familiar with the area. But overall, the writing is precise. Score 7.\n\n- Reproducibility: The paper commits to providing replication package with artifacts, ledgers, scripts. It explicitly mentions Zenodo archive, claim ledgers, and that some parts are rerunnable on CPU. However, some components require GPU or specific runtime environments. Still, the commitment to open artifacts is strong. Score 8.\n\n- Scope match to IST: The paper deals with software V&V of scientific ML surrogates, which fits IST's remit of software testing, metamorphic testing. The focus on auditable assets and domain-validity gating is relevant to software verification and validation. Score 8.\n\nAccept probability: Given IST's regular track, this paper is likely acceptable after revisions to address concerns like the generalizability of the operator floor and the coverage implication's limitations. I'd estimate around 0.7.\n\nVerdict: \"minor_revision\". The main concerns are about the novelty being incremental, the OP floor derivation's generality, and the coverage claims needing clearer boundaries. But overall, the paper is solid and makes a useful contribution.\n\nTop concerns:\n- \"Operator floor derivation is limited to specific mesh topologies; general unstructured mesh applicability not proven.\"\n- \"Coverage implication is proposed as falsifiable but not validated with real defect corpora; may overclaim bounded utility.\"\n- \"Novelty is incremental, building on existing inapplicability handling and gating concepts, though well applied to SciML.\"\n\nTop strengths:\n- \"Strong integration of physical validity conditions into metamorphic testing for SciML surrogates.\"\n- \"Thorough empirical design with multiple replications and transparent claim boundaries.\"\n- \"Well-structured related work positioning, clearly articulating the gap filled.\"\n\nNow put into JSON format."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 21146,
+        "completion_tokens": 1259,
+        "total_tokens": 22405,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1004
+        }
+      },
+      "system_fingerprint": "fp_9954b31ca7_prod0820_fp8_kvcache_20260402"
+    },
+    "DevilsAdvocate": {
+      "id": "chatcmpl-d54f008b-5223-9071-8537-56eba80a6005",
+      "object": "chat.completion",
+      "created": 1782014384,
+      "model": "qwen3-max",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\n  \"scores\": {\n    \"novelty_contribution\": 7,\n    \"technical_soundness\": 8,\n    \"empirical_rigor\": 7,\n    \"related_work\": 8,\n    \"clarity\": 8,\n    \"reproducibility\": 6,\n    \"scope_match_to_ist\": 9\n  },\n  \"accept_probability\": 0.65,\n  \"verdict\": \"major_revision\",\n  \"top_concerns\": [\n    \"Reproducibility limited by non-redistributable checkpoints and GPU dependencies\",\n    \"Empirical claims remain narrowly scoped without sufficient statistical grounding for broader interpretation\",\n    \"Overstates methodological novelty by underplaying similarity to prior constraint-based MT frameworks\",\n    \"Coverage implications presented as falsifiable but lack independent validation\"\n  ],\n  \"top_strengths\": [\n    \"Clear, auditable workflow linking physics-derived MRs to executable test assets\",\n    \"Strong integration of numerical analysis (operator floors) into MT admissibility criteria\",\n    \"Well-structured case studies with explicit artifact tracing and claim ledgers\"\n  ]\n}"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 22079,
+        "completion_tokens": 230,
+        "total_tokens": 22309,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    }
+  },
+  "honesty_boundary": "Five single-call temperature-0 LLM reviews via one gateway; an automated panel estimate, NOT a substitute for human peer review and NOT a prediction of an actual IST editorial decision."
+}

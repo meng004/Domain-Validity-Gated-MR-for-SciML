@@ -1,1447 +1,1447 @@
 {
   "denominator": 240,
   "honesty_boundary": "The absolute compressible-continuity residual has a large discrete operator floor on this coarse transonic mesh (uncalibratable, as for cylinder incompressible continuity), so only a reference-relative diagnostic is reported; this asserts no absolute mass conservation.",
-  "median_pred_over_ref_residual_ratio": 1.0035544979766935,
+  "median_pred_over_ref_residual_ratio": 1.0086609729954334,
   "metric": "rms(drho/dt + div(rho u)) surrogate vs reference, interior cells",
   "relation": "compressible_unsteady_mass_conservation",
   "rows": [
     {
-      "pred_residual_rms": 0.9691962825050005,
-      "ratio": 1.1526331365762001,
+      "pred_residual_rms": 1.075880664255581,
+      "ratio": 1.2795093491458969,
       "ref_residual_rms": 0.8408540859617455,
       "trajectory": 0
     },
     {
-      "pred_residual_rms": 4.829452912361244,
-      "ratio": 1.0048193844118545,
+      "pred_residual_rms": 4.857593130207739,
+      "ratio": 1.010674258014899,
       "ref_residual_rms": 4.806289555399094,
       "trajectory": 1
     },
     {
-      "pred_residual_rms": 2.8257268281664922,
-      "ratio": 1.0145840352087605,
+      "pred_residual_rms": 2.8864739751495323,
+      "ratio": 1.0363954448960386,
       "ref_residual_rms": 2.785108704756104,
       "trajectory": 2
     },
     {
-      "pred_residual_rms": 5.320393022797286,
-      "ratio": 1.0040851362973144,
+      "pred_residual_rms": 5.3544056769004476,
+      "ratio": 1.0105041358495412,
       "ref_residual_rms": 5.2987469194264545,
       "trajectory": 3
     },
     {
-      "pred_residual_rms": 1.6775636855922171,
-      "ratio": 1.0438273830285763,
+      "pred_residual_rms": 1.7308669241622878,
+      "ratio": 1.0769941596471955,
       "ref_residual_rms": 1.6071274933647641,
       "trajectory": 4
     },
     {
-      "pred_residual_rms": 15.121353138407526,
-      "ratio": 0.9986155475253412,
+      "pred_residual_rms": 15.14255100147964,
+      "ratio": 1.0000154563459587,
       "ref_residual_rms": 15.142316956590145,
       "trajectory": 5
     },
     {
-      "pred_residual_rms": 15.821706766475348,
-      "ratio": 1.0794824021872664,
+      "pred_residual_rms": 15.791983505066032,
+      "ratio": 1.0774544453997625,
       "ref_residual_rms": 14.656752842303982,
       "trajectory": 6
     },
     {
-      "pred_residual_rms": 1.3263143104583168,
-      "ratio": 1.0733974359614904,
+      "pred_residual_rms": 1.362436840199385,
+      "ratio": 1.1026317060728539,
       "ref_residual_rms": 1.235622767507617,
       "trajectory": 7
     },
     {
-      "pred_residual_rms": 13.58008371109855,
-      "ratio": 1.0600165272084405,
+      "pred_residual_rms": 13.646271445468438,
+      "ratio": 1.0651829233679297,
       "ref_residual_rms": 12.81119997898691,
       "trajectory": 8
     },
     {
-      "pred_residual_rms": 2.4552991698730153,
-      "ratio": 1.019560340622679,
+      "pred_residual_rms": 2.5731089490595105,
+      "ratio": 1.0684807247737793,
       "ref_residual_rms": 2.40819407350965,
       "trajectory": 9
     },
     {
-      "pred_residual_rms": 3.572923798996953,
-      "ratio": 1.008438907298669,
+      "pred_residual_rms": 3.596793154523251,
+      "ratio": 1.0151759070666522,
       "ref_residual_rms": 3.5430245433189747,
       "trajectory": 10
     },
     {
-      "pred_residual_rms": 1.8310360712137295,
-      "ratio": 1.0364643898241868,
+      "pred_residual_rms": 1.8758475279798525,
+      "ratio": 1.0618300720870413,
       "ref_residual_rms": 1.7666174440632003,
       "trajectory": 11
     },
     {
-      "pred_residual_rms": 16.211287478748805,
-      "ratio": 0.9992991160875964,
+      "pred_residual_rms": 16.246326092651703,
+      "ratio": 1.0014589726657985,
       "ref_residual_rms": 16.22265767853212,
       "trajectory": 12
     },
     {
-      "pred_residual_rms": 8.850460864787413,
-      "ratio": 1.0018215124643068,
+      "pred_residual_rms": 8.873489530731074,
+      "ratio": 1.0044282256398323,
       "ref_residual_rms": 8.834368951627738,
       "trajectory": 13
     },
     {
-      "pred_residual_rms": 17.74033306698083,
-      "ratio": 0.9971373113828078,
+      "pred_residual_rms": 17.77976680876224,
+      "ratio": 0.9993537779569819,
       "ref_residual_rms": 17.791263915677703,
       "trajectory": 14
     },
     {
-      "pred_residual_rms": 7.731722796367914,
-      "ratio": 1.0398020273360526,
+      "pred_residual_rms": 7.814342258521278,
+      "ratio": 1.050913119457053,
       "ref_residual_rms": 7.435764302341667,
       "trajectory": 15
     },
     {
-      "pred_residual_rms": 2.617189427304611,
-      "ratio": 1.0169445960098626,
+      "pred_residual_rms": 2.6578492341111923,
+      "ratio": 1.032743517698669,
       "ref_residual_rms": 2.5735811346788737,
       "trajectory": 16
     },
     {
-      "pred_residual_rms": 3.2707260280399706,
-      "ratio": 1.0106719658971497,
+      "pred_residual_rms": 3.302227526338154,
+      "ratio": 1.020406098606764,
       "ref_residual_rms": 3.2361895238052085,
       "trajectory": 17
     },
     {
-      "pred_residual_rms": 3.188073343391212,
-      "ratio": 1.011253134243382,
+      "pred_residual_rms": 3.2530602114653133,
+      "ratio": 1.031866892757071,
       "ref_residual_rms": 3.1525967489599167,
       "trajectory": 18
     },
     {
-      "pred_residual_rms": 7.4328225981883,
-      "ratio": 1.117081176374283,
+      "pred_residual_rms": 7.506743758138249,
+      "ratio": 1.128190810059872,
       "ref_residual_rms": 6.653789138505633,
       "trajectory": 19
     },
     {
-      "pred_residual_rms": 1.1146425856119249,
-      "ratio": 1.1091750553127127,
+      "pred_residual_rms": 1.1655643297884695,
+      "ratio": 1.1598470188126817,
       "ref_residual_rms": 1.0049293664449304,
       "trajectory": 20
     },
     {
-      "pred_residual_rms": 12.03210919210942,
-      "ratio": 1.0003271695018867,
+      "pred_residual_rms": 12.068106705387807,
+      "ratio": 1.0033199357735303,
       "ref_residual_rms": 12.02817394043272,
       "trajectory": 21
     },
     {
-      "pred_residual_rms": 7.8893923319988435,
-      "ratio": 1.0014286613768562,
+      "pred_residual_rms": 7.921018404116006,
+      "ratio": 1.0054430713253184,
       "ref_residual_rms": 7.878137141742859,
       "trajectory": 22
     },
     {
-      "pred_residual_rms": 3.01271815459818,
-      "ratio": 1.0123906801271068,
+      "pred_residual_rms": 3.0285804245159795,
+      "ratio": 1.017721020838179,
       "ref_residual_rms": 2.9758454060639217,
       "trajectory": 23
     },
     {
-      "pred_residual_rms": 1.3683914746117607,
-      "ratio": 1.0684456861226095,
+      "pred_residual_rms": 1.407427890489889,
+      "ratio": 1.098925480041603,
       "ref_residual_rms": 1.2807309649755383,
       "trajectory": 24
     },
     {
-      "pred_residual_rms": 5.8181240500973885,
-      "ratio": 1.0024162294114478,
+      "pred_residual_rms": 5.854254477716348,
+      "ratio": 1.0086412130503262,
       "ref_residual_rms": 5.8041000129391405,
       "trajectory": 25
     },
     {
-      "pred_residual_rms": 9.241663790528555,
-      "ratio": 1.0503156088502674,
+      "pred_residual_rms": 9.336689631458452,
+      "ratio": 1.0611153010090626,
       "ref_residual_rms": 8.798939778344323,
       "trajectory": 26
     },
     {
-      "pred_residual_rms": 0.9267241101363672,
-      "ratio": 1.1705430083324524,
+      "pred_residual_rms": 1.1563531498807484,
+      "ratio": 1.4605868995433198,
       "ref_residual_rms": 0.7917044513012572,
       "trajectory": 27
     },
     {
-      "pred_residual_rms": 9.11368785321288,
-      "ratio": 1.0016490557847866,
+      "pred_residual_rms": 9.136335977476012,
+      "ratio": 1.0041382207253506,
       "ref_residual_rms": 9.098683616361377,
       "trajectory": 28
     },
     {
-      "pred_residual_rms": 3.258971471773603,
-      "ratio": 1.010809194549431,
+      "pred_residual_rms": 3.290773325875609,
+      "ratio": 1.0206729220500994,
       "ref_residual_rms": 3.224121317204967,
       "trajectory": 29
     },
     {
-      "pred_residual_rms": 4.4064888083679605,
-      "ratio": 1.0354633060410114,
+      "pred_residual_rms": 4.528787335205917,
+      "ratio": 1.0642017511910578,
       "ref_residual_rms": 4.25557215080438,
       "trajectory": 30
     },
     {
-      "pred_residual_rms": 13.585786557287175,
-      "ratio": 1.082806039262963,
+      "pred_residual_rms": 13.634506410640517,
+      "ratio": 1.0866890791753419,
       "ref_residual_rms": 12.546833010401986,
       "trajectory": 31
     },
     {
-      "pred_residual_rms": 1.4525926797170268,
-      "ratio": 1.0601360866968186,
+      "pred_residual_rms": 1.4739195029496486,
+      "ratio": 1.0757009007284513,
       "ref_residual_rms": 1.3701945419507677,
       "trajectory": 32
     },
     {
-      "pred_residual_rms": 1.0645957275523923,
-      "ratio": 1.1213203971538839,
+      "pred_residual_rms": 1.245225277299175,
+      "ratio": 1.3115743998873504,
       "ref_residual_rms": 0.9494126123581902,
       "trajectory": 33
     },
     {
-      "pred_residual_rms": 8.128523063884368,
-      "ratio": 1.0308333387095276,
+      "pred_residual_rms": 8.24393409347877,
+      "ratio": 1.045469396948606,
       "ref_residual_rms": 7.885390158277423,
       "trajectory": 34
     },
     {
-      "pred_residual_rms": 3.3175998292557236,
-      "ratio": 1.0319787108046934,
+      "pred_residual_rms": 3.4580680602821,
+      "ratio": 1.0756730173588798,
       "ref_residual_rms": 3.2147948349329796,
       "trajectory": 35
     },
     {
-      "pred_residual_rms": 3.220141861902701,
-      "ratio": 1.0109692712385479,
+      "pred_residual_rms": 3.2526712392421153,
+      "ratio": 1.0211819271751528,
       "ref_residual_rms": 3.185202511603222,
       "trajectory": 36
     },
     {
-      "pred_residual_rms": 1.157305262426571,
-      "ratio": 1.0997442738391083,
+      "pred_residual_rms": 1.3041055857056574,
+      "ratio": 1.2392431771668277,
       "ref_residual_rms": 1.0523403394377517,
       "trajectory": 37
     },
     {
-      "pred_residual_rms": 0.8546515362895954,
-      "ratio": 1.210640902226613,
+      "pred_residual_rms": 1.0838387311426172,
+      "ratio": 1.5352918044647754,
       "ref_residual_rms": 0.7059496624620222,
       "trajectory": 38
     },
     {
-      "pred_residual_rms": 14.138129655097865,
-      "ratio": 0.994016174477493,
+      "pred_residual_rms": 14.15375106850463,
+      "ratio": 0.9951144765848672,
       "ref_residual_rms": 14.223239035853322,
       "trajectory": 39
     },
     {
-      "pred_residual_rms": 0.8508567631586339,
-      "ratio": 1.0118958537086107,
+      "pred_residual_rms": 0.8477958076157285,
+      "ratio": 1.0082555603521188,
       "ref_residual_rms": 0.8408540859617455,
       "trajectory": 0
     },
     {
-      "pred_residual_rms": 4.807341450417765,
-      "ratio": 1.0002188580206304,
+      "pred_residual_rms": 4.805452471296304,
+      "ratio": 0.9998258356902676,
       "ref_residual_rms": 4.806289555399094,
       "trajectory": 1
     },
     {
-      "pred_residual_rms": 2.7869279740670647,
-      "ratio": 1.0006532130354029,
+      "pred_residual_rms": 2.7870742747095947,
+      "ratio": 1.000705742634079,
       "ref_residual_rms": 2.785108704756104,
       "trajectory": 2
     },
     {
-      "pred_residual_rms": 5.299405199390569,
-      "ratio": 1.000124233139292,
+      "pred_residual_rms": 5.298782842104179,
+      "ratio": 1.000006779466593,
       "ref_residual_rms": 5.2987469194264545,
       "trajectory": 3
     },
     {
-      "pred_residual_rms": 1.6119688036569315,
-      "ratio": 1.003012399646049,
+      "pred_residual_rms": 1.6107468705901584,
+      "ratio": 1.0022520784694042,
       "ref_residual_rms": 1.6071274933647641,
       "trajectory": 4
     },
     {
-      "pred_residual_rms": 15.113947206661702,
-      "ratio": 0.998126459113901,
+      "pred_residual_rms": 15.173753685927736,
+      "ratio": 1.0020760844874474,
       "ref_residual_rms": 15.142316956590145,
       "trajectory": 5
     },
     {
-      "pred_residual_rms": 15.815899078569123,
-      "ratio": 1.0790861556264688,
+      "pred_residual_rms": 15.68839600438297,
+      "ratio": 1.0703868839966615,
       "ref_residual_rms": 14.656752842303982,
       "trajectory": 6
     },
     {
-      "pred_residual_rms": 1.2423271717745175,
-      "ratio": 1.0054259313143152,
+      "pred_residual_rms": 1.2403338171625176,
+      "ratio": 1.0038126924970825,
       "ref_residual_rms": 1.235622767507617,
       "trajectory": 7
     },
     {
-      "pred_residual_rms": 13.573260163928156,
-      "ratio": 1.0594839036305097,
+      "pred_residual_rms": 13.617368382147417,
+      "ratio": 1.0629268456103094,
       "ref_residual_rms": 12.81119997898691,
       "trajectory": 8
     },
     {
-      "pred_residual_rms": 2.4107499220046185,
-      "ratio": 1.001061313339769,
+      "pred_residual_rms": 2.4104883342256773,
+      "ratio": 1.000952689295794,
       "ref_residual_rms": 2.40819407350965,
       "trajectory": 9
     },
     {
-      "pred_residual_rms": 3.5423302986837886,
-      "ratio": 0.9998040531114877,
+      "pred_residual_rms": 3.5423098441346568,
+      "ratio": 0.9997982799228231,
       "ref_residual_rms": 3.5430245433189747,
       "trajectory": 10
     },
     {
-      "pred_residual_rms": 1.7708565079761323,
-      "ratio": 1.0023995369949377,
+      "pred_residual_rms": 1.7694984298448615,
+      "ratio": 1.0016307921057515,
       "ref_residual_rms": 1.7666174440632003,
       "trajectory": 11
     },
     {
-      "pred_residual_rms": 16.203560556521413,
-      "ratio": 0.9988228117495213,
+      "pred_residual_rms": 16.197118957106344,
+      "ratio": 0.9984257375128138,
       "ref_residual_rms": 16.22265767853212,
       "trajectory": 12
     },
     {
-      "pred_residual_rms": 8.838165014484984,
-      "ratio": 1.0004296925878953,
+      "pred_residual_rms": 8.825999603950132,
+      "ratio": 0.9990526377465746,
       "ref_residual_rms": 8.834368951627738,
       "trajectory": 13
     },
     {
-      "pred_residual_rms": 17.733585891566122,
-      "ratio": 0.9967580704560987,
+      "pred_residual_rms": 17.810397868083985,
+      "ratio": 1.0010754689771884,
       "ref_residual_rms": 17.791263915677703,
       "trajectory": 14
     },
     {
-      "pred_residual_rms": 7.716672830316219,
-      "ratio": 1.0377780301462876,
+      "pred_residual_rms": 7.7449637643990705,
+      "ratio": 1.0415827411258893,
       "ref_residual_rms": 7.435764302341667,
       "trajectory": 15
     },
     {
-      "pred_residual_rms": 2.5759846804643267,
-      "ratio": 1.0009339304493126,
+      "pred_residual_rms": 2.575546996130689,
+      "ratio": 1.0007638622405666,
       "ref_residual_rms": 2.5735811346788737,
       "trajectory": 16
     },
     {
-      "pred_residual_rms": 3.237092578674529,
-      "ratio": 1.0002790488204345,
+      "pred_residual_rms": 3.2371867105636,
+      "ratio": 1.0003081360813562,
       "ref_residual_rms": 3.2361895238052085,
       "trajectory": 17
     },
     {
-      "pred_residual_rms": 3.1549291864018096,
-      "ratio": 1.000739846427445,
+      "pred_residual_rms": 3.1551179730731236,
+      "ratio": 1.0007997293386917,
       "ref_residual_rms": 3.1525967489599167,
       "trajectory": 18
     },
     {
-      "pred_residual_rms": 7.417563449424847,
-      "ratio": 1.1147878742503627,
+      "pred_residual_rms": 7.463389790287737,
+      "ratio": 1.1216751290023492,
       "ref_residual_rms": 6.653789138505633,
       "trajectory": 19
     },
     {
-      "pred_residual_rms": 1.0132990621529763,
-      "ratio": 1.0083286407856253,
+      "pred_residual_rms": 1.0107155946783788,
+      "ratio": 1.0057578457020497,
       "ref_residual_rms": 1.0049293664449304,
       "trajectory": 20
     },
     {
-      "pred_residual_rms": 12.022439754601193,
-      "ratio": 0.9995232704598449,
+      "pred_residual_rms": 12.004679232949448,
+      "ratio": 0.9980466937375843,
       "ref_residual_rms": 12.02817394043272,
       "trajectory": 21
     },
     {
-      "pred_residual_rms": 7.8749981068606925,
-      "ratio": 0.9996015511248802,
+      "pred_residual_rms": 7.865379421537516,
+      "ratio": 0.9983806171464387,
       "ref_residual_rms": 7.878137141742859,
       "trajectory": 22
     },
     {
-      "pred_residual_rms": 2.9764393597691656,
-      "ratio": 1.0001995915863215,
+      "pred_residual_rms": 2.976089171143223,
+      "ratio": 1.0000819145641118,
       "ref_residual_rms": 2.9758454060639217,
       "trajectory": 23
     },
     {
-      "pred_residual_rms": 1.287166456963658,
-      "ratio": 1.005024858587879,
+      "pred_residual_rms": 1.2852880319355409,
+      "ratio": 1.003558176607442,
       "ref_residual_rms": 1.2807309649755383,
       "trajectory": 24
     },
     {
-      "pred_residual_rms": 5.799008464741951,
-      "ratio": 0.9991227669775092,
+      "pred_residual_rms": 5.798291462331572,
+      "ratio": 0.9989992331981496,
       "ref_residual_rms": 5.8041000129391405,
       "trajectory": 25
     },
     {
-      "pred_residual_rms": 9.229030865038187,
-      "ratio": 1.0488798761587608,
+      "pred_residual_rms": 9.217006019738667,
+      "ratio": 1.0475132518150967,
       "ref_residual_rms": 8.798939778344323,
       "trajectory": 26
     },
     {
-      "pred_residual_rms": 0.8022930634270714,
-      "ratio": 1.013374450665789,
+      "pred_residual_rms": 0.7991232995100064,
+      "ratio": 1.009370729438941,
       "ref_residual_rms": 0.7917044513012572,
       "trajectory": 27
     },
     {
-      "pred_residual_rms": 9.10176598321885,
-      "ratio": 1.0003387706384175,
+      "pred_residual_rms": 9.087139932986545,
+      "ratio": 0.9987312798354617,
       "ref_residual_rms": 9.098683616361377,
       "trajectory": 28
     },
     {
-      "pred_residual_rms": 3.2252105517396013,
-      "ratio": 1.000337839190114,
+      "pred_residual_rms": 3.2254652549643477,
+      "ratio": 1.000416838458345,
       "ref_residual_rms": 3.224121317204967,
       "trajectory": 29
     },
     {
-      "pred_residual_rms": 4.381749306058866,
-      "ratio": 1.0296498686388473,
+      "pred_residual_rms": 4.419023507083807,
+      "ratio": 1.0384087851144839,
       "ref_residual_rms": 4.25557215080438,
       "trajectory": 30
     },
     {
-      "pred_residual_rms": 13.576790655461686,
-      "ratio": 1.082089053405414,
+      "pred_residual_rms": 13.524562028021352,
+      "ratio": 1.0779263593297828,
       "ref_residual_rms": 12.546833010401986,
       "trajectory": 31
     },
     {
-      "pred_residual_rms": 1.376152953364726,
-      "ratio": 1.0043485879059737,
+      "pred_residual_rms": 1.3743067862707172,
+      "ratio": 1.0030012120133647,
       "ref_residual_rms": 1.3701945419507677,
       "trajectory": 32
     },
     {
-      "pred_residual_rms": 0.9582564869640842,
-      "ratio": 1.0093151012434174,
+      "pred_residual_rms": 0.9556857689204287,
+      "ratio": 1.0066074080758807,
       "ref_residual_rms": 0.9494126123581902,
       "trajectory": 33
     },
     {
-      "pred_residual_rms": 8.114286269025646,
-      "ratio": 1.02902787384692,
+      "pred_residual_rms": 8.156454533199492,
+      "ratio": 1.0343755184564365,
       "ref_residual_rms": 7.885390158277423,
       "trajectory": 34
     },
     {
-      "pred_residual_rms": 3.2850733143101003,
-      "ratio": 1.0218609531822849,
+      "pred_residual_rms": 3.3107750943241836,
+      "ratio": 1.029855796192109,
       "ref_residual_rms": 3.2147948349329796,
       "trajectory": 35
     },
     {
-      "pred_residual_rms": 3.1867906371126233,
-      "ratio": 1.0004985948314482,
+      "pred_residual_rms": 3.1866883089172915,
+      "ratio": 1.000466468712321,
       "ref_residual_rms": 3.185202511603222,
       "trajectory": 36
     },
     {
-      "pred_residual_rms": 1.0603104883807843,
-      "ratio": 1.0075737369787525,
+      "pred_residual_rms": 1.0579813533684506,
+      "ratio": 1.0053604463492416,
       "ref_residual_rms": 1.0523403394377517,
       "trajectory": 37
     },
     {
-      "pred_residual_rms": 0.7177915864410553,
-      "ratio": 1.016774459439125,
+      "pred_residual_rms": 0.7141835552626535,
+      "ratio": 1.0116635692861093,
       "ref_residual_rms": 0.7059496624620222,
       "trajectory": 38
     },
     {
-      "pred_residual_rms": 14.131373786362758,
-      "ratio": 0.9935411864161887,
+      "pred_residual_rms": 14.067422291270972,
+      "ratio": 0.9890449183769201,
       "ref_residual_rms": 14.223239035853322,
       "trajectory": 39
     },
     {
-      "pred_residual_rms": 0.9607192141767222,
-      "ratio": 1.1425516391204527,
+      "pred_residual_rms": 0.8571354200479435,
+      "ratio": 1.0193628530300545,
       "ref_residual_rms": 0.8408540859617455,
       "trajectory": 0
     },
     {
-      "pred_residual_rms": 4.82800110708696,
-      "ratio": 1.0045173207809497,
+      "pred_residual_rms": 4.822811820726878,
+      "ratio": 1.0034376341952231,
       "ref_residual_rms": 4.806289555399094,
       "trajectory": 1
     },
     {
-      "pred_residual_rms": 2.822508769205271,
-      "ratio": 1.0134285833746093,
+      "pred_residual_rms": 2.7944028580634637,
+      "ratio": 1.0033370881687629,
       "ref_residual_rms": 2.785108704756104,
       "trajectory": 2
     },
     {
-      "pred_residual_rms": 5.318521174560399,
-      "ratio": 1.0037318738627519,
+      "pred_residual_rms": 5.313192698596966,
+      "ratio": 1.0027262632826546,
       "ref_residual_rms": 5.2987469194264545,
       "trajectory": 3
     },
     {
-      "pred_residual_rms": 1.6725936739819411,
-      "ratio": 1.0407349017968162,
+      "pred_residual_rms": 1.6179850579701573,
+      "ratio": 1.0067558825607925,
       "ref_residual_rms": 1.6071274933647641,
       "trajectory": 4
     },
     {
-      "pred_residual_rms": 15.12075293443686,
-      "ratio": 0.9985759100000942,
+      "pred_residual_rms": 15.154002584591352,
+      "ratio": 1.0007717199444912,
       "ref_residual_rms": 15.142316956590145,
       "trajectory": 5
     },
     {
-      "pred_residual_rms": 15.821726511391198,
-      "ratio": 1.0794837493421283,
+      "pred_residual_rms": 15.764395088978244,
+      "ratio": 1.0755721447029698,
       "ref_residual_rms": 14.656752842303982,
       "trajectory": 6
     },
     {
-      "pred_residual_rms": 1.320101481290009,
-      "ratio": 1.0683693405494579,
+      "pred_residual_rms": 1.248057467062559,
+      "ratio": 1.0100635079588443,
       "ref_residual_rms": 1.235622767507617,
       "trajectory": 7
     },
     {
-      "pred_residual_rms": 13.58013692746173,
-      "ratio": 1.0600206811021637,
+      "pred_residual_rms": 13.671548362291302,
+      "ratio": 1.0671559560943196,
       "ref_residual_rms": 12.81119997898691,
       "trajectory": 8
     },
     {
-      "pred_residual_rms": 2.4516526977280013,
-      "ratio": 1.0180461469847468,
+      "pred_residual_rms": 2.4166115350268207,
+      "ratio": 1.0034953418454782,
       "ref_residual_rms": 2.40819407350965,
       "trajectory": 9
     },
     {
-      "pred_residual_rms": 3.570581121198009,
-      "ratio": 1.0077776988395402,
+      "pred_residual_rms": 3.5778836139533334,
+      "ratio": 1.009838788924026,
       "ref_residual_rms": 3.5430245433189747,
       "trajectory": 10
     },
     {
-      "pred_residual_rms": 1.8265316419197835,
-      "ratio": 1.0339146418246505,
+      "pred_residual_rms": 1.776377777397265,
+      "ratio": 1.0055248709146765,
       "ref_residual_rms": 1.7666174440632003,
       "trajectory": 11
     },
     {
-      "pred_residual_rms": 16.210120475247216,
-      "ratio": 0.99922717944659,
+      "pred_residual_rms": 16.235255153771988,
+      "ratio": 1.0007765358481637,
       "ref_residual_rms": 16.22265767853212,
       "trajectory": 12
     },
     {
-      "pred_residual_rms": 8.849598716896441,
-      "ratio": 1.0017239222577292,
+      "pred_residual_rms": 8.853574098902842,
+      "ratio": 1.0021739127469387,
       "ref_residual_rms": 8.834368951627738,
       "trajectory": 13
     },
     {
-      "pred_residual_rms": 17.73959188735807,
-      "ratio": 0.9970956516319169,
+      "pred_residual_rms": 17.788020534065062,
+      "ratio": 0.9998176980776625,
       "ref_residual_rms": 17.791263915677703,
       "trajectory": 14
     },
     {
-      "pred_residual_rms": 7.7301414231124195,
-      "ratio": 1.039589356090543,
+      "pred_residual_rms": 7.816164820435699,
+      "ratio": 1.0511582269995077,
       "ref_residual_rms": 7.435764302341667,
       "trajectory": 15
     },
     {
-      "pred_residual_rms": 2.6142436944804053,
-      "ratio": 1.015799991402488,
+      "pred_residual_rms": 2.5901582443275344,
+      "ratio": 1.0064412617209868,
       "ref_residual_rms": 2.5735811346788737,
       "trajectory": 16
     },
     {
-      "pred_residual_rms": 3.2680092766113917,
-      "ratio": 1.0098324750673962,
+      "pred_residual_rms": 3.24906967975015,
+      "ratio": 1.0039800375874761,
       "ref_residual_rms": 3.2361895238052085,
       "trajectory": 17
     },
     {
-      "pred_residual_rms": 3.1859059576107565,
-      "ratio": 1.0105656420098221,
+      "pred_residual_rms": 3.1652454306021847,
+      "ratio": 1.0040121470170396,
       "ref_residual_rms": 3.1525967489599167,
       "trajectory": 18
     },
     {
-      "pred_residual_rms": 7.431142487472321,
-      "ratio": 1.1168286720221001,
+      "pred_residual_rms": 7.507669805566995,
+      "ratio": 1.1283299860105176,
       "ref_residual_rms": 6.653789138505633,
       "trajectory": 19
     },
     {
-      "pred_residual_rms": 1.1072675566413195,
-      "ratio": 1.1018362022381971,
+      "pred_residual_rms": 1.0192517426034704,
+      "ratio": 1.0142521222254728,
       "ref_residual_rms": 1.0049293664449304,
       "trajectory": 20
     },
     {
-      "pred_residual_rms": 12.031088297734437,
-      "ratio": 1.0002422942431783,
+      "pred_residual_rms": 12.05967430090384,
+      "ratio": 1.0026188813553178,
       "ref_residual_rms": 12.02817394043272,
       "trajectory": 21
     },
     {
-      "pred_residual_rms": 7.887915184013404,
-      "ratio": 1.001241161723212,
+      "pred_residual_rms": 7.892290227227508,
+      "ratio": 1.0017965015371029,
       "ref_residual_rms": 7.878137141742859,
       "trajectory": 22
     },
     {
-      "pred_residual_rms": 3.0099720073316356,
-      "ratio": 1.011467867651382,
+      "pred_residual_rms": 2.9861634793193788,
+      "ratio": 1.0034672746220055,
       "ref_residual_rms": 2.9758454060639217,
       "trajectory": 23
     },
     {
-      "pred_residual_rms": 1.3623643783514892,
-      "ratio": 1.06373970459714,
+      "pred_residual_rms": 1.2928623975930684,
+      "ratio": 1.0094722724360474,
       "ref_residual_rms": 1.2807309649755383,
       "trajectory": 24
     },
     {
-      "pred_residual_rms": 5.81627988693293,
-      "ratio": 1.0020984948513356,
+      "pred_residual_rms": 5.819356840130415,
+      "ratio": 1.0026286292719393,
       "ref_residual_rms": 5.8041000129391405,
       "trajectory": 25
     },
     {
-      "pred_residual_rms": 9.240251910216763,
-      "ratio": 1.0501551485735343,
+      "pred_residual_rms": 9.33508067741735,
+      "ratio": 1.060932443291925,
       "ref_residual_rms": 8.798939778344323,
       "trajectory": 26
     },
     {
-      "pred_residual_rms": 0.9178600995311781,
-      "ratio": 1.15934689772499,
+      "pred_residual_rms": 0.8082566552932351,
+      "ratio": 1.0209070492969599,
       "ref_residual_rms": 0.7917044513012572,
       "trajectory": 27
     },
     {
-      "pred_residual_rms": 9.112862974038823,
-      "ratio": 1.0015583966071695,
+      "pred_residual_rms": 9.118036441687442,
+      "ratio": 1.0021269917871707,
       "ref_residual_rms": 9.098683616361377,
       "trajectory": 28
     },
     {
-      "pred_residual_rms": 3.256177177519307,
-      "ratio": 1.0099425105821171,
+      "pred_residual_rms": 3.235391830995878,
+      "ratio": 1.0034956853920998,
       "ref_residual_rms": 3.224121317204967,
       "trajectory": 29
     },
     {
-      "pred_residual_rms": 4.40439999503689,
-      "ratio": 1.0349724640914335,
+      "pred_residual_rms": 4.456266285018908,
+      "ratio": 1.0471603176030264,
       "ref_residual_rms": 4.25557215080438,
       "trajectory": 30
     },
     {
-      "pred_residual_rms": 13.584360534598423,
-      "ratio": 1.0826923832760245,
+      "pred_residual_rms": 13.705077798899568,
+      "ratio": 1.0923137167393027,
       "ref_residual_rms": 12.546833010401986,
       "trajectory": 31
     },
     {
-      "pred_residual_rms": 1.4469126183627847,
-      "ratio": 1.05599064516984,
+      "pred_residual_rms": 1.3820888348460287,
+      "ratio": 1.0086807329405407,
       "ref_residual_rms": 1.3701945419507677,
       "trajectory": 32
     },
     {
-      "pred_residual_rms": 1.056879467217652,
-      "ratio": 1.113192992657356,
+      "pred_residual_rms": 0.9634532271739881,
+      "ratio": 1.014788738461061,
       "ref_residual_rms": 0.9494126123581902,
       "trajectory": 33
     },
     {
-      "pred_residual_rms": 8.127090827601162,
-      "ratio": 1.030651707077553,
+      "pred_residual_rms": 8.21352387399764,
+      "ratio": 1.0416128700208664,
       "ref_residual_rms": 7.885390158277423,
       "trajectory": 34
     },
     {
-      "pred_residual_rms": 3.314972768657597,
-      "ratio": 1.0311615324984513,
+      "pred_residual_rms": 3.338185148606629,
+      "ratio": 1.0383820181408938,
       "ref_residual_rms": 3.2147948349329796,
       "trajectory": 35
     },
     {
-      "pred_residual_rms": 3.2178153967590544,
-      "ratio": 1.0102388733642613,
+      "pred_residual_rms": 3.201684168438683,
+      "ratio": 1.0051744455102685,
       "ref_residual_rms": 3.185202511603222,
       "trajectory": 36
     },
     {
-      "pred_residual_rms": 1.1502366997904103,
-      "ratio": 1.0930272808937107,
+      "pred_residual_rms": 1.0669725051502448,
+      "ratio": 1.0139044044632088,
       "ref_residual_rms": 1.0523403394377517,
       "trajectory": 37
     },
     {
-      "pred_residual_rms": 0.8450364711580678,
-      "ratio": 1.1970208586983042,
+      "pred_residual_rms": 0.7246447660846598,
+      "ratio": 1.0264822049173277,
       "ref_residual_rms": 0.7059496624620222,
       "trajectory": 38
     },
     {
-      "pred_residual_rms": 14.138113548664121,
-      "ratio": 0.9940150420748312,
+      "pred_residual_rms": 14.210820496384176,
+      "ratio": 0.9991268838667591,
       "ref_residual_rms": 14.223239035853322,
       "trajectory": 39
     },
     {
-      "pred_residual_rms": 0.8472965036516922,
-      "ratio": 1.0076617546343705,
+      "pred_residual_rms": 0.8574713484998716,
+      "ratio": 1.0197623616458018,
       "ref_residual_rms": 0.8408540859617455,
       "trajectory": 0
     },
     {
-      "pred_residual_rms": 4.806987323733377,
-      "ratio": 1.000145178172526,
+      "pred_residual_rms": 4.819636578408201,
+      "ratio": 1.0027769910354472,
       "ref_residual_rms": 4.806289555399094,
       "trajectory": 1
     },
     {
-      "pred_residual_rms": 2.7859594171780704,
-      "ratio": 1.000305450347598,
+      "pred_residual_rms": 2.794880104341172,
+      "ratio": 1.0035084445962135,
       "ref_residual_rms": 2.785108704756104,
       "trajectory": 2
     },
     {
-      "pred_residual_rms": 5.2990728206261,
-      "ratio": 1.0000615053341104,
+      "pred_residual_rms": 5.313124722260433,
+      "ratio": 1.0027134345256736,
       "ref_residual_rms": 5.2987469194264545,
       "trajectory": 3
     },
     {
-      "pred_residual_rms": 1.6101418200117106,
-      "ratio": 1.0018755989549002,
+      "pred_residual_rms": 1.619649052458806,
+      "ratio": 1.0077912668072315,
       "ref_residual_rms": 1.6071274933647641,
       "trajectory": 4
     },
     {
-      "pred_residual_rms": 15.114460473026394,
-      "ratio": 0.9981603552716793,
+      "pred_residual_rms": 15.146545210943966,
+      "ratio": 1.0002792343051556,
       "ref_residual_rms": 15.142316956590145,
       "trajectory": 5
     },
     {
-      "pred_residual_rms": 15.816265339449414,
-      "ratio": 1.0791111448504962,
+      "pred_residual_rms": 15.887638534900441,
+      "ratio": 1.0839807906867158,
       "ref_residual_rms": 14.656752842303982,
       "trajectory": 6
     },
     {
-      "pred_residual_rms": 1.239908131154933,
-      "ratio": 1.0034681811957544,
+      "pred_residual_rms": 1.2485679082492187,
+      "ratio": 1.010476612346431,
       "ref_residual_rms": 1.235622767507617,
       "trajectory": 7
     },
     {
-      "pred_residual_rms": 13.573500629198813,
-      "ratio": 1.0595026735561257,
+      "pred_residual_rms": 13.540434956751458,
+      "ratio": 1.0569216762645692,
       "ref_residual_rms": 12.81119997898691,
       "trajectory": 8
     },
     {
-      "pred_residual_rms": 2.4095952072322024,
-      "ratio": 1.0005818192719453,
+      "pred_residual_rms": 2.418044697567288,
+      "ratio": 1.0040904610496288,
       "ref_residual_rms": 2.40819407350965,
       "trajectory": 9
     },
     {
-      "pred_residual_rms": 3.5416102271415895,
-      "ratio": 0.9996008167146196,
+      "pred_residual_rms": 3.5733699956220017,
+      "ratio": 1.008564843943926,
       "ref_residual_rms": 3.5430245433189747,
       "trajectory": 10
     },
     {
-      "pred_residual_rms": 1.7691827176409587,
-      "ratio": 1.001452082105483,
+      "pred_residual_rms": 2.8048975925034947,
+      "ratio": 1.5877221194262985,
       "ref_residual_rms": 1.7666174440632003,
       "trajectory": 11
     },
     {
-      "pred_residual_rms": 16.20407349360753,
-      "ratio": 0.9988544303101963,
+      "pred_residual_rms": 16.168368183849303,
+      "ratio": 0.9966534771454458,
       "ref_residual_rms": 16.22265767853212,
       "trajectory": 12
     },
     {
-      "pred_residual_rms": 8.838276175943642,
-      "ratio": 1.0004422754287599,
+      "pred_residual_rms": 8.868735113505139,
+      "ratio": 1.0038900528227395,
       "ref_residual_rms": 8.834368951627738,
       "trajectory": 13
     },
     {
-      "pred_residual_rms": 17.73421528194641,
-      "ratio": 0.9967934468286413,
+      "pred_residual_rms": 17.77742963884052,
+      "ratio": 0.9992224118026267,
       "ref_residual_rms": 17.791263915677703,
       "trajectory": 14
     },
     {
-      "pred_residual_rms": 7.716407796020299,
-      "ratio": 1.0377423869648816,
+      "pred_residual_rms": 7.759333526129861,
+      "ratio": 1.043515260924327,
       "ref_residual_rms": 7.435764302341667,
       "trajectory": 15
     },
     {
-      "pred_residual_rms": 2.5749581812407816,
-      "ratio": 1.0005350701959042,
+      "pred_residual_rms": 2.587781369512124,
+      "ratio": 1.0055176946403217,
       "ref_residual_rms": 2.5735811346788737,
       "trajectory": 16
     },
     {
-      "pred_residual_rms": 3.2362845630692285,
-      "ratio": 1.00002936764467,
+      "pred_residual_rms": 3.2484781670949574,
+      "ratio": 1.0037972569898501,
       "ref_residual_rms": 3.2361895238052085,
       "trajectory": 17
     },
     {
-      "pred_residual_rms": 3.154163854475068,
-      "ratio": 1.0004970840357772,
+      "pred_residual_rms": 3.161521095782087,
+      "ratio": 1.0028307923698503,
       "ref_residual_rms": 3.1525967489599167,
       "trajectory": 18
     },
     {
-      "pred_residual_rms": 7.417395017268258,
-      "ratio": 1.1147625605301525,
+      "pred_residual_rms": 7.443667173445874,
+      "ratio": 1.1187110108989176,
       "ref_residual_rms": 6.653789138505633,
       "trajectory": 19
     },
     {
-      "pred_residual_rms": 1.0103129586083819,
-      "ratio": 1.0053571846372613,
+      "pred_residual_rms": 1.0224875548703873,
+      "ratio": 1.0174720622281856,
       "ref_residual_rms": 1.0049293664449304,
       "trajectory": 20
     },
     {
-      "pred_residual_rms": 12.022756651544832,
-      "ratio": 0.9995496166820735,
+      "pred_residual_rms": 12.048948460783235,
+      "ratio": 1.0017271549657825,
       "ref_residual_rms": 12.02817394043272,
       "trajectory": 21
     },
     {
-      "pred_residual_rms": 7.874940079678729,
-      "ratio": 0.9995941855280495,
+      "pred_residual_rms": 7.896310368038124,
+      "ratio": 1.0023067923251772,
       "ref_residual_rms": 7.878137141742859,
       "trajectory": 22
     },
     {
-      "pred_residual_rms": 2.9755297783820907,
-      "ratio": 0.9998939368015597,
+      "pred_residual_rms": 3.0184604164718882,
+      "ratio": 1.0143203038441209,
       "ref_residual_rms": 2.9758454060639217,
       "trajectory": 23
     },
     {
-      "pred_residual_rms": 1.2848370750760287,
-      "ratio": 1.0032060676385448,
+      "pred_residual_rms": 1.2935535887718916,
+      "ratio": 1.0100119573485897,
       "ref_residual_rms": 1.2807309649755383,
       "trajectory": 24
     },
     {
-      "pred_residual_rms": 5.798661267573235,
-      "ratio": 0.9990629476828826,
+      "pred_residual_rms": 5.811138914484155,
+      "ratio": 1.0012127464256857,
       "ref_residual_rms": 5.8041000129391405,
       "trajectory": 25
     },
     {
-      "pred_residual_rms": 9.22895134408011,
-      "ratio": 1.048870838597409,
+      "pred_residual_rms": 9.288114593839087,
+      "ratio": 1.055594745255412,
       "ref_residual_rms": 8.798939778344323,
       "trajectory": 26
     },
     {
-      "pred_residual_rms": 0.7985228521444282,
-      "ratio": 1.008612305806749,
+      "pred_residual_rms": 0.8098530223602092,
+      "ratio": 1.0229234167234031,
       "ref_residual_rms": 0.7917044513012572,
       "trajectory": 27
     },
     {
-      "pred_residual_rms": 9.101906688143815,
-      "ratio": 1.000354234955114,
+      "pred_residual_rms": 9.133562730197482,
+      "ratio": 1.003833424186042,
       "ref_residual_rms": 9.098683616361377,
       "trajectory": 28
     },
     {
-      "pred_residual_rms": 3.2244068213824844,
-      "ratio": 1.0000885525541467,
+      "pred_residual_rms": 3.2354235729494025,
+      "ratio": 1.0035055305407161,
       "ref_residual_rms": 3.224121317204967,
       "trajectory": 29
     },
     {
-      "pred_residual_rms": 4.381176210328226,
-      "ratio": 1.0295151991489804,
+      "pred_residual_rms": 4.451572039321805,
+      "ratio": 1.046057235448441,
       "ref_residual_rms": 4.25557215080438,
       "trajectory": 30
     },
     {
-      "pred_residual_rms": 13.57684050019031,
-      "ratio": 1.0820930260994461,
+      "pred_residual_rms": 13.643743610398879,
+      "ratio": 1.0874252968129483,
       "ref_residual_rms": 12.546833010401986,
       "trajectory": 31
     },
     {
-      "pred_residual_rms": 1.3739689104662154,
-      "ratio": 1.0027546223546286,
+      "pred_residual_rms": 1.4049815568240822,
+      "ratio": 1.0253883764737435,
       "ref_residual_rms": 1.3701945419507677,
       "trajectory": 32
     },
     {
-      "pred_residual_rms": 0.955112545458513,
-      "ratio": 1.006003641647613,
+      "pred_residual_rms": 0.9657192791270133,
+      "ratio": 1.0171755320674747,
       "ref_residual_rms": 0.9494126123581902,
       "trajectory": 33
     },
     {
-      "pred_residual_rms": 8.114033282202277,
-      "ratio": 1.0289957908658258,
+      "pred_residual_rms": 8.240271703506435,
+      "ratio": 1.0450049443471718,
       "ref_residual_rms": 7.885390158277423,
       "trajectory": 34
     },
     {
-      "pred_residual_rms": 3.284236707916124,
-      "ratio": 1.021600716857128,
+      "pred_residual_rms": 3.3566249591452455,
+      "ratio": 1.0441179395559228,
       "ref_residual_rms": 3.2147948349329796,
       "trajectory": 35
     },
     {
-      "pred_residual_rms": 3.1860259729969713,
-      "ratio": 1.0002585271707998,
+      "pred_residual_rms": 3.1989869402736466,
+      "ratio": 1.0043276459252466,
       "ref_residual_rms": 3.185202511603222,
       "trajectory": 36
     },
     {
-      "pred_residual_rms": 1.057477606232373,
-      "ratio": 1.0048817541265842,
+      "pred_residual_rms": 1.0683665098804915,
+      "ratio": 1.0152290754636493,
       "ref_residual_rms": 1.0523403394377517,
       "trajectory": 37
     },
     {
-      "pred_residual_rms": 0.7135681887846871,
-      "ratio": 1.010791883228749,
+      "pred_residual_rms": 0.7255839698469986,
+      "ratio": 1.027812616719018,
       "ref_residual_rms": 0.7059496624620222,
       "trajectory": 38
     },
     {
-      "pred_residual_rms": 14.131758927061568,
-      "ratio": 0.9935682646856209,
+      "pred_residual_rms": 14.172350416179418,
+      "ratio": 0.9964221497265408,
       "ref_residual_rms": 14.223239035853322,
       "trajectory": 39
     },
     {
-      "pred_residual_rms": 0.8477268866872192,
-      "ratio": 1.0081735949675654,
+      "pred_residual_rms": 0.8838150715121915,
+      "ratio": 1.0510920815724032,
       "ref_residual_rms": 0.8408540859617455,
       "trajectory": 0
     },
     {
-      "pred_residual_rms": 4.80685018820878,
-      "ratio": 1.0001166456584074,
+      "pred_residual_rms": 4.812651287745802,
+      "ratio": 1.0013236265259053,
       "ref_residual_rms": 4.806289555399094,
       "trajectory": 1
     },
     {
-      "pred_residual_rms": 2.785975010541188,
-      "ratio": 1.0003110491822473,
+      "pred_residual_rms": 2.807060498498553,
+      "ratio": 1.0078818445057323,
       "ref_residual_rms": 2.785108704756104,
       "trajectory": 2
     },
     {
-      "pred_residual_rms": 5.298760192277132,
-      "ratio": 1.0000025049036836,
+      "pred_residual_rms": 5.3077809203366755,
+      "ratio": 1.0017049315711042,
       "ref_residual_rms": 5.2987469194264545,
       "trajectory": 3
     },
     {
-      "pred_residual_rms": 1.6103226396746617,
-      "ratio": 1.0019881100429737,
+      "pred_residual_rms": 1.6364848201565338,
+      "ratio": 1.018266955741206,
       "ref_residual_rms": 1.6071274933647641,
       "trajectory": 4
     },
     {
-      "pred_residual_rms": 15.113855155863314,
-      "ratio": 0.9981203800707366,
+      "pred_residual_rms": 15.13273688762132,
+      "ratio": 0.9993673313670366,
       "ref_residual_rms": 15.142316956590145,
       "trajectory": 5
     },
     {
-      "pred_residual_rms": 15.81617148873316,
-      "ratio": 1.0791047416098014,
+      "pred_residual_rms": 15.826943543457961,
+      "ratio": 1.0798396966739074,
       "ref_residual_rms": 14.656752842303982,
       "trajectory": 6
     },
     {
-      "pred_residual_rms": 1.240121441114426,
-      "ratio": 1.0036408147576328,
+      "pred_residual_rms": 1.2582093823377538,
+      "ratio": 1.0182795392121953,
       "ref_residual_rms": 1.235622767507617,
       "trajectory": 7
     },
     {
-      "pred_residual_rms": 13.573456189715012,
-      "ratio": 1.0594992047566476,
+      "pred_residual_rms": 13.621737847183663,
+      "ratio": 1.063267911634055,
       "ref_residual_rms": 12.81119997898691,
       "trajectory": 8
     },
     {
-      "pred_residual_rms": 2.4097304605868954,
-      "ratio": 1.0006379830820722,
+      "pred_residual_rms": 2.436468708891307,
+      "ratio": 1.011741011944461,
       "ref_residual_rms": 2.40819407350965,
       "trajectory": 9
     },
     {
-      "pred_residual_rms": 3.541442154357876,
-      "ratio": 0.9995533790574263,
+      "pred_residual_rms": 3.545228478197623,
+      "ratio": 1.0006220490012705,
       "ref_residual_rms": 3.5430245433189747,
       "trajectory": 10
     },
     {
-      "pred_residual_rms": 1.7691266473567087,
-      "ratio": 1.0014203433244366,
+      "pred_residual_rms": 1.7691078029065306,
+      "ratio": 1.001409676357323,
       "ref_residual_rms": 1.7666174440632003,
       "trajectory": 11
     },
     {
-      "pred_residual_rms": 16.203401703931423,
-      "ratio": 0.9988130197294258,
+      "pred_residual_rms": 16.227645560917786,
+      "ratio": 1.0003074639485408,
       "ref_residual_rms": 16.22265767853212,
       "trajectory": 12
     },
     {
-      "pred_residual_rms": 8.837881227650898,
-      "ratio": 1.0003975695425888,
+      "pred_residual_rms": 8.84858211309731,
+      "ratio": 1.001608848526408,
       "ref_residual_rms": 8.834368951627738,
       "trajectory": 13
     },
     {
-      "pred_residual_rms": 17.73345299106118,
-      "ratio": 0.9967506004693922,
+      "pred_residual_rms": 17.77885646965045,
+      "ratio": 0.9993026101975633,
       "ref_residual_rms": 17.791263915677703,
       "trajectory": 14
     },
     {
-      "pred_residual_rms": 7.716023348221216,
-      "ratio": 1.0376906844386247,
+      "pred_residual_rms": 7.779243471270604,
+      "ratio": 1.0461928532109024,
       "ref_residual_rms": 7.435764302341667,
       "trajectory": 15
     },
     {
-      "pred_residual_rms": 2.5750420872843933,
-      "ratio": 1.0005676730318829,
+      "pred_residual_rms": 2.58323263237752,
+      "ratio": 1.0037502208765026,
       "ref_residual_rms": 2.5735811346788737,
       "trajectory": 16
     },
     {
-      "pred_residual_rms": 3.236113574247505,
-      "ratio": 0.9999765311774405,
+      "pred_residual_rms": 3.2432042597386856,
+      "ratio": 1.0021675912000447,
       "ref_residual_rms": 3.2361895238052085,
       "trajectory": 17
     },
     {
-      "pred_residual_rms": 3.1543898559299235,
-      "ratio": 1.000568771432819,
+      "pred_residual_rms": 3.165002251363123,
+      "ratio": 1.0039350108469467,
       "ref_residual_rms": 3.1525967489599167,
       "trajectory": 18
     },
     {
-      "pred_residual_rms": 7.417220269230539,
-      "ratio": 1.11473629759424,
+      "pred_residual_rms": 7.461150191888975,
+      "ratio": 1.1213385390755959,
       "ref_residual_rms": 6.653789138505633,
       "trajectory": 19
     },
     {
-      "pred_residual_rms": 1.0105928977293615,
-      "ratio": 1.0056357506045093,
+      "pred_residual_rms": 1.0290671102647762,
+      "ratio": 1.0240193436731142,
       "ref_residual_rms": 1.0049293664449304,
       "trajectory": 20
     },
     {
-      "pred_residual_rms": 12.02218033478496,
-      "ratio": 0.9995017027790383,
+      "pred_residual_rms": 12.043560696794962,
+      "ratio": 1.0012792262930716,
       "ref_residual_rms": 12.02817394043272,
       "trajectory": 21
     },
     {
-      "pred_residual_rms": 7.874611161647252,
-      "ratio": 0.9995524347910975,
+      "pred_residual_rms": 7.891884050477738,
+      "ratio": 1.0017449440759338,
       "ref_residual_rms": 7.878137141742859,
       "trajectory": 22
     },
     {
-      "pred_residual_rms": 2.9753850098376575,
-      "ratio": 0.9998452889302226,
+      "pred_residual_rms": 2.9785693437612157,
+      "ratio": 1.0009153491951375,
       "ref_residual_rms": 2.9758454060639217,
       "trajectory": 23
     },
     {
-      "pred_residual_rms": 1.2850538068719386,
-      "ratio": 1.0033752927153463,
+      "pred_residual_rms": 1.3055879762304872,
+      "ratio": 1.0194084565257806,
       "ref_residual_rms": 1.2807309649755383,
       "trajectory": 24
     },
     {
-      "pred_residual_rms": 5.798555753447418,
-      "ratio": 0.999044768443107,
+      "pred_residual_rms": 5.82024625524938,
+      "ratio": 1.0027818683817034,
       "ref_residual_rms": 5.8041000129391405,
       "trajectory": 25
     },
     {
-      "pred_residual_rms": 9.228571231654016,
-      "ratio": 1.0488276387988344,
+      "pred_residual_rms": 9.268414442177354,
+      "ratio": 1.0533558219126,
       "ref_residual_rms": 8.798939778344323,
       "trajectory": 26
     },
     {
-      "pred_residual_rms": 0.7990728956018919,
-      "ratio": 1.0093070643830835,
+      "pred_residual_rms": 0.8479419766829367,
+      "ratio": 1.0710334838830913,
       "ref_residual_rms": 0.7917044513012572,
       "trajectory": 27
     },
     {
-      "pred_residual_rms": 9.101503127996768,
-      "ratio": 1.0003098812701126,
+      "pred_residual_rms": 9.112254024035284,
+      "ratio": 1.0014914693428294,
       "ref_residual_rms": 9.098683616361377,
       "trajectory": 28
     },
     {
-      "pred_residual_rms": 3.224280603287865,
-      "ratio": 1.0000494044941943,
+      "pred_residual_rms": 3.234520190524068,
+      "ratio": 1.0032253356173693,
       "ref_residual_rms": 3.224121317204967,
       "trajectory": 29
     },
     {
-      "pred_residual_rms": 4.3812038185141695,
-      "ratio": 1.0295216866869579,
+      "pred_residual_rms": 4.4343431346870705,
+      "ratio": 1.0420086835677078,
       "ref_residual_rms": 4.25557215080438,
       "trajectory": 30
     },
     {
-      "pred_residual_rms": 13.576600609044524,
-      "ratio": 1.0820739064422715,
+      "pred_residual_rms": 13.62677059695639,
+      "ratio": 1.0860725240910658,
       "ref_residual_rms": 12.546833010401986,
       "trajectory": 31
     },
     {
-      "pred_residual_rms": 1.3740469554218733,
-      "ratio": 1.002811581387283,
+      "pred_residual_rms": 1.3785058629506435,
+      "ratio": 1.0060657963124293,
       "ref_residual_rms": 1.3701945419507677,
       "trajectory": 32
     },
     {
-      "pred_residual_rms": 0.9555858360125186,
-      "ratio": 1.006502150460162,
+      "pred_residual_rms": 1.0009081854940658,
+      "ratio": 1.0542394028324196,
       "ref_residual_rms": 0.9494126123581902,
       "trajectory": 33
     },
     {
-      "pred_residual_rms": 8.113664142076342,
-      "ratio": 1.0289489776938046,
+      "pred_residual_rms": 8.165173618904198,
+      "ratio": 1.035481245063452,
       "ref_residual_rms": 7.885390158277423,
       "trajectory": 34
     },
     {
-      "pred_residual_rms": 3.28448167496461,
-      "ratio": 1.0216769167582302,
+      "pred_residual_rms": 3.3560863215579038,
+      "ratio": 1.0439503899563376,
       "ref_residual_rms": 3.2147948349329796,
       "trajectory": 35
     },
     {
-      "pred_residual_rms": 3.1860290404652822,
-      "ratio": 1.000259490207938,
+      "pred_residual_rms": 3.1926192854173134,
+      "ratio": 1.0023285093450334,
       "ref_residual_rms": 3.185202511603222,
       "trajectory": 36
     },
     {
-      "pred_residual_rms": 1.0578823936046822,
-      "ratio": 1.0052664085555167,
+      "pred_residual_rms": 1.0814888151377433,
+      "ratio": 1.0276987155273027,
       "ref_residual_rms": 1.0523403394377517,
       "trajectory": 37
     },
     {
-      "pred_residual_rms": 0.7141551364057124,
-      "ratio": 1.011623313077413,
+      "pred_residual_rms": 0.7572620669465974,
+      "ratio": 1.072685642069183,
       "ref_residual_rms": 0.7059496624620222,
       "trajectory": 38
     },
     {
-      "pred_residual_rms": 14.131526037099675,
-      "ratio": 0.9935518907808228,
+      "pred_residual_rms": 14.117196088213179,
+      "ratio": 0.9925443882808386,
       "ref_residual_rms": 14.223239035853322,
       "trajectory": 39
     },
     {
-      "pred_residual_rms": 0.8424549959087966,
-      "ratio": 1.001903909339062,
+      "pred_residual_rms": 0.8920885978528911,
+      "ratio": 1.0609315132631425,
       "ref_residual_rms": 0.8408540859617455,
       "trajectory": 0
     },
     {
-      "pred_residual_rms": 4.805920542563277,
-      "ratio": 0.9999232229287138,
+      "pred_residual_rms": 4.814110782178199,
+      "ratio": 1.0016272899684786,
       "ref_residual_rms": 4.806289555399094,
       "trajectory": 1
     },
     {
-      "pred_residual_rms": 2.784613313620159,
-      "ratio": 0.999822128617422,
+      "pred_residual_rms": 2.797732863400849,
+      "ratio": 1.0045327346193658,
       "ref_residual_rms": 2.785108704756104,
       "trajectory": 2
     },
     {
-      "pred_residual_rms": 5.298334692081037,
-      "ratio": 0.9999222028619811,
+      "pred_residual_rms": 5.309012442947102,
+      "ratio": 1.0019373492783759,
       "ref_residual_rms": 5.2987469194264545,
       "trajectory": 3
     },
     {
-      "pred_residual_rms": 1.607627393184143,
-      "ratio": 1.0003110517500589,
+      "pred_residual_rms": 1.6320500338449455,
+      "ratio": 1.0155075067678683,
       "ref_residual_rms": 1.6071274933647641,
       "trajectory": 4
     },
     {
-      "pred_residual_rms": 15.113962955265167,
-      "ratio": 0.9981274991531175,
+      "pred_residual_rms": 15.11238512418967,
+      "ratio": 0.9980232990442425,
       "ref_residual_rms": 15.142316956590145,
       "trajectory": 5
     },
     {
-      "pred_residual_rms": 15.815644999203352,
-      "ratio": 1.0790688203156735,
+      "pred_residual_rms": 15.764485485458023,
+      "ratio": 1.0755783122682383,
       "ref_residual_rms": 14.656752842303982,
       "trajectory": 6
     },
     {
-      "pred_residual_rms": 1.2365950165382527,
-      "ratio": 1.0007868493978924,
+      "pred_residual_rms": 1.2696431940780282,
+      "ratio": 1.027533020161998,
       "ref_residual_rms": 1.235622767507617,
       "trajectory": 7
     },
     {
-      "pred_residual_rms": 13.572798836768628,
-      "ratio": 1.059447893954579,
+      "pred_residual_rms": 13.66316723463968,
+      "ratio": 1.0665017529232372,
       "ref_residual_rms": 12.81119997898691,
       "trajectory": 8
     },
     {
-      "pred_residual_rms": 2.4080480027683775,
-      "ratio": 0.9999393442817258,
+      "pred_residual_rms": 2.4268869716885133,
+      "ratio": 1.0077622058722289,
       "ref_residual_rms": 2.40819407350965,
       "trajectory": 9
     },
     {
-      "pred_residual_rms": 3.540385207440672,
-      "ratio": 0.9992550613618301,
+      "pred_residual_rms": 3.5496779262933953,
+      "ratio": 1.0018778822706624,
       "ref_residual_rms": 3.5430245433189747,
       "trajectory": 10
     },
     {
-      "pred_residual_rms": 1.7668005398028281,
-      "ratio": 1.00010364198556,
+      "pred_residual_rms": 1.7870335977092942,
+      "ratio": 1.0115566353738346,
       "ref_residual_rms": 1.7666174440632003,
       "trajectory": 11
     },
     {
-      "pred_residual_rms": 16.203886197597555,
-      "ratio": 0.9988428849756594,
+      "pred_residual_rms": 16.170516496073887,
+      "ratio": 0.9967859037963162,
       "ref_residual_rms": 16.22265767853212,
       "trajectory": 12
     },
     {
-      "pred_residual_rms": 8.837606618044019,
-      "ratio": 1.0003664853068746,
+      "pred_residual_rms": 8.845667583292153,
+      "ratio": 1.001278940434374,
       "ref_residual_rms": 8.834368951627738,
       "trajectory": 13
     },
     {
-      "pred_residual_rms": 17.733816848644164,
-      "ratio": 0.9967710519440434,
+      "pred_residual_rms": 17.727252626162432,
+      "ratio": 0.9964020943189503,
       "ref_residual_rms": 17.791263915677703,
       "trajectory": 14
     },
     {
-      "pred_residual_rms": 7.7160020829453675,
-      "ratio": 1.037687824574462,
+      "pred_residual_rms": 7.774490378351833,
+      "ratio": 1.0455536327184947,
       "ref_residual_rms": 7.435764302341667,
       "trajectory": 15
     },
     {
-      "pred_residual_rms": 2.5732433956367777,
-      "ratio": 0.9998687668954575,
+      "pred_residual_rms": 2.5883090163379396,
+      "ratio": 1.0057227190006208,
       "ref_residual_rms": 2.5735811346788737,
       "trajectory": 16
     },
     {
-      "pred_residual_rms": 3.235032853600628,
-      "ratio": 0.9996425826744472,
+      "pred_residual_rms": 3.2501007046882906,
+      "ratio": 1.0042986298487009,
       "ref_residual_rms": 3.2361895238052085,
       "trajectory": 17
     },
     {
-      "pred_residual_rms": 3.1526769192917046,
-      "ratio": 1.0000254299354379,
+      "pred_residual_rms": 3.1698468149351795,
+      "ratio": 1.0054717007435074,
       "ref_residual_rms": 3.1525967489599167,
       "trajectory": 18
     },
     {
-      "pred_residual_rms": 7.417052502864043,
-      "ratio": 1.1147110839358263,
+      "pred_residual_rms": 7.447439536304033,
+      "ratio": 1.1192779604639898,
       "ref_residual_rms": 6.653789138505633,
       "trajectory": 19
     },
     {
-      "pred_residual_rms": 1.006237081961261,
-      "ratio": 1.0013013009272052,
+      "pred_residual_rms": 1.0474492192697105,
+      "ratio": 1.0423112849962777,
       "ref_residual_rms": 1.0049293664449304,
       "trajectory": 20
     },
     {
-      "pred_residual_rms": 12.0223545173912,
-      "ratio": 0.9995161839968111,
+      "pred_residual_rms": 12.01675571267772,
+      "ratio": 0.9990507097909003,
       "ref_residual_rms": 12.02817394043272,
       "trajectory": 21
     },
     {
-      "pred_residual_rms": 7.87450270368073,
-      "ratio": 0.999538667835208,
+      "pred_residual_rms": 7.882469885523209,
+      "ratio": 1.0005499705961443,
       "ref_residual_rms": 7.878137141742859,
       "trajectory": 22
     },
     {
-      "pred_residual_rms": 2.9740760857827304,
-      "ratio": 0.9994054394500514,
+      "pred_residual_rms": 2.9866849329853906,
+      "ratio": 1.0036425033704308,
       "ref_residual_rms": 2.9758454060639217,
       "trajectory": 23
     },
     {
-      "pred_residual_rms": 1.2816464251357387,
-      "ratio": 1.000714795054727,
+      "pred_residual_rms": 1.3132903535269558,
+      "ratio": 1.0254225043680734,
       "ref_residual_rms": 1.2807309649755383,
       "trajectory": 24
     },
     {
-      "pred_residual_rms": 5.798114806246884,
-      "ratio": 0.9989687967679893,
+      "pred_residual_rms": 5.8008495175807715,
+      "ratio": 0.9994399656533963,
       "ref_residual_rms": 5.8041000129391405,
       "trajectory": 25
     },
     {
-      "pred_residual_rms": 9.228627031479034,
-      "ratio": 1.0488339804520816,
+      "pred_residual_rms": 9.285074233687865,
+      "ratio": 1.0552492081534643,
       "ref_residual_rms": 8.798939778344323,
       "trajectory": 26
     },
     {
-      "pred_residual_rms": 0.7934095668094097,
-      "ratio": 1.0021537273225507,
+      "pred_residual_rms": 0.8464217454019651,
+      "ratio": 1.0691132833859576,
       "ref_residual_rms": 0.7917044513012572,
       "trajectory": 27
     },
     {
-      "pred_residual_rms": 9.101240938635117,
-      "ratio": 1.00028106508387,
+      "pred_residual_rms": 9.109306751007477,
+      "ratio": 1.00116754632802,
       "ref_residual_rms": 9.098683616361377,
       "trajectory": 28
     },
     {
-      "pred_residual_rms": 3.223199770252089,
-      "ratio": 0.9997141711299881,
+      "pred_residual_rms": 3.2341875595329297,
+      "ratio": 1.0031221661152283,
       "ref_residual_rms": 3.224121317204967,
       "trajectory": 29
     },
     {
-      "pred_residual_rms": 4.380335524464201,
-      "ratio": 1.0293176497163228,
+      "pred_residual_rms": 4.458416314848235,
+      "ratio": 1.0476655445744267,
       "ref_residual_rms": 4.25557215080438,
       "trajectory": 30
     },
     {
-      "pred_residual_rms": 13.576858557838264,
-      "ratio": 1.0820944653190436,
+      "pred_residual_rms": 13.605116249264315,
+      "ratio": 1.084346642534013,
       "ref_residual_rms": 12.546833010401986,
       "trajectory": 31
     },
     {
-      "pred_residual_rms": 1.3709491219457695,
-      "ratio": 1.0005507101158988,
+      "pred_residual_rms": 1.4011080560799054,
+      "ratio": 1.022561405101735,
       "ref_residual_rms": 1.3701945419507677,
       "trajectory": 32
     },
     {
-      "pred_residual_rms": 0.9508502198597063,
-      "ratio": 1.0015142072928074,
+      "pred_residual_rms": 0.9946444187089634,
+      "ratio": 1.0476418848475422,
       "ref_residual_rms": 0.9494126123581902,
       "trajectory": 33
     },
     {
-      "pred_residual_rms": 8.11360945469824,
-      "ratio": 1.028942042415143,
+      "pred_residual_rms": 8.176653552792615,
+      "ratio": 1.0369370936210998,
       "ref_residual_rms": 7.885390158277423,
       "trajectory": 34
     },
     {
-      "pred_residual_rms": 3.283109378546841,
-      "ratio": 1.0212500477080322,
+      "pred_residual_rms": 3.3435568245338443,
+      "ratio": 1.040052941544417,
       "ref_residual_rms": 3.2147948349329796,
       "trajectory": 35
     },
     {
-      "pred_residual_rms": 3.1845791801955796,
-      "ratio": 0.9998043039946843,
+      "pred_residual_rms": 3.197259661514756,
+      "ratio": 1.003785363683349,
       "ref_residual_rms": 3.185202511603222,
       "trajectory": 36
     },
     {
-      "pred_residual_rms": 1.0536071384112953,
-      "ratio": 1.0012037920870926,
+      "pred_residual_rms": 1.0913796041972135,
+      "ratio": 1.037097565584457,
       "ref_residual_rms": 1.0523403394377517,
       "trajectory": 37
     },
     {
-      "pred_residual_rms": 0.7078298286645306,
-      "ratio": 1.0026633148260902,
+      "pred_residual_rms": 0.7692698534533494,
+      "ratio": 1.0896950510189296,
       "ref_residual_rms": 0.7059496624620222,
       "trajectory": 38
     },
     {
-      "pred_residual_rms": 14.131046469223458,
-      "ratio": 0.9935181735751281,
+      "pred_residual_rms": 14.131269413439696,
+      "ratio": 0.9935338482196782,
       "ref_residual_rms": 14.223239035853322,
       "trajectory": 39
     }
