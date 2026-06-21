@@ -1,7 +1,7 @@
-# 云端 Kickoff:补全 airfoil 的三臂(arm2 accuracy-monitor + arm3 ungated-generic)
+# GPU Kickoff:补全 airfoil 的三臂(arm2 accuracy-monitor + arm3 ungated-generic)
 
-> 单文件冷启动 runbook,**GPU/云端执行**(本机 Mac 无 physicsnemo/CUDA,跑不了)。先完整读完再动手。
-> 版本:2026-06-21 · 分支:`cloud/1q-empirical-expansion`。
+> 单文件冷启动 runbook,**有 CUDA GPU 的机器执行**(本地 RTX 或云端皆可;无 physicsnemo/CUDA 的 Mac 跑不了)。执行者是无先验上下文的 GPU 会话,**先完整读完再动手**。
+> 版本:2026-06-21 · 分支:`cloud/1q-empirical-expansion` · 这是 EXT-1 所在的同一分支与同一机器栈。
 
 ## 0. 人类如何调用
 ```
@@ -15,13 +15,35 @@ EXT-1 已把 airfoil 训到收敛(C35,K=6,`.../physicsnemo-mgn-airfoil-primary-r
 
 **诚实预期(先说清,避免反伤)**:airfoil 是**低保真模型**(rollout 0.92)。所以 arm2 大概率检出很少(故障要把 rollout 推过 2×0.92=1.84 才算检到);arm3 的 gate-rejected 模板在不准的模型上误报率会高。**这些都如实报,本任务价值是"补全 cross-SUT 三臂表",不是"airfoil 强检测"。** 严禁为了好看调参/挑数。
 
-## 2. 环境自检
+## 2. 环境与数据(复用 EXT-1 已建的 harness)
+
+EXT-1 已把 GPU 环境与 airfoil 数据的搭建脚本提交在 `tools/_ext1_*.sh`。**先自检;不齐就按下序复用,不要从零重搭**:
+
 ```bash
-python -c "import torch,physicsnemo;print('cuda',torch.cuda.is_available())"   # True
-python -m pytest tests -q     # 基线(云端 torch/GPU 齐时应全绿;缺 dep 的 skip 记录)
+# (a) 自检:三者齐 → 直接跳到 §4
+python -c "import torch,physicsnemo;print('cuda',torch.cuda.is_available())"   # 期望 True
+ls research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/checkpoint_k0*.pt | wc -l   # 期望 6
+bash tools/_ext1_verify_gpu.sh        # GPU 可见性自检
+
+# (b) 若 physicsnemo/torch-cuda 缺(非 EXT-1 原机或环境已失效),按序复用:
+bash tools/_ext1_venv_setup.sh
+bash tools/_ext1_install_torch_cu124.sh    # 或 _ext1_install_torch.sh(按你 CUDA 版本)
+bash tools/_ext1_install_stack.sh          # physicsnemo + 依赖栈
+bash tools/_ext1_fix_torchvision.sh        # 若 torchvision ABI 报错才需
+
+# (c) 若 airfoil 官方数据未 staged:
+bash tools/_ext1_stage_data.sh             # 落 DeepMind airfoil TFRecords
+
+# (d) 基线门(env 齐后)
+python -m pytest tests -q                  # 全绿(缺 dep 的 skip 记录,勿当失败)
 python tools/validate_research_assets.py; python tools/validate_experiment_protocol.py   # rc=0
 ```
-输入(committed):converged airfoil checkpoints(C35 roster);现有 airfoil seeded-fault runner `tools/run_seeded_fault_detection_physicsnemo_airfoil.py`(arm1 模板);三臂参照实现 `tools/run_three_arm_complementarity_pointmlp.py`(arm2/arm3 的标准做法)。
+
+**输入(committed,checkout 后即有)**:
+- converged airfoil checkpoints(C35 roster,6 个 `checkpoint_k0*.pt`);
+- **arm1 模板** `tools/run_seeded_fault_detection_physicsnemo_airfoil.py`(+ 一键复跑 `tools/_ext1_seeded_fault.sh`);
+- **arm2/arm3 标准做法**参照 `tools/run_three_arm_complementarity_pointmlp.py`(`arms_for` 的 accuracy 臂、`fp_rate` 的 generic 误报臂);
+- 本地整合脚本 `tools/run_ext3_cross_sut_three_arm.py`(Task C 跑完刷新它)。
 
 ## 3. 硬约束(违反即整轮作废)
 1. **实事求是**:不伪造、不挑数;每个数有 run 目录 + ledger。airfoil 检出低就如实低。
@@ -54,7 +76,7 @@ python tools/validate_research_assets.py; python tools/validate_experiment_proto
 ```bash
 python -m pytest tests -q                         # 全绿(含新 test)
 python tools/validate_research_assets.py; python tools/validate_experiment_protocol.py   # rc=0
-grep -rIn -E "outperform|superior|better than" research_assets/runs/*airfoil-three-arm* | grep -v "%"   # 空
+grep -rIn -E "outperform|better than|state-of-the-art" research_assets/runs/*airfoil-three-arm*   # 空(裸 superior 不查:合规免责语"not a superiority claim"本就含它)
 ```
 - commit:`feat(ext3): airfoil three-arm arm2/arm3 on converged C35 (C52)` + 验证;结尾 `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`。push 前 fetch;分叉则 merge(ledger 冲突保留双方 claim)。
 - **不改 main.tex**——正文整合由有上下文的本地会话做(收编散落 cell 进一张 cross-SUT 表,降 over-extension)。
