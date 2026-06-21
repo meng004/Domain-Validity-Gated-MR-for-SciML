@@ -191,3 +191,38 @@
 | Fig 9 | Python `.py` | 等 `seeded_fault_detection.csv` |
 
 数据图代码应只读取真实 CSV/JSON，不生成 synthetic demo data。若需要先搭脚本骨架，脚本也应在缺少输入文件时退出并提示所需字段，而不是画假图。
+
+---
+
+# 追加评估 — 2026-06-21 IST 投稿前 float 必要性/数量复核
+
+> 此节为终稿(4 图 + 6 表已落定)的事后评估,与上方 2026-06-05 生成规划区分。仅评估,不改正文。
+
+## 终稿 float 盘点(4 图 + 6 表 = 10 float)
+
+| float | 评估 | 理由 |
+|---|---|---|
+| fig_1 validity-gated workflow | **保留(高)** | 方法中心图,candidate→gate→admit/reject/defer→card/runner/ledger 全链 |
+| fig_2 mr_asset_dataflow | **建议砍/并入 fig_1(低)** | 内容近线性,与 fig_1 尾段 + tab:rubric(card 字段)重叠 |
+| fig_3 verdict_2d | **保留(高)** | 两轴 typed verdict 核心新意,图让 relation×domain 一眼可见 |
+| fig_4 operator_floor_loglog | **保留(高)** | O(h) 斜率标定关键定量结果 |
+| tab:rq-contribution-evidence | **建议砍/并(中)** | 与 tab:rqmap 同为 RQ×N 表,前段连遇两张;独有列 Primary section 可下放正文 |
+| tab:closest-prior-positioning | **保留(高)** | closest-prior 能力矩阵,正面回应"incremental" |
+| tab:rubric | **保留(高)** | 准入门+card 字段+verdict 语义方法主表 |
+| tab:rqmap | **保留(高)** | 评估设计×RQ,列更密,信息独有 |
+| tab:mr-card-verdict | **保留(高)** | MR-card→verdict 结果主表 |
+| tab:claim-evidence(附录) | **保留(高)** | claim→artifact 可审计映射,复现核心 |
+
+## 三问结论
+
+1. **篇幅**:IST-counted 12676 / 15000,**合规**,余量 ~2300。float 不是篇幅瓶颈。
+2. **必要/合适**:8 个 float 个体充分必要;**2 个偏弱**——fig_2(与 fig_1/tab:rubric 重叠)、tab:rq-contribution-evidence(与 tab:rqmap 重复 RQ 索引)。
+3. **数量**:10 float 对 ~12.7k 词方法论文**偏多**(常见 4–8);且 float 密度正是 EIC 多轮"dense/overextended"的来源之一。
+
+## 最高 ROI 删减(可选,直击 EIC reason-b)
+
+- **砍 fig_2** → 并入 fig_1 尾段;省 200 词,4→3 图。需删 `\ref{fig:asset-flow}`(1 处)。
+- **砍 tab:rq-contribution-evidence** → Primary-section 指向下放正文,RQ×evidence 交 tab:rqmap;省 200–400 词,消前段两张相似 RQ 表。需删 `\ref{tab:rq-contribution-evidence}`(2 处:L110、L118)。
+- 净:10→8 float,省 ~400–600 词,main 密度下降。均需重建 + 复测(test_phase6 查 \ref、test_phase4 字数)。
+
+> 决策权在作者。采纳则我执行删减 + 清引用 + 重建 + 全测试;否则保持现状(亦合规)。
