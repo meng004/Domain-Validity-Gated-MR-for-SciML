@@ -1,0 +1,84 @@
+% =============================================================================
+% DRAFT — cross-SUT three-arm + validity-coverage duality consolidation table
+% (EXT-3). NOT \input by main.tex, NOT in the build. A staging fragment.
+%
+% PURPOSE: when the airfoil three-arm (C52) returns from GPU, fill the two
+% [C52 pending] cells, then paste this table + lead sentence into main.tex
+% Results, and DELETE the scattered prose cells it subsumes (see "SUBSUMES"
+% below) so the net float/word change is neutral-or-down (de-overload).
+%
+% NUMBERS (all from research_assets/runs/ext3-cross-sut-three-arm/raw/
+%   cross_sut_three_arm_report.json = C51, which reads C38 / C42-C43 / C36):
+%   cylinder MGN (C38):  ARM1 MR 5/10  | ARM2 acc 3/10  | 2x2 both3/mr2/acc0/neither5
+%   PointMLP (C42/C43):  ARM1 MR 13/20 | ARM2 acc 6/20  | 2x2 both4/mr9/acc2/neither5
+%                        ARM3 gate value: admitted 0% baseline FP; 6/6 rejected fire
+%   airfoil (C35/C36):   ARM1 conservation localizes gross normalization; node-perm 0;
+%                        mirror-y gate-EXCLUDED (non-zero AoA) | ARM2/ARM3 = C52 pending
+%
+% TO FILL FROM C52 (the GPU run, docs/cloud_runbook/ext3_airfoil_three_arm_kickoff.md):
+%   - airfoil ARM2 accuracy-monitor: detect/total + Wilson CI (threshold 2x0.92=1.84)
+%   - airfoil ARM3 ungated-generic gate value: admitted vs rejected baseline FP
+%   Replace both \textbf{[C52 pending]} cells; then add C52 to the claim cite.
+%
+% SUBSUMES on insertion (delete/tighten these so this table replaces, not adds):
+%   - subsec:llm-mr-baseline: the three-arm gate-value prose (13/20, 6/20, 0%/100%, 2x2)
+%   - subsec:fault-robustness: the cross-SUT airfoil per-arm restatement (keep the
+%     duality principle sentence; the per-SUT arm numbers move into the table)
+%
+% PRE-INSERTION CHECKLIST (run after pasting into main.tex):
+%   [ ] keep pinned strings: "validity-coverage duality", "falsifiable",
+%       "complementarity, not superiority"-style note, "claim~C36"
+%   [ ] caps: abstract <= 300, "not a " (md+tex) <= 28, \bC\d+ (tex) <= 10
+%   [ ] 0 active superiority phrases (outperform / better than / state-of-the-art)
+%   [ ] rebuild (xelatex/pdflatex x3 + bibtex), 0 undefined/Missing/Overfull
+%   [ ] python -m pytest tests -q  (all pass)
+%   [ ] this table ADDS 1 float (+200 IST words); confirm a subsumed cell was
+%       removed so net float count does not grow
+% =============================================================================
+
+% ---- LEAD SENTENCE (draft; place before the table in Results) ----
+% Across the converged SUTs the three detector arms tell one consistent story
+% (Table~\ref{tab:cross-sut-three-arm}): the validity-gated MR arm and the
+% accuracy monitor are complementary (the MR arm catches relation violations the
+% monitor leaves inside its band), the ungated-generic arm makes the gate value
+% measurable (admitted detectors raise no baseline false alarm while rejected
+% templates fire on the correct SUT), and coverage tracks each SUT's gate-fixed
+% admissible MR set --- the validity-coverage duality, with the airfoil's
+% mirror-y exclusion removing exactly that relation's coverage. This is
+% complementarity and a measured gate value, not a baseline-superiority ranking.
+
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Three-arm complementarity and the validity-coverage duality across the
+converged SUTs. Coverage tracks each SUT's gate-fixed admissible MR set; on the
+airfoil the non-zero angle of attack makes mirror-y inadmissible, so that
+relation's fault coverage is absent. Arm contrasts are internal (gated vs
+ungated, MR vs accuracy on the same faults), not baseline-superiority claims.}
+\label{tab:cross-sut-three-arm}
+\begin{tabularx}{\linewidth}{@{}%
+  >{\raggedright\arraybackslash}p{0.17\linewidth}%
+  >{\raggedright\arraybackslash}p{0.17\linewidth}%
+  >{\raggedright\arraybackslash}p{0.22\linewidth}%
+  >{\raggedright\arraybackslash}p{0.13\linewidth}Y@{}}
+\toprule
+\textbf{SUT (converged)} & \textbf{Admissible MR set} & \textbf{ARM1 validity-gated MR} & \textbf{ARM2 accuracy monitor} & \textbf{ARM3 ungated-generic gate value} \\
+\midrule
+Cylinder MeshGraphNets (C38) &
+  node-perm, conservation, mirror-y &
+  5/10 (2 MR-only faults the monitor leaves in band) &
+  3/10 &
+  measured on PointMLP \\
+Cylinder PointMLP (C42/C43) &
+  node-perm, conservation, mirror-y &
+  13/20, Wilson [0.43, 0.82] (9 MR-only) &
+  6/20, Wilson [0.15, 0.52] &
+  admitted 0\% baseline FP; all 6 rejected templates fire on the correct SUT \\
+Compressible airfoil (C35/C36) &
+  node-perm, conservation \emph{(mirror-y gate-excluded: non-zero AoA)} &
+  conservation localizes the gross normalization fault; node-perm none; mirror-y coverage absent &
+  \textbf{[C52 pending]} &
+  \textbf{[C52 pending]} \\
+\bottomrule
+\end{tabularx}
+\end{table}
