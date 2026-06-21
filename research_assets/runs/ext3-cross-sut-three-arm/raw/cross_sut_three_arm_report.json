@@ -1,0 +1,161 @@
+{
+  "record_type": "ext3-cross-sut-three-arm-consolidation",
+  "schema_version": "0.1.0",
+  "purpose": "consolidate per-SUT three-arm complementarity + validity-coverage duality across converged SUTs into one cross-SUT view; references committed artifacts, runs no new model",
+  "converged_suts": [
+    {
+      "sut": "cylinder-flow MeshGraphNets",
+      "source_claims": [
+        "C38",
+        "C13"
+      ],
+      "admissible_mr_set": [
+        "node-permutation",
+        "conservation",
+        "mirror-y"
+      ],
+      "gate_excluded_mr": [],
+      "arm1_validity_gated_mr": {
+        "detect": 5,
+        "total": 10,
+        "rate": 0.5,
+        "wilson95": [
+          0.2366,
+          0.7634
+        ]
+      },
+      "arm2_accuracy_monitor": {
+        "detect": 3,
+        "total": 10,
+        "rate": 0.3,
+        "wilson95": [
+          0.1078,
+          0.6032
+        ]
+      },
+      "arm3_gate_value": "not separately run on MGN; the ungated-generic gate value is measured on PointMLP (C43)",
+      "complementarity_2x2": {
+        "both": 3,
+        "mr_only": 2,
+        "accuracy_only": 0,
+        "neither": 5
+      },
+      "arms_run": [
+        "arm1",
+        "arm2"
+      ]
+    },
+    {
+      "sut": "cylinder-flow PointMLP (row-wise, no message passing)",
+      "source_claims": [
+        "C42",
+        "C43"
+      ],
+      "admissible_mr_set": [
+        "node-permutation",
+        "conservation",
+        "mirror-y"
+      ],
+      "gate_excluded_mr": [],
+      "arm1_validity_gated_mr": {
+        "detect": 13,
+        "total": 20,
+        "rate": 0.65,
+        "wilson95": [
+          0.43285427668523624,
+          0.818808175898918
+        ]
+      },
+      "arm2_accuracy_monitor": {
+        "detect": 6,
+        "total": 20,
+        "rate": 0.3,
+        "wilson95": [
+          0.1454772448676043,
+          0.5189728183535235
+        ]
+      },
+      "arm3_gate_value": {
+        "admitted_max_false_positive": 0.0,
+        "rejected_templates_flagging_fault_free_sut": "6/6",
+        "reading": "gate-admitted detectors raise no baseline false alarm; gate-rejected templates all fire on the correct SUT -- the gate removes the false-alarming detectors"
+      },
+      "complementarity_2x2": {
+        "both": 4,
+        "mr_only": 9,
+        "accuracy_only": 2,
+        "neither": 5
+      },
+      "arms_run": [
+        "arm1",
+        "arm2",
+        "arm3"
+      ]
+    },
+    {
+      "sut": "compressible airfoil PhysicsNeMo MeshGraphNet (converged, C35)",
+      "source_claims": [
+        "C35",
+        "C36"
+      ],
+      "admissible_mr_set": [
+        "node-permutation",
+        "conservation"
+      ],
+      "gate_excluded_mr": [
+        "mirror-y (non-zero angle of attack: boundary-precondition gate rejects)"
+      ],
+      "arm1_validity_gated_mr": {
+        "per_trajectory_union": [
+          0.3,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        "robustly_detected_mutants": [
+          "NS_skip_denorm"
+        ],
+        "node_permutation_detection_rate": 0.0,
+        "conservation_robustly_localizes": [
+          "normalization_scale_fault"
+        ]
+      },
+      "arm2_accuracy_monitor": "GPU-pending (requires the live PhysicsNeMo airfoil model)",
+      "arm3_gate_value": "GPU-pending (requires the live PhysicsNeMo airfoil model)",
+      "arms_run": [
+        "arm1"
+      ]
+    }
+  ],
+  "duality_cross_sut": {
+    "principle": "the admissibility gate fixes each SUT's admissible MR set from its physics and numerics, and detector coverage tracks that set; a change of SUT or physics that makes an MR inadmissible removes exactly that MR's fault coverage",
+    "cross_sut_confirmations": [
+      "airfoil: non-zero angle of attack makes mirror-y inadmissible (boundary-precondition gate rejects), so the mirror-y fault coverage present on the cylinder is absent on the airfoil (C36)",
+      "the conservation MR localizes to different fault classes per SUT (cylinder: boundary + normalization; airfoil: normalization), so coverage follows each SUT's admissible relation rather than a fixed checklist (C36)",
+      "node-permutation is insensitive to invariant-preserving faults on every SUT (expected by-class), contributing zero detection while anchoring the representation contract (C36, C38, C42/C43)"
+    ],
+    "shared_localization_across_suts": [
+      "normalization_scale_fault"
+    ],
+    "falsifiability": "a fault caught by an MR the gate excluded on that SUT, or coverage surviving exclusion of the only MR measuring the affected invariant, would refute the duality; none observed across the converged SUTs",
+    "prior_synthesis": "the four-architecture-family duality synthesis is C47; this consolidation adds the three-arm complementarity layer across the converged SUTs"
+  },
+  "arm_coverage_matrix": {
+    "cylinder-flow MeshGraphNets": [
+      "arm1",
+      "arm2"
+    ],
+    "cylinder-flow PointMLP (row-wise, no message passing)": [
+      "arm1",
+      "arm2",
+      "arm3"
+    ],
+    "compressible airfoil PhysicsNeMo MeshGraphNet (converged, C35)": [
+      "arm1"
+    ]
+  },
+  "gpu_pending": "airfoil arm2 (accuracy-monitor) + arm3 (ungated-generic gate value) require the live PhysicsNeMo airfoil model (GPU); see docs/cloud_runbook/ext3_airfoil_three_arm_kickoff.md",
+  "no_overclaim_self_check": "every arm contrast is internal (gated vs ungated, MR vs accuracy on the same faults); the duality is a falsifiable cross-SUT prediction, not a law; zero baseline-ranking claims",
+  "generated_at": "2026-06-21T06:38:39Z"
+}

@@ -1575,6 +1575,36 @@ claims:
       - "Baseline superiority, or that the MR suite outperforms any monitor."
     blocked_reason: null
 
+  - claim_id: "C51-cross-sut-three-arm-consolidation"
+    status: "observed"
+    scope: "consolidation over committed artifacts (C38 cylinder MeshGraphNets, C42/C43 PointMLP, C35/C36 converged airfoil, C47 cross-architecture duality); no new model runs; the airfoil accuracy-monitor and ungated-generic arms are GPU-pending and explicitly marked not-yet-run"
+    evidence:
+      - "tools/run_ext3_cross_sut_three_arm.py"
+      - "research_assets/runs/ext3-cross-sut-three-arm/raw/cross_sut_three_arm_report.json"
+      - "research_assets/runs/detection-vs-accuracy/raw/metric_ledger.json"
+      - "research_assets/runs/pointmlp-three-arm-complementarity/raw/metric_ledger.json"
+      - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-seeded-fault-detection/raw/metric_ledger.json"
+    wording_allowed: >
+      Consolidating the per-SUT three-arm evidence into one cross-SUT view shows that, on
+      the converged SUTs, detector coverage tracks each SUT's admissible MR set fixed by the
+      gate. The validity-gated MR arm and the accuracy-monitor arm are complementary on both
+      cylinder SUTs (cylinder MeshGraphNets: MR 5/10, accuracy 3/10, two MR-only faults the
+      monitor leaves in band; PointMLP: MR 13/20, accuracy 6/20, nine MR-only faults), and on
+      PointMLP the ungated-generic gate value holds (gate-admitted detectors raise no baseline
+      false alarm while all six gate-rejected templates fire on the correct SUT). On the
+      converged airfoil the admissible set drops to two relations because the non-zero angle of
+      attack makes mirror-y inadmissible, so the mirror-y fault coverage present on the cylinder
+      is absent on the airfoil, and the conservation MR robustly localizes the gross
+      normalization fault -- the cross-SUT validity-coverage duality, confirmed with no
+      falsifying case across the converged SUTs. The airfoil accuracy-monitor and
+      ungated-generic arms are GPU-pending.
+    wording_forbidden:
+      - "A full three-arm result on the airfoil (its accuracy-monitor and ungated-generic arms are GPU-pending, not yet run)."
+      - "Baseline superiority, or that the MR suite outperforms the accuracy monitor or any baseline."
+      - "A validated or quantitative predictive coverage model, or a real-world fault-detection rate."
+      - "New seeded-fault or model executions (this claim is a consolidation over already-committed artifacts)."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
