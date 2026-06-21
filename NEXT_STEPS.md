@@ -1,6 +1,6 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-20 by claude-code (实证扩张:MVP+EXT-2/FNO/PINN 全完成,by-class+盲区在 4 架构族复现 C41-C46;下一步=整合进 main.tex → 重跑 panel)
+> Last updated: 2026-06-21 by claude-code (**EXT-1 airfoil 已训到收敛**:C35 roster 40ep/100tr GPU,loss 1.0→0.14,commit `1e7f7ed` on `cloud/1q-empirical-expansion`;下一步=整合 C41-C46+C35-converged 进 main.tex → 重跑 panel)
 
 ## 🟡 2026-06-20 冲中科院1区实证扩张计划(目标 TSE/TOSEM,根治 incremental+单SUT)
 
@@ -22,11 +22,20 @@
   - next-action: 工作流定位落点 + ID-free 措辞 + guard/budget 核对 → 执行编辑 → pytest/wordcount/build 验证
 - [ ] 整合后**重跑 gate panel**,看 EIC 是否从 major 上移(这才是改判关键)
 
-### 🔴 Blockers — EXT-1(需 Windows/WSL2 或云端 CUDA)
-- [ ] **EXT-1** airfoil 训到收敛(不同物理 compressible)— 代码已就绪(cuda 分支已补);唯缺训练配方 + GPU 时间;风险:配方问题可能仍训不收敛
+### ✅ Done — EXT-1 airfoil 训到收敛(2026-06-21,RTX 3090/WSL2,commit `1e7f7ed`)
+- [x] **EXT-1** airfoil 训到收敛(不同物理 compressible)— C35 roster **K=6 × 40ep × 100tr GPU**,
+  final loss **1.0(未收敛)→ 0.14**,rollout 1.0→0.92。配方=`--loss huber --grad-clip 1.0 --batch-size 12`
+  (heavy-tailed deltas 根治,见记忆 `ext1-airfoil-gpu-env`)。240 cell 全量重评估 + C36 seeded-fault 重跑。
+  - **关键发现(实证核心)**:typed verdicts **训练无关**——node-perm/mirror-y/incompressible ledger +
+    rubric 收敛前后**字节级不变**;仅量值指标(rollout/residual)变。强化 by-class 跨任务主张。
+  - **node-perm 精确性修复**:CUDA TF32/原子归约注入逐次 ~1e-6 噪声;`perm_residual_exact()` 单线程 CPU
+    计算(raw ~1e-9 留痕)+ 低于 1e-6 舍入地板归零为结构性 0.0(匹配 ledger "relative L2 0.0")。
+  - **claim-ledger C35 + manuscript §5.4.1 已同步**到收敛协议(40ep/100tr,rollout 0.92,residual 1.01)。
+  - 验证:两 validator rc=0、airfoil(5/5)+seeded-fault(5/5)守卫过、全量无新增失败、IST 10874≤15000。
+  - 已 rebase 整合远程 19 个提交(C48-C50 等)并 push。EXT-1 复现 harness `_ext1_*` 一并提交。
 
 ### 🟢 Backlog
-- [ ] **EXT-3** 三臂互补 + duality 跨全部收敛 SUT(MGN/PointMLP/FNO/PINN 已可立做,airfoil 收敛后更全)
+- [ ] **EXT-3** 三臂互补 + duality 跨全部收敛 SUT(MGN/PointMLP/FNO/PINN **+ airfoil 现已收敛**,五 SUT 全可立做)
 
 ### 🔵 Open Questions
 - [ ] 目标锁 **TSE** 还是 **TOSEM**?TSE=IEEEtran 单栏单盲(`venues/IEEE-TSE.md` 已有);TOSEM=acmart 双盲(需新建 `venues/TOSEM.md` + §15 双盲化审计);回退 IST 零切换成本。**venue 未定前不要双盲化**(过早匿名化反伤)。
