@@ -1,6 +1,6 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-21 by claude-code (**IST 成熟度面板(5模型设计者/执行者拆分)已跑通**:maturity 61.2/100、overall 7.4、major(4:1);最具 ROI=密度/结构手术。详见顶部 2026-06-21 小节。上一条:EXT-1 airfoil 已训到收敛 C35 commit `1e7f7ed`)
+> Last updated: 2026-06-21 by claude-code (**最高-ROI 已执行**:任务2 related-work 锐化(已在 `eef25d0`)+ 任务1a 密度手术 §444/§449→Appendix C;EIC-集成面板 maturity 60.9→63.3、clarity 6.27→6.8、verdict 4:1→3:2 向 minor。详见顶部 2026-06-21 小节。)
 
 ## 🟢 2026-06-21 IST 成熟度量化考核(academic-paper-reviewer 设计者 + 5 模型网关执行者)
 
@@ -10,7 +10,9 @@
 - **差距(跨评审共识)**:G1 过度扩张稀释核心(4/5);G2 冗长+内联 boundary-claiming 拖 clarity(glm clarity=4,需压~35%);G3 非独立格(K=6/Wilson)被读成推断性 over-claim(3/5,实为标注不显眼);G4 novelty 增量(结构天花板);G5 单 CFD 承重+operator-floor 未跨网格泛化(对 IST 过度要求)。
 - **最具 ROI=密度/结构手术**(纯 prose+重排,零新实验/GPU/凭据):二级层(PINN/FNO/airfoil/OpenMC+跨程序审计)入限定附录 + 内联 caveat 归并进单一 "Scope and boundary of evidence" 子节(**重定位非删除**,绕诚实守卫)+ 非独立格描述性框定做显眼一致。3/5 highest-ROI 投票指向此,命中两绑定低维+G1。**诚实边界**:prose-only 历史已触平台(v29→v30 clarity 仅 +0.6),能把 major 下沿推到 minor 边界,**不破 novelty 天花板**(G4 无廉价解,投 IST 已接受风险)。次优=related-work 锐化(grok,1-2 引用抬 novelty);最低 ROI=operator-floor 跨网格(新实验+GPU,冲 1 区成本)。
 - **EIC 去偏复跑(用户:gpt-5.5 有偏见→EIC 改 3 模型综合)**:EIC 席=gpt-5.5+claude-opus-4-7+grok-4.3 均值合成一席(gpt 稀释 1/3),其余 4 专家席不变;runner 同文件加 ensemble 支持,产物 `research_assets/runs/ist-maturity-panel-eic3/`。**反直觉发现:gpt-5.5 在 EIC 角色是中位/偏严票(maturity 62、clarity 5 最狠),不是高估离群点;EIC 席真正离散=opus(宽松 75/minor) vs grok(严苛 53/major) 22 分裂口,真乐观偏见来自 opus 而非 gpt**。**去偏后面板基本不动**:maturity 61.2→60.9、overall 7.40→7.41、accept 0.59→0.599、major(4:1) 不变、绑定低维仍 clari 6.27/empir 6.53、scope 9.0。EIC 集成内 gpt+grok 两票独立重提 G1/G2/G3 且 highest-ROI 同指密度手术(2:1,opus 指向昂贵 floor 跨网格)。→ **差距/理由/ROI 非 gpt 偏见产物,7 模型实例复现同画像,结论强化**。clarity 绑定低被 gpt(5)+glm(4) 双模型证实。
-- **未改动 manuscript**。待用户拍板是否执行密度手术。
+- **执行最高-ROI(用户:先做2再做1)**:**任务2 related-work 锐化**(已在 `eef25d0`,云端会话提交)——L165 合成句把数值可判定性 floor 闸顶为相对 Eniser relaxation/Duque-Torres constraint 的 crisp delta + "先于任何故障/SUT 固定的离散化属性"消解 tautology(对症 grok 的 novelty/tautology);目标引用(Kanewala 簇/Eniser/Duque-Torres/MetaTrimmer)全已在 bib,零新 cite/C-ID。**任务1a 密度手术第一块**——§444(secondary baselines/external-scope)+§449(PINN/FNO cross-family)整段重定位入新 **Appendix C**,Results 引言 `\ref` 重指 app:secondary + 一句指针;**重定位非删除**,守卫全 presence-anywhere(374 assertIn/0 顺序检查)故钉死串随文存活。验证:444 tests、xelatex 49pp 0 真实 undefined/0 Missing/0 Overfull>50pt/0 Error、em-dash 0、C-ID 7≤10、wordcount 12737≤15000。
+- **量化收益(EIC-集成面板,手术前→后)**:maturity 60.9→**63.3**、**clarity 6.27→6.8(靶维命中)**、accept 0.599→0.609、verdict major **4:1→3:2**(向 minor 靠一票);overall 7.41→7.42(clarity 涨被 novelty −0.27 噪声抵消)、**novelty 天花板未破(如预言)**。单次跑±0.3 噪声、两编辑合并测量。产物 `research_assets/runs/ist-maturity-panel-eic3-postsurgery/`。
+- **任务1 b/c 待定**:内联 boundary-claiming 归并进单一 "Scope and boundary of evidence" 子节 + 非独立格描述性框定显眼化(风险高于 1a,需重写 primary Results 密集散文,边际收益递减)。
 
 ## 🟡 2026-06-20 冲中科院1区实证扩张计划(目标 TSE/TOSEM,根治 incremental+单SUT)
 
