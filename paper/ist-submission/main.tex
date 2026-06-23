@@ -13,9 +13,19 @@
 \usepackage{enumitem}
 \usepackage[protrusion=true,expansion=false]{microtype}
 \usepackage{xurl}
+\usepackage{float}
 
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 \setlength{\emergencystretch}{3em}
+
+%% Float placement: keep full-width tables near their first mention instead of
+%% deferring tall floats to the end of the document.
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.7}
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{5}
 
 \journal{Information and Software Technology}
 
@@ -117,7 +127,7 @@ The single methodological idea is to gate a candidate relation's admissibility o
 
 \textbf{Bounded empirical utility.} The case studies evaluate what this workflow adds beyond rollout accuracy, generic MR generation, and LLM-assisted MR candidate elicitation, drawing primarily on MeshGraphNets cylinder-flow runs with supporting airfoil, PINN, and FNO checks (Table~\ref{tab:rq-contribution-evidence}). Crucially, this utility is a demonstrated change in V\&V outcomes rather than bookkeeping: on a converged surrogate the gate keeps the detector that raises no baseline false alarm while excluding templates that all do, and on a second CFD task it rejects a continuity relation it only defers on cylinder flow. The admissible MR set is also used to interpret fault-detection boundaries and blind spots, but this coverage reading is a discussion implication of the admitted relations rather than a separate formal research question.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \caption{Research questions, contributions, and evidence locations. Coverage is listed as a bounded implication, not as a formal research question.}
 \label{tab:rq-contribution-evidence}
@@ -164,7 +174,7 @@ Three contemporary strands are closest to this paper. Yang and Chui \citep{yang2
 
 The present work combines these ideas in a SciML-specific V\&V workflow. From physics-based MR testing it takes relation-level checks; from relaxations it takes the need for calibrated tolerances; from violation-attribution work it takes the need to avoid treating inapplicability as a SUT failure. What none of these strands supplies is the element doing the load-bearing work here: admissibility is made contingent on numerical decidability. Relaxations attach a tolerance to an oracle, and constraint- or attribution-based work decides whether a relation applies to an input, but neither requires the verdict tolerance to dominate the measuring operator's intrinsic error floor, a property of the discretization fixed before any fault or SUT is considered. That floor gate, not the recording discipline, is what is genuinely new here. The admissibility decision, tolerance rationale, executable asset, and typed verdict are then recorded together and tied to evidence artifacts.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering\footnotesize
 \caption{Closest-prior capability matrix. The table positions the paper against capabilities needed by RQ0--RQ4; it does not assert that prior work should have solved the SciML-specific combination.}
 \label{tab:closest-prior-positioning}
@@ -231,7 +241,7 @@ This classification is used only to locate the source of a candidate. The same r
 
 A candidate relation is an \emph{admissible MR} only when four conditions hold together. First, it must have a physical or software basis. Second, its transformation preconditions must hold for the source and follow-up cases. Third, boundary conditions and output mappings must remain compatible after transformation. Fourth, the verdict must be numerically decidable: the tolerance must dominate the intrinsic error floor of the measuring operator. None of these conditions is optional.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \caption{Admissibility gate, MR-card fields, and verdict semantics. This is the method table for RQ1--RQ3.}
 \label{tab:rubric}
@@ -314,7 +324,7 @@ Rollout accuracy, residual/UQ diagnostics, expert-designed candidates, generic M
 
 Table~\ref{tab:rqmap} maps the research questions to evaluation evidence, artifacts, units of analysis, and claim boundaries. It is a design table rather than a result table.
 
-\begin{table}[t]
+\begin{table}[H]
 \centering
 \caption{Evaluation design by research question.}
 \label{tab:rqmap}
