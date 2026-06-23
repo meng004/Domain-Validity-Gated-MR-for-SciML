@@ -1,6 +1,16 @@
 # NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
 
-> Last updated: 2026-06-21（晚）by claude-code (**venue 锁定 IST**;EIC 通读裁定=related-work 合规(强项)、决定 Major Revision(有接收路径)、最高-ROI=零成本 novelty 框定。**已执行+投稿流水线全过**:cover-letter 对齐正文保守框定 commit `c2e087b`。详见顶部 2026-06-21（晚）小节。)
+> Last updated: 2026-06-22 by claude-code (**采用 canonical 两层 MetaPattern 模型**:§3.2 Yang 三层→L1 五元模式+L2 十族 a–j、preamble vendored 符号宏、§3.5 解释协议、§4.1 锚到 a–j、术语弃 block/NOETHER-style;commits `0e0163e`(框架)+ 本次 §4 对齐提交。详见顶部 2026-06-22 小节。下方 2026-06-21（晚）为前序投稿就绪小结。)
+
+## 🟢 2026-06-22 采用 canonical 两层 MetaPattern 模型(元模式定义/术语/符号系统)
+- **权威源**:`P1-MetaPattern/shared/two_layer_canon.{md,tex}`(分支 `claude/b1-realbug-2026-06-21`),single source of truth。投稿包自包含→符号宏 **vendored** 进 preamble(不跨仓 `\input`)。用户拍板 target=**仅 main.tex**(manuscript.md 不动)。
+- **两层模型**:L1 元模式=最小代数基生成的 MR 等价类,共 5(群作用 G/偏序 O_≤/自伴 T*/时间反演对合 𝒯*_rev/参数化极限 ℒ*→ m_inv/m_mono/m_adj/m_rev/m_conv);L2 MR family=经 `Translate` 实例化,共 10 族 a–j,一对多:**G→{a 等变,b 守恒}, T*→{c 自伴,d 伴随对偶}, 𝒯*→{e 时间反演}, O_≤→{f 静态序,g 动态形状}, ℒ*→{h 收敛,i 精度阶,j 表示不变}**。
+- **关键 canonical 一致点(纠正前序误派生)**:**守恒=m_inv**(Noether 对应,非独立结构);**节点置换=族 j 表示不变,归 m_conv**(非 m_inv);镜像-y=族 a 等变。
+- **cylinder-flow 实例化(忠实)**:强实例 a/b/j/h-i;f 候选未跑;**e 黏性流为空 by construction**;c-d 仅 PINN/FNO 扩展。
+- **改动(commit `0e0163e`)**:preamble 符号宏;§3.2 候选来源全替换为两层模型;§3.5 解释协议 Yang→两层位置;3 处"NOETHER-style organization"→"NOETHER two-layer MetaPattern model";yang2020hierarchical 保留为"被取代旧分类"(仍被引)。
+- **§4 对齐(本次提交)**:§4.1 Evaluation logic 加 a–j 族指针句把实验设计锚到 §3.2;§5.8 "conservation MR class"→"MR family (b)"。
+- **诚实边界**:§3.5 D 轴的"across MR classes"(L309/L528)**未改**——与 `test_phase9`(读 main.tex+manuscript.md)+ claim-ledger(`test_p3`)+ manuscript.md 三处缠绕,改它超出"仅 main.tex"范围。若日后要全库统一术语,需同步 manuscript.md + ledger + 2 guard。
+- **验证**:444 tests / 编译 0 错误·0 undefined ctrl seq·0 LaTeX warning·0 Overfull>40pt·50pp / bib 0 undefined·0 uncited / em-dash 0 / wordcount 12965≤15000(headroom 2036)/ secrets 0。
 
 ## 🟢 2026-06-21（晚）EIC 通读裁定 + venue 锁定 IST + 最高-ROI cover-letter 对齐(投稿流水线全过)
 - **用户拍板:目标期刊锁定 IST**(解决历史 🔵 TSE/TOSEM 开放问题;不双盲化、零切换成本)。
