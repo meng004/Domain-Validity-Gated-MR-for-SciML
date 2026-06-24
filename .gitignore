@@ -18,6 +18,12 @@ submissions/IST/*.spl
 submissions/IST/*.bbl
 submissions/IST/*.log
 submissions/IST/*.raw.tex
+manuscript/*.aux
+manuscript/*.blg
+manuscript/*.spl
+manuscript/*.bbl
+manuscript/*.log
+manuscript/*.raw.tex
 dist/
 *.tar.gz
 

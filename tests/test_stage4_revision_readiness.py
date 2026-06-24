@@ -7,10 +7,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT = ROOT / "manuscript" / "manuscript.md"
-IST_MAIN = ROOT / "submissions" / "IST" / "main.tex"
+IST_MAIN = ROOT / "manuscript" / "main.tex"
 STAGE4_REVIEW = ROOT / "paper" / "24_stage4_revision_re_review.md"
-LATEX_LOG = ROOT / "submissions" / "IST" / "main.log"
-BIB = ROOT / "submissions" / "IST" / "main.bbl"
+LATEX_LOG = ROOT / "manuscript" / "main.log"
+BIB = ROOT / "manuscript" / "main.bbl"
 PDF = ROOT / "submissions" / "IST" / "main.pdf"
 
 

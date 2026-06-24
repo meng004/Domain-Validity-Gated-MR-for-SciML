@@ -20,8 +20,8 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MAIN_TEX = ROOT / "submissions" / "IST" / "main.tex"
-BBL = ROOT / "submissions" / "IST" / "main.bbl"
+MAIN_TEX = ROOT / "manuscript" / "main.tex"
+BBL = ROOT / "manuscript" / "main.bbl"
 
 _WORD = re.compile(r"[A-Za-z][A-Za-z0-9'\-]*")
 WORDS_PER_FLOAT = 200

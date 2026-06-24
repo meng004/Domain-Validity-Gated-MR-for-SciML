@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "research_assets/runs/operator-floor-analytic-bound/operator_floor_analytic_bound_report.json"
 TOOL = ROOT / "tools/run_operator_floor_analytic_bound.py"
 MANUSCRIPT = ROOT / "manuscript/manuscript.md"
-IST_MAIN = ROOT / "submissions/IST/main.tex"
+IST_MAIN = ROOT / "manuscript/main.tex"
 LEDGER = ROOT / "research_assets/experiments/claim-ledger.yml"
 
 

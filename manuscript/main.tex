@@ -67,11 +67,11 @@
 \fntext[orcid-jl]{ORCID: Jie Liu, 0009-0008-1970-8347.}
 \fntext[orcid-sy]{ORCID: Shiyu Yan, 0000-0001-7626-5185.}
 \affiliation[inst1]{organization={School of Computing, University of South China},
-  city={Hengyang}, country={China}}
+  city={Hengyang}, postcode={421001}, country={China}}
 \affiliation[inst2]{organization={Hunan Engineering Research Center of Software Evaluation and Testing for Intellectual Equipment},
-  city={Hengyang}, country={China}}
+  city={Hengyang}, postcode={421001}, country={China}}
 \affiliation[inst3]{organization={CNNC Key Laboratory on High Trusted Computing},
-  city={Hengyang}, country={China}}
+  city={Hengyang}, postcode={421001}, country={China}}
 
 \begin{abstract}
 \textbf{Context:}
@@ -219,7 +219,7 @@ SciML reliability research has developed complementary tools: physics residuals,
 \subsection{Hybrid ML-solver trust regions}
 \label{subsec:hybrid-trust}
 
-Hybrid ML-solver frameworks use residual thresholds or error estimates to decide when a learned component should be trusted \citep{baral2025xrepit,wang2025deeponetfe}. Such systems operationalize runtime trust regions, whereas the present study acts offline: physically derived transformations are applied before deployment to estimate where relation violations occur.
+Hybrid ML-solver frameworks use residual thresholds or error estimates to decide when a learned component should be trusted \citep{baral2025xrepit,wang2025deeponetfe}. Such systems operationalize runtime trust regions, whereas this study acts offline: physically derived transformations are applied before deployment to estimate where relation violations occur.
 
 The distinction from residual- and uncertainty-based trust estimation is deliberate. UQ, conformal prediction, residual-threshold trust regions, and physical-consistency diagnostics that score a physically derived residual on observed outputs \citep{najafi2026} locate unreliable behavior from observed inputs. The present method acts in relation space: it applies a controlled transformation and reports which necessary relation breaks under it, indexed by that transformation. The claim is complementarity, not superiority: relation-indexed evidence answers a different question from scalar accuracy, residual magnitude, or uncertainty.
 
@@ -306,7 +306,7 @@ An MR execution can produce: \textbf{pass} (relation holds within tolerance); \t
 
 These verdicts form the two-dimensional space in Figure~\ref{fig:verdict-2d}. One axis is relation-violation magnitude, typically expressed as a violation-to-floor or violation-to-tolerance ratio. The other is domain-violation magnitude, meaning how far the transformed case lies outside the relation's validity domain. Low domain violation with high relation violation is the region that may be read as SUT inconsistency; high domain violation is out-of-relation-domain; a violation inside the error floor is a numerical-tolerance issue. This decomposition is the method's answer to RQ3.
 
-In the present study, the domain-violation coordinate is operationalized per relation from committed measurements. For mirror-y, $D = m/(m+1)$, where $m$ is the worst reflected-node placement error in median-edge-length units. The synthetic symmetric mesh scores $D \approx 0$, whereas the real asymmetric evaluation mesh scores $D = 0.51$. Other MR families use their own precondition measurements. These $D$ values denote structural placement within each relation's own validity domain: $D$ is a per-relation normalized coordinate, not a cross-relation calibrated metric, and the values cannot be averaged or ranked across MR families; they are read per relation, not as a calibrated boundary measurement. A cross-relation calibration would need to normalize each family by its own admissibility boundary, mapping every gate threshold to a common $D_{\mathrm{cal}} = 1$; that calibration is future work.
+In this study, the domain-violation coordinate is operationalized per relation from committed measurements. For mirror-y, $D = m/(m+1)$, where $m$ is the worst reflected-node placement error in median-edge-length units. The synthetic symmetric mesh scores $D \approx 0$, whereas the real asymmetric evaluation mesh scores $D = 0.51$. Other MR families use their own precondition measurements. These $D$ values denote structural placement within each relation's own validity domain: $D$ is a per-relation normalized coordinate, not a cross-relation calibrated metric, and the values cannot be averaged or ranked across MR families; they are read per relation, not as a calibrated boundary measurement. A cross-relation calibration would need to normalize each family by its own admissibility boundary, mapping every gate threshold to a common $D_{\mathrm{cal}} = 1$; that calibration is future work.
 
 \begin{figure}[!htbp]
 \centering

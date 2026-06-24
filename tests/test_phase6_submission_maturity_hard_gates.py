@@ -12,7 +12,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-IST_MAIN = ROOT / "submissions" / "IST" / "main.tex"
+IST_MAIN = ROOT / "manuscript" / "main.tex"
 MANUSCRIPT = ROOT / "manuscript" / "manuscript.md"
 PHASE5_TRIAGE = ROOT / "paper" / "33_phase5_review_panel_triage.md"
 

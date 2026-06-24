@@ -7,8 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT = ROOT / "manuscript" / "manuscript.md"
-IST_MAIN = ROOT / "submissions" / "IST" / "main.tex"
-BIB = ROOT / "submissions" / "IST" / "references.bib"
+IST_MAIN = ROOT / "manuscript" / "main.tex"
+BIB = ROOT / "manuscript" / "references.bib"
 CITATION_AUDIT = ROOT / "paper" / "citation_audit.md"
 STAGE25_AUDIT = ROOT / "paper" / "22_stage2p5_integrity_audit.md"
 STAGE3_REVIEW = ROOT / "paper" / "23_stage3_reviewer_simulation.md"

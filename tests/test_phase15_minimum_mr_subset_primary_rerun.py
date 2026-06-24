@@ -19,7 +19,7 @@ DIFFUSION_PINN_RERUN = ROOT / (
     "diffusion2d-pinn-witness/abd_witness_report.json"
 )
 MANUSCRIPT = ROOT / "manuscript/manuscript.md"
-IST_MAIN = ROOT / "submissions/IST/main.tex"
+IST_MAIN = ROOT / "manuscript/main.tex"
 
 
 class Phase15MinimumMrSubsetPrimaryRerunTest(unittest.TestCase):

@@ -50,7 +50,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 # Review exactly what is submitted: the LaTeX source is the single source of truth.
-PAPER = ROOT / "submissions" / "IST" / "main.tex"
+PAPER = ROOT / "manuscript" / "main.tex"
 OUTDIR = ROOT / "research_assets" / "runs" / "ist-maturity-panel-eic3"
 # glm-5.1 / grok are reasoning models that can spend the whole budget on hidden
 # reasoning and emit empty content; the ladder gives them headroom.

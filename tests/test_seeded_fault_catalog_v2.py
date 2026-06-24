@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "research_assets/runs/seeded-fault-catalog-v2/raw/metric_ledger.json"
 CLAIM_LEDGER = ROOT / "research_assets/experiments/claim-ledger.yml"
 MANUSCRIPT = ROOT / "manuscript/manuscript.md"
-IST_MAIN = ROOT / "submissions/IST/main.tex"
+IST_MAIN = ROOT / "manuscript/main.tex"
 
 
 class SeededFaultCatalogV2Test(unittest.TestCase):

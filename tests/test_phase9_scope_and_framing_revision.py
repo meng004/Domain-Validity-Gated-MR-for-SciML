@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT = ROOT / "manuscript/manuscript.md"
-IST_MAIN = ROOT / "submissions/IST/main.tex"
+IST_MAIN = ROOT / "manuscript/main.tex"
 AUDIT = ROOT / "research_assets/runs/minimum-mr-subset-external-scope-audit/minimum_mr_subset_scope_audit.json"
 
 

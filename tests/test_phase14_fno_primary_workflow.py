@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "research_assets/runs/fno-primary-workflow/fno_primary_workflow_report.json"
 MANUSCRIPT = ROOT / "manuscript/manuscript.md"
-IST_MAIN = ROOT / "submissions/IST/main.tex"
+IST_MAIN = ROOT / "manuscript/main.tex"
 
 
 class Phase14FnoPrimaryWorkflowTest(unittest.TestCase):

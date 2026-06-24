@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "research_assets/runs/domain-violation-score/domain_violation_report.json"
 MANUSCRIPT = ROOT / "manuscript/manuscript.md"
-LATEX = ROOT / "submissions/IST/main.tex"
+LATEX = ROOT / "manuscript/main.tex"
 
 
 class TestDomainViolationScore(unittest.TestCase):

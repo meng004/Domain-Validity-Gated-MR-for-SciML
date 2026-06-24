@@ -21,7 +21,7 @@ DIFF_REPORT = DIFF_DIR / "pinn_mr_report.json"
 DIFF_CKPT = DIFF_DIR / "sut/checkpoint.pt"
 DIFF_REF = DIFF_DIR / "reference_solution.npz"
 MANUSCRIPT = ROOT / "manuscript/manuscript.md"
-LATEX = ROOT / "submissions/IST/main.tex"
+LATEX = ROOT / "manuscript/main.tex"
 LEDGER = ROOT / "research_assets/experiments/claim-ledger.yml"
 
 

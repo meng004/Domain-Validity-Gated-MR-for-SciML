@@ -1,9 +1,5 @@
 # Cover Letter: Information and Software Technology (regular paper)
 
-> Signature filled from the manuscript author block. **Only remaining author input:** the
-> suggested/opposed reviewers line below (optional; Editorial Manager collects these in its
-> own form, so replace `[Reviewer 1/2/3, ...]` with real, conflict-free names or delete the line).
-
 To the Editor-in-Chief
 Information and Software Technology
 
@@ -22,8 +18,6 @@ We submit our manuscript, "Domain-Validity-Gated Metamorphic Testing of Scientif
 **Scope and honesty.** We state the boundary plainly. The paper is a V&V method paper, not a claim of superiority over accuracy- or uncertainty-based validation, and the empirical evidence is deliberately scoped (one primary task family, bounded cross-family and cross-program checks); the coverage implication is stated as a qualitative, falsifiable hypothesis with its refutation conditions made explicit. We believe this fit, a software-testing methodology contribution for an emerging and consequential class of systems, matches IST's scope and its emphasis on empirical software-engineering research.
 
 **Declarations.** This manuscript is original, has not been published previously, and is not under consideration elsewhere. All authors have approved the submission. We declare no competing interests. Our use of generative-AI tools (restricted to code scaffolding, copy-editing, and reference cross-checking, with no AI-generated data, results, or citations) is declared in the manuscript. The work was supported by the funders acknowledged in the manuscript.
-
-We suggest the following potential reviewers, with no conflict of interest: [Reviewer 1, affiliation, email]; [Reviewer 2, affiliation, email]; [Reviewer 3, affiliation, email]. We request the exclusion of [optional].
 
 Thank you for considering our submission.
 
