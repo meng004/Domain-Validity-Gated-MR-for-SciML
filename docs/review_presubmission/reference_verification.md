@@ -1,6 +1,6 @@
 # Reference verification — pre-submission (§8.5 hard-block gate)
 
-> Date: 2026-06-17 · Venue: Elsevier IST · Bib: `paper/ist-submission/references.bib` (33 entries)
+> Date: 2026-06-17 · Venue: Elsevier IST · Bib: `submissions/IST/references.bib` (33 entries)
 > Method: every entry verified against CrossRef via paper-search-mcp `get_crossref_paper_by_doi`
 > (DOI-first), with `search_crossref` / `search_dblp` / `search_arxiv` fallback. Each DOI was
 > opened and its returned title + author list + venue + volume/issue/pages compared field-by-field
@@ -49,7 +49,7 @@ sibling `kanewala2016graphkernel`, `mandrioli2025cps`, `raissi2019pinn`, `karnia
 
 ## Follow-up verification — Undermind + paper-search MCP (2026-06-18)
 
-Scope: current `paper/ist-submission/references.bib` after the Undermind-assisted related-work
+Scope: current `submissions/IST/references.bib` after the Undermind-assisted related-work
 expansion (41 entries) and the archived Undermind BibTeX at
 `research_assets/undermind/undermind_domain_gated_workflows.bib` (177 entries). Method:
 DOI-first CrossRef lookup via paper-search MCP for DOI-indexed works; arXiv/Semantic/OpenAlex/DBLP

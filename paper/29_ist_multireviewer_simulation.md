@@ -8,7 +8,7 @@ returned a structured report. The four reports were then merged into the
 meta-review below.
 
 Inputs each reviewer saw:
-- `paper/ist-submission/main.tex` (the submission as of commit `c92533d`)
+- `submissions/IST/main.tex` (the submission as of commit `c92533d`)
 - `CLAUDE.md` and `paper/28_ist_format_compliance_check.md` (IST hard
   requirements, word budget, etc.)
 - `research_assets/experiments/claim-ledger.yml` (C1–C13)

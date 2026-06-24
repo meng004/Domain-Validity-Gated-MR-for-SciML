@@ -1,6 +1,6 @@
 # 43 — §15 Journal Submission Audit (IST regular track)
 
-> Date: 2026-06-17 · Subject: `paper/ist-submission/main.tex` (Elsevier elsarticle).
+> Date: 2026-06-17 · Subject: `submissions/IST/main.tex` (Elsevier elsarticle).
 > Run after the phase-22 reframe (R2-1 cross-SUT, validity–coverage duality central
 > thesis, R2-3/R2-4). IST is **single-anonymized**, so author info is kept (not a
 > double-blind target). Verdict: **submission-ready, no blockers.**
@@ -39,11 +39,11 @@ Rasterized p1 (highlights), p30, p31. All render without overflow or overlap.
 
 ## Findings (non-blocking)
 1. **⚠ Stale intermediate in the submission folder.**
-   `paper/ist-submission/manuscript-body.raw.tex` is a tracked Pandoc intermediate
+   `submissions/IST/manuscript-body.raw.tex` is a tracked Pandoc intermediate
    that `main.tex` does **not** `\input` (main.tex is self-contained). No
    `build_submission.sh` exists, so the tarball is assembled by hand — exclude this
    file (or `git rm` / gitignore it) so it does not ship in the submission package.
-   **RESOLVED (commit `0b8fc12`):** `git rm --cached` + a `paper/ist-submission/*.raw.tex`
+   **RESOLVED (commit `0b8fc12`):** `git rm --cached` + a `submissions/IST/*.raw.tex`
    gitignore rule; the file is kept locally but removed from tracking and from any
    future submission tarball. 352 tests still pass.
 2. **ℹ `(R1)–(R4)` experiment labels** in §Results (fault-robustness battery) read as

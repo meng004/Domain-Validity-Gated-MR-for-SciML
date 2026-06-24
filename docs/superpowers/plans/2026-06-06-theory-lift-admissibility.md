@@ -48,11 +48,11 @@ pilot evidence.
 
 ## Files
 
-- paper/manuscript.md: abstract framing; §1 two-ideas paragraph; §2.6 delta para;
+- manuscript/manuscript.md: abstract framing; §1 two-ideas paragraph; §2.6 delta para;
   §2.7 structural-novelty sentence; §3.3 admissibility predicate + tolerance/floor;
   §3.5 two-axis paragraph + qualitative-boundary caveat; §6.3 applicability-map +
   guard.
-- paper/ist-submission/main.tex: mirror all of the above with LaTeX formatting; keep
+- submissions/IST/main.tex: mirror all of the above with LaTeX formatting; keep
   numbers identical to manuscript.md; rebuild PDF if texlive available.
 - README.md: replace the empty stub with a real project overview that carries the
   gap/positioning and the elevated framework framing (incorporates the user's design

@@ -2,7 +2,7 @@
 
 > Date: 2026-06-05  
 > Target venue: Information and Software Technology  
-> Checked source: `paper/ist-submission/main.tex`  
+> Checked source: `submissions/IST/main.tex`  
 > Pipeline lens: research -> write -> integrity -> review -> revise -> final integrity -> finalize
 
 ## 1. Current Pipeline Stage
@@ -28,7 +28,7 @@ The paper has a coherent IST-format draft, a method-centered framing, a bibliogr
 | Item | Current status |
 |---|---|
 | LaTeX template | Elsevier `elsarticle` IST-format draft in place. |
-| Current PDF | Builds successfully as `paper/ist-submission/main.pdf`. |
+| Current PDF | Builds successfully as `submissions/IST/main.pdf`. |
 | PDF length | 21 pages. |
 | Approximate word count | 4206 words from stripped LaTeX source. |
 | References | 22 BibTeX entries. |

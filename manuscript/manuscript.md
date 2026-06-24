@@ -599,7 +599,7 @@ authoritative runtime mapping is `claim-ledger.yml`.
 ## References
 
 Submission citation status is tracked in `paper/citation_audit.md` and the IST
-package bibliography at `paper/ist-submission/references.bib`. The current
+package bibliography at `submissions/IST/references.bib`. The current
 submission draft cites only keys that are backed by BibTeX entries and an audit
 row. The unverified `qi2025physicalfield` lead is excluded from the submission
 bibliography; the partially verified fluid-velocity lead is retained only in the

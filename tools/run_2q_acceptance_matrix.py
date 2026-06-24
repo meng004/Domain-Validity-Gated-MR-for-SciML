@@ -32,7 +32,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PAPER = ROOT / "paper" / "ist-submission" / "main.tex"
+PAPER = ROOT / "submissions" / "IST" / "main.tex"
 OUTDIR = ROOT / "research_assets" / "runs" / "tier2-acceptance-matrix"
 TOKEN_LADDER = (12000, 24000)
 

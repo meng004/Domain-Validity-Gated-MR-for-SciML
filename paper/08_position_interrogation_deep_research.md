@@ -1,7 +1,7 @@
 # 本文立场拷问报告（deep-research 第三轮）
 
 > 日期：2026-06-04
-> 对象：`paper/06_paper_plan_v2.md`、`paper/04_ist_outline_evidence_map.md`、`paper/manuscript.md`
+> 对象：`paper/06_paper_plan_v2.md`、`paper/04_ist_outline_evidence_map.md`、`manuscript/manuscript.md`
 > 方法：deep-research review mode + academic-paper-reviewer devil's advocate + research-evidence-gate。外部证据优先使用 IST 官方指南、ScienceDirect 专刊页、arXiv/PMLR/期刊原文、NVIDIA/DeepMind 一手页面。
 > 总裁决：**IST regular track 的大方向仍然合理，但当前主立场必须再降一档。最安全的论文不是 "NOETHER 证明/机械推导了物理 MR"，而是 "rubric-gated, NOETHER-informed, executable oracle-free testing framework for mesh-based neural surrogates"。**
 

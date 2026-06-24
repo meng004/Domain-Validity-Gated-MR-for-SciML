@@ -1,7 +1,7 @@
 # Academic Pipeline Quality Check
 
 > Date: 2026-06-05  
-> Source checked: `paper/ist-submission/main.tex`  
+> Source checked: `submissions/IST/main.tex`  
 > Mode: academic-pipeline mid-stage quality check, with reviewer-style diagnosis  
 > Figure policy for this check: **generated figures are held out and should not be inserted for now** because their design quality is not yet acceptable.
 

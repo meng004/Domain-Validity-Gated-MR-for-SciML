@@ -39,7 +39,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 # Review exactly what is submitted: the LaTeX source is the single source of truth.
-PAPER = ROOT / "paper" / "ist-submission" / "main.tex"
+PAPER = ROOT / "submissions" / "IST" / "main.tex"
 OUTDIR = ROOT / "research_assets" / "runs" / "tier1-maturity-panel"
 # Escalating ladder + a 3rd rung; glm-5.2 has emitted empty content on long inputs.
 TOKEN_LADDER = (16000, 28000, 40000)

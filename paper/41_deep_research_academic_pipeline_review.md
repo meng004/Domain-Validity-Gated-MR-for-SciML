@@ -4,7 +4,7 @@
 > Reviewer mode: literature-grounded peer review (paper-search-mcp deep research)
 > + §10/§11 academic-pipeline structured review + §10.6 Reviewer-2 adversarial pass.
 > Target venue: Elsevier Information and Software Technology (IST), regular track.
-> Subject of review: `paper/ist-submission/main.tex` (11,792 IST-counted words; 41 pp).
+> Subject of review: `submissions/IST/main.tex` (11,792 IST-counted words; 41 pp).
 > Scope note: this complements — does not replace — the gateway review panels
 > (v33–v36), which were LLM reviewers without literature access. The distinctive
 > value here is the literature audit the panels structurally cannot perform.

@@ -1,7 +1,7 @@
 # 48 — RQ-Driven Manuscript Restructuring Plan for IST
 
 > Date: 2026-06-18  
-> Target manuscript: `paper/ist-submission/main.tex`  
+> Target manuscript: `submissions/IST/main.tex`  
 > Target venue: Elsevier *Information and Software Technology* (IST), regular research paper  
 > Purpose: record the revised research questions and use them to guide a chapter-by-chapter restructuring of the manuscript.  
 > Scope: planning document only. It does not edit the submitted LaTeX manuscript and does not generate new figures.

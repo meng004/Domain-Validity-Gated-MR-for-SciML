@@ -16,7 +16,7 @@
 - `paper/01_journal_fit.md`：候选期刊适配分析与推荐。
 - `paper/02_paper_configuration.md`：Academic Paper Phase 0 配置记录。
 - `paper/04_ist_outline_evidence_map.md`：IST/v2.1 论文结构与证据地图。
-- `paper/manuscript.md`：Markdown 论文骨架，供后续扩展为完整稿。
+- `manuscript/manuscript.md`：Markdown 论文骨架，供后续扩展为完整稿。
 
 ## 3. 验收标准
 

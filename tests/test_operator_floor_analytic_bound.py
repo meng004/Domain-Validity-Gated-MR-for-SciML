@@ -16,8 +16,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "research_assets/runs/operator-floor-analytic-bound/operator_floor_analytic_bound_report.json"
 TOOL = ROOT / "tools/run_operator_floor_analytic_bound.py"
-MANUSCRIPT = ROOT / "paper/manuscript.md"
-IST_MAIN = ROOT / "paper/ist-submission/main.tex"
+MANUSCRIPT = ROOT / "manuscript/manuscript.md"
+IST_MAIN = ROOT / "submissions/IST/main.tex"
 LEDGER = ROOT / "research_assets/experiments/claim-ledger.yml"
 
 

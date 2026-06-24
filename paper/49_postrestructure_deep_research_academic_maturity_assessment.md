@@ -1,7 +1,7 @@
 # 49 — 重构后 deep-research + academic-pipeline 学术成熟度评估
 
 > 日期：2026-06-18  
-> 评估对象：`paper/ist-submission/main.tex`  
+> 评估对象：`submissions/IST/main.tex`  
 > 目标期刊：Elsevier *Information and Software Technology*（IST）regular research paper  
 > 方法：deep-research 证据审计 + academic-pipeline Stage 2.5/3 思路 + 外部 OpenAI-compatible LLM 网关五模型 reviewer panel。  
 > 输出语言：中文。  
@@ -13,7 +13,7 @@
 证据来源包括：
 
 - IST 官方 Guide for Authors：`https://www.sciencedirect.com/journal/information-and-software-technology/publish/guide-for-authors`
-- 当前稿件：`paper/ist-submission/main.tex`
+- 当前稿件：`submissions/IST/main.tex`
 - 当前 panel 原始报告：`research_assets/runs/academic-review-panel-20260618-postrestructure/review_panel_report.json`
 - 本地测试与编译输出：`pytest`、`pdflatex+bibtex`、`tools/ist_wordcount.py`
 - 既有 deep-research 文献审计：`paper/41_deep_research_academic_pipeline_review.md`

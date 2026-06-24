@@ -1,7 +1,7 @@
 # 50 — EIC-facing novelty and evidence compression repair plan
 
 > Date: 2026-06-18  
-> Target manuscript: `paper/ist-submission/main.tex`  
+> Target manuscript: `submissions/IST/main.tex`  
 > Goal: improve EIC and Reviewer-2 readability without adding experiments or expanding claims.
 
 ## Overall Goal
@@ -83,6 +83,6 @@ Run:
 ```bash
 rtk .venv/bin/python tools/ist_wordcount.py
 rtk .venv/bin/python -m pytest tests/test_p0_submission_readiness.py tests/test_stage2p5_submission_readiness.py
-rtk zsh -lc 'cd paper/ist-submission && TEXMFVAR=/private/tmp/codex-texmf-var TEXMFCONFIG=/private/tmp/codex-texmf-config pdflatex -interaction=nonstopmode main.tex && bibtex main && TEXMFVAR=/private/tmp/codex-texmf-var TEXMFCONFIG=/private/tmp/codex-texmf-config pdflatex -interaction=nonstopmode main.tex && TEXMFVAR=/private/tmp/codex-texmf-var TEXMFCONFIG=/private/tmp/codex-texmf-config pdflatex -interaction=nonstopmode main.tex'
+rtk zsh -lc 'cd submissions/IST && TEXMFVAR=/private/tmp/codex-texmf-var TEXMFCONFIG=/private/tmp/codex-texmf-config pdflatex -interaction=nonstopmode main.tex && bibtex main && TEXMFVAR=/private/tmp/codex-texmf-var TEXMFCONFIG=/private/tmp/codex-texmf-config pdflatex -interaction=nonstopmode main.tex && TEXMFVAR=/private/tmp/codex-texmf-var TEXMFCONFIG=/private/tmp/codex-texmf-config pdflatex -interaction=nonstopmode main.tex'
 ```
 

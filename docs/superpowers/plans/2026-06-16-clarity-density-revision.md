@@ -2,7 +2,7 @@
 
 > **Plan-first per user request.** Do NOT edit the manuscript until this plan is
 > approved. Every prose edit is **dual-source**: it must land identically in
-> BOTH `paper/manuscript.md` and `paper/ist-submission/main.tex`. After each
+> BOTH `manuscript/manuscript.md` and `submissions/IST/main.tex`. After each
 > phase: run the prose-guard tests + `tools/ist_wordcount.py` + a `pdflatex`
 > clean-room compile.
 

@@ -2,7 +2,7 @@
 
 > Date: 2026-06-05  
 > Skill mode used: `academic-paper plan -> full`  
-> Source edited: `paper/ist-submission/main.tex`  
+> Source edited: `submissions/IST/main.tex`  
 > Figure policy: generated figures remain excluded; no figure was inserted into the manuscript.
 
 ## 1. Plan
@@ -72,7 +72,7 @@ TEXMFVAR=/private/tmp/codex-texmf-var TEXMFCONFIG=/private/tmp/codex-texmf-confi
 Status:
 
 - LaTeX compilation succeeded.
-- Output PDF: `paper/ist-submission/main.pdf`
+- Output PDF: `submissions/IST/main.pdf`
 - Current PDF length: 24 pages.
 - No figures are inserted in `main.tex`.
 

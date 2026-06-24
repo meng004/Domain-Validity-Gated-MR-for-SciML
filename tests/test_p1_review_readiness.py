@@ -11,8 +11,8 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-IST = ROOT / "paper" / "ist-submission" / "main.tex"
-BIB = ROOT / "paper" / "ist-submission" / "references.bib"
+IST = ROOT / "submissions" / "IST" / "main.tex"
+BIB = ROOT / "submissions" / "IST" / "references.bib"
 README = ROOT / "README.md"
 sys.path.insert(0, str(ROOT / "tools"))
 from ist_wordcount import ist_word_count  # noqa: E402

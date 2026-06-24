@@ -1,6 +1,6 @@
 # IST submission-maturity synthesis — 2026-06-20
 
-Three independent evidence streams on `paper/ist-submission/main.tex`
+Three independent evidence streams on `submissions/IST/main.tex`
 (commit `d8889e1`), for Elsevier Information and Software Technology regular track.
 
 ## Evidence streams

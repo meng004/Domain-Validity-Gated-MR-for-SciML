@@ -1,8 +1,8 @@
 # Academic Pipeline Progress and Quality Update
 
 > Date: 2026-06-05  
-> Source checked: `paper/ist-submission/main.tex`  
-> PDF checked: `paper/ist-submission/main.pdf`  
+> Source checked: `submissions/IST/main.tex`  
+> PDF checked: `submissions/IST/main.pdf`  
 > Mode: academic-pipeline progress + quality assessment  
 > Figure policy: generated figures remain excluded. They are not inserted into the current manuscript.
 

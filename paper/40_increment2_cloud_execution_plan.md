@@ -101,8 +101,8 @@ python tools/validate_experiment_protocol.py; echo $?  # 0
    ```bash
    python tools/ist_wordcount.py     # total ≤ 11800（硬）。超了：先压别处，或把三态对照表计为 float;
                                      # 不擅自升 phase4 buffer（保持 11800）。
-   diff <(git show HEAD:paper/manuscript.md | grep -oP '\b\d+[-–]\w+' | sort -u) \
-        <(grep -oP '\b\d+[-–]\w+' paper/manuscript.md | sort -u)   # 数字前缀术语集应不变
+   diff <(git show HEAD:manuscript/manuscript.md | grep -oP '\b\d+[-–]\w+' | sort -u) \
+        <(grep -oP '\b\d+[-–]\w+' manuscript/manuscript.md | sort -u)   # 数字前缀术语集应不变
    ```
 
 ## 第 5 步：面板验证 v29 + 判读纪律

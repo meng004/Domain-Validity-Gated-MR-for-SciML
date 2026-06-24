@@ -29,7 +29,7 @@ Journal hierarchy:
 ## 4. Formatting Contract
 
 - Manuscript language: English.
-- Working format: Markdown scaffold in `paper/manuscript.md`.
+- Working format: Markdown scaffold in `manuscript/manuscript.md`.
 - Citation workflow: BibTeX keys in Markdown during drafting; final style deferred to the selected journal template.
 - Abstract format: IST structured abstract with **Context / Objective / Method / Results / Conclusion** headings.
 - Word limit: keep the full research paper below IST's 15,000-word limit.

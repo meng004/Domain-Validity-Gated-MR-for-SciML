@@ -55,9 +55,9 @@ Every conclusion must be traceable to one of:
   - Empty/no-result example ledger showing schema shape without empirical claims.
 - Create: `paper/reference_ledger.md`
   - Closest-work and citation-integrity ledger.
-- Modify: `paper/ist-submission/main.tex`
+- Modify: `submissions/IST/main.tex`
   - Only after ledger evidence exists; update related work and contributions without stronger claims.
-- Modify: `paper/manuscript.md`
+- Modify: `manuscript/manuscript.md`
   - Keep synchronized with the relevant textual changes in `main.tex` if it remains the plain-text mirror.
 
 ## Task 1: Research Asset Validator
@@ -342,8 +342,8 @@ first/only novelty, or submission-ready citation claims until those entries are
 upgraded or removed.
 
 **Files:**
-- Modify: `paper/ist-submission/main.tex`
-- Modify: `paper/manuscript.md`
+- Modify: `submissions/IST/main.tex`
+- Modify: `manuscript/manuscript.md`
 
 - [ ] **Step 1: Revise only claims supported by `paper/reference_ledger.md`**
 
@@ -369,7 +369,7 @@ Expected:
 
 - tests pass;
 - validator exits 0;
-- LaTeX creates `paper/ist-submission/main.pdf`;
+- LaTeX creates `submissions/IST/main.pdf`;
 - no fatal LaTeX error.
 
 ## Self-Review Checklist

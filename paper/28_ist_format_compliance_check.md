@@ -2,7 +2,7 @@
 
 Date: 2026-06-07
 Target: Elsevier *Information and Software Technology*, regular track.
-Source: `paper/ist-submission/main.tex` at HEAD `951ef4e`, after the 2026-06-07
+Source: `submissions/IST/main.tex` at HEAD `951ef4e`, after the 2026-06-07
 front-matter edits (title shortened, abstract rewritten to satisfy the 300-word
 cap, highlights tightened, CRediT / competing-interest / GenAI / data-availability
 sections added).
@@ -103,9 +103,9 @@ for reviewer-driven additions.
 
 ## Files touched in this pass
 
-- `paper/ist-submission/main.tex` (title, abstract, highlight h3+h4, keywords,
+- `submissions/IST/main.tex` (title, abstract, highlight h3+h4, keywords,
   added CRediT / competing-interest / GenAI / data-availability sections).
-- `paper/ist-submission/main.pdf` (rebuilt; 0 compile errors, 0 overfull boxes,
+- `submissions/IST/main.pdf` (rebuilt; 0 compile errors, 0 overfull boxes,
   0 unresolved citations).
 - `CLAUDE.md` (added; records the standing IST submission requirements).
 - `paper/28_ist_format_compliance_check.md` (this file).

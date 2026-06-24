@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "research_assets/runs/phase3-unified-fault-catalog/phase3_unified_fault_catalog.json"
-MANUSCRIPT = ROOT / "paper/manuscript.md"
+MANUSCRIPT = ROOT / "manuscript/manuscript.md"
 LEDGER = ROOT / "research_assets/experiments/claim-ledger.yml"
 
 

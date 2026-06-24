@@ -95,8 +95,8 @@ Expected: FAIL because the new manuscript sections, Stage 4 review record, and f
 ### Task 2: Add Reviewer-Facing Tables and Related-Work Positioning
 
 **Files:**
-- Modify: `paper/manuscript.md`
-- Modify: `paper/ist-submission/main.tex`
+- Modify: `manuscript/manuscript.md`
+- Modify: `submissions/IST/main.tex`
 
 - [ ] **Step 1: Add Related Work positioning**
 
@@ -128,10 +128,10 @@ Add a compact table covering:
 ### Task 3: Fix LaTeX Table Layout and Rebuild
 
 **Files:**
-- Modify: `paper/ist-submission/main.tex`
-- Generated: `paper/ist-submission/main.bbl`
-- Generated: `paper/ist-submission/main.log`
-- Generated: `paper/ist-submission/main.pdf`
+- Modify: `submissions/IST/main.tex`
+- Generated: `submissions/IST/main.bbl`
+- Generated: `submissions/IST/main.log`
+- Generated: `submissions/IST/main.pdf`
 
 - [ ] **Step 1: Reduce wide table pressure**
 
@@ -206,9 +206,9 @@ Ask a read-only subagent to check:
 ## Acceptance Criteria
 
 - `tests/test_stage4_revision_readiness.py` fails before implementation and passes after.
-- `paper/manuscript.md` and `paper/ist-submission/main.tex` contain both new compact tables.
+- `manuscript/manuscript.md` and `submissions/IST/main.tex` contain both new compact tables.
 - Related Work contains "What is new and what is not new".
 - `paper/24_stage4_revision_re_review.md` records Stage 4 revision and focused re-review status.
-- `paper/ist-submission/main.bbl`, `main.log`, and `main.pdf` are regenerated.
+- `submissions/IST/main.bbl`, `main.log`, and `main.pdf` are regenerated.
 - The final LaTeX log has no unresolved references and no `Overfull \hbox`.
 - Existing tests and validators pass.

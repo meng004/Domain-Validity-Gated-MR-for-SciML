@@ -16,7 +16,7 @@ OUT = ROOT / "research_assets/runs/production-grade-sut-extension/physicsnemo-mg
 REPORT = OUT / "physicsnemo_mgn_airfoil_workflow_report.json"
 RUBRIC = OUT / "physicsnemo_mgn_airfoil_rubric_decisions.json"
 CHECKPOINT = OUT / "physicsnemo_mgn_airfoil_checkpoint.pt"
-MANUSCRIPT = ROOT / "paper/manuscript.md"
+MANUSCRIPT = ROOT / "manuscript/manuscript.md"
 
 LEDGERS = [
     "node_permutation_metric_ledger.json",

@@ -168,8 +168,8 @@ be treated as obsolete for the regular-track target.
 
 ## Appendix B — Internal evidence pointers
 
-- Manuscript: `paper/manuscript.md` §5.3-§5.7, §6, §7, §8
-- IST submission: `paper/ist-submission/main.tex`
+- Manuscript: `manuscript/manuscript.md` §5.3-§5.7, §6, §7, §8
+- IST submission: `submissions/IST/main.tex`
 - Claim ledger: `research_assets/experiments/claim-ledger.yml` (C1-C13)
 - Empirical-extension plan: `docs/superpowers/plans/2026-06-06-empirical-enhancement-E1E2E3.md`
 - E1 aggregate: `research_assets/runs/multicheckpoint/e1_aggregate.json`

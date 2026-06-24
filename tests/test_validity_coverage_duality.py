@@ -16,7 +16,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-IST_MAIN = ROOT / "paper/ist-submission/main.tex"
+IST_MAIN = ROOT / "submissions/IST/main.tex"
 CROSS_SUT = (ROOT / "research_assets/runs/production-grade-sut-extension"
             / "physicsnemo-mgn-airfoil-seeded-fault-detection/raw/metric_ledger.json")
 CYLINDER = ROOT / "research_assets/runs/seeded-fault-detection/raw/metric_ledger.json"

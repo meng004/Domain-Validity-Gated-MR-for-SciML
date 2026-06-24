@@ -17,7 +17,7 @@ Move the paper from a minimal empirically supported method-paper draft to a subm
 ## Main Steps
 
 1. Add readiness tests before editing paper text.
-   - Test stale planned-study language is absent from `paper/manuscript.md` and `paper/ist-submission/main.tex`.
+   - Test stale planned-study language is absent from `manuscript/manuscript.md` and `submissions/IST/main.tex`.
    - Test PR4 bounded evidence wording is present in the IST package.
    - Test cited keys in the IST package exist in `references.bib` and are covered by a citation audit.
    - Test Stage 2.5 audit records claim-to-evidence links and blocked boundaries.
@@ -46,8 +46,8 @@ Move the paper from a minimal empirically supported method-paper draft to a subm
 - The new readiness test passes.
 - Existing PR4 evidence convergence tests pass.
 - Existing research-asset/protocol validators pass.
-- `paper/manuscript.md` no longer ends with a placeholder reference section.
-- `paper/ist-submission/main.tex` no longer contains planned-results language and includes PR4-bounded results.
+- `manuscript/manuscript.md` no longer ends with a placeholder reference section.
+- `submissions/IST/main.tex` no longer contains planned-results language and includes PR4-bounded results.
 - Every submission-cited key is represented in `references.bib` and `paper/citation_audit.md`.
 - Stage 2.5 audit can trace each major claim to a ledger, artifact, or external literature source.
 

@@ -6,12 +6,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MANUSCRIPT = ROOT / "paper" / "manuscript.md"
-IST_MAIN = ROOT / "paper" / "ist-submission" / "main.tex"
+MANUSCRIPT = ROOT / "manuscript" / "manuscript.md"
+IST_MAIN = ROOT / "submissions" / "IST" / "main.tex"
 STAGE4_REVIEW = ROOT / "paper" / "24_stage4_revision_re_review.md"
-LATEX_LOG = ROOT / "paper" / "ist-submission" / "main.log"
-BIB = ROOT / "paper" / "ist-submission" / "main.bbl"
-PDF = ROOT / "paper" / "ist-submission" / "main.pdf"
+LATEX_LOG = ROOT / "submissions" / "IST" / "main.log"
+BIB = ROOT / "submissions" / "IST" / "main.bbl"
+PDF = ROOT / "submissions" / "IST" / "main.pdf"
 
 
 def read(path: Path) -> str:

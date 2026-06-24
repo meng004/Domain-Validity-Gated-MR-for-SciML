@@ -126,8 +126,8 @@ points"，需要的是 rate 不是 point。E1 的全部工程模式（orchestrat
 
 ### Phase 4 — 仅删不增的清晰度手术（已执行）
 
-- **已执行（Phase 4 clarity surgery）**：`paper/manuscript.md` 从 13,134 words 降至
-  10,547 words，`paper/ist-submission/main.tex` 从 10,456 words 降至 8,113 words；IST-counted
+- **已执行（Phase 4 clarity surgery）**：`manuscript/manuscript.md` 从 13,134 words 降至
+  10,547 words，`submissions/IST/main.tex` 从 10,456 words 降至 8,113 words；IST-counted
   total 从 12,401 降至 10,087（headroom 4,913），超过原 −15% 目标。
 - **已执行（scope 收敛）**：§5.4–§5.7 的重复数值复述被压缩为 reviewer-facing summary；
   stale “only one trained SUT / comparator planned” wording 删除；blocked 口径收敛为 canonical

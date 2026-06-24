@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "research_assets/runs/llm-mr-baseline/llm_baseline_report.json"
 CANDIDATES = ROOT / "research_assets/runs/llm-mr-baseline/llm_candidates.json"
 VOTES = ROOT / "research_assets/runs/llm-mr-baseline/llm_votes.json"
-MANUSCRIPT = ROOT / "paper/manuscript.md"
+MANUSCRIPT = ROOT / "manuscript/manuscript.md"
 LEDGER = ROOT / "research_assets/experiments/claim-ledger.yml"
 
 EXPECTED_RATERS = {"glm-5.1", "kimi-k2.6", "deepseek-v4-flash"}

@@ -1098,7 +1098,7 @@ claims:
       - "research_assets/runs/seeded-fault-detection/raw/metric_ledger.json"
       - "research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-seeded-fault-detection/raw/metric_ledger.json"
       - "tests/test_validity_coverage_duality.py"
-      - "paper/ist-submission/main.tex"
+      - "submissions/IST/main.tex"
     wording_allowed: >
       We propose, and give confirming evidence for, a validity-coverage duality: the
       same physics-based admissibility gate that decides whether a metamorphic

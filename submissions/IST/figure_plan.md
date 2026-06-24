@@ -1,6 +1,6 @@
 # 插图规划 -- Rubric-Gated Oracle-Free Testing of Mesh-Based Neural Surrogates for Cylinder Flow
 
-> 源文件: `paper/ist-submission/main.tex`  
+> 源文件: `submissions/IST/main.tex`  
 > 评估日期: 2026-06-05  
 > 目标期刊: Information and Software Technology  
 > 使用技能: `paper-figure-planner` + `ppw:visualization`  

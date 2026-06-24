@@ -65,7 +65,7 @@ The local evidence supports method readiness, not empirical results.
 
 | Local artifact | Current status | Claim allowed |
 |---|---|---|
-| `paper/ist-submission/main.tex` | IST draft exists with method, worked examples, and blocked Results. | The paper has a coherent draft and cautious claim discipline. |
+| `submissions/IST/main.tex` | IST draft exists with method, worked examples, and blocked Results. | The paper has a coherent draft and cautious claim discipline. |
 | `research_assets/mr_cards/node_permutation_equivariance.json` | One design-time MR card exists. | A minimal MR asset format has been instantiated for node permutation. |
 | `research_assets/ledgers/candidate_ledger.json` | One design-time candidate decision exists. | Node permutation has been retained as a design-time representation MR, not as an empirical pass/fail result. |
 | `research_assets/ledgers/verdict_ledger.schema.json` and `.example.json` | Strict schema and no-run example exist. | Verdict classes and ledger shape are ready for future runs. |

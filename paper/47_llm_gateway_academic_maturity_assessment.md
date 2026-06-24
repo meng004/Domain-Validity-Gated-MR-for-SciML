@@ -1,7 +1,7 @@
 # 47 — LLM 网关多 Reviewer 学术成熟度评估
 
 > 日期：2026-06-18  
-> 评估对象：`paper/ist-submission/main.tex`  
+> 评估对象：`submissions/IST/main.tex`  
 > 目标期刊：Elsevier *Information and Software Technology*（IST）regular research paper  
 > 方法：deep-research 式期刊匹配与证据审计 + academic-pipeline Stage 2.5/3 入口 + 通过 `.env` 中 OpenAI-compatible 网关运行五模型 reviewer panel。
 
@@ -35,7 +35,7 @@
 
 - `tools/ist_wordcount.py`：**12,470 IST-counted words**，距离 15,000 上限仍有 **2,530 words** 余量。
 - `tests/test_p0_submission_readiness.py` + `tests/test_stage2p5_submission_readiness.py`：**17/17 passed**。
-- `paper/ist-submission/main.tex` 包含 structured abstract headings、3 个 figures、8 个 tables、CRediT、competing-interest、generative-AI 和 data-availability sections。
+- `submissions/IST/main.tex` 包含 structured abstract headings、3 个 figures、8 个 tables、CRediT、competing-interest、generative-AI 和 data-availability sections。
 - 既有投稿审计 `paper/43_journal_submission_audit.md` 显示 compile/audit clean，无投稿阻塞项。
 
 ### 证据完整性核对
@@ -44,7 +44,7 @@
 
 - `research_assets/experiments/evidence-package.md`
 - `research_assets/experiments/claim-ledger.yml`
-- `paper/ist-submission/main.tex`
+- `submissions/IST/main.tex`
 - `research_assets/runs/academic-review-panel-20260618-codex/review_panel_report.json`
 
 evidence package 和 claim ledger 支撑了稿件当前的谨慎表述：多项 claim 被明确标记为 observed、qualified、secondary 或 blocked。证据充分支持的内容包括 domain-validity rubric、MR-card execution path、bounded cylinder-flow results、FNO/PINN transfer evidence、PhysicsNeMo smoke-scale execution、seeded-fault stress tests、baseline scope contrasts，以及 artifact-backed claim boundaries。ledger **不支持** broad reliability claim、baseline superiority、real-world defect-rate claim 或 geometry-independent pass/fail rate。

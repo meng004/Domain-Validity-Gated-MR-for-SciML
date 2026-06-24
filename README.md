@@ -78,8 +78,8 @@ localization; runtime; reliability; model accuracy. The authoritative runtime cl
 
 ## Repository layout
 
-- `paper/manuscript.md` — working manuscript (source of truth for prose).
-- `paper/ist-submission/` — Elsevier/IST LaTeX package (`main.tex`, `references.bib`,
+- `manuscript/manuscript.md` — working manuscript (source of truth for prose).
+- `submissions/IST/` — Elsevier/IST LaTeX package (`main.tex`, `references.bib`,
   vendored `elsarticle` class). IST uses single-anonymized review, so the
   submission carries author names, affiliations, CRediT, and funding.
 - `paper/22_stage2p5_integrity_audit.md`, `paper/23_stage3_reviewer_simulation.md` —
@@ -103,13 +103,13 @@ python tools/validate_research_assets.py
 python -m unittest discover -s tests -v
 ```
 
-> **Fresh-clone note.** `paper/ist-submission/main.bbl` and `main.log` are gitignored
+> **Fresh-clone note.** `submissions/IST/main.bbl` and `main.log` are gitignored
 > regenerable LaTeX byproducts (they would otherwise carry local absolute paths). The full
 > test discovery above includes one compile-gate check
 > (`test_stage4_revision_readiness.test_final_latex_artifacts_*`) that reads those two files,
 > so after a fresh clone run a LaTeX compile first to generate them:
 > ```bash
-> cd paper/ist-submission && pdflatex -interaction=nonstopmode main.tex && bibtex main \
+> cd submissions/IST && pdflatex -interaction=nonstopmode main.tex && bibtex main \
 >   && pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex
 > ```
 > Otherwise that single test errors on the missing artifacts. CI (`.github/workflows/validate.yml`)

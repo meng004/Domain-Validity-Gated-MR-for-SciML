@@ -1,7 +1,7 @@
-# Drafting Audit for `paper/manuscript.md`
+# Drafting Audit for `manuscript/manuscript.md`
 
 > Date: 2026-06-05  
-> Draft inspected: `paper/manuscript.md` v0.3  
+> Draft inspected: `manuscript/manuscript.md` v0.3  
 > Purpose: word-count tracking, terminology consistency, and argument-chain audit for the academic-paper plan -> full drafting pass.
 
 ## 1. Current Word Count
@@ -106,8 +106,8 @@ Claims still blocked:
 Updated on 2026-06-05.
 
 - Official Elsevier `elsarticle` template package was downloaded from Elsevier and stored under `paper/ist-template/`.
-- The working IST-format manuscript is now `paper/ist-submission/main.tex`.
-- The compiled draft is `paper/ist-submission/main.pdf`.
+- The working IST-format manuscript is now `submissions/IST/main.tex`.
+- The compiled draft is `submissions/IST/main.pdf`.
 - The draft uses `\documentclass[preprint,12pt,authoryear]{elsarticle}` and `\journal{Information and Software Technology}`.
 - The local TeX installation did not include `elsarticle.cls`; it was generated from the official `elsarticle.dtx` and `elsarticle.ins` files.
 - Full LaTeX/BibTeX compilation succeeded with writable TeX cache variables.

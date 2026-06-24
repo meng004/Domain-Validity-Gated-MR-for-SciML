@@ -20,8 +20,8 @@ DIFF_DIR = ROOT / "research_assets/runs/pinn-cross-family-diffusion"
 DIFF_REPORT = DIFF_DIR / "pinn_mr_report.json"
 DIFF_CKPT = DIFF_DIR / "sut/checkpoint.pt"
 DIFF_REF = DIFF_DIR / "reference_solution.npz"
-MANUSCRIPT = ROOT / "paper/manuscript.md"
-LATEX = ROOT / "paper/ist-submission/main.tex"
+MANUSCRIPT = ROOT / "manuscript/manuscript.md"
+LATEX = ROOT / "submissions/IST/main.tex"
 LEDGER = ROOT / "research_assets/experiments/claim-ledger.yml"
 
 

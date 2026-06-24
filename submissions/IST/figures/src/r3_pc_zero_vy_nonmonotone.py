@@ -2,7 +2,7 @@
 the K=6 multi-checkpoint roster.
 
 Source data: research_assets/runs/fault-robustness-e3/fault_robustness_report.json.
-Output: paper/ist-submission/figures/r3_pc_zero_vy_nonmonotone.pdf (and .png).
+Output: submissions/IST/figures/r3_pc_zero_vy_nonmonotone.pdf (and .png).
 """
 from __future__ import annotations
 
@@ -15,8 +15,8 @@ import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parents[4]
 REPORT = ROOT / "research_assets/runs/fault-robustness-e3/fault_robustness_report.json"
-OUT_PDF = ROOT / "paper/ist-submission/figures/r3_pc_zero_vy_nonmonotone.pdf"
-OUT_PNG = ROOT / "paper/ist-submission/figures/r3_pc_zero_vy_nonmonotone.png"
+OUT_PDF = ROOT / "submissions/IST/figures/r3_pc_zero_vy_nonmonotone.pdf"
+OUT_PNG = ROOT / "submissions/IST/figures/r3_pc_zero_vy_nonmonotone.png"
 
 
 def main() -> None:

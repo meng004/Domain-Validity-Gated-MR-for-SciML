@@ -34,7 +34,7 @@ Source ledgers:
   - research_assets/runs/conservation-diagnostic-pilot/raw/metric_ledger.json
 
 Output:
-  paper/ist-submission/figures/fig_3_verdict_2d.{pdf,png}
+  submissions/IST/figures/fig_3_verdict_2d.{pdf,png}
 """
 from __future__ import annotations
 
@@ -50,8 +50,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[4]
 RUNS = ROOT / "research_assets" / "runs"
-OUT_PDF = ROOT / "paper/ist-submission/figures/fig_3_verdict_2d.pdf"
-OUT_PNG = ROOT / "paper/ist-submission/figures/fig_3_verdict_2d.png"
+OUT_PDF = ROOT / "submissions/IST/figures/fig_3_verdict_2d.pdf"
+OUT_PNG = ROOT / "submissions/IST/figures/fig_3_verdict_2d.png"
 
 # ---------------------------------------------------------------------------
 # Read every coordinate from the real metric ledgers. Compute the per-MR

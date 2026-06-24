@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MANUSCRIPT = ROOT / "paper" / "manuscript.md"
+MANUSCRIPT = ROOT / "manuscript" / "manuscript.md"
 CLAIM_LEDGER = ROOT / "research_assets" / "experiments" / "claim-ledger.yml"
 EXPERIMENT_LEDGER = ROOT / "research_assets" / "experiments" / "experiment-ledger.yml"
 EVIDENCE_PACKAGE = ROOT / "research_assets" / "experiments" / "evidence-package.md"

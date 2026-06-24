@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "research_assets/runs/fault-robustness-e3/fault_robustness_report.json"
-MANUSCRIPT = ROOT / "paper/manuscript.md"
+MANUSCRIPT = ROOT / "manuscript/manuscript.md"
 LEDGER = ROOT / "research_assets/experiments/claim-ledger.yml"
 
 REFINED = [0.85, 0.9, 0.95, 0.99]

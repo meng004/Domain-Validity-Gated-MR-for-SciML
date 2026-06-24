@@ -2,8 +2,8 @@
 
 Date: 2026-06-06
 
-Scope: Cited-key audit for `paper/ist-submission/main.tex` and
-`paper/ist-submission/references.bib`. This file is a submission-facing audit,
+Scope: Cited-key audit for `submissions/IST/main.tex` and
+`submissions/IST/references.bib`. This file is a submission-facing audit,
 not a claim that every related-work lead in `paper/reference_ledger.md` is ready
 for citation.
 

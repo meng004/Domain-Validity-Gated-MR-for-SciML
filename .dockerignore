@@ -8,9 +8,9 @@ venv
 .DS_Store
 .translate_cache/
 CLAUDE-FABLE-5.md
-paper/ist-submission/main.pdf
-paper/ist-submission/figures/
-paper/ist-submission/*.log
-paper/ist-submission/*.bbl
-paper/ist-submission/*.aux
-paper/ist-submission/*.blg
+submissions/IST/main.pdf
+submissions/IST/figures/
+submissions/IST/*.log
+submissions/IST/*.bbl
+submissions/IST/*.aux
+submissions/IST/*.blg

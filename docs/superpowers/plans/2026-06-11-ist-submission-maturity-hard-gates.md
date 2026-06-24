@@ -14,8 +14,8 @@
 
 **Files:**
 - Create: `tests/test_phase6_submission_maturity_hard_gates.py`
-- Read: `paper/ist-submission/main.tex`
-- Read: `paper/ist-submission/main.log`
+- Read: `submissions/IST/main.tex`
+- Read: `submissions/IST/main.log`
 - Read: `paper/33_phase5_review_panel_triage.md`
 
 - [ ] **Step 1: Write failing tests**
@@ -36,7 +36,7 @@ Expected initial failures: conflict markers, duplicate `subsec:pinn-extension`, 
 ### Task 2: Resolve Current LaTeX Hard Blockers
 
 **Files:**
-- Modify: `paper/ist-submission/main.tex`
+- Modify: `submissions/IST/main.tex`
 
 - [ ] **Step 1: Remove merge-conflict markers**
 
@@ -59,8 +59,8 @@ Expected: all tests pass.
 ### Task 3: Rebuild And Verify Submission Package
 
 **Files:**
-- Generated/updated: `paper/ist-submission/main.pdf`
-- Generated/updated: `paper/ist-submission/main.log`
+- Generated/updated: `submissions/IST/main.pdf`
+- Generated/updated: `submissions/IST/main.log`
 
 - [ ] **Step 1: Compile with available tools**
 

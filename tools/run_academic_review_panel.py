@@ -35,7 +35,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 # Canonical submission document is the LaTeX source (single source of truth);
 # the panel reviews exactly what is submitted to IST.
-PAPER = ROOT / "paper" / "ist-submission" / "main.tex"
+PAPER = ROOT / "submissions" / "IST" / "main.tex"
 OUTDIR = ROOT / "research_assets" / "runs" / "academic-review-panel"
 TOKEN_LADDER = (16000, 28000)
 

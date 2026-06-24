@@ -37,7 +37,7 @@
 - Modify: `research_assets/experiments/claim-ledger.yml`
 - Modify: `research_assets/experiments/experiment-ledger.yml`
 - Modify: `research_assets/experiments/evidence-package.md`
-- Modify: `paper/manuscript.md`
+- Modify: `manuscript/manuscript.md`
 - Modify: `docs/superpowers/plans/2026-06-06-pr4-evidence-convergence.md`
 
 ## Task 1: RED Test For PR4 Evidence Convergence
@@ -191,7 +191,7 @@ Modify `tools/validate_experiment_protocol.py` so it no longer requires every `r
 ## Task 3: Update Manuscript Sections
 
 **Files:**
-- Modify: `paper/manuscript.md`
+- Modify: `manuscript/manuscript.md`
 
 - [ ] **Step 1: Replace Results mirror-y wording**
 
@@ -266,7 +266,7 @@ Expected: all tests pass. Record the test count exactly from output.
 Run:
 
 ```bash
-rtk rg -n "0\\.6914 and 0\\.7494; about 3\\.6--3\\.8|violation rate has been measured|The SUT fails mirror-y in general|Mirror-y is a valid exact relation|model is unreliable|baseline superiority" paper/manuscript.md research_assets/experiments
+rtk rg -n "0\\.6914 and 0\\.7494; about 3\\.6--3\\.8|violation rate has been measured|The SUT fails mirror-y in general|Mirror-y is a valid exact relation|model is unreliable|baseline superiority" manuscript/manuscript.md research_assets/experiments
 ```
 
 Expected: no unsafe manuscript claim. Matches inside `wording_forbidden` are acceptable only if the line is clearly forbidden wording.
@@ -287,7 +287,7 @@ Acceptance: reviewer reports no critical or important issues, or all such issues
 - After edits, targeted PR4 consistency test passes.
 - Existing protocol and research-asset validators exit 0.
 - Full unittest suite passes.
-- `paper/manuscript.md` reports mirror-y as PR4 bounded within-SUT frame-level OOD-stress evidence, not two-frame pilot evidence.
+- `manuscript/manuscript.md` reports mirror-y as PR4 bounded within-SUT frame-level OOD-stress evidence, not two-frame pilot evidence.
 - `claim-ledger.yml`, `experiment-ledger.yml`, and `evidence-package.md` include C6/PR4 and preserve forbidden overclaims.
 - Baseline comparison, METBENCH planned SUTs, seeded fault, cross-SUT reliability, exact mirror-y, and absolute conservation claims remain blocked/forbidden.
 - Reviewer subagent finds no unresolved critical or important issue.

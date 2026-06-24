@@ -36,7 +36,7 @@ python tools/validate_research_assets.py
 # counts refs + appendices + 200 words per float per IST rules)
 python tools/ist_wordcount.py
 
-# Build the submission PDF (from paper/ist-submission/)
+# Build the submission PDF (from submissions/IST/)
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex
@@ -65,8 +65,8 @@ license**, enforced by tests. The flow is:
    are `C1`–`C10`; paper-level claims `PC1`–`PC10` map onto them in a
    distinct namespace. Add a claim ID *before* writing prose that depends on
    it; never widen wording beyond `wording_allowed`.
-3. **Manuscript** — `paper/manuscript.md` is the prose source of truth;
-   `paper/ist-submission/main.tex` + `references.bib` is the Elsevier
+3. **Manuscript** — `manuscript/manuscript.md` is the prose source of truth;
+   `submissions/IST/main.tex` + `references.bib` is the Elsevier
    `elsarticle` submission package (class files are vendored in that folder).
 4. **Regression guards** — `tests/test_*` pin manuscript text, claim
    wording, asset schemas, and phase outcomes to the ledgers. They are

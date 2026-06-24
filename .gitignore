@@ -12,12 +12,12 @@ __pycache__/
 *.pyc
 tmp/
 .planning/
-paper/ist-submission/*.aux
-paper/ist-submission/*.blg
-paper/ist-submission/*.spl
-paper/ist-submission/*.bbl
-paper/ist-submission/*.log
-paper/ist-submission/*.raw.tex
+submissions/IST/*.aux
+submissions/IST/*.blg
+submissions/IST/*.spl
+submissions/IST/*.bbl
+submissions/IST/*.log
+submissions/IST/*.raw.tex
 dist/
 *.tar.gz
 

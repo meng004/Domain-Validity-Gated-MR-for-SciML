@@ -8,8 +8,8 @@ characteristic edge length h. Overlays the log-log linear fit to display the
 empirical convergence slope (~ 1, the theoretical P1 rate).
 
 Output:
-  paper/ist-submission/figures/fig_4_operator_floor_loglog.pdf
-  paper/ist-submission/figures/fig_4_operator_floor_loglog.png
+  submissions/IST/figures/fig_4_operator_floor_loglog.pdf
+  submissions/IST/figures/fig_4_operator_floor_loglog.png
 """
 from __future__ import annotations
 
@@ -23,8 +23,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[4]
 REPORT = ROOT / "research_assets/runs/operator-floor-sweep/operator_floor_report.json"
-OUT_PDF = ROOT / "paper/ist-submission/figures/fig_4_operator_floor_loglog.pdf"
-OUT_PNG = ROOT / "paper/ist-submission/figures/fig_4_operator_floor_loglog.png"
+OUT_PDF = ROOT / "submissions/IST/figures/fig_4_operator_floor_loglog.pdf"
+OUT_PNG = ROOT / "submissions/IST/figures/fig_4_operator_floor_loglog.png"
 
 
 def main() -> None:

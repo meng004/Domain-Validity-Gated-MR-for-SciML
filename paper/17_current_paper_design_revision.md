@@ -49,8 +49,8 @@ These claims require SUT runs, verdict ledgers, baselines, and, for localization
 
 ## 5. Files Updated
 
-- `paper/ist-submission/main.tex`
-- `paper/manuscript.md`
+- `submissions/IST/main.tex`
+- `manuscript/manuscript.md`
 - `paper/02_paper_configuration.md`
 - `paper/16_research_position_necessity_argument_plan.md`
 

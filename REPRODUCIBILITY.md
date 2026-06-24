@@ -56,7 +56,7 @@ python tools/run_classical_operator_conservation.py
 #   expect: baseline |dM|max ~2.2e-16 PASS; 3/3 operator-code faults detected
 
 # Build the submission PDF (needs a TeX distribution, e.g. TeX Live / MacTeX):
-cd paper/ist-submission
+cd submissions/IST
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex
