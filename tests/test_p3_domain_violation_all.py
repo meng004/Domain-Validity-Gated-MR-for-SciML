@@ -123,7 +123,7 @@ class P3DomainViolationAllTest(unittest.TestCase):
             self.assertTrue((ROOT / ev).exists(), ev)
         wording = " ".join(c17["wording_allowed"].split())
         self.assertIn("per-relation operationalization from committed measurements", wording)
-        self.assertIn("not mutually calibrated across MR classes or domains", wording)
+        self.assertIn("not mutually calibrated across MR families or domains", wording)
         # The forbidden-wording guard for cross-domain calibration claims.
         forbidden = " ".join(" ".join(c17["wording_forbidden"]).split())
         self.assertIn("calibrated or validated across domains", forbidden)

@@ -412,7 +412,7 @@ claims:
       magnitude of the mirror-y violation beyond the 0.5 relative-change threshold, not
       because it breaks any symmetry. A2 stays below that threshold by three orders of
       magnitude. Detection localizes
-      by MR class (continuity -> boundary/scale;
+      by MR family (continuity -> boundary/scale;
       symmetry -> physical-channel/adjacency; node-permutation is exact-by-design and
       flags none of these mutants). This bounds the detector sensitivity of these
       domain-validity MRs against this catalogue across the family, and is not a
@@ -487,9 +487,9 @@ claims:
       non-bijective), quantitatively confirming the qualitative placement that put the
       symmetric-mesh failure in the SUT-inconsistency region and the real-mesh probe in the
       out-of-relation-domain region. This is a single-relation, geometry-only score; a
-      calibrated continuous score spanning all MR classes remains future work.
+      calibrated continuous score spanning all MR families remains future work.
     wording_forbidden:
-      - "A calibrated domain-violation score across all MR classes."
+      - "A calibrated domain-violation score across all MR families."
       - "A general or SUT-independent domain-violation metric."
     blocked_reason: null
 
@@ -584,7 +584,7 @@ claims:
 
   - claim_id: "C17-domain-violation-score-all"
     status: "observed"
-    scope: "multi-relation extension of C15 for the MGN/PINN executed MR classes available before C19: per-relation domain-violation scores D = m/(m+1) for MGN node-permutation, mirror-y on two meshes, absolute-conservation precondition, operator-floor diagnostic, and PINN MR-A/B/C on Burgers and heat; one entry (PINN MR-C per-K=6-seed) explicitly marked not-operationalizable-from-committed-data; FNO translation admissibility is recorded separately in C19"
+    scope: "multi-relation extension of C15 for the MGN/PINN executed MR families available before C19: per-relation domain-violation scores D = m/(m+1) for MGN node-permutation, mirror-y on two meshes, absolute-conservation precondition, operator-floor diagnostic, and PINN MR-A/B/C on Burgers and heat; one entry (PINN MR-C per-K=6-seed) explicitly marked not-operationalizable-from-committed-data; FNO translation admissibility is recorded separately in C19"
     evidence:
       - "tools/compute_domain_violation_scores_all.py"
       - "research_assets/runs/domain-violation-score-all/domain_violation_scores_all.json"
@@ -598,7 +598,7 @@ claims:
       - "research_assets/runs/pinn-cross-family-diffusion/pinn_mr_report.json"
     wording_allowed: >
       The domain-violation axis of the two-dimensional verdict is given a per-relation
-      operationalization from committed measurements: for each executed MR class, D = m/(m+1)
+      operationalization from committed measurements: for each executed MR family, D = m/(m+1)
       in [0,1) with a relation-specific dimensionless precondition-violation measure m read
       from already-committed artifacts (no new experiment). Node-permutation (MGN) and
       collocation-point permutation (PINN MR-A) score D = 0 by construction (an exact
@@ -613,10 +613,10 @@ claims:
       conserved reference Q under zero-flux BC). A per-K=6-seed PINN MR-C score is not
       operationalizable from committed data (no per-snapshot Q_ref committed) and is reported
       as such rather than invented. The per-relation m's use different relation-specific
-      units, so the D values are not mutually calibrated across MR classes or domains, and
+      units, so the D values are not mutually calibrated across MR families or domains, and
       no claim of a domain-violation score calibrated or validated across domains is made.
     wording_forbidden:
-      - "A domain-violation score calibrated or validated across domains or MR classes."
+      - "A domain-violation score calibrated or validated across domains or MR families."
       - "A general or SUT-independent domain-violation metric."
       - "Any wording implying the per-relation D values are mutually comparable on a common scale."
     blocked_reason: null
@@ -1318,7 +1318,7 @@ claims:
       localization matches the MGN result on the shared classes: node-permutation detects none on
       both; conservation localizes the boundary-condition and normalization-scale faults on both;
       mirror-y localizes a physical-channel fault on both. This reproduces the "about half the
-      catalogue, localized by MR class" pattern on two architecture families. Architecture-specific
+      catalogue, localized by MR family" pattern on two architecture families. Architecture-specific
       differences are reported honestly: the mesh-adjacency fault class exists only for the
       message-passing MGN; on PointMLP the channel-swap fault additionally trips the conservation
       detector (ratio above 1.5) and mirror-y additionally flags the skip-denormalization fault,

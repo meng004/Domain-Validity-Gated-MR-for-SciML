@@ -9,7 +9,14 @@
 - **cylinder-flow 实例化(忠实)**:强实例 a/b/j/h-i;f 候选未跑;**e 黏性流为空 by construction**;c-d 仅 PINN/FNO 扩展。
 - **改动(commit `0e0163e`)**:preamble 符号宏;§3.2 候选来源全替换为两层模型;§3.5 解释协议 Yang→两层位置;3 处"NOETHER-style organization"→"NOETHER two-layer MetaPattern model";yang2020hierarchical 保留为"被取代旧分类"(仍被引)。
 - **§4 对齐(本次提交)**:§4.1 Evaluation logic 加 a–j 族指针句把实验设计锚到 §3.2;§5.8 "conservation MR class"→"MR family (b)"。
-- **诚实边界**:§3.5 D 轴的"across MR classes"(L309/L528)**未改**——与 `test_phase9`(读 main.tex+manuscript.md)+ claim-ledger(`test_p3`)+ manuscript.md 三处缠绕,改它超出"仅 main.tex"范围。若日后要全库统一术语,需同步 manuscript.md + ledger + 2 guard。
+- **全库术语统一(2026-06-22 续,用户拍板)已完成**:把 manuscript.md + claim-ledger.yml 也统一到两层 canon。
+  - **manuscript.md**:§3.2 taxonomy→两层模型(镜像 main.tex)、§3.6 Yang→两层解释协议、§4.2 "Planned MR Classes"→"Planned MR Families"(6 类映射 a–j)、4 处 NOETHER-style→canonical、§5.3 "by MR class"→"by MR family"、§5.8 "conservation MR class"→"family (b)"。
+  - **claim-ledger.yml**:8 处 "MR class(es)"→"MR family/families"(C15/C17 等 wording_allowed/forbidden)。
+  - **main.tex**:D 轴 L309/L528 残留 "across MR classes"→"MR families"(之前留的,现一并改);§5.3 "separate by MR class"→"MR family"。
+  - **guards 同步**:`test_phase9`(across MR families)、`test_p3`(ledger wording across MR families or domains)、`test_seeded_..pointmlp` docstring。
+  - **Noether-style correspondence**(物理术语,canon 原文)正确保留;"fault class(es)"(故障类,不同义)未动。
+  - **验证**:444 tests / 两 validator rc=0 / 编译 0 告警·0 undefined ctrl seq·50pp / 全库 0 残留 "MR class"·0 "three-level"·0 松散 NOETHER-style / em-dash 本次新增 0 / secrets 0 / wordcount 12965≤15000。
+  - **现状**:**main.tex(投稿)与 manuscript.md(prose 源)+ ledger 三处术语/定义/符号完全一致到两层 canon**。
 - **验证**:444 tests / 编译 0 错误·0 undefined ctrl seq·0 LaTeX warning·0 Overfull>40pt·50pp / bib 0 undefined·0 uncited / em-dash 0 / wordcount 12965≤15000(headroom 2036)/ secrets 0。
 
 ## 🟢 2026-06-21（晚）EIC 通读裁定 + venue 锁定 IST + 最高-ROI cover-letter 对齐(投稿流水线全过)

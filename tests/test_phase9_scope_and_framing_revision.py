@@ -51,7 +51,7 @@ class Phase9ScopeAndFramingRevisionTest(unittest.TestCase):
         required = [
             "per-relation normalized coordinate",
             "not a cross-relation calibrated metric",
-            "cannot be averaged or ranked across MR classes",
+            "cannot be averaged or ranked across MR families",
         ]
         for text in (self.md, self.tex):
             for marker in required:

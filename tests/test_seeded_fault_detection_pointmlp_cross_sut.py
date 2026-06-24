@@ -2,7 +2,7 @@
 
 Pins that the paper's three domain-validity MR detectors, run with their predeclared
 thresholds on the converged row-wise PointMLP cylinder SUT, reproduce the MeshGraphNets
-"about half the catalogue, localized by MR class" reading on a SECOND architecture family,
+"about half the catalogue, localized by MR family" reading on a SECOND architecture family,
 while honestly recording the two mesh-adjacency mutants as not-applicable (no-ops on a
 row-wise network) rather than as detector misses. Prevents prose from overclaiming a
 proven cross-architecture generalization.
