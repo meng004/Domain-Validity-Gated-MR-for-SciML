@@ -1,15 +1,16 @@
 """Render the operator-floor log-log convergence figure (Figure 4).
 
-Source data: research_assets/runs/operator-floor-sweep/operator_floor_report.json
+Source data: research_assets/runs/operator-floor-sweep-extended/operator_floor_extended_report.json
 (produced by tools/run_operator_floor_sweep.py). Plots the area-weighted RMS
 of the per-cell P1 discrete divergence on the y=0-symmetric structured
-triangular channel mesh at four resolutions h0, h0/2, h0/4, h0/8, against the
+triangular channel mesh at nine resolutions from h0*2 down to h0/16, against the
 characteristic edge length h. Overlays the log-log linear fit to display the
-empirical convergence slope (~ 1, the theoretical P1 rate).
+empirical convergence slope (~ 1, the theoretical P1 rate); the fitted slope is
+the headline 0.984 value reported in the manuscript text and claim ledger.
 
 Output:
-  submissions/IST/figures/fig_4_operator_floor_loglog.pdf
-  submissions/IST/figures/fig_4_operator_floor_loglog.png
+  manuscript/figures/fig_4_operator_floor_loglog.pdf
+  manuscript/figures/fig_4_operator_floor_loglog.png
 """
 from __future__ import annotations
 
@@ -21,10 +22,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[4]
-REPORT = ROOT / "research_assets/runs/operator-floor-sweep/operator_floor_report.json"
-OUT_PDF = ROOT / "submissions/IST/figures/fig_4_operator_floor_loglog.pdf"
-OUT_PNG = ROOT / "submissions/IST/figures/fig_4_operator_floor_loglog.png"
+ROOT = Path(__file__).resolve().parents[3]
+REPORT = ROOT / "research_assets/runs/operator-floor-sweep-extended/operator_floor_extended_report.json"
+OUT_PDF = ROOT / "manuscript/figures/fig_4_operator_floor_loglog.pdf"
+OUT_PNG = ROOT / "manuscript/figures/fig_4_operator_floor_loglog.png"
 
 
 def main() -> None:
@@ -63,7 +64,7 @@ def main() -> None:
     fig.tight_layout()
     OUT_PDF.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUT_PDF, bbox_inches="tight")
-    fig.savefig(OUT_PNG, bbox_inches="tight", dpi=150)
+    fig.savefig(OUT_PNG, bbox_inches="tight", dpi=300)
     print(f"wrote {OUT_PDF}")
     print(f"wrote {OUT_PNG}")
 

@@ -226,3 +226,48 @@
 - 净:10→8 float,省 ~400–600 词,main 密度下降。均需重建 + 复测(test_phase6 查 \ref、test_phase4 字数)。
 
 > 决策权在作者。采纳则我执行删减 + 清引用 + 重建 + 全测试;否则保持现状(亦合规)。
+
+---
+
+# 追加评估 — 2026-06-24 必要性 / 位置 / 内容三问复核
+
+> 源文件已迁至 `manuscript/main.tex`(repo 已拆分,旧 `submissions/IST/` 名废弃)。
+> 字数:IST-counted 13020 / 15000,headroom ≈ 1980;每浮动体 200 词。本节仅评估,不改正文/图。
+
+## 三问逐图结论(4 图 + 6 表)
+
+| 图 | 1 必要性 | 2 位置 | 3 内容 |
+|---|---|---|---|
+| Fig 1 workflow | 高 — 方法中心图 | 合适(紧跟 L239 首引,Method 开篇) | 准确,与 §3.5 判决四类一致 |
+| Fig 2 asset dataflow | 中(四图最弱,与 Fig 1 尾段 + tab:rubric 概念重叠) | 合适(紧跟 L293) | 准确 |
+| Fig 3 verdict 2D | 高 — RQ3 核心,概念+真实 pilot 双用 | 合适(紧跟 L307) | 基本准确;**1 处需澄清(见下)** |
+| Fig 4 operator-floor | 高 — 支撑唯一 load-bearing 新点 | 合适(紧跟 L457) | **⚠ 数字与正文不符,需重生成(见下)** |
+
+## ⚠ 必须修(stage-2,待用户确认)— Fig 4 数据源错位
+
+- fig_4 及其源 `src/fig_4_operator_floor_loglog.py` 读取
+  `research_assets/runs/operator-floor-sweep/operator_floor_report.json`
+  —— **仅 4 分辨率**(h0,h0/2,h0/4,h0/8),fit_all slope = **0.988**,interior 0.994。
+- 正文 L457 与 claim-evidence 表 L603 引的是 **9 分辨率**、slope **0.984**(interior 0.989)、95% CI [0.975,0.992]。
+  该数据在 `operator-floor-sweep-extended/operator_floor_extended_report.json`(9 levels,fit_all 0.9837≈0.984,interior 0.9893≈0.989)。
+- 另 `operator-floor-sweep-mesh2`(8 levels,非结构 Delaunay,slope 0.983)= 正文第二拓扑。
+- **后果**:审稿人比对图"slope=0.988 / 4 点"与正文"nine resolutions … 0.984"会发现矛盾。违 §3/§6 数字溯源。
+- **修复**:fig_4 数据源改为 extended(9 点,slope 0.984),可选叠加 mesh2 Delaunay 点;并修脚本写死的旧输出路径 `submissions/IST/figures/` → `manuscript/figures/`。
+
+## 建议修(措辞)— Fig 3 caption
+
+- 横轴单一共享对数刻度,却混入不同 MR 族(V/tol 与 V/floor);正文 L309 明确这些 per-relation 值"不能跨族平均或排序"。图易被读成正文否认的跨族标定。
+- 建议 caption 补一句:横轴为 per-relation 示意放置,非跨族标定刻度。**仅改 caption,不动数据**。
+- 数字核对:图中 mirror-y `V/floor 3.96`、对称网格 `relL2 1.10` 与正文 L430/L436 逐字一致。✓
+
+## 数量与重复
+
+- 4 图配比合理(2 流程/数据流 + 1 概念 + 1 数据),无冗图;**不建议新增图**(headroom 紧)。
+- 唯一可选新增(低优先,需先腾词):MR 族 × 故障类 检测命中小矩阵,让"按族定位"覆盖几何一眼可见(数据已在 §4.1/§4.9 + claim-evidence 表)。
+- 省词杠杆同 2026-06-21 结论:Fig 2、tab:rq-contribution-evidence 为最弱两项,如需压词优先处理。
+
+## 待办优先级
+
+1. **(必须,待确认)** Fig 4 改用 9 分辨率 extended 报告重生成 + 修脚本路径。
+2. **(建议)** Fig 3 caption 加 per-relation 示意说明。
+3. **(可选)** 压词时砍/并 Fig 2。
