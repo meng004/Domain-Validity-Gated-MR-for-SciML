@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2007-2024 by Elsevier Ltd
+% Copyright (C) 2007-2026 by Elsevier Ltd
 % -----------------------------------------------
 % 
 % This file may be distributed and/or modified under the
@@ -16,7 +16,7 @@
 % \fi
 % \CheckSum{3279}
 %
-% $Id: elsarticle.dtx 259 2024-04-06 12:00:41Z rishi $
+% $Id: elsarticle.dtx 286 2026-01-09 05:51:42Z rishi $
 % $URL: https://lenova.river-valley.com/svn/elsarticle/trunk/elsarticle.dtx $
 % \iffalse
 %<*driver>
@@ -63,6 +63,13 @@
 %    address tagging.}
 %
 % \changes{v3.4}{2022/11/26}{A bug fix. Accented characters produced errors. So loaded fontenc package.}
+
+% \changes{v3.4a}{2024/12/02}{Removed the preprint submitted line as per the 
+%    instruction received on 22 Oct 2024 from Arun Shanmugam (ELS) with the subject line, 
+%    FW: Preprint sentence in EM submissions}
+%
+% \changes{v3.4b}{2025/01/09}{\string\global\string\bibsep=0pt commented out for all 
+%          models since it produced error for all \string\jtype options.}
 %
 % \GetFileInfo{elsarticle.dtx}
 %
@@ -84,8 +91,8 @@
 %% 
 %%
  \def\RCSfile{elsarticle}%
- \def\RCSversion{3.4}%
- \def\RCSdate{2024/04/04}%
+ \def\RCSversion{3.5}%
+ \def\RCSdate{2026/01/09}%
  \def\@shortjnl{\relax}
  \def\@journal{Elsevier Ltd} 
  \def\@company{Elsevier Ltd}
@@ -307,7 +314,7 @@
 \let\authorsep\@empty
 \let\prelimauthorsep\@empty
 \let\sep\@empty
-\newcounter{author}
+\newcounter{elsarticle@author}
 \def\author{\@ifnextchar[{\@@author}{\@author}}
 
 \newtoks\@eadauthor
@@ -1112,10 +1119,14 @@
          \else%
          \ifx\@elsarticlemyfooteralign\@elsarticlemyfooteralignright%
            {}\hfill\@elsarticlemyfooter%
-         \else%
-               Preprint submitted to \ifx\@journal\@empty%
-                 Elsevier%
-            \else\@journal\fi\hfill\@date\fi%
+%% Removed the preprint submitted line as per the instruction
+%% received on 22 Oct 2024 from Arun Shanmugam (ELS) with the 
+%% subject line "FW: Preprint sentence in EM submissions"
+%         \else%
+%               Preprint submitted to \ifx\@journal\@empty%
+%                 Elsevier%
+%            \else\@journal\fi\hfill\@date
+         \fi%
          \fi%
          \fi%
          \fi%
@@ -1356,8 +1367,8 @@
   footskip=12pt,
   footnotesep=24pt plus 2pt minus 12pt,
  }
- \global\let\bibfont=\footnotesize
- \global\bibsep=0pt
+% \global\let\bibfont=\footnotesize
+% \global\bibsep=0pt
  \if@twocolumn\global\@twocolumnfalse\fi
 %
 %    \end{macrocode}
@@ -1379,8 +1390,8 @@
   footnotesep=24pt plus 2pt minus 12pt,
   columnsep=2pc
  }
- \global\let\bibfont=\footnotesize
- \global\bibsep=0pt
+% \global\let\bibfont=\footnotesize
+% \global\bibsep=0pt
  \if@twocolumn\input{fleqn.clo}\fi
 %    \end{macrocode}
 %
@@ -1401,8 +1412,8 @@
   footnotesep=24pt plus 2pt minus 12pt,
   columnsep=18pt
  }%
- \global\let\bibfont=\footnotesize
- \global\bibsep=0pt
+% \global\let\bibfont=\footnotesize
+% \global\bibsep=0pt
  \input{fleqn.clo}
  \global\@twocolumntrue
 %%
