@@ -43,6 +43,17 @@
 \providecommand{\madj}{m_{\mathrm{adj}}}
 \providecommand{\mrev}{m_{\mathrm{rev}}}
 \providecommand{\mconv}{m_{\mathrm{conv}}}
+%% L2 MR-family symbols (sans-serif f_{parent.child}), per two_layer_canon.tex.
+\providecommand{\fIeqv}{\mathsf{f}_{\mathrm{inv}.\mathrm{eqv}}}
+\providecommand{\fIcon}{\mathsf{f}_{\mathrm{inv}.\mathrm{con}}}
+\providecommand{\fAself}{\mathsf{f}_{\mathrm{adj}.\mathrm{self}}}
+\providecommand{\fAdual}{\mathsf{f}_{\mathrm{adj}.\mathrm{dual}}}
+\providecommand{\fRtraj}{\mathsf{f}_{\mathrm{rev}.\mathrm{traj}}}
+\providecommand{\fMstat}{\mathsf{f}_{\mathrm{mono}.\mathrm{stat}}}
+\providecommand{\fMshape}{\mathsf{f}_{\mathrm{mono}.\mathrm{shape}}}
+\providecommand{\fClim}{\mathsf{f}_{\mathrm{conv}.\mathrm{lim}}}
+\providecommand{\fCrate}{\mathsf{f}_{\mathrm{conv}.\mathrm{rate}}}
+\providecommand{\fCrepr}{\mathsf{f}_{\mathrm{conv}.\mathrm{repr}}}
 \providecommand{\Translate}{\textsc{Translate}}
 
 \journal{Information and Software Technology}
@@ -183,7 +194,7 @@ Testing scientific software without a reliable oracle is a long-standing problem
 
 Separate work has made MR specification and applicability more explicit. General MT tooling has explored machine-readable MR representations, constraint definition, test-data-driven MR selection, and general MR specification languages \citep{duqueTorres2023completePipeline,duqueTorres2024selecting,sun2026ccml}. These systems strengthen MR engineering in the large, but they do not by themselves decide whether a physics-derived relation is numerically measurable, in-domain for a transformed CFD case, or interpretable as a SciML V\&V verdict.
 
-These approaches are valuable candidate sources, but candidate identification is not the same as admissible SciML test construction. MR identification, including our own prior physics-derived MR construction for numerical solver and nuclear-power software \citep{li2022nuclearmr,wang2022mridentification}, is itself established work; this paper takes candidate MRs as input and contributes the admissibility gate rather than a new identification method. A failed SciML MR can mean that the SUT is inconsistent, that the relation was invalid under the boundary conditions, that the transformation left the intended physical regime, or that the tolerance was below the measuring operator's floor. Fault-oriented MR work ranks relations by observed detection power \citep{srinivasan2022prioritization,saha2019faultdetection}; the present paper uses the admitted relation set later to interpret bounded coverage and blind spots, but treats that as a consequence of admissibility rather than as the primary novelty.
+These approaches are valuable candidate sources, but candidate identification is not the same as admissible SciML test construction. MR identification, including our own prior physics-derived MR construction for numerical solver and nuclear-power software \citep{li2022nuclearmr,wang2022mridentification}, is itself established work; this paper takes candidate MRs as input and contributes the admissibility gate rather than a new identification method. Fault-oriented MR work ranks relations by observed detection power \citep{srinivasan2022prioritization,saha2019faultdetection}; the present paper uses the admitted relation set later to interpret bounded coverage and blind spots, but treats that as a consequence of admissibility rather than as the primary novelty.
 
 \subsection{Physics-based MT for learned scientific simulators}
 \label{subsec:physics-mt}
@@ -226,9 +237,7 @@ The distinction from residual- and uncertainty-based trust estimation is deliber
 \subsection{What is new and what is not new}
 \label{subsec:new-not-new}
 
-Metamorphic testing, MR identification, scientific-software MT, residual diagnostics, uncertainty quantification, LLM candidate generation, and the NOETHER two-layer MetaPattern model are established or emerging sources of testing ideas. The contribution here is narrower: SciML MR use should be treated as a domain-validity and asset-construction problem. A candidate relation becomes a useful oracle-free V\&V asset only after its physical basis, transformation preconditions, output mapping, tolerance, exclusion rule, executable artifact, and relation-level verdict are recorded. Recent work derives or refines domain-specific MRs for scientific programs directly from their numerical models \citep{yan2024elliptic,stevens2025mars}; the wedge here is the learned surrogate evaluated out of distribution and the requirement that a relation's tolerance dominate the measuring operator's numerical floor, rather than testing a numerical solver against derived relations.
-
-Table~\ref{tab:closest-prior-positioning} summarizes the gap. Existing work supplies candidate sources, relaxed oracles, constraint-based inapplicability handling, and SciML diagnostics. The missing combination is a validity-gated, executable, and auditable workflow for physics-governed SciML surrogate software.
+Metamorphic testing, MR identification, scientific-software MT, residual diagnostics, uncertainty quantification, LLM candidate generation, and the NOETHER two-layer MetaPattern model are established or emerging sources of testing ideas. The contribution here is narrower: SciML MR use should be treated as a domain-validity and asset-construction problem. A candidate relation becomes a useful oracle-free V\&V asset only after its physical basis, transformation preconditions, output mapping, tolerance, exclusion rule, executable artifact, and relation-level verdict are recorded. Recent work derives or refines domain-specific MRs for scientific programs directly from their numerical models \citep{yan2024elliptic,stevens2025mars}; the wedge here is the learned surrogate evaluated out of distribution and the requirement that a relation's tolerance dominate the measuring operator's numerical floor, rather than testing a numerical solver against derived relations. The missing combination is thus a validity-gated, executable, and auditable workflow for physics-governed SciML surrogate software (Table~\ref{tab:closest-prior-positioning}).
 
 \section{Method}
 \label{sec:method}
@@ -243,7 +252,7 @@ The method answers RQ1--RQ3 by turning a physics-derived candidate relation into
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/fig_1_validity_gated_workflow.pdf}
-\caption{Validity-gated V\&V workflow. A candidate relation is admitted only after the gate records its basis, preconditions, mapping, and numerical decidability; admitted relations become MR cards, executable runners, and relation-level evidence ledgers.}
+\caption{Validity-gated V\&V workflow in which gate-admitted candidate relations become MR cards, executable runners, typed relation-level verdicts, and evidence ledgers.}
 \label{fig:workflow}
 \end{figure}
 
@@ -254,9 +263,9 @@ We organize candidate relations with the two-layer MetaPattern model of NOETHER 
 
 \emph{Layer~1 (MetaPattern).} A \emph{MetaPattern} is the equivalence class of metamorphic relations generated, through \Translate, from one minimal algebraic structure of the program-induced operator algebra $\AP$ (its generating basis). The five MetaPatterns $\minv, \mmono, \madj, \mrev, \mconv$ are generated respectively by a group action ($\Grp$), a partial order ($\Ord$), a self-adjoint operator ($\Sadj$), a time-reversal involution ($\Trev$), and a parametrised limit ($\Lim$); their set is $\MM$. By the Noether-style correspondence between symmetries and conserved quantities, a conservation relation is a member of the group-action MetaPattern $\minv$ rather than a separate structure.
 
-\emph{Layer~2 (MR family).} An \emph{MR family} is the set of executable relations obtained by instantiating one MetaPattern under a fixed transformation template and a chosen mode (input-orbit or implementation-orbit). The map from MetaPatterns to families is one-to-many: $\Grp \to \{a, b\}$ (equivariance, conservation), $\Sadj \to \{c, d\}$ (self-adjoint, adjoint-duality), $\Trev \to \{e\}$ (time-reversal), $\Ord \to \{f, g\}$ (static-order, dynamic-shape), and $\Lim \to \{h, i, j\}$ (convergence, accuracy-order, representation-invariance).
+\emph{Layer~2 (MR family).} An \emph{MR family} is the set of executable relations obtained by instantiating one MetaPattern under a fixed transformation template and a chosen mode (input-orbit or implementation-orbit). Families are written in the sans-serif form $\mathsf{f}_{\mathrm{parent}.\mathrm{child}}$, where the stem before the dot names the parent MetaPattern; the legacy enumeration letters a--j are kept in parentheses as cross-reference anchors. The map from MetaPatterns to families is one-to-many: $\Grp \to \{\fIeqv, \fIcon\}$ (equivariance a, conservation b), $\Sadj \to \{\fAself, \fAdual\}$ (self-adjoint c, adjoint-duality d), $\Trev \to \{\fRtraj\}$ (trajectory-reversal e), $\Ord \to \{\fMstat, \fMshape\}$ (static-order f, dynamic-shape g), and $\Lim \to \{\fClim, \fCrate, \fCrepr\}$ (convergence h, accuracy-order i, representation-invariance j).
 
-For the cylinder-flow surrogates studied here, the instantiated families are a (equivariance), mirror-y reflection; b (conservation), discrete-divergence continuity and, on the airfoil task, compressible mass balance; j (representation-invariance), node-permutation and encoding contracts; and h--i (convergence, accuracy-order), the operator-floor mesh-refinement relation. The f (static-order) Reynolds--Strouhal monotonicity is a candidate not exercised here, e (time-reversal) is empty by construction for viscous dissipative flow, and the self-adjoint families c--d appear only in the cross-family PINN and FNO extensions. The same relation may be admissible as one family yet inadmissible once instantiated for a given SUT: mirror symmetry holds on a symmetric domain but not on an asymmetric mesh with incompatible boundary labels, and conservation is a physical expectation but not an executable verdict when the discrete measuring operator has an unresolved floor. The admissibility gate records where each relation survives.
+For the cylinder-flow surrogates studied here, the instantiated families are $\fIeqv$ (equivariance, a), mirror-y reflection; $\fIcon$ (conservation, b), discrete-divergence continuity and, on the airfoil task, compressible mass balance; $\fCrepr$ (representation-invariance, j), node-permutation and encoding contracts; and $\fClim$ and $\fCrate$ (convergence, accuracy-order, h--i), the operator-floor mesh-refinement relation. The $\fMstat$ (static-order, f) Reynolds--Strouhal monotonicity is a candidate not exercised here, $\fRtraj$ (trajectory-reversal, e) is empty by construction for viscous dissipative flow, and the self-adjoint families $\fAself$ and $\fAdual$ (c--d) appear only in the cross-family PINN and FNO extensions. The same relation may be admissible as one family yet inadmissible once instantiated for a given SUT: mirror symmetry holds on a symmetric domain but not on an asymmetric mesh with incompatible boundary labels, and conservation is a physical expectation but not an executable verdict when the discrete measuring operator has an unresolved floor. The admissibility gate records where each relation survives.
 
 \subsection{Admissibility gate}
 \label{subsec:rubric}
@@ -295,7 +304,7 @@ Each executable asset includes transformation code, runner configuration, metric
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\linewidth]{figures/fig_2_mr_asset_dataflow.pdf}
-\caption{MR-card-to-executable asset data flow. The MR card specifies the transformation, mapping, metric, tolerance, exclusion rule, and artifact schema; execution emits metric files, logs, and relation-level ledger entries.}
+\caption{MR-card-to-executable asset data flow, from the card's transformation, mapping, metric, tolerance, and exclusion rule through the source and follow-up runs to the relation-level verdict ledger.}
 \label{fig:asset-flow}
 \end{figure}
 
@@ -311,7 +320,7 @@ In this study, the domain-violation coordinate is operationalized per relation f
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.92\linewidth]{figures/fig_3_verdict_2d.pdf}
-\caption{Two-dimensional verdict space. The horizontal axis records relation violation relative to the relevant tolerance or floor; the vertical axis records whether the transformed case is in domain, near the boundary, or out of the relation domain. Only high relation violation inside the valid domain is read as SUT inconsistency. Points from different MR families share the horizontal axis only as a per-relation schematic placement, not a calibrated cross-family scale, and are not ranked across families.}
+\caption{Two-dimensional verdict space plotting relation-violation magnitude against domain-violation magnitude, where only a large in-domain violation reads as SUT inconsistency and the horizontal axis is a per-relation, not cross-family-calibrated, placement.}
 \label{fig:verdict-2d}
 \end{figure}
 
@@ -323,7 +332,7 @@ Retained MRs are interpreted through their two-layer position (Sec.~\ref{subsec:
 \subsection{Evaluation logic}
 \label{subsec:evaluation-logic}
 
-The experiments evaluate whether the method produces auditable, executable, and interpretable MR evidence under bounded conditions. The relations under evaluation are the cylinder-flow MR families of Section~\ref{subsec:candidate-sources}: equivariance (a) and conservation (b) under $\minv$, representation-invariance (j) and the convergence/accuracy-order pair (h--i) under $\mconv$; the static-order (f) and self-adjoint (c--d) families are exercised only as candidate or cross-family checks, and time-reversal (e) is empty by construction. The design separates four evidence tiers: primary cylinder-flow evidence, supporting cross-family checks, secondary candidate-generation and rollout comparators, and stress tests used to interpret coverage boundaries.
+The experiments evaluate whether the method produces auditable, executable, and interpretable MR evidence under bounded conditions. The relations under evaluation are the cylinder-flow MR families of Section~\ref{subsec:candidate-sources}: equivariance ($\fIeqv$) and conservation ($\fIcon$) under $\minv$, representation-invariance ($\fCrepr$) and the convergence/accuracy-order pair ($\fClim$, $\fCrate$) under $\mconv$; the static-order ($\fMstat$) and self-adjoint ($\fAself$, $\fAdual$) families are exercised only as candidate or cross-family checks, and trajectory-reversal ($\fRtraj$) is empty by construction. The design separates four evidence tiers: primary cylinder-flow evidence, supporting cross-family checks, secondary candidate-generation and rollout comparators, and stress tests used to interpret coverage boundaries.
 
 \subsection{Subject systems and evidence tiers}
 \label{subsec:suts}
@@ -459,7 +468,7 @@ The P1 discrete-divergence sweep on symmetric meshes, over nine resolutions, giv
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.82\linewidth]{figures/fig_4_operator_floor_loglog.pdf}
-\caption{Operator-floor calibration for the P1 divergence measurement. The log--log sweep shows the $O(h)$ floor used to decide whether absolute conservation is numerically admissible in the cylinder-flow setting.}
+\caption{Operator-floor calibration for the P1 divergence measurement, whose log--log sweep gives the $O(h)$ floor used to decide whether absolute conservation is numerically admissible for the cylinder-flow mesh.}
 \label{fig:operator-floor}
 \end{figure}
 
