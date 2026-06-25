@@ -146,7 +146,7 @@ We decompose this into four questions:
 \subsection{Contributions}
 \label{subsec:contributions}
 
-The single methodological idea is to gate a candidate relation's admissibility on numerical decidability: a relation is admitted only when its verdict tolerance dominates the measuring operator's own intrinsic error floor, a test that to our knowledge is new for learned SciML surrogates evaluated out of distribution. The four scoped contributions below build this idea into an auditable workflow, and Table~\ref{tab:rq-contribution-evidence} ties each to a research question and to evidence reported later. The positive claim is methodological: a measurement-floor admissibility gate, a typed domain-inadmissibility verdict, and a seeded-fault diagnostic stress test whose MR-class-to-fault-class diagnostic is reported as stress-test evidence rather than a validated localization model.
+The single methodological idea is to gate a candidate relation's admissibility on numerical decidability: a relation is admitted only when its verdict tolerance dominates the measuring operator's own intrinsic error floor, a test that to our knowledge is new for learned SciML surrogates evaluated out of distribution. The four scoped contributions below build this idea into an auditable workflow, each tied to a research question and to evidence reported later (Table~\ref{tab:rqmap}). The positive claim is methodological: a measurement-floor admissibility gate, a typed domain-inadmissibility verdict, and a seeded-fault diagnostic stress test whose MR-class-to-fault-class diagnostic is reported as stress-test evidence rather than a validated localization model.
 
 \textbf{Measurement-floor admissibility.} The method admits a relation only when its verdict tolerance dominates the intrinsic numerical floor of the measurement operator. For the deployed cylinder-flow mesh, the divergence floor is closed form, a leading-order predictor matches the measured floor to within 0.5\%, a rigorous a-priori bound dominates it, and the floor is empirically topology-stable across a structured and an unstructured Delaunay mesh (Sec.~\ref{subsec:operator-floor-sweep}); a general unstructured-mesh bound is left to future work.
 
@@ -154,25 +154,7 @@ The single methodological idea is to gate a candidate relation's admissibility o
 
 \textbf{Typed relation-level verdicts.} The verdict scheme separates relation violation from domain violation, instantiating for physics-governed SciML the constraint-architecture pattern behind bug-versus-inapplicability reasoning \citep{duqueTorres2023bugornot,duqueTorres2023completePipeline} and MetaTrimmer \citep{duqueTorres2023metaTrimmer}. The added element is a typed classification of physical, geometric, boundary-condition, mapping, and operator-admissibility limits.
 
-\textbf{Bounded empirical utility.} The case studies evaluate what this workflow adds beyond rollout accuracy, generic MR generation, and LLM-assisted MR candidate elicitation, drawing primarily on MeshGraphNets cylinder-flow runs with supporting airfoil, PINN, and FNO checks (Table~\ref{tab:rq-contribution-evidence}). This utility is a demonstrated change in V\&V outcomes rather than bookkeeping (Section~\ref{sec:results}). The admissible MR set is also used to interpret fault-detection boundaries and blind spots, but this coverage reading is a discussion implication of the admitted relations rather than a separate formal research question.
-
-\begin{table}[H]
-\centering
-\caption{Research questions, contributions, and evidence locations. Coverage is listed as a bounded implication, not as a formal research question.}
-\label{tab:rq-contribution-evidence}
-\begin{tabularx}{\linewidth}{p{0.13\linewidth}p{0.25\linewidth}Yp{0.18\linewidth}}
-\toprule
-Question & Contribution focus & Evidence used in the paper & Primary section \\
-\midrule
-RQ0 & Validity-gated V\&V assets & End-to-end workflow, MR cards, runners, evidence ledger & Method; Results \\
-RQ1 & Admissibility & Domain-validity rubric, physical/software preconditions, operator-floor sweep & Method; Results \\
-RQ2 & Asset construction & MR-card schema, executable transformations, mappings, metrics, tolerances, exclusions & Method; Experimental Design \\
-RQ3 & Verdict interpretation & Relation-level verdict classes, two-axis verdict space, ledger records & Method; Results \\
-RQ4 & Empirical utility & Cylinder-flow runs, variants, PhysicsNeMo, FNO/PINN checks, baselines & Experimental Design; Results \\
-Impl. & Coverage boundaries & Seeded-fault stress tests and cross-SUT coverage removal check & Results; Discussion \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\textbf{Bounded empirical utility.} The case studies evaluate what this workflow adds beyond rollout accuracy, generic MR generation, and LLM-assisted MR candidate elicitation, drawing primarily on MeshGraphNets cylinder-flow runs with supporting airfoil, PINN, and FNO checks. This utility is a demonstrated change in V\&V outcomes rather than bookkeeping (Section~\ref{sec:results}). The admissible MR set is also used to interpret fault-detection boundaries and blind spots, but this coverage reading is a discussion implication of the admitted relations rather than a separate formal research question.
 
 \section{Related Work}
 \label{sec:related}
@@ -299,14 +281,7 @@ The gate produces four design-time decisions: admit as an executable MR; downgra
 
 A retained MR is represented as an MR card. The card records the fields listed in Table~\ref{tab:rubric}: identifier, source category, physical or software basis, source-case schema, follow-up transformation, preconditions, boundary-condition compatibility, output mapping, metric, tolerance and provenance, expected verdict classes, exclusion rules, artifact schema, and interpretation limits. The card is the reusable design artifact; the executable runner is the operational artifact generated from it.
 
-Each executable asset includes transformation code, runner configuration, metric computation, verdict logic, and artifact recording. Figure~\ref{fig:asset-flow} shows the resulting data flow. The ledger is part of the method rather than only replication packaging: every relation-level claim must be traceable to the source run, follow-up run, mapping, metric output, floor evidence, exclusion decision, and verdict.
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.85\linewidth]{figures/fig_2_mr_asset_dataflow.pdf}
-\caption{MR-card-to-executable asset data flow, from the card's transformation, mapping, metric, tolerance, and exclusion rule through the source and follow-up runs to the relation-level verdict ledger.}
-\label{fig:asset-flow}
-\end{figure}
+Each executable asset includes transformation code, runner configuration, metric computation, verdict logic, and artifact recording. The ledger is part of the method rather than only replication packaging: every relation-level claim must be traceable to the source run, follow-up run, mapping, metric output, floor evidence, exclusion decision, and verdict.
 
 \subsection{Relation-level verdicts}
 \label{subsec:verdicts}
