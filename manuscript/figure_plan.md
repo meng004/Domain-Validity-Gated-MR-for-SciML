@@ -219,6 +219,44 @@
 2. **必要/合适**:8 个 float 个体充分必要;**2 个偏弱**——fig_2(与 fig_1/tab:rubric 重叠)、tab:rq-contribution-evidence(与 tab:rqmap 重复 RQ 索引)。
 3. **数量**:10 float 对 ~12.7k 词方法论文**偏多**(常见 4–8);且 float 密度正是 EIC 多轮"dense/overextended"的来源之一。
 
+---
+
+# 追加评估 — 2026-06-26 IST 同步稿 float 必要性与 caption 精简
+
+> 源文件: `manuscript/main.tex`  
+> 当前状态: 3 图 + 5 表/长表 = 8 floats。  
+> 本轮处理: 保留全部 floats；仅压缩图题和表题，删去 caption 中可由正文承担的解释性句子。
+
+## 当前 float 必要性
+
+| float | 保留判断 | 理由 |
+|---|---|---|
+| `fig:workflow` | **保留(高)** | 方法入口图，概括 candidate relation → admissibility gate → MR asset/evidence ledger 的主流程。 |
+| `fig:verdict-2d` | **保留(高)** | RQ3 的核心判别空间；用图比文字更快说明 relation violation 与 domain violation 的二维解释。 |
+| `fig:operator-floor` | **保留(高)** | P1 divergence floor 的关键定量证据；删图会削弱 numerical decidability 的可审查性。 |
+| `tab:closest-prior-positioning` | **保留(高)** | 回答 closest-prior/incrementality；表格比段落更适合多工作多能力对照。 |
+| `tab:rubric` | **保留(高)** | 方法主表，集中给出 admissibility gate、MR-card fields、verdict semantics。 |
+| `tab:rqmap` | **保留(高)** | 评估设计索引，避免 reviewer 将 primary/supporting/secondary/stress evidence 混读。 |
+| `tab:mr-card-verdict` | **保留(高)** | 结果主表，连接 MR card、rubric decision、runtime verdict 和解释边界。 |
+| `tab:claim-evidence` | **保留(高)** | 附录证据索引，支撑 claim-to-artifact traceability。 |
+
+## caption 精简结果
+
+| float | 新 caption |
+|---|---|
+| `tab:closest-prior-positioning` | Closest-prior capability matrix. |
+| `fig:workflow` | Validity-gated V\&V workflow. |
+| `tab:rubric` | Admissibility gate and verdict semantics. |
+| `fig:verdict-2d` | Two-dimensional relation and domain verdict space. |
+| `tab:rqmap` | Evaluation design. |
+| `tab:mr-card-verdict` | MR-card verdict map. |
+| `fig:operator-floor` | P1 divergence operator-floor calibration. |
+| `tab:claim-evidence` | Claim-to-evidence map. |
+
+## 总判断
+
+当前 8 个 floats 对 IST regular 方法论文是可接受的上限内配置。三张图分别服务于方法流程、判别语义和数值证据；五张表分别服务于相关工作定位、方法定义、实验设计、结果映射和证据追踪。不存在明显装饰性图片；也不存在可无损删除的表格。若后续还需进一步压缩，优先压缩正文解释和长表单元格，而不是删除这些 floats。
+
 ## 最高 ROI 删减(可选,直击 EIC reason-b)
 
 - **砍 fig_2** → 并入 fig_1 尾段;省 200 词,4→3 图。需删 `\ref{fig:asset-flow}`(1 处)。
@@ -271,3 +309,120 @@
 1. **(必须,待确认)** Fig 4 改用 9 分辨率 extended 报告重生成 + 修脚本路径。
 2. **(建议)** Fig 3 caption 加 per-relation 示意说明。
 3. **(可选)** 压词时砍/并 Fig 2。
+
+---
+
+# 追加评估 — 2026-06-27 第 5 章阅读节奏复核
+
+> 用户问题:第 5 章大段文字表达缺乏多样性,是否可增加图片或表格。
+
+## 判断
+
+- 不建议新增概念图:第 5 章已有 `tab:mr-card-verdict` 和 `fig:operator-floor`,再加概念图会与结果映射/证据边界重复。
+- 不建议新增数据图:可视化真实 verdict distribution 或 seeded-fault matrix 需要整理 ledger 为图表输入,且会增加一个 200-word float 成本;当前最直接的问题是读者在进入长段结果前缺少扫读入口。
+- 建议新增一个短表:在 `Primary cylinder-flow evidence` 开头加入 `tab:primary-result-summary`,把六个长段结果压成“check / observed result / interpretation / boundary”四列。该表不引入新证据,只重排已报告结果,主要功能是降低阅读疲劳和防止过度解读。
+
+## 已执行
+
+- 新增 `Primary result summary.` 表。
+- 同步更新正文后需重新编译、同步投稿包并复查 IST 字数和 LaTeX 日志。
+
+---
+
+# 追加评估 — 2026-06-27 第 5 章全局图表规划
+
+> 用户问题:5.6、5.7 仍有大段文字疲劳感,需从全局视角规划插图和表格提升可读性。  
+> 当前状态:正文已计数约 13.3k / 15k;第 5 章已有 `tab:mr-card-verdict`、`tab:primary-result-summary`、`fig:operator-floor`。新增图表必须有明确分工,不能只是把同一信息重排。
+
+## 一、全局诊断
+
+| 位置 | 当前承载方式 | 阅读问题 | 建议动作 |
+|---|---|---|---|
+| §5.1 Evidence overview | 长表 `tab:mr-card-verdict` | 承担全章索引,功能明确 | 保留,不再加同类总表 |
+| §5.2 Primary cylinder-flow evidence | 已新增 `tab:primary-result-summary` + 六个短主题段 | 已有扫读入口 | 保留;不再加图 |
+| §5.3 Same-task replication | 两段文字,数字密集但短 | 可读性尚可 | 暂不加图表 |
+| §5.4 Second-task gate discrimination | 一个长段同时讲 airfoil、四类 verdict、边界 | 可读性中等偏弱 | 可选新增小表,但优先级低于 §5.6/§5.7 |
+| §5.5 Operator-floor resolution sweep | 数据图 + 解释段 | 图文搭配合理 | 保留 |
+| §5.6 Coverage implication | 多个证据层混在连续段落:K=6 复现、severity sweep、60-entry catalogue、adversarial、cross-SUT、cross-program | 最疲劳;核心“coverage geometry”不够一眼可见 | **优先新增 1 张检测矩阵图或 1 张矩阵表** |
+| §5.7 Interpretation and boundaries | 反驳、边界、实践含义连续展开 | 读者需要自己整理“能 claim 什么/不能 claim 什么/何时使用” | **新增 1 张 claim-boundary / use-condition 表**,并压缩原文 |
+
+## 二、推荐新增/替换清单
+
+### Table R1 -- Coverage-geometry matrix
+
+- 位置:§5.6 第一段后,在 `Aggregate reading and Phase-3 unified catalogue` 之前。
+- 类型:结果矩阵表;若后续整理出 CSV,可升级为热力图。
+- 必要性:高 -- §5.6 的主张是“admitted MR set 决定可见/不可见 fault directions”,这是二维结构,表/矩阵比长段更适合。
+- 内容要点:
+  - 行: detector or MR family (`node permutation`, `continuity/conservation`, `mirror-y`, `full admitted suite`)。
+  - 列: fault/evidence group (`boundary/scale`, `physical-channel/adjacency`, `output scaling`, `partial v_y zeroing`, `adversarial`, `airfoil mirror removed`, `cross-program`)。
+  - 单元格: detected / blind / excluded / supporting breadth,并在可用处给 count 或 rate,如 `5/10 union`, `0/6`, `6/6`, `240/240 node permutation` 等。
+- 数据来源:正文 §5.6 已报告数值 + `claim-ledger.yml` / seeded-fault ledgers;若实施为图,必须先整理为 `seeded_fault_detection_summary.csv`,不得手填假数据。
+- caption 草稿:`Coverage-geometry matrix for the admitted MR set. Cells distinguish detected, blind, excluded, and scope-breadth evidence, showing that coverage follows the invariants measured by admitted relations.`
+- 拟生成/实现:
+  - 快速实施:LaTeX `table` / `tabularx`,不新增图文件。
+  - 数据图实施: `fig_5_coverage_geometry_matrix.{pdf,png}` + `src/fig_5_coverage_geometry_matrix.py`。
+- 预计正文改动:新增表后,压缩 §5.6 的 `Aggregate reading` 和 `Cross-SUT coverage` 两段各 2--3 句,让表承担枚举细节。
+
+### Table R2 -- Interpretation and claim-boundary guide
+
+- 位置:§5.7 开头,第一段后;或替换 `Boundary of claims` 与 `Implications for SciML testing` 两个加粗段的部分内容。
+- 类型:解释边界表。
+- 必要性:高 -- §5.7 不是数据结果,而是“如何读这些结果”。表格能防止读者在长段中丢失 permitted claim 与 blocked claim。
+- 内容要点:
+  - 行: `value beyond accuracy`, `predicate not post-hoc`, `deferred conservation`, `overclaim blocked`, `when to use`, `cost profile`。
+  - 列: `reader concern`, `evidence response`, `licensed claim`, `not licensed`。
+- 数据来源:正文 §5.7 现有文字和 Table~\ref{tab:claim-evidence};不新增实验证据。
+- caption 草稿:`Interpretation and claim-boundary guide. The table separates what the evidence licenses from claims that remain outside the study scope.`
+- 拟实现:`tab:interpretation-boundary-guide`。
+- 预计正文改动:新增表后,把 §5.7 中 `Boundary of claims`、`Implications`、`When to use` 三段各压缩为 1--2 句,避免“表 + 原文重复”。
+
+### Table R3 -- Cross-task gate discrimination summary (optional)
+
+- 位置:§5.4 第二句后。
+- 类型:小型对比表。
+- 必要性:中 -- §5.4 单段较长,但不像 §5.6 那样结构复杂;若还要进一步改善,这张表能让 cylinder vs airfoil 的 verdict type difference 更直观。
+- 内容要点:
+  - 行:`node permutation`, `incompressible continuity`, `compressible mass conservation`, `mirror-y`。
+  - 列:`cylinder-flow gate`, `airfoil gate`, `reason for difference`, `claim boundary`。
+- 数据来源:正文 §5.4 与 `tab:mr-card-verdict`。
+- caption 草稿:`Cross-task gate discrimination between incompressible cylinder flow and compressible airfoil flow.`
+- 拟实现:`tab:cross-task-gate-summary`。
+- 取舍建议:仅当实施 R1/R2 后仍觉得 §5.4 疲劳时再加;否则先不加,避免第 5 章表格过密。
+
+## 三、是否新增图片
+
+| 候选图 | 结论 | 原因 |
+|---|---|---|
+| Verdict distribution stacked bar | 暂不推荐 | `tab:mr-card-verdict` 已给 verdict map;若无整理好的 per-case ledger 图会增加数据处理风险 |
+| Coverage geometry heatmap | 推荐为 R1 的二阶段版本 | 这是唯一真正能呈现表没有展示的二维结构的图;但必须从真实 summary CSV 生成 |
+| Claim-boundary concept diagram | 不推荐 | §5.7 更像解释/范围界定,表格比概念图更精确 |
+| Cross-task Sankey/flow | 不推荐 | 信息量不足,容易装饰化 |
+
+## 四、优先级与实施策略
+
+1. **优先实施 R1 + R2**:一个 coverage 矩阵 + 一个 claim-boundary 表,直接针对 §5.6/§5.7 的疲劳点。
+2. **控制净增量**:新增两个表会按 IST 规则增加约 400 counted words;当前 headroom 约 1689,形式上安全,但应同步压缩 §5.6/§5.7 原文约 250--400 words,让可读性提升而非简单增厚。
+3. **不建议一次性加 R1/R2/R3 三张表**:第 5 章会从“文字疲劳”变成“表格疲劳”。R3 作为备选。
+4. **若作者偏好图片**:把 R1 做成 heatmap,不要另加 R1 表;R2 仍用表。
+5. **实施后验证**:重编译两遍,检查 `Overfull \hbox`、undefined refs、IST wordcount、PDF/hash/zip 同步。
+
+## 五、建议的最终第 5 章 float 布局
+
+| 位置 | float | 功能 |
+|---|---|---|
+| §5.1 | `tab:mr-card-verdict` | 全章 verdict map |
+| §5.2 | `tab:primary-result-summary` | 主案例扫读入口 |
+| §5.5 | `fig:operator-floor` | 数值可判定性定量证据 |
+| §5.6 | `tab:coverage-geometry-matrix` 或 `fig:coverage-geometry-matrix` | coverage/blind-spot 二维结构 |
+| §5.7 | `tab:interpretation-boundary-guide` | allowed vs blocked claims / use conditions |
+
+推荐最终增量:新增 2 个浮动体,同时删减相应段落细节;不新增概念图。
+
+## 六、执行记录
+
+- 已实施 R1:`tab:coverage-geometry` 加入 §5.6,用 detector / relation family 行组织 visible directions、blind/excluded directions、scope and boundary。
+- 已压缩 §5.6:原先的 aggregate reading、Phase-3 catalogue、adversarial mutants、cross-SUT/cross-program 长段压缩为三个解释段,避免和矩阵重复。
+- 已实施 R2:`tab:interpretation-boundary` 加入 §5.7,按 reader concern、evidence response、licensed claim、not licensed 四列组织解释边界。
+- 已压缩 §5.7:保留关键 misreading、claim boundary、implications、cost profile,删去与表格重复的长解释。
+- 未实施 R3:§5.4 暂不新增 cross-task gate summary,避免第 5 章表格过密。
