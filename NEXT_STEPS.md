@@ -1,6 +1,26 @@
-# NEXT_STEPS — MR识别/圆柱绕流 (IST submission)
+# NEXT_STEPS — MR识别/圆柱绕流 (IST rejected → RESS repositioning)
 
-> Last updated: 2026-06-22 by claude-code (**采用 canonical 两层 MetaPattern 模型**:§3.2 Yang 三层→L1 五元模式+L2 十族 a–j、preamble vendored 符号宏、§3.5 解释协议、§4.1 锚到 a–j、术语弃 block/NOETHER-style;commits `0e0163e`(框架)+ 本次 §4 对齐提交。详见顶部 2026-06-22 小节。下方 2026-06-21（晚）为前序投稿就绪小结。)
+> Last updated: 2026-06-30 by claude-code
+
+## 🔴 2026-06-29 IST 桌拒 → 改投 RESS（重定位进行中）
+- **✅ §11 提交前流水线全过（2026-06-30）**：① 整体审视=各 gate 见下；② 文献真实性 hard-block ✗=0（57 条全核实，新 10 条 Crossref 直查留档 `docs/review_presubmission/reference_verification_ress_delta.md`，含页码逐条比对）；③ proofread（peer-reviewer 子代理全稿）→ 无致命，修复真缺陷：family(b) 孤儿标号删除、"Four MR families"→"instances"、`tab:subject-scope` 补 \ref、GPU/CPU/CFD/ODE/NSE/SOTA 全部首用定义或拆写、L354 补 Appendix~、(i)–(iv) 条件标号、§3.2 trajectory-reversal/self-adjointness 改诚实表述（PINN/FNO 无此族判决，去 overclaim, §6.4）、拼写统一美式（catalogue→catalog/off-center/nearest-neighbor）；④ humanizer：em-dash 0、AI-ism 0（"not only X but Y" 精确用法保留）；⑤ RESS precheck 硬约束 PASS + 编译 52pp 0 undefined/0 Missing/0 undefctrl/0 Overfull、全 cite resolve、正文 ~12,050≤13,000。
+- **✅ 去黑话彻底性核验（2026-06-30，应用户要求）**：两轮全表达式扫描 `submissions/RESS/{main.tex,references.bib,highlights.txt}` → 旧元模式体系 **零残留**：符号宏(空)、a–j 字母枚举(空)、NOETHER/Noether黑话(空)、MetaPattern/two-layer/Layer1-2(空)、MR class(空)、three-level/Yang taxonomy(空)、裸符号 m_{}/f_{parent.child}(空)。首轮命中全为误报（relative L2 范数 / MetaTrimmer+constraint-architecture=Duque-Torres 真实前作合法引用 / block=普通英语）。合法保留：MR family(5)、relation family(3)、admissible MR(6) 均为去黑话后白话词。**注**：去黑话仅作用于 RESS `main.tex`；`manuscript.md`(IST prose 源) 仍持两层 canon（IST 历史既定，非错误，若 RESS 转正需回灌）。
+- **IST 结果**：EIC Staron 桌拒（"not suitable for review"），死因=超范围(SE 受众)+importance 不清+单 SUT。诊断 `paper/52`。
+- **目标刊**：RESS（中科院工程技术 1 区 Top）；模板/约束 `venues/RESS.md` + `venues/templates/RESS/`（官方 16 页 Guide 坐实）。
+- **已完成**：① RESS 投稿包 `submissions/RESS/`（elsarticle，编译 0 错，摘要 199 词非结构化）；② 重定位草案 `paper/53`（标题/摘要/引言/Phase10.0/广度重排§H/去黑话§I/漂移检查§G）；③ Phase 0–3 评审 `paper/54`。
+- **✅ DA-1（scope-by-convenience）四步全部解除（① 2026-06-29，②③④ 2026-06-30）**：
+  1. ✅ **2026-06-29**：`submissions/RESS/main.tex` 新增 §2.4「Reliability and assurance of learned surrogates」三段——certification 线（Eiras ICML2024/Hillebrecht-Unger TNNLS/Mukherjee/Haugen）+ assurance（Kirsch PCMM 2025/NACA + Van Acker Validity Frames）+ 显式区分 Lim2026(runtime)/Shikhman2026/Daniels2025，缺口收紧到三合一精确表述。10 条新文献入 `references.bib`（57 总）。守边界 §G。残留清理：`kirsch2024naca` 补页码；`lim2026/shikhman2026` 补 arXiv id。
+  2. ✅ **去黑话 2026-06-30**（`paper/53 §I`）：§3.2 重命名「Candidate relation sources and relation families」，删 Layer-1/Layer-2 层级、MetaPattern 算子代数（$\AP$/$\MM$/群作用/偏序）、sans-serif `f_{parent.child}` 记号、a–j 字母、Noether 对应；改为白话族名（reflection-symmetry/conservation/representation-invariance/convergence-accuracy-order/monotonicity）。删 preamble vendored 符号宏块（原 L31-58）。正文 0 残留宏使用（grep 空）。
+  3. ✅ **广度前置 2026-06-30**（`paper/53 §H`）：§5.2 之后新增 §5.3「Method transfer across architectures and equations」+ `tab:method-transfer` 表（6 行：cylinder MGN/S4-S5/PointMLP/PhysicsNeMo/airfoil/PINN-FNO，每行均 ledger 既有运行，非新结果），并锁 G-3 红线句「supporting breadth, not a cross-SUT or geometry-independent pass/fail rate；primary 量化证据仍在单一 MGN checkpoint」。
+  4. ✅ **thesis + RESS 语汇 gap 2026-06-30**（`paper/53 §C`）：引言第 1 段立成可靠性问题（complex systems/OOD trust/fault propagates）；第 2 段点名 false alarms + misattribution + admissibility-before-reporting 才是真问题；第 4 段加显式 thesis「admissibility gating *changes* V&V outcomes rather than merely annotating them」+ 复用 RESS scope 闸门句「discernible relationship to the reliability of complex systems」。全部 `\citep` 键保留（57 cited = 57 defined，零悬挂）。
+  - **统一验证（步骤②③④后全量）**：pdflatex×3 → 0 undefined / 0 Missing character / 0 Undefined control sequence / 0 Overfull / 0 undefined refs / 0 undefined citations；em-dash 0；abstract 199 词；干净正文词数 **12,048 ≤ RESS 13,000**（RESS 纯词数规则，无 IST floats=200 加权；precheck 的 13,950 是含 LaTeX token 高估）；3 figs + 8 tables；唯一 bibtex 告警 `kirsch2024naca`（空页，benign）。
+- **🟡 缺口主张新硬约束（undermind 核实暴露）**：① 缺口必须收紧到"(a)多属性事后测试 +(b)类型化 admissibility 门控 +(c)违例归因（模型/无效测试/数值）"**三合一**精确表述，不得写"几乎无人做"；② Related Work **必须显式区分** Lim 2026（核工业 validation-gated diagnosis，**最近邻竞争**：在线治理 vs 本文部署前 oracle-free 测试）/ Shikhman 2026 / Daniels 2025 / Van Acker 2019，否则审稿人有据可驳；③ 元数据：Eiras→ICML 2024、Kirsch PCMM→2025。
+- **收尾清理**：CNKI 核 `yang2020hierarchical` 卷期页码；`zhao2026noether`→`li2026noether`；`yang2021hydromt` 补 number=9。
+- **边界铁律**：补文献仅用于定位，不得新增 reliability/localization/泛化 claim（漂移检查 `paper/53 §G`）。
+
+---
+
+> [IST 阶段历史 ↓] Last updated: 2026-06-22 by claude-code (**采用 canonical 两层 MetaPattern 模型**:§3.2 Yang 三层→L1 五元模式+L2 十族 a–j、preamble vendored 符号宏、§3.5 解释协议、§4.1 锚到 a–j、术语弃 block/NOETHER-style;commits `0e0163e`(框架)+ 本次 §4 对齐提交。详见顶部 2026-06-22 小节。下方 2026-06-21（晚）为前序投稿就绪小结。)
 
 ## 🟢 2026-06-22 采用 canonical 两层 MetaPattern 模型(元模式定义/术语/符号系统)
 - **权威源**:`P1-MetaPattern/shared/two_layer_canon.{md,tex}`(分支 `claude/b1-realbug-2026-06-21`),single source of truth。投稿包自包含→符号宏 **vendored** 进 preamble(不跨仓 `\input`)。用户拍板 target=**仅 main.tex**(manuscript.md 不动)。

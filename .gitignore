@@ -18,6 +18,13 @@ submissions/IST/*.spl
 submissions/IST/*.bbl
 submissions/IST/*.log
 submissions/IST/*.raw.tex
+submissions/RESS/*.aux
+submissions/RESS/*.blg
+submissions/RESS/*.spl
+submissions/RESS/*.bbl
+submissions/RESS/*.log
+submissions/RESS/*.out
+submissions/RESS/*.synctex.gz
 manuscript/*.aux
 manuscript/*.blg
 manuscript/*.spl

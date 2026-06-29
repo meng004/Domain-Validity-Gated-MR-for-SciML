@@ -28,6 +28,20 @@
 
 12. ASME. (2009, reaffirmed 2021). V&V 20 - Standard for Verification and Validation in Computational Fluid Dynamics and Heat Transfer.
 
+## RESS lineage (to add — defeats DA-1 scope-by-convenience; Crossref-verified by Phase 2 subagent 2026-06-29)
+
+> 目的：把贡献接进 RESS 本刊的 reliability/assurance/OOD-trustworthy 对话，解除 `paper/54` DA-1 致命项。
+> ★ = 必补；均经 Crossref 核实（ISSN 0951-8320）。加入 bib 前按 §11.2.1 全引用审计。
+
+1. ★ Paterson, C., Hawkins, R., Picardi, C., Jia, Y., Calinescu, R., & Habli, I. (2025). Safety assurance of Machine Learning for autonomous systems. *Reliability Engineering & System Safety*, 264, 111311. https://doi.org/10.1016/j.ress.2025.111311
+   — 用途：把"MR→可审计验证资产"接到 ML safety assurance / assurance case 语境。
+2. ★ Han, T., & Li, Y.-F. (2022). Out-of-distribution detection-assisted trustworthy machinery fault diagnosis approach with uncertainty-aware deep ensembles. *Reliability Engineering & System Safety*, 226, 108648. https://doi.org/10.1016/j.ress.2022.108648
+   — 用途：RESS 内"OOD + 可信性"代表作；呼应本文"不声称优于 UQ"边界。
+3. ★ Chen, E., Bao, H., & Dinh, N. (2024). Evaluating the reliability of machine-learning-based predictions used in nuclear power plant instrumentation and control systems. *Reliability Engineering & System Safety*, 250, 110266. https://doi.org/10.1016/j.ress.2024.110266
+   — 用途：接作者核能线（li2022nuclearmr/fu2021burnup）到 RESS 当代脉络。
+4. (可选) Subramanian, A., & Mahadevan, S. (2023). Probabilistic physics-informed machine learning for dynamic systems. *Reliability Engineering & System Safety*, 230, 108899. https://doi.org/10.1016/j.ress.2022.108899
+   — 用途：衔接 PIML 与可靠性代理验证；视正文是否展开代理-可靠性论述再定。
+
 ## To Verify
 
 1. Towards metamorphic testing with LLM-based workflows: Metamorphic relation inference and follow-up test case generation. Information and Software Technology, 2026.

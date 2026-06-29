@@ -1,0 +1,5 @@
+- Validity gate decides when a physics check can soundly fault a learned surrogate
+- Tolerance must dominate the measuring operator's numerical floor to admit a check
+- Typed verdicts separate surrogate faults from out-of-domain and numerical limits
+- A claim ledger binds every reported verdict to a recorded artifact
+- Case study bounds where admitted checks can and cannot surface seeded faults
