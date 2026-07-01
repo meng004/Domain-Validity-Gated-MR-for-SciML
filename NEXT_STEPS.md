@@ -1,6 +1,32 @@
-# NEXT_STEPS — MR识别/圆柱绕流 (IST rejected → RESS repositioning)
+# NEXT_STEPS — MR识别/圆柱绕流 (IST rejected → 拍板 A+B+C：TOSEM 稳投)
 
-> Last updated: 2026-06-30 by claude-code
+> Last updated: 2026-07-01 by claude-code · 主攻已锁 **A+B+C 理论优先 → TOSEM 稳投**（`paper/67`；deep-research 裁定 + 精修 `paper/66` 实验-only 排序）
+
+## 🟡 2026-07-01 用户拍板 A+B+C 三杆全上 → TOSEM 稳投（执行程序 `paper/67`）
+- **决策精修**：deep-research 裁定（`paper/67`）后用户选 **A+B+C 三杆全上、理论优先、做到 TOSEM 稳投**（非边缘）。较 2026-06-30 的「A 单杆砸实验冲顶」，改为 **杆 B（完善 floor 理论）为枢轴 + 杆 C（聚焦核心）先行 + 杆 A（补实验）作 breadth**。
+- **deep-research 裁定要点（`paper/67`）**：现稿 = IST/STVR 档（理论强/实证弱/诚信满格）；**天花板=TOSEM**（ICSE/FSE/ISSTA 结构性够不着——本领域无真实缺陷语料，补实验翻不过「真实 bug」墙）；**最适合=TOSEM**（收货币=framework+soundness，匹配本文可补强的强项、代偿产不出的短板；CCML/MET-MAPF/MR-Scout 均首创框架不靠击败 SOTA）。paper-search 硬锚点：RESS 0 篇 MT 先例、MT-of-SciML-surrogate 近空白 niche。
+- **三杆 ROI**：A（补实验）4–6 月/HIGH，有真实缺陷语料结构墙，单杆封顶 TOSEM 门槛下沿；**B（完善理论）中成本/低风险/最高 ROI**，单杆即可 IST→TOSEM；**C（聚焦）最便宜、感知增益大**。Reviewer-2 枢轴反驳=「floor gate 只在 1 网格+1 Delaunay 证明」→ 杆 B 补 general-mesh soundness 直接消掉，是天花板枢轴。
+- **执行程序（`paper/67` §五，理论优先，带 gate）**：**Phase C** 聚焦重框定到「数值可判定性可采性判据」单一贡献（1–2 周，写作）→ **Phase B** floor 理论一般化到非结构网格 soundness 定理（枢轴，1.5–3 月 MED，**不闭合不投稿**）→ **Phase A** 多 SUT breadth + measured-advantage 演示（并行，1.5–2 月，部分从 committed C38/C42）→ **Phase L** 诚信 ledger 升级（贯穿，C42 禁 superiority 须新增 claim 不得改写蒙混）→ **Phase S** TOSEM 投稿包 + `venues/TOSEM.md`。总工期 ~6+ 月，枢轴风险=杆 B 能否一般化。
+- **「稳投」判据**：杆 B 理论闭合 + 杆 A ≥3 独立 SUT 门控价值方向一致 + 诚信 ledger 干净，三者齐备方投；杆 B 证不出 → 降落重框定 IST。
+- **RESS Method-B（原 `paper/60`）与 IST/ICST 转为降落备选**，不并行主攻。
+- **🟢 资产实检重估风险（关键，低于 `paper/63` 先验）**：measured-advantage 信号**已在提交数据里**，非从零 4–6 月赌注——① MGN `detection-vs-accuracy`(C38, 10 故障)：MR 抓 **2/10** accuracy 漏、accuracy 抓 **0/10** MR 漏（近似严格占优）；② PointMLP `pointmlp-three-arm-complementarity`(C42/C43, 20 故障)：gated-MR **13/20** vs accuracy **6/20**，**9 个 MR-only** accuracy 盲，**门控价值=采信检测器 0% 误警 / 6 个被拒模板 100% 误警**（=`paper/64` §四要的 measured harm+fix）；③ 自然 baseline 全建（generic/expert/llm/rollout-accuracy）；④ `phase3-unified-fault-catalog` 60 条/1032 trials。
+- **三个封顶=真正的 path-A 工作（非修辞）**：① **诚信硬 gate**——C42 现 `wording_forbidden` 禁 superiority，升头条须**新增 claim ID+真实运行+guard**，不得改写 C42 蒙混（prose≤ledger，§4/§6.4）；② **故障基准可辩护**（`paper/63` 阶段2，最稀缺）——自造平凡 mutant 须换真实、经独立校验的 SciML-surrogate 故障分类；③ **多被测**——0%-vs-100% 误警须跨 ≥3–5 独立 SUT 稳定（airfoil 训到位+补 2–3 物理域）。
+- **执行程序（`paper/66`，de-risk 优先，带 gate）**：Phase 0 优势信号盘点+可辩护性预检（1–2 周，读现有数据）→ Phase 1 可辩护真实故障基准（1–1.5 月 HIGH）→ Phase 2 多被测真实代理（1–2 月 GPU）→ Phase 3 全 baseline head-to-head + measured harm/fix 定稿（3–4 周，**跑不出显著优势则降落**）→ Phase 4 诚信 ledger 升级（贯穿，硬 gate）→ Phase 5 TOSEM 框架化+`venues/TOSEM.md`+投稿包。总工期 ~4–6 月，风险重心从「优势能否测出」前移到「优势能否在真实基准+多 SUT 存活」。
+- **🔵 next-action（待用户认可即启动）**：Phase 0 第 0 动作 = 把 C38+C42/C43+统一目录的 measured-advantage 证据汇总成「gate-value 证据表」+ 逐条标注对自造故障的依赖度（CPU、无凭据、无新训练，最便宜 de-risk）。
+- **边界铁律**：prose≤ledger（superiority 先落 claim）；实事求是（信号消失如实降落，不 disguise）；姊妹库只读；SE 化框定弱化 CFD 物理（IST 桌拒同坑）。
+
+## 🔵 2026-06-30 Venue 天花板决策（已拍板 A，记录留档）— `paper/65`
+- **天花板坐标（无争议）**：本论文这条线（SciML 代理蜕变测试方法稿）的**期刊**天花板=**TSE/TOSEM**（CCF-A、中科院 1 区 Top）；再上是 ICSE/FSE/ISSTA（会议）。RESS 同为 1 区 Top 但属可靠性社区，是**跨界**非更高。
+- **CCF-A SE 顶会截稿窗口（实检 2026-06-30）**：ICSE 2027 单轮全文 **6/30 今天已关**；FSE 2027 研究论文 **2026-10-02**（~3 月，4–6 月实验压线）；ISSTA 2027 约 **2027-01 下旬**（按 ISSTA 2026 单轮 1/29 推，~7 月，时间最契合但一锤子）；ASE 2026 已过；**TSE/TOSEM 无截稿滚动 + R&R 多轮**。
+- **判断：现实稳妥天花板 = TOSEM（TSE 等价）期刊路，非会议**。三条理由：① 会议与 TSE/TOSEM 对本文**同一道证据门槛**（≥3–5 真实代理 + 击败 baseline 或 measured harm/fix + 可辩护故障基准，4–6 月 HIGH 风险），但会议多了硬 deadline + 一锤子；② 期刊 R&R 正好吸收本文核心风险「门控可能测不出显著优势」（会议=直接 reject，期刊=Major Revision 给第二次机会）；③ 必要性打法先例（CCML/MET-MAPF/DRLMutation）**全在 TOSEM**。
+- **诚实尾注 + 两步走**：4–6 月新实验 + HIGH 风险跑不掉（生死手=`paper/63` 阶段 2/4：可辩护真实故障基准 + measured harm/fix）。稳妥打法=先做证据 → 成立则投 TOSEM/TSE；跑不出优势则**优雅降落 IST 重框定 / ICST（CCF-B）**。
+- **🔵 待用户拍板主攻方向（三选一，互斥）**：
+  - **A. 纵向冲顶 SE 天花板** → TOSEM/TSE（本决策推荐为「天花板」答案，4–6 月 HIGH 风险）；
+  - **B. 横向跨界较快出** → RESS Method-B（`paper/60` 已启动 PINN-PDEM 主线，周–月级）；
+  - **C. 稳妥落地换确定性** → IST 重框定 / ICST（CCF-B，门槛低一档）。
+  - claude-recommendation：若以「天花板」为唯一目标且愿担 4–6 月 HIGH 风险 → **A（TOSEM）**；若要更高出稿确定性/更快 → B 或 C。
+
+---
 
 ## 🔴 2026-06-29 IST 桌拒 → 改投 RESS（重定位进行中）
 - **🔴🔴 Phase 10.0 编辑桌拒预检 FAIL（2026-06-30）—— 推翻"可投 RESS"判断**：两个独立对抗性 RESS handling-editor persona（Council Mode）通读 main.tex，**均判 DESK-REJECT**。记录 `paper/56`。收敛诊断：**这是 software-V&V/SE 方法论文，重定位封面投 RESS，正文没挣得 scope**——(超范围)可靠性连接靠 scope 原文断言、未实例化，无系统级可靠性/风险决策在环；(不成熟)主证据单 MGN checkpoint，四种宽度全被作者边界句自我降级，过滤后无可靠性/覆盖/优越结论幸存；(受众)单块 250 词摘要 + MT 行话 + 9 张否定表，可靠性读者一次略读抓不到肯定结论。诚信过硬（under-claim），死结是 scope+maturity **结构性**缺口，框架救不了。**未解决前不得投 RESS**（Phase 10.0「不带病投稿」）。埋没的真钩子：署名 CNNC 核背景 + OpenMC，若立题「核 surrogate 可靠性、系统在环」scope 会硬——但是补证据（Phase 4）。**战略分叉待用户拍板**：①改投 SE(TSE/TOSEM，IST 已拒) ②留 RESS 补结构性可靠性证据(Phase 4) ③其他。
