@@ -2,6 +2,22 @@
 
 > Last updated: 2026-07-01 by claude-code · 主攻已锁 **A+B+C 理论优先 → TOSEM 稳投**（`paper/67`；deep-research 裁定 + 精修 `paper/66` 实验-only 排序）
 
+## 🟢 2026-07-02 Codex Phase Loop 执行结果（Phase 0/C/B/A-L/S-Q 已闭环）
+- **执行原则**：按用户要求采用“实事求是 + 不伪造”硬约束；所有结论只落到已读文件、已解析 ledger、已编译日志、已运行验证脚本或明示的权限失败记录。
+- **新增审计文件**：
+  - `paper/69_phase0_tosem_evidence_gate.md`：Phase 0 证据门控与 TOSEM 差距评估。
+  - `paper/70_phaseB_operator_floor_soundness.md`：shape-regular P1 triangular mesh 的 local divergence operator-floor soundness 定理与非声称边界。
+  - `paper/71_phaseA_L_measured_advantage_ledger_audit.md`：C38/C42/C51/C52/C53 measured-advantage 与 claim-ledger 审计。
+  - `paper/72_phaseS_Q_pipeline_reviewer_humanizer_report.md`：academic-pipeline 风格最终校对、reviewer 复核、humanizer 去 AI 化和验证记录。
+- **正文/PDF 已更新**：`manuscript/main.tex` 重框定为 numerical decidability/admissibility-gate 主线；`manuscript/main.pdf` 重新生成（临时编译区输出 51 页）。
+- **ledger 已更新**：`research_assets/experiments/claim-ledger.yml` 新增 `C53-shape-regular-p1-operator-floor-soundness`，状态为 `supported-theory`；允许声称 shape-regular P1 局部 operator floor，禁止 arbitrary unstructured / degenerate mesh / non-P1 / learned-output / reliability 或 fault-detection 泛化声称。
+- **验证实绩**：
+  - `pdflatex` 两轮通过，日志固定字符串扫描未发现 undefined refs/citations、Undefined control sequence、LaTeX Error、Missing character、Overfull hbox 或 rerun 提示；仍有常规 Underfull hbox 排版提示。
+  - 完整临时镜像中 `tools/validate_research_assets.py` 与 `tools/validate_experiment_protocol.py` 均退出 0。
+  - 直接从 OneDrive 项目路径运行验证脚本曾被系统返回 `Operation not permitted`，因此验证采用从项目复制出的完整临时镜像；此限制不得伪装为“项目路径直接验证通过”。
+- **当前 TOSEM 稳投距离**：较 2026-07-01 原状态已从“大差距”降到“中等差距”。核心理论缺口已由 C53 降低；叙事漂移已修正；剩余最大风险是 external validity / denominator trust，即审稿人可能仍要求更多独立 subjects 或更锐利地收窄到 admissibility soundness，而不是 broad SciML reliability。
+- **下一真实 next-action**：若继续冲“非边缘稳投”，优先补外部效度和独立复现实验；若不补新实验，则当前稿应保持 bounded methodological claim，不得升级为 baseline superiority、general reliability 或 real-world defect-detection-rate 论文。
+
 ## 🟡 2026-07-01 用户拍板 A+B+C 三杆全上 → TOSEM 稳投（执行程序 `paper/67`）
 - **决策精修**：deep-research 裁定（`paper/67`）后用户选 **A+B+C 三杆全上、理论优先、做到 TOSEM 稳投**（非边缘）。较 2026-06-30 的「A 单杆砸实验冲顶」，改为 **杆 B（完善 floor 理论）为枢轴 + 杆 C（聚焦核心）先行 + 杆 A（补实验）作 breadth**。
 - **deep-research 裁定要点（`paper/67`）**：现稿 = IST/STVR 档（理论强/实证弱/诚信满格）；**天花板=TOSEM**（ICSE/FSE/ISSTA 结构性够不着——本领域无真实缺陷语料，补实验翻不过「真实 bug」墙）；**最适合=TOSEM**（收货币=framework+soundness，匹配本文可补强的强项、代偿产不出的短板；CCML/MET-MAPF/MR-Scout 均首创框架不靠击败 SOTA）。paper-search 硬锚点：RESS 0 篇 MT 先例、MT-of-SciML-surrogate 近空白 niche。

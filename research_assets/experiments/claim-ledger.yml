@@ -1638,6 +1638,33 @@ claims:
       - "A validated quantitative coverage model or a real-world fault-detection rate."
     blocked_reason: null
 
+  - claim_id: "C53-shape-regular-p1-operator-floor-soundness"
+    status: "supported-theory"
+    scope: "mathematical proof artifact for the P1 constant-per-cell divergence operator on shape-regular triangular meshes / C2 divergence-free reference fields with bounded Hessian / local operator-floor upper bound and soundness condition for numerical-decidability admissibility"
+    evidence:
+      - "paper/70_phaseB_operator_floor_soundness.md"
+      - "tools/conservation_rubric.py"
+      - "tools/run_operator_floor_analytic_bound.py"
+      - "research_assets/runs/operator-floor-analytic-bound/operator_floor_analytic_bound_report.json"
+      - "tools/run_operator_floor_sweep_mesh2.py"
+      - "research_assets/runs/operator-floor-sweep-mesh2/operator_floor_mesh2_report.json"
+    wording_allowed: >
+      For the P1 constant-per-cell divergence operator on a shape-regular triangular
+      mesh family, and for C2 divergence-free reference fields with bounded Hessian,
+      the operator-floor error is bounded locally by a mesh-shape constant times
+      M h, where M bounds the component Hessians and h is the cell diameter. This
+      supplies a soundness condition for the numerical-decidability gate: an absolute
+      divergence-free MR verdict is admissible only when its tolerance dominates this
+      operator floor. The concrete deployment mesh has a tighter closed-form predictor
+      and strict a-priori bound (C32), and one Delaunay topology gives observed
+      first-order same-order stability (C44).
+    wording_forbidden:
+      - "A closed-form bound for arbitrary unstructured cylinder meshes."
+      - "A guarantee for degenerate or sliver meshes without a shape-regularity condition."
+      - "A guarantee for non-P1 operators, flux-form operators, discontinuous fields, learned outputs, or boundary-condition mismatch."
+      - "A model-accuracy, reliability, or fault-detection claim."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"
