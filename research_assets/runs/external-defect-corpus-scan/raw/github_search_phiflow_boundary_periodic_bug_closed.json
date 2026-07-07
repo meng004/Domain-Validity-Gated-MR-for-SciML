@@ -1,0 +1,89 @@
+{
+  "total_count": 1,
+  "incomplete_results": false,
+  "items": [
+    {
+      "url": "https://api.github.com/repos/tum-pbs/PhiFlow/issues/199",
+      "repository_url": "https://api.github.com/repos/tum-pbs/PhiFlow",
+      "labels_url": "https://api.github.com/repos/tum-pbs/PhiFlow/issues/199/labels{/name}",
+      "comments_url": "https://api.github.com/repos/tum-pbs/PhiFlow/issues/199/comments",
+      "events_url": "https://api.github.com/repos/tum-pbs/PhiFlow/issues/199/events",
+      "html_url": "https://github.com/tum-pbs/PhiFlow/issues/199",
+      "id": 3131532423,
+      "node_id": "I_kwDODXcFTc66p2SH",
+      "number": 199,
+      "title": "Error in gradient calculation in flow past an obstacle",
+      "user": {
+        "login": "zhangzhen117",
+        "id": 62326829,
+        "node_id": "MDQ6VXNlcjYyMzI2ODI5",
+        "avatar_url": "https://avatars.githubusercontent.com/u/62326829?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/zhangzhen117",
+        "html_url": "https://github.com/zhangzhen117",
+        "followers_url": "https://api.github.com/users/zhangzhen117/followers",
+        "following_url": "https://api.github.com/users/zhangzhen117/following{/other_user}",
+        "gists_url": "https://api.github.com/users/zhangzhen117/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/zhangzhen117/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/zhangzhen117/subscriptions",
+        "organizations_url": "https://api.github.com/users/zhangzhen117/orgs",
+        "repos_url": "https://api.github.com/users/zhangzhen117/repos",
+        "events_url": "https://api.github.com/users/zhangzhen117/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/zhangzhen117/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 8,
+      "created_at": "2025-06-09T21:27:54Z",
+      "updated_at": "2025-09-15T10:40:09Z",
+      "closed_at": "2025-09-15T10:40:09Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "I wanted to calculate the gradient in a flow past a cylinder problem, but I got the following error. It seems something is wrong under the hood.\n\n<pre markdown>\n---------------------------------------------------------------------------\nRuntimeError                              Traceback (most recent call last)\nCell In[1], line 42\n     40 forward_run(forcing,v0)\n     41 sim_grad = field.gradient(forward_run,wrt='forcing',get_output=False)\n---> 42 forcing_grad = sim_grad(forcing,v0)\n     44 _=plot(forcing_grad)\n\nFile ~/.conda/envs/pyTorch/lib/python3.12/site-packages/phiml/math/_functional.py:639, in GradientFunction.__call__(self, *args, **kwargs)\n    637 if key not in self.traces:\n    638     self.traces[key] = self._trace_grad(key, wrt_natives)\n--> 639 native_result = self.traces[key](*natives)\n    640 output_key = match_output_signature(key, self.recorded_mappings, self)\n    641 jac_shape = output_key.shapes[0].non_batch  # ToDo prepend this to all wrt shapes\n\nFile ~/.conda/envs/pyTorch/lib/python3.12/site-packages/phiml/backend/torch/_torch_backend.py:984, in TorchBackend.jacobian.<locals>.eval_grad(*args)\n    982 if np.prod(self.staticshape(loss)) == 1:\n    983     assert loss.requires_grad, f\"Failed to compute gradient because function output does not depend on any input. Inputs: {args}\"\n--> 984     grads = torch.autograd.grad(loss, wrt_args)  # grad() cannot be called during jit trace\n    985 else:\n    986     raise NotImplementedError(f\"Loss must be reduced to a scalar\")\n\nFile ~/.conda/envs/pyTorch/lib/python3.12/site-packages/torch/autograd/__init__.py:436, in grad(outputs, inputs, grad_outputs, retain_graph, create_graph, only_inputs, allow_unused, is_grads_batched, materialize_grads)\n    432     result = _vmap_internals._vmap(vjp, 0, 0, allow_none_pass_through=True)(\n    433         grad_outputs_\n    434     )\n    435 else:\n--> 436     result = _engine_run_backward(\n    437         t_outputs,\n    438         grad_outputs_,\n    439         retain_graph,\n    440         create_graph,\n    441         inputs,\n    442         allow_unused,\n    443         accumulate_grad=False,\n    444     )\n    445 if materialize_grads:\n    446     if any(\n    447         result[i] is None and not is_tensor_like(inputs[i])\n    448         for i in range(len(inputs))\n    449     ):\n\nFile ~/.conda/envs/pyTorch/lib/python3.12/site-packages/torch/autograd/graph.py:769, in _engine_run_backward(t_outputs, *args, **kwargs)\n    767     unregister_hooks = _register_logging_hooks_on_whole_graph(t_outputs)\n    768 try:\n--> 769     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass\n    770         t_outputs, *args, **kwargs\n    771     )  # Calls into the C++ engine to run the backward pass\n    772 finally:\n    773     if attach_logging_hooks:\n\nRuntimeError: Function TorchCustomFunctionBackward returned an invalid gradient at index 0 - got [64, 32] but expected shape compatible with [32, 64]\n</pre>\n\n```python\nfrom phi.torch.flow import *\ndevice = torch.device('cuda' if torch.cuda.is_available() else 'cpu')\nprint(device)\nN          = 32                  # grid resolution \nx_min      = -5.0                # min X coordinate\nx_max      = 15.0                # max X coordinate\ny_min      = -5.0                # min Y coordinate\ny_max      = 5.0                 # max Y coordinate\ndt         = 0.1                # time step\nnu         = 0.1                # kinematic viscosity\n\n# Define domain and settings\ndomain = Box(x=(x_min,x_max), y=(y_min,y_max))\n\n# cylinder = Sphere(x=0, y=0, radius=0.5)\ncylinder = Box(x=(-0.5,0.5), y=(-0.5,0.5))\n\n# Plot the obstacle and inflow regions\n_=plot(domain, cylinder, overlay='args')\n\n#@jit_compile\ndef forward_run(forcing, v0, dt=dt, vis=nu):\n    v = v0\n    for i in range(2):\n        v = advect.semi_lagrangian(v, v, dt)\n        v = diffuse.explicit(v, vis, dt)\n        v = v + forcing * dt\n        v,_ = fluid.make_incompressible(v,cylinder, Solve('scipy-direct'))\n    loss = field.l2_loss(v-field.stop_gradient(v0))\n\n    return loss\n\nboundary = {'x-': vec(x=1.0,y=0.0), 'x+': ZERO_GRADIENT, 'y': PERIODIC}\nv0 = StaggeredGrid(vec(x=1.0,y=0.0), boundary=boundary, bounds=domain,x=N*2,y=N)\nv0, _ = fluid.make_incompressible(v0, cylinder, Solve('scipy-direct')) \n_=plot(v0)\n\nboundary = {'x-': 0, 'x+': ZERO_GRADIENT, 'y': PERIODIC}\nforcing = StaggeredGrid(0, boundary=boundary, bounds=domain,x=N*2,y=N)\nforward_run(forcing,v0)\nsim_grad = field.gradient(forward_run,wrt='forcing',get_output=False)\nforcing_grad = sim_grad(forcing,v0)\n\n_=plot(forcing_grad)",
+      "reactions": {
+        "url": "https://api.github.com/repos/tum-pbs/PhiFlow/issues/199/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/tum-pbs/PhiFlow/issues/199/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    }
+  ],
+  "search_type": "lexical"
+}

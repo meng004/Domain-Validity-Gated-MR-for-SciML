@@ -1,0 +1,119 @@
+{
+  "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131",
+  "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+  "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131/labels{/name}",
+  "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131/comments",
+  "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131/events",
+  "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/8131",
+  "id": 1927935698,
+  "node_id": "I_kwDOBlHMec5y6fbS",
+  "number": 8131,
+  "title": "`test/transforms/test_add_positional_encoding.py::test_eigenvector_permutation_invariance` fails with AMD CPU",
+  "user": {
+    "login": "Kh4L",
+    "id": 3193578,
+    "node_id": "MDQ6VXNlcjMxOTM1Nzg=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3193578?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Kh4L",
+    "html_url": "https://github.com/Kh4L",
+    "followers_url": "https://api.github.com/users/Kh4L/followers",
+    "following_url": "https://api.github.com/users/Kh4L/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Kh4L/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Kh4L/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Kh4L/subscriptions",
+    "organizations_url": "https://api.github.com/users/Kh4L/orgs",
+    "repos_url": "https://api.github.com/users/Kh4L/repos",
+    "events_url": "https://api.github.com/users/Kh4L/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Kh4L/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 712483737,
+      "node_id": "MDU6TGFiZWw3MTI0ODM3Mzc=",
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/bug",
+      "name": "bug",
+      "color": "d73a4a",
+      "default": true,
+      "description": ""
+    },
+    {
+      "id": 3794787434,
+      "node_id": "LA_kwDOBlHMec7iL9xq",
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/test",
+      "name": "test",
+      "color": "9A29AF",
+      "default": false,
+      "description": ""
+    }
+  ],
+  "state": "closed",
+  "locked": false,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 4,
+  "created_at": "2023-10-05T10:20:34Z",
+  "updated_at": "2023-10-06T14:31:30Z",
+  "closed_at": "2023-10-06T14:31:30Z",
+  "assignee": null,
+  "author_association": "CONTRIBUTOR",
+  "issue_field_values": [
+
+  ],
+  "type": null,
+  "active_lock_reason": null,
+  "sub_issues_summary": {
+    "total": 0,
+    "completed": 0,
+    "percent_completed": 0
+  },
+  "issue_dependencies_summary": {
+    "blocked_by": 0,
+    "total_blocked_by": 0,
+    "blocking": 0,
+    "total_blocking": 0
+  },
+  "body": "### 🐛 Describe the bug\r\n\r\nThe unit test added in #8087 fails with the error bellow on AMD CPU based systems.\r\n\r\n\r\n```\r\nNVIDIA_TF32_OVERRIDE=0 pytest -s --cov --cov-report=xml test/transforms/test_add_positional_encoding.py::test_eigenvector_permutation_invariance\r\n```\r\n\r\nTraceback:\r\n```\r\n======================================================================== FAILURES ========================================================================$\r\n_________________________________________________________ test_eigenvector_permutation_invariance ________________________________________________________$\r\n\r\n    def test_eigenvector_permutation_invariance():\r\n        edge_index = torch.tensor([[0, 1, 0, 4, 1, 4, 2, 3, 3, 5],\r\n                                   [1, 0, 4, 0, 4, 1, 3, 2, 5, 3]])\r\n        data = Data(edge_index=edge_index, num_nodes=6)\r\n\r\n        perm = torch.tensor([5, 4, 3, 2, 1, 0])\r\n        transform = AddLaplacianEigenvectorPE(\r\n            k=1,\r\n            is_undirected=True,\r\n            attr_name='x',\r\n            v0=torch.arange(data.num_nodes),\r\n        )\r\n        out1 = transform(data)\r\n\r\n        transform = AddLaplacianEigenvectorPE(\r\n            k=1,\r\n            is_undirected=True,\r\n            attr_name='x',\r\n            v0=perm,\r\n        )\r\n        out2 = transform(data.subgraph(perm))\r\n\r\n        print(out1.x[perm].abs())\r\n        print(out2.x.abs())\r\n\r\n>       assert torch.allclose(out1.x[perm].abs(), out2.x.abs(), atol=1e-1)\r\nE       assert False\r\nE        +  where False = <built-in method allclose of type object at 0x7f2f94b318a0>(tensor([[0.1360],\\n        [0.5556],\\n        [0.1924],\\n        [0.1\r\n360],\\n        [0.5556],\\n        [0.5556]]), tensor([[0.2091],\\n        [0.5245],\\n        [0.2957],\\n        [0.2091],\\n        [0.5245],\\n        [0.524\r\n5]]), atol=0.1)\r\nE        +    where <built-in method allclose of type object at 0x7f2f94b318a0> = torch.allclose\r\nE        +    and   tensor([[0.1360],\\n        [0.5556],\\n        [0.1924],\\n        [0.1360],\\n        [0.5556],\\n        [0.5556]]) = <built-in method ab\r\ns of Tensor object at 0x7f2bc6e1e160>()\r\nE        +      where <built-in method abs of Tensor object at 0x7f2bc6e1e160> = tensor([[ 0.1360],\\n        [-0.5556],\\n        [ 0.1924],\\n        [ 0.13\r\n60],\\n        [-0.5556],\\n        [-0.5556]]).abs\r\nE        +    and   tensor([[0.2091],\\n        [0.5245],\\n        [0.2957],\\n        [0.2091],\\n        [0.5245],\\n        [0.5245]]) = <built-in method ab\r\ns of Tensor object at 0x7f2bc89d3470>()\r\nE        +      where <built-in method abs of Tensor object at 0x7f2bc89d3470> = tensor([[ 0.2091],\\n        [-0.5245],\\n        [ 0.2957],\\n        [ 0.20\r\n91],\\n        [-0.5245],\\n        [-0.5245]]).abs\r\nE        +        where tensor([[ 0.2091],\\n        [-0.5245],\\n        [ 0.2957],\\n        [ 0.2091],\\n        [-0.5245],\\n        [-0.5245]]) = Data(edge\r\n_index=[2, 10], num_nodes=6, x=[6, 1]).x\r\n```\r\n\r\n### Environment\r\n\r\n* PyG version: 2.4.0 (built from source)\r\n* PyTorch version: 2.1.0\r\n* OS:  Ubuntu 22.04.3 LTS\r\n* Python version: 3.10.12\r\n* CUDA/cuDNN version: 12.2\r\n* How you installed PyTorch and PyG (`conda`, `pip`, source): source",
+  "closed_by": {
+    "login": "rusty1s",
+    "id": 6945922,
+    "node_id": "MDQ6VXNlcjY5NDU5MjI=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/6945922?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/rusty1s",
+    "html_url": "https://github.com/rusty1s",
+    "followers_url": "https://api.github.com/users/rusty1s/followers",
+    "following_url": "https://api.github.com/users/rusty1s/following{/other_user}",
+    "gists_url": "https://api.github.com/users/rusty1s/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/rusty1s/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/rusty1s/subscriptions",
+    "organizations_url": "https://api.github.com/users/rusty1s/orgs",
+    "repos_url": "https://api.github.com/users/rusty1s/repos",
+    "events_url": "https://api.github.com/users/rusty1s/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/rusty1s/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "reactions": {
+    "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131/timeline",
+  "performed_via_github_app": null,
+  "state_reason": "completed",
+  "pinned_comment": null
+}

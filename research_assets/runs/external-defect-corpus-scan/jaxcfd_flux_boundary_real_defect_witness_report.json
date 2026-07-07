@@ -1,0 +1,144 @@
+{
+  "claim_limitations": "One external merged-PR-linked boundary-condition semantic witness for JAX-CFD advection flux handling. It is not a full solver validation, not a CFD benchmark result, and not a production defect-rate estimate.",
+  "date": "2026-07-03",
+  "forbidden_claims": [
+    "The method validates JAX-CFD solver accuracy.",
+    "The paper measures JAX-CFD defect prevalence.",
+    "The witness proves CFD simulation correctness.",
+    "The witness is a production CFD workload."
+  ],
+  "metric": {
+    "corrected_flux_bc": [
+      "dirichlet",
+      "dirichlet"
+    ],
+    "corrected_matches_expected": true,
+    "expected_flux_bc": [
+      "dirichlet",
+      "dirichlet"
+    ],
+    "name": "advection_flux_boundary_consistency",
+    "old_flux_bc": [
+      "neumann",
+      "neumann"
+    ],
+    "old_matches_expected": false,
+    "primary_case": "normal_no_penetration_scalar_neumann"
+  },
+  "mr_card": "research_assets/mr_cards/jaxcfd_flux_boundary_consistency.json",
+  "run_id": "jaxcfd-flux-boundary-real-defect-witness-001",
+  "source_artifacts": {
+    "jaxcfd_pr_167.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/jaxcfd_pr_167.json",
+      "sha256": "b278447d62b2649b45db0e8ccbae7ff80dd882a2af6fe9b1b630b386ac06425e"
+    },
+    "jaxcfd_pr_167_files.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/jaxcfd_pr_167_files.json",
+      "sha256": "ab7200d46598b25c83519173357e7b7041b1ad7bbedc657b5eae4145b71651ea"
+    }
+  },
+  "source_checks": {
+    "patch_adds_flux_bc_inference_function": true,
+    "patch_imposes_inferred_flux_bc": true,
+    "patch_replaces_scalar_bc_inheritance": true,
+    "pr_167_merged": true,
+    "pr_167_merged_at": "2022-08-12T21:32:34Z",
+    "pr_167_url": "https://github.com/google/jax-cfd/pull/167",
+    "pr_body_states_flux_bc_inferred_from_velocity": true
+  },
+  "source_follow_up_cases": [
+    {
+      "axis": 0,
+      "case_id": "normal_no_penetration_scalar_neumann",
+      "corrected_flux_bc": [
+        "dirichlet",
+        "dirichlet"
+      ],
+      "corrected_matches_expected": true,
+      "description": "For a nonporous wall, normal advection flux should be homogeneous Dirichlet even when the advected scalar has Neumann boundary conditions.",
+      "expected_flux_bc": [
+        "dirichlet",
+        "dirichlet"
+      ],
+      "flux_direction": 0,
+      "old_flux_bc": [
+        "neumann",
+        "neumann"
+      ],
+      "old_matches_expected": false,
+      "scalar_bc": [
+        "neumann",
+        "neumann"
+      ],
+      "velocity_bc": [
+        "dirichlet_zero",
+        "dirichlet_zero"
+      ]
+    },
+    {
+      "axis": 0,
+      "case_id": "periodic_control",
+      "corrected_flux_bc": [
+        "periodic",
+        "periodic"
+      ],
+      "corrected_matches_expected": true,
+      "description": "Periodic velocity boundaries should keep the flux periodic.",
+      "expected_flux_bc": [
+        "periodic",
+        "periodic"
+      ],
+      "flux_direction": 0,
+      "old_flux_bc": [
+        "periodic",
+        "periodic"
+      ],
+      "old_matches_expected": true,
+      "scalar_bc": [
+        "periodic",
+        "periodic"
+      ],
+      "velocity_bc": [
+        "periodic",
+        "periodic"
+      ]
+    },
+    {
+      "axis": 0,
+      "case_id": "tangential_wall_control",
+      "corrected_flux_bc": [
+        "dirichlet",
+        "dirichlet"
+      ],
+      "corrected_matches_expected": true,
+      "description": "Flux boundaries parallel to a nonperiodic wall are homogeneous Dirichlet in the corrected implementation.",
+      "expected_flux_bc": [
+        "dirichlet",
+        "dirichlet"
+      ],
+      "flux_direction": 1,
+      "old_flux_bc": [
+        "neumann",
+        "neumann"
+      ],
+      "old_matches_expected": false,
+      "scalar_bc": [
+        "neumann",
+        "neumann"
+      ],
+      "velocity_bc": [
+        "dirichlet_zero",
+        "dirichlet_zero"
+      ]
+    }
+  ],
+  "subject": "JAX-CFD PR #167 advection flux-boundary semantic witness",
+  "typed_verdict": "pass",
+  "verdict_checks": {
+    "corrected_inference_matches_no_penetration_flux_bc": true,
+    "external_fix_source_complete": true,
+    "old_scalar_bc_inheritance_misses_no_penetration_flux_bc": true,
+    "periodic_control_matches_expected": true,
+    "tangential_wall_control_matches_expected": true
+  }
+}

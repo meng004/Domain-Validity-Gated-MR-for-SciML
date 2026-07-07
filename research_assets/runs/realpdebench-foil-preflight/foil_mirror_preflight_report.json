@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "realpdebench-foil-mirror-preflight",
+  "source_artifact": "research_assets/runs/realpdebench-foil-preflight/raw/real-data-00000-of-00098.arrow",
+  "sim_id": "10000_0.0.h5",
+  "reynolds": 10000.0,
+  "angle_of_attack_degrees": 0.0,
+  "field_shape": {
+    "t": 3990,
+    "h": 128,
+    "w": 256,
+    "time_samples": 3990
+  },
+  "reflection_mapping": {
+    "axis": 0,
+    "centerline_y": 538.0,
+    "x_invariance_max_norm": 0.0,
+    "y_reflection_max_norm": 0.0
+  },
+  "coordinate_floor_max_norm": 0.0,
+  "metric": {
+    "u_mirror_relative_l2": 0.060019612312316895,
+    "v_sign_reversed_mirror_relative_l2": 1.375328779220581,
+    "combined_uv_relative_l2": 0.2292153537273407
+  },
+  "verdict": "inconclusive",
+  "reason": "The zero-AoA real field can be mirrored and scored, but no independent PIV measurement-floor bound is available in this preflight run; no pass/fail claim is licensed.",
+  "claim_limitations": "This preflight run is a production-adjacent public real-flow field mirror-y scoring witness. It is not a SUT pass/fail result, not a real-defect detection result, and not production CFD validation."
+}

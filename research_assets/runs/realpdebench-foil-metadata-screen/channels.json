@@ -1,0 +1,17 @@
+{
+  "scenario": "foil",
+  "real": {
+    "fields": [
+      {"key": "u", "shape": "(T, H, W)"},
+      {"key": "v", "shape": "(T, H, W)"}
+    ]
+  },
+  "numerical": {
+    "fields": [
+      {"key": "u", "shape": "(T, H, W)"},
+      {"key": "v", "shape": "(T, H, W)"},
+      {"key": "p", "shape": "(T, H, W)"}
+    ]
+  },
+  "note": "Each field is stored as a separate column in the Arrow dataset. Geometric parameters (angle of attack, Reynolds number) are stored in the *_params_*.json index files."
+}

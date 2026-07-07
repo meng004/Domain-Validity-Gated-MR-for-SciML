@@ -1,0 +1,97 @@
+{
+  "mr_id": "realpdebench-foil-mirror-y-gate",
+  "title": "Mirror-y admissibility gate for RealPDEBench NACA0025 foil fields",
+  "status": "design-time-deferred",
+  "evidence_level": "design-time-candidate",
+  "source_case_schema": {
+    "benchmark": "RealPDEBench",
+    "scenario": "foil",
+    "dataset_repo": "AI4Science-WestlakeU/RealPDEBench",
+    "metadata_root": "research_assets/runs/realpdebench-foil-metadata-screen",
+    "source_case": {
+      "sim_id": "Re_AoA.h5, where AoA is read from *_params_*.json",
+      "required_fields_real": [
+        "u",
+        "v",
+        "x",
+        "y",
+        "t"
+      ],
+      "required_fields_numerical": [
+        "u",
+        "v",
+        "p",
+        "x",
+        "y",
+        "t"
+      ]
+    }
+  },
+  "follow_up_transformation": {
+    "kind": "mirror_y",
+    "parameters": {
+      "coordinate_rule": "y -> -y about the empirically verified centerline",
+      "velocity_rule": "u -> u, v -> -v",
+      "pressure_rule": "p -> p when numerical pressure is available",
+      "angle_of_attack_rule": "admissible candidate only when AoA = 0.0 degrees"
+    },
+    "synchronized_fields": [
+      "x",
+      "y",
+      "u",
+      "v",
+      "p",
+      "t"
+    ]
+  },
+  "transformation_preconditions": [
+    "The RealPDEBench foil metadata explicitly provides angle of attack and Reynolds number for the source case.",
+    "The source case has AoA = 0.0 degrees before mirror-y can be considered admissible.",
+    "The coordinate arrays expose a y-axis and an empirically verifiable reflection centerline.",
+    "The grid or interpolation map has a bounded reflection/mapping floor.",
+    "Velocity components use the documented x/y ordering: u is x velocity and v is y velocity.",
+    "The source and follow-up fields are compared at matched time indices."
+  ],
+  "boundary_condition_compatibility": {
+    "status": "conditional-admissibility-gate",
+    "reason": "NACA 00xx foil geometry supplies a plausible symmetry prior, and RealPDEBench metadata contains zero-AoA foil cases, but the MR is admitted only after coordinate symmetry and measurement/mapping floor checks pass. Non-zero AoA cases are rejected by physical precondition."
+  },
+  "output_mapping": {
+    "kind": "mirror_y_vector_field_output",
+    "description": "Reflect the follow-up field about the verified y-centerline and compare u directly while comparing v with sign reversal. Numerical pressure, when available, is compared without sign reversal."
+  },
+  "metric": {
+    "name": "realpdebench_foil_mirror_relative_l2_error",
+    "formula": "norm(unmirror_y(y_follow) - y_source) / max(norm(y_source), eps)",
+    "floor_terms": [
+      "coordinate-reflection mismatch",
+      "interpolation error if reflected coordinates do not land exactly on grid points",
+      "measurement noise for real PIV fields",
+      "real/simulation modality mismatch when comparing paired data"
+    ]
+  },
+  "tolerance": {
+    "assertion": "less_or_defer_until_floor_dominance_known",
+    "threshold": null,
+    "source": "metadata-screen precommitment; no outcome-dependent tolerance allowed"
+  },
+  "exclusion_rules": [
+    "Reject non-zero angle-of-attack source cases as out-of-relation-domain for exact mirror-y.",
+    "Reject cases whose AoA, velocity-component convention, coordinate axes, or time index cannot be verified from metadata.",
+    "Defer cases where the reflection/mapping floor dominates any proposed verdict tolerance.",
+    "Do not compare real and numerical modalities as an exact MR unless a modality-mismatch floor is explicitly bounded."
+  ],
+  "allowed_verdicts": [
+    "skip",
+    "out-of-relation-domain",
+    "numerical-tolerance-issue",
+    "inconclusive"
+  ],
+  "verdict_interpretation": {
+    "skip": "The run was not executed because prerequisites or metadata were unavailable.",
+    "out-of-relation-domain": "AoA, geometry, boundary, coordinate, or component preconditions were not met.",
+    "numerical-tolerance-issue": "The result was dominated by numerical mapping or interpolation uncertainty.",
+    "inconclusive": "The metadata or runtime evidence was insufficient for pass/fail classification."
+  },
+  "claim_limitations": "This card precommits a RealPDEBench foil mirror-y admissibility gate. It does not report a SUT verdict, real-defect detection, production CFD validation, broad aerodynamic generalization, or model reliability."
+}

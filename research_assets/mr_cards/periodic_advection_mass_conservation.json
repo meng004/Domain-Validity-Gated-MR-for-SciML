@@ -1,0 +1,68 @@
+{
+  "mr_id": "periodic-advection-mass-conservation",
+  "title": "Global mean conservation for 2D periodic scalar advection surrogates",
+  "status": "design-time-retained",
+  "evidence_level": "design-time-asset",
+  "source_case_schema": {
+    "task": "2D scalar periodic advection",
+    "grid": [32, 32],
+    "boundary_condition": "periodic",
+    "model": {
+      "family": "NumPy-trained periodic convolution surrogate",
+      "checkpoint": "research_assets/runs/periodic-advection-primary-workflow/checkpoints/seed_*.npz",
+      "deterministic": true
+    }
+  },
+  "follow_up_transformation": {
+    "kind": "one_periodic_advection_step",
+    "parameters": {
+      "advection_shift_cells": [1, 2],
+      "boundary": "wrap"
+    },
+    "synchronized_fields": ["scalar_state"]
+  },
+  "transformation_preconditions": [
+    "The scalar field is defined on a periodic Cartesian grid.",
+    "The one-step transport operator is conservative under periodic wrapping.",
+    "The metric is evaluated on the scalar field without masking or boundary cropping."
+  ],
+  "boundary_condition_compatibility": {
+    "status": "compatible-periodic",
+    "reason": "Periodic advection preserves the spatial integral of the scalar field."
+  },
+  "output_mapping": {
+    "kind": "identity",
+    "description": "Compare the spatial mean of the source input and the SUT output after one predicted advection step."
+  },
+  "metric": {
+    "name": "rms_normalized_mean_drift",
+    "formula": "abs(mean(y_source) - mean(x_source)) / max(rms(x_source), eps)"
+  },
+  "tolerance": {
+    "assertion": "less_or_equal",
+    "threshold": 0.0000000001,
+    "source": "tools/run_periodic_advection_primary_workflow.py"
+  },
+  "exclusion_rules": [
+    "Exclude non-periodic boundary configurations.",
+    "Exclude source fields with vanishing RMS below the numeric guard.",
+    "Exclude SUTs whose inference path is nondeterministic."
+  ],
+  "allowed_verdicts": [
+    "pass",
+    "fail",
+    "skip",
+    "out-of-relation-domain",
+    "numerical-tolerance-issue",
+    "inconclusive"
+  ],
+  "verdict_interpretation": {
+    "pass": "The observed predicted step preserved the spatial mean under the declared tolerance.",
+    "fail": "The observed predicted step exceeded the declared mean-drift tolerance.",
+    "skip": "The run was not executed because prerequisites were absent or disabled.",
+    "out-of-relation-domain": "The source case did not satisfy periodic advection preconditions.",
+    "numerical-tolerance-issue": "The result was dominated by numeric precision or calibration uncertainty.",
+    "inconclusive": "The run did not provide enough evidence for pass/fail classification."
+  },
+  "claim_limitations": "This card defines a global conservation MR for the synthetic periodic-advection task only. It is not evidence for conservation on open-boundary CFD meshes, real defects, model accuracy, or production reliability."
+}

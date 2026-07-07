@@ -1,0 +1,127 @@
+%% Journal of Systems and Software regular-paper template.
+%% Verified against JSS Guide for Authors and Elsevier LaTeX instructions on 2026-07-04.
+\documentclass[preprint,12pt]{elsarticle}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xurl}
+
+\journal{Journal of Systems and Software}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Concise and Informative Title Without Unnecessary Abbreviations}
+
+\author[inst1]{First Author\corref{cor1}}
+\ead{author@example.edu}
+\cortext[cor1]{Corresponding author.}
+\affiliation[inst1]{organization={Department, Institution},
+  city={City}, postcode={Postcode}, country={Country}}
+
+\begin{abstract}
+Write a concise and factual abstract of 250 words or less. State the software
+engineering problem, objective, method, principal results, and major conclusion.
+The abstract should stand alone and normally avoid references and uncommon
+abbreviations.
+\end{abstract}
+
+\begin{keyword}
+Software engineering \sep Testing \sep Validation
+\end{keyword}
+
+\end{frontmatter}
+
+\section{Introduction}
+
+State the software-engineering problem, why current evidence is insufficient,
+and what this paper contributes. Bound claims to the evidence available in the
+paper.
+
+\section{Background and Related Work}
+
+Position the paper against prior software-engineering work. Avoid turning this
+section into a survey unless the article is submitted as a review.
+
+\section{Method}
+
+Describe the method, assumptions, artifacts, and intended use. If the paper
+includes formal or numerical claims, state assumptions near the claim.
+
+\section{Evaluation Design}
+
+State the research questions, evidence units, datasets or systems under test,
+baselines or comparators, metrics, and analysis procedure.
+
+\begin{table}[t]
+\centering
+\caption{Independent evidence units and inference boundaries.}
+\begin{tabular}{llll}
+\toprule
+Unit & Evidence source & Allowed inference & Forbidden inference \\
+\midrule
+E1 & Primary SUT or dataset & Bounded claim & Population claim \\
+E2 & Independent SUT or dataset & Transfer check & General guarantee \\
+E3 & Baseline or comparator & Relative contrast & Superiority beyond scope \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Results}
+
+Answer each research question directly. Separate primary evidence, supporting
+evidence, falsification checks, and exploratory evidence.
+
+\section{Discussion}
+
+Discuss implications, adoption cost, limitations, and what the evidence does not
+support.
+
+\section{Threats to Validity}
+
+Discuss construct, internal, external, and conclusion validity as applicable.
+
+\section{Conclusion}
+
+Summarize the contribution and the evidence boundary without strengthening the
+claims.
+
+\section*{CRediT authorship contribution statement}
+
+Author A: Conceptualization, Methodology, Software, Validation, Writing -
+original draft. Author B: Supervision, Writing - review and editing.
+
+\section*{Declaration of competing interest}
+
+The authors declare that they have no known competing financial interests or
+personal relationships that could have appeared to influence the work reported in
+this paper.
+
+\section*{Funding}
+
+State funding sources and sponsor roles, or state that no specific funding was
+received.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+
+If AI tools were used, state the tool/service, purpose, and that the authors
+reviewed and edited the content and take full responsibility. If none were used,
+omit this section if appropriate for the submission system.
+
+\section*{Data availability}
+
+State where data, code, scripts, models, and supplementary materials are
+deposited and cite/link them. If sharing is not possible, state the reason.
+
+\section*{Acknowledgements}
+
+Place acknowledgements here, directly before references.
+
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+\end{document}
+

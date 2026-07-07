@@ -1,0 +1,258 @@
+{
+  "total_count": 3,
+  "incomplete_results": false,
+  "items": [
+    {
+      "url": "https://api.github.com/repos/google/jax-cfd/issues/167",
+      "repository_url": "https://api.github.com/repos/google/jax-cfd",
+      "labels_url": "https://api.github.com/repos/google/jax-cfd/issues/167/labels{/name}",
+      "comments_url": "https://api.github.com/repos/google/jax-cfd/issues/167/comments",
+      "events_url": "https://api.github.com/repos/google/jax-cfd/issues/167/events",
+      "html_url": "https://github.com/google/jax-cfd/pull/167",
+      "id": 1318811882,
+      "node_id": "PR_kwDOFOM8bc48JFrl",
+      "number": 167,
+      "title": "Fix to flux boundary implementation.",
+      "user": {
+        "login": "copybara-service[bot]",
+        "id": 56741989,
+        "node_id": "MDM6Qm90NTY3NDE5ODk=",
+        "avatar_url": "https://avatars.githubusercontent.com/in/44061?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/copybara-service%5Bbot%5D",
+        "html_url": "https://github.com/apps/copybara-service",
+        "followers_url": "https://api.github.com/users/copybara-service%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/copybara-service%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/copybara-service%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/copybara-service%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/copybara-service%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/copybara-service%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/copybara-service%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/copybara-service%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/copybara-service%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 1,
+      "created_at": "2022-07-26T22:27:20Z",
+      "updated_at": "2022-08-12T21:32:34Z",
+      "closed_at": "2022-08-12T21:32:34Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "draft": false,
+      "pull_request": {
+        "url": "https://api.github.com/repos/google/jax-cfd/pulls/167",
+        "html_url": "https://github.com/google/jax-cfd/pull/167",
+        "diff_url": "https://github.com/google/jax-cfd/pull/167.diff",
+        "patch_url": "https://github.com/google/jax-cfd/pull/167.patch",
+        "merged_at": "2022-08-12T21:32:34Z"
+      },
+      "body": "Fix to flux boundary implementation.\n\nAdvection flux boundary condition is now correctly inferred from the velocity boundary conditions.\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/google/jax-cfd/issues/167/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/google/jax-cfd/issues/167/timeline",
+      "performed_via_github_app": null,
+      "state_reason": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/google/jax-cfd/issues/173",
+      "repository_url": "https://api.github.com/repos/google/jax-cfd",
+      "labels_url": "https://api.github.com/repos/google/jax-cfd/issues/173/labels{/name}",
+      "comments_url": "https://api.github.com/repos/google/jax-cfd/issues/173/comments",
+      "events_url": "https://api.github.com/repos/google/jax-cfd/issues/173/events",
+      "html_url": "https://github.com/google/jax-cfd/pull/173",
+      "id": 1326398438,
+      "node_id": "PR_kwDOFOM8bc48iMhe",
+      "number": 173,
+      "title": "Wrapper for BoundaryConditions.pad() and minor fixes for boundaries test file.",
+      "user": {
+        "login": "copybara-service[bot]",
+        "id": 56741989,
+        "node_id": "MDM6Qm90NTY3NDE5ODk=",
+        "avatar_url": "https://avatars.githubusercontent.com/in/44061?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/copybara-service%5Bbot%5D",
+        "html_url": "https://github.com/apps/copybara-service",
+        "followers_url": "https://api.github.com/users/copybara-service%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/copybara-service%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/copybara-service%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/copybara-service%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/copybara-service%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/copybara-service%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/copybara-service%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/copybara-service%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/copybara-service%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 1,
+      "created_at": "2022-08-02T21:04:04Z",
+      "updated_at": "2022-08-23T17:47:44Z",
+      "closed_at": "2022-08-23T17:47:43Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "draft": false,
+      "pull_request": {
+        "url": "https://api.github.com/repos/google/jax-cfd/pulls/173",
+        "html_url": "https://github.com/google/jax-cfd/pull/173",
+        "diff_url": "https://github.com/google/jax-cfd/pull/173.diff",
+        "patch_url": "https://github.com/google/jax-cfd/pull/173.patch",
+        "merged_at": "2022-08-23T17:47:43Z"
+      },
+      "body": "Wrapper for BoundaryConditions.pad() and minor fixes for boundaries test file.\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/google/jax-cfd/issues/173/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/google/jax-cfd/issues/173/timeline",
+      "performed_via_github_app": null,
+      "state_reason": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/google/jax-cfd/issues/44",
+      "repository_url": "https://api.github.com/repos/google/jax-cfd",
+      "labels_url": "https://api.github.com/repos/google/jax-cfd/issues/44/labels{/name}",
+      "comments_url": "https://api.github.com/repos/google/jax-cfd/issues/44/comments",
+      "events_url": "https://api.github.com/repos/google/jax-cfd/issues/44/events",
+      "html_url": "https://github.com/google/jax-cfd/pull/44",
+      "id": 1001214906,
+      "node_id": "PR_kwDOFOM8bc4r-agB",
+      "number": 44,
+      "title": "Preserve dtype of input array to step function",
+      "user": {
+        "login": "akasharidas",
+        "id": 58511267,
+        "node_id": "MDQ6VXNlcjU4NTExMjY3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/58511267?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/akasharidas",
+        "html_url": "https://github.com/akasharidas",
+        "followers_url": "https://api.github.com/users/akasharidas/followers",
+        "following_url": "https://api.github.com/users/akasharidas/following{/other_user}",
+        "gists_url": "https://api.github.com/users/akasharidas/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/akasharidas/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/akasharidas/subscriptions",
+        "organizations_url": "https://api.github.com/users/akasharidas/orgs",
+        "repos_url": "https://api.github.com/users/akasharidas/repos",
+        "events_url": "https://api.github.com/users/akasharidas/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/akasharidas/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 3098221291,
+          "node_id": "MDU6TGFiZWwzMDk4MjIxMjkx",
+          "url": "https://api.github.com/repos/google/jax-cfd/labels/pull%20ready",
+          "name": "pull ready",
+          "color": "fef2c0",
+          "default": false,
+          "description": "Ready for pulling into Google's internal systems with Copybara"
+        },
+        {
+          "id": 3098341462,
+          "node_id": "MDU6TGFiZWwzMDk4MzQxNDYy",
+          "url": "https://api.github.com/repos/google/jax-cfd/labels/cla:%20yes",
+          "name": "cla: yes",
+          "color": "c2e0c6",
+          "default": false,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 1,
+      "created_at": "2021-09-20T17:23:36Z",
+      "updated_at": "2021-09-23T01:50:57Z",
+      "closed_at": "2021-09-23T01:02:30Z",
+      "assignee": null,
+      "author_association": "CONTRIBUTOR",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "draft": false,
+      "pull_request": {
+        "url": "https://api.github.com/repos/google/jax-cfd/pulls/44",
+        "html_url": "https://github.com/google/jax-cfd/pull/44",
+        "diff_url": "https://github.com/google/jax-cfd/pull/44.diff",
+        "patch_url": "https://github.com/google/jax-cfd/pull/44.patch",
+        "merged_at": "2021-09-23T01:02:30Z"
+      },
+      "body": "Hi, thanks for the fantastic library! I'm working on a project which involves running simulations using different floating point precisions. I discovered an issue when running the code in the [demo](https://github.com/google/jax-cfd/blob/main/notebooks/demo.ipynb) notebook. \r\n\r\nWhen the input array to the step function is of dtype `float32`, I expect the output to be of dtype `float32` as well. However, there is a type cast to `float64` happening somewhere, which leads to an error.\r\n\r\n### Minimal example to reproduce\r\n(adapted from demo code)\r\n\r\n```\r\nimport jax\r\nimport jax.numpy as jnp\r\nimport jax_cfd.base as cfd\r\n\r\nfrom jax.config import config\r\nconfig.update(\"jax_enable_x64\", True)\r\n\r\n\r\nsize = 256\r\ndensity = 1.\r\nviscosity = 1e-3\r\nseed = 0\r\ninner_steps = 25\r\nouter_steps = 200\r\nmax_velocity = 2.0\r\ncfl_safety_factor = 0.5\r\n\r\ngrid = cfd.grids.Grid((size, size), domain=((0, 2 * jnp.pi), (0, 2 * jnp.pi)))\r\n\r\nv0 = cfd.initial_conditions.filtered_velocity_field(\r\n    jax.random.PRNGKey(seed), grid, max_velocity)\r\n\r\ndt = cfd.equations.stable_time_step(\r\n    max_velocity, cfl_safety_factor, viscosity, grid)\r\n\r\nstep_fn = cfd.funcutils.repeated(\r\n    cfd.equations.semi_implicit_navier_stokes(\r\n        density=density, viscosity=viscosity, dt=dt, grid=grid),\r\n    steps=inner_steps)\r\n\r\n\r\n# Cast input into float32\r\nfor i in range(len(v0)):\r\n    v0[i].data = v0[i].data.astype('float32')\r\n\r\noutput = step_fn(v0)\r\n```\r\n\r\nBecause the `semi_implicit_navier_stokes` step function returns a `float64` array, the `scan` throws the error: \r\n\r\n> TypeError: scan carry output and input must have identical types, got\r\n(GridArray(data=ShapedArray(float64[256,256]), offset=(1.0, 0.5), grid=Grid(shape=(256, 256), step=(0.02454369260617026, 0.02454369260617026), domain=((0.0, 6.283185307179586), (0.0, 6.283185307179586)), boundaries=('periodic', 'periodic'))), GridArray(data=ShapedArray(float64[256,256]), offset=(0.5, 1.0), grid=Grid(shape=(256, 256), step=(0.02454369260617026, 0.02454369260617026), domain=((0.0, 6.283185307179586), (0.0, 6.283185307179586)), boundaries=('periodic', 'periodic'))))\r\nand\r\n(GridArray(data=ShapedArray(float32[256,256]), offset=(1.0, 0.5), grid=Grid(shape=(256, 256), step=(0.02454369260617026, 0.02454369260617026), domain=((0.0, 6.283185307179586), (0.0, 6.283185307179586)), boundaries=('periodic', 'periodic'))), GridArray(data=ShapedArray(float32[256,256]), offset=(0.5, 1.0), grid=Grid(shape=(256, 256), step=(0.02454369260617026, 0.02454369260617026), domain=((0.0, 6.283185307179586), (0.0, 6.283185307179586)), boundaries=('periodic', 'periodic')))).\r\n\r\n### Expected behaviour\r\nThe step function should return an array of the same dtype as the input array, after performing computation using the input dtype.\r\n\r\n### Possible solution\r\n\r\nI traced the issue to the following line in `finite_differences.py`:\r\n`scales = np.square(1 / np.array(u.grid.step))`\r\n\r\nThe vanilla numpy array is created by default in `float64`, and so the remaining computation gets cast up to `float64`. Specifying the dtype of the numpy array to be the same as the input `GridArray` fixes the error and lets the simulation run in `float32`.",
+      "reactions": {
+        "url": "https://api.github.com/repos/google/jax-cfd/issues/44/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/google/jax-cfd/issues/44/timeline",
+      "performed_via_github_app": null,
+      "state_reason": null,
+      "score": 1.0
+    }
+  ],
+  "search_type": "lexical"
+}

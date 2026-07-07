@@ -1,0 +1,1350 @@
+$ pdflatex -interaction=nonstopmode main.tex
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(./elsarticle.cls
+Document Class: elsarticle 2026/01/09, 3.5: Elsevier Ltd
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+) (/Users/limeng/Library/texmf/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/natbib/natbib.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/Users/limeng/Library/texmf/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/array.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/tabularx.sty)
+(/Users/limeng/Library/texmf/tex/latex/xltabular/xltabular.sty
+(/Users/limeng/Library/texmf/tex/latex/ltablex/ltablex.sty))
+(/Users/limeng/Library/texmf/tex/latex/makecell/makecell.sty)
+(/Users/limeng/Library/texmf/tex/latex/enumitem/enumitem.sty)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.sty
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype-pdftex.def)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.cfg))
+(/Users/limeng/Library/texmf/tex/latex/xurl/xurl.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty))
+(/Users/limeng/Library/texmf/tex/latex/float/float.sty)
+No file main.aux.
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty (/Users/limeng/Library/texmf/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-cmr.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msa.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msb.cfg) [1{/Users/limeng/L
+ibrary/texlive/2026basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package natbib Warning: Citation `raissi2019pinn' on page 2 undefined on input 
+line 124.
+
+
+Package natbib Warning: Citation `karniadakis2021piml' on page 2 undefined on i
+nput line 124.
+
+
+Package natbib Warning: Citation `li2021fno' on page 2 undefined on input line 
+124.
+
+
+Package natbib Warning: Citation `pfaff2021meshgraphnets' on page 2 undefined o
+n input line 124.
+
+
+Package natbib Warning: Citation `barr2015oracle' on page 2 undefined on input 
+line 124.
+
+
+Package natbib Warning: Citation `chen1998metamorphic' on page 2 undefined on i
+nput line 126.
+
+
+Package natbib Warning: Citation `segura2016survey' on page 2 undefined on inpu
+t line 126.
+
+
+Package natbib Warning: Citation `kanewala2019scientific' on page 2 undefined o
+n input line 126.
+
+
+Package natbib Warning: Citation `lin2020exploratory' on page 2 undefined on in
+put line 126.
+
+
+Package natbib Warning: Citation `olsen2019simulation' on page 2 undefined on i
+nput line 126.
+
+[2]
+
+LaTeX Warning: Reference `subsec:operator-floor-sweep' on page 3 undefined on i
+nput line 166.
+
+[3]
+
+Package natbib Warning: Citation `duqueTorres2023bugornot' on page 4 undefined 
+on input line 170.
+
+
+Package natbib Warning: Citation `duqueTorres2023completePipeline' on page 4 un
+defined on input line 170.
+
+
+Package natbib Warning: Citation `duqueTorres2023metaTrimmer' on page 4 undefin
+ed on input line 170.
+
+
+Package natbib Warning: Citation `pfaff2021meshgraphnets' on page 4 undefined o
+n input line 182.
+
+
+Package natbib Warning: Citation `chen1998metamorphic' on page 4 undefined on i
+nput line 184.
+
+
+Package natbib Warning: Citation `segura2016survey' on page 4 undefined on inpu
+t line 184.
+
+
+Package natbib Warning: Citation `chen2018mtSurvey' on page 4 undefined on inpu
+t line 184.
+
+
+Package natbib Warning: Citation `chen2002pde' on page 4 undefined on input lin
+e 184.
+
+
+Package natbib Warning: Citation `chen2011ml' on page 4 undefined on input line
+ 184.
+
+
+Package natbib Warning: Citation `kanewala2019scientific' on page 4 undefined o
+n input line 184.
+
+
+Package natbib Warning: Citation `olsen2019simulation' on page 4 undefined on i
+nput line 184.
+
+
+Package natbib Warning: Citation `ying2025' on page 4 undefined on input line 1
+84.
+
+
+Package natbib Warning: Citation `kanewalaBieman2014slr' on page 4 undefined on
+ input line 186.
+
+
+Package natbib Warning: Citation `kanewala2019scientific' on page 4 undefined o
+n input line 186.
+
+
+Package natbib Warning: Citation `lin2020exploratory' on page 4 undefined on in
+put line 186.
+
+
+Package natbib Warning: Citation `olsen2019simulation' on page 4 undefined on i
+nput line 186.
+
+
+Package natbib Warning: Citation `raunak2021continuum' on page 4 undefined on i
+nput line 186.
+
+
+Package natbib Warning: Citation `kanewala2016graphkernel' on page 4 undefined 
+on input line 186.
+
+
+Package natbib Warning: Citation `wang2022mridentification' on page 4 undefined
+ on input line 186.
+
+
+Package natbib Warning: Citation `fu2021burnup' on page 4 undefined on input li
+ne 186.
+
+
+Package natbib Warning: Citation `tsigkanos2023' on page 4 undefined on input l
+ine 186.
+
+
+Package natbib Warning: Citation `spieker2024trajectory' on page 4 undefined on
+ input line 186.
+
+
+Package natbib Warning: Citation `spieker2025multimodal' on page 4 undefined on
+ input line 186.
+
+
+Package natbib Warning: Citation `hiremath2021ocean' on page 4 undefined on inp
+ut line 186.
+
+
+Package natbib Warning: Citation `mandrioli2025cps' on page 4 undefined on inpu
+t line 186.
+
+
+Package natbib Warning: Citation `duqueTorres2023completePipeline' on page 4 un
+defined on input line 188.
+
+
+Package natbib Warning: Citation `duqueTorres2024selecting' on page 4 undefined
+ on input line 188.
+
+
+Package natbib Warning: Citation `sun2026ccml' on page 4 undefined on input lin
+e 188.
+
+[4]
+
+Package natbib Warning: Citation `li2022nuclearmr' on page 5 undefined on input
+ line 190.
+
+
+Package natbib Warning: Citation `wang2022mridentification' on page 5 undefined
+ on input line 190.
+
+
+Package natbib Warning: Citation `srinivasan2022prioritization' on page 5 undef
+ined on input line 190.
+
+
+Package natbib Warning: Citation `saha2019faultdetection' on page 5 undefined o
+n input line 190.
+
+
+Package natbib Warning: Citation `yang2021hydromt' on page 5 undefined on input
+ line 195.
+
+
+Package natbib Warning: Citation `reichert2024hess' on page 5 undefined on inpu
+t line 195.
+
+
+Package natbib Warning: Citation `eniser2022relaxations' on page 5 undefined on
+ input line 195.
+
+
+Package natbib Warning: Citation `duqueTorres2023bugornot' on page 5 undefined 
+on input line 195.
+
+
+Package natbib Warning: Citation `duqueTorres2023completePipeline' on page 5 un
+defined on input line 195.
+
+
+Package natbib Warning: Citation `duqueTorres2024selecting' on page 5 undefined
+ on input line 195.
+
+
+Package natbib Warning: Citation `duqueTorres2023metaTrimmer' on page 5 undefin
+ed on input line 195.
+
+
+LaTeX Warning: Reference `tab:closest-prior-positioning' on page 5 undefined on
+ input line 197.
+
+[5]
+
+Package natbib Warning: Citation `raissi2019pinn' on page 6 undefined on input 
+line 223.
+
+
+Package natbib Warning: Citation `karniadakis2021piml' on page 6 undefined on i
+nput line 223.
+
+
+Package natbib Warning: Citation `li2021fno' on page 6 undefined on input line 
+223.
+
+
+Package natbib Warning: Citation `krishnapriyan2021failure' on page 6 undefined
+ on input line 223.
+
+
+Package natbib Warning: Citation `gopakumar2025calibrated' on page 6 undefined 
+on input line 223.
+
+
+Package natbib Warning: Citation `wang2021gradflow' on page 6 undefined on inpu
+t line 223.
+
+
+Package natbib Warning: Citation `krishnapriyan2021failure' on page 6 undefined
+ on input line 223.
+
+[6]
+
+Package natbib Warning: Citation `baral2025xrepit' on page 7 undefined on input
+ line 225.
+
+
+Package natbib Warning: Citation `wang2025deeponetfe' on page 7 undefined on in
+put line 225.
+
+
+Package natbib Warning: Citation `najafi2026' on page 7 undefined on input line
+ 227.
+
+
+Package natbib Warning: Citation `yan2024elliptic' on page 7 undefined on input
+ line 229.
+
+
+Package natbib Warning: Citation `stevens2025mars' on page 7 undefined on input
+ line 229.
+
+
+LaTeX Warning: Reference `tab:closest-prior-positioning' on page 7 undefined on
+ input line 229.
+
+[7]
+
+LaTeX Warning: Reference `subsec:verdicts' on page 8 undefined on input line 24
+8.
+
+
+Package natbib Warning: Citation `yang2020hierarchical' on page 8 undefined on 
+input line 260.
+
+
+Package natbib Warning: Citation `zhao2026noether' on page 8 undefined on input
+ line 260.
+
+
+LaTeX Warning: Reference `subsec:admissibility-gate' on page 8 undefined on inp
+ut line 260.
+
+[8] [9 <./fig_1_validity_gated_workflow.pdf>]
+
+LaTeX Warning: Reference `tab:admissibility-gate' on page 10 undefined on input
+ line 271.
+
+[10] [11]
+
+LaTeX Warning: Reference `tab:admissibility-gate' on page 12 undefined on input
+ line 300.
+
+
+LaTeX Warning: Reference `fig:verdict-2d' on page 12 undefined on input line 30
+9.
+
+
+LaTeX Warning: Reference `subsec:rqs' on page 12 undefined on input line 309.
+
+[12]
+
+LaTeX Warning: Reference `subsec:candidate-sources' on page 13 undefined on inp
+ut line 320.
+
+[13 <./fig_3_verdict_2d.pdf>] [14] [15]
+
+LaTeX Warning: Reference `sec:method' on page 16 undefined on input line 378.
+
+
+Underfull \hbox (badness 1308) in paragraph at lines 378--379
+\T1/cmr/m/n/12 ($\OT1/cmss/m/n/12 f[]$\T1/cmr/m/n/12 ), representation-invarian
+ce ($\OT1/cmss/m/n/12 f[]$\T1/cmr/m/n/12 ), and convergence/accuracy-
+
+LaTeX Warning: Reference `tab:rqmap' on page 16 undefined on input line 388.
+
+[16] [17]
+
+LaTeX Warning: Reference `tab:rqmap' on page 18 undefined on input line 420.
+
+
+LaTeX Warning: Reference `tab:relation-record-verdict' on page 18 undefined on 
+input line 429.
+
+ [18]
+Underfull \hbox (badness 1184) in paragraph at lines 459--460
+[]\T1/cmr/bx/n/12 Geometric MR. \T1/cmr/m/n/12 Ex-act mirror-y is out-of-relati
+on-domain on the
+
+Underfull \hbox (badness 1546) in paragraph at lines 461--462
+[]\T1/cmr/bx/n/12 Continuity MR. \T1/cmr/m/n/12 The P1 discrete-divergence op-e
+r-a-tor gives non-
+[19]
+Underfull \hbox (badness 3780) in paragraph at lines 467--468
+\T1/cmr/m/n/12 condition, mesh-adjacency, normalization-scale, temporal-rollout
+, and
+[20]
+
+LaTeX Warning: Reference `fig:operator-floor' on page 21 undefined on input lin
+e 497.
+
+[21]
+Underfull \hbox (badness 1472) in paragraph at lines 506--506
+[]\T1/cmr/m/it/12 Coverage im-pli-ca-tion: fault-detection ro-bust-ness across 
+the multi-
+[22 <./fig_4_operator_floor_loglog.pdf>]
+
+LaTeX Warning: Reference `tab:coverage-geometry' on page 23 undefined on input 
+line 511.
+
+
+Underfull \hbox (badness 1331) in paragraph at lines 532--533
+\T1/cmr/m/n/12 faults; mirror-y is sen-si-tive to physical-channel and ad-ja-ce
+ncy faults;
+[23]
+
+Package natbib Warning: Citation `verdecchia2023threats' on page 24 undefined o
+n input line 558.
+
+
+Package natbib Warning: Citation `ralph2021empirical' on page 24 undefined on i
+nput line 558.
+
+[24] [25] [26]
+Underfull \hbox (badness 2042) in paragraph at lines 604--605
+[]\T1/cmr/m/n/12 The de-tailed claim-to-evidence map, cross-program breadth not
+es,
+[27]
+No file main.bbl.
+
+Package natbib Warning: There were undefined citations.
+
+[28] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(see the transcript file for additional information) </Users/limeng/Library/tex
+live/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </Users/li
+meng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.6
+00pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknapp
+en/ec/ecbx0800.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/
+pk/ljfour/jknappen/ec/eccc1200.600pk> </Users/limeng/Library/texlive/2026basic/
+texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/limeng/Library/te
+xlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </Users/l
+imeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.
+600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ecrm1000.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/limeng/Library/texlive/2026basic
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </Users/limeng/Library/t
+exlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0700.600pk> </Users/
+limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800
+.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecrm1200.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/font
+s/pk/ljfour/jknappen/ec/ecrm1728.600pk></usr/local/texlive/2026basic/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2026basic/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2026basic/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2026basic/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2026bas
+ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026b
+asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2
+026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
+ve/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/te
+xlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local
+/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (28 pages, 391858 bytes).
+Transcript written on main.log.
+
+
+
+$ bibtex main
+This is BibTeX, Version 0.99e (TeX Live 2026)
+The top-level auxiliary file: main.aux
+The style file: elsarticle-harv.bst
+Database file #1: references.bib
+Warning--empty pages in li2021fno
+Warning--empty pages in pfaff2021meshgraphnets
+(There were 2 warnings)
+
+
+
+$ pdflatex -interaction=nonstopmode main.tex
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(./elsarticle.cls
+Document Class: elsarticle 2026/01/09, 3.5: Elsevier Ltd
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+) (/Users/limeng/Library/texmf/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(./main.spl)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/natbib/natbib.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/Users/limeng/Library/texmf/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/array.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/tabularx.sty)
+(/Users/limeng/Library/texmf/tex/latex/xltabular/xltabular.sty
+(/Users/limeng/Library/texmf/tex/latex/ltablex/ltablex.sty))
+(/Users/limeng/Library/texmf/tex/latex/makecell/makecell.sty)
+(/Users/limeng/Library/texmf/tex/latex/enumitem/enumitem.sty)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.sty
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype-pdftex.def)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.cfg))
+(/Users/limeng/Library/texmf/tex/latex/xurl/xurl.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty))
+(/Users/limeng/Library/texmf/tex/latex/float/float.sty) (./main.aux)
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty (/Users/limeng/Library/texmf/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-cmr.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msa.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msb.cfg) [1{/Users/limeng/L
+ibrary/texlive/2026basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package natbib Warning: Citation `raissi2019pinn' on page 2 undefined on input 
+line 124.
+
+
+Package natbib Warning: Citation `karniadakis2021piml' on page 2 undefined on i
+nput line 124.
+
+
+Package natbib Warning: Citation `li2021fno' on page 2 undefined on input line 
+124.
+
+
+Package natbib Warning: Citation `pfaff2021meshgraphnets' on page 2 undefined o
+n input line 124.
+
+
+Package natbib Warning: Citation `barr2015oracle' on page 2 undefined on input 
+line 124.
+
+
+Package natbib Warning: Citation `chen1998metamorphic' on page 2 undefined on i
+nput line 126.
+
+
+Package natbib Warning: Citation `segura2016survey' on page 2 undefined on inpu
+t line 126.
+
+
+Package natbib Warning: Citation `kanewala2019scientific' on page 2 undefined o
+n input line 126.
+
+
+Package natbib Warning: Citation `lin2020exploratory' on page 2 undefined on in
+put line 126.
+
+
+Package natbib Warning: Citation `olsen2019simulation' on page 2 undefined on i
+nput line 126.
+
+[2] [3]
+
+Package natbib Warning: Citation `duqueTorres2023bugornot' on page 4 undefined 
+on input line 170.
+
+
+Package natbib Warning: Citation `duqueTorres2023completePipeline' on page 4 un
+defined on input line 170.
+
+
+Package natbib Warning: Citation `duqueTorres2023metaTrimmer' on page 4 undefin
+ed on input line 170.
+
+
+Package natbib Warning: Citation `pfaff2021meshgraphnets' on page 4 undefined o
+n input line 182.
+
+
+Package natbib Warning: Citation `chen1998metamorphic' on page 4 undefined on i
+nput line 184.
+
+
+Package natbib Warning: Citation `segura2016survey' on page 4 undefined on inpu
+t line 184.
+
+
+Package natbib Warning: Citation `chen2018mtSurvey' on page 4 undefined on inpu
+t line 184.
+
+
+Package natbib Warning: Citation `chen2002pde' on page 4 undefined on input lin
+e 184.
+
+
+Package natbib Warning: Citation `chen2011ml' on page 4 undefined on input line
+ 184.
+
+
+Package natbib Warning: Citation `kanewala2019scientific' on page 4 undefined o
+n input line 184.
+
+
+Package natbib Warning: Citation `olsen2019simulation' on page 4 undefined on i
+nput line 184.
+
+
+Package natbib Warning: Citation `ying2025' on page 4 undefined on input line 1
+84.
+
+
+Package natbib Warning: Citation `kanewalaBieman2014slr' on page 4 undefined on
+ input line 186.
+
+
+Package natbib Warning: Citation `kanewala2019scientific' on page 4 undefined o
+n input line 186.
+
+
+Package natbib Warning: Citation `lin2020exploratory' on page 4 undefined on in
+put line 186.
+
+
+Package natbib Warning: Citation `olsen2019simulation' on page 4 undefined on i
+nput line 186.
+
+
+Package natbib Warning: Citation `raunak2021continuum' on page 4 undefined on i
+nput line 186.
+
+
+Package natbib Warning: Citation `kanewala2016graphkernel' on page 4 undefined 
+on input line 186.
+
+
+Package natbib Warning: Citation `wang2022mridentification' on page 4 undefined
+ on input line 186.
+
+
+Package natbib Warning: Citation `fu2021burnup' on page 4 undefined on input li
+ne 186.
+
+
+Package natbib Warning: Citation `tsigkanos2023' on page 4 undefined on input l
+ine 186.
+
+
+Package natbib Warning: Citation `spieker2024trajectory' on page 4 undefined on
+ input line 186.
+
+
+Package natbib Warning: Citation `spieker2025multimodal' on page 4 undefined on
+ input line 186.
+
+
+Package natbib Warning: Citation `hiremath2021ocean' on page 4 undefined on inp
+ut line 186.
+
+
+Package natbib Warning: Citation `mandrioli2025cps' on page 4 undefined on inpu
+t line 186.
+
+[4]
+
+Package natbib Warning: Citation `duqueTorres2023completePipeline' on page 5 un
+defined on input line 188.
+
+
+Package natbib Warning: Citation `duqueTorres2024selecting' on page 5 undefined
+ on input line 188.
+
+
+Package natbib Warning: Citation `sun2026ccml' on page 5 undefined on input lin
+e 188.
+
+
+Package natbib Warning: Citation `li2022nuclearmr' on page 5 undefined on input
+ line 190.
+
+
+Package natbib Warning: Citation `wang2022mridentification' on page 5 undefined
+ on input line 190.
+
+
+Package natbib Warning: Citation `srinivasan2022prioritization' on page 5 undef
+ined on input line 190.
+
+
+Package natbib Warning: Citation `saha2019faultdetection' on page 5 undefined o
+n input line 190.
+
+
+Package natbib Warning: Citation `yang2021hydromt' on page 5 undefined on input
+ line 195.
+
+
+Package natbib Warning: Citation `reichert2024hess' on page 5 undefined on inpu
+t line 195.
+
+
+Package natbib Warning: Citation `eniser2022relaxations' on page 5 undefined on
+ input line 195.
+
+
+Package natbib Warning: Citation `duqueTorres2023bugornot' on page 5 undefined 
+on input line 195.
+
+
+Package natbib Warning: Citation `duqueTorres2023completePipeline' on page 5 un
+defined on input line 195.
+
+
+Package natbib Warning: Citation `duqueTorres2024selecting' on page 5 undefined
+ on input line 195.
+
+
+Package natbib Warning: Citation `duqueTorres2023metaTrimmer' on page 5 undefin
+ed on input line 195.
+
+[5]
+
+Package natbib Warning: Citation `raissi2019pinn' on page 6 undefined on input 
+line 223.
+
+
+Package natbib Warning: Citation `karniadakis2021piml' on page 6 undefined on i
+nput line 223.
+
+
+Package natbib Warning: Citation `li2021fno' on page 6 undefined on input line 
+223.
+
+
+Package natbib Warning: Citation `krishnapriyan2021failure' on page 6 undefined
+ on input line 223.
+
+
+Package natbib Warning: Citation `gopakumar2025calibrated' on page 6 undefined 
+on input line 223.
+
+
+Package natbib Warning: Citation `wang2021gradflow' on page 6 undefined on inpu
+t line 223.
+
+
+Package natbib Warning: Citation `krishnapriyan2021failure' on page 6 undefined
+ on input line 223.
+
+[6]
+
+Package natbib Warning: Citation `baral2025xrepit' on page 7 undefined on input
+ line 225.
+
+
+Package natbib Warning: Citation `wang2025deeponetfe' on page 7 undefined on in
+put line 225.
+
+
+Package natbib Warning: Citation `najafi2026' on page 7 undefined on input line
+ 227.
+
+
+Package natbib Warning: Citation `yan2024elliptic' on page 7 undefined on input
+ line 229.
+
+
+Package natbib Warning: Citation `stevens2025mars' on page 7 undefined on input
+ line 229.
+
+[7]
+
+Package natbib Warning: Citation `yang2020hierarchical' on page 8 undefined on 
+input line 260.
+
+
+Package natbib Warning: Citation `zhao2026noether' on page 8 undefined on input
+ line 260.
+
+[8] [9 <./fig_1_validity_gated_workflow.pdf>] [10] [11] [12] [13 <./fig_3_verdi
+ct_2d.pdf>] [14] [15]
+Underfull \hbox (badness 1308) in paragraph at lines 378--379
+\T1/cmr/m/n/12 ($\OT1/cmss/m/n/12 f[]$\T1/cmr/m/n/12 ), representation-invarian
+ce ($\OT1/cmss/m/n/12 f[]$\T1/cmr/m/n/12 ), and convergence/accuracy-
+[16] [17] [18]
+Underfull \hbox (badness 1184) in paragraph at lines 459--460
+[]\T1/cmr/bx/n/12 Geometric MR. \T1/cmr/m/n/12 Ex-act mirror-y is out-of-relati
+on-domain on the
+
+Underfull \hbox (badness 1546) in paragraph at lines 461--462
+[]\T1/cmr/bx/n/12 Continuity MR. \T1/cmr/m/n/12 The P1 discrete-divergence op-e
+r-a-tor gives non-
+[19]
+Underfull \hbox (badness 3780) in paragraph at lines 467--468
+\T1/cmr/m/n/12 condition, mesh-adjacency, normalization-scale, temporal-rollout
+, and
+[20] [21]
+Underfull \hbox (badness 1472) in paragraph at lines 506--506
+[]\T1/cmr/m/it/12 Coverage im-pli-ca-tion: fault-detection ro-bust-ness across 
+the multi-
+[22 <./fig_4_operator_floor_loglog.pdf>]
+Underfull \hbox (badness 1331) in paragraph at lines 532--533
+\T1/cmr/m/n/12 faults; mirror-y is sen-si-tive to physical-channel and ad-ja-ce
+ncy faults;
+[23]
+
+Package natbib Warning: Citation `verdecchia2023threats' on page 24 undefined o
+n input line 558.
+
+
+Package natbib Warning: Citation `ralph2021empirical' on page 24 undefined on i
+nput line 558.
+
+[24] [25] [26]
+Underfull \hbox (badness 2042) in paragraph at lines 604--605
+[]\T1/cmr/m/n/12 The de-tailed claim-to-evidence map, cross-program breadth not
+es,
+[27] (./main.bbl [28] [29] [30] [31] [32])
+
+Package natbib Warning: There were undefined citations.
+
+[33] (./main.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+) )
+(see the transcript file for additional information) </Users/limeng/Library/tex
+live/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </Users/li
+meng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.6
+00pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknapp
+en/ec/ecbx0800.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/
+pk/ljfour/jknappen/ec/eccc1200.600pk> </Users/limeng/Library/texlive/2026basic/
+texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/limeng/Library/te
+xlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </Users/l
+imeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.
+600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ectt1000.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/limeng/Library/texlive/2026basic
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/limeng/Library/t
+exlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </Users/
+limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0700
+.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecrm0800.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/font
+s/pk/ljfour/jknappen/ec/ecrm1200.600pk> </Users/limeng/Library/texlive/2026basi
+c/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk></usr/local/texlive/2026
+basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/
+2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texli
+ve/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/te
+xlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
+/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loc
+al/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr
+/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+/usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
+.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/symbo
+ls/msbm10.pfb>
+Output written on main.pdf (33 pages, 413388 bytes).
+Transcript written on main.log.
+
+
+
+$ pdflatex -interaction=nonstopmode main.tex
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(./elsarticle.cls
+Document Class: elsarticle 2026/01/09, 3.5: Elsevier Ltd
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+) (/Users/limeng/Library/texmf/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(./main.spl)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/natbib/natbib.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/Users/limeng/Library/texmf/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/array.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/tabularx.sty)
+(/Users/limeng/Library/texmf/tex/latex/xltabular/xltabular.sty
+(/Users/limeng/Library/texmf/tex/latex/ltablex/ltablex.sty))
+(/Users/limeng/Library/texmf/tex/latex/makecell/makecell.sty)
+(/Users/limeng/Library/texmf/tex/latex/enumitem/enumitem.sty)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.sty
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype-pdftex.def)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.cfg))
+(/Users/limeng/Library/texmf/tex/latex/xurl/xurl.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty))
+(/Users/limeng/Library/texmf/tex/latex/float/float.sty) (./main.aux)
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty (/Users/limeng/Library/texmf/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-cmr.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msa.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msb.cfg) [1{/Users/limeng/L
+ibrary/texlive/2026basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] [3] [4] [5] [6] [7] [8] [9] [10 <./fig_1_validity_gated_workflow.pdf>]
+[11] [12] [13] [14] [15 <./fig_3_verdict_2d.pdf>] [16]
+Underfull \hbox (badness 1308) in paragraph at lines 378--379
+\T1/cmr/m/n/12 ($\OT1/cmss/m/n/12 f[]$\T1/cmr/m/n/12 ), representation-invarian
+ce ($\OT1/cmss/m/n/12 f[]$\T1/cmr/m/n/12 ), and convergence/accuracy-
+[17] [18] [19] [20]
+Underfull \hbox (badness 1184) in paragraph at lines 459--460
+[]\T1/cmr/bx/n/12 Geometric MR. \T1/cmr/m/n/12 Ex-act mirror-y is out-of-relati
+on-domain on the
+
+Underfull \hbox (badness 1546) in paragraph at lines 461--462
+[]\T1/cmr/bx/n/12 Continuity MR. \T1/cmr/m/n/12 The P1 discrete-divergence op-e
+r-a-tor gives non-
+[21]
+Underfull \hbox (badness 3780) in paragraph at lines 467--468
+\T1/cmr/m/n/12 condition, mesh-adjacency, normalization-scale, temporal-rollout
+, and
+[22] [23]
+Underfull \hbox (badness 1472) in paragraph at lines 506--506
+[]\T1/cmr/m/it/12 Coverage im-pli-ca-tion: fault-detection ro-bust-ness across 
+the multi-
+[24 <./fig_4_operator_floor_loglog.pdf>]
+Underfull \hbox (badness 1331) in paragraph at lines 532--533
+\T1/cmr/m/n/12 faults; mirror-y is sen-si-tive to physical-channel and ad-ja-ce
+ncy faults;
+[25]
+Underfull \hbox (badness 1603) in paragraph at lines 558--559
+\T1/cmr/m/n/12 and re-port against the Em-pir-i-cal Stan-dards for soft-ware en
+-gi-neer-ing
+[26] [27] [28]
+Underfull \hbox (badness 2042) in paragraph at lines 604--605
+[]\T1/cmr/m/n/12 The de-tailed claim-to-evidence map, cross-program breadth not
+es,
+[29] (./main.bbl [30] [31] [32] [33] [34]) [35] (./main.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(see the transcript file for additional information) </Users/limeng/Library/tex
+live/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </Users/li
+meng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.6
+00pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknapp
+en/ec/ecbx0800.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/
+pk/ljfour/jknappen/ec/eccc1200.600pk> </Users/limeng/Library/texlive/2026basic/
+texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/limeng/Library/te
+xlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </Users/l
+imeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.
+600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ectt1000.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/limeng/Library/texlive/2026basic
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/limeng/Library/t
+exlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </Users/
+limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0700
+.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecrm0800.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/font
+s/pk/ljfour/jknappen/ec/ecrm1200.600pk> </Users/limeng/Library/texlive/2026basi
+c/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk></usr/local/texlive/2026
+basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/
+2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texli
+ve/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/te
+xlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
+/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loc
+al/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr
+/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+/usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
+.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/symbo
+ls/msbm10.pfb>
+Output written on main.pdf (35 pages, 414665 bytes).
+Transcript written on main.log.
+
+
+
+$ pdflatex -interaction=nonstopmode main.tex
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(./elsarticle.cls
+Document Class: elsarticle 2026/01/09, 3.5: Elsevier Ltd
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+) (/Users/limeng/Library/texmf/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(./main.spl)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/natbib/natbib.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/Users/limeng/Library/texmf/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/array.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/tabularx.sty)
+(/Users/limeng/Library/texmf/tex/latex/xltabular/xltabular.sty
+(/Users/limeng/Library/texmf/tex/latex/ltablex/ltablex.sty))
+(/Users/limeng/Library/texmf/tex/latex/makecell/makecell.sty)
+(/Users/limeng/Library/texmf/tex/latex/enumitem/enumitem.sty)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.sty
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype-pdftex.def)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.cfg))
+(/Users/limeng/Library/texmf/tex/latex/xurl/xurl.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty))
+(/Users/limeng/Library/texmf/tex/latex/float/float.sty) (./main.aux)
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty (/Users/limeng/Library/texmf/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-cmr.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msa.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msb.cfg) [1{/Users/limeng/L
+ibrary/texlive/2026basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] [3] [4] [5] [6] [7] [8] [9] [10 <./fig_1_validity_gated_workflow.pdf>]
+[11] [12] [13] [14] [15 <./fig_3_verdict_2d.pdf>] [16]
+Underfull \hbox (badness 1308) in paragraph at lines 378--379
+\T1/cmr/m/n/12 ($\OT1/cmss/m/n/12 f[]$\T1/cmr/m/n/12 ), representation-invarian
+ce ($\OT1/cmss/m/n/12 f[]$\T1/cmr/m/n/12 ), and convergence/accuracy-
+[17] [18] [19] [20]
+Underfull \hbox (badness 1184) in paragraph at lines 459--460
+[]\T1/cmr/bx/n/12 Geometric MR. \T1/cmr/m/n/12 Ex-act mirror-y is out-of-relati
+on-domain on the
+
+Underfull \hbox (badness 1546) in paragraph at lines 461--462
+[]\T1/cmr/bx/n/12 Continuity MR. \T1/cmr/m/n/12 The P1 discrete-divergence op-e
+r-a-tor gives non-
+[21]
+Underfull \hbox (badness 3780) in paragraph at lines 467--468
+\T1/cmr/m/n/12 condition, mesh-adjacency, normalization-scale, temporal-rollout
+, and
+[22] [23]
+Underfull \hbox (badness 1472) in paragraph at lines 506--506
+[]\T1/cmr/m/it/12 Coverage im-pli-ca-tion: fault-detection ro-bust-ness across 
+the multi-
+[24 <./fig_4_operator_floor_loglog.pdf>]
+Underfull \hbox (badness 1331) in paragraph at lines 532--533
+\T1/cmr/m/n/12 faults; mirror-y is sen-si-tive to physical-channel and ad-ja-ce
+ncy faults;
+[25]
+Underfull \hbox (badness 1603) in paragraph at lines 558--559
+\T1/cmr/m/n/12 and re-port against the Em-pir-i-cal Stan-dards for soft-ware en
+-gi-neer-ing
+[26] [27] [28]
+Underfull \hbox (badness 2042) in paragraph at lines 604--605
+[]\T1/cmr/m/n/12 The de-tailed claim-to-evidence map, cross-program breadth not
+es,
+[29] (./main.bbl [30] [31] [32] [33] [34]) [35] (./main.aux) )
+(see the transcript file for additional information) </Users/limeng/Library/tex
+live/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </Users/li
+meng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.6
+00pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknapp
+en/ec/ecbx0800.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/
+pk/ljfour/jknappen/ec/eccc1200.600pk> </Users/limeng/Library/texlive/2026basic/
+texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </Users/limeng/Library/te
+xlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </Users/l
+imeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.
+600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ectt1000.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/limeng/Library/texlive/2026basic
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </Users/limeng/Library/t
+exlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </Users/
+limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0700
+.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecrm0800.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/font
+s/pk/ljfour/jknappen/ec/ecrm1200.600pk> </Users/limeng/Library/texlive/2026basi
+c/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk></usr/local/texlive/2026
+basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/
+2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texli
+ve/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/te
+xlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
+/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loc
+al/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr
+/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+/usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
+.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/symbo
+ls/msbm10.pfb>
+Output written on main.pdf (35 pages, 414665 bytes).
+Transcript written on main.log.
+
+
+
+$ pdflatex -interaction=nonstopmode supplementary.tex
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./supplementary.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(./elsarticle.cls
+Document Class: elsarticle 2026/01/09, 3.5: Elsevier Ltd
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+) (/Users/limeng/Library/texmf/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/natbib/natbib.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/Users/limeng/Library/texmf/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/array.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/tabularx.sty)
+(/Users/limeng/Library/texmf/tex/latex/xltabular/xltabular.sty
+(/Users/limeng/Library/texmf/tex/latex/ltablex/ltablex.sty))
+(/Users/limeng/Library/texmf/tex/latex/makecell/makecell.sty)
+(/Users/limeng/Library/texmf/tex/latex/enumitem/enumitem.sty)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.sty
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype-pdftex.def)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.cfg))
+(/Users/limeng/Library/texmf/tex/latex/xurl/xurl.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty))
+(/Users/limeng/Library/texmf/tex/latex/float/float.sty)
+No file supplementary.aux.
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty (/Users/limeng/Library/texmf/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-cmr.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msa.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msb.cfg) [1{/Users/limeng/L
+ibrary/texlive/2026basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] [3]
+Overfull \hbox (2.85843pt too wide) in paragraph at lines 96--96
+[]|\T1/cmr/m/n/8 RealPDEBench 
+[4] [5] [6] [7] [8] [9]
+Underfull \hbox (badness 1478) in paragraph at lines 216--225
+ \T1/cmr/m/it/12 Com-po-nent cov-er-age map..[] \T1/cmr/m/n/12 The five counted
+ wit-nesses cover dif-fer-ent
+
+Underfull \hbox (badness 3068) in paragraph at lines 216--225
+\T1/cmr/m/n/12 numerical-decidability se-man-tics; Neu-ral-Op-er-a-tor Spec-tra
+l-Conv cov-ers
+
+Underfull \hbox (badness 1189) in paragraph at lines 216--225
+\T1/cmr/m/n/12 ad-vec-tion flux boundary-condition in-fer-ence se-man-tics. Thi
+s breadth
+
+Overfull \hbox (0.45363pt too wide) in paragraph at lines 227--236
+ \T1/cmr/m/it/12 Ev-i-dence lad-der and claim bound-ary..[] \T1/cmr/m/n/12 The 
+ev-i-dence lad-der starts with author-
+[10] [11] (./supplementary.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(see the transcript file for additional information) </Users/limeng/Library/tex
+live/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </Users/li
+meng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.6
+00pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknapp
+en/ec/ecrm1000.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/
+pk/ljfour/jknappen/ec/ectt0800.600pk> </Users/limeng/Library/texlive/2026basic/
+texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </Users/limeng/Library/te
+xlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0800.600pk> </Users/l
+imeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.
+600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ecbx1200.600pk></usr/local/texlive/2026basic/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2026basic/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026basic/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026basic/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on supplementary.pdf (11 pages, 192755 bytes).
+Transcript written on supplementary.log.
+
+
+
+$ pdflatex -interaction=nonstopmode supplementary.tex
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./supplementary.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(./elsarticle.cls
+Document Class: elsarticle 2026/01/09, 3.5: Elsevier Ltd
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
+ef))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+) (/Users/limeng/Library/texmf/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(./supplementary.spl)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/natbib/natbib.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/Users/limeng/Library/texmf/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/array.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/tools/tabularx.sty)
+(/Users/limeng/Library/texmf/tex/latex/xltabular/xltabular.sty
+(/Users/limeng/Library/texmf/tex/latex/ltablex/ltablex.sty))
+(/Users/limeng/Library/texmf/tex/latex/makecell/makecell.sty)
+(/Users/limeng/Library/texmf/tex/latex/enumitem/enumitem.sty)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.sty
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype-pdftex.def)
+(/Users/limeng/Library/texmf/tex/latex/microtype/microtype.cfg))
+(/Users/limeng/Library/texmf/tex/latex/xurl/xurl.sty
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/url/url.sty))
+(/Users/limeng/Library/texmf/tex/latex/float/float.sty) (./supplementary.aux)
+(/usr/local/texlive/2026basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
+ty (/Users/limeng/Library/texmf/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-cmr.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msa.cfg)
+(/usr/local/texlive/2026basic/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/Users/limeng/Library/texmf/tex/latex/microtype/mt-msb.cfg) [1{/Users/limeng/L
+ibrary/texlive/2026basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] [3]
+Overfull \hbox (2.85843pt too wide) in paragraph at lines 96--96
+[]|\T1/cmr/m/n/8 RealPDEBench 
+[4] [5] [6] [7] [8] [9]
+Underfull \hbox (badness 1478) in paragraph at lines 216--225
+ \T1/cmr/m/it/12 Com-po-nent cov-er-age map..[] \T1/cmr/m/n/12 The five counted
+ wit-nesses cover dif-fer-ent
+
+Underfull \hbox (badness 3068) in paragraph at lines 216--225
+\T1/cmr/m/n/12 numerical-decidability se-man-tics; Neu-ral-Op-er-a-tor Spec-tra
+l-Conv cov-ers
+
+Underfull \hbox (badness 1189) in paragraph at lines 216--225
+\T1/cmr/m/n/12 ad-vec-tion flux boundary-condition in-fer-ence se-man-tics. Thi
+s breadth
+
+Overfull \hbox (0.45363pt too wide) in paragraph at lines 227--236
+ \T1/cmr/m/it/12 Ev-i-dence lad-der and claim bound-ary..[] \T1/cmr/m/n/12 The 
+ev-i-dence lad-der starts with author-
+[10] [11] (./supplementary.aux) )
+(see the transcript file for additional information) </Users/limeng/Library/tex
+live/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </Users/li
+meng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.6
+00pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknapp
+en/ec/ecrm1000.600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/
+pk/ljfour/jknappen/ec/ectt0800.600pk> </Users/limeng/Library/texlive/2026basic/
+texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </Users/limeng/Library/te
+xlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0800.600pk> </Users/l
+imeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.
+600pk> </Users/limeng/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ecbx1200.600pk></usr/local/texlive/2026basic/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2026basic/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026basic/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026basic/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on supplementary.pdf (11 pages, 192755 bytes).
+Transcript written on supplementary.log.
+
+
+
+$ /opt/anaconda3/bin/python /Users/limeng/Papers/P9-SciML-OOD/tools/precheck_jss.py main.tex
+Warnings:
+  - no highlights environment in main.tex; ensure separate editable highlights file exists
+JSS precheck passed
+

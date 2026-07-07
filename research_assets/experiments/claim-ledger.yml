@@ -1665,6 +1665,157 @@ claims:
       - "A model-accuracy, reliability, or fault-detection claim."
     blocked_reason: null
 
+  - claim_id: "C54-periodic-advection-primary-workflow"
+    status: "observed"
+    scope: "independent synthetic 2D scalar periodic-advection SciML surrogate task / K=6 NumPy-trained periodic-convolution SUT checkpoints / n=10 held-out fields per SUT / full rubric-to-verdict chain with admitted translation and mass-conservation MRs plus rejected fixed-velocity mirror candidate"
+    evidence:
+      - "paper/82_p0_independent_primary_sut_scan_plan.md"
+      - "tools/run_periodic_advection_primary_workflow.py"
+      - "tests/test_p0_periodic_advection_primary_workflow.py"
+      - "research_assets/mr_cards/periodic_advection_translation_equivariance.json"
+      - "research_assets/mr_cards/periodic_advection_mass_conservation.json"
+      - "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_primary_workflow_report.json"
+      - "research_assets/runs/periodic-advection-primary-workflow/smoke_manifest.json"
+      - "research_assets/runs/periodic-advection-primary-workflow/PROVENANCE.md"
+      - "research_assets/runs/periodic-advection-primary-workflow/checkpoints"
+      - "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s0/metric_ledger.json"
+    wording_allowed: >
+      The P0 independent periodic-advection primary workflow adds a genuinely
+      separate synthetic SciML surrogate task to the evidence package. Six
+      deterministic NumPy-trained periodic-convolution SUT checkpoints are
+      trained for one 2D scalar periodic-advection step on a 32 x 32 periodic
+      grid and evaluated on 10 held-out fields per SUT. The full
+      rubric-to-verdict chain is recorded: MR cards, trained checkpoints,
+      source/follow-up output archives, per-SUT metric ledgers, rubric decisions,
+      and an aggregate verdict report. Periodic integer-translation equivariance
+      is admitted and passes on 60/60 relation cells with maximum relative-L2
+      violation 0.0 at tolerance 1e-10; global mean/mass conservation is admitted
+      and passes on 60/60 relation cells with maximum RMS-normalized mean drift
+      3.47e-17 at tolerance 1e-10. The fixed-velocity mirror candidate is
+      rejected for all six SUTs and is not executed as an exact MR, because
+      mirroring the scalar field without transforming the advection velocity
+      changes the transport problem. This strengthens the paper's independent
+      primary-scale evidence by adding a new PDE/task and SUT implementation with
+      a complete auditable chain.
+    wording_forbidden:
+      - "Production CFD, official benchmark, or official-checkpoint evidence."
+      - "Real-world defect-detection, reliability, or model-safety rates."
+      - "General neural-operator, PINN, FNO, MGN, airfoil, or cylinder-flow generalization."
+      - "Superiority over rollout accuracy, UQ, residuals, baselines, or other testing methods."
+      - "A claim that mirror reflection is a valid periodic-advection MR when the velocity vector is not transformed."
+    blocked_reason: null
+
+  - claim_id: "C55-realpdebench-foil-mirror-preflight"
+    status: "observed"
+    scope: "production-adjacent public RealPDEBench foil real-flow field preflight / metadata-screened zero-AoA NACA0025 case / source field sim_id 10000_0.0.h5 / coordinate mirror map and metric generation only / no trained-SUT pass/fail"
+    evidence:
+      - "paper/86_targeted_supplemental_empirical_scan_plan.md"
+      - "paper/87_realpdebench_foil_phase_s1_s2_screen_report.md"
+      - "tools/run_realpdebench_foil_mirror_preflight.py"
+      - "tests/test_realpdebench_foil_metadata_screen.py"
+      - "research_assets/mr_cards/realpdebench_foil_mirror_y_gate.json"
+      - "research_assets/runs/realpdebench-foil-metadata-screen/metadata_screen_summary.json"
+      - "research_assets/runs/realpdebench-foil-preflight/foil_mirror_preflight_report.json"
+    wording_allowed: >
+      A production-adjacent public-data preflight was executed on RealPDEBench
+      foil real-flow data. Metadata screening found machine-readable angle of
+      attack and Reynolds number fields, zero-AoA real and numerical cases, and
+      stored x/y coordinate arrays. The zero-AoA real PIV field
+      10000_0.0.h5 was decoded from the public Arrow artifact; its coordinate
+      reflection map is exact on the stored grid under the selected spatial
+      axis (x-invariance floor 0.0 and y-reflection floor 0.0). A mirror-y
+      source/follow-up metric was generated on the real velocity field:
+      u relative-L2 0.0600, sign-reversed-v relative-L2 1.3753, and combined
+      uv relative-L2 0.2292. Because this preflight has no independent PIV
+      measurement-floor bound, the typed verdict is inconclusive rather than
+      pass or fail. The evidence is a public real-flow admissibility and metric
+      witness, not a trained-SUT correctness result.
+    wording_forbidden:
+      - "RealPDEBench validates the method on production CFD."
+      - "The method detects real defects on RealPDEBench."
+      - "The foil result is a SUT pass/fail result."
+      - "The method generalizes to aerodynamic data or real-flow benchmarks."
+      - "The real-flow metric proves model reliability, physical correctness, or deployment readiness."
+      - "The observed mirror residual is a fault without an independent measurement-floor bound."
+    blocked_reason: null
+
+  - claim_id: "C56-deepxde-periodicbc-real-defect-witness"
+    status: "observed"
+    scope: "one external DeepXDE issue/PR-linked PeriodicBC boundary-condition semantic witness / issue #26 / merged PR #27 / analytic source-follow-up endpoint residuals / no trained-surrogate execution"
+    evidence:
+      - "tools/run_deepxde_periodicbc_real_defect_witness.py"
+      - "research_assets/mr_cards/deepxde_periodicbc_derivative_enforcement.json"
+      - "research_assets/runs/deepxde-periodicbc-real-defect-scan/raw/deepxde_issue_26.json"
+      - "research_assets/runs/deepxde-periodicbc-real-defect-scan/raw/deepxde_issue_26_comments.json"
+      - "research_assets/runs/deepxde-periodicbc-real-defect-scan/raw/deepxde_pr_27.json"
+      - "research_assets/runs/deepxde-periodicbc-real-defect-scan/raw/deepxde_pr_27.patch"
+      - "research_assets/runs/deepxde-periodicbc-real-defect-scan/raw/deepxde_periodicbc_commit_search.json"
+      - "research_assets/runs/deepxde-periodicbc-real-defect-scan/deepxde_periodicbc_real_defect_witness_report.json"
+    wording_allowed: >
+      A single external real-defect-linked witness was executed for DeepXDE
+      PeriodicBC issue #26 and merged PR #27. The archived GitHub artifacts
+      record a closed periodic-boundary issue, a merged PR adding
+      PeriodicBC derivative_order support, and merge commit
+      c4b44313939aac1aa51430e9e2a1b6c2cbec0c10. The source/follow-up
+      semantic check uses analytic periodic endpoint pairing: for
+      u=x(1-x), u(0)=u(1)=0 but du/dx(0)=1 and du/dx(1)=-1. The pre-PR
+      value-only residual is 0.0, while the derivative_order=1 residual is
+      2.0. Controls behave as expected: u=sin(2*pi*x) has near-zero value
+      and derivative residuals, and u=x fails value periodicity. The typed
+      verdict is pass for reproducing this issue-linked derivative-periodicity
+      semantic contrast.
+    wording_forbidden:
+      - "The paper measures a real-world defect-detection rate."
+      - "The method detects all DeepXDE or PINN periodic-boundary defects."
+      - "This is a trained-surrogate accuracy, reliability, or correctness result."
+      - "This witness validates DeepXDE, PINNs, production CFD, or deployment readiness."
+      - "The result supports population-wide real-defect effectiveness."
+    blocked_reason: null
+
+  - claim_id: "C57-external-defect-witness-corpus"
+    status: "observed"
+    scope: "small external issue/PR/commit-linked SciML semantic witness corpus / five units across four repositories or independent subsystems / CPU-only semantic witnesses / no trained-SUT correctness, production validation, or defect-rate claim"
+    evidence:
+      - "paper/92_external_defect_corpus_minor_revision_sprint.md"
+      - "research_assets/runs/external-defect-corpus-scan/screened_candidates_initial.md"
+      - "tools/run_external_defect_corpus_summary.py"
+      - "research_assets/runs/external-defect-corpus-scan/external_defect_corpus_summary.json"
+      - "tools/run_neuraloperator_spectrum2d_real_defect_witness.py"
+      - "research_assets/mr_cards/neuraloperator_spectrum2d_radial_power_consistency.json"
+      - "research_assets/runs/external-defect-corpus-scan/neuraloperator_spectrum2d_real_defect_witness_report.json"
+      - "tools/run_neuraloperator_hermitian_symmetry_real_defect_witness.py"
+      - "research_assets/mr_cards/neuraloperator_hermitian_symmetry_irfft_boundary.json"
+      - "research_assets/runs/external-defect-corpus-scan/neuraloperator_hermitian_symmetry_real_defect_witness_report.json"
+      - "tools/run_jaxcfd_flux_boundary_real_defect_witness.py"
+      - "research_assets/mr_cards/jaxcfd_flux_boundary_consistency.json"
+      - "research_assets/runs/external-defect-corpus-scan/jaxcfd_flux_boundary_real_defect_witness_report.json"
+      - "tools/run_phiml_custom_gradient_transpose_real_defect_witness.py"
+      - "research_assets/mr_cards/phiml_custom_gradient_transpose_consistency.json"
+      - "research_assets/runs/external-defect-corpus-scan/phiml_custom_gradient_transpose_real_defect_witness_report.json"
+      - "research_assets/runs/deepxde-periodicbc-real-defect-scan/deepxde_periodicbc_real_defect_witness_report.json"
+    wording_allowed: >
+      A small external issue/PR/commit-linked semantic witness corpus was
+      executed to strengthen external-validity evidence beyond self-made
+      tasks. The corpus contains five units across four repositories or
+      independent subsystems: DeepXDE PeriodicBC issue #26 / PR #27,
+      NeuralOperator spectrum_2d issue #532 / PR #661, NeuralOperator
+      SpectralConv PR #702, PhiFlow issue #199 / PhiML commit
+      96ef3e4d8376502a1b75dcdd799d9ada1cb39f72, and JAX-CFD PR #167.
+      Each counted unit has archived external source artifacts, an MR card,
+      a source/follow-up semantic witness, a metric, and a typed verdict. All
+      five typed verdicts are pass for reproducing the documented semantic
+      contrast: derivative periodicity, spectral radial/power calculation,
+      Hermitian irfft boundary-frequency enforcement, custom-gradient native
+      axis ordering, and advection flux-boundary inference.
+    wording_forbidden:
+      - "The paper measures a real-world defect-detection rate."
+      - "The corpus validates production SciML or CFD deployments."
+      - "The witnesses prove trained SUT accuracy, reliability, or correctness."
+      - "The corpus establishes broad DeepXDE, NeuralOperator, JAX-CFD, PhiFlow, or PhiML correctness."
+      - "The corpus is a representative sample of SciML software defects."
+      - "The NeuralOperator PR #702 witness reproduces GPU line artifacts on this machine."
+    blocked_reason: null
+
 
 speculative_claims:
   - claim: "General seeded-fault detection effectiveness"

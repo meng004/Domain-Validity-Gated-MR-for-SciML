@@ -1,0 +1,71 @@
+{
+  "mr_id": "deepxde-periodicbc-derivative-enforcement",
+  "title": "Issue-linked derivative periodicity witness for DeepXDE PeriodicBC",
+  "status": "design-time-retained",
+  "evidence_level": "design-time-asset",
+  "source_case_schema": {
+    "subject_program": "DeepXDE PeriodicBC boundary-condition residual",
+    "external_issue": "https://github.com/lululxvi/deepxde/issues/26",
+    "external_pr": "https://github.com/lululxvi/deepxde/pull/27",
+    "source_artifacts": "research_assets/runs/deepxde-periodicbc-real-defect-scan/raw",
+    "source_function": "smooth scalar u(x) on [0,1] with endpoint values and endpoint derivatives available"
+  },
+  "follow_up_transformation": {
+    "kind": "periodic_boundary_pairing",
+    "parameters": {
+      "periodic_map": "x=0 <-> x=1",
+      "derivative_order": "0 for value periodicity, 1 for first-derivative periodicity",
+      "primary_witness_function": "u=x(1-x)"
+    },
+    "synchronized_fields": [
+      "u",
+      "du/dx"
+    ]
+  },
+  "transformation_preconditions": [
+    "The target boundary condition is periodic on a smooth function over [0,1].",
+    "The PDE or issue context requires first-derivative periodicity in addition to value periodicity.",
+    "Endpoint values and first derivatives can be evaluated analytically.",
+    "The external issue and merged PR document the PeriodicBC derivative-order semantic change."
+  ],
+  "boundary_condition_compatibility": {
+    "status": "compatible-issue-linked-periodic-boundary",
+    "reason": "DeepXDE issue #26 discusses cases where value-only periodicity is insufficient for the reported PDE boundary semantics, and PR #27 adds derivative_order support to PeriodicBC."
+  },
+  "output_mapping": {
+    "kind": "periodic_endpoint_residual",
+    "description": "Pair x=0 with x=1 and compare either u(0)-u(1) or du/dx(0)-du/dx(1), matching DeepXDE PR #27's derivative_order branch."
+  },
+  "metric": {
+    "name": "periodic_boundary_derivative_residual",
+    "formula": "abs(du/dx(0) - du/dx(1)) for derivative_order=1; contrast with abs(u(0)-u(1)) for derivative_order=0"
+  },
+  "tolerance": {
+    "assertion": "semantic_reproduction_checks_equal_within_tolerance",
+    "threshold": 0.000000000001,
+    "source": "tools/run_deepxde_periodicbc_real_defect_witness.py"
+  },
+  "exclusion_rules": [
+    "Exclude nonsmooth functions whose first derivative is undefined at either periodic endpoint.",
+    "Exclude PDE contexts that require value periodicity only and do not require derivative periodicity.",
+    "Exclude any claim that the witness is a trained-surrogate accuracy result.",
+    "Exclude any broad defect-rate claim beyond this one external issue/PR-linked witness."
+  ],
+  "allowed_verdicts": [
+    "pass",
+    "fail",
+    "skip",
+    "out-of-relation-domain",
+    "numerical-tolerance-issue",
+    "inconclusive"
+  ],
+  "verdict_interpretation": {
+    "pass": "The issue/PR artifacts are present and the semantic source/follow-up residual checks reproduce the value-only blind spot and derivative-order witness.",
+    "fail": "The artifact checks or residual checks contradict the expected issue-linked semantic contrast.",
+    "skip": "The run was not executed because source artifacts were unavailable.",
+    "out-of-relation-domain": "The function or PDE context does not require first-derivative periodicity.",
+    "numerical-tolerance-issue": "Endpoint evaluation uncertainty dominates the analytic residual.",
+    "inconclusive": "The external issue/PR link or semantic residual evidence is incomplete."
+  },
+  "claim_limitations": "This MR card supports one external issue/PR-linked boundary-condition semantic witness for a SciML library component. It does not report a trained-SUT verdict, a real-world defect-detection rate, DeepXDE-wide correctness, PINN accuracy, or production CFD readiness."
+}

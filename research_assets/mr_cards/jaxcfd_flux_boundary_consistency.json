@@ -1,0 +1,72 @@
+{
+  "mr_id": "jaxcfd-flux-boundary-consistency",
+  "title": "Merged-PR-linked advection flux-boundary witness for JAX-CFD",
+  "status": "design-time-retained",
+  "evidence_level": "design-time-asset",
+  "source_case_schema": {
+    "subject_program": "JAX-CFD advection flux boundary-condition inference",
+    "external_pr": "https://github.com/google/jax-cfd/pull/167",
+    "source_artifacts": "research_assets/runs/external-defect-corpus-scan/raw",
+    "source_function": "small boundary-condition tuples for velocity, advected scalar, flux direction, and grid axis"
+  },
+  "follow_up_transformation": {
+    "kind": "boundary_condition_consistency",
+    "parameters": {
+      "old_rule": "advection flux inherits the advected scalar boundary condition",
+      "corrected_rule": "advection flux boundary condition is inferred from velocity and scalar boundary conditions",
+      "primary_witness": "normal no-penetration velocity boundary with scalar Neumann boundary"
+    },
+    "synchronized_fields": [
+      "velocity_boundary_condition",
+      "scalar_boundary_condition",
+      "flux_direction",
+      "grid_axis"
+    ]
+  },
+  "transformation_preconditions": [
+    "The subject computes advection flux across a boundary.",
+    "The velocity boundary condition is available in the flux direction.",
+    "The boundary is either periodic or a homogeneous no-penetration wall.",
+    "The external merged PR documents the flux-boundary semantic correction."
+  ],
+  "boundary_condition_compatibility": {
+    "status": "compatible-external-flux-boundary-fix",
+    "reason": "JAX-CFD PR #167 states that advection flux boundary conditions are now correctly inferred from velocity boundary conditions and adds get_advection_flux_bc_from_velocity_and_scalar."
+  },
+  "output_mapping": {
+    "kind": "source_follow_up_boundary_condition",
+    "description": "Compare the old scalar-boundary inheritance rule with the corrected velocity/scalar inference rule for flux boundary conditions."
+  },
+  "metric": {
+    "name": "advection_flux_boundary_consistency",
+    "formula": "old_matches_expected = old_flux_bc == expected_flux_bc; corrected_matches_expected = corrected_flux_bc == expected_flux_bc"
+  },
+  "tolerance": {
+    "assertion": "semantic_reproduction_checks_exact_boundary_class",
+    "threshold": 0,
+    "source": "tools/run_jaxcfd_flux_boundary_real_defect_witness.py"
+  },
+  "exclusion_rules": [
+    "Exclude claims about full JAX-CFD solver accuracy.",
+    "Exclude production CFD benchmark claims.",
+    "Exclude non-constant or unsupported boundary-condition classes not covered by PR #167.",
+    "Exclude defect-rate claims across JAX-CFD or differentiable CFD libraries."
+  ],
+  "allowed_verdicts": [
+    "pass",
+    "fail",
+    "skip",
+    "out-of-relation-domain",
+    "numerical-tolerance-issue",
+    "inconclusive"
+  ],
+  "verdict_interpretation": {
+    "pass": "The PR artifact is present and the witness reproduces the old scalar-BC inheritance mismatch and corrected flux-BC inference behavior.",
+    "fail": "The artifact checks or boundary-condition contrasts contradict the PR-linked semantic correction.",
+    "skip": "The run was not executed because source artifacts were unavailable.",
+    "out-of-relation-domain": "The target boundary condition is not a supported periodic or homogeneous no-penetration case.",
+    "numerical-tolerance-issue": "Not applicable to exact boundary-condition labels, but retained for schema consistency.",
+    "inconclusive": "The external PR link or semantic witness evidence is incomplete."
+  },
+  "claim_limitations": "This MR card supports one external merged-PR-linked boundary-condition semantic witness for JAX-CFD advection flux handling. It does not report full solver validation, production CFD correctness, or a real-world defect-detection rate."
+}

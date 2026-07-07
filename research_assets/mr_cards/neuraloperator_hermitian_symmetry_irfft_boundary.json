@@ -1,0 +1,71 @@
+{
+  "mr_id": "neuraloperator-hermitian-symmetry-irfft-boundary",
+  "title": "Merged-PR-linked Hermitian-symmetry witness for NeuralOperator SpectralConv",
+  "status": "design-time-retained",
+  "evidence_level": "design-time-asset",
+  "source_case_schema": {
+    "subject_program": "NeuralOperator SpectralConv real-valued inverse FFT path",
+    "external_pr": "https://github.com/neuraloperator/neuraloperator/pull/702",
+    "source_artifacts": "research_assets/runs/external-defect-corpus-scan/raw",
+    "source_function": "small complex frequency vector before the final irfft stage"
+  },
+  "follow_up_transformation": {
+    "kind": "frequency_domain_symmetry_enforcement",
+    "parameters": {
+      "real_signal_constraint": "DC and Nyquist frequencies must be real before irfft",
+      "primary_witness_size": 8,
+      "corrective_action": "zero imaginary parts at boundary frequencies"
+    },
+    "synchronized_fields": [
+      "dc_frequency",
+      "nyquist_frequency",
+      "interior_frequency"
+    ]
+  },
+  "transformation_preconditions": [
+    "The subject is a real-valued inverse FFT path.",
+    "The post-partial-IFFT spectrum exposes DC and Nyquist frequencies.",
+    "The spatial size is even when a Nyquist frequency is present.",
+    "The external merged PR documents Hermitian-symmetry enforcement before irfft."
+  ],
+  "boundary_condition_compatibility": {
+    "status": "compatible-external-frequency-symmetry-fix",
+    "reason": "NeuralOperator PR #702 adds an enforce_hermitian_symmetry flag and explicitly zeroes imaginary parts of the 0th and Nyquist frequencies before irfft."
+  },
+  "output_mapping": {
+    "kind": "source_follow_up_frequency_constraint",
+    "description": "Compare boundary-frequency imaginary parts before and after the PR-linked Hermitian-symmetry enforcement."
+  },
+  "metric": {
+    "name": "irfft_boundary_frequency_imaginary_part",
+    "formula": "max(abs(imag(dc)), abs(imag(nyquist))) before and after enforcement"
+  },
+  "tolerance": {
+    "assertion": "semantic_reproduction_checks_equal_within_tolerance",
+    "threshold": 0.000000000001,
+    "source": "tools/run_neuraloperator_hermitian_symmetry_real_defect_witness.py"
+  },
+  "exclusion_rules": [
+    "Exclude claims that the witness reproduces GPU-specific line artifacts on the local machine.",
+    "Exclude claims about trained NeuralOperator or FNO accuracy.",
+    "Exclude claims about all FFT paths or all spectral layers.",
+    "Exclude defect-rate claims across NeuralOperator."
+  ],
+  "allowed_verdicts": [
+    "pass",
+    "fail",
+    "skip",
+    "out-of-relation-domain",
+    "numerical-tolerance-issue",
+    "inconclusive"
+  ],
+  "verdict_interpretation": {
+    "pass": "The PR artifact is present and the witness reproduces the added Hermitian-symmetry enforcement semantics.",
+    "fail": "The artifact checks or frequency-boundary metrics contradict the PR-linked correction.",
+    "skip": "The run was not executed because source artifacts were unavailable.",
+    "out-of-relation-domain": "The target path is not a real-valued irfft path or exposes no DC/Nyquist constraints.",
+    "numerical-tolerance-issue": "Floating-point tolerance dominates the boundary imaginary-part metric.",
+    "inconclusive": "The external PR link or semantic witness evidence is incomplete."
+  },
+  "claim_limitations": "This MR card supports one external merged-PR-linked Hermitian-symmetry semantic witness for NeuralOperator SpectralConv. It does not reproduce GPU-specific line artifacts, validate trained-FNO accuracy, establish NeuralOperator-wide correctness, or report a real-world defect-detection rate."
+}

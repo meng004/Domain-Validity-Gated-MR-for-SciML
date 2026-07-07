@@ -1,0 +1,89 @@
+{
+  "builder_name": "generator",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "generator",
+  "dataset_size": 102558062349,
+  "description": "",
+  "download_checksums": {},
+  "download_size": 0,
+  "features": {
+    "sim_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "u": {
+      "dtype": "binary",
+      "_type": "Value"
+    },
+    "v": {
+      "dtype": "binary",
+      "_type": "Value"
+    },
+    "shape_t": {
+      "dtype": "int32",
+      "_type": "Value"
+    },
+    "shape_h": {
+      "dtype": "int32",
+      "_type": "Value"
+    },
+    "shape_w": {
+      "dtype": "int32",
+      "_type": "Value"
+    },
+    "vo": {
+      "dtype": "binary",
+      "_type": "Value"
+    },
+    "x": {
+      "dtype": "binary",
+      "_type": "Value"
+    },
+    "x_shape_h": {
+      "dtype": "int32",
+      "_type": "Value"
+    },
+    "x_shape_w": {
+      "dtype": "int32",
+      "_type": "Value"
+    },
+    "y": {
+      "dtype": "binary",
+      "_type": "Value"
+    },
+    "y_shape_h": {
+      "dtype": "int32",
+      "_type": "Value"
+    },
+    "y_shape_w": {
+      "dtype": "int32",
+      "_type": "Value"
+    },
+    "t": {
+      "dtype": "binary",
+      "_type": "Value"
+    },
+    "t_shape": {
+      "dtype": "int32",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 102558062349,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 102558062349,
+      "num_examples": 98,
+      "dataset_name": "generator"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

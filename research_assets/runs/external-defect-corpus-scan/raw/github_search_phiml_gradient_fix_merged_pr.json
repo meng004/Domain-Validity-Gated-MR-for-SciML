@@ -1,0 +1,163 @@
+{
+  "total_count": 2,
+  "incomplete_results": false,
+  "items": [
+    {
+      "url": "https://api.github.com/repos/tum-pbs/PhiML/issues/2",
+      "repository_url": "https://api.github.com/repos/tum-pbs/PhiML",
+      "labels_url": "https://api.github.com/repos/tum-pbs/PhiML/issues/2/labels{/name}",
+      "comments_url": "https://api.github.com/repos/tum-pbs/PhiML/issues/2/comments",
+      "events_url": "https://api.github.com/repos/tum-pbs/PhiML/issues/2/events",
+      "html_url": "https://github.com/tum-pbs/PhiML/pull/2",
+      "id": 2157621069,
+      "node_id": "PR_kwDOJsIQRc5oGdqT",
+      "number": 2,
+      "title": "Fix PyTorch checkpointing multiple access to ctx.saved_tensor",
+      "user": {
+        "login": "Dxyk",
+        "id": 16347901,
+        "node_id": "MDQ6VXNlcjE2MzQ3OTAx",
+        "avatar_url": "https://avatars.githubusercontent.com/u/16347901?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Dxyk",
+        "html_url": "https://github.com/Dxyk",
+        "followers_url": "https://api.github.com/users/Dxyk/followers",
+        "following_url": "https://api.github.com/users/Dxyk/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Dxyk/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Dxyk/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Dxyk/subscriptions",
+        "organizations_url": "https://api.github.com/users/Dxyk/orgs",
+        "repos_url": "https://api.github.com/users/Dxyk/repos",
+        "events_url": "https://api.github.com/users/Dxyk/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Dxyk/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2024-02-27T21:21:31Z",
+      "updated_at": "2024-06-13T16:50:55Z",
+      "closed_at": "2024-06-13T16:50:54Z",
+      "assignee": null,
+      "author_association": "CONTRIBUTOR",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "draft": false,
+      "pull_request": {
+        "url": "https://api.github.com/repos/tum-pbs/PhiML/pulls/2",
+        "html_url": "https://github.com/tum-pbs/PhiML/pull/2",
+        "diff_url": "https://github.com/tum-pbs/PhiML/pull/2.diff",
+        "patch_url": "https://github.com/tum-pbs/PhiML/pull/2.patch",
+        "merged_at": "2024-06-13T16:50:54Z"
+      },
+      "body": "Hi,\r\n\r\nCurrently when using the PyTorch backend, PhiML does not support gradient checkpointing. An error will be thrown complaining `torch.utils.checkpoint.CheckpointError: torch.utils.checkpoint: Unpack is being triggered for a tensor that was already unpacked once. If you are calling ctx.saved_tensors in backward, make sure to do so only once. Otherwise please open an issue with details on your use case`.\r\n\r\nThis is because in _torch_backend, `TorchCustomFunction.backward()` accesses `ctx.saved_tensors` twice.\r\n\r\nThe issue can be fixed by accessing `ctx.saved_tensors` only once and caching it in a separate variable (see code change).\r\n\r\nPlease let me know if any of this does not make sense or if there's a better fix 😃 \r\n\r\nBellow is a simple use case / repro adapted from [Fluids_Tutorial.ipynb](https://github.com/tum-pbs/PhiFlow/blob/master/docs/Fluids_Tutorial.ipynb).\r\n\r\n<details>\r\n\r\n<summary>Checkpointing Error Repro Example</summary>\r\n\r\n```python\r\nfrom torch.utils import checkpoint\r\nfrom phi.torch.flow import *\r\n\r\nINFLOW_LOCATION = tensor([(4, 5), (8, 5), (12, 5), (16, 5)], batch('inflow_loc'), channel(vector='x,y'))\r\nINFLOW = 0.6 * CenteredGrid(Sphere(center=INFLOW_LOCATION, radius=3), extrapolation.BOUNDARY, x=32, y=40,\r\n                            bounds=Box(x=32, y=40))\r\n\r\n\r\ndef step(smoke: CenteredGrid, velocity: StaggeredGrid):\r\n    smoke = advect.mac_cormack(smoke, velocity, dt=1) + INFLOW\r\n    buoyancy_force = smoke * (0, 0.5) @ velocity\r\n    velocity = advect.semi_lagrangian(velocity, velocity, dt=1) + buoyancy_force\r\n    velocity, _ = fluid.make_incompressible(velocity)\r\n    return smoke, velocity\r\n\r\n\r\ndef simulate(smoke: CenteredGrid, velocity: StaggeredGrid):\r\n    for _ in range(5):\r\n        # smoke, velocity = step(smoke, velocity)\r\n        # THIS WILL CAUSE ISSUE\r\n        smoke, velocity = checkpoint.checkpoint(step, smoke=smoke, velocity=velocity, use_reentrant=False)\r\n    loss = math.sum(field.l2_loss(diffuse.explicit(smoke - field.stop_gradient(smoke.inflow_loc[-1]), 1, 1, 10)))\r\n    return loss, smoke, velocity\r\n\r\n\r\nsim_grad = field.functional_gradient(simulate, wrt='velocity', get_output=False)\r\n\r\ninitial_smoke = CenteredGrid(0, extrapolation.BOUNDARY, x=32, y=40, bounds=Box(x=32, y=40))\r\ninitial_velocity = StaggeredGrid(math.zeros(batch(inflow_loc=4)), extrapolation.ZERO, x=32, y=40,\r\n                                 bounds=Box(x=32, y=40))\r\n\r\nvelocity_grad = sim_grad(initial_smoke, initial_velocity)\r\nprint(velocity_grad)\r\n```\r\n</details>",
+      "reactions": {
+        "url": "https://api.github.com/repos/tum-pbs/PhiML/issues/2/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/tum-pbs/PhiML/issues/2/timeline",
+      "performed_via_github_app": null,
+      "state_reason": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/tum-pbs/PhiML/issues/1",
+      "repository_url": "https://api.github.com/repos/tum-pbs/PhiML",
+      "labels_url": "https://api.github.com/repos/tum-pbs/PhiML/issues/1/labels{/name}",
+      "comments_url": "https://api.github.com/repos/tum-pbs/PhiML/issues/1/comments",
+      "events_url": "https://api.github.com/repos/tum-pbs/PhiML/issues/1/events",
+      "html_url": "https://github.com/tum-pbs/PhiML/pull/1",
+      "id": 2083710093,
+      "node_id": "PR_kwDOJsIQRc5kLiSt",
+      "number": 1,
+      "title": "1.4.0",
+      "user": {
+        "login": "p-holl",
+        "id": 6258959,
+        "node_id": "MDQ6VXNlcjYyNTg5NTk=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/6258959?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/p-holl",
+        "html_url": "https://github.com/p-holl",
+        "followers_url": "https://api.github.com/users/p-holl/followers",
+        "following_url": "https://api.github.com/users/p-holl/following{/other_user}",
+        "gists_url": "https://api.github.com/users/p-holl/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/p-holl/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/p-holl/subscriptions",
+        "organizations_url": "https://api.github.com/users/p-holl/orgs",
+        "repos_url": "https://api.github.com/users/p-holl/repos",
+        "events_url": "https://api.github.com/users/p-holl/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/p-holl/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 1,
+      "created_at": "2024-01-16T11:27:54Z",
+      "updated_at": "2024-01-16T12:02:37Z",
+      "closed_at": "2024-01-16T12:02:37Z",
+      "assignee": null,
+      "author_association": "COLLABORATOR",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "draft": false,
+      "pull_request": {
+        "url": "https://api.github.com/repos/tum-pbs/PhiML/pulls/1",
+        "html_url": "https://github.com/tum-pbs/PhiML/pull/1",
+        "diff_url": "https://github.com/tum-pbs/PhiML/pull/1.diff",
+        "patch_url": "https://github.com/tum-pbs/PhiML/pull/1.patch",
+        "merged_at": "2024-01-16T12:02:37Z"
+      },
+      "body": "Highlights:\r\n\r\n* Reworked `Layout` utilities. Layouts now disclose the shape of the wrapped elements and allow slicing them.\r\n* `iterate` now allows for additional outputs.\r\n* Added `find_closest` supporting k-d trees.\r\n* Added `argmax`, `argmin`, `erf`.\r\n* Added `to_format`, `is_sparse` to convert between dense/sparse matrix formats.\r\n* Support scatter with modes `min`, `max`, `prod`, `any`, `all`.\r\n* `minimize` now supports non-uniform tensors and uses an improved gradient descent algorithm.\r\n* Add `equal` function similar to `close`.\r\n* `slice` now supports non-Tensor types as well.\r\n\r\nOf course, this update also includes a large number of bug fixes.",
+      "reactions": {
+        "url": "https://api.github.com/repos/tum-pbs/PhiML/issues/1/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/tum-pbs/PhiML/issues/1/timeline",
+      "performed_via_github_app": null,
+      "state_reason": null,
+      "score": 1.0
+    }
+  ],
+  "search_type": "lexical"
+}

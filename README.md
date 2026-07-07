@@ -78,10 +78,19 @@ localization; runtime; reliability; model accuracy. The authoritative runtime cl
 
 ## Repository layout
 
-- `manuscript/manuscript.md` — working manuscript (source of truth for prose).
-- `submissions/IST/` — Elsevier/IST LaTeX package (`main.tex`, `references.bib`,
-  vendored `elsarticle` class). IST uses single-anonymized review, so the
-  submission carries author names, affiliations, CRediT, and funding.
+- `manuscript/` — unique authoritative source for the paper:
+  `main.tex`, `references.bib`, `figures/`, and manuscript-side draft/audit
+  materials. Generated venue packages must derive paper text from this
+  directory.
+- `venues/jss/` — JSS-specific template, highlights, declarations, cover
+  letter, author biographies, and build entry point.
+- `venues/arxiv/`, `venues/ist/` — target-specific build entry points and
+  venue-only metadata.
+- `submission/` — generated, disposable upload packages.
+- `source/` — transitional/generated working copy from prior packaging work;
+  it is not the authority for submitted paper text.
+- `submissions/IST/`, `submissions/RESS/` — legacy historical packages retained
+  for traceability, not active source.
 - `paper/22_stage2p5_integrity_audit.md`, `paper/23_stage3_reviewer_simulation.md` —
   integrity audit and multi-role reviewer simulations.
 - `research_assets/experiments/` — `claim-ledger.yml` (authoritative claims),
@@ -103,14 +112,12 @@ python tools/validate_research_assets.py
 python -m unittest discover -s tests -v
 ```
 
-> **Fresh-clone note.** `submissions/IST/main.bbl` and `main.log` are gitignored
-> regenerable LaTeX byproducts (they would otherwise carry local absolute paths). The full
-> test discovery above includes one compile-gate check
-> (`test_stage4_revision_readiness.test_final_latex_artifacts_*`) that reads those two files,
-> so after a fresh clone run a LaTeX compile first to generate them:
+> **Fresh-clone note.** `submission/JSS_regular_20260705/source/main.bbl` and
+> `submission/JSS_regular_20260705/review/final_main.log` are generated LaTeX
+> byproducts. The full test discovery above includes compile-gate checks that
+> read those files, so after a fresh clone run the JSS package build first:
 > ```bash
-> cd submissions/IST && pdflatex -interaction=nonstopmode main.tex && bibtex main \
->   && pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex
+> python venues/jss/build.py
 > ```
 > Otherwise that single test errors on the missing artifacts. CI (`.github/workflows/validate.yml`)
 > runs a compile-independent subset and is unaffected.
@@ -120,7 +127,8 @@ the precondition gate fails closed and the SUT runs stay blocked by design.
 
 ## Positioning
 
-The intended venue is a software V&V method paper (e.g. IST / JSS), framed as:
+The current intended venue is Journal of Systems and Software (JSS), regular
+paper, framed as:
 
 > A domain-validity-aware workflow for identifying and executing metamorphic relations in
 > SciML OOD validation.

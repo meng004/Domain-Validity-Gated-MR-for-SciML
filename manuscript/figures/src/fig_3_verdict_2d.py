@@ -22,10 +22,10 @@ Sec. 3.5:
   - OOD-stress / out-of-domain    : Out-of-domain row    (downgraded probe)
   - boundary                      : Boundary row         (transition strip)
 
-Five real pilot points, all read from committed metric ledgers, are plotted
+Four real verdict markers, all read from committed metric ledgers, are plotted
 at their measured (V/tolerance, D-bin) coordinates. Pass-region differentia-
-tion between machine-precision exactness (P1) and within-tolerance regression
-(P2) is shown by their x positions (orders of magnitude apart), not by colour.
+tion between machine-precision exactness (V1) and within-tolerance regression
+(V2) is shown by their x positions (orders of magnitude apart), not by colour.
 
 Source ledgers:
   - research_assets/runs/real-sut-node-permutation-pilot/raw/metric_ledger.json
@@ -34,7 +34,7 @@ Source ledgers:
   - research_assets/runs/conservation-diagnostic-pilot/raw/metric_ledger.json
 
 Output:
-  submissions/IST/figures/fig_3_verdict_2d.{pdf,png}
+  manuscript/figures/fig_3_verdict_2d.{pdf,png}
 """
 from __future__ import annotations
 
@@ -48,10 +48,10 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[3]
 RUNS = ROOT / "research_assets" / "runs"
-OUT_PDF = ROOT / "submissions/IST/figures/fig_3_verdict_2d.pdf"
-OUT_PNG = ROOT / "submissions/IST/figures/fig_3_verdict_2d.png"
+OUT_PDF = ROOT / "manuscript/figures/fig_3_verdict_2d.pdf"
+OUT_PNG = ROOT / "manuscript/figures/fig_3_verdict_2d.png"
 
 # ---------------------------------------------------------------------------
 # Read every coordinate from the real metric ledgers. Compute the per-MR
@@ -98,16 +98,16 @@ def x_plot(v):
 
 # (key, pilot label, mechanism note, V/tolerance, y-bin, marker, fc, ec)
 points = [
-    ("P1", "Node-perm.\\ equivariance",
+    ("V1", "Node-perm.\\ equivariance",
      "structurally exact ($V \\equiv 0$)",
      node_perm_v_over_tol, Y_IN, "o", "#2c7a2c", "#1c4d1c"),
-    ("P2", "Conservation (ref.-relative)",
+    ("V2", "Conservation (ref.-relative)",
      f"ratio $= {cons_median:.3f}$, within tol.\\ budget",
      cons_v_over_tol, Y_IN, "D", "#2c7a2c", "#1c4d1c"),
-    ("P3", "Mirror-y on symmetric mesh",
+    ("V3", "Mirror-y on symmetric mesh",
      f"$V = {sym_v:.2f}$, $\\mathrm{{tol}} = 10^{{-6}}$",
      sym_v_over_tol, Y_IN, "*", "#b03030", "#600"),
-    ("P4", "Mirror-y OOD-stress (downgraded)",
+    ("V4", "Mirror-y OOD-stress (downgraded)",
      f"$V/\\mathrm{{floor}} = {my_v_over_eff_tol:.2f}$ (floor as eff.\\ tol.)",
      my_v_over_eff_tol, Y_OUT, "s", "#d68a1e", "#7a4d00"),
 ]
@@ -171,8 +171,8 @@ for (key, label, note, vt, y, mk, fc, ec) in points:
                           edgecolor="none", alpha=0.85),
                 zorder=5)
 
-# Hint that P1 sits at V/tol = 0 (clipped to the plot floor for log display)
-ax.annotate("(P1 plotted at axis floor;\nactual $V/\\mathrm{tol} = 0$)",
+# Hint that V1 sits at V/tol = 0 (clipped to the plot floor for log display)
+ax.annotate("(V1 plotted at axis floor;\nactual $V/\\mathrm{tol} = 0$)",
             (X_PLOT_FLOOR, Y_IN), xytext=(4, 18),
             textcoords="offset points", fontsize=7.6, style="italic",
             color="#1c4d1c", zorder=5,
@@ -188,8 +188,6 @@ ax.set_xlabel(r"Relation-violation $V/\mathrm{tolerance}$ (log scale)",
 ax.set_ylabel("Domain-violation", fontsize=10)
 ax.set_yticks([Y_IN, Y_BORDER, Y_OUT])
 ax.set_yticklabels(["In-domain", "Boundary", "Out-of-domain"])
-ax.set_title("Two-dimensional verdict reading of the cylinder-flow pilots",
-             fontsize=11)
 ax.grid(True, which="both", axis="x", alpha=0.25, linestyle=":", linewidth=0.5)
 
 # ---------------------------------------------------------------------------

@@ -1,0 +1,5 @@
+- Admissibility gates screen SciML metamorphic relations before verdicts.
+- Operator-floor analysis blocks undecidable metamorphic-relation claims.
+- Typed verdicts separate software faults, invalid relations, and deferrals.
+- Bounded executions cover CFD, PDE, cross-program, and external witnesses.
+- Replication artifacts map claims to runs, metrics, and boundaries.

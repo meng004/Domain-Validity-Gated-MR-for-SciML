@@ -21,7 +21,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MAIN_TEX = ROOT / "manuscript" / "main.tex"
-BBL = ROOT / "manuscript" / "main.bbl"
+BBL = ROOT / "submission" / "JSS_regular_20260705" / "source" / "main.bbl"
 
 _WORD = re.compile(r"[A-Za-z][A-Za-z0-9'\-]*")
 WORDS_PER_FLOAT = 200

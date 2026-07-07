@@ -1,7 +1,7 @@
 {
   "upload_type": "software",
-  "title": "Domain-Validity-Gated Metamorphic Testing of Scientific ML Surrogates",
-  "version": "1.1.0",
+  "title": "Numerical-Decidability-Gated Metamorphic Testing for SciML Surrogates",
+  "version": "2.0.0",
   "license": "MIT",
   "creators": [
     { "name": "Li, Meng" },
@@ -13,9 +13,10 @@
     "metamorphic testing",
     "scientific machine learning",
     "oracle problem",
-    "domain validity",
-    "executable test assets",
+    "numerical decidability",
+    "admissibility gate",
+    "verification and validation",
     "MeshGraphNets"
   ],
-  "description": "Replication package for the manuscript \"Domain-Validity-Gated Metamorphic Testing of Scientific ML Surrogates\" (submitted to Information and Software Technology). Contains the domain-validity rubric, MR-card executable assets, the claim ledger binding every reported result to a tracked artifact, the MeshGraphNets cylinder-flow case study with committed run artifacts, cross-family PINN/FNO executions, the manuscript source (Elsevier elsarticle), the regression test suite and fail-closed validators, and three reproducibility tiers (smoke / cache-replay / full re-run) with a Dockerfile. See REPRODUCIBILITY.md."
+  "description": "Replication package for the manuscript \"Numerical-Decidability-Gated Metamorphic Testing for SciML Surrogates\" prepared for Journal of Systems and Software regular-paper submission. Contains the admissibility rubric, MR-card executable assets, the claim ledger binding every reported result to a tracked artifact, the MeshGraphNets cylinder-flow case study with committed run artifacts, airfoil, periodic-advection, PINN/FNO, external witness, and cross-program evidence, the manuscript source (Elsevier elsarticle), the regression test suite and fail-closed validators, and reproducibility tiers with a Dockerfile. See REPRODUCIBILITY.md."
 }

@@ -1,0 +1,151 @@
+{
+  "total_count": 1,
+  "incomplete_results": false,
+  "items": [
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5117",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5117/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5117/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5117/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/pull/5117",
+      "id": 1326065868,
+      "node_id": "PR_kwDOBlHMec48hEXg",
+      "number": 5117,
+      "title": "`RandLA-Net` example",
+      "user": {
+        "login": "CharlesGaydon",
+        "id": 11660435,
+        "node_id": "MDQ6VXNlcjExNjYwNDM1",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11660435?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/CharlesGaydon",
+        "html_url": "https://github.com/CharlesGaydon",
+        "followers_url": "https://api.github.com/users/CharlesGaydon/followers",
+        "following_url": "https://api.github.com/users/CharlesGaydon/following{/other_user}",
+        "gists_url": "https://api.github.com/users/CharlesGaydon/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/CharlesGaydon/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/CharlesGaydon/subscriptions",
+        "organizations_url": "https://api.github.com/users/CharlesGaydon/orgs",
+        "repos_url": "https://api.github.com/users/CharlesGaydon/repos",
+        "events_url": "https://api.github.com/users/CharlesGaydon/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/CharlesGaydon/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 1267385588,
+          "node_id": "MDU6TGFiZWwxMjY3Mzg1NTg4",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/feature",
+          "name": "feature",
+          "color": "a2eeef",
+          "default": false,
+          "description": ""
+        },
+        {
+          "id": 3358958308,
+          "node_id": "MDU6TGFiZWwzMzU4OTU4MzA4",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/1%20-%20Priority%20P1",
+          "name": "1 - Priority P1",
+          "color": "FBCA04",
+          "default": false,
+          "description": ""
+        },
+        {
+          "id": 4017636777,
+          "node_id": "LA_kwDOBlHMec7veEWp",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/example",
+          "name": "example",
+          "color": "27D88A",
+          "default": false,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+        {
+          "login": "CharlesGaydon",
+          "id": 11660435,
+          "node_id": "MDQ6VXNlcjExNjYwNDM1",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11660435?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/CharlesGaydon",
+          "html_url": "https://github.com/CharlesGaydon",
+          "followers_url": "https://api.github.com/users/CharlesGaydon/followers",
+          "following_url": "https://api.github.com/users/CharlesGaydon/following{/other_user}",
+          "gists_url": "https://api.github.com/users/CharlesGaydon/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/CharlesGaydon/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/CharlesGaydon/subscriptions",
+          "organizations_url": "https://api.github.com/users/CharlesGaydon/orgs",
+          "repos_url": "https://api.github.com/users/CharlesGaydon/repos",
+          "events_url": "https://api.github.com/users/CharlesGaydon/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/CharlesGaydon/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        }
+      ],
+      "milestone": null,
+      "comments": 30,
+      "created_at": "2022-08-02T16:00:09Z",
+      "updated_at": "2022-12-23T12:43:49Z",
+      "closed_at": "2022-12-02T06:58:05Z",
+      "assignee": {
+        "login": "CharlesGaydon",
+        "id": 11660435,
+        "node_id": "MDQ6VXNlcjExNjYwNDM1",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11660435?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/CharlesGaydon",
+        "html_url": "https://github.com/CharlesGaydon",
+        "followers_url": "https://api.github.com/users/CharlesGaydon/followers",
+        "following_url": "https://api.github.com/users/CharlesGaydon/following{/other_user}",
+        "gists_url": "https://api.github.com/users/CharlesGaydon/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/CharlesGaydon/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/CharlesGaydon/subscriptions",
+        "organizations_url": "https://api.github.com/users/CharlesGaydon/orgs",
+        "repos_url": "https://api.github.com/users/CharlesGaydon/repos",
+        "events_url": "https://api.github.com/users/CharlesGaydon/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/CharlesGaydon/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "author_association": "CONTRIBUTOR",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "draft": false,
+      "pull_request": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/pulls/5117",
+        "html_url": "https://github.com/pyg-team/pytorch_geometric/pull/5117",
+        "diff_url": "https://github.com/pyg-team/pytorch_geometric/pull/5117.diff",
+        "patch_url": "https://github.com/pyg-team/pytorch_geometric/pull/5117.patch",
+        "merged_at": "2022-12-02T06:58:05Z"
+      },
+      "body": "The paper: [RandLA-Net: Efficient Semantic Segmentation of Large-Scale Point Clouds](https://arxiv.org/abs/1911.11236)\r\n\r\n# Context\r\nThere lacks a good pytorch implementation of RandLa-Net that leverages pytorch geometric standards and modules. \r\nIn torch-points3d, the current modules are outdated leading to [some confusion among users](https://github.com/torch-points3d/torch-points3d/issues?q=is%3Aissue+randlanet+is%3Aclosed). \r\n\r\nThe implementation with the most stars on github is [aRI0U/RandLA-Net-pytorch](https://github.com/aRI0U/RandLA-Net-pytorch/blob/master/model.py), which has nasty dependencies (torch_points or torch_points_kernels), makes slow back-and-forth between cpu and gpu when calling knns, and only accepts fixed size point clouds. \r\n\r\n# Proposal\r\nI would like to implement RandLA-Net as part of pyg's examples. For now I would tackle the ModelNet classification task, and would follow the structure of other examples (pointnet2_classification in particular). \r\n\r\nThe RandLa-Net paper focuses on segmentation, but for classification I would simply add a MLP+Global Max Pooling after the first DilatedResidualBlocks.\r\n\r\nRandLa-Net architecture is conceptually close to PointNet++, augmented with different tricks to speed things up (random sampling instead of fps), use more context (with a sort of dilated KNN), and encode local information better (by explicitly calculating positions, distances, and euclidian distance between points in a neighborhood, and by using self-attention on these features).\r\n\r\nIf I have some success, I will take on the segmentation task as well (which is what interests me anyway for [my own project](https://github.com/IGNF/myria3d))\r\n\r\n# Where I am at\r\nI have a working implementation at `examples/randlanet_classification.py`. I still have to review it to make sure that I am following the paper as closely as possible, but I think I am on the right track.\r\n\r\nI would love some guidance on how to move forward. In particular:\r\n- Am I using MessagePassing modules correctly?\r\n- What should I aim for in term of accuracy on ModelNet? \r\n- Should I stick strictly to the paper? Or adapt the architecture to ModelNet.\r\n\r\nIndeed the hyperparameters were not chosen by the author for small objects but rather for large scale Lidar data, which could make convergence way longer that needed.\r\n\r\nWith 4 DilatedResidualBlocks (like in the paper), we reach ~57% accuracy at epoch 200.\r\n\r\nWith 3 DilatedResidualBlocks, we reach up to 75% accuracy at the 20th epoch\r\n\r\nWith only 2 DilatedResidualBlocks, we reach 90% accuracy at the 81st epoch, getting closer to the [leaderboard](https://modelnet.cs.princeton.edu/) for the ModelNet10 challenge.",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5117/reactions",
+        "total_count": 1,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 1,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5117/timeline",
+      "performed_via_github_app": null,
+      "state_reason": null,
+      "score": 1.0
+    }
+  ],
+  "search_type": "lexical"
+}

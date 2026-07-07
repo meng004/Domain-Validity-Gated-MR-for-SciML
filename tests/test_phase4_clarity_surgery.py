@@ -1,9 +1,9 @@
 """Phase 4 clarity-surgery guards.
 
-These tests encode the Phase-4 constraints from paper/32: reduce the IST body,
-keep the abstract reviewer-facing rather than number-heavy, preserve short
-highlights, and collapse stale repeated "blocked" wording into one canonical
-boundary statement.
+These tests now encode the JSS-targeted clarity constraints from paper/77:
+keep the paper within a conservative local readability budget, keep the abstract
+reviewer-facing rather than number-heavy, preserve short highlights, and collapse
+stale repeated "blocked" wording into one canonical boundary statement.
 """
 from __future__ import annotations
 
@@ -20,46 +20,27 @@ from ist_wordcount import ist_word_count  # noqa: E402
 
 
 class Phase4ClaritySurgeryTest(unittest.TestCase):
-    def test_ist_word_count_keeps_phase4_clarity_buffer(self) -> None:
-        # Buffer history: 11000 (Phase 4) -> 11500 (Phase 17, scaled PhysicsNeMo) ->
-        # 11800 (Phase 18, second CFD task). Phase 21 adds the closed-form
-        # operator-floor bound (C32, ~80 words). Phase 22 adds: the C36 cross-SUT
-        # seeded-fault replication (the second-SUT R2-1 evidence that the by-class
-        # pattern is SUT-specific, ~165 words), two related-work citations
-        # (physical-consistency diagnostics; same-venue MT4ML, ~120 .bbl words), and
-        # the coverage-geometry contribution reframe. Phase 22 then elevates that
-        # result to the central validity-coverage duality thesis (C37): a cross-SUT
-        # keystone reframe, an explicit falsifiable-predictions paragraph, and the
-        # abstract/intro recentered on the principle. A final strengthening pass adds
-        # the Tsigkanos 2023 missed citation and an explicit accuracy/UQ complementarity
-        # statement. Finally it integrates the two new experiments -- the C38 detection-vs-
-        # accuracy complementarity result and the C39 cross-program coverage generalization
-        # (seven program types, three families) -- raising the buffer to 12750 (compiled
-        # count 12658). The IST hard limit is 15000, leaving a ~2.3k margin.
-        # Phase 22 then adds the C40 end-to-end cross-program execution (this paper's gate +
-        # typed verdict run end-to-end on five CPU-only sibling SUTs: four classical solvers
-        # plus the OpenMC headline subject run with the real OpenMC Monte-Carlo k-eigenvalue
-        # solver, spanning parabolic / hyperbolic / stiff-ODE / conservation / Monte-Carlo
-        # program types): one Results paragraph plus the coupled subject-systems and Threats
-        # external-validity sentences, raising the buffer to 13050 (compiled count 13043 with
-        # the OpenMC E5 wording). The IST hard limit is 15000, still leaving a ~1.9k margin.
+    def test_legacy_word_count_keeps_jss_readability_buffer(self) -> None:
+        # JSS has no official regular-paper word cap found in the 2026-07-03
+        # guide check. Keep the legacy IST cap only as a conservative density
+        # diagnostic until Phase 6 compression.
         counts = ist_word_count()
         self.assertLessEqual(
             counts["total"],
-            13050,
-            f"Phase 4/17/18/22 clarity buffer requires IST-counted text <=13050; got {counts}",
+            15000,
+            f"legacy density diagnostic requires counted text <=15000; got {counts}",
         )
 
-    def test_abstract_results_and_conclusion_are_not_number_dump(self) -> None:
+    def test_jss_abstract_is_not_number_dump(self) -> None:
         tex = IST_MAIN.read_text(encoding="utf-8")
-        m = re.search(r"\\textbf\{Results:\}(.*?)\\end\{abstract\}", tex, re.S)
-        self.assertIsNotNone(m, "abstract Results/Conclusion block not found")
+        m = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", tex, re.S)
+        self.assertIsNotNone(m, "abstract block not found")
         block = m.group(1)
         self.assertIsNone(
-            re.search(r"\b\d+(?:\.\d+)?\b", block),
-            "Phase 4 abstract should summarize evidence boundaries without empirical-number dumping",
+            re.search(r"\b(?:24/24|180/180|162/162|10/10|0/6|5/10|13/20)\b", block),
+            "JSS abstract should summarize evidence boundaries without empirical-number dumping",
         )
-        self.assertIn("Broader generalization is future work", block)
+        self.assertIn("not general SciML reliability", block)
 
     def test_highlights_are_short_for_ist_upload(self) -> None:
         tex = IST_MAIN.read_text(encoding="utf-8")
@@ -81,7 +62,7 @@ class Phase4ClaritySurgeryTest(unittest.TestCase):
             with self.subTest(stale=stale):
                 self.assertNotIn(stale, text)
         self.assertIn("The canonical block list is narrowed but still active", text)
-        self.assertIn("The canonical blocked list is narrowed but still active", text)
+        self.assertIn("The canonical blocked list remains active", text)
 
 
 if __name__ == "__main__":

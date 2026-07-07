@@ -1,0 +1,72 @@
+{
+  "mr_id": "phiml-custom-gradient-transpose-consistency",
+  "title": "Issue-linked native-axis ordering witness for PhiML custom gradients",
+  "status": "design-time-retained",
+  "evidence_level": "design-time-asset",
+  "source_case_schema": {
+    "subject_program": "PhiML CustomGradientFunction native tensor reconstruction",
+    "external_issue": "https://github.com/tum-pbs/PhiFlow/issues/199",
+    "external_commit": "https://github.com/tum-pbs/PhiML/commit/96ef3e4d8376502a1b75dcdd799d9ada1cb39f72",
+    "source_artifacts": "research_assets/runs/external-defect-corpus-scan/raw",
+    "source_function": "small named dense gradient tensor with available requested input-axis names"
+  },
+  "follow_up_transformation": {
+    "kind": "native_axis_order_consistency",
+    "parameters": {
+      "source_names": "('y', 'x')",
+      "requested_names": "('x', 'y')",
+      "corrective_action": "return Dense.native(c_spec['names']) instead of raw natives"
+    },
+    "synchronized_fields": [
+      "gradient_tensor",
+      "requested_input_names",
+      "native_tensor"
+    ]
+  },
+  "transformation_preconditions": [
+    "The custom-gradient return value is a named dense tensor.",
+    "The requested native tensor axis names are available from input specs.",
+    "The requested names differ from the gradient tensor's current native order.",
+    "The external issue comment and commit document an incorrectly transposed custom-gradient fix."
+  ],
+  "boundary_condition_compatibility": {
+    "status": "compatible-external-custom-gradient-fix",
+    "reason": "PhiFlow issue #199 links the failure to a PhiML commit whose message is 'Fix incorrectly transposed custom gradients'; the patch replaces shape-only reconstruction with spec/name-aware native reconstruction."
+  },
+  "output_mapping": {
+    "kind": "source_follow_up_native_axis_order",
+    "description": "Compare raw native tensor order with name-aware native tensor order for the same gradient values."
+  },
+  "metric": {
+    "name": "custom_gradient_native_axis_order_consistency",
+    "formula": "old_matches_expected = old_native == expected_native; corrected_matches_expected = Dense.native(requested_names) == expected_native"
+  },
+  "tolerance": {
+    "assertion": "semantic_reproduction_checks_exact_axis_order",
+    "threshold": 0,
+    "source": "tools/run_phiml_custom_gradient_transpose_real_defect_witness.py"
+  },
+  "exclusion_rules": [
+    "Exclude claims about full PhiFlow flow-past-obstacle simulation correctness.",
+    "Exclude claims about all PhiML automatic-differentiation behavior.",
+    "Exclude production CFD workload claims.",
+    "Exclude defect-rate claims across PhiFlow or PhiML."
+  ],
+  "allowed_verdicts": [
+    "pass",
+    "fail",
+    "skip",
+    "out-of-relation-domain",
+    "numerical-tolerance-issue",
+    "inconclusive"
+  ],
+  "verdict_interpretation": {
+    "pass": "The external issue/commit artifacts are present and the witness reproduces the name-aware native-axis ordering correction.",
+    "fail": "The artifact checks or axis-order metrics contradict the commit-linked semantic correction.",
+    "skip": "The run was not executed because source artifacts were unavailable.",
+    "out-of-relation-domain": "The target gradient return value is not a named tensor requiring native axis-order reconstruction.",
+    "numerical-tolerance-issue": "Not applicable to exact axis-order labels, but retained for schema consistency.",
+    "inconclusive": "The external issue/commit link or semantic witness evidence is incomplete."
+  },
+  "claim_limitations": "This MR card supports one external issue/commit-linked native-axis ordering semantic witness for PhiML custom gradients. It does not report full PhiFlow simulation validation, automatic-differentiation benchmark performance, production CFD behavior, or a real-world defect-detection rate."
+}

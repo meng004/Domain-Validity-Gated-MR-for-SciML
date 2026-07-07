@@ -1,0 +1,69 @@
+{
+  "mr_id": "periodic-advection-translation-equivariance",
+  "title": "Integer-translation equivariance for 2D periodic advection surrogates",
+  "status": "design-time-retained",
+  "evidence_level": "design-time-asset",
+  "source_case_schema": {
+    "task": "2D scalar periodic advection",
+    "grid": [32, 32],
+    "boundary_condition": "periodic",
+    "model": {
+      "family": "NumPy-trained periodic convolution surrogate",
+      "checkpoint": "research_assets/runs/periodic-advection-primary-workflow/checkpoints/seed_*.npz",
+      "deterministic": true
+    }
+  },
+  "follow_up_transformation": {
+    "kind": "periodic_integer_translation",
+    "parameters": {
+      "translation_cells": "integer dy, dx selected per evaluation case",
+      "boundary": "wrap"
+    },
+    "synchronized_fields": ["scalar_state"]
+  },
+  "transformation_preconditions": [
+    "The scalar field is defined on a periodic Cartesian grid.",
+    "The advection step uses periodic boundary conditions.",
+    "The SUT inference path is deterministic for source and follow-up executions."
+  ],
+  "boundary_condition_compatibility": {
+    "status": "compatible-periodic",
+    "reason": "Integer grid translation preserves the periodic boundary-value problem and the advection shift."
+  },
+  "output_mapping": {
+    "kind": "inverse_periodic_translation",
+    "description": "Roll the follow-up output by the inverse integer translation before comparing it with the source output."
+  },
+  "metric": {
+    "name": "translation_relative_l2_error",
+    "formula": "norm(inverse_translate(y_follow) - y_source) / max(norm(y_source), eps)"
+  },
+  "tolerance": {
+    "assertion": "less_or_equal",
+    "threshold": 0.0000000001,
+    "source": "tools/run_periodic_advection_primary_workflow.py"
+  },
+  "exclusion_rules": [
+    "Exclude non-periodic boundary configurations.",
+    "Exclude non-integer translations.",
+    "Exclude nondeterministic runtime configurations from verdict generation."
+  ],
+  "allowed_verdicts": [
+    "pass",
+    "fail",
+    "skip",
+    "out-of-relation-domain",
+    "numerical-tolerance-issue",
+    "inconclusive"
+  ],
+  "verdict_interpretation": {
+    "pass": "The observed run satisfied the declared translation relation under the tolerance.",
+    "fail": "The observed run exceeded the declared translation tolerance and requires investigation.",
+    "skip": "The run was not executed because prerequisites were absent or disabled.",
+    "out-of-relation-domain": "The source/follow-up pair did not satisfy the periodic translation preconditions.",
+    "numerical-tolerance-issue": "The result was dominated by numeric or determinism uncertainty.",
+    "inconclusive": "The run did not provide enough evidence for pass/fail classification."
+  },
+  "claim_limitations": "This card defines an executable MR asset for the periodic-advection task. It does not itself report SUT pass/fail rates, real-defect detection, model accuracy, or general neural-operator reliability."
+}
+

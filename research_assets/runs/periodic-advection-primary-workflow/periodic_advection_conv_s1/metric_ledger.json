@@ -1,0 +1,284 @@
+{
+  "record_type": "periodic-advection-primary-sut-ledger",
+  "generated_at": "2026-07-03T11:39:17Z",
+  "sut_id": "periodic_advection_conv_s1",
+  "task": "2D scalar periodic advection",
+  "architecture_family": "NumPy periodic convolution surrogate",
+  "seed": 1,
+  "checkpoint": "research_assets/runs/periodic-advection-primary-workflow/checkpoints/seed_1.npz",
+  "checkpoint_sha256": "e66d54da096549bdae3e4f0ac70f9004cba62d001f312fe76a0b1b642b4b5be8",
+  "rubric_decisions": [
+    {
+      "relation_id": "periodic-advection-translation-equivariance",
+      "relation_name": "periodic integer-translation equivariance",
+      "admissibility": "admitted",
+      "predicate": "periodic boundary condition, integer grid translation, and deterministic periodic-convolution inference",
+      "source_followup_transform": "roll scalar field by a declared integer (dy, dx)",
+      "expected_output_relation": "inverse-rolled follow-up output equals the source output",
+      "tolerance_rule": "relative L2 <= 1e-10"
+    },
+    {
+      "relation_id": "periodic-advection-mass-conservation",
+      "relation_name": "periodic global mean conservation",
+      "admissibility": "admitted",
+      "predicate": "periodic scalar advection preserves the spatial integral",
+      "source_followup_transform": "one periodic advection step predicted by the SUT",
+      "expected_output_relation": "predicted output mean equals source input mean",
+      "tolerance_rule": "rms-normalized absolute mean drift <= 1e-10"
+    },
+    {
+      "relation_id": "periodic-advection-fixed-velocity-mirror",
+      "relation_name": "mirror reflection under fixed advection velocity",
+      "admissibility": "rejected",
+      "predicate": "reflection of the scalar field alone does not transform the advection velocity vector",
+      "source_followup_transform": "mirror scalar field in y while keeping velocity/shift fixed",
+      "expected_output_relation": null,
+      "tolerance_rule": "not executed as an exact MR"
+    }
+  ],
+  "source_followup_outputs": [
+    "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_00.npz",
+    "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_01.npz",
+    "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_02.npz",
+    "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_03.npz",
+    "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_04.npz",
+    "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_05.npz",
+    "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_06.npz",
+    "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_07.npz",
+    "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_08.npz",
+    "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_09.npz"
+  ],
+  "relations": {
+    "periodic_translation": [
+      {
+        "case_id": "periodic_advection_conv_s1:translation:0",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_00.npz",
+        "translation_shift": [
+          3,
+          5
+        ],
+        "violation": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:translation:1",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_01.npz",
+        "translation_shift": [
+          7,
+          2
+        ],
+        "violation": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:translation:2",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_02.npz",
+        "translation_shift": [
+          11,
+          13
+        ],
+        "violation": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:translation:3",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_03.npz",
+        "translation_shift": [
+          16,
+          4
+        ],
+        "violation": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:translation:4",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_04.npz",
+        "translation_shift": [
+          5,
+          17
+        ],
+        "violation": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:translation:5",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_05.npz",
+        "translation_shift": [
+          3,
+          5
+        ],
+        "violation": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:translation:6",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_06.npz",
+        "translation_shift": [
+          7,
+          2
+        ],
+        "violation": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:translation:7",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_07.npz",
+        "translation_shift": [
+          11,
+          13
+        ],
+        "violation": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:translation:8",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_08.npz",
+        "translation_shift": [
+          16,
+          4
+        ],
+        "violation": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:translation:9",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_09.npz",
+        "translation_shift": [
+          5,
+          17
+        ],
+        "violation": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      }
+    ],
+    "periodic_mass_conservation": [
+      {
+        "case_id": "periodic_advection_conv_s1:mass:0",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_00.npz",
+        "rms_normalized_mean_drift": 1.3877787807814457e-17,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:mass:1",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_01.npz",
+        "rms_normalized_mean_drift": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:mass:2",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_02.npz",
+        "rms_normalized_mean_drift": 1.0408340855860843e-17,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:mass:3",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_03.npz",
+        "rms_normalized_mean_drift": 0.0,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:mass:4",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_04.npz",
+        "rms_normalized_mean_drift": 2.0816681711721685e-17,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:mass:5",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_05.npz",
+        "rms_normalized_mean_drift": 6.93889390390723e-18,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:mass:6",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_06.npz",
+        "rms_normalized_mean_drift": 6.938893903907228e-18,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:mass:7",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_07.npz",
+        "rms_normalized_mean_drift": 3.469446951953614e-18,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:mass:8",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_08.npz",
+        "rms_normalized_mean_drift": 1.5612511283791267e-17,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      },
+      {
+        "case_id": "periodic_advection_conv_s1:mass:9",
+        "raw_output": "research_assets/runs/periodic-advection-primary-workflow/periodic_advection_conv_s1/raw/case_09.npz",
+        "rms_normalized_mean_drift": 1.387778780781446e-17,
+        "threshold": 1e-10,
+        "verdict": "pass"
+      }
+    ],
+    "fixed_velocity_mirror_rejection": {
+      "admissibility": "rejected",
+      "executed_as_exact_mr": false,
+      "reason": "Mirroring the scalar field without transforming the fixed advection velocity changes the transport problem."
+    }
+  },
+  "accuracy_diagnostic": [
+    {
+      "case_id": "periodic_advection_conv_s1:accuracy-diagnostic:0",
+      "relative_l2_to_exact_shift": 7.117149072989891e-14
+    },
+    {
+      "case_id": "periodic_advection_conv_s1:accuracy-diagnostic:1",
+      "relative_l2_to_exact_shift": 9.12920471284715e-14
+    },
+    {
+      "case_id": "periodic_advection_conv_s1:accuracy-diagnostic:2",
+      "relative_l2_to_exact_shift": 7.501161049137199e-14
+    },
+    {
+      "case_id": "periodic_advection_conv_s1:accuracy-diagnostic:3",
+      "relative_l2_to_exact_shift": 8.954451256065169e-14
+    },
+    {
+      "case_id": "periodic_advection_conv_s1:accuracy-diagnostic:4",
+      "relative_l2_to_exact_shift": 7.941894136506074e-14
+    },
+    {
+      "case_id": "periodic_advection_conv_s1:accuracy-diagnostic:5",
+      "relative_l2_to_exact_shift": 8.519067873243888e-14
+    },
+    {
+      "case_id": "periodic_advection_conv_s1:accuracy-diagnostic:6",
+      "relative_l2_to_exact_shift": 8.74414651232479e-14
+    },
+    {
+      "case_id": "periodic_advection_conv_s1:accuracy-diagnostic:7",
+      "relative_l2_to_exact_shift": 7.675789550227098e-14
+    },
+    {
+      "case_id": "periodic_advection_conv_s1:accuracy-diagnostic:8",
+      "relative_l2_to_exact_shift": 7.93352842358453e-14
+    },
+    {
+      "case_id": "periodic_advection_conv_s1:accuracy-diagnostic:9",
+      "relative_l2_to_exact_shift": 6.859169689515217e-14
+    }
+  ]
+}

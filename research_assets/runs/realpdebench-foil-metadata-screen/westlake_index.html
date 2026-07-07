@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RealPDEBench - Dataset Download</title>
+  <link rel="icon" type="image/png" href="https://realpdebench.github.io/assets/images/icon.png">
+  <style>
+    /* ── Palette ── */
+    :root {
+      --lavender-main: #D8D4E6;
+      --lavender-light: #EBE9F5;
+      --lavender-dark: #B6B1CA;
+      --surface: #F9F9FC;
+      --slate: #696285;
+      --carbon: #1D1D1F;
+      --platinum: #F5F5F7;
+      --mint-light: #BFD9CF;
+      --mint-mid: #9FC2B4;
+      --mint-dark: #4E776B;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+    }
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    ::selection { background: var(--lavender-main); color: var(--carbon); }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--carbon);
+      background: var(--surface);
+      line-height: 1.6;
+      padding-top: 60px;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      font-optical-sizing: auto;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Navigation ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(249, 249, 252, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(216, 212, 230, 0.3);
+      height: 60px;
+    }
+
+    .navbar-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .navbar-brand a {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--carbon);
+      letter-spacing: -0.01em;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .navbar-links a {
+      font-size: 0.875rem;
+      color: var(--slate);
+      font-weight: 500;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .navbar-links a:hover { color: var(--carbon); }
+
+    .navbar-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; left: 0; right: 0;
+      height: 2px;
+      background: var(--lavender-main);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .navbar-links a:hover::after { transform: scaleX(1); }
+
+    .navbar-end {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .rp-icon {
+      width: 18px; height: 18px;
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+
+    .nav-ext {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-ext .rp-icon { width: 16px; height: 16px; opacity: 0.95; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 100px 0 60px;
+      text-align: left;
+    }
+
+    .hero-inner {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, var(--lavender-dark), var(--slate));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.35rem;
+      color: var(--slate);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 760px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      background: var(--carbon);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-weight: 500;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(29, 29, 31, 0.2);
+      color: white;
+    }
+
+    .btn-secondary {
+      color: var(--slate);
+      background: transparent;
+      border: 2px solid var(--lavender-main);
+      padding: 12px 32px;
+      border-radius: 100px;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--lavender-light);
+      border-color: var(--lavender-dark);
+      color: var(--carbon);
+    }
+
+    /* ── Sections ── */
+    .section {
+      padding: 80px 0;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--slate);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.18;
+      margin: 0 0 18px;
+    }
+
+    .section-lead {
+      max-width: 760px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--slate);
+      margin: 0 0 48px;
+    }
+
+    /* ── Stats ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 3rem;
+      text-align: center;
+      padding: 40px 0 60px;
+    }
+
+    @media (min-width: 900px) {
+      .stats-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    .stat-number {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--carbon);
+      letter-spacing: -0.02em;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: var(--slate);
+      font-weight: 500;
+    }
+
+    /* ── Download Cards ── */
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .dl-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      padding: 36px 32px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dl-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+    }
+
+    .dl-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .dl-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .dl-card-size {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--slate);
+      background: var(--lavender-light);
+      padding: 4px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .dl-card-desc {
+      font-size: 0.98rem;
+      color: var(--slate);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .dl-card-tags {
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 100px;
+      background: var(--lavender-light);
+      color: var(--slate);
+      font-size: 0.82rem;
+      font-weight: 500;
+      margin: 0 8px 8px 0;
+    }
+
+    .dl-card-meta {
+      font-size: 0.85rem;
+      color: var(--slate);
+      opacity: 0.85;
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+
+    .dl-card-meta code {
+      background: rgba(216, 212, 230, 0.35);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+    }
+
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--carbon);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 100px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      align-self: flex-start;
+    }
+
+    .dl-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px rgba(29, 29, 31, 0.2);
+      color: white;
+    }
+
+    .dl-btn svg {
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── Full dataset card ── */
+    .dl-full-card {
+      background: linear-gradient(135deg, rgba(235, 233, 245, 0.6), rgba(255, 255, 255, 0.85));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      margin-top: 48px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .dl-full-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+    }
+
+    .dl-full-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .dl-full-card p {
+      color: var(--slate);
+      font-size: 1rem;
+      margin-bottom: 24px;
+    }
+
+    /* ── Footer ── */
+    .rp-footer {
+      padding: 2.5rem 0 3rem;
+      background: var(--platinum);
+      border-top: 0;
+      position: relative;
+    }
+
+    .rp-footer::before {
+      content: "";
+      position: absolute;
+      top: -56px; left: 0; right: 0;
+      height: 56px;
+      background: linear-gradient(to bottom, transparent, var(--platinum));
+      pointer-events: none;
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-content p {
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .footer-copyright {
+      font-weight: 500;
+      color: var(--carbon);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .footer-links a {
+      color: var(--slate);
+      margin: 0 10px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--carbon);
+      text-decoration: underline;
+    }
+
+    .footer-note {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-top: 1.5rem;
+    }
+
+    .footer-note a { text-decoration: underline; }
+    .footer-note a:hover { color: var(--carbon); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .navbar-links { display: none; }
+      .hero { padding: 60px 0 40px; }
+      .hero-title { font-size: 2rem; }
+      .hero-subtitle { font-size: 1.1rem; }
+      .download-grid { grid-template-columns: 1fr; }
+      .section { padding: 48px 0; }
+      .dl-full-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-brand">
+        <a href="https://realpdebench.github.io/">RealPDEBench</a>
+      </div>
+      <div class="navbar-links">
+        <a href="https://realpdebench.github.io/">Home</a>
+        <a href="https://realpdebench.github.io/leaderboard/">Leaderboard</a>
+        <a href="https://realpdebench.github.io/getting-started/">Getting Started</a>
+        <a href="https://realpdebench.github.io/datasets/">Datasets</a>
+        <a href="https://realpdebench.github.io/models/">Models</a>
+        <a class="nav-ext" href="https://huggingface.co/datasets/AI4Science-WestlakeU/RealPDEBench" target="_blank" rel="noopener noreferrer">
+          <svg class="rp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="currentColor" d="M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378"/>
+          </svg>
+          Hugging Face
+        </a>
+        <a class="nav-ext" href="https://github.com/AI4Science-WestlakeU/RealPDEBench" target="_blank" rel="noopener noreferrer">
+          <svg class="rp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+      <div class="navbar-end"></div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <h1 class="hero-title">
+          <span class="hero-gradient">RealPDEBench</span><br>
+          Dataset Download
+        </h1>
+        <p class="hero-subtitle">
+          Download the full-resolution HDF5 datasets as <strong style="font-weight:600;">tar archives</strong>, one per scenario. Each archive contains paired real-world experimental and numerical simulation data.
+        </p>
+        <div class="hero-cta">
+          <a href="#downloads" class="btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Datasets
+          </a>
+          <a href="https://realpdebench.github.io/datasets/" class="btn-secondary" target="_blank" rel="noopener noreferrer">Dataset Documentation</a>
+          <a href="https://arxiv.org/abs/2601.01829" class="btn-secondary" target="_blank" rel="noopener noreferrer">Paper</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="container">
+    <div class="stats-row">
+      <div>
+        <span class="stat-number">5</span>
+        <span class="stat-label">Datasets</span>
+      </div>
+      <div>
+        <span class="stat-number">~922 GB</span>
+        <span class="stat-label">Total Size</span>
+      </div>
+      <div>
+        <span class="stat-number">700+</span>
+        <span class="stat-label">Trajectories</span>
+      </div>
+      <div>
+        <span class="stat-number">HDF5</span>
+        <span class="stat-label">Data Format</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Downloads -->
+  <section id="downloads" class="section">
+    <div class="container">
+      <p class="subtitle">Downloads</p>
+      <h2 class="section-title">Full-Resolution HDF5 Datasets</h2>
+      <p class="section-lead">
+        Each tar archive contains the complete HDF5 data for one scenario, including both <strong>real-world experimental</strong> and <strong>numerical simulation</strong> trajectories at full spatiotemporal resolution.
+      </p>
+
+      <div class="download-grid">
+
+        <!-- Combustion -->
+        <div class="dl-card">
+          <div class="dl-card-header">
+            <h3>Combustion</h3>
+            <span class="dl-card-size">~110 GB</span>
+          </div>
+          <p class="dl-card-desc">
+            3D swirl-stabilized NH&#8323;/CH&#8324;/air flames captured with OH* chemiluminescence at 4000 fps. Large Eddy Simulation with 38 species and 184 reactions.
+          </p>
+          <div class="dl-card-tags">
+            <span class="badge">Combustion</span>
+            <span class="badge">3D LES</span>
+            <span class="badge">Multi-physics</span>
+          </div>
+          <p class="dl-card-meta">
+            Archive: <code>combustion_h5.tar</code><br>
+            Real: ~0.2 GB &middot; Numerical: ~110 GB
+          </p>
+          <a href="./realpdebench_h5/combustion_h5.tar" class="dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <!-- Cylinder -->
+        <div class="dl-card">
+          <div class="dl-card-header">
+            <h3>Cylinder</h3>
+            <span class="dl-card-size">~192 GB</span>
+          </div>
+          <p class="dl-card-desc">
+            Stationary cylinder wake across Re 1800&ndash;12000, measured by Particle Image Velocimetry (PIV). Velocity fields capture vortex shedding dynamics.
+          </p>
+          <div class="dl-card-tags">
+            <span class="badge">Cylinder Wake</span>
+            <span class="badge">PIV</span>
+            <span class="badge">Vortex Shedding</span>
+          </div>
+          <p class="dl-card-meta">
+            Archive: <code>cylinder_h5.tar</code><br>
+            Real: ~57 GB &middot; Numerical: ~135 GB
+          </p>
+          <a href="./realpdebench_h5/cylinder_h5.tar" class="dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <!-- Controlled Cylinder -->
+        <div class="dl-card">
+          <div class="dl-card-header">
+            <h3>Controlled Cylinder</h3>
+            <span class="dl-card-size">~188 GB</span>
+          </div>
+          <p class="dl-card-desc">
+            Active flow control via forced cylinder vibration (f 0.5&ndash;1.4 Hz, Re 1781&ndash;9843). PIV-measured velocity fields under parametric excitation.
+          </p>
+          <div class="dl-card-tags">
+            <span class="badge">Active Control</span>
+            <span class="badge">Forced Vibration</span>
+            <span class="badge">PIV</span>
+          </div>
+          <p class="dl-card-meta">
+            Archive: <code>controlled_cylinder_h5.tar</code><br>
+            Real: ~47 GB &middot; Numerical: ~141 GB
+          </p>
+          <a href="./realpdebench_h5/controlled_cylinder_h5.tar" class="dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <!-- FSI -->
+        <div class="dl-card">
+          <div class="dl-card-header">
+            <h3>FSI</h3>
+            <span class="dl-card-size">~96 GB</span>
+          </div>
+          <p class="dl-card-desc">
+            Fluid&ndash;structure interaction with wake-induced vibration (WIV) of tandem cylinders, spanning Re 3272&ndash;9068 across varying mass ratio and damping.
+          </p>
+          <div class="dl-card-tags">
+            <span class="badge">Fluid-Structure Interaction</span>
+            <span class="badge">Tandem Cylinders</span>
+            <span class="badge">WIV</span>
+          </div>
+          <p class="dl-card-meta">
+            Archive: <code>fsi_h5.tar</code><br>
+            Real: ~41 GB &middot; Numerical: ~55 GB
+          </p>
+          <a href="./realpdebench_h5/fsi_h5.tar" class="dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+        <!-- Foil -->
+        <div class="dl-card">
+          <div class="dl-card-header">
+            <h3>Foil</h3>
+            <span class="dl-card-size">~336 GB</span>
+          </div>
+          <p class="dl-card-desc">
+            NACA0025 airfoil with 2D slices of 3D flow fields. Angle of attack 0&deg;&ndash;20&deg;, Re 2968&ndash;17031. PIV velocity measurements paired with CFD simulations.
+          </p>
+          <div class="dl-card-tags">
+            <span class="badge">Airfoil</span>
+            <span class="badge">NACA0025</span>
+            <span class="badge">3D Flow</span>
+          </div>
+          <p class="dl-card-meta">
+            Archive: <code>foil_h5.tar</code><br>
+            Real: ~191 GB &middot; Numerical: ~145 GB
+          </p>
+          <a href="./realpdebench_h5/foil_h5.tar" class="dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="rp-footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-copyright">&copy; 2025 AI for Scientific Simulation and Discovery Lab, Westlake University. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="https://ai4s.lab.westlake.edu.cn/" target="_blank">Lab Website</a> |
+          <a href="mailto:wutailin@westlake.edu.cn">Contact</a>
+        </div>
+        <p class="footer-note">
+          For questions and collaborations, please reach out via email or
+          <a href="https://github.com/AI4Science-WestlakeU/RealPDEBench/issues" target="_blank">GitHub Issues</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

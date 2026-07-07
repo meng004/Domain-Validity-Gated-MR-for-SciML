@@ -1,0 +1,94 @@
+{
+  "claim_limitations": "One external issue/PR-linked spectral-metric witness for a NeuralOperator utility function. It is not a trained-FNO result, not a neural-operator reliability claim, and not a defect-rate estimate.",
+  "date": "2026-07-03",
+  "forbidden_claims": [
+    "The method validates NeuralOperator model accuracy.",
+    "The paper measures NeuralOperator defect prevalence.",
+    "The witness proves all spectral utilities are correct.",
+    "The witness is a production training workload."
+  ],
+  "metric": {
+    "corrected_l2_radius_gap": 0.5857864376269049,
+    "corrected_power_sum_of_squares": 2.0,
+    "name": "spectrum_2d_radial_power_consistency",
+    "old_l1_radius_collision": true,
+    "old_power_after_sum": 0.0,
+    "tolerance": 1e-12
+  },
+  "mr_card": "research_assets/mr_cards/neuraloperator_spectrum2d_radial_power_consistency.json",
+  "run_id": "neuraloperator-spectrum2d-real-defect-witness-001",
+  "source_artifacts": {
+    "neuraloperator_issue_532.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/neuraloperator_issue_532.json",
+      "sha256": "a8b0b00fdd6c807e8aa4289e7c57e7b4fce0609719cc75fe29473df1adcdd6d3"
+    },
+    "neuraloperator_issue_532_comments.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/neuraloperator_issue_532_comments.json",
+      "sha256": "982e5959ba70ab4e72e383bffd30de1c28ff17156c550aa204e4b28ff5534c5c"
+    },
+    "neuraloperator_pr_661.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/neuraloperator_pr_661.json",
+      "sha256": "c1898fd2a781df8a30604fe0193d58ca9003a8ef0750e2839c40589175b98dfe"
+    },
+    "neuraloperator_pr_661_commits.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/neuraloperator_pr_661_commits.json",
+      "sha256": "9888f7fa7aad194dba871361db36c61e9478071fb39d503d9c098dbb8e16b629"
+    },
+    "neuraloperator_pr_661_files.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/neuraloperator_pr_661_files.json",
+      "sha256": "1972f813540ebab7f3f69167c9d9a409f034d20e7d10551218b6c5a34b361d6d"
+    }
+  },
+  "source_checks": {
+    "issue_532_closed": true,
+    "issue_532_title": "Incorrect math in neuralop.utils.spectrum_2d?",
+    "issue_532_url": "https://github.com/neuraloperator/neuraloperator/issues/532",
+    "maintainer_comment_marks_power_order_as_bug": true,
+    "patch_replaces_l1_with_l2_radius": true,
+    "patch_squares_before_bin_sum": true,
+    "pr_661_body_addresses_issue_532": true,
+    "pr_661_merged": true,
+    "pr_661_merged_at": "2025-10-15T05:49:24Z",
+    "pr_661_url": "https://github.com/neuraloperator/neuraloperator/pull/661"
+  },
+  "source_follow_up_cases": {
+    "power_accumulation_case": {
+      "corrected_sum_of_squared_magnitudes": 2.0,
+      "old_power_after_complex_sum": 0.0,
+      "old_power_cancels_nonzero_energy": true,
+      "source_coefficients": [
+        {
+          "imag": 0.0,
+          "real": 1.0
+        },
+        {
+          "imag": 0.0,
+          "real": -1.0
+        }
+      ]
+    },
+    "radial_binning_case": {
+      "corrected_l2_radius_follow_up": 1.4142135623730951,
+      "corrected_l2_radius_source": 2.0,
+      "corrected_l2_separates_modes": true,
+      "follow_up_mode": {
+        "kx": 1,
+        "ky": 1
+      },
+      "old_l1_bin_collision": true,
+      "old_l1_radius_follow_up": 2,
+      "old_l1_radius_source": 2,
+      "source_mode": {
+        "kx": 2,
+        "ky": 0
+      }
+    }
+  },
+  "subject": "NeuralOperator issue #532 / PR #661 spectrum_2d semantic witness",
+  "typed_verdict": "pass",
+  "verdict_checks": {
+    "external_defect_source_complete": true,
+    "old_l1_radius_collides_distinct_l2_modes": true,
+    "old_power_order_cancels_nonzero_energy": true
+  }
+}

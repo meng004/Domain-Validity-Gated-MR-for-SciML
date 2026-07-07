@@ -1,4 +1,4 @@
-"""Render Figure 1 (validity-gated V&V workflow).
+"""Render Figure 1 (admissibility-gated V&V workflow).
 
 The figure is drawn with reportlab rather than matplotlib so the submission can
 be regenerated in the bundled Codex runtime. Node sizes and line breaks are
@@ -169,10 +169,10 @@ def main() -> None:
 
     d.add("A", 6.4, 15.2, 4.3, 1.0, "Candidate relation sources", shape="round", fontsize=9)
     d.add("B", 6.4, 13.5, 3.8, 1.0, "NOETHER-informed\norganization", fontsize=9)
-    d.add("C", 6.4, 11.4, 3.8, 1.7, "Domain-validity\nrubric", shape="diamond", fontsize=9)
-    d.add("D", 2.5, 9.3, 3.2, 1.0, "Rejected / deferred\ncandidates", fontsize=8.5)
-    d.add("E", 6.4, 9.3, 3.2, 1.0, "Retained MR card", shape="artifact", fontsize=9)
-    d.add("F", 6.4, 7.6, 3.25, 1.08, "Executable\nMR asset", fontsize=9)
+    d.add("C", 6.4, 11.4, 3.8, 1.7, "Admissibility\ngate", shape="diamond", fontsize=9)
+    d.add("D", 2.5, 9.3, 3.2, 1.0, "Rejected / deferred\nrelations", fontsize=8.5)
+    d.add("E", 6.4, 9.3, 3.2, 1.0, "Relation\nrecord", shape="artifact", fontsize=9)
+    d.add("F", 6.4, 7.6, 3.25, 1.08, "Executable\ncheck", fontsize=9)
     d.add("G", 6.4, 6.0, 3.2, 1.0, "SUT executions", fontsize=9)
     d.add("H", 6.4, 4.1, 3.8, 1.7, "Relation-level\nverdict", shape="diamond", fontsize=9)
 
@@ -185,7 +185,7 @@ def main() -> None:
     for name, cx, txt in verds:
         d.add(name, cx, 2.05, 2.65, 1.0, txt, fontsize=8.5)
 
-    d.add("I", 6.4, 0.35, 3.3, 1.0, "Evidence ledger", shape="artifact", fontsize=9)
+    d.add("I", 6.4, 0.35, 3.3, 1.0, "Ledger", shape="artifact", fontsize=9)
 
     for name, _, _ in srcs:
         d.edge(d.anchor(name, "S"), d.anchor("A", "N"))

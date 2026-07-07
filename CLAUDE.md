@@ -3,8 +3,8 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 This repository develops the manuscript "Domain-Validity-Gated Metamorphic
-Testing of Scientific ML Surrogates" for submission to **Elsevier Information
-and Software Technology (IST), regular track**.
+Testing of Scientific ML Surrogates" for submission to **Elsevier Journal of
+Systems and Software (JSS), regular paper**.
 
 ## Hard user constraints (standing)
 
@@ -32,11 +32,10 @@ python -m pytest tests/test_stage4_revision_readiness.py -q
 python tools/validate_experiment_protocol.py
 python tools/validate_research_assets.py
 
-# IST word count (single source of truth; conservative over-estimate,
-# counts refs + appendices + 200 words per float per IST rules)
+# Legacy IST word count (conservative diagnostic only; not a JSS official cap)
 python tools/ist_wordcount.py
 
-# Build the submission PDF (from submissions/IST/)
+# Build the legacy IST submission PDF (JSS package is built under submissions/JSS/)
 pdflatex -interaction=nonstopmode main.tex
 bibtex main
 pdflatex -interaction=nonstopmode main.tex
@@ -65,9 +64,9 @@ license**, enforced by tests. The flow is:
    are `C1`–`C10`; paper-level claims `PC1`–`PC10` map onto them in a
    distinct namespace. Add a claim ID *before* writing prose that depends on
    it; never widen wording beyond `wording_allowed`.
-3. **Manuscript** — `manuscript/manuscript.md` is the prose source of truth;
-   `submissions/IST/main.tex` + `references.bib` is the Elsevier
-   `elsarticle` submission package (class files are vendored in that folder).
+3. **Manuscript** — `manuscript/manuscript.md` is the prose source of truth.
+   `submissions/IST/` is a legacy Elsevier/IST package; the current target
+   package is `submissions/JSS/` once created.
 4. **Regression guards** — `tests/test_*` pin manuscript text, claim
    wording, asset schemas, and phase outcomes to the ledgers. They are
    numbered by pipeline stage/phase (e.g. `test_stage4_revision_readiness.py`,
@@ -110,32 +109,35 @@ If the local tree is behind the remote, the remote is authoritative for
 prior session work; `git reset --hard origin/...` only after confirming no
 uncommitted local changes worth keeping.
 
-## Target venue: IST regular track — submission requirements
+## Target venue: JSS regular paper — submission requirements
 
-Sources: ScienceDirect "Guide for Authors — Information and Software
-Technology"; Elsevier latex-instructions; Elsevier highlights / CRediT pages.
-Verified 2026-06-07.
+Sources: ScienceDirect "Guide for Authors — Journal of Systems and Software",
+JSS aims and scope, and JSS Journal Insights. Verified 2026-07-03.
 
-### Length limits (hard)
+### Scope and evidence contract
 
-| Article type           | Word limit |
-|------------------------|------------|
-| Regular Paper          | **≤ 15,000 words** |
-| SLR / Mapping Study    | ≤ 20,000 words |
-| Short Communication    | ≤ 2,500 words (refs ≤ 10) |
+- JSS publishes software-engineering papers. It explicitly includes methods and
+  tools for verification and validation, testing, AI/data analytics applied in
+  software engineering, Software Engineering for AI systems, and methods/tools for
+  empirical software-engineering research.
+- All claims should be supported by evidence, such as empirical studies,
+  simulation, formal proofs, or other validation.
+- This paper must stay framed as a software V&V method paper about
+  domain-validity-gated metamorphic testing of SciML surrogates. It is not a
+  general SciML reliability benchmark.
 
-**Counting rule (IST-specific):** references AND appendices count toward the
-total, and **each figure or table is counted as 200 words**. There is no
-page limit; the word count is the binding constraint. Check with
-`python tools/ist_wordcount.py`.
+### Length limits
+
+- No JSS-specific regular-paper word limit was found on the official Guide for
+  Authors page during the 2026-07-03 check.
+- Use `python tools/ist_wordcount.py` only as a conservative local diagnostic,
+  not as a JSS official cap.
 
 ### Abstract
 
-- **Structured abstract is mandatory** ("Papers will not be handled without a
-  structured abstract").
-- Five required headings: **Context, Objective(s), Method(s), Results,
-  Conclusion**.
-- Hard limit: **≤ 300 words**.
+- JSS requires a concise factual abstract of **≤ 250 words**.
+- The abstract should state purpose, principal results, and major conclusions.
+- Avoid references and define any essential uncommon abbreviation at first mention.
 
 ### Highlights
 
@@ -144,34 +146,30 @@ page limit; the word count is the binding constraint. Check with
 
 ### Keywords
 
-- 1 to 7 keywords; prefer single terms over phrases where possible.
+- 1 to 7 English keywords; prefer single terms and avoid "and"/"of" phrases where
+  possible.
 
 ### Manuscript format
 
-- LaTeX template: **Elsevier `elsarticle.cls`** with `elsarticle-num`
-  (numbered Vancouver-style references). Word template also accepted.
-- IST is **NOT** in the "Your Paper Your Way" list — initial submission must
-  follow the formal format (no double-spaced single-column free-form draft).
-- **Peer review model: single-anonymized** (reviewers see the authors; authors
-  do not see reviewers). The submission therefore **keeps** author names,
-  affiliations, CRediT, and funding — do NOT anonymize `main.tex`. (Verified
-  2026-06-07 against indexed Guide-for-Authors text; IST and Information
-  Systems are single-anonymized, unlike Information Processing & Management.)
+- JSS accepts editable source files, including `.tex` for LaTeX.
+- Elsevier's LaTeX template is recommended.
+- **Peer review model: single-anonymized**. Keep author names, affiliations,
+  CRediT, and funding; do not anonymize the JSS manuscript.
 
 ### Mandatory at submission
 
-- Structured abstract (above).
+- Abstract (≤250 words).
 - Highlights file.
 - **CRediT author statement** (contributor roles).
 - **Declaration of Competing Interest** (via Elsevier's tool; required even
   when there is none).
 - **Generative-AI usage declaration**.
-- Submission system: **Editorial Manager** at
-  `https://www.editorialmanager.com/infsof/`.
+- Submission system: JSS Editorial Manager, linked from the official JSS Guide for
+  Authors page.
 
 ### Optional
 
-- Graphical abstract (TIFF/EPS/PDF; AI-generated images forbidden).
+- Graphical abstract.
 
 ## Scope framing (do not drift)
 

@@ -1,0 +1,5 @@
+A domain-validity rubric screens candidate MRs for SciML surrogate testing.
+MR tolerances are gated by the measuring operator's floor (O(h) for divergence).
+MR cards convert retained candidates into auditable executable test assets.
+A fail-closed claim ledger ties every reported number to a tracked artifact.
+A K=6 roster shows where the admitted MR set bounds detector coverage.

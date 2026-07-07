@@ -1,0 +1,1 @@
+{"splits":[{"dataset":"AI4Science-WestlakeU/RealPDEBench","config":"default","split":"train"},{"dataset":"AI4Science-WestlakeU/RealPDEBench","config":"default","split":"validation"},{"dataset":"AI4Science-WestlakeU/RealPDEBench","config":"default","split":"test"}],"pending":[],"failed":[]}

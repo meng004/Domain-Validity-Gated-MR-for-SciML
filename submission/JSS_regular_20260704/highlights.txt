@@ -1,0 +1,5 @@
+- A validity gate turns SciML MRs into auditable test assets.
+- Measurement floors decide when relation verdicts are usable.
+- MR cards, runners, and ledgers link each verdict to a claim.
+- Independent witnesses reduce self-made benchmark risk.
+- Evidence supports complementarity, not baseline superiority.

@@ -57,8 +57,6 @@ def main() -> None:
 
     ax.set_xlabel(r"Characteristic edge length $h$ (RMS over cells)", fontsize=10)
     ax.set_ylabel(r"Area-weighted RMS of cell divergence", fontsize=10)
-    ax.set_title("P1 discrete-divergence operator: empirical $O(h)$ floor",
-                 fontsize=11)
     ax.grid(True, which="both", alpha=0.3, linestyle="--", linewidth=0.5)
     ax.legend(fontsize=8, loc="lower right", framealpha=0.95)
     fig.tight_layout()

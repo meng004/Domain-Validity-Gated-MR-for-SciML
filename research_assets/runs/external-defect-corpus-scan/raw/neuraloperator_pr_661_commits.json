@@ -1,0 +1,84 @@
+[
+  {
+    "sha": "dd00217a91b8d0cdf15a95eac2b75ee9e17efc7a",
+    "node_id": "C_kwDOEhwN6toAKGRkMDAyMTdhOTFiOGQwY2RmMTVhOTVlYWMyYjc1ZWU5ZTE3ZWZjN2E",
+    "commit": {
+      "author": {
+        "name": "Ryan Han",
+        "email": "rwhan128@gmail.com",
+        "date": "2025-10-14T20:27:35Z"
+      },
+      "committer": {
+        "name": "Ryan Han",
+        "email": "rwhan128@gmail.com",
+        "date": "2025-10-14T20:30:41Z"
+      },
+      "message": "fix: Correct L2-norm and power calculation in spectrum_2d",
+      "tree": {
+        "sha": "b6be83f185bc229cc0f5ed84c34241854935a2f6",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/trees/b6be83f185bc229cc0f5ed84c34241854935a2f6"
+      },
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/commits/dd00217a91b8d0cdf15a95eac2b75ee9e17efc7a",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/dd00217a91b8d0cdf15a95eac2b75ee9e17efc7a",
+    "html_url": "https://github.com/neuraloperator/neuraloperator/commit/dd00217a91b8d0cdf15a95eac2b75ee9e17efc7a",
+    "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/dd00217a91b8d0cdf15a95eac2b75ee9e17efc7a/comments",
+    "author": {
+      "login": "rwhan",
+      "id": 36714725,
+      "node_id": "MDQ6VXNlcjM2NzE0NzI1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36714725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/rwhan",
+      "html_url": "https://github.com/rwhan",
+      "followers_url": "https://api.github.com/users/rwhan/followers",
+      "following_url": "https://api.github.com/users/rwhan/following{/other_user}",
+      "gists_url": "https://api.github.com/users/rwhan/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/rwhan/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/rwhan/subscriptions",
+      "organizations_url": "https://api.github.com/users/rwhan/orgs",
+      "repos_url": "https://api.github.com/users/rwhan/repos",
+      "events_url": "https://api.github.com/users/rwhan/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/rwhan/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "rwhan",
+      "id": 36714725,
+      "node_id": "MDQ6VXNlcjM2NzE0NzI1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36714725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/rwhan",
+      "html_url": "https://github.com/rwhan",
+      "followers_url": "https://api.github.com/users/rwhan/followers",
+      "following_url": "https://api.github.com/users/rwhan/following{/other_user}",
+      "gists_url": "https://api.github.com/users/rwhan/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/rwhan/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/rwhan/subscriptions",
+      "organizations_url": "https://api.github.com/users/rwhan/orgs",
+      "repos_url": "https://api.github.com/users/rwhan/repos",
+      "events_url": "https://api.github.com/users/rwhan/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/rwhan/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "318baccfe350701ba27049c4623cf236fe6f1113",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/318baccfe350701ba27049c4623cf236fe6f1113",
+        "html_url": "https://github.com/neuraloperator/neuraloperator/commit/318baccfe350701ba27049c4623cf236fe6f1113"
+      }
+    ]
+  }
+]

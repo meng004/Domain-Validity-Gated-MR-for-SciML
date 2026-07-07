@@ -1,0 +1,29 @@
+[
+  {
+    "relation_id": "periodic-advection-translation-equivariance",
+    "relation_name": "periodic integer-translation equivariance",
+    "admissibility": "admitted",
+    "predicate": "periodic boundary condition, integer grid translation, and deterministic periodic-convolution inference",
+    "source_followup_transform": "roll scalar field by a declared integer (dy, dx)",
+    "expected_output_relation": "inverse-rolled follow-up output equals the source output",
+    "tolerance_rule": "relative L2 <= 1e-10"
+  },
+  {
+    "relation_id": "periodic-advection-mass-conservation",
+    "relation_name": "periodic global mean conservation",
+    "admissibility": "admitted",
+    "predicate": "periodic scalar advection preserves the spatial integral",
+    "source_followup_transform": "one periodic advection step predicted by the SUT",
+    "expected_output_relation": "predicted output mean equals source input mean",
+    "tolerance_rule": "rms-normalized absolute mean drift <= 1e-10"
+  },
+  {
+    "relation_id": "periodic-advection-fixed-velocity-mirror",
+    "relation_name": "mirror reflection under fixed advection velocity",
+    "admissibility": "rejected",
+    "predicate": "reflection of the scalar field alone does not transform the advection velocity vector",
+    "source_followup_transform": "mirror scalar field in y while keeping velocity/shift fixed",
+    "expected_output_relation": null,
+    "tolerance_rule": "not executed as an exact MR"
+  }
+]

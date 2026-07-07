@@ -49,11 +49,11 @@
       "interior_cells": 14666,
       "h_rms_edge": 0.01599284235098712,
       "measured_floor_rms": 0.3300999745927822,
-      "predicted_floor_rms": 0.33018343507788467,
+      "predicted_floor_rms": 0.3301834350778846,
       "bound_rms": 5.627062095356618,
       "bound_max": 5.627062095356859,
       "measured_max_abs": 0.6052801060921488,
-      "predictor_ratio_meas_over_pred": 0.999747229944825,
+      "predictor_ratio_meas_over_pred": 0.9997472299448252,
       "bound_dominates_rms": true,
       "bound_dominates_pointwise": true,
       "headroom_bound_over_measured_rms": 17.04653901381929

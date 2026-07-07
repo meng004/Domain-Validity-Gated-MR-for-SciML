@@ -1,0 +1,1072 @@
+{
+  "total_count": 12,
+  "incomplete_results": false,
+  "items": [
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/9679",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/9679/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/9679/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/9679/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/9679",
+      "id": 2547549154,
+      "node_id": "I_kwDOBlHMec6X2IPi",
+      "number": 9679,
+      "title": "Reproducing the Random Graph matching Results of DGMC as in the paper's firgure 2",
+      "user": {
+        "login": "BarakeelFanseuKamhoua",
+        "id": 106661928,
+        "node_id": "U_kgDOBluIKA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/106661928?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/BarakeelFanseuKamhoua",
+        "html_url": "https://github.com/BarakeelFanseuKamhoua",
+        "followers_url": "https://api.github.com/users/BarakeelFanseuKamhoua/followers",
+        "following_url": "https://api.github.com/users/BarakeelFanseuKamhoua/following{/other_user}",
+        "gists_url": "https://api.github.com/users/BarakeelFanseuKamhoua/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/BarakeelFanseuKamhoua/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/BarakeelFanseuKamhoua/subscriptions",
+        "organizations_url": "https://api.github.com/users/BarakeelFanseuKamhoua/orgs",
+        "repos_url": "https://api.github.com/users/BarakeelFanseuKamhoua/repos",
+        "events_url": "https://api.github.com/users/BarakeelFanseuKamhoua/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/BarakeelFanseuKamhoua/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 3358959205,
+          "node_id": "MDU6TGFiZWwzMzU4OTU5MjA1",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/question",
+          "name": "question",
+          "color": "d876e3",
+          "default": true,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": true,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2024-09-25T10:06:01Z",
+      "updated_at": "2024-10-03T17:23:15Z",
+      "closed_at": "2024-10-03T17:23:15Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "### 🐛 Describe the bug\r\n\r\nHello Rusty,\r\nThanks for the amazing paper. I am so sorry that I am not able to reproduce the results on erdos regny random graph matching using the softmax for the different noise levels till 0.5 as defined in figure 2 (a, b, c, and d) of the paper. My results are orders of magnitude lower using the torch model implementation and the random graph generation below:\r\n\r\n### Generate Erdos-Renyi graphs\r\n\r\n```python\r\ndef to_onehot(mat):\r\n    k = mat.shape[0]\r\n    encoded_arr = np.zeros((mat.size,k), dtype=int)\r\n    encoded_arr[np.arange(mat.size), mat.astype(int)] = 1\r\n    return encoded_arr\r\n\r\ndef compute_evecs(A, k, type=1):\r\n      if type==1:\r\n          return np.abs(sp.linalg.svds(A, k, which=\"LM\")[0])\r\n      else:\r\n          D = A@np.ones((A.shape[0], 1))\r\n          return to_onehot(D)\r\n\r\ndef generate_er(n, p, sigma, learned=False,  feat_type=1, feat_num=20):\r\n       s = 1 - (sigma**2)*(1-p)\r\n       G = np.random.uniform(size=(n,n)) < p/s\r\n       G = np.tril(G, -1) + np.tril(G, -1).T\r\n       Z1 = np.random.uniform(size=(n,n)) < s\r\n       Z1 = np.tril(Z1, -1) + np.tril(Z1, -1).T\r\n       Z2 = np.random.uniform(size=(n,n)) < s\r\n       Z2 = np.tril(Z2, -1) + np.tril(Z2, -1).T\r\n       A0 = (G * Z1).astype(float)\r\n       B0 = (G * Z2).astype(float)\r\n       P_rnd = np.eye(n)\r\n       idx = np.random.permutation(n)\r\n       P_rnd = P_rnd[:, idx]\r\n       B0 = P_rnd @ B0 @ P_rnd.T\r\n       A = A0 - p\r\n       B = B0 - p\r\n       A = A/np.sqrt(n*p*(1-p))\r\n       B = B/np.sqrt(n*p*(1-p))\r\n       P_orig = P_rnd\r\n       if learned:\r\n           P_rnd = np.array(P_rnd.nonzero()).T\r\n       real_symm = False\r\n       if np.allclose(A @ A.T, A.T @ A) and np.allclose(B @ B.T, B @ B.T):\r\n            real_symm = True\r\n       x_A0 = compute_evecs(A0, feat_num, feat_type)\r\n       x_B0 = compute_evecs(B0, feat_num, feat_type)\r\n       return A, B, A0, B0, x_A0, x_B0, P_rnd, P_orig\r\n\r\n\r\nclass DGMC(torch.nn.Module):\r\n    def __init__(self, psi_1, psi_2, num_steps, k=-1, detach=False):\r\n          super(DGMC, self).__init__()\r\n          self.psi_1 = psi_1\r\n          self.psi_2 = psi_2\r\n          self.num_steps = num_steps\r\n          self.k = k\r\n          self.detach = detach\r\n          self.mlp = nn.Sequential(nn.Linear(psi_2.output_dim, psi_2.output_dim), \r\n                                                  nn.ReLU(), nn.Linear(psi_2.output_dim, 1),)\r\n\r\n    def reset_parameters(self):\r\n          self.psi_1.reset_parameters()\r\n          self.psi_2.reset_parameters()\r\n          for layer in self.mlp:\r\n              if hasattr(layer, 'reset_parameters'):\r\n                  layer.reset_parameters()\r\n\r\n    def forward(self, x_s, adj_s, x_t, adj_t, y=None):\r\n          h_s = self.psi_1(adj_s, x_s)\r\n          h_t = self.psi_1(adj_t, x_t)\r\n          h_s, h_t = (h_s.detach(), h_t.detach()) if self.detach else (h_s, h_t)\r\n          B, N_s, C_out = h_s.size()\r\n          N_t = h_t.size(1)\r\n          R_in, R_out = self.psi_2.input_dim, self.psi_2.output_dim\r\n          S_hat = h_s @ h_t.transpose(-1, -2)\r\n          S_0 = torch.softmax(S_hat, dim=-1)\r\n          for _ in range(self.num_steps):\r\n                S = torch.softmax(S_hat, dim=-1)\r\n                r_s = torch.randn((B, N_s, R_in), dtype=h_s.dtype, device=h_s.device)\r\n                r_t = S.transpose(-1, -2) @ r_s                \r\n                o_s = self.psi_2(adj_s, r_s)\r\n                o_t = self.psi_2(adj_t, r_t)\r\n                D = o_s.view(B, N_s, 1, R_out) - o_t.view(B, 1, N_t, R_out)\r\n                S_hat = S_hat + self.mlp(D).squeeze(-1)\r\n          S_L = torch.softmax(S_hat, dim=-1)\r\n          return S_0, S_L\r\n        \r\n    def loss(self, S, y, reduction='mean', EPS=1e-8):\r\n          assert reduction in ['none', 'mean', 'sum']\r\n          B = S.size(0)\r\n          nll = 0\r\n          for i in range(B):\r\n              val = S[i][y[i, :, 0], y[i, :, 1]]\r\n              nll += -torch.log(val + EPS).sum()\r\n          if reduction == 'mean':\r\n              nll = nll / y.size(0)\r\n          elif reduction == 'sum':\r\n              nll = nll\r\n          return nll\r\n\r\n    @torch.no_grad()\r\n    def acc(self, S, y, reduction='mean'):\r\n          assert reduction in ['mean', 'sum']\r\n          B = S.size(0)\r\n          correct = 0\r\n          total = 0\r\n          for i in range(B):\r\n              pred = S[i].argmax(dim=-1)\r\n              correct += (pred == y[i, :, 1]).sum().item()\r\n              total += y[i, :, 1].size(0)\r\n          accuracy = correct / total\r\n          return accuracy if reduction == 'mean' else correct\r\n\r\n    @torch.no_grad()\r\n    def hits_at_k(self, k, S, y, reduction='mean'):\r\n          assert reduction in ['mean', 'sum']\r\n          B = S.size(0)\r\n          correct = 0\r\n          total = 0\r\n          for i in range(B):\r\n              pred = S[i].argsort(dim=-1, descending=True)[:, :k]\r\n              correct += (pred == y[i, :, 1].view(-1, 1)).sum().item()\r\n              total += y[i, :, 1].size(0)\r\n          hits = correct / total\r\n          return hits if reduction == 'mean' else correct\r\n```\r\n\r\n### Versions\r\n\r\n```console\r\n$ python collect_env.py \r\nCollecting environment information...\r\nPyTorch version: 2.4.0+cu118\r\nIs debug build: False\r\nCUDA used to build PyTorch: 11.8\r\nROCM used to build PyTorch: N/A\r\n\r\nOS: Microsoft Windows 11 Pro\r\nGCC version: (x86_64-posix-seh-rev0, Built by MinGW-Builds project) 13.2.0\r\nClang version: Could not collect\r\nCMake version: version 3.28.3\r\nLibc version: N/A\r\n\r\nPython version: 3.9.16 (main, May 17 2023, 17:49:16) [MSC v.1916 64 bit (AMD64)] (64-bit runtime)\r\nPython platform: Windows-10-10.0.22631-SP0\r\nIs CUDA available: True\r\nCUDA runtime version: 11.2.67\r\nCUDA_MODULE_LOADING set to: LAZY\r\nGPU models and configuration: GPU 0: NVIDIA GeForce RTX 2080 Ti\r\nNvidia driver version: 535.98\r\ncuDNN version: Could not collect\r\nHIP runtime version: N/A\r\nMIOpen runtime version: N/A\r\nIs XNNPACK available: True\r\n\r\nCPU:\r\nArchitecture=9\r\nCurrentClockSpeed=2500\r\nDeviceID=CPU0\r\nFamily=205\r\nL2CacheSize=11776\r\nL2CacheSpeed=\r\nManufacturer=GenuineIntel\r\nMaxClockSpeed=2500\r\nName=13th Gen Intel(R) Core(TM) i5-13500\r\nProcessorType=3\r\nRevision=\r\n\r\nVersions of relevant libraries:\r\n[pip3] numpy==1.26.3\r\n[pip3] torch==2.4.0+cu118\r\n[pip3] torch_geometric==2.4.0\r\n[pip3] torchaudio==2.4.0+cu118\r\n[pip3] torchvision==0.19.0+cu118\r\n[conda] libblas                   3.9.0                     8_mkl    conda-forge\r\n[conda] libcblas                  3.9.0                     8_mkl    conda-forge\r\n[conda] liblapack                 3.9.0                     8_mkl    conda-forge\r\n[conda] mkl                       2020.4             hb70f87d_311    conda-forge\r\n[conda] numpy                     1.24.4                   pypi_0    pypi\r\n[conda] torch                     2.0.1+cu117              pypi_0    pypi\r\n[conda] torch-geometric           2.4.0                    pypi_0    pypi\r\n[conda] torchaudio                2.0.2+cu117              pypi_0    pypi\r\n[conda] torchvision               0.15.2+cu117             pypi_0    pypi\r\n```",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/9679/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/9679/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8866",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8866/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8866/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8866/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/8866",
+      "id": 2119144866,
+      "node_id": "I_kwDOBlHMec5-T5Wi",
+      "number": 8866,
+      "title": "GPU vs. CPU for Aggregation of Aggregation: Significant difference in terms of reproducibility and stable results",
+      "user": {
+        "login": "simonheilig",
+        "id": 40565252,
+        "node_id": "MDQ6VXNlcjQwNTY1MjUy",
+        "avatar_url": "https://avatars.githubusercontent.com/u/40565252?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/simonheilig",
+        "html_url": "https://github.com/simonheilig",
+        "followers_url": "https://api.github.com/users/simonheilig/followers",
+        "following_url": "https://api.github.com/users/simonheilig/following{/other_user}",
+        "gists_url": "https://api.github.com/users/simonheilig/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/simonheilig/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/simonheilig/subscriptions",
+        "organizations_url": "https://api.github.com/users/simonheilig/orgs",
+        "repos_url": "https://api.github.com/users/simonheilig/repos",
+        "events_url": "https://api.github.com/users/simonheilig/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/simonheilig/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 712483737,
+          "node_id": "MDU6TGFiZWw3MTI0ODM3Mzc=",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/bug",
+          "name": "bug",
+          "color": "d73a4a",
+          "default": true,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 6,
+      "created_at": "2024-02-05T17:58:16Z",
+      "updated_at": "2024-03-20T11:09:14Z",
+      "closed_at": "2024-02-09T10:00:17Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "First, I want to say that I am aware of the existing [reproducibility issues with scatter ops](https://github.com/pyg-team/pytorch_geometric/issues/92).\r\nBut still, I expect that those numerical issues should not result in significant (i.e. > 1e-6) differences in computation.\r\n\r\nIn my case, I want to aggregate once, apply non-linearity and aggregate again with the same message passing module.\r\nWhen doing this over multiple layers, those effects are very significant on gpu in comparison to perfect cpu.\r\n\r\nFor the sake of reproducing this behavior, I adopted the [introduction:learning-methods-on-graphs ](https://pytorch-geometric.readthedocs.io/en/latest/get_started/introduction.html#learning-methods-on-graphs) task. See the full script below.\r\n\r\nThe main model difference is in the forward method:\r\n```\r\ndef forward(self, data):\r\n        x, edge_index = data.x, data.edge_index\r\n\r\n        x = self.emb(x)\r\n\r\n        for _ in range(2):\r\n            x = self.conv(x,edge_index)\r\n            x = F.relu(x)\r\n            y = self.conv(x,edge_index)\r\n            x = x+y\r\n\r\n        x = self.dec(x)\r\n```\r\nWhen training with a fixed seed multiple times, I get the following results:\r\n\r\n```\r\ncuda  loss  0.6542618870735168\r\ncpu  loss  0.9095242023468018\r\ncuda  loss  0.705021321773529\r\ncpu  loss  0.9095242023468018\r\ncuda  loss  0.8169752359390259\r\ncpu  loss  0.9095242023468018\r\ncuda  loss  0.6809478402137756\r\ncpu  loss  0.9095242023468018\r\ncuda  loss  0.6463167667388916\r\ncpu  loss  0.9095242023468018\r\n```\r\nOne can clearly see, that the cpu loss is perfect while using cuda things start to vary at 1e-1 precision!\r\nWhich is not expected at this bad precision. \r\nPlease note, that this is only to demonstrate this effect and is not aiming for reasonable performance on the task.\r\n\r\n### Full Training Script\r\n\r\n```\r\nimport torch\r\nimport torch.nn.functional as F\r\nimport os.path as osp\r\nfrom torch_geometric.nn import MessagePassing\r\nfrom torch_geometric.datasets import Planetoid\r\nfrom typing import Optional\r\nimport numpy as np\r\nimport random\r\nimport math\r\n\r\nclass VanillaConv(MessagePassing):\r\n    def __init__(self,in_channels: int,out_channels:int):\r\n        super().__init__(aggr = 'add')\r\n        self.weight = torch.nn.Parameter(torch.empty((in_channels, out_channels)), requires_grad=True)\r\n        self.set_transposed = False\r\n        self.reset_parameters()\r\n\r\n    def forward(self, x: torch.Tensor, edge_index: torch.Tensor, edge_weight: Optional[torch.Tensor] = None) -> torch.Tensor: \r\n        message = F.linear(x,self.weight)\r\n        aggregation = self.propagate(edge_index, x=message, edge_weight=edge_weight)\r\n        return aggregation\r\n    \r\n    def message(self, x_j: torch.Tensor, edge_weight: Optional[torch.Tensor] = None) -> torch.Tensor:\r\n        return x_j if edge_weight is None else edge_weight.view(-1, 1) * x_j\r\n\r\n    def reset_parameters(self,):\r\n        torch.nn.init.kaiming_uniform_(self.weight, a=math.sqrt(5))\r\n\r\nclass GCN(torch.nn.Module):\r\n    def __init__(self):\r\n        super().__init__()\r\n        self.emb = torch.nn.Linear(dataset.num_node_features, 16)\r\n        self.conv = VanillaConv(16,16)\r\n        self.dec = torch.nn.Linear(16, dataset.num_classes)\r\n\r\n    def forward(self, data):\r\n        x, edge_index = data.x, data.edge_index\r\n\r\n        x = self.emb(x)\r\n\r\n        for _ in range(2):\r\n            x = self.conv(x,edge_index)\r\n            x = F.relu(x)\r\n            y = self.conv(x,edge_index)\r\n            x = x+y\r\n\r\n        x = self.dec(x)\r\n\r\n        return F.log_softmax(x, dim=1)\r\n    \r\ndef train_model(device):\r\n    seed = 41\r\n    random.seed(seed)\r\n    np.random.seed(seed)\r\n    torch.manual_seed(seed)\r\n    torch.cuda.manual_seed_all(seed)\r\n\r\n    \r\n    model = GCN().to(device)\r\n    data = dataset[0].to(device)\r\n    optimizer = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)\r\n    model.train()\r\n    for _ in range(200):\r\n        optimizer.zero_grad()\r\n        out = model(data)\r\n        loss = F.nll_loss(out[data.train_mask], data.y[data.train_mask])\r\n        loss.backward()\r\n        optimizer.step()\r\n\r\n    print(device,' loss ',loss.detach().item())\r\n    del model,optimizer\r\n    \r\nif __name__ == \"__main__\":\r\n    device_cuda= torch.device('cuda')\r\n    device_cpu = torch.device('cpu')\r\n\r\n    path = osp.join(osp.dirname(osp.realpath(__file__)), '..', 'data', 'Planetoid')\r\n    dataset = Planetoid(root=path, name='Cora')\r\n    for i in range(5):\r\n        train_model(device_cuda)\r\n        train_model(device_cpu)\r\n\r\n```\r\n\r\n\r\n\r\n\r\n### Versions\r\n\r\nCollecting environment information...\r\nPyTorch version: 2.1.2\r\nIs debug build: False\r\nCUDA used to build PyTorch: 12.1\r\nROCM used to build PyTorch: N/A\r\n\r\nOS: Ubuntu 22.04.3 LTS (x86_64)\r\nGCC version: (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0\r\nClang version: Could not collect\r\nCMake version: version 3.22.1\r\nLibc version: glibc-2.35\r\n\r\nPython version: 3.8.18 (default, Sep 11 2023, 13:40:15)  [GCC 11.2.0] (64-bit runtime)\r\nPython platform: Linux-5.15.0-1032-nvidia-x86_64-with-glibc2.17\r\nIs CUDA available: True\r\nCUDA runtime version: Could not collect\r\nCUDA_MODULE_LOADING set to: LAZY\r\nGPU models and configuration: \r\nGPU 0: NVIDIA H100 80GB HBM3\r\nGPU 1: NVIDIA H100 80GB HBM3\r\nGPU 2: NVIDIA H100 80GB HBM3\r\nGPU 3: NVIDIA H100 80GB HBM3\r\nGPU 4: NVIDIA H100 80GB HBM3\r\nGPU 5: NVIDIA H100 80GB HBM3\r\nGPU 6: NVIDIA H100 80GB HBM3\r\nGPU 7: NVIDIA H100 80GB HBM3\r\n\r\nNvidia driver version: 525.125.06\r\ncuDNN version: Could not collect\r\nHIP runtime version: N/A\r\nMIOpen runtime version: N/A\r\nIs XNNPACK available: True\r\n\r\nCPU:\r\nArchitecture:                       x86_64\r\nCPU op-mode(s):                     32-bit, 64-bit\r\nAddress sizes:                      52 bits physical, 57 bits virtual\r\nByte Order:                         Little Endian\r\nCPU(s):                             224\r\nOn-line CPU(s) list:                0-223\r\nVendor ID:                          GenuineIntel\r\nModel name:                         Intel(R) Xeon(R) Platinum 8480CL\r\nCPU family:                         6\r\nModel:                              143\r\nThread(s) per core:                 2\r\nCore(s) per socket:                 56\r\nSocket(s):                          2\r\nStepping:                           7\r\nCPU max MHz:                        3800,0000\r\nCPU min MHz:                        800,0000\r\nBogoMIPS:                           4000.00\r\nFlags:                              fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l3 cat_l2 cdp_l3 invpcid_single intel_ppin cdp_l2 ssbd mba ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local split_lock_detect avx_vnni avx512_bf16 wbnoinvd dtherm ida arat pln pts hwp hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke waitpkg avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg tme avx512_vpopcntdq la57 rdpid bus_lock_detect cldemote movdiri movdir64b enqcmd fsrm md_clear serialize tsxldtrk pconfig arch_lbr amx_bf16 avx512_fp16 amx_tile amx_int8 flush_l1d arch_capabilities\r\nL1d cache:                          5,3 MiB (112 instances)\r\nL1i cache:                          3,5 MiB (112 instances)\r\nL2 cache:                           224 MiB (112 instances)\r\nL3 cache:                           210 MiB (2 instances)\r\nNUMA node(s):                       2\r\nNUMA node0 CPU(s):                  0-55,112-167\r\nNUMA node1 CPU(s):                  56-111,168-223\r\nVulnerability Gather data sampling: Not affected\r\nVulnerability Itlb multihit:        Not affected\r\nVulnerability L1tf:                 Not affected\r\nVulnerability Mds:                  Not affected\r\nVulnerability Meltdown:             Not affected\r\nVulnerability Mmio stale data:      Not affected\r\nVulnerability Retbleed:             Not affected\r\nVulnerability Spec store bypass:    Mitigation; Speculative Store Bypass disabled via prctl and seccomp\r\nVulnerability Spectre v1:           Mitigation; usercopy/swapgs barriers and __user pointer sanitization\r\nVulnerability Spectre v2:           Mitigation; Enhanced IBRS, IBPB conditional, RSB filling, PBRSB-eIBRS SW sequence\r\nVulnerability Srbds:                Not affected\r\nVulnerability Tsx async abort:      Not affected\r\n\r\nVersions of relevant libraries:\r\n[pip3] numpy==1.24.3\r\n[pip3] pytorch-lightning==2.1.3\r\n[pip3] torch==2.1.2\r\n[pip3] torch_geometric==2.4.0\r\n[pip3] torch-scatter==2.1.2\r\n[pip3] torch-sparse==0.6.18\r\n[pip3] torchaudio==2.1.2\r\n[pip3] torchcde==0.2.5\r\n[pip3] torchdiffeq==0.2.3\r\n[pip3] torchdyn==1.0.6\r\n[pip3] torchmetrics==1.3.0.post0\r\n[pip3] torchsde==0.2.6\r\n[pip3] torchvision==0.16.2\r\n[pip3] triton==2.1.0\r\n[conda] blas                      1.0                         mkl  \r\n[conda] cudatoolkit               11.8.0               h6a678d5_0    anaconda\r\n[conda] ffmpeg                    4.3                  hf484d3e_0    pytorch\r\n[conda] libjpeg-turbo             2.0.0                h9bf148f_0    pytorch\r\n[conda] mkl                       2023.1.0         h213fc3f_46344  \r\n[conda] mkl-service               2.4.0            py38h5eee18b_1  \r\n[conda] mkl_fft                   1.3.8            py38h5eee18b_0  \r\n[conda] mkl_random                1.2.4            py38hdb19cb5_0  \r\n[conda] numpy                     1.24.3           py38hf6e8229_1  \r\n[conda] numpy-base                1.24.3           py38h060ed82_1  \r\n[conda] pyg                       2.4.0           py38_torch_2.1.0_cu121    pyg\r\n[conda] pytorch                   2.1.2           py3.8_cuda12.1_cudnn8.9.2_0    pytorch\r\n[conda] pytorch-cuda              12.1                 ha16c6d3_5    pytorch\r\n[conda] pytorch-lightning         2.1.3                    pypi_0    pypi\r\n[conda] pytorch-mutex             1.0                        cuda    pytorch\r\n[conda] pytorch-scatter           2.1.2           py38_torch_2.1.0_cu121    pyg\r\n[conda] torch-sparse              0.6.18                   pypi_0    pypi\r\n[conda] torchaudio                2.1.2                py38_cu121    pytorch\r\n[conda] torchcde                  0.2.5                    pypi_0    pypi\r\n[conda] torchdiffeq               0.2.3                    pypi_0    pypi\r\n[conda] torchdyn                  1.0.6                    pypi_0    pypi\r\n[conda] torchmetrics              1.3.0.post0              pypi_0    pypi\r\n[conda] torchsde                  0.2.6                    pypi_0    pypi\r\n[conda] torchtriton               2.1.0                      py38    pytorch\r\n[conda] torchvision               0.16.2               py38_cu121    pytorch",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8866/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8866/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/8131",
+      "id": 1927935698,
+      "node_id": "I_kwDOBlHMec5y6fbS",
+      "number": 8131,
+      "title": "`test/transforms/test_add_positional_encoding.py::test_eigenvector_permutation_invariance` fails with AMD CPU",
+      "user": {
+        "login": "Kh4L",
+        "id": 3193578,
+        "node_id": "MDQ6VXNlcjMxOTM1Nzg=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/3193578?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Kh4L",
+        "html_url": "https://github.com/Kh4L",
+        "followers_url": "https://api.github.com/users/Kh4L/followers",
+        "following_url": "https://api.github.com/users/Kh4L/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Kh4L/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Kh4L/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Kh4L/subscriptions",
+        "organizations_url": "https://api.github.com/users/Kh4L/orgs",
+        "repos_url": "https://api.github.com/users/Kh4L/repos",
+        "events_url": "https://api.github.com/users/Kh4L/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Kh4L/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 712483737,
+          "node_id": "MDU6TGFiZWw3MTI0ODM3Mzc=",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/bug",
+          "name": "bug",
+          "color": "d73a4a",
+          "default": true,
+          "description": ""
+        },
+        {
+          "id": 3794787434,
+          "node_id": "LA_kwDOBlHMec7iL9xq",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/test",
+          "name": "test",
+          "color": "9A29AF",
+          "default": false,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 4,
+      "created_at": "2023-10-05T10:20:34Z",
+      "updated_at": "2023-10-06T14:31:30Z",
+      "closed_at": "2023-10-06T14:31:30Z",
+      "assignee": null,
+      "author_association": "CONTRIBUTOR",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "### 🐛 Describe the bug\r\n\r\nThe unit test added in #8087 fails with the error bellow on AMD CPU based systems.\r\n\r\n\r\n```\r\nNVIDIA_TF32_OVERRIDE=0 pytest -s --cov --cov-report=xml test/transforms/test_add_positional_encoding.py::test_eigenvector_permutation_invariance\r\n```\r\n\r\nTraceback:\r\n```\r\n======================================================================== FAILURES ========================================================================$\r\n_________________________________________________________ test_eigenvector_permutation_invariance ________________________________________________________$\r\n\r\n    def test_eigenvector_permutation_invariance():\r\n        edge_index = torch.tensor([[0, 1, 0, 4, 1, 4, 2, 3, 3, 5],\r\n                                   [1, 0, 4, 0, 4, 1, 3, 2, 5, 3]])\r\n        data = Data(edge_index=edge_index, num_nodes=6)\r\n\r\n        perm = torch.tensor([5, 4, 3, 2, 1, 0])\r\n        transform = AddLaplacianEigenvectorPE(\r\n            k=1,\r\n            is_undirected=True,\r\n            attr_name='x',\r\n            v0=torch.arange(data.num_nodes),\r\n        )\r\n        out1 = transform(data)\r\n\r\n        transform = AddLaplacianEigenvectorPE(\r\n            k=1,\r\n            is_undirected=True,\r\n            attr_name='x',\r\n            v0=perm,\r\n        )\r\n        out2 = transform(data.subgraph(perm))\r\n\r\n        print(out1.x[perm].abs())\r\n        print(out2.x.abs())\r\n\r\n>       assert torch.allclose(out1.x[perm].abs(), out2.x.abs(), atol=1e-1)\r\nE       assert False\r\nE        +  where False = <built-in method allclose of type object at 0x7f2f94b318a0>(tensor([[0.1360],\\n        [0.5556],\\n        [0.1924],\\n        [0.1\r\n360],\\n        [0.5556],\\n        [0.5556]]), tensor([[0.2091],\\n        [0.5245],\\n        [0.2957],\\n        [0.2091],\\n        [0.5245],\\n        [0.524\r\n5]]), atol=0.1)\r\nE        +    where <built-in method allclose of type object at 0x7f2f94b318a0> = torch.allclose\r\nE        +    and   tensor([[0.1360],\\n        [0.5556],\\n        [0.1924],\\n        [0.1360],\\n        [0.5556],\\n        [0.5556]]) = <built-in method ab\r\ns of Tensor object at 0x7f2bc6e1e160>()\r\nE        +      where <built-in method abs of Tensor object at 0x7f2bc6e1e160> = tensor([[ 0.1360],\\n        [-0.5556],\\n        [ 0.1924],\\n        [ 0.13\r\n60],\\n        [-0.5556],\\n        [-0.5556]]).abs\r\nE        +    and   tensor([[0.2091],\\n        [0.5245],\\n        [0.2957],\\n        [0.2091],\\n        [0.5245],\\n        [0.5245]]) = <built-in method ab\r\ns of Tensor object at 0x7f2bc89d3470>()\r\nE        +      where <built-in method abs of Tensor object at 0x7f2bc89d3470> = tensor([[ 0.2091],\\n        [-0.5245],\\n        [ 0.2957],\\n        [ 0.20\r\n91],\\n        [-0.5245],\\n        [-0.5245]]).abs\r\nE        +        where tensor([[ 0.2091],\\n        [-0.5245],\\n        [ 0.2957],\\n        [ 0.2091],\\n        [-0.5245],\\n        [-0.5245]]) = Data(edge\r\n_index=[2, 10], num_nodes=6, x=[6, 1]).x\r\n```\r\n\r\n### Environment\r\n\r\n* PyG version: 2.4.0 (built from source)\r\n* PyTorch version: 2.1.0\r\n* OS:  Ubuntu 22.04.3 LTS\r\n* Python version: 3.10.12\r\n* CUDA/cuDNN version: 12.2\r\n* How you installed PyTorch and PyG (`conda`, `pip`, source): source",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/8131/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/7584",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/7584/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/7584/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/7584/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/7584",
+      "id": 1758492411,
+      "node_id": "I_kwDOBlHMec5o0Hb7",
+      "number": 7584,
+      "title": "`HGTLoader` fires `keyerror`",
+      "user": {
+        "login": "denadai2",
+        "id": 190799,
+        "node_id": "MDQ6VXNlcjE5MDc5OQ==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/190799?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/denadai2",
+        "html_url": "https://github.com/denadai2",
+        "followers_url": "https://api.github.com/users/denadai2/followers",
+        "following_url": "https://api.github.com/users/denadai2/following{/other_user}",
+        "gists_url": "https://api.github.com/users/denadai2/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/denadai2/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/denadai2/subscriptions",
+        "organizations_url": "https://api.github.com/users/denadai2/orgs",
+        "repos_url": "https://api.github.com/users/denadai2/repos",
+        "events_url": "https://api.github.com/users/denadai2/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/denadai2/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 712483737,
+          "node_id": "MDU6TGFiZWw3MTI0ODM3Mzc=",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/bug",
+          "name": "bug",
+          "color": "d73a4a",
+          "default": true,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 2,
+      "created_at": "2023-06-15T10:09:23Z",
+      "updated_at": "2023-07-07T06:42:25Z",
+      "closed_at": "2023-07-07T06:42:24Z",
+      "assignee": null,
+      "author_association": "CONTRIBUTOR",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "### 🐛 Describe the bug\n\nWhile I was trying to use `HGTLoader` I found a bug. Minimal example (from the documentation: https://pytorch-geometric.readthedocs.io/en/latest/modules/loader.html#torch_geometric.loader.HGTLoader)\r\n\r\n```python\r\nfrom torch_geometric.loader import HGTLoader\r\nfrom torch_geometric.datasets import OGB_MAG\r\n\r\nhetero_data = OGB_MAG('data')[0]\r\n\r\nloader = HGTLoader(\r\n    hetero_data,\r\n    # Sample 512 nodes per type and per iteration for 4 iterations\r\n    num_samples={key: [512] * 4 for key in hetero_data.node_types},\r\n    # Use a batch size of 128 for sampling training nodes of type paper\r\n    batch_size=128,\r\n    input_nodes=('paper', hetero_data['paper'].train_mask),\r\n)\r\n\r\nsampled_hetero_data = next(iter(loader))\r\n```\r\n\r\nError:\r\n```KeyError                                  Traceback (most recent call last)\r\nCell In[50], line 15\r\n      4 hetero_data = OGB_MAG('data')[0]\r\n      6 loader = HGTLoader(\r\n      7     hetero_data,\r\n      8     # Sample 512 nodes per type and per iteration for 4 iterations\r\n   (...)\r\n     12     input_nodes=('paper', hetero_data['paper'].train_mask),\r\n     13 )\r\n---> 15 sampled_hetero_data = next(iter(loader))\r\n     16 print(sampled_data.batch_size)\r\n\r\nFile ~/miniconda3/envs/gnn/lib/python3.9/site-packages/torch_geometric/loader/base.py:36, in DataLoaderIterator.__next__(self)\r\n     35 def __next__(self) -> Any:\r\n---> 36     return self.transform_fn(next(self.iterator))\r\n\r\nFile ~/miniconda3/envs/gnn/lib/python3.9/site-packages/torch_geometric/loader/node_loader.py:154, in NodeLoader.filter_fn(self, out)\r\n    152 elif isinstance(out, HeteroSamplerOutput):\r\n    153     if isinstance(self.data, HeteroData):\r\n--> 154         data = filter_hetero_data(self.data, out.node, out.row,\r\n    155                                   out.col, out.edge,\r\n    156                                   self.node_sampler.edge_permutation)\r\n    157     else:  # Tuple[FeatureStore, GraphStore]\r\n    158         data = filter_custom_store(*self.data, out.node, out.row,\r\n    159                                    out.col, out.edge, self.custom_cls)\r\n\r\nFile ~/miniconda3/envs/gnn/lib/python3.9/site-packages/torch_geometric/loader/utils.py:137, in filter_hetero_data(data, node_dict, row_dict, col_dict, edge_dict, perm_dict)\r\n    133 out = copy.copy(data)\r\n    135 for node_type in data.node_types:\r\n    136     filter_node_store_(data[node_type], out[node_type],\r\n--> 137                        node_dict[node_type])\r\n    139 for edge_type in data.edge_types:\r\n    140     filter_edge_store_(\r\n    141         data[edge_type],\r\n    142         out[edge_type],\r\n   (...)\r\n    146         perm_dict[edge_type] if perm_dict else None,\r\n    147     )\r\n\r\nKeyError: 'institution'```\r\n\r\n\n\n### Environment\n\n* PyG version: 2.3.1\r\n* PyTorch version: 2.0\r\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/7584/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/7584/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/331",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/331/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/331/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/331/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/331",
+      "id": 447068036,
+      "node_id": "MDU6SXNzdWU0NDcwNjgwMzY=",
+      "number": 331,
+      "title": "Issue reproducing the results of the original ecc implementation. Pooling layer and conv layer are giving different results of the original implementation",
+      "user": {
+        "login": "dhorka",
+        "id": 39189267,
+        "node_id": "MDQ6VXNlcjM5MTg5MjY3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/39189267?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/dhorka",
+        "html_url": "https://github.com/dhorka",
+        "followers_url": "https://api.github.com/users/dhorka/followers",
+        "following_url": "https://api.github.com/users/dhorka/following{/other_user}",
+        "gists_url": "https://api.github.com/users/dhorka/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/dhorka/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/dhorka/subscriptions",
+        "organizations_url": "https://api.github.com/users/dhorka/orgs",
+        "repos_url": "https://api.github.com/users/dhorka/repos",
+        "events_url": "https://api.github.com/users/dhorka/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/dhorka/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 6391520341,
+          "node_id": "LA_kwDOBlHMec8AAAABfPbcVQ",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/determinism",
+          "name": "determinism",
+          "color": "FAD8AE",
+          "default": false,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 93,
+      "created_at": "2019-05-22T10:55:26Z",
+      "updated_at": "2024-01-04T13:23:39Z",
+      "closed_at": "2019-06-05T12:44:46Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "As I mentioned in #319  I have problems to reproduce the [ecc implemenation](https://github.com/mys007/ecc) using pytorch_geometric. I found some differences between the results obtained, first one is that the results of both convolution operations using the same weights have different results. Moreover, the results of the pooling layers are also different. \r\n\r\nI created a test that checks this things. Basically, the scripts load the same weights to both implementations. These weights are obtained from train a network using the ecc_implementation. Below you can see the output of my test.\r\n\r\n```\r\nECC Weights and PyGeometric weights are equal: True #I am only doing a re-check in order to be sure that both weights are equal before to load to the models.\r\nLoading weights \r\nStarting validation:\r\necc features conv1:  (997, 16) #Shape of the output of first conv in ecc implementation\r\npygeometric features conv1:  (997, 16) #Shape of the output of first conv in pygeometric implementation\r\nMax difference between features of first conv 2.549824\r\nOutput of ecc pooling:  (398, 32)\r\nOutput of PyGeometric pooling:  (385, 32)\r\nPygeomtric Acc:  41.51982378854625  Ecc accuracy:  63.65638766519823\r\nPygeomtric Loss:  2.435516586519023  Ecc Loss:  0.9878960176974138\r\n```\r\nAs you can observe this difference has an impact to the accuracy using the same weights. You can find the source code [here](https://github.com/dhorka/eccvspygeometric.git). One important thing, the data used for this tests is obtained from the original code of the ecc.\r\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/331/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/331/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/6199",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/6199/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/6199/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/6199/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/6199",
+      "id": 1487163253,
+      "node_id": "I_kwDOBlHMec5YpE91",
+      "number": 6199,
+      "title": "Inconsistent output of HeteroLinear when '\"is_sorted=False\"",
+      "user": {
+        "login": "toenshoff",
+        "id": 15213846,
+        "node_id": "MDQ6VXNlcjE1MjEzODQ2",
+        "avatar_url": "https://avatars.githubusercontent.com/u/15213846?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/toenshoff",
+        "html_url": "https://github.com/toenshoff",
+        "followers_url": "https://api.github.com/users/toenshoff/followers",
+        "following_url": "https://api.github.com/users/toenshoff/following{/other_user}",
+        "gists_url": "https://api.github.com/users/toenshoff/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/toenshoff/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/toenshoff/subscriptions",
+        "organizations_url": "https://api.github.com/users/toenshoff/orgs",
+        "repos_url": "https://api.github.com/users/toenshoff/repos",
+        "events_url": "https://api.github.com/users/toenshoff/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/toenshoff/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 712483737,
+          "node_id": "MDU6TGFiZWw3MTI0ODM3Mzc=",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/bug",
+          "name": "bug",
+          "color": "d73a4a",
+          "default": true,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2022-12-09T17:49:05Z",
+      "updated_at": "2022-12-12T06:59:43Z",
+      "closed_at": "2022-12-12T06:59:43Z",
+      "assignee": null,
+      "author_association": "CONTRIBUTOR",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "### 🐛 Describe the bug\r\n\r\nHey,\r\n\r\nwhile working with the HeteroLinear Module we observed some unexpected output behavior when using the \"is_sorted=False\" option.\r\n\r\nSpecifically, when pyg-lib is installed the forward pass of HeteroLinear internally sorts the vertices by type before before applying its transformation. However, the original vertex ordering is not restored before the output is returned. Instead, the updated vertex embeddings are returned in a new order sorted by type.\r\nThis seems like undesirable output behavior, since the permutation of the sorting is not returned and can also not be safely recovered by the user as the used sorting method is not stable.\r\n\r\nImportantly, this change in vertex order does not happen when pyg-lib is not installed, since then no sorting is used in the forward pass. Therefore, this behavior is inconsistent between different installations.\r\n\r\nHere is a minimal example to reproduce this:\r\n\r\n```python\r\nimport torch\r\nfrom torch_geometric.nn import HeteroLinear\r\n\r\nlin = HeteroLinear(1, 1, num_types=2, bias=False, is_sorted=False)\r\n\r\nx = torch.tensor([0.0, 1.0, 0.0]).view(-1, 1)\r\ntype_vec = torch.tensor([0, 1, 0])\r\n\r\ny = lin(x, type_vec)\r\nprint(y.detach().flatten().numpy())\r\n```\r\nWith pyg-lib installed we obtain:\r\n```\r\n[ 0.          0.         -0.76703763]\r\n```\r\n\r\nWithout pyg-lib installed we obtain:\r\n```\r\n[0.         0.58155024 0.        ]\r\n```\r\n\r\nNote that we did not fix a seed here, but crucially the order of the output is different in each case.\r\n\r\nIf this behavior is intended, it should be clearly specified in the documentation.\r\nOtherwise, we have created a pull request (https://github.com/pyg-team/pytorch_geometric/pull/6198) which returns nodes to their original order when pyg-lib is installed and \"is_sorted=False\": \r\n\r\nKind Regards,\r\nJan\r\n\r\n### Environment\r\n\r\n* PyG version: 2.2.0\r\n* PyTorch version: 1.13.0\r\n* OS: Ubuntu 22.04 LTS\r\n* Python version: 3.10\r\n* CUDA/cuDNN version: 11.7\r\n* How you installed PyTorch and PyG (`conda`, `pip`, source): conda\r\n* Any other relevant information (*e.g.*, version of `torch-scatter`):  pyg-lib-0.1.0 was installed\r\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/6199/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/6199/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5475",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5475/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5475/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5475/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/5475",
+      "id": 1378773471,
+      "node_id": "I_kwDOBlHMec5SLmnf",
+      "number": 5475,
+      "title": "The ERROR of to_dense_adj: ''RuntimeError: max(): Expected reduction dim to be specified for input.numel() == 0. Specify the reduction dim with the 'dim' argument.''",
+      "user": {
+        "login": "jiaruHithub",
+        "id": 56715103,
+        "node_id": "MDQ6VXNlcjU2NzE1MTAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/56715103?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/jiaruHithub",
+        "html_url": "https://github.com/jiaruHithub",
+        "followers_url": "https://api.github.com/users/jiaruHithub/followers",
+        "following_url": "https://api.github.com/users/jiaruHithub/following{/other_user}",
+        "gists_url": "https://api.github.com/users/jiaruHithub/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/jiaruHithub/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/jiaruHithub/subscriptions",
+        "organizations_url": "https://api.github.com/users/jiaruHithub/orgs",
+        "repos_url": "https://api.github.com/users/jiaruHithub/repos",
+        "events_url": "https://api.github.com/users/jiaruHithub/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/jiaruHithub/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 712483737,
+          "node_id": "MDU6TGFiZWw3MTI0ODM3Mzc=",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/bug",
+          "name": "bug",
+          "color": "d73a4a",
+          "default": true,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 1,
+      "created_at": "2022-09-20T03:43:10Z",
+      "updated_at": "2022-09-20T09:00:16Z",
+      "closed_at": "2022-09-20T09:00:16Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "### 🐛 Describe the bug\r\n\r\nmy code is \r\n```\r\ndataset = MoleculeDataset(\"dataset/\" + args.dataset, dataset=args.dataset)\r\nsmiles_list = pd.read_csv('dataset/' + args.dataset + '/processed/smiles.csv', header=None)[0].tolist()\r\ntrain_dataset, valid_dataset, test_dataset = scaffold_split(dataset, smiles_list, null_value=0, frac_train=0.8,frac_valid=0.1, frac_test=0.1)\r\n\r\nclass_graphs, y_idxs = split_class_graphs(train_dataset)\r\n```\r\n\r\nthe ```MoleculeDataset`` code\r\n```\r\nclass MoleculeDataset(InMemoryDataset):\r\n    def __init__(self,\r\n                 root,\r\n                 #data = None,\r\n                 #slices = None,\r\n                 transform=None,\r\n                 pre_transform=None,\r\n                 pre_filter=None,\r\n                 dataset='zinc250k',\r\n                 empty=False):\r\n        \"\"\"\r\n        Adapted from qm9.py. Disabled the download functionality\r\n        :param root: directory of the dataset, containing a raw and processed\r\n        dir. The raw dir should contain the file containing the smiles, and the\r\n        processed dir can either empty or a previously processed file\r\n        :param dataset: name of the dataset. Currently only implemented for\r\n        zinc250k, chembl_with_labels, tox21, hiv, bace, bbbp, clintox, esol,\r\n        freesolv, lipophilicity, muv, pcba, sider, toxcast\r\n        :param empty: if True, then will not load any data obj. For\r\n        initializing empty dataset\r\n        \"\"\"\r\n        self.dataset = dataset\r\n        self.root = root\r\n\r\n        super(MoleculeDataset, self).__init__(root, transform, pre_transform,\r\n                                                 pre_filter)\r\n        self.transform, self.pre_transform, self.pre_filter = transform, pre_transform, pre_filter\r\n\r\n        if not empty:\r\n            self.data, self.slices = torch.load(self.processed_paths[0])\r\n\r\n\r\n    def get(self, idx):\r\n        data = Data()\r\n        for key in self.data.keys:\r\n            item, slices = self.data[key], self.slices[key]\r\n            s = list(repeat(slice(None), item.dim()))\r\n            s[data.__cat_dim__(key, item)] = slice(slices[idx],\r\n                                                    slices[idx + 1])\r\n            data[key] = item[s]\r\n        return data\r\n\r\n\r\n    @property\r\n    def raw_file_names(self):\r\n        file_name_list = os.listdir(self.raw_dir)\r\n        # assert len(file_name_list) == 1     # currently assume we have a\r\n        # # single raw file\r\n        return file_name_list\r\n\r\n    @property\r\n    def processed_file_names(self):\r\n        return 'geometric_data_processed.pt'\r\n\r\n    def download(self):\r\n        raise NotImplementedError('Must indicate valid location of raw data. '\r\n                                  'No download allowed')\r\n\r\n    def process(self):\r\n        data_smiles_list = []\r\n        data_list = []\r\n\r\n        if self.dataset == 'zinc_standard_agent':\r\n            input_path = self.raw_paths[0]\r\n            input_df = pd.read_csv(input_path, sep=',', compression='gzip',\r\n                                   dtype='str')\r\n            smiles_list = list(input_df['smiles'])\r\n            zinc_id_list = list(input_df['zinc_id'])\r\n            for i in range(len(smiles_list)):\r\n                s = smiles_list[i]\r\n                # each example contains a single species\r\n                try:\r\n                    rdkit_mol = AllChem.MolFromSmiles(s)\r\n                    if rdkit_mol != None:  # ignore invalid mol objects\r\n                        # # convert aromatic bonds to double bonds\r\n                        # Chem.SanitizeMol(rdkit_mol,\r\n                        #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                        data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                        # manually add mol id\r\n                        id = int(zinc_id_list[i].split('ZINC')[1].lstrip('0'))\r\n                        data.id = torch.tensor(\r\n                            [id])  # id here is zinc id value, stripped of\r\n                        # leading zeros\r\n                        data_list.append(data)\r\n                        data_smiles_list.append(smiles_list[i])\r\n                except:\r\n                    continue\r\n        \r\n        elif self.dataset == \"zinc_sample\":\r\n            input_path = self.raw_paths[0]\r\n            with open(input_path, \"r\") as f:\r\n                data = f.readlines()\r\n            all_data = [x.strip() for x in data]\r\n            data_smiles_list = []\r\n            data_list = []\r\n            for i, item in enumerate(all_data):\r\n                s = item\r\n                try:\r\n                    rdkit_mol = AllChem.MolFromSmiles(s)\r\n                    if rdkit_mol != None:\r\n                        data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                        # manually add mol id\r\n                        id = i\r\n                        data.id = torch.tensor([id])  # id here is zinc id value, stripped of\r\n                        # leading zeros\r\n                        data_list.append(data)\r\n                        data_smiles_list.append(s)\r\n                except:\r\n                    continue\r\n\r\n        elif self.dataset == 'chembl_filtered':\r\n            ### get downstream test molecules.\r\n            from splitters import scaffold_split\r\n\r\n            ### \r\n            downstream_dir = [\r\n            'dataset/bace',\r\n            'dataset/bbbp',\r\n            'dataset/clintox',\r\n            'dataset/esol',\r\n            'dataset/freesolv',\r\n            'dataset/hiv',\r\n            'dataset/lipophilicity',\r\n            'dataset/muv',\r\n            # 'dataset/pcba/processed/smiles.csv',\r\n            'dataset/sider',\r\n            'dataset/tox21',\r\n            'dataset/toxcast'\r\n            ]\r\n\r\n            downstream_inchi_set = set()\r\n            for d_path in downstream_dir:\r\n                print(d_path)\r\n                dataset_name = d_path.split('/')[1]\r\n                downstream_dataset = MoleculeDataset(d_path, dataset=dataset_name)\r\n                downstream_smiles = pd.read_csv(os.path.join(d_path,\r\n                                                             'processed', 'smiles.csv'),\r\n                                                header=None)[0].tolist()\r\n\r\n                assert len(downstream_dataset) == len(downstream_smiles)\r\n\r\n                _, _, _, (train_smiles, valid_smiles, test_smiles) = scaffold_split(downstream_dataset, downstream_smiles, task_idx=None, null_value=0,\r\n                                   frac_train=0.8,frac_valid=0.1, frac_test=0.1,\r\n                                   return_smiles=True)\r\n\r\n                ### remove both test and validation molecules\r\n                remove_smiles = test_smiles + valid_smiles\r\n\r\n                downstream_inchis = []\r\n                for smiles in remove_smiles:\r\n                    species_list = smiles.split('.')\r\n                    for s in species_list:  # record inchi for all species, not just\r\n                     # largest (by default in create_standardized_mol_id if input has\r\n                     # multiple species)\r\n                        inchi = create_standardized_mol_id(s)\r\n                        downstream_inchis.append(inchi)\r\n                downstream_inchi_set.update(downstream_inchis)\r\n\r\n            smiles_list, rdkit_mol_objs, folds, labels = \\\r\n                _load_chembl_with_labels_dataset(os.path.join(self.root, 'raw'))\r\n\r\n            print('processing')\r\n            for i in range(len(rdkit_mol_objs)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                if rdkit_mol != None:\r\n                    # # convert aromatic bonds to double bonds\r\n                    # Chem.SanitizeMol(rdkit_mol,\r\n                    #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                    mw = Descriptors.MolWt(rdkit_mol)\r\n                    if 50 <= mw <= 900:\r\n                        inchi = create_standardized_mol_id(smiles_list[i])\r\n                        if inchi != None and inchi not in downstream_inchi_set:\r\n                            data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                            # manually add mol id\r\n                            data.id = torch.tensor(\r\n                                [i])  # id here is the index of the mol in\r\n                            # the dataset\r\n                            data.y = torch.tensor(labels[i, :])\r\n                            # fold information\r\n                            if i in folds[0]:\r\n                                data.fold = torch.tensor([0])\r\n                            elif i in folds[1]:\r\n                                data.fold = torch.tensor([1])\r\n                            else:\r\n                                data.fold = torch.tensor([2])\r\n                            data_list.append(data)\r\n                            data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'tox21':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_tox21_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                ## convert aromatic bonds to double bonds\r\n                #Chem.SanitizeMol(rdkit_mol,\r\n                                 #sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                # manually add mol id\r\n                data.id = torch.tensor(\r\n                    [i])  # id here is the index of the mol in\r\n                # the dataset\r\n                data.y = torch.tensor(labels[i, :])\r\n                data_list.append(data)\r\n                data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'hiv':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_hiv_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                # # convert aromatic bonds to double bonds\r\n                # Chem.SanitizeMol(rdkit_mol,\r\n                #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                # manually add mol id\r\n                data.id = torch.tensor(\r\n                    [i])  # id here is the index of the mol in\r\n                # the dataset\r\n                data.y = torch.tensor([labels[i]])\r\n                data_list.append(data)\r\n                data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'bace':\r\n            smiles_list, rdkit_mol_objs, folds, labels = \\\r\n                _load_bace_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                # # convert aromatic bonds to double bonds\r\n                # Chem.SanitizeMol(rdkit_mol,\r\n                #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                # manually add mol id\r\n                data.id = torch.tensor(\r\n                    [i])  # id here is the index of the mol in\r\n                # the dataset\r\n                data.y = torch.tensor([labels[i]])\r\n                data.fold = torch.tensor([folds[i]])\r\n                data_list.append(data)\r\n                data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'bbbp':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_bbbp_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                if rdkit_mol != None:\r\n                    # # convert aromatic bonds to double bonds\r\n                    # Chem.SanitizeMol(rdkit_mol,\r\n                    #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                    data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                    # manually add mol id\r\n                    data.id = torch.tensor(\r\n                        [i])  # id here is the index of the mol in\r\n                    # the dataset\r\n                    data.y = torch.tensor([labels[i]])\r\n                    data_list.append(data)\r\n                    data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'clintox':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_clintox_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                if rdkit_mol != None:\r\n                    # # convert aromatic bonds to double bonds\r\n                    # Chem.SanitizeMol(rdkit_mol,\r\n                    #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                    data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                    # manually add mol id\r\n                    data.id = torch.tensor(\r\n                        [i])  # id here is the index of the mol in\r\n                    # the dataset\r\n                    data.y = torch.tensor(labels[i, :])\r\n                    data_list.append(data)\r\n                    data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'esol':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_esol_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                # # convert aromatic bonds to double bonds\r\n                # Chem.SanitizeMol(rdkit_mol,\r\n                #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                # manually add mol id\r\n                data.id = torch.tensor(\r\n                    [i])  # id here is the index of the mol in\r\n                # the dataset\r\n                data.y = torch.tensor([labels[i]])\r\n                data_list.append(data)\r\n                data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'freesolv':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_freesolv_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                # # convert aromatic bonds to double bonds\r\n                # Chem.SanitizeMol(rdkit_mol,\r\n                #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                # manually add mol id\r\n                data.id = torch.tensor(\r\n                    [i])  # id here is the index of the mol in\r\n                # the dataset\r\n                data.y = torch.tensor([labels[i]])\r\n                data_list.append(data)\r\n                data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'lipophilicity':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_lipophilicity_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                # # convert aromatic bonds to double bonds\r\n                # Chem.SanitizeMol(rdkit_mol,\r\n                #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                # manually add mol id\r\n                data.id = torch.tensor(\r\n                    [i])  # id here is the index of the mol in\r\n                # the dataset\r\n                data.y = torch.tensor([labels[i]])\r\n                data_list.append(data)\r\n                data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'muv':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_muv_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                # # convert aromatic bonds to double bonds\r\n                # Chem.SanitizeMol(rdkit_mol,\r\n                #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                # manually add mol id\r\n                data.id = torch.tensor(\r\n                    [i])  # id here is the index of the mol in\r\n                # the dataset\r\n                data.y = torch.tensor(labels[i, :])\r\n                data_list.append(data)\r\n                data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'pcba':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_pcba_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                # # convert aromatic bonds to double bonds\r\n                # Chem.SanitizeMol(rdkit_mol,\r\n                #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                # manually add mol id\r\n                data.id = torch.tensor(\r\n                    [i])  # id here is the index of the mol in\r\n                # the dataset\r\n                data.y = torch.tensor(labels[i, :])\r\n                data_list.append(data)\r\n                data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'pcba_pretrain':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_pcba_dataset(self.raw_paths[0])\r\n            downstream_inchi = set(pd.read_csv(os.path.join(self.root,\r\n                                                            'downstream_mol_inchi_may_24_2019'),\r\n                                               sep=',', header=None)[0])\r\n            for i in range(len(smiles_list)):\r\n                if '.' not in smiles_list[i]:   # remove examples with\r\n                    # multiples species\r\n                    rdkit_mol = rdkit_mol_objs[i]\r\n                    mw = Descriptors.MolWt(rdkit_mol)\r\n                    if 50 <= mw <= 900:\r\n                        inchi = create_standardized_mol_id(smiles_list[i])\r\n                        if inchi != None and inchi not in downstream_inchi:\r\n                            # # convert aromatic bonds to double bonds\r\n                            # Chem.SanitizeMol(rdkit_mol,\r\n                            #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                            data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                            # manually add mol id\r\n                            data.id = torch.tensor(\r\n                                [i])  # id here is the index of the mol in\r\n                            # the dataset\r\n                            data.y = torch.tensor(labels[i, :])\r\n                            data_list.append(data)\r\n                            data_smiles_list.append(smiles_list[i])\r\n\r\n        # elif self.dataset == ''\r\n\r\n        elif self.dataset == 'sider':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_sider_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                # # convert aromatic bonds to double bonds\r\n                # Chem.SanitizeMol(rdkit_mol,\r\n                #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                # manually add mol id\r\n                data.id = torch.tensor(\r\n                    [i])  # id here is the index of the mol in\r\n                # the dataset\r\n                data.y = torch.tensor(labels[i, :])\r\n                data_list.append(data)\r\n                data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'toxcast':\r\n            smiles_list, rdkit_mol_objs, labels = \\\r\n                _load_toxcast_dataset(self.raw_paths[0])\r\n            for i in range(len(smiles_list)):\r\n                rdkit_mol = rdkit_mol_objs[i]\r\n                if rdkit_mol != None:\r\n                    # # convert aromatic bonds to double bonds\r\n                    # Chem.SanitizeMol(rdkit_mol,\r\n                    #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                    data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                    # manually add mol id\r\n                    data.id = torch.tensor(\r\n                        [i])  # id here is the index of the mol in\r\n                    # the dataset\r\n                    data.y = torch.tensor(labels[i, :])\r\n                    data_list.append(data)\r\n                    data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'ptc_mr':\r\n            input_path = self.raw_paths[0]\r\n            input_df = pd.read_csv(input_path, sep=',', header=None, names=['id', 'label', 'smiles'])\r\n            smiles_list = input_df['smiles']\r\n            labels = input_df['label'].values\r\n            for i in range(len(smiles_list)):\r\n                s = smiles_list[i]\r\n                rdkit_mol = AllChem.MolFromSmiles(s)\r\n                if rdkit_mol != None:  # ignore invalid mol objects\r\n                    # # convert aromatic bonds to double bonds\r\n                    # Chem.SanitizeMol(rdkit_mol,\r\n                    #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                    data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                    # manually add mol id\r\n                    data.id = torch.tensor(\r\n                        [i])\r\n                    data.y = torch.tensor([labels[i]])\r\n                    data_list.append(data)\r\n                    data_smiles_list.append(smiles_list[i])\r\n\r\n        elif self.dataset == 'mutag':\r\n            smiles_path = os.path.join(self.root, 'raw', 'mutag_188_data.can')\r\n            # smiles_path = 'dataset/mutag/raw/mutag_188_data.can'\r\n            labels_path = os.path.join(self.root, 'raw', 'mutag_188_target.txt')\r\n            # labels_path = 'dataset/mutag/raw/mutag_188_target.txt'\r\n            smiles_list = pd.read_csv(smiles_path, sep=' ', header=None)[0]\r\n            labels = pd.read_csv(labels_path, header=None)[0].values\r\n            for i in range(len(smiles_list)):\r\n                s = smiles_list[i]\r\n                rdkit_mol = AllChem.MolFromSmiles(s)\r\n                if rdkit_mol != None:  # ignore invalid mol objects\r\n                    # # convert aromatic bonds to double bonds\r\n                    # Chem.SanitizeMol(rdkit_mol,\r\n                    #                  sanitizeOps=Chem.SanitizeFlags.SANITIZE_KEKULIZE)\r\n                    data = mol_to_graph_data_obj_simple(rdkit_mol)\r\n                    # manually add mol id\r\n                    data.id = torch.tensor(\r\n                        [i])\r\n                    data.y = torch.tensor([labels[i]])\r\n                    data_list.append(data)\r\n                    data_smiles_list.append(smiles_list[i])\r\n                    \r\n\r\n        else:\r\n            raise ValueError('Invalid dataset name')\r\n\r\n        if self.pre_filter is not None:\r\n            data_list = [data for data in data_list if self.pre_filter(data)]\r\n\r\n        if self.pre_transform is not None:\r\n            data_list = [self.pre_transform(data) for data in data_list]\r\n\r\n        # write data_smiles_list in processed paths\r\n        data_smiles_series = pd.Series(data_smiles_list)\r\n        data_smiles_series.to_csv(os.path.join(self.processed_dir,\r\n                                               'smiles.csv'), index=False,\r\n                                  header=False)\r\n\r\n        data, slices = self.collate(data_list)\r\n        torch.save((data, slices), self.processed_paths[0])\r\n```\r\n\r\nthe ```scaffold_split``` code is\r\n```\r\ndef scaffold_split(dataset, smiles_list, task_idx=None, null_value=0,\r\n                   frac_train=0.8, frac_valid=0.1, frac_test=0.1,\r\n                   return_smiles=False):\r\n    \"\"\"\r\n    Adapted from https://github.com/deepchem/deepchem/blob/master/deepchem/splits/splitters.py\r\n    Split dataset by Bemis-Murcko scaffolds\r\n    This function can also ignore examples containing null values for a\r\n    selected task when splitting. Deterministic split\r\n    :param dataset: pytorch geometric dataset obj\r\n    :param smiles_list: list of smiles corresponding to the dataset obj\r\n    :param task_idx: column idx of the data.y tensor. Will filter out\r\n    examples with null value in specified task column of the data.y tensor\r\n    prior to splitting. If None, then no filtering\r\n    :param null_value: float that specifies null value in data.y to filter if\r\n    task_idx is provided\r\n    :param frac_train:\r\n    :param frac_valid:\r\n    :param frac_test:\r\n    :param return_smiles:\r\n    :return: train, valid, test slices of the input dataset obj. If\r\n    return_smiles = True, also returns ([train_smiles_list],\r\n    [valid_smiles_list], [test_smiles_list])\r\n    \"\"\"\r\n    np.testing.assert_almost_equal(frac_train + frac_valid + frac_test, 1.0)\r\n\r\n    if task_idx != None:\r\n        # filter based on null values in task_idx\r\n        # get task array\r\n        y_task = np.array([data.y[task_idx].item() for data in dataset])\r\n        # boolean array that correspond to non null values\r\n        non_null = y_task != null_value\r\n        smiles_list = list(compress(enumerate(smiles_list), non_null))\r\n    else:\r\n        non_null = np.ones(len(dataset)) == 1\r\n        smiles_list = list(compress(enumerate(smiles_list), non_null))\r\n\r\n    # create dict of the form {scaffold_i: [idx1, idx....]}\r\n    all_scaffolds = {}\r\n    for i, smiles in smiles_list:\r\n        scaffold = generate_scaffold(smiles, include_chirality=True)\r\n        if scaffold not in all_scaffolds:\r\n            all_scaffolds[scaffold] = [i]\r\n        else:\r\n            all_scaffolds[scaffold].append(i)\r\n\r\n    # sort from largest to smallest sets\r\n    all_scaffolds = {key: sorted(value) for key, value in all_scaffolds.items()}\r\n    all_scaffold_sets = [\r\n        scaffold_set for (scaffold, scaffold_set) in sorted(\r\n            all_scaffolds.items(), key=lambda x: (len(x[1]), x[1][0]), reverse=True)\r\n    ]\r\n\r\n    # get train, valid test indices\r\n    train_cutoff = frac_train * len(smiles_list)\r\n    valid_cutoff = (frac_train + frac_valid) * len(smiles_list)\r\n    train_idx, valid_idx, test_idx = [], [], []\r\n    for scaffold_set in all_scaffold_sets:\r\n        if len(train_idx) + len(scaffold_set) > train_cutoff:\r\n            if len(train_idx) + len(valid_idx) + len(scaffold_set) > valid_cutoff:\r\n                test_idx.extend(scaffold_set)\r\n            else:\r\n                valid_idx.extend(scaffold_set)\r\n        else:\r\n            train_idx.extend(scaffold_set)\r\n\r\n    assert len(set(train_idx).intersection(set(valid_idx))) == 0\r\n    assert len(set(test_idx).intersection(set(valid_idx))) == 0\r\n\r\n    train_dataset = dataset[torch.tensor(train_idx)]\r\n    valid_dataset = dataset[torch.tensor(valid_idx)]\r\n    test_dataset = dataset[torch.tensor(test_idx)]\r\n\r\n    if not return_smiles:\r\n        return train_dataset, valid_dataset, test_dataset\r\n    else:\r\n        train_smiles = [smiles_list[i][1] for i in train_idx]\r\n        valid_smiles = [smiles_list[i][1] for i in valid_idx]\r\n        test_smiles = [smiles_list[i][1] for i in test_idx]\r\n        return train_dataset, valid_dataset, test_dataset, (train_smiles,\r\n                                                            valid_smiles,\r\n                                                            test_smiles)\r\n\r\ndef random_scaffold_split(dataset, smiles_list, task_idx=None, null_value=0,\r\n                   frac_train=0.8, frac_valid=0.1, frac_test=0.1, seed=0):\r\n    \"\"\"\r\n    Adapted from https://github.com/pfnet-research/chainer-chemistry/blob/master/chainer_chemistry/dataset/splitters/scaffold_splitter.py\r\n    Split dataset by Bemis-Murcko scaffolds\r\n    This function can also ignore examples containing null values for a\r\n    selected task when splitting. Deterministic split\r\n    :param dataset: pytorch geometric dataset obj\r\n    :param smiles_list: list of smiles corresponding to the dataset obj\r\n    :param task_idx: column idx of the data.y tensor. Will filter out\r\n    examples with null value in specified task column of the data.y tensor\r\n    prior to splitting. If None, then no filtering\r\n    :param null_value: float that specifies null value in data.y to filter if\r\n    task_idx is provided\r\n    :param frac_train:\r\n    :param frac_valid:\r\n    :param frac_test:\r\n    :param seed;\r\n    :return: train, valid, test slices of the input dataset obj\r\n    \"\"\"\r\n\r\n    np.testing.assert_almost_equal(frac_train + frac_valid + frac_test, 1.0)\r\n\r\n    if task_idx != None:\r\n        # filter based on null values in task_idx\r\n        # get task array\r\n        y_task = np.array([data.y[task_idx].item() for data in dataset])\r\n        # boolean array that correspond to non null values\r\n        non_null = y_task != null_value\r\n        smiles_list = list(compress(enumerate(smiles_list), non_null))\r\n    else:\r\n        non_null = np.ones(len(dataset)) == 1\r\n        smiles_list = list(compress(enumerate(smiles_list), non_null))\r\n\r\n    rng = np.random.RandomState(seed)\r\n\r\n    scaffolds = defaultdict(list)\r\n    for ind, smiles in smiles_list:\r\n        scaffold = generate_scaffold(smiles, include_chirality=True)\r\n        scaffolds[scaffold].append(ind)\r\n\r\n    scaffold_sets = rng.permutation(list(scaffolds.values()))\r\n\r\n    n_total_valid = int(np.floor(frac_valid * len(dataset)))\r\n    n_total_test = int(np.floor(frac_test * len(dataset)))\r\n\r\n    train_idx = []\r\n    valid_idx = []\r\n    test_idx = []\r\n\r\n    for scaffold_set in scaffold_sets:\r\n        if len(valid_idx) + len(scaffold_set) <= n_total_valid:\r\n            valid_idx.extend(scaffold_set)\r\n        elif len(test_idx) + len(scaffold_set) <= n_total_test:\r\n            test_idx.extend(scaffold_set)\r\n        else:\r\n            train_idx.extend(scaffold_set)\r\n\r\n    train_dataset = dataset[torch.tensor(train_idx)]\r\n    valid_dataset = dataset[torch.tensor(valid_idx)]\r\n    test_dataset = dataset[torch.tensor(test_idx)]\r\n\r\n    return train_dataset, valid_dataset, test_dataset\r\n```\r\n\r\nthe ```split_class_graphs``` code is:\r\n```\r\ndef split_class_graphs(dataset):\r\n\r\n    y_list = []\r\n    for data in dataset:\r\n        y_list.append(tuple(data.y.tolist()))   \r\n    num_classes = len(set(y_list))\r\n    \r\n    y_cetos = set(y_list)\r\n    y_idxs = []\r\n    for y_ceto in y_cetos:\r\n        y_idxs.append([idx for idx, y in enumerate(y_list) if y == y_ceto])\r\n    # for i in y_idxs:\r\n    #     print(len(i))\r\n    #print(y_list)\r\n\r\n    all_graphs_list = []\r\n    for graph in dataset:\r\n        adj = to_dense_adj(graph.edge_index)[0].numpy()\r\n        #print(adj)\r\n        all_graphs_list.append(adj)\r\n\r\n    class_graphs = []\r\n    for class_label in set(y_list):\r\n        c_graph_list = [all_graphs_list[i] for i in range(len(y_list)) if y_list[i] == class_label]\r\n        print(len(c_graph_list))\r\n        class_graphs.append( ( np.array(class_label), c_graph_list ) )\r\n\r\n    return class_graphs, y_idxs\r\n```\r\n\r\nand report the error:\r\n\r\n```\r\n[03:31:05] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:05] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:06] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:06] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:06] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:06] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:06] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:06] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:06] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:06] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:06] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:07] WARNING: not removing hydrogen atom without neighbors\r\n[03:31:07] WARNING: not removing hydrogen atom without neighbors\r\nTraceback (most recent call last):\r\n  File \"graohon_get.py\", line 208, in <module>\r\n    class_graphs, y_idxs = split_class_graphs(train_dataset)\r\n  File \"graohon_get.py\", line 64, in split_class_graphs\r\n    adj = to_dense_adj(graph.edge_index)[0].numpy()\r\n  File \"/opt/conda/lib/python3.7/site-packages/torch_geometric/utils/to_dense_adj.py\", line 22, in to_dense_adj\r\n    batch = edge_index.new_zeros(edge_index.max().item() + 1)\r\nRuntimeError: max(): Expected reduction dim to be specified for input.numel() == 0. Specify the reduction dim with the 'dim' argument.\r\n```\r\nThe dataset is contained in MoleculeNet, I download in ```http://snap.stanford.edu/gnn-pretrain/data/chem_dataset.zip```\r\nif run with ``` Tox21 ToxCast SIDER ClinTox MUV``` datasets will report this error, but datasets ```BACE BBBP HIV``` will not reported.\r\nCould you help me ?\r\nthanks!\r\n\r\n### Environment\r\n\r\n* PyG version: 2.0.4\r\n* PyTorch version:1.9.0\r\n* OS:centos7\r\n* Python version:3.7.4\r\n* CUDA/cuDNN version:20.2\r\n* How you installed PyTorch and PyG (`conda`, `pip`, source):pip\r\n* Any other relevant information (*e.g.*, version of `torch-scatter`):\r\ntorch                   1.9.0\r\ntorch-cluster           1.6.0\r\ntorch-geometric         2.0.4\r\ntorch-points-kernels    0.6.10\r\ntorch-scatter           2.0.9\r\ntorch-sparse            0.6.12\r\ntorch-spline-conv       1.2.1",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5475/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/5475/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/4301",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/4301/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/4301/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/4301/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/4301",
+      "id": 1174079903,
+      "node_id": "I_kwDOBlHMec5F-wmf",
+      "number": 4301,
+      "title": "data dimension was changed and  peculiar value added",
+      "user": {
+        "login": "CaiYitao",
+        "id": 65641330,
+        "node_id": "MDQ6VXNlcjY1NjQxMzMw",
+        "avatar_url": "https://avatars.githubusercontent.com/u/65641330?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/CaiYitao",
+        "html_url": "https://github.com/CaiYitao",
+        "followers_url": "https://api.github.com/users/CaiYitao/followers",
+        "following_url": "https://api.github.com/users/CaiYitao/following{/other_user}",
+        "gists_url": "https://api.github.com/users/CaiYitao/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/CaiYitao/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/CaiYitao/subscriptions",
+        "organizations_url": "https://api.github.com/users/CaiYitao/orgs",
+        "repos_url": "https://api.github.com/users/CaiYitao/repos",
+        "events_url": "https://api.github.com/users/CaiYitao/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/CaiYitao/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 712483737,
+          "node_id": "MDU6TGFiZWw3MTI0ODM3Mzc=",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/bug",
+          "name": "bug",
+          "color": "d73a4a",
+          "default": true,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 9,
+      "created_at": "2022-03-18T22:22:28Z",
+      "updated_at": "2022-03-20T11:40:35Z",
+      "closed_at": "2022-03-20T11:40:35Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "### 🐛 Describe the bug\n\n\r\nmy code is as following:\r\n```py\r\nclass TOX21(InMemoryDataset):\r\n    def __init__(self, root, partition, lmax_attr,transform=None, pre_transform=None):\r\n        # assert target in targets\r\n        assert partition in [\"train\", \"test\", \"val\"]\r\n        self.root = root\r\n        # self.target = target\r\n        self.partition = partition\r\n        # self.feature_type = feature_type\r\n        self.lmax_attr = lmax_attr\r\n        self.attr_irreps = Irreps.spherical_harmonics(lmax_attr)\r\n        # transform = TargetGetter(self.target)\r\n\r\n        super().__init__(root, transform, pre_transform)\r\n\r\n        self.data, self.slices = torch.load(self.processed_paths[0])\r\n\r\n    @property\r\n    def raw_file_names(self) -> List[str]:\r\n        return [\"/system/user/publicwork/confdata.pkl\",\"/system/user/publicwork/PracticalAI/tox21.csv\"]\r\n\r\n\r\n    @ property\r\n    def processed_file_names(self) -> str:\r\n        return [\"_\".join([self.partition,  \"l=\"+str(self.lmax_attr)]) + '.pt']   \r\n    \r\n    def download(self):\r\n        pass\r\n\r\n    def process(self):\r\n        try:\r\n            import rdkit\r\n            from rdkit import Chem\r\n            from rdkit.Chem.rdchem import HybridizationType\r\n            from rdkit.Chem.rdchem import BondType as BT\r\n            from rdkit import RDLogger\r\n            RDLogger.DisableLog('rdApp.*')\r\n        except ImportError:\r\n            print(\"Please install rdkit\")\r\n            return\r\n\r\n        with open(self.raw_paths[1], 'rb') as f:\r\n            tox21 = pd.read_csv(f)\r\n            target = tox21.iloc[:,7:].values\r\n            #map nan to 0, 0 to -1, 1 to 1\r\n            for i in range(len(target)):\r\n                for j in range(len(target[i])):\r\n                    if np.isnan(target[i][j]):\r\n                        target[i][j] = 0\r\n                    elif target[i][j] == 0:\r\n                        target[i][j] = -1\r\n                    elif target[i][j] == 1:\r\n                        target[i][j] = 1\r\n            target = torch.tensor(target, dtype=torch.float)\r\n            # target = torch.cat([target[:, 3:], target[:, :3]], dim=-1)\r\n            # target = target * conversion.view(1, -1)\r\n\r\n        with open(self.raw_paths[0], 'rb') as f:\r\n            conf = pickle.load(f)\r\n\r\n        # types = {'H': 0, 'C': 1, 'N': 2, 'O': 3, 'F': 4} \r\n\r\n        types = {'H': 0,  'C': 1,  'N': 2,  'O': 3,  'F': 4,  'P': 5,  'S': 6,  'Ag': 7,  'Al': 8,  'As': 9, \r\n         'Au': 10,  'B': 11,  'Ba': 12,  'Be': 13,  'Bi': 14,  'Br': 15,  'Ca': 16,  'Cd': 17,  'Cl': 18,\r\n         'Co': 19,  'Cr': 20,  'Cu': 21,  'Dy': 22,  'Eu': 23,  'Fe': 24,  'Gd': 25,  'Ge': 26,  'Hg': 27,  \r\n         'I': 28,  'In': 29,  'K': 30,  'Li': 31,  'Mg': 32,  'Mn': 33,  'Mo': 34,  'Na': 35,  'Nd': 36,  \r\n         'Ni': 37,  'Pb': 38,  'Pd': 39,  'Pt': 40,  'Ru': 41,  'Sb': 42,  'Sc': 43,  'Se': 44,  'Si': 45,  \r\n         'Sn': 46,  'Ti': 47,  'Tl': 48,  'V': 49,  'Yb': 50,  'Zn': 51,  'Zr': 52}\r\n\r\n        data_list = []\r\n        train, valid, test = dict(list(conf.items())[0:11704]), dict(list(conf.items())[11704:11999]), dict(list(conf.items())[11999:])\r\n        traintarget, validtarget, testtarget = target[0:11704,:], target[11704:11999],target[11999:]\r\n        indices = {\"train\": train, \"valid\": valid, \"test\": test}\r\n        targetindices = {\"train\": traintarget, \"valid\": validtarget, \"test\": testtarget}\r\n    \r\n        Nmols = len(conf)\r\n        np.random.seed(0)\r\n        # data_perm = np.random.permutation(Nmols)\r\n   \r\n        for i,((name,confdata),target) in enumerate(zip(indices[self.partition].items(), targetindices[self.partition])):\r\n         \r\n            mol = confdata.rdmol\r\n            N = mol.GetNumAtoms()            \r\n            pos = confdata.pos\r\n            edge_index = confdata.edge_index\r\n\r\n            type_idx = []\r\n            atomic_number = []\r\n            aromatic = []\r\n            sp = []\r\n            sp2 = []\r\n            sp3 = []\r\n            num_hs = []\r\n            for atom in mol.GetAtoms():\r\n                # if atom.GetSymbol() in types.keys():\r\n                type_idx.append(types[atom.GetSymbol()])\r\n                atomic_number.append(atom.GetAtomicNum())\r\n                aromatic.append(1 if atom.GetIsAromatic() else 0)\r\n                hybridization = atom.GetHybridization()\r\n                sp.append(1 if hybridization == HybridizationType.SP else 0)\r\n                sp2.append(1 if hybridization == HybridizationType.SP2 else 0)\r\n                sp3.append(1 if hybridization == HybridizationType.SP3 else 0)\r\n            \r\n            z = torch.tensor(atomic_number, dtype=torch.long)       \r\n            row, col = edge_index\r\n            hs = (z == 1).to(torch.float)\r\n            num_hs = scatter(hs[row], col, dim_size=N).tolist()\r\n\r\n            x1 = F.one_hot(torch.tensor(type_idx), num_classes=len(types))\r\n            x2 = torch.tensor([atomic_number, aromatic, sp, sp2, sp3, num_hs],\r\n                                dtype=torch.float).t().contiguous()\r\n            x = torch.cat([x1.to(torch.float), x2], dim=-1)\r\n            y = target.unsqueeze(0)\r\n            # name = mol.GetProp('_Name')\r\n            # name = tox21[\"sdftitle\"][i]\r\n            name = name\r\n\r\n            edge_attr, node_attr, edge_dist = self.get_O3_attr(edge_index, pos, self.attr_irreps)\r\n\r\n            data = Data(x=x, pos=pos, edge_index=edge_index, edge_attr=edge_attr,\r\n                        node_attr=node_attr, additional_message_features=edge_dist, y=y, name=name, index=i)\r\n            data_list.append(data)\r\n\r\n        torch.save(self.collate(data_list), self.processed_paths[0])\r\n    \r\n    def get_O3_attr(self, edge_index, pos, attr_irreps):\r\n        \"\"\" Creates spherical harmonic edge attributes and node attributes for the SEGNN \"\"\"\r\n        rel_pos = pos[edge_index[0]] - pos[edge_index[1]]  # pos_j - pos_i (note in edge_index stores tuples like (j,i))\r\n        edge_dist = rel_pos.pow(2).sum(-1, keepdims=True)\r\n        edge_attr = spherical_harmonics(attr_irreps, rel_pos, normalize=True,\r\n                                        normalization='component')  # Unnormalised for now\r\n        node_attr = scatter(edge_attr, edge_index[1], dim=0, reduce=\"mean\")\r\n        return edge_attr, node_attr, edge_dist\r\n```\r\n\r\nI found that after load this dataset, the dimension of target `y` changed from 12 to 13, and it automatically add one peculiar value into y data, which is strange, I never intend to to so. \r\n\r\n<img width=\"458\" alt=\"image\" src=\"https://user-images.githubusercontent.com/65641330/159091184-fe2f5367-c073-4bb5-acac-cf690ba586f4.png\">\r\nsee the first value 2 is this peculiar value added, and I am not sure if it did this to other data.\r\n\r\nIf I remove the unsqueeze(0) in y= target.unsqueeze(0), it will give \r\n```IndexError: index 13 is out of bounds for dimension 0 with size 13```\r\nWhat could be the problem?  \r\n\r\n\n\n### Environment\n\n* PyG version: conda forge\r\n* PyTorch version: 1.9\r\n* OS: Linux\r\n* Python version: 3.9\r\n* CUDA/cuDNN version: 1.0\r\n* How you installed PyTorch and PyG (`conda`, `pip`, source): \r\n* Any other relevant information (*e.g.*, version of `torch-scatter`):\r\n\r\n\r\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/4301/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/4301/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/182",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/182/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/182/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/182/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/182",
+      "id": 428339539,
+      "node_id": "MDU6SXNzdWU0MjgzMzk1Mzk=",
+      "number": 182,
+      "title": "PointNet++ implementation",
+      "user": {
+        "login": "kuynzereb",
+        "id": 28061164,
+        "node_id": "MDQ6VXNlcjI4MDYxMTY0",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28061164?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/kuynzereb",
+        "html_url": "https://github.com/kuynzereb",
+        "followers_url": "https://api.github.com/users/kuynzereb/followers",
+        "following_url": "https://api.github.com/users/kuynzereb/following{/other_user}",
+        "gists_url": "https://api.github.com/users/kuynzereb/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/kuynzereb/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/kuynzereb/subscriptions",
+        "organizations_url": "https://api.github.com/users/kuynzereb/orgs",
+        "repos_url": "https://api.github.com/users/kuynzereb/repos",
+        "events_url": "https://api.github.com/users/kuynzereb/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/kuynzereb/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 7,
+      "created_at": "2019-04-02T16:58:23Z",
+      "updated_at": "2021-10-22T10:45:22Z",
+      "closed_at": "2019-04-02T18:18:08Z",
+      "assignee": null,
+      "author_association": "CONTRIBUTOR",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "## ❓ Questions & Help\r\n\r\nHi, I have some questions about implementation of PointNet++ in examples. First one: now there are the following lines:\r\n```\r\nidx = fps(pos, batch, ratio=0.5)  # 512 points\r\nedge_index = radius(\r\n    pos[idx], pos, 0.1, batch[idx], batch, max_num_neighbors=64)\r\n```\r\n\r\nIf I understand correctly, it means that we find 64 sampled points for each point from initial point cloud. But in original pointnet++ we should find 64 points from initial point cloud for each sampled point (which is not the same thing). So it seems for me that more correct way is:\r\n```\r\nidx = fps(pos, batch, ratio=0.5)  # 512 points\r\nedge_index = radius(\r\n    pos, pos[idx], 0.1, batch, batch[idx], max_num_neighbors=64)\r\n```\r\nThe second question. It seems for me that there is a problem with indices.\r\n```\r\nidx = fps(pos, batch, ratio=0.25)  # 128 points\r\nedge_index = radius(\r\n    pos[idx], pos, 0.2, batch[idx], batch, max_num_neighbors=64)\r\nN, M = pos.size(0), idx.size(0)\r\n```\r\nLet's assume that `idx` has size 1, so there is only 1 sampled point. Then `pos[idx]` also has size 1, which means, that `edge_index[1]` is `[0, ..., 0]`. Now, look at the next line\r\n```\r\nx = F.relu(self.local_sa2(x, pos, edge_index, size=(N, M)))\r\n```\r\nInside PointConv propagate we now have `x_i = [x[0], ..., x[0]]`, whereas it should be `[x[idx[0]], ..., x[idx[0]]]`. If my understanding is correct, then there is a problem with local and global indices of sampled points.\r\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/182/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/182/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/1690",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/1690/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/1690/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/1690/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/1690",
+      "id": 712779546,
+      "node_id": "MDU6SXNzdWU3MTI3Nzk1NDY=",
+      "number": 1690,
+      "title": "Size mismatch when using GCNConv with batch size > 1",
+      "user": {
+        "login": "guiolpei",
+        "id": 47031650,
+        "node_id": "MDQ6VXNlcjQ3MDMxNjUw",
+        "avatar_url": "https://avatars.githubusercontent.com/u/47031650?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/guiolpei",
+        "html_url": "https://github.com/guiolpei",
+        "followers_url": "https://api.github.com/users/guiolpei/followers",
+        "following_url": "https://api.github.com/users/guiolpei/following{/other_user}",
+        "gists_url": "https://api.github.com/users/guiolpei/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/guiolpei/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/guiolpei/subscriptions",
+        "organizations_url": "https://api.github.com/users/guiolpei/orgs",
+        "repos_url": "https://api.github.com/users/guiolpei/repos",
+        "events_url": "https://api.github.com/users/guiolpei/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/guiolpei/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 2,
+      "created_at": "2020-10-01T12:06:32Z",
+      "updated_at": "2020-10-03T15:58:35Z",
+      "closed_at": "2020-10-03T15:56:22Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "## (Not really a) 🐛 Bug\r\n\r\nWhen using batch training with GCNConv and batch size > 1, a size mismatch error occurs.\r\n\r\n## To Reproduce\r\n\r\nWe have defined a NN using GCNConv. We are using it to process fixed 24-node graphs.\r\n\r\nThe stack trace of the error is:\r\n\r\n```\r\nTraceback (most recent call last):\r\n  File \"trainStabilityPredictor.py\", line 673, in <module>\r\n    stability_model, stability_losses = train_stability_model_cv(stability_model_params)\r\n  File \"trainStabilityPredictor.py\", line 420, in train_stability_model_cv\r\n    output_ = stability_model(sample)\r\n  File \"/xxx/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/nn/modules/module.py\", line 722, in _call_impl\r\n    result = self.forward(*input, **kwargs)\r\n  File \"/xxx/training/network/gcn_network.py\", line 43, in forward\r\n    data.x = self.fc1(data.x.view(-1))\r\n  File \"/xxx/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/nn/modules/module.py\", line 722, in _call_impl\r\n    result = self.forward(*input, **kwargs)\r\n  File \"/xxx/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/nn/modules/linear.py\", line 91, in forward\r\n    return F.linear(input, self.weight, self.bias)\r\n  File \"/xxx/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/nn/functional.py\", line 1676, in linear\r\n    output = input.matmul(weight.t())\r\nRuntimeError: mat1 dim 1 must match mat2 dim 0\r\n```\r\n\r\nIt works fine when batch size is 1.\r\n\r\nBatch generation seems wrong. When batch is 1:\r\n\r\n`Batch(batch=[24], edge_index=[2, 130], pos=[24, 3], x=[24, 2], y=[1])`\r\n\r\nBut when batch is 10:\r\n\r\n`Batch(batch=[240], edge_index=[2, 1300], pos=[240, 3], x=[240, 2], y=[10])`\r\n\r\nIt seems it is not correctly generated, instead the elements have been concatenated.\r\n\r\n## Environment\r\n\r\n* OS: Ubuntu 16.04 LTS\r\n* Python version: 3.8.5\r\n* PyTorch version: 1.6\r\n* CUDA/cuDNN version: 9.2/7.6.3\r\n* GCC version: 7.3.0\r\n* PyTorch Geometric version: 1.6.1\r\n\r\n## Code\r\n\r\nNetwork definition:\r\n\r\n```\r\nclass GCN_test(torch.nn.Module):\r\n\r\n    def __init__(self, numFeatures, numClasses):\r\n\r\n        super().__init__()\r\n\r\n        self.conv1 = GCNConv(numFeatures, 8)\r\n        self.conv2 = GCNConv(8, 8)\r\n        self.conv3 = GCNConv(8, 16)\r\n        self.conv4 = GCNConv(16, 16)\r\n        self.conv5 = GCNConv(16, 32)\r\n        self.fc1 = torch.nn.Linear(768, 128)\r\n        self.fc2 = torch.nn.Linear(128, numClasses * 1)\r\n\r\n    def forward(self, data):\r\n        data.x = F.relu(self.conv1(data.x, data.edge_index))\r\n        data.x = F.relu(self.conv2(data.x, data.edge_index))\r\n        data.x = F.relu(self.conv3(data.x, data.edge_index))\r\n        data.x = F.relu(self.conv4(data.x, data.edge_index))\r\n        data.x = F.relu(self.conv5(data.x, data.edge_index))\r\n\r\n        log.debug(data.x.view(-1).size())\r\n        data.x = self.fc1(data.x.view(-1))\r\n        #data.x = F.dropout(data.x, training=self.training)\r\n        data.x = self.fc2(data.x)\r\n        #data.x = F.dropout(data.x, training=self.training)\r\n        log.debug(data.x.size())\r\n        data.x = F.log_softmax(data.x.view(1, 2), dim=1)\r\n        log.debug(data.x.size())\r\n        return data.x\r\n```\r\n\r\nDataLoader:\r\n\r\n```\r\ntrain_sampler_ = RandomSampler(training_fold_idx_)\r\n\r\ntrain_loader_ = DataLoader(stability_dataset, batch_size=batch_size, sampler=train_sampler_,\r\n                         num_workers=train_params['num_workers'])\r\n```\r\n\r\nCode where the error occurs:\r\n\r\n```\r\nfor batch in train_loader_:\r\n\r\n                samples = [batch]\r\n\r\n                for sample in samples:\r\n\r\n                    sample = sample.to(device)\r\n                    optimizer_.zero_grad()\r\n                    **output_ = stability_model(sample)**\r\n```\r\n\r\n## Disclaimer\r\n\r\nThis may not be a bug, instead some problem with our implementation. \r\n\r\nAny insight will be much appreciated. Thanks in advance.",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/1690/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/1690/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/630",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/630/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/630/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/630/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/630",
+      "id": 481988210,
+      "node_id": "MDU6SXNzdWU0ODE5ODgyMTA=",
+      "number": 630,
+      "title": "Default flow direction and spatial transforms",
+      "user": {
+        "login": "rubenwiersma",
+        "id": 9115743,
+        "node_id": "MDQ6VXNlcjkxMTU3NDM=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/9115743?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/rubenwiersma",
+        "html_url": "https://github.com/rubenwiersma",
+        "followers_url": "https://api.github.com/users/rubenwiersma/followers",
+        "following_url": "https://api.github.com/users/rubenwiersma/following{/other_user}",
+        "gists_url": "https://api.github.com/users/rubenwiersma/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/rubenwiersma/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/rubenwiersma/subscriptions",
+        "organizations_url": "https://api.github.com/users/rubenwiersma/orgs",
+        "repos_url": "https://api.github.com/users/rubenwiersma/repos",
+        "events_url": "https://api.github.com/users/rubenwiersma/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/rubenwiersma/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 5,
+      "created_at": "2019-08-18T12:27:00Z",
+      "updated_at": "2019-08-18T21:11:58Z",
+      "closed_at": "2019-08-18T16:08:51Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "## 🐛 Bug\r\n\r\nFirst of all: I have really enjoyed and benefited from working with PyTorch Geometric in my thesis. Great work!\r\n\r\nNow the issue: The spatial transforms (like transforms.Cartesian and transforms.Polar) compute the coördinates for target nodes relative to the source nodes, i.e. in the tangent plane of the source nodes:\r\n```\r\n cart = pos[col] - pos[row]\r\n```\r\nHowever, the default flow for MessagePassing networks is from source to target. For example, for nn.GMMConv, it seems to me that the aggregation step therefore uses the wrong coordinates (target -> src, instead of src -> target).\r\n\r\n## Additional context\r\nThis issue does not seem to break the performance of GMMConv. I ran into this, as I am working on a technique that assumes we are working in the tangent plane of `src` (as is assumed in Polar and Cartesian transforms) and breaks when this assumption is broken.\r\n\r\n## Additional thoughts\r\nIt might help to rename `col` and `row` variable names to `src` and `target` to more easily distinguish between the two and know what each index is referring to.\r\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/630/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/630/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/629",
+      "repository_url": "https://api.github.com/repos/pyg-team/pytorch_geometric",
+      "labels_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/629/labels{/name}",
+      "comments_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/629/comments",
+      "events_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/629/events",
+      "html_url": "https://github.com/pyg-team/pytorch_geometric/issues/629",
+      "id": 481858641,
+      "node_id": "MDU6SXNzdWU0ODE4NTg2NDE=",
+      "number": 629,
+      "title": "device of 'edge_index' is changed when' edge_index' is empty",
+      "user": {
+        "login": "ZongweiZhou1",
+        "id": 28044312,
+        "node_id": "MDQ6VXNlcjI4MDQ0MzEy",
+        "avatar_url": "https://avatars.githubusercontent.com/u/28044312?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ZongweiZhou1",
+        "html_url": "https://github.com/ZongweiZhou1",
+        "followers_url": "https://api.github.com/users/ZongweiZhou1/followers",
+        "following_url": "https://api.github.com/users/ZongweiZhou1/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ZongweiZhou1/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ZongweiZhou1/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ZongweiZhou1/subscriptions",
+        "organizations_url": "https://api.github.com/users/ZongweiZhou1/orgs",
+        "repos_url": "https://api.github.com/users/ZongweiZhou1/repos",
+        "events_url": "https://api.github.com/users/ZongweiZhou1/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ZongweiZhou1/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 712483737,
+          "node_id": "MDU6TGFiZWw3MTI0ODM3Mzc=",
+          "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/labels/bug",
+          "name": "bug",
+          "color": "d73a4a",
+          "default": true,
+          "description": ""
+        }
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 8,
+      "created_at": "2019-08-17T07:27:06Z",
+      "updated_at": "2019-08-24T16:33:09Z",
+      "closed_at": "2019-08-24T16:33:08Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "## 🐛 Bug\r\n\r\n<!-- A clear and concise description of what the bug is. -->\r\n\r\n## To Reproduce\r\n\r\nSteps to reproduce the behavior:\r\n\r\n\r\n```\r\nimport torch\r\nfrom torch_geometric.nn import EdgeConv\r\nimport torch.nn as nn\r\nimport torch.nn.functional as F\r\nfrom torch_geometric.data import Data\r\n\r\nclass MLP(nn.Module):\r\n    def __init__(self, F_in, F_out):\r\n        super(MLP, self).__init__()\r\n        self.mlp = nn.Sequential(\r\n            nn.Linear(2 * F_in, F_out),\r\n            nn.ReLU(inplace=True))\r\n\r\n    def forward(self, x):\r\n        return self.mlp(x)\r\n\r\nclass TestBlock(nn.Module):\r\n    def __init__(self, F_in, F_out):\r\n        super(TestBlock, self).__init__()\r\n        self.edge_conv1 = EdgeConv(MLP(F_in, F_out),aggr='mean')\r\n        self.edge_conv2 = EdgeConv(MLP(F_out, F_out), aggr='mean') \r\n        self.fc = nn.Linear(F_out, 16)\r\n        \r\n    def forward(self, data):\r\n        x = data.x\r\n        edge_index = data.edge_index \r\n        x = self.edge_conv1(x, edge_index)\r\n        x = self.fc(self.edge_conv2(x, edge_index))\r\n        return x\r\n\r\nd = torch.device('cuda:1')\r\nblock = TestBlock(4, 8).to(d)\r\nedge_index = torch.tensor([[], []], dtype=torch.long)\r\ndata = Data(x=x, edge_index=edge_index)\r\ny = block(data.to(d))\r\n```\r\n\r\n\r\n<!-- If you have a code sample, error messages, stack traces, please provide it here as well. -->\r\n```\r\n---------------------------------------------------------------------------\r\nRuntimeError                              Traceback (most recent call last)\r\n<ipython-input-34-d1a9b2a113f2> in <module>\r\n      1 edge_index = torch.tensor([[], []], dtype=torch.long)\r\n      2 data = Data(x=x, edge_index=edge_index)\r\n----> 3 y = block(data.to(d))\r\n      4 print(y)\r\n      5 print(data.edge_index.data)\r\n\r\n~/miniconda3/envs/py36_pytorch110/lib/python3.6/site-packages/torch/nn/modules/module.py in __call__(self, *input, **kwargs)\r\n    491             result = self._slow_forward(*input, **kwargs)\r\n    492         else:\r\n--> 493             result = self.forward(*input, **kwargs)\r\n    494         for hook in self._forward_hooks.values():\r\n    495             hook_result = hook(self, input, result)\r\n\r\n<ipython-input-31-b450444a54a6> in forward(self, data)\r\n     24         edge_index = data.edge_index\r\n     25         x = self.edge_conv1(x, edge_index)\r\n---> 26         x = self.fc(self.edge_conv2(x, edge_index))\r\n     27         return x\r\n\r\n~/miniconda3/envs/py36_pytorch110/lib/python3.6/site-packages/torch/nn/modules/module.py in __call__(self, *input, **kwargs)\r\n    491             result = self._slow_forward(*input, **kwargs)\r\n    492         else:\r\n--> 493             result = self.forward(*input, **kwargs)\r\n    494         for hook in self._forward_hooks.values():\r\n    495             hook_result = hook(self, input, result)\r\n\r\n~/miniconda3/envs/py36_pytorch110/lib/python3.6/site-packages/torch_geometric/nn/conv/edge_conv.py in forward(self, x, edge_index)\r\n     42         x = x.unsqueeze(-1) if x.dim() == 1 else x\r\n     43 \r\n---> 44         return self.propagate(edge_index, x=x)\r\n     45 \r\n     46     def message(self, x_i, x_j):\r\n\r\n~/miniconda3/envs/py36_pytorch110/lib/python3.6/site-packages/torch_geometric/nn/conv/message_passing.py in propagate(self, edge_index, size, **kwargs)\r\n     99                         raise ValueError(__size_error_msg__)\r\n    100 \r\n--> 101                     tmp = torch.index_select(tmp, 0, edge_index[idx])\r\n    102                     message_args.append(tmp)\r\n    103             else:\r\n\r\nRuntimeError: arguments are located on different GPUs at /opt/conda/conda-bld/pytorch_1556653183467/work/aten/src/THC/generic/THCTensorIndex.cu:521\r\n'''\r\n\r\n## Expected behavior\r\n\r\n<!-- A clear and concise description of what you expected to happen. -->\r\n\r\n## Environment\r\n\r\n* OS:   Linux 16.04\r\n* Python version:  3.6\r\n* PyTorch version: 1.1.0\r\n* CUDA/cuDNN version:  9.0\r\n* GCC version:  5.4.0\r\n* Any other relevant information:\r\n\r\n## Additional context\r\n\r\n<!-- Add any other context about the problem here. -->\r\nMaybe there are some problems in initialization, and I find some interesting thing in the function:\r\n `gen` in  `torch_scatter/utils/gen.py`\r\n\r\n```\r\ndef gen(src, index, dim=-1, out=None, dim_size=None, fill_value=0):\r\n    dim = range(src.dim())[dim]  # Get real dim value.\r\n\r\n    # Automatically expand index tensor to the right dimensions.\r\n    if index.dim() == 1:\r\n        index_size = list(repeat(1, src.dim()))\r\n        index_size[dim] = src.size(dim)\r\n        index = index.view(index_size).expand_as(src)\r\n\r\n    # Generate output tensor if not given.\r\n    if out is None:\r\n        out_size = list(src.size())\r\n        dim_size = maybe_dim_size(index, dim_size)\r\n        out_size[dim] = dim_size\r\n        out = src.new_full(out_size, fill_value)\r\n\r\n    return src, out, index, dim\r\n```\r\n\r\nThe device of the index.data is 'cuda:1' before `index.view(index_size)` , but after that it changes to 'cuda:0' while the device of `index` is still 'cuda:1'. \r\n\r\n\r\nB.T.W, if the 'edge_index` of the first sample fed to the network is not empty , the bug is gone.\r\n\r\n```\r\nedge_index = torch.tensor([[0], [1]], dtype=torch.long)\r\ndata = Data(x=x, edge_index=edge_index)\r\ny = block(data.to(d))\r\nedge_index = torch.tensor([[], []], dtype=torch.long)\r\ndata = Data(x=x, edge_index=edge_index)\r\ny = block(data.to(d))\r\nprint(y.device)\r\nprint(data.edge_index.data)\r\n```\r\n\r\n\r\nThe output:\r\n```\r\ncuda:1\r\ntensor([], device='cuda:1', size=(2, 0), dtype=torch.int64)\r\n```\r\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/629/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/pyg-team/pytorch_geometric/issues/629/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    }
+  ],
+  "search_type": "lexical"
+}

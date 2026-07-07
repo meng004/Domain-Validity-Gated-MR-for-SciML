@@ -1,0 +1,48 @@
+[
+  {
+    "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/comments/2773703991",
+    "html_url": "https://github.com/neuraloperator/neuraloperator/issues/532#issuecomment-2773703991",
+    "issue_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/532",
+    "id": 2773703991,
+    "node_id": "IC_kwDOEhwN6s6lU103",
+    "user": {
+      "login": "dhpitt",
+      "id": 40699064,
+      "node_id": "MDQ6VXNlcjQwNjk5MDY0",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40699064?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/dhpitt",
+      "html_url": "https://github.com/dhpitt",
+      "followers_url": "https://api.github.com/users/dhpitt/followers",
+      "following_url": "https://api.github.com/users/dhpitt/following{/other_user}",
+      "gists_url": "https://api.github.com/users/dhpitt/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/dhpitt/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/dhpitt/subscriptions",
+      "organizations_url": "https://api.github.com/users/dhpitt/orgs",
+      "repos_url": "https://api.github.com/users/dhpitt/repos",
+      "events_url": "https://api.github.com/users/dhpitt/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/dhpitt/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "created_at": "2025-04-02T20:47:20Z",
+    "updated_at": "2025-04-02T20:47:20Z",
+    "body": "Hi @pratikrathore8 , thanks for raising this issue and sorry for the delayed response. Re: 1, you are correct that we use a square approximation to radial binning. For 2, I believe this is a bug. ",
+    "author_association": "MEMBER",
+    "pin": null,
+    "reactions": {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/comments/2773703991/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null
+  }
+]

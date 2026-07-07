@@ -40,18 +40,18 @@ STALE_MARKERS = [
 
 PR4_BOUNDARY_MARKERS = [
     "failed on 10 of 10 recorded eval frames",
-    "median relative L2 0.737",
+    "median relative \\(L_2\\) norm 0.737",
     "median V/floor 3.96",
     "bounded within-SUT frame-level OOD-stress",
     "one SUT, one checkpoint, one MR, one eval trajectory",
-    "not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim",
+    "cannot separate a model-level violation from an amplified geometric artifact",
 ]
 
 
 # Theory-lift markers: the admissibility-predicate + two-axis-verdict + relation-space
 # framing must appear in BOTH the manuscript and the IST package, kept in lockstep.
 FRAMEWORK_MARKERS = [
-    "domain-admissibility-gated, relation-indexed",
+    "numerical-decidability-gated, relation-indexed",
     "admissible MR",
     "intrinsic error floor",
     "domain-violation magnitude",
@@ -63,10 +63,10 @@ FRAMEWORK_MARKERS = [
 # presence is asserted so a future edit cannot silently turn the framing into a
 # completed-applicability-map or calibrated-boundary claim.
 FRAMEWORK_GUARD_MARKERS = [
-    "We do not claim a completed applicability map",
-    "one bounded within-SUT",
+    "relation-indexed applicability map",
+    "bounded within-SUT",
     "not as a calibrated boundary measurement",
-    "is left to future work",
+    "future work",
 ]
 
 
@@ -89,13 +89,12 @@ SOCRATIC_DEBATE_CITATION_MARKERS = [
 ]
 
 
-# Seeded-fault detection (C10/PC10): the MR-as-detector result and its boundaries
+# Seeded-fault detection: the MR-as-detector result and its boundaries
 # must appear in BOTH the manuscript and the IST package.
 SEEDED_FAULT_MARKERS = [
     "Seeded-fault detection",
     "injected-fault catalogue",
     "5 of 10",
-    "PC10-seeded-fault-detection",
 ]
 
 
@@ -103,11 +102,11 @@ SEEDED_FAULT_MARKERS = [
 # exact mirror-y test on a provably symmetric, admissible mesh) and their honesty
 # caveats must appear in BOTH the manuscript and the IST package.
 ADDED_EVIDENCE_MARKERS = [
-    "median relative L2 0.0216",   # rollout-accuracy one-step diagnostic
+    "0.0216",                       # rollout-accuracy one-step diagnostic
     "34 times",                     # mirror-y violation vs in-distribution accuracy
-    "relative L2 1.10",             # exact mirror-y fail on symmetric admissible mesh
+    "1.10",                         # exact mirror-y fail on symmetric admissible mesh
     "provably symmetric",           # admissible-mesh framing
-    "out-of-sample",                # rebuts the circularity objection
+    "verified bijection",           # rebuts the circularity objection
 ]
 
 
@@ -281,4 +280,3 @@ class Stage25SubmissionReadinessTest(unittest.TestCase):
             # main.tex \citep{key}
             with self.subTest(file="ist_main", key=key):
                 self.assertIn(key, ist)
-

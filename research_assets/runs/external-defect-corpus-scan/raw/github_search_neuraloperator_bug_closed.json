@@ -1,0 +1,827 @@
+{
+  "total_count": 10,
+  "incomplete_results": false,
+  "items": [
+    {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/724",
+      "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+      "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/724/labels{/name}",
+      "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/724/comments",
+      "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/724/events",
+      "html_url": "https://github.com/neuraloperator/neuraloperator/issues/724",
+      "id": 4548193936,
+      "node_id": "I_kwDOEhwN6s8AAAABDxfukA",
+      "number": 724,
+      "title": "Complex data processing",
+      "user": {
+        "login": "Fallen-Cat",
+        "id": 14400592,
+        "node_id": "MDQ6VXNlcjE0NDAwNTky",
+        "avatar_url": "https://avatars.githubusercontent.com/u/14400592?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Fallen-Cat",
+        "html_url": "https://github.com/Fallen-Cat",
+        "followers_url": "https://api.github.com/users/Fallen-Cat/followers",
+        "following_url": "https://api.github.com/users/Fallen-Cat/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Fallen-Cat/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Fallen-Cat/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Fallen-Cat/subscriptions",
+        "organizations_url": "https://api.github.com/users/Fallen-Cat/orgs",
+        "repos_url": "https://api.github.com/users/Fallen-Cat/repos",
+        "events_url": "https://api.github.com/users/Fallen-Cat/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Fallen-Cat/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 7,
+      "created_at": "2026-05-29T11:46:43Z",
+      "updated_at": "2026-06-23T17:59:43Z",
+      "closed_at": "2026-06-23T17:59:43Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "Hi! I've got confused using FNO for complex data.\nI want to map real data to complex field, so I set FNO parameter \"complex_data\" to True.\nWhen I try to train a model it I got an error \"imag is not implemented for tensors with non-complex dtypes\".\nIf I deliberately change the input dtype from \"float32\" to \"complex64\" the error is the same.\nPlease, explain, how to process complex data correctly.\n\nUpd.\nI use PTDataset to load data and as far as I understand the code the \"x\" vector is deliberately converted to \"float32\" (not \"y\" vector though).\nShould I use smth else to load my data?\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/724/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/724/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/501",
+      "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+      "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/501/labels{/name}",
+      "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/501/comments",
+      "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/501/events",
+      "html_url": "https://github.com/neuraloperator/neuraloperator/issues/501",
+      "id": 2755408506,
+      "node_id": "I_kwDOEhwN6s6kPDJ6",
+      "number": 501,
+      "title": "Why the norm layers is not decorated by ComplexValued in FNOBlocks?",
+      "user": {
+        "login": "USTCKAY",
+        "id": 50285351,
+        "node_id": "MDQ6VXNlcjUwMjg1MzUx",
+        "avatar_url": "https://avatars.githubusercontent.com/u/50285351?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/USTCKAY",
+        "html_url": "https://github.com/USTCKAY",
+        "followers_url": "https://api.github.com/users/USTCKAY/followers",
+        "following_url": "https://api.github.com/users/USTCKAY/following{/other_user}",
+        "gists_url": "https://api.github.com/users/USTCKAY/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/USTCKAY/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/USTCKAY/subscriptions",
+        "organizations_url": "https://api.github.com/users/USTCKAY/orgs",
+        "repos_url": "https://api.github.com/users/USTCKAY/repos",
+        "events_url": "https://api.github.com/users/USTCKAY/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/USTCKAY/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 1,
+      "created_at": "2024-12-23T07:27:22Z",
+      "updated_at": "2025-10-15T23:50:16Z",
+      "closed_at": "2025-10-15T23:50:16Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "Hi! I find all the layers are decorated by ComplexValued(like fno_skips) or just support complex(like conv_module) in FNOBlocks, except norms., they are not decorated by ComplexValued,.\r\nhttps://github.com/neuraloperator/neuraloperator/blob/31b77fde81e705b2e3ed7d8f1f5de767f571b125/neuralop/layers/fno_block.py#L229\r\nSo I want to ask why? Hope anyone could help me with this question, many thanks!",
+      "reactions": {
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/501/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/501/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/532",
+      "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+      "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/532/labels{/name}",
+      "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/532/comments",
+      "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/532/events",
+      "html_url": "https://github.com/neuraloperator/neuraloperator/issues/532",
+      "id": 2831207968,
+      "node_id": "I_kwDOEhwN6s6owM4g",
+      "number": 532,
+      "title": "Incorrect math in neuralop.utils.spectrum_2d?",
+      "user": {
+        "login": "pratikrathore8",
+        "id": 76628577,
+        "node_id": "MDQ6VXNlcjc2NjI4NTc3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/76628577?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/pratikrathore8",
+        "html_url": "https://github.com/pratikrathore8",
+        "followers_url": "https://api.github.com/users/pratikrathore8/followers",
+        "following_url": "https://api.github.com/users/pratikrathore8/following{/other_user}",
+        "gists_url": "https://api.github.com/users/pratikrathore8/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/pratikrathore8/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/pratikrathore8/subscriptions",
+        "organizations_url": "https://api.github.com/users/pratikrathore8/orgs",
+        "repos_url": "https://api.github.com/users/pratikrathore8/repos",
+        "events_url": "https://api.github.com/users/pratikrathore8/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/pratikrathore8/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 1,
+      "created_at": "2025-02-04T20:20:38Z",
+      "updated_at": "2025-10-15T05:11:50Z",
+      "closed_at": "2025-10-15T05:11:50Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "I have a couple questions about the math in the implementation of `neuralop.utils.spectrum_2d`.\n\n1. Why does this function use the L1-norm of the wavenumbers rather than the L2-norm? I believe that using the L2-norm of the wavenumbers is a more standard approach.\n\nhttps://github.com/neuraloperator/neuraloperator/blob/b3abeb1f74a830592f6af3a71060705efde26f35/neuralop/utils.py#L128\n\n2. When performing the binning step, why does the function take the sum of the spectral content within each bin before computing the squared magnitude? I thought the standard approach is to compute the squared magnitudes and then take the sum.\n\nhttps://github.com/neuraloperator/neuraloperator/blob/b3abeb1f74a830592f6af3a71060705efde26f35/neuralop/utils.py#L139\n\nPlease let me know if I am misinterpreting these two lines in the implementation. Thanks!",
+      "reactions": {
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/532/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/532/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599",
+      "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+      "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599/labels{/name}",
+      "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599/comments",
+      "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599/events",
+      "html_url": "https://github.com/neuraloperator/neuraloperator/issues/599",
+      "id": 3091780467,
+      "node_id": "I_kwDOEhwN6s64SNNz",
+      "number": 599,
+      "title": "Bug: BatchNormalization for FNOBlocks in main branch doesn't work",
+      "user": {
+        "login": "cb0s",
+        "id": 16071970,
+        "node_id": "MDQ6VXNlcjE2MDcxOTcw",
+        "avatar_url": "https://avatars.githubusercontent.com/u/16071970?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/cb0s",
+        "html_url": "https://github.com/cb0s",
+        "followers_url": "https://api.github.com/users/cb0s/followers",
+        "following_url": "https://api.github.com/users/cb0s/following{/other_user}",
+        "gists_url": "https://api.github.com/users/cb0s/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/cb0s/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/cb0s/subscriptions",
+        "organizations_url": "https://api.github.com/users/cb0s/orgs",
+        "repos_url": "https://api.github.com/users/cb0s/repos",
+        "events_url": "https://api.github.com/users/cb0s/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/cb0s/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 2,
+      "created_at": "2025-05-26T17:53:46Z",
+      "updated_at": "2025-05-29T17:51:16Z",
+      "closed_at": "2025-05-29T17:51:15Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "First, thank you for creating this cool package!\n\nWhile going through the code of the main branch, `normalization_layers.py` in particular, I noticed that you added a batch normalization feature for the FNO block in #564 . However, `F.batch_norm` has more than one required argument (see [here](https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.batch_norm.html)), namely `running_mean` and `running_var`, which aren't being set through the Constructor of the FNO block (obviously presetting this also defeats the purpose imo). Maybe this was confused with the BatchNormalization layer which doesn't need these additional inputs during inference.\n\nThis bug leads to this error:\n```\n[... unrelated ...]\nFile .venv/lib/python3.13/site-packages/neuralop/layers/fno_block.py:285, in FNOBlocks.forward(self, x, index, output_shape)\n    283     return self.forward_with_preactivation(x, index, output_shape)\n    284 else:\n--> 285     return self.forward_with_postactivation(x, index, output_shape)\n\nFile .venv/lib/python3.13/site-packages/neuralop/layers/fno_block.py:304, in FNOBlocks.forward_with_postactivation(self, x, index, output_shape)\n    301 #self.convs(x, index, output_shape=output_shape)\n    303 if self.norm is not None:\n--> 304     x_fno = self.norm[self.n_norms * index](x_fno)\n    306 x = x_fno + x_skip_fno\n    308 if (index < (self.n_layers - 1)):\n[... torch output ...]\nFile .venv/lib/python3.13/site-packages/neuralop/layers/normalization_layers.py:62, in BatchNorm.forward(self, x)\n     60 def forward(self, x):\n     61     size = x.shape\n---> 62     x = torch.nn.functional.batch_norm(x, **self.kwargs)\n     63     assert x.shape == size\n     64     return x\n\nTypeError: batch_norm() missing 2 required positional arguments: 'running_mean' and 'running_var'\n```\n\nIf I am misusing it in some way, please let me know. Afaik, this is still not really documented, so the mistake might also be on my end :)",
+      "reactions": {
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/476",
+      "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+      "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/476/labels{/name}",
+      "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/476/comments",
+      "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/476/events",
+      "html_url": "https://github.com/neuraloperator/neuraloperator/issues/476",
+      "id": 2662282614,
+      "node_id": "I_kwDOEhwN6s6erzV2",
+      "number": 476,
+      "title": "potential bug in the code",
+      "user": {
+        "login": "AtiehAlipour-NOAA",
+        "id": 148251584,
+        "node_id": "U_kgDOCNYjwA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/148251584?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/AtiehAlipour-NOAA",
+        "html_url": "https://github.com/AtiehAlipour-NOAA",
+        "followers_url": "https://api.github.com/users/AtiehAlipour-NOAA/followers",
+        "following_url": "https://api.github.com/users/AtiehAlipour-NOAA/following{/other_user}",
+        "gists_url": "https://api.github.com/users/AtiehAlipour-NOAA/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/AtiehAlipour-NOAA/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/AtiehAlipour-NOAA/subscriptions",
+        "organizations_url": "https://api.github.com/users/AtiehAlipour-NOAA/orgs",
+        "repos_url": "https://api.github.com/users/AtiehAlipour-NOAA/repos",
+        "events_url": "https://api.github.com/users/AtiehAlipour-NOAA/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/AtiehAlipour-NOAA/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 1,
+      "created_at": "2024-11-15T15:19:28Z",
+      "updated_at": "2024-11-15T15:22:39Z",
+      "closed_at": "2024-11-15T15:22:38Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "Hi, yesterday I was trying to install the package, but was getting an error because of this:\r\n\r\n![image](https://github.com/user-attachments/assets/298c1ff5-f1ec-400b-a969-850351b2c8af)\r\n\r\nI removed the equal sign, and that solved my issue. ",
+      "reactions": {
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/476/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/476/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/521",
+      "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+      "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/521/labels{/name}",
+      "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/521/comments",
+      "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/521/events",
+      "html_url": "https://github.com/neuraloperator/neuraloperator/issues/521",
+      "id": 2792997767,
+      "node_id": "I_kwDOEhwN6s6mecOH",
+      "number": 521,
+      "title": "spectral_conv weights are always complex even if complex_data is set to False",
+      "user": {
+        "login": "f-fuchs",
+        "id": 48164677,
+        "node_id": "MDQ6VXNlcjQ4MTY0Njc3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/48164677?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/f-fuchs",
+        "html_url": "https://github.com/f-fuchs",
+        "followers_url": "https://api.github.com/users/f-fuchs/followers",
+        "following_url": "https://api.github.com/users/f-fuchs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/f-fuchs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/f-fuchs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/f-fuchs/subscriptions",
+        "organizations_url": "https://api.github.com/users/f-fuchs/orgs",
+        "repos_url": "https://api.github.com/users/f-fuchs/repos",
+        "events_url": "https://api.github.com/users/f-fuchs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/f-fuchs/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 1,
+      "created_at": "2025-01-16T14:52:41Z",
+      "updated_at": "2025-01-17T07:20:45Z",
+      "closed_at": "2025-01-17T07:20:44Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "Hey, \n\nI tried using this library together with https://torchjd.org/ sadly I got an error that the dtypes don`t fit.\nUpon further inspection I realized that the weights of the spectral_conv are always complex even if complex_data is set to False. Is this correct or a bug?\n\nThanks",
+      "reactions": {
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/521/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/521/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/480",
+      "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+      "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/480/labels{/name}",
+      "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/480/comments",
+      "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/480/events",
+      "html_url": "https://github.com/neuraloperator/neuraloperator/issues/480",
+      "id": 2694469685,
+      "node_id": "I_kwDOEhwN6s6gmlg1",
+      "number": 480,
+      "title": "Checkpointing and loading training states",
+      "user": {
+        "login": "Dzz99",
+        "id": 166900117,
+        "node_id": "U_kgDOCfKxlQ",
+        "avatar_url": "https://avatars.githubusercontent.com/u/166900117?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/Dzz99",
+        "html_url": "https://github.com/Dzz99",
+        "followers_url": "https://api.github.com/users/Dzz99/followers",
+        "following_url": "https://api.github.com/users/Dzz99/following{/other_user}",
+        "gists_url": "https://api.github.com/users/Dzz99/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/Dzz99/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/Dzz99/subscriptions",
+        "organizations_url": "https://api.github.com/users/Dzz99/orgs",
+        "repos_url": "https://api.github.com/users/Dzz99/repos",
+        "events_url": "https://api.github.com/users/Dzz99/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/Dzz99/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 6,
+      "created_at": "2024-11-26T12:16:14Z",
+      "updated_at": "2024-12-17T21:24:24Z",
+      "closed_at": "2024-12-17T21:24:23Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "I encountered an issue while running the \"Checkpointing and loading training states\" example from the user manual. After using resume_from_dir, the model is not training properly.\r\n\r\nHere is the code I used:\r\n\r\ndevice = \"cuda\" if torch.cuda.is_available() else \"cpu\"\r\n# device =\"cpu\"\r\ntrain_loader, test_loaders, data_processor = load_darcy_flow_small(\r\n        n_train=1000, batch_size=32,\r\n        test_resolutions=[16, 32], n_tests=[100, 50],\r\n        test_batch_sizes=[32, 32],\r\n)\r\n\r\nmodel = FNO(n_modes=(4,4),\r\n             in_channels=1,\r\n             out_channels=1,\r\n             hidden_channels=4,\r\n             projection_channel_ratio=1,\r\n             factorization='tucker',\r\n             rank=0.42)\r\n\r\nmodel = model.to(device)\r\noptimizer = AdamW(model.parameters(),\r\n                  lr=8e-3,\r\n                  weight_decay=1e-4)\r\nscheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, eta_min=8e-3, T_max=30)\r\nl2loss = LpLoss(d=2, p=2)\r\nh1loss = H1Loss(d=2)\r\n\r\ntrain_loss = h1loss\r\neval_losses = {'h1': h1loss, 'l2': l2loss}\r\n\r\ntrainer = Trainer(model=model, n_epochs=10,\r\n                  device=device,\r\n                  data_processor=data_processor,\r\n                  wandb_log=False,\r\n                  eval_interval=1,\r\n                  use_distributed=False,\r\n                  verbose=True)\r\ntrainer.train(train_loader=train_loader,\r\n              test_loaders={},\r\n              optimizer=optimizer,\r\n              scheduler=scheduler,\r\n              regularizer=False,\r\n              training_loss=train_loss,\r\n              save_every=7,\r\n              save_dir=\"./checkpoints\")\r\n\r\n# .. resume_from_dir:\r\ntrainer = Trainer(model=model, n_epochs=10,\r\n                  device=device,\r\n                  data_processor=data_processor,\r\n                  wandb_log=False,\r\n                  eval_interval=1,\r\n                  use_distributed=False,\r\n                  verbose=True)\r\ntrainer.train(train_loader=train_loader,\r\n              test_loaders={},\r\n              optimizer=optimizer,\r\n              scheduler=scheduler,\r\n              regularizer=False,\r\n              training_loss=train_loss,\r\n              resume_from_dir=\"./checkpoints\")\r\nThe code for saving the model state works fine, but after calling resume_from_dir, the model parameters do not update during training. Based on my testing, it seems that the issue lies in the train_one_epoch function in trainer.py, where the command self.optimizer.step() does not seem to have any effect.",
+      "reactions": {
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/480/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/480/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/382",
+      "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+      "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/382/labels{/name}",
+      "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/382/comments",
+      "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/382/events",
+      "html_url": "https://github.com/neuraloperator/neuraloperator/issues/382",
+      "id": 2439551962,
+      "node_id": "I_kwDOEhwN6s6RaJva",
+      "number": 382,
+      "title": "Einsum error using separable Fourier convolution ",
+      "user": {
+        "login": "HenrikAsmuth",
+        "id": 35228224,
+        "node_id": "MDQ6VXNlcjM1MjI4MjI0",
+        "avatar_url": "https://avatars.githubusercontent.com/u/35228224?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/HenrikAsmuth",
+        "html_url": "https://github.com/HenrikAsmuth",
+        "followers_url": "https://api.github.com/users/HenrikAsmuth/followers",
+        "following_url": "https://api.github.com/users/HenrikAsmuth/following{/other_user}",
+        "gists_url": "https://api.github.com/users/HenrikAsmuth/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/HenrikAsmuth/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/HenrikAsmuth/subscriptions",
+        "organizations_url": "https://api.github.com/users/HenrikAsmuth/orgs",
+        "repos_url": "https://api.github.com/users/HenrikAsmuth/repos",
+        "events_url": "https://api.github.com/users/HenrikAsmuth/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/HenrikAsmuth/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 4,
+      "created_at": "2024-07-31T09:17:09Z",
+      "updated_at": "2024-08-02T16:20:45Z",
+      "closed_at": "2024-08-02T16:20:45Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "Hi,\r\n\r\nThere seems to be an issue in the tensor contraction when using the separable Fourier convolution option (`separable=True`).\r\nThe problem occurred when I tested the `plot_FNO_darcy.py` example with Tucker contraction as well as in my own toy project. \r\nSeems like the Einstein summation is not correctly set.\r\n\r\nBelow, I only pasted the part of the stacktrace which I deemed most relevant. The full error should be reproducible when adding the above option to the model init in the example.\r\n\r\n\r\n\r\n`Traceback (most recent call last):\r\n  File \"C:\\Users\\Henrik\\virtual_environments\\neuraloperator\\venv\\lib\\site-packages\\tensorly\\plugins.py\", line 72, in cached_einsum\r\n    expression = OPT_EINSUM_PATH_CACHE[key]\r\nKeyError: 'abcd,fghi,bf,eg,ch,di->aecd,(32, 32, 9, 9),(20, 10, 6),(32, 20),(16, 10),(9, 6)'`\r\n...\r\n\r\n` File \"C:\\Users\\Henrik\\virtual_environments\\venv_pytorch\\lib\\site-packages\\opt_einsum\\parser.py\", line 354, in parse_einsum_input\r\n    raise ValueError(\"Number of einsum subscripts must be equal to the \" \"number of operands.\")\r\nValueError: Number of einsum subscripts must be equal to the number of operands.`\r\n",
+      "reactions": {
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/382/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/382/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/61",
+      "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+      "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/61/labels{/name}",
+      "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/61/comments",
+      "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/61/events",
+      "html_url": "https://github.com/neuraloperator/neuraloperator/issues/61",
+      "id": 1071435197,
+      "node_id": "I_kwDOEhwN6s4_3M29",
+      "number": 61,
+      "title": "maybe some thing wrong in utilities3.py ? or another bug in the code?",
+      "user": {
+        "login": "veyron95",
+        "id": 87417304,
+        "node_id": "MDQ6VXNlcjg3NDE3MzA0",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87417304?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/veyron95",
+        "html_url": "https://github.com/veyron95",
+        "followers_url": "https://api.github.com/users/veyron95/followers",
+        "following_url": "https://api.github.com/users/veyron95/following{/other_user}",
+        "gists_url": "https://api.github.com/users/veyron95/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/veyron95/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/veyron95/subscriptions",
+        "organizations_url": "https://api.github.com/users/veyron95/orgs",
+        "repos_url": "https://api.github.com/users/veyron95/repos",
+        "events_url": "https://api.github.com/users/veyron95/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/veyron95/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 3,
+      "created_at": "2021-12-05T11:28:29Z",
+      "updated_at": "2023-12-13T09:20:44Z",
+      "closed_at": "2022-01-21T06:08:55Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "Hi, i am trying to reproduce your exepriments result.\r\nI just change the TRAIN_PATH and TEST_PATH to '/home/data/NavierStokes_V1e-5_N1200_T20.mat' \r\nand change T from 40 to 10, and then run:\r\n` python3.7 fourier_3d.py`\r\nThe result that i got as follow, maybe some thing wrong, \r\n\r\nPlease take a look, thanks,\r\n\r\n\r\n```\r\n489 10.252128057181835 0.019634807519614696 0.08073463827371598 0.22321295380592346\r\n490 8.146521881921217 0.019635397335514428 0.08073771142959595 0.2236676424741745\r\n491 10.866600763052702 0.019629415897652505 0.08073480159044266 0.2232614892721176\r\n492 8.50566947995685 0.019635313227772712 0.08075259721279145 0.22349709749221802\r\n493 10.444014868000522 0.019620819902047514 0.08072293162345887 0.2237038666009903\r\n494 12.948399811983109 0.019610148882493378 0.08068822592496872 0.2233934336900711\r\n495 8.396875259000808 0.019591552671045065 0.08063761121034622 0.22345163762569428\r\n496 8.427478078054264 0.019569343607872724 0.08057864302396775 0.22329660773277282\r\n497 10.278667164035141 0.01957395510748029 0.08059006589651108 0.22355687558650972\r\n498 8.890411228872836 0.01956247627735138 0.0805699879527092 0.22378367960453033\r\n499 8.894694186048582 0.019547253418713807 0.0805325716137886 0.2240159559249878\r\nTraceback (most recent call last):\r\n  File \"fourier_3d.py\", line 303, in <module>\r\n    out = y_normalizer.decode(out)\r\n  File \"/home/zongyi/fourier_neural_operator/utilities3.py\", line 99, in decode\r\n    x = (x * std) + mean\r\nRuntimeError: The size of tensor a (10) must match the size of tensor b (64) at non-singleton dimension 3\r\n```",
+      "reactions": {
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/61/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/61/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    },
+    {
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/33",
+      "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+      "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/33/labels{/name}",
+      "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/33/comments",
+      "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/33/events",
+      "html_url": "https://github.com/neuraloperator/neuraloperator/issues/33",
+      "id": 849920099,
+      "node_id": "MDU6SXNzdWU4NDk5MjAwOTk=",
+      "number": 33,
+      "title": "`torch.rfft` and `torch.ifft` arguments",
+      "user": {
+        "login": "scaomath",
+        "id": 4467042,
+        "node_id": "MDQ6VXNlcjQ0NjcwNDI=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/4467042?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/scaomath",
+        "html_url": "https://github.com/scaomath",
+        "followers_url": "https://api.github.com/users/scaomath/followers",
+        "following_url": "https://api.github.com/users/scaomath/following{/other_user}",
+        "gists_url": "https://api.github.com/users/scaomath/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/scaomath/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/scaomath/subscriptions",
+        "organizations_url": "https://api.github.com/users/scaomath/orgs",
+        "repos_url": "https://api.github.com/users/scaomath/repos",
+        "events_url": "https://api.github.com/users/scaomath/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/scaomath/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "closed",
+      "locked": false,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 6,
+      "created_at": "2021-04-04T17:19:13Z",
+      "updated_at": "2021-04-13T00:46:57Z",
+      "closed_at": "2021-04-09T00:43:30Z",
+      "assignee": null,
+      "author_association": "NONE",
+      "issue_field_values": [
+
+      ],
+      "type": null,
+      "active_lock_reason": null,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "body": "@zongyi-li \r\n\r\nIt seems that Torch has modified the `fft` to a namespace and put all functions under it: `rfft` and `ifft`, etc.\r\n\r\nBut right now there is no arguments for `one-sided`, and I checked torch's official document, now it seems everything is automatically one-sided unless you want specifically the negative part: [https://pytorch.org/docs/stable/fft.html](https://pytorch.org/docs/stable/fft.html). `normalized` arg became `norm`.\r\n\r\nCan you please confirm?",
+      "reactions": {
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/33/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/33/timeline",
+      "performed_via_github_app": null,
+      "state_reason": "completed",
+      "pinned_comment": null,
+      "score": 1.0
+    }
+  ],
+  "search_type": "lexical"
+}

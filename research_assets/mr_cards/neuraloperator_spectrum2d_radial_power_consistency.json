@@ -1,0 +1,72 @@
+{
+  "mr_id": "neuraloperator-spectrum2d-radial-power-consistency",
+  "title": "Issue-linked radial-binning and power-accumulation witness for NeuralOperator spectrum_2d",
+  "status": "design-time-retained",
+  "evidence_level": "design-time-asset",
+  "source_case_schema": {
+    "subject_program": "NeuralOperator spectrum_2d spectral metric utility",
+    "external_issue": "https://github.com/neuraloperator/neuraloperator/issues/532",
+    "external_pr": "https://github.com/neuraloperator/neuraloperator/pull/661",
+    "source_artifacts": "research_assets/runs/external-defect-corpus-scan/raw",
+    "source_function": "small discrete Fourier modes with known radial wavenumbers and complex coefficients"
+  },
+  "follow_up_transformation": {
+    "kind": "spectral_metric_consistency",
+    "parameters": {
+      "radial_metric": "Euclidean L2 radius sqrt(kx^2 + ky^2)",
+      "power_metric": "sum of squared magnitudes within a bin",
+      "primary_modes": "(2,0) and (1,1)",
+      "primary_coefficients": "+1 and -1 in one bin"
+    },
+    "synchronized_fields": [
+      "wavenumber_pair",
+      "spectral_coefficient"
+    ]
+  },
+  "transformation_preconditions": [
+    "The subject is a 2D spectral diagnostic whose bins are interpreted radially.",
+    "Wavenumber coordinates are available as integer grid modes.",
+    "Spectral coefficients are available before radial aggregation.",
+    "The external issue and merged PR document the L2-radius and power-order semantic correction."
+  ],
+  "boundary_condition_compatibility": {
+    "status": "compatible-external-spectral-metric-fix",
+    "reason": "NeuralOperator issue #532 and PR #661 document that spectrum_2d should use L2 wavenumber radius and should square magnitudes before summing within bins."
+  },
+  "output_mapping": {
+    "kind": "source_follow_up_spectral_metric",
+    "description": "Compare old L1-radius binning with corrected L2-radius binning, and old square-after-complex-sum power with corrected sum-of-squared-magnitudes power."
+  },
+  "metric": {
+    "name": "spectrum_2d_radial_power_consistency",
+    "formula": "old_collision = (|2|+|0| == |1|+|1|); corrected_gap = |sqrt(2^2+0^2)-sqrt(1^2+1^2)|; power_contrast = |1 + (-1)|^2 versus |1|^2 + |-1|^2"
+  },
+  "tolerance": {
+    "assertion": "semantic_reproduction_checks_equal_within_tolerance",
+    "threshold": 0.000000000001,
+    "source": "tools/run_neuraloperator_spectrum2d_real_defect_witness.py"
+  },
+  "exclusion_rules": [
+    "Exclude claims about trained NeuralOperator or FNO model accuracy.",
+    "Exclude claims about defect prevalence in NeuralOperator.",
+    "Exclude spectra whose binning semantics are intentionally non-radial.",
+    "Exclude hardware-specific FFT artifact claims; this card covers only the issue/PR #532/#661 utility semantics."
+  ],
+  "allowed_verdicts": [
+    "pass",
+    "fail",
+    "skip",
+    "out-of-relation-domain",
+    "numerical-tolerance-issue",
+    "inconclusive"
+  ],
+  "verdict_interpretation": {
+    "pass": "The issue/PR artifacts are present and the witness reproduces both the L1/L2 radial-binning contrast and the power-accumulation order contrast.",
+    "fail": "The artifact checks or metric contrasts contradict the issue/PR-linked semantic correction.",
+    "skip": "The run was not executed because source artifacts were unavailable.",
+    "out-of-relation-domain": "The target spectrum is not a radial 2D spectrum or does not aggregate spectral power.",
+    "numerical-tolerance-issue": "Floating-point tolerance dominates the small spectral contrast.",
+    "inconclusive": "The external issue/PR link or semantic witness evidence is incomplete."
+  },
+  "claim_limitations": "This MR card supports one external issue/PR-linked spectral-metric semantic witness for a NeuralOperator utility function. It does not report trained-FNO accuracy, NeuralOperator-wide correctness, production workload behavior, or a real-world defect-detection rate."
+}

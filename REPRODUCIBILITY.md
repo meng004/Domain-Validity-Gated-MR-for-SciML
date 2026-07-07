@@ -48,19 +48,16 @@ CI runs only the compile-independent subset above and is unaffected.
 ## Tier 2 — Cache replay (≤ 30 min, no credentials): paper numbers + PDF
 
 ```bash
-# IST word count (single source of truth; counts refs + appendices + 200 w/float)
+# Conservative legacy density diagnostic (kept as a regression guard)
 python tools/ist_wordcount.py
 
 # A representative deterministic ledger regeneration (no GPU, no data download):
 python tools/run_classical_operator_conservation.py
 #   expect: baseline |dM|max ~2.2e-16 PASS; 3/3 operator-code faults detected
 
-# Build the submission PDF (needs a TeX distribution, e.g. TeX Live / MacTeX):
-cd submissions/IST
-pdflatex -interaction=nonstopmode main.tex
-bibtex main
-pdflatex -interaction=nonstopmode main.tex
-pdflatex -interaction=nonstopmode main.tex
+# Build the current JSS submission PDF from the canonical source/ tree
+# (needs a TeX distribution, e.g. TeX Live / MacTeX):
+python venues/jss/build.py
 #   expect: 0 undefined references, 0 "Missing character", 0 "Overfull \hbox"
 ```
 
@@ -249,6 +246,8 @@ docker run --rm dvg-mr-sciml      # runs the compile-independent CI checks (vali
 
 ## Archival
 
-On acceptance the full repository is deposited to Zenodo for a persistent DOI.
-After the deposit, fill the `doi:` field in `CITATION.cff` and the placeholder in
-the manuscript's Data-availability statement.
+The replication package metadata in `CITATION.cff` and `.zenodo.json` records
+the current archive DOI: `10.5281/zenodo.20702952`. The JSS data-availability
+statement links that DOI and the source repository. Do not claim a JSS Open
+Science badge or validation before any Journal of Systems and Software Open
+Science review has actually occurred.

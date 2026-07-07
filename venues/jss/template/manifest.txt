@@ -1,0 +1,33 @@
+JSS template manifest
+
+Authoritative local guide:
+- Guide for authors - Journal of Systems and Software - ISSN 0164-1212 | ScienceDirect.com by Elsevier.pdf
+
+Official bundles retained:
+- elsarticle.zip
+- els-cas-templates.zip
+
+Default extracted elsarticle files:
+- elsarticle-template-harv.tex
+- elsarticle-template-num.tex
+- elsarticle-harv.bst
+- elsarticle-num.bst
+- elsarticle-num-names.bst
+- elsarticle.cls / elsarticle.dtx / elsarticle.ins where available
+
+Optional CAS extracted files:
+- cas/cas-sc.cls
+- cas/cas-dc.cls
+- cas/cas-common.sty
+- cas/cas-model2-names.bst
+- cas/cas-sc-template.tex
+- cas/cas-dc-template.tex
+
+Project helper files:
+- main.tex
+- precheck_jss.py
+- README.md
+- highlights.txt
+- cover_letter.md
+- declarations.md
+- author_biographies.md

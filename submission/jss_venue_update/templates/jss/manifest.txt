@@ -1,0 +1,21 @@
+JSS template manifest
+Verified: 2026-07-04
+
+Official / shared Elsevier files expected in this directory:
+- elsarticle.cls
+- elsarticle-num.bst
+- elsarticle-template-num.tex
+- elsarticle.dtx
+- elsarticle.ins
+- doc/elsdoc.pdf
+- elsarticle-official-v3.5.zip
+
+JSS-specific helper files:
+- README.md
+- main.tex
+- cover_letter.md
+- declarations.md
+- author_biographies.md
+- highlights.txt
+- precheck_jss.py
+

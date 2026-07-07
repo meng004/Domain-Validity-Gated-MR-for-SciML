@@ -36,3 +36,6 @@ dist/
 
 # Primary-scale airfoil roster checkpoints (regenerable from recorded seeds in the report)
 research_assets/runs/production-grade-sut-extension/physicsnemo-mgn-airfoil-primary-roster/*.pt
+
+# RealPDEBench raw Arrow shards are external benchmark downloads; commit reports/metadata instead.
+research_assets/runs/realpdebench-foil-preflight/raw/*.arrow

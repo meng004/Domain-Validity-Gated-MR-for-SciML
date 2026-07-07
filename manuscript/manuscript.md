@@ -1,26 +1,28 @@
-# Domain-Validity-Gated Metamorphic Testing of Scientific ML Surrogates
+# Numerical-Decidability-Gated Metamorphic Testing for SciML Surrogates
 
-## Structured Abstract
+## Abstract
 
-### Context
-
-Scientific machine-learning (SciML) surrogates are increasingly used to approximate expensive physical simulations. Mesh-based neural simulators are attractive for fluid-flow problems because they operate on irregular meshes and predict spatiotemporal physical fields. Testing such systems is difficult because exact expected outputs are often unavailable for arbitrary inputs without running a trusted high-fidelity solver. Rollout accuracy and physics residuals provide useful evidence, but they do not by themselves specify which physical relations should hold under controlled transformations of inputs, meshes, boundary conditions, or parameters.
-
-### Objective
-
-This paper investigates how physically meaningful metamorphic relations (MRs) can be screened and operationalized as executable oracle-free test assets for scientific machine-learning systems. The goal is not to improve a predictive model, but to make the step from candidate relation to executable test asset more systematic, auditable, and explicit about the physical, numerical, and software conditions under which each relation is expected to hold. MeshGraphNets-family cylinder-flow surrogates are used as the concrete case study.
-
-### Method
-
-We propose a domain-validity rubric for screening candidate MRs, an MR-card and executable-asset format that records source cases, follow-up transformations, output mappings, metrics, tolerances, exclusion rules, and relation-level verdicts, and a case-study protocol for applying these assets to mesh-based neural cylinder-flow surrogates. Candidate sources may include physical equations, boundary conditions, representation contracts, expert reasoning, LLM-assisted candidate lists, and the NOETHER two-layer MetaPattern model, but validity is decided by the rubric and evidence records rather than by candidate generation alone.
-
-### Results
-
-On cylinder flow, the rubric produces three distinct, artifact-backed outcomes on the same surrogate: node permutation is admitted and holds to machine precision; exact mirror-y is ruled out-of-domain and, downgraded to an OOD-stress probe, fails on every recorded eval frame; absolute conservation is deferred for want of a calibratable tolerance, while its reference-relative guard passes. These readings replicate across a K=6 checkpoint roster (six checkpoints), three held-out trajectories, and three further cylinder-flow architectures, including the NVIDIA PhysicsNeMo production implementation. On a genuinely second CFD task, compressible airfoil flow on a second official dataset, the same predicate yields a different but physically correct typed structure: node permutation stays admitted, while incompressible continuity is now rejected on physical-basis grounds rather than deferred, showing that the gate reasons about domain validity rather than running a fixed checklist. Two controls separate model-level violations from geometric artifacts, an O(h) operator sweep validates the measurement-floor gate, and cross-family PINN and FNO executions transfer the rubric beyond mesh surrogates. The evidence is bounded to the stated rosters and datasets.
-
-### Conclusion
-
-The evidence supports a validity-aware bridge from candidate MR ideas to auditable SciML test assets. The main empirical lesson is not that every physical intuition becomes a clean MR, or that every MR exposes a general fault. Rather, the scoped pilots show that a rubric-gated workflow can produce relation-level outcomes while preserving the evidence boundary for each claim. We frame this as a domain-admissibility-gated, relation-indexed approach to SciML OOD validation: a relation is admitted only when its tolerance dominates the relevant numerical error floor, and its verdict is read in a space that separates a model-level violation from an out-of-domain application.
+Scientific machine-learning (SciML) surrogates are hard to test because exact
+outputs are unavailable for transformed inputs. Metamorphic testing can
+turn physical relations into oracle-free tests, but a candidate relation is not
+automatically an interpretable verdict: a failure may reflect a surrogate
+inconsistency, an invalid relation application, or a numerical artifact of the
+measurement operator. This paper treats numerical decidability as an
+admissibility condition for SciML metamorphic testing. We define a four-condition admissibility predicate
+covering physical basis, transformation preconditions, representation mapping,
+and whether the verdict tolerance dominates the operator's intrinsic floor. The
+predicate is implemented through MR cards, executable runners, typed verdicts,
+and a fail-closed claim/evidence ledger. For P1 discrete divergence on
+shape-regular triangular meshes, we give a local operator-floor bound and
+instantiate it on the cylinder-flow mesh, with a second Delaunay topology used as
+bounded stability evidence. The gate changes verdicts rather than only annotating
+them: it defers absolute conservation when the floor dominates, rejects an
+inadmissible airfoil continuity relation on physical-basis grounds, and keeps
+node permutation as an implementation sanity check. Bounded MeshGraphNets,
+PointMLP, PINN, FNO, airfoil, and cross-program executions show that detector
+coverage follows the admitted relation set. The evidence supports an auditable
+admissibility workflow, not general SciML reliability, baseline superiority,
+arbitrary-mesh soundness, or real-world defect-detection rates.
 
 ## Keywords
 
@@ -34,7 +36,7 @@ Metamorphic testing (MT) addresses this oracle problem by checking relations amo
 
 This paper treats MR identification for SciML as a validity-gated testing problem. Physical knowledge, expert reasoning, LLM-assisted lists, and the NOETHER two-layer MetaPattern model can all suggest candidates, but a candidate becomes an executable MR only after its physical or software basis, transformation preconditions, tolerance rationale, and verdict interpretation are recorded (Section 3.4).
 
-Two ideas organize this treatment. First, a candidate relation is *admissible* only when, in addition to a physical or software basis and satisfied transformation preconditions, it is numerically decidable: its verdict tolerance must dominate the intrinsic error floor of the operator that measures it, machine precision for an exact representation relation, the interpolation or mapping floor for an approximate geometric relation, or the discretization floor of a discrete operator for a continuity relation. Second, a relation-level verdict is read in two dimensions, how far the measured quantity violates the relation, and how far the transformed case lies outside the relation's validity domain, so that a model-level inconsistency is not confused with a relation applied outside its domain. We refer to this as a domain-admissibility-gated, relation-indexed approach to SciML out-of-distribution (OOD) validation, an organizing framework rather than a new algorithm.
+Two ideas organize this treatment. First, a candidate relation is *admissible* only when, in addition to a physical or software basis and satisfied transformation preconditions, it is numerically decidable: its verdict tolerance must dominate the intrinsic error floor of the operator that measures it, machine precision for an exact representation relation, the interpolation or mapping floor for an approximate geometric relation, or the discretization floor of a discrete operator for a continuity relation. Second, a relation-level verdict is read in two dimensions, how far the measured quantity violates the relation, and how far the transformed case lies outside the relation's validity domain, so that a model-level inconsistency is not confused with a relation applied outside its domain. We refer to this as a numerical-decidability-gated, relation-indexed approach to SciML out-of-distribution (OOD) validation, an organizing framework rather than a new algorithm.
 
 The case study is scoped to cylinder-flow surrogates: one task examined deeply across four architectures including the PhysicsNeMo production implementation, with cross-family PINN and FNO executions testing whether the predicate transfers. This deliberately trades task breadth for architectural depth and auditability; the boundary of what this evidence supports is stated once, in Section 5.9.
 
@@ -46,7 +48,7 @@ The main research question is:
 
 We decompose this into four questions.
 
-**RQ1 - Validity.** How can a domain-validity rubric distinguish physically meaningful candidate MRs from transformations that are executable but invalid, underspecified, or outside the relation's domain?
+**RQ1 - Validity.** How can an admissibility rubric distinguish physically meaningful candidate MRs from transformations that are executable but invalid, underspecified, or outside the relation's domain?
 
 **RQ2 - Operationalization.** How can retained candidates be represented as MR cards and executable assets with source cases, follow-up transformations, metrics, thresholds, exclusions, and verdict rules?
 
@@ -58,7 +60,7 @@ We decompose this into four questions.
 
 This paper makes three scoped contributions, each repositioned narrowly with respect to the closest prior we identify in Section 2, and evaluated through a single MeshGraphNets-family cylinder-flow case study. The positive claim is methodological: the paper contributes a measurement-floor admissibility gate, a typed domain-inadmissibility verdict, and a seeded-fault diagnostic stress test: the MR-class-to-fault-class diagnostic is used as stress-test evidence, not a validated localization model.
 
-**Measurement-floor admissibility gate.** A domain-validity rubric and MR-card workflow screen candidate MRs and convert retained ones into auditable executable assets. The tolerance floor is grounded in the *intrinsic error floor of the discrete measurement operator*, whose truncation order is characterizable ($O(h)$ for a P1 discrete-divergence operator on a triangular mesh). Where Eniser et al.'s *relaxations* [eniser2022relaxations] derive a tolerance empirically from RL rollouts, ours is a property of the scoring operator's numerical analysis, so a relation can be refused before any model runs. For the concrete deployed-scale structured mesh this floor is closed-form: a leading-order predictor from the analytic Hessian matches the measured floor to within 0.5% and a rigorous a-priori bound dominates it (Section 5.5), so the gate's tolerance is set above a derived rather than merely estimated floor; a general bound for arbitrary unstructured meshes remains future work. To our knowledge, grounding an MR tolerance in the measurement operator's own error floor is new in the SciML setting.
+**Measurement-floor admissibility gate.** An admissibility rubric and MR-card workflow screen candidate MRs and convert retained ones into auditable executable assets. The tolerance floor is grounded in the *intrinsic error floor of the discrete measurement operator*, whose truncation order is characterizable ($O(h)$ for a P1 discrete-divergence operator on a triangular mesh). Where Eniser et al.'s *relaxations* [eniser2022relaxations] derive a tolerance empirically from RL rollouts, ours is a property of the scoring operator's numerical analysis, so a relation can be refused before any model runs. For the concrete deployed-scale structured mesh this floor is closed-form: a leading-order predictor from the analytic Hessian matches the measured floor to within 0.5% and a rigorous a-priori bound dominates it (Section 5.5), so the gate's tolerance is set above a derived rather than merely estimated floor; a general bound for arbitrary unstructured meshes remains future work. To our knowledge, grounding an MR tolerance in the measurement operator's own error floor is new in the SciML setting.
 
 **Typed domain-inadmissibility verdict.** Verdicts are read in two dimensions (relation-violation against domain-violation magnitude). Unlike the binary bug-vs-inapplicability separation of the Duque-Torres line [duqueTorres2023bugornot, duqueTorres2023completePipeline, duqueTorres2023metaTrimmer], the inadmissibility axis is *typed*, sub-dimensions drawn from PDE-domain preconditions, geometry, boundary conditions, and operator admissibility, and carries a continuous per-relation score from committed precondition measurements; cross-MR-class calibration is left to future work.
 
@@ -106,10 +108,10 @@ None of Reichert, Eniser, or the 2023 cluster maps MR failures back to identifia
 
 | Capability | Reichert et al. 2024 | Eniser et al. 2022 | Duque-Torres 2023 line | This paper |
 |---|---|---|---|---|
-| Admissibility screening | informal exclusion filter | — | binary skip/proceed pre-filter | four-condition predicate with measurement-floor gate |
-| Tolerance grounding | a-priori qualitative direction | empirical rollout-derived relaxations | — | measurement operator's own characterizable error floor (O(h) validated) |
-| Inadmissibility verdict | implicit (basin strata) | — | binary | typed sub-dimensions + continuous per-relation D score |
-| Fault-class diagnosis | — | — | — | MR-class-to-fault-class stress test with per-detector precision/recall |
+| Admissibility screening | informal exclusion filter | none | binary skip/proceed pre-filter | four-condition predicate with measurement-floor gate |
+| Tolerance grounding | a-priori qualitative direction | empirical rollout-derived relaxations | none | measurement operator's own characterizable error floor (O(h) validated) |
+| Inadmissibility verdict | implicit (basin strata) | none | binary | typed sub-dimensions + continuous per-relation D score |
+| Fault-class diagnosis | none | none | none | MR-class-to-fault-class stress test with per-detector precision/recall |
 | Subjects | one LSTM surrogate | RL policies | tabular/numeric programs | 4 cylinder-flow architectures incl. a production framework + PINN/FNO transfer |
 
 ### 2.5 SciML V&V, Residuals, UQ, and Failure Modes
@@ -138,7 +140,7 @@ The proposed method is a five-stage workflow:
 
 1. identify candidate relation sources;
 2. organize candidate relations using declared candidate-source categories;
-3. screen candidates with a domain-validity rubric;
+3. screen candidates with an admissibility rubric;
 4. convert retained relations into executable MR assets;
 5. execute the assets and record relation-level verdicts.
 
@@ -146,7 +148,7 @@ The method deliberately separates candidate generation from validity judgment: t
 
 ### 3.2 Candidate Relation Sources
 
-We organize candidate relations with the two-layer MetaPattern model of NOETHER [zhao2026noether], which grounds each relation in an explicit algebraic generating structure, superseding the earlier descriptive three-level physical/computational/code classification [yang2020hierarchical].
+This paper applies two prior MR-identification results rather than redefining MR identification. The four-layer classification of scientific-computing MRs [yang2020hierarchical] asks where relations come from: physical, computational, code, or data layers. Its physical, computational, and code layers can yield real MRs when the corresponding semantic constraint is established. The two-layer MetaPattern model of NOETHER [zhao2026noether] asks a different question: what algebraic shape a candidate relation has. We use these two results to source and organize candidate relations, and use NOETHER only as an optional scaffold for generating and naming likely MR candidates. The central decision point in this paper is therefore not candidate discovery itself but the admissibility gate (§3.3), which decides whether any candidate becomes an admissible MR for a specific SUT.
 
 *Layer 1 (MetaPattern).* A MetaPattern is the equivalence class of metamorphic relations generated, through Translate, from one minimal algebraic structure of the program-induced operator algebra A_P (its generating basis). The five MetaPatterns m_inv, m_mono, m_adj, m_rev, m_conv are generated respectively by a group action (G), a partial order (O≤), a self-adjoint operator (T\*), a time-reversal involution (T\*_rev), and a parametrised limit (L\*); their set is 𝕄(A_P). By the Noether-style correspondence between symmetries and conserved quantities, a conservation relation is a member of the group-action MetaPattern m_inv rather than a separate structure.
 
@@ -178,6 +180,15 @@ The rubric outputs one of four screening decisions:
 - retained as OOD stress relation, not physics-preserving MR;
 - rejected as invalid or underspecified;
 - deferred pending missing evidence, such as a discrete operator or threshold.
+
+**Practitioner checklist and adoption boundary.** For a new SUT: (1) state the
+relation and source; (2) record source/follow-up preconditions; (3) check
+boundary labels and output mapping; (4) bound or calibrate the operator floor;
+(5) compare verdict tolerance with that floor; and (6) issue a typed verdict and
+ledger the run. The method does not remove domain expertise or automate MR
+discovery. Adoption costs are relation-specific physics review, mapping code,
+floor evidence, and bookkeeping; when any item is missing, the outcome is reject,
+defer, or OOD-stress, without a fault claim.
 
 ### 3.4 MR Card and Executable Asset Format
 
@@ -335,11 +346,12 @@ Third-party code, datasets, and model checkpoints will be used according to thei
 
 ## 5. Results
 
-The *primary* evidence is the cylinder-flow case study (§5.3–§5.6), including
-the same-task multi-architecture executions and the PhysicsNeMo
-production-framework workflow; the cross-family PINN/FNO transfer (§5.8) is
-*supporting*, and the baseline comparators and external witness audits (§5.7)
-are *secondary* context. Section 5.9 states the boundary of the evidence.
+The *primary* evidence is now two bounded full-chain workflows: the cylinder-flow
+case study (§5.3–§5.6), including same-task multi-architecture executions and
+the PhysicsNeMo production-framework workflow; and an independent synthetic
+periodic-advection workflow (§5.8.3). The cross-family PINN/FNO transfer
+(§5.8) is supporting, and the baseline comparators and external witness audits
+(§5.7) are secondary context. Section 5.9 states the boundary of the evidence.
 
 ### 5.1 Claim-to-Evidence Map
 
@@ -350,7 +362,7 @@ runtime mapping is `claim-ledger.yml`.
 
 | Claim | Status | Boundary |
 |---|---|---|
-| Domain-validity rubric | Supported method claim | Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. |
+| Admissibility rubric | Supported method claim | Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. |
 | MR-card executable assets | Supported asset/workflow claim | Some cards remain protocol assets pending matched SUT evidence. |
 | Node-permutation sanity check | Observed pilot | One representation-contract path on one pilot case. |
 | Conservation diagnostic | Observed; absolute deferred | Reference-relative guard only; absolute conservation remains deferred. |
@@ -360,18 +372,26 @@ runtime mapping is `claim-ledger.yml`.
 | Operator-floor resolution | Observed | Log-log slope 0.984, 95% CI [0.975, 0.992], R² = 0.9999 over nine resolutions; closed-form floor for the deployed mesh (predictor within 0.5% plus a-priori bound, §5.5). |
 | PC10-seeded-fault-detection | Observed | Detector stress test: MRs catch 5/10 injected mutants with class-specific response patterns. |
 
+### 5.1a Independent Evidence Units / Effective-N / Inference-Allowed Table
+
+| Evidence unit | SUT/task and MR/operator | Independence source | Evidence role | Inference allowed | Inference forbidden |
+|---|---|---|---|---|---|
+| Cylinder primary workflow | MGN cylinder-flow mirror-y, node permutation, and P1 divergence | K=6 checkpoints, three held-out trajectories, and exact-symmetric mesh inputs within one task | Primary method execution | within-family denominator robustness and typed verdict behavior | cross-SUT, geometry-independent, or population rates |
+| Same-task architecture check | S4/S5 MGN variants, PointMLP, and PhysicsNeMo MGN on cylinder flow | different implementations or architectures on the same task | Implementation check | rules out a single-codebase artifact; same predicate gives comparable verdict types | broad production CFD, external-dataset, or reliability claims |
+| Changed-physics task | PhysicsNeMo MGN on official airfoil; node permutation, continuity, and mirror-y gates | second CFD task with compressible physics and non-zero angle of attack | Gate discrimination | typed verdict change under changed physical preconditions | SOTA accuracy, official-checkpoint, or general airfoil reliability claims |
+| PINN/FNO PDE families | Burgers/heat PINN and FNO translation and conservation operators | different representation families, PDEs, and calibratable floors | Cross-family predicate check | rubric-to-verdict evidence where floors are calibratable | neural-operator generalization or real-defect rates |
+| Periodic-advection primary workflow | six NumPy-trained periodic-convolution surrogates for 2D scalar periodic advection; translation and mass-conservation MRs | independent synthetic PDE/task and SUT implementation with K=6 checkpoints and 10 held-out fields per SUT | Independent primary-scale workflow check | full rubric-to-verdict execution on a new task, including admitted and rejected candidates | production CFD, real-defect, reliability, or broad neural-operator claims |
+| Fault and external witnesses | 60-entry fault catalogue; sibling true-fault-class witnesses and CPU-only replays | seeded/probe catalogues plus read-only external artifacts, not mined defects | Blind-spot stress and external audit | structural complementarity and admitted-set coverage geometry | real-world defect rate, superiority, or validated localization |
+
 ### 5.2 MR-Card-to-Verdict Map
 
-| MR card | Rubric decision | Runtime verdict | What the verdict can and cannot mean |
+| Evidence block | Rubric outcome | Runtime verdict | Boundary |
 |---|---|---|---|
-| Node permutation equivariance | Retained as representation MR | pass sanity; relative L2 = 0.0 | Supports the executable path and representation contract for one case; does not establish model reliability. |
-| Mirror-y equivariance (asymmetric eval mesh) | Exact relation out-of-relation-domain; downgraded to approximate OOD-stress | S0 pilot: fail on 10 of 10 recorded eval frames; primary upgrade: 180/180 fail across K=6 x 3 trajectories x 10 | Shows bounded within-family OOD-stress violation across three held-out trajectories; not by itself exact symmetry, cross-SUT, or geometry-independent evidence. |
-| Mirror-y equivariance (synthetic symmetric mesh) | Exact relation admissible (bijection verified, offset < 1e-12, type-match 1.0) | S0 pilot: fail, relative L2 1.10; primary upgrade: 18/18 fail across K=6 x 3 input seeds | Shows exact-symmetry failure where the relation is admissible; synthetic no-obstacle OOD meshes, not accuracy or cross-SUT evidence. |
-| Discrete divergence / conservation | Absolute mass-conservation MR deferred; reference-relative diagnostic retained | S0 pilot inconclusive: reference-relative non-regression guard; primary upgrade: 162/162 pass across K=6 x 3 trajectories x 9 | Reference-relative diagnostic only; the absolute conservation relation remains deferred. |
-| MGN S4/S5 variant workflow | Node permutation admitted; mirror OOD/conservation diagnostic/exact-symmetry decisions recorded | 2/2 node-permutation passes; 60/60 mirror OOD failures; 54/54 conservation-diagnostic passes; 6/6 exact-symmetry failures | Same-domain MGN variant evidence, not an external SUT family. |
-| PointMLP cylinder workflow | Node permutation admitted; mirror OOD/conservation diagnostic/exact-symmetry decisions recorded | 9/9 node-permutation passes; 10/10 mirror OOD failures; 9/9 conservation-diagnostic passes; 3/3 exact-symmetry failures | Different non-MGN cylinder SUT; not PhysicsNeMo/EchoWave or production CFD evidence. |
-| PhysicsNeMo MGN scaled workflow | Node permutation admitted; mirror OOD/conservation diagnostic decisions recorded | Node permutation exact on 40/40 trajectories (relative L2 0.0); mirror-y OOD-stress fail on 40/40; rollout and conservation diagnostic ledgers recorded per trajectory | Official production architecture on 25+40 official trajectories at CPU scale; no full-scale production pass/fail rate, no official-checkpoint claim, and not external-aerodynamics evidence. |
-| FNO periodic translation and conservation | Translation admitted; periodic discrete-conservation MR admitted-with-reference-floor; Dirichlet translation rejected | FNO primary workflow upgrade: 24/24 translation passes, 24/24 conservation failures, and 6/6 rejected Dirichlet exact-MR executions | Full rubric-to-verdict FNO evidence with raw source/follow-up outputs and per-case ledgers; outside cylinder-flow and broad neural-operator claims. |
+| Cylinder-flow MGN/variants | Node permutation admitted; mirror exact relation downgraded or admitted only on symmetric mesh; absolute conservation deferred | Node permutation exact; mirror OOD stress fails 180/180; exact symmetric-mesh mirror fails 18/18; reference-relative conservation passes 162/162 | Primary bounded workflow; absolute conservation remains deferred; no geometry-independent or population rate. |
+| Same-task architecture checks | Same predicate applied to S4/S5, PointMLP, and PhysicsNeMo cylinder executions | S4/S5 and PointMLP reproduce typed verdict pattern; PhysicsNeMo smoke records node-permutation pass and mirror OOD stress | Implementation artifact check, not production-scale reliability. |
+| Airfoil changed-physics task | Node permutation admitted; incompressible continuity and mirror-y rejected/deferred for physical/numerical reasons | 240/240 node-permutation exact; continuity and mirror verdict types change with compressible/non-zero-angle physics | Gate discrimination, not SOTA airfoil accuracy. |
+| FNO primary workflow upgrade | Translation admitted; periodic discrete-conservation admitted-with-reference-floor; Dirichlet translation rejected | 24/24 translation passes, 24/24 conservation failures, and 6/6 rejected Dirichlet exact-MR executions | Full rubric-to-verdict FNO evidence, outside cylinder-flow and broad neural-operator claims. |
+| Periodic-advection primary workflow | Periodic translation and mass/mean conservation admitted; fixed-velocity mirror candidate rejected | 60/60 translation passes, 60/60 mass-conservation passes, and 6/6 fixed-velocity mirror rejections | Independent synthetic PDE workflow; not production CFD or real-defect evidence. |
 
 ### 5.3 Within-SUT pilot evidence (single SUT, single checkpoint)
 
@@ -404,7 +424,9 @@ and metric ledgers are committed (see §5.1).
   absolute mass-conservation relation stays deferred. As a reference-relative
   diagnostic, the surrogate's predicted next-state divergence stays within ~0.4–0.8%
   of the reference (the interior-only ratio confirms interior behaviour, not boundary imposition). Because the reference divergence is not yet decomposed into operator
-  error, solver artefact, or non-solenoidal data, the ratio is a non-regression guard, not a conservation measurement: with a 50% threshold on two frames, a "pass"
+  error, solver artefact, or non-solenoidal data, the verdict is
+  **inconclusive: reference-relative non-regression guard**, not a conservation
+  measurement: with a 50% threshold on two frames, a "pass"
   means "does not regress conservation by more than 50% on those frames," not
   "conserves mass."
 
@@ -474,6 +496,14 @@ The one-step rollout error remains high at this training budget (median relative
 
 ### 5.5 Operator-floor resolution sweep (calibration of numerical decidability)
 
+**Proposition (C53: P1 operator-floor soundness).** For P1 constant-per-cell
+divergence on shape-regular triangular meshes and C² divergence-free fields with
+Hessian bound M, the local floor is bounded by C_shape M h. An absolute
+divergence-free MR verdict is admissible only when its tolerance dominates this
+floor. The claim is limited to this operator class: it gives no
+arbitrary/degenerate-mesh, non-P1, learned-output, boundary-mismatch,
+reliability, or fault-detection guarantee.
+
 The numerical-decidability gate is checked by a symmetric-mesh P1 discrete-divergence sweep. Over nine resolutions (245,120 cells at the finest), the measured log--log slope is 0.984 with 95% CI [0.975, 0.992] and R² = 0.9999, matching the expected O(h) trend and supporting the use of the operator's intrinsic error floor in the continuity-MR verdict.
 
 Beyond the slope, the *absolute* floor is closed-form for the concrete deployed-scale mesh. Because the P1 operator is exact on affine fields and the analytic reference field is divergence-free, the measured floor equals the geometry-weighted sum of the operator's second-order Lagrange remainders exactly; a leading-order predictor built from the analytic Hessian at each cell centroid matches the area-weighted RMS measured floor to within 0.5% at the deployed scale (measured 1.337 vs predicted 1.343, ratio 0.996) and converges to it as the mesh refines (0.999 at h0/2, 1.000 at h0/4), while a rigorous a-priori upper bound from the analytic Hessian's global spectral norm dominates the measured floor in RMS and pointwise at every resolution. The numerical-decidability gate therefore rests on a derived floor, not an empirical estimate, for this mesh; the same floor reproduces on a second, unstructured Delaunay topology (a jittered-grid triangulation, worst triangle angle about 14 degrees, over the same domain and reference field) with log--log slope 0.983 (95% CI [0.953, 1.014], R² = 0.999) and a matched-resolution unstructured-over-structured floor ratio of 1.06 median and 1.33 maximum, so the verdict is empirically topology-stable across these two mesh families, while a general bound for arbitrary unstructured meshes remains future work. The manuscript treats absolute conservation on the deployed mesh as deferred and reports only the reference-relative non-regression guard as executable evidence.
@@ -488,28 +518,46 @@ The seeded-fault experiment is a detector stress test rather than a real-world d
 
 ### 5.7 LLM and generic-MR baselines: Secondary baseline and external-scope audit
 
-LLM baselines are secondary exploratory scope contrasts. Three expert-LLMs proposed 25 candidate MRs (24 unique) without access to the rubric. Three independent rater models then applied the four-condition predicate by majority vote: 4 candidates were retained, 2 downgraded to OOD-stress, 13 rejected, and 6 deferred. The 76% rejection/deferral rate and the absence of any novel retained candidate show an admissibility gap between unguided elicitation and validity-gated MR construction; this is an automated LLM-simulated expert baseline rather than a human-expert benchmark.
+LLM baselines are secondary exploratory scope contrasts. Three expert-LLMs proposed 25 candidate MRs (24 unique) without access to the rubric. Three independent rater models then applied the four-condition predicate by majority vote: 4 candidates were retained, 2 downgraded to OOD-stress, 13 rejected, and 6 deferred. These counts show an admissibility gap in candidate screening without serving as a human-expert benchmark.
 
 **Generic-MR generation.** A domain-blind generic-MR catalogue contributes the complementary scope contrast: only 3/13 templates are admitted, and all three coincide with this paper's MR families or software-contract variants. The dominant rejection reasons are missing physical/software basis and boundary/output incompatibility.
 
-**Three-arm complementarity and a measured gate value.** On the converged PointMLP SUT, over a 20-fault catalogue spanning four predeclared fault classes, three arms are contrasted: the validity-gated MR suite, a rollout-accuracy monitor (rollout L2 ≥ 2× baseline), and ungated generic templates. The MR suite and the accuracy monitor are complementary: the suite detects 13/20 faults (Wilson 95% CI [0.43, 0.82]) and the monitor 6/20, with a 2×2 split of MR-only 9, accuracy-only 2, both 4, neither 5, so nine faults are relation violations the monitor leaves inside its 2× baseline band and two degrade rollout without crossing a relation threshold. The third arm makes the gate's value measurable rather than asserted: the single gate-admitted generic template raises no baseline false positive on the fault-free correct SUT (0%), whereas all six gate-rejected templates fire on it (100% baseline false positive), so the admissibility gate is exactly what removes the false-alarming detectors. The same knife-edge symmetry blind spot (§5.6) recurs on this row-wise architecture. This is complementarity and a measured gate value, reported with descriptive Wilson CIs and never a superiority ranking.
+**Three-arm complementarity and a measured gate value.** On the converged PointMLP SUT, over a 20-fault catalogue spanning four predeclared fault classes, the validity-gated MR suite detects 13/20 faults and a rollout-accuracy monitor detects 6/20, with a 2x2 split of MR-only 9, accuracy-only 2, both 4, neither 5. The single gate-admitted generic template raises no baseline false positive on the fault-free correct SUT (0%), whereas all six gate-rejected templates fire on it (100% baseline false positive). This is complementarity and a measured gate value, reported with descriptive Wilson CIs and never a superiority ranking.
 
 **LLM-generated MRs.** The one-shot LLM baseline generated K=8 candidates; vendor-disjoint raters (`glm-5.1`, `kimi-k2.6`, `deepseek-v4-flash`) scored them. 7/8 reached panel-majority valid, six overlap this paper's MR families, and the most informative disagreement is the centerline-reflection case where a rater objected to non-bijectivity on the asymmetric mesh. Fleiss kappa is 0.077, a small-sample paradox paired with PRA 0.79 / item-unanimous 0.75.
 
-**Minimum-MR-SubSet audit and primary reruns.** The sibling repository audit at commit `9ef862ec37335b4834d0a1fb38b4b613af702f34` records 70 real ABD instances, including 20 true-fault-class rows. We locally reran three SciML/PDE witnesses: held-out cylinder-flow MGN (`PASS_WITNESS`, kstar = 6, four active true fault classes, collapse false) and trained Burgers2D/Diffusion2D PINNs (`PASS_WITNESS`, kstar = 1 each, five active classes each; Diffusion includes Neumann mass conservation). The PINN reruns add second trained-SUT/PDE primary witness evidence, while remaining one-seed witnesses rather than cross-SUT rates.
+**Minimum-MR-SubSet audit and primary reruns.** The Minimum-MR-SubSet external-scope audit at commit `9ef862ec37335b4834d0a1fb38b4b613af702f34` records 70 real ABD instances, including 20 true-fault-class rows. The local reruns provide external witness evidence for held-out cylinder-flow MGN and trained Burgers2D/Diffusion2D PINNs with `PASS_WITNESS` status, but they remain scoped witnesses and do not add new primary SUT executions to this paper.
 
 ### 5.8 Cross-family transfer: PINN and FNO subjects (supporting)
 
-The cross-family executions are not decoration: they test the two claims that the cylinder-flow case study cannot test by itself. First, that the admissibility predicate is *family-agnostic*, the same four conditions, applied unchanged, produce typed decisions on pointwise PINNs and spectral FNOs (admitting periodic translation, rejecting Dirichlet translation as boundary-incompatible, ruling MR-A vacuous for pointwise MLPs). Second, that the conservation MR family (b) produces *full executable verdicts wherever its floor is calibratable*: the FNO periodic discrete-conservation MR executes end-to-end against a case-level reference floor and fails 24/24, and the PINN reference-relative conservation passes 30/30, while the MGN open-boundary absolute variant is the one member of the family the gate correctly refuses to execute. The deferral on cylinder flow is therefore the fail-closed gate discriminating rather than a missing verdict.
+The cross-family executions have a supporting falsification role: they test whether the same four admissibility conditions produce typed decisions on pointwise PINNs and spectral FNOs, and whether conservation MRs execute wherever the floor is calibratable. FNO periodic conservation fails 24/24 against a case-level floor, PINN reference-relative conservation passes 30/30, and the MGN open-boundary absolute variant is refused. The deferral on cylinder flow is therefore gate discrimination rather than missing verdict evidence.
 
 #### 5.8.1 Cross-family PINN extension (K=6 roster)
 
-The PINN extension checks whether the predicate and MR rewrites can be carried outside MeshGraphNets. The K=15 PINN roster contains fifteen Burgers and fifteen heat-equation seeds. MR-A remains vacuous by construction for pointwise MLP PINNs; the two non-trivial MR checks are mirror-y and reference-relative conservation. MR-B passes on 13/15 Burgers seeds (mean 0.712, CI [0.583, 0.875]; Wilson pass-rate CI [0.62, 0.96]) but is mixed on heat with 7/15 passing (mean 1.495, CI [1.142, 1.897]; Wilson pass-rate CI [0.25, 0.70]). MR-C passes on all 15/15 of both PDEs (Wilson CI [0.80, 1.00]): Burgers mean 1.007 (CI [0.997, 1.017]) and heat mean 1.006 (CI [0.988, 1.022]). This is a two-PDE seed roster rather than a PINN-vs-MGN benchmark.
+The K=15 PINN roster contains fifteen Burgers and fifteen heat-equation seeds. MR-A remains vacuous by construction for pointwise MLP PINNs. The two non-trivial MR checks carry the evidence: MR-B passes on 13/15 Burgers seeds (mean 0.712, CI [0.583, 0.875]) and is mixed on heat with 7/15 passing (mean 1.495, CI [1.142, 1.897]); MR-C passes on all 15/15 of both PDEs, with Burgers mean 1.007 (CI [0.997, 1.017]) and heat mean 1.006 (CI [0.988, 1.022]). This is a two-PDE seed roster rather than a PINN-vs-MGN benchmark.
 
 
 #### 5.8.2 FNO primary workflow upgrade (K=6)
 
-The **FNO primary workflow upgrade** converts the earlier FNO roster into a second trained primary execution. Six torch FNO-2D checkpoints cover Burgers and heat. For each checkpoint and four held-out generated periodic finite-difference cases, the workflow records rubric decisions, source and follow-up tensors, mapped outputs, metric ledgers, and relation verdicts. Periodic integer translation is admitted and yields **24/24 translation passes** (maximum relative-L2 violation below 1e-5). The **periodic discrete-conservation MR** is admitted-with-reference-floor because the finite-difference target supplies a case-level channel-sum drift floor; the trained FNO outputs exceed that calibrated floor on **24/24 conservation failures**. The Dirichlet translation candidate is rejected for 6/6 SUTs because it changes the boundary-value problem and is not executed as an exact MR. This is **not only admissibility evidence**: it is a full rubric-to-verdict FNO execution with raw source/follow-up outputs and per-case ledgers, outside cylinder-flow and broad neural-operator claims.
+The **FNO primary workflow upgrade** uses six trained FNO-2D checkpoints over Burgers and heat. Periodic integer translation is admitted and yields **24/24 translation passes** (maximum relative-L2 violation below 1e-5). The **periodic discrete-conservation MR** is admitted-with-reference-floor, and trained FNO outputs exceed that calibrated floor on **24/24 conservation failures**. The Dirichlet translation candidate is rejected for 6/6 SUTs because it changes the boundary-value problem and is not executed as an exact MR. This is **not only admissibility evidence**: it is a full rubric-to-verdict FNO execution with raw source/follow-up outputs and per-case ledgers, outside cylinder-flow and broad neural-operator claims.
+
+#### 5.8.3 Independent periodic-advection primary workflow (K=6)
+
+The **periodic-advection primary workflow** adds a new synthetic SciML surrogate
+task rather than another cylinder, airfoil, PINN, or FNO extension. Six
+deterministic NumPy-trained periodic-convolution SUTs are trained for one 2D
+scalar periodic-advection step on a 32 x 32 periodic grid and evaluated on 10
+held-out fields per SUT. The run records MR cards, trained checkpoints,
+source/follow-up output archives, per-SUT metric ledgers, rubric decisions, and
+an aggregate verdict report. Periodic integer translation is admitted and gives
+**60/60 translation passes** (maximum relative-L2 violation 0.0 at tolerance
+1e-10). Global mass/mean conservation is admitted and gives **60/60
+mass-conservation passes** (maximum RMS-normalized mean drift 3.47e-17 at
+tolerance 1e-10). The **fixed-velocity mirror candidate is rejected** for 6/6
+SUTs and is not executed as an exact MR because mirroring the scalar field
+without transforming the advection velocity changes the transport problem. This
+is full rubric-to-verdict evidence on an independent primary-scale synthetic
+PDE task, **not production CFD or real-defect evidence**.
 
 ### 5.9 Boundary of the evidence
 
@@ -542,7 +590,7 @@ The workflow is not claimed to beat rollout accuracy, to have NOETHER certify th
 
 The scoped evidence shows how SciML testing can move from implicit expert checks to explicit MR assets. Such assets can complement residuals, uncertainty estimates, and accuracy metrics by making transformation assumptions and verdict rules inspectable. This is especially important for OOD validation, where the boundary of the relation is often as important as the violation itself.
 
-In that sense the workflow is aimed at producing, over many controlled transformations, a relation-indexed applicability map: a record of where a surrogate stops respecting the relations it should respect, expressed in relation space rather than in residual space. We do not claim a completed applicability map in this paper; the present evidence is one bounded within-SUT point on such a map, and assembling a calibrated map would require the cross-SUT, multi-trajectory, and cross-relation score-calibration work that remains future work.
+In that sense the workflow is aimed at producing, over many controlled transformations, a relation-indexed applicability map: a record of where a surrogate stops respecting the relations it should respect, expressed in relation space rather than in residual space. We do not claim a completed applicability map; the present evidence is one bounded within-SUT point on such a map, and assembling a calibrated map would require the cross-SUT, multi-trajectory, and cross-relation score-calibration work that remains future work.
 
 ## 7. Threats to Validity
 
@@ -550,7 +598,7 @@ In that sense the workflow is aimed at producing, over many controlled transform
 
 **Internal validity.** SUT setup, checkpoint differences, random seeds, mesh preprocessing, and runtime nondeterminism may affect verdicts. The experiment ledger must record these details.
 
-**External validity.** The empirical evidence covers two CFD tasks on two official datasets, incompressible DeepMind cylinder flow (across four architectures: the MeshGraphNets K=6 roster, S4/S5 variants, PointMLP, and the PhysicsNeMo production implementation) and compressible DeepMind airfoil flow, plus bounded cross-family PINN and FNO executions over 2D Burgers and heat data. The second-task airfoil result demonstrates that the predicate produces a physically correct, task-specific typed verdict structure rather than a fixed checklist, but it is a primary-scale K=6 roster (official architecture, 240 cells) with moderate surrogate accuracy at the local training budget; the Minimum-MR-SubSet reruns add reproduced held-out cylinder-flow MGN evidence and two trained PINN PDE witnesses as applicability checks, not general cross-SUT pass-rate estimates. Generalization to all neural operators, PINNs, or fluid surrogates without further evidence is not supported.
+**External validity.** The empirical evidence covers two CFD tasks on two official datasets, incompressible DeepMind cylinder flow (across four architectures: the MeshGraphNets K=6 roster, S4/S5 variants, PointMLP, and the PhysicsNeMo production implementation) and compressible DeepMind airfoil flow, plus bounded cross-family PINN and FNO executions over 2D Burgers and heat data and an independent periodic-advection primary workflow over six synthetic periodic-convolution SUTs. The second-task airfoil result demonstrates that the predicate produces a physically correct, task-specific typed verdict structure rather than a fixed checklist, and the periodic-advection task demonstrates a complete independent rubric-to-verdict chain on another PDE/operator setting; neither result licenses production-CFD, real-defect, or reliability rates. The Minimum-MR-SubSet reruns add reproduced held-out cylinder-flow MGN evidence and two trained PINN PDE witnesses as applicability checks, not general cross-SUT pass-rate estimates. Generalization to all neural operators, PINNs, or fluid surrogates without further evidence is not supported.
 
 **Baseline fairness.** Generic MR-generation and LLM baselines may not be designed for SciML. They should be interpreted as scope contrasts and candidate-generation comparators, not as defeated competitors.
 
@@ -560,17 +608,22 @@ In that sense the workflow is aimed at producing, over many controlled transform
 
 ## 8. Conclusion
 
-This paper presents domain-validity-gated MR identification as an auditable oracle-free testing workflow for SciML surrogates. The evidence supports the scoped pilots of Section 5.3; expands them across K=6 MGN checkpoints and three held-out trajectories with 180 mirror-y, 162 conservation-transition, and 18 exact-symmetry cells; replicates the verdict pattern across same-task architectures, including wider/deeper MGN variants, a non-message-passing PointMLP network, and the NVIDIA PhysicsNeMo production implementation; calibrates the P1 operator floor (slope 0.984, 95% CI [0.975, 0.992]); and adds bounded PINN/FNO cross-family executions plus two primary trained-PINN witness reruns. The central claim remains methodological: physically meaningful SciML MRs require explicit validity conditions, executable assets, raw evidence records, and relation-level verdicts.
+This paper presents numerical-decidability-gated MR testing as an auditable oracle-free testing workflow for SciML surrogates. The evidence supports the scoped pilots of Section 5.3; expands them across K=6 MGN checkpoints and three held-out trajectories with 180 mirror-y, 162 conservation-transition, and 18 exact-symmetry cells; replicates the verdict pattern across same-task architectures, including wider/deeper MGN variants, a non-message-passing PointMLP network, and the NVIDIA PhysicsNeMo production implementation; calibrates the P1 operator floor (slope 0.984, 95% CI [0.975, 0.992]); and adds bounded PINN/FNO cross-family executions plus two primary trained-PINN witness reruns. The central claim remains methodological: physically meaningful SciML MRs require explicit validity conditions, executable assets, raw evidence records, and relation-level verdicts.
 
 ## Data Availability
 
-All MR cards, executable assets, run manifests, raw outputs, metric ledgers,
-and the claim ledger that backs every empirical statement in this paper are
-maintained in a version-controlled replication package. The package, including
-the trained checkpoints, the seeded-fault catalogue, and the per-trajectory
-ledgers referenced by relative path throughout Section 5, will be archived
-with a DOI on Zenodo upon acceptance; until then it is available to reviewers
-on request through the editor.
+The replication package is archived on Zenodo at
+https://doi.org/10.5281/zenodo.20702952, with source at
+https://github.com/meng004/Domain-Validity-Gated-MR-for-SciML. It contains the
+manuscript source, MR cards, validators, claim ledger, run manifests, metric
+ledgers, and committed derived outputs under `research_assets/runs/`.
+Minimum-MR-SubSet audit/rerun artifacts cite commit
+`9ef862ec37335b4834d0a1fb38b4b613af702f34`. DeepMind cylinder-flow and airfoil
+TFRecords are public benchmark inputs staged by the workflow runners rather
+than redistributed in the manuscript package. GPU-dependent reruns and
+credential requirements are documented in `REPRODUCIBILITY.md`; absent
+credentials cause fail-closed precondition checks rather than silent
+substitution.
 
 ## Appendix A. Full claim-to-evidence ledger
 
@@ -581,7 +634,7 @@ authoritative runtime mapping is `claim-ledger.yml`.
 
 | Claim | Current status | Evidence | Boundary |
 |---|---|---|---|
-| Domain-validity rubric | Supported method claim | `research_assets/rubric/domain_validity_rubric.json` | Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. |
+| Admissibility rubric | Supported method claim | `research_assets/rubric/domain_validity_rubric.json` | Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. |
 | MR-card executable assets | Supported asset/workflow claim | `research_assets/mr_cards/`; validators | Some cards remain protocol assets pending matched SUT evidence. |
 | Baseline admissibility contrast | Observed | `expert-mr-baseline/`; `llm-mr-baseline/`; `generic-mr-baseline/`; `claim-ledger.yml` | Expert-LLM, LLM, and generic baselines executed as scoped admissibility-gap comparators without ranking methods as competitors. |
 | Minimum-MR-SubSet external-scope audit | Observed secondary audit | `minimum-mr-subset-external-scope-audit/minimum_mr_subset_scope_audit.json` | external witness evidence from 70 real rows and three SciML/PDE true-fault-class PASS_WITNESS rows; does not add new primary SUT executions to this paper. |

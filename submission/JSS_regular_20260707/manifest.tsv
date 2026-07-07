@@ -1,0 +1,13 @@
+file	purpose
+main.pdf	Manuscript PDF without highlights or supplementary appendix
+main.tex	Single editable manuscript source file without highlights or supplementary appendix
+supplementary.pdf	Supplementary evidence appendix PDF
+supplementary.tex	Single editable supplementary source file
+jss_latex_source.zip	Single flat LaTeX source archive for manuscript and supplement
+source/main.tex	Generated upload copy derived from manuscript/main.tex, with highlights and appendix removed
+source/supplementary.tex	Generated upload copy of supplementary source
+highlights.txt	Separate editable highlights file
+cover_letter.md	Cover letter text
+declarations.md	Submission-system declaration text
+author_biographies.md	Separate editable author biographies
+open_science_checklist.md	Open-science and data/software availability audit

@@ -1,0 +1,101 @@
+{
+  "sha": "96ef3e4d8376502a1b75dcdd799d9ada1cb39f72",
+  "node_id": "C_kwDOJsIQRdoAKDk2ZWYzZTRkODM3NjUwMmExYjc1ZGNkZDc5OWQ5YWRhMWNiMzlmNzI",
+  "commit": {
+    "author": {
+      "name": "Philipp Holl",
+      "email": "philipp.holl@tum.de",
+      "date": "2025-09-10T22:50:42Z"
+    },
+    "committer": {
+      "name": "Philipp Holl",
+      "email": "philipp.holl@tum.de",
+      "date": "2025-09-10T22:50:42Z"
+    },
+    "message": "Fix incorrectly transposed custom gradients",
+    "tree": {
+      "sha": "15db2097e379de5ebc813d6ab6f445bd1bd838e6",
+      "url": "https://api.github.com/repos/tum-pbs/PhiML/git/trees/15db2097e379de5ebc813d6ab6f445bd1bd838e6"
+    },
+    "url": "https://api.github.com/repos/tum-pbs/PhiML/git/commits/96ef3e4d8376502a1b75dcdd799d9ada1cb39f72",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "url": "https://api.github.com/repos/tum-pbs/PhiML/commits/96ef3e4d8376502a1b75dcdd799d9ada1cb39f72",
+  "html_url": "https://github.com/tum-pbs/PhiML/commit/96ef3e4d8376502a1b75dcdd799d9ada1cb39f72",
+  "comments_url": "https://api.github.com/repos/tum-pbs/PhiML/commits/96ef3e4d8376502a1b75dcdd799d9ada1cb39f72/comments",
+  "author": {
+    "login": "p-holl",
+    "id": 6258959,
+    "node_id": "MDQ6VXNlcjYyNTg5NTk=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/6258959?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/p-holl",
+    "html_url": "https://github.com/p-holl",
+    "followers_url": "https://api.github.com/users/p-holl/followers",
+    "following_url": "https://api.github.com/users/p-holl/following{/other_user}",
+    "gists_url": "https://api.github.com/users/p-holl/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/p-holl/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/p-holl/subscriptions",
+    "organizations_url": "https://api.github.com/users/p-holl/orgs",
+    "repos_url": "https://api.github.com/users/p-holl/repos",
+    "events_url": "https://api.github.com/users/p-holl/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/p-holl/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "p-holl",
+    "id": 6258959,
+    "node_id": "MDQ6VXNlcjYyNTg5NTk=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/6258959?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/p-holl",
+    "html_url": "https://github.com/p-holl",
+    "followers_url": "https://api.github.com/users/p-holl/followers",
+    "following_url": "https://api.github.com/users/p-holl/following{/other_user}",
+    "gists_url": "https://api.github.com/users/p-holl/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/p-holl/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/p-holl/subscriptions",
+    "organizations_url": "https://api.github.com/users/p-holl/orgs",
+    "repos_url": "https://api.github.com/users/p-holl/repos",
+    "events_url": "https://api.github.com/users/p-holl/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/p-holl/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "41efdff3a29cbf6f75eb6283a9d98c5114d42aa1",
+      "url": "https://api.github.com/repos/tum-pbs/PhiML/commits/41efdff3a29cbf6f75eb6283a9d98c5114d42aa1",
+      "html_url": "https://github.com/tum-pbs/PhiML/commit/41efdff3a29cbf6f75eb6283a9d98c5114d42aa1"
+    }
+  ],
+  "stats": {
+    "total": 41,
+    "additions": 27,
+    "deletions": 14
+  },
+  "files": [
+    {
+      "sha": "87bc7dc5fd26c6ca139c813853ddd8fd3390aff1",
+      "filename": "phiml/math/_functional.py",
+      "status": "modified",
+      "additions": 27,
+      "deletions": 14,
+      "changes": 41,
+      "blob_url": "https://github.com/tum-pbs/PhiML/blob/96ef3e4d8376502a1b75dcdd799d9ada1cb39f72/phiml%2Fmath%2F_functional.py",
+      "raw_url": "https://github.com/tum-pbs/PhiML/raw/96ef3e4d8376502a1b75dcdd799d9ada1cb39f72/phiml%2Fmath%2F_functional.py",
+      "contents_url": "https://api.github.com/repos/tum-pbs/PhiML/contents/phiml%2Fmath%2F_functional.py?ref=96ef3e4d8376502a1b75dcdd799d9ada1cb39f72",
+      "patch": "@@ -14,7 +14,7 @@\n from ._shape import Shape, spatial, instance, batch, channel, merge_shapes, DimFilter, shape, dual\n from ._sparse import SparseCoordinateTensor\n from ._tensors import Tensor, disassemble_tree, assemble_tree, disassemble_tensors, assemble_tensors, variable_attributes, wrap, specs_equal, equality_by_shape_and_value, \\\n-    object_dims, backend_for, NATIVE_TENSOR\n+    object_dims, backend_for, NATIVE_TENSOR, Dense, TensorStack\n from ._trace import ShiftLinTracer, matrix_from_function, LinearTraceInProgress\n from .magic import PhiTreeNode, Shapable\n from ..backend import Backend\n@@ -937,7 +937,7 @@ def backward_native(x_natives, y_natives, dy_natives):\n             result = self.gradient(kwargs, y, dy)\n             assert isinstance(result, dict) and all(key in kwargs for key in result.keys()), f\"gradient function must return a dict containing only parameter names of the forward function. Forward '{f_name(self.f)}' has arguments {kwargs}.\"\n             full_result = tuple(result.get(name, None) for name in in_key.tree.keys())\n-            result_natives = self.incomplete_tree_to_natives(full_result, tuple(in_key.tree.values()), list(in_key.shapes))\n+            result_natives = self.incomplete_tree_to_natives(full_result, tuple(in_key.tree.values()), list(in_key.specs))\n             ML_LOGGER.debug(f\"Backward pass of custom op {backward_native.__name__} returned gradients for {tuple(result.keys())} out of {tuple(in_key.tree.keys())} containing {len(result_natives)} native tensors\")\n             return result_natives\n \n@@ -973,37 +973,50 @@ def __name__(self):\n         return f\"custom_grad({f_name(self.f)})\"\n \n     @staticmethod\n-    def incomplete_tree_to_natives(incomplete, tree, complete_shapes: List[Shape]) -> list:\n-        \"\"\" None in `tree` means there is a tensor. \"\"\"\n+    def incomplete_tree_to_natives(incomplete, tree, complete_specs: List[dict]) -> list:\n+        \"\"\" Returns native tensors for required input gradients.\n+\n+        Args:\n+            incomplete: Computed gradient Tensors / composite types\n+            tree: Corresponding input data `x`, including non-Tensor attributes. For dataclasses, this will be an instance of DataclassTreeNode.\n+                None means there is a tensor, not a composite type.\n+            complete_shapes: Shapes of `x`.\n+        \"\"\"\n         if tree is None:\n-            c_shape = complete_shapes.pop(0)\n-            if incomplete is None:\n-                return [None] * c_shape.non_uniform_shape.volume\n+            c_spec = complete_specs.pop(0)\n+            if incomplete is None:  # no gradient required for this input\n+                return [None] * c_spec['shape'].non_uniform_shape.volume\n             else:\n                 assert isinstance(incomplete, Tensor)\n+                if isinstance(incomplete, Dense):\n+                    return [incomplete.native(c_spec['names'])]\n+                elif isinstance(incomplete, TensorStack):\n+                    specs = c_spec['tensors']\n+                    return [t.native(s['names']) for t, s in zip(incomplete._tensors, specs)]\n+                warnings.warn(f\"Unsupported tensor type for custom gradient: {type(incomplete)}. This might result in incorrectly transposed gradients.\", RuntimeWarning)\n                 return list(incomplete._natives())\n         elif isinstance(tree, str) and tree == NATIVE_TENSOR:\n-            complete_shapes.pop(0)\n+            complete_specs.pop(0)\n             return [incomplete]\n         elif isinstance(tree, (tuple, list)):\n             if incomplete is None:\n-                return sum([CustomGradientFunction.incomplete_tree_to_natives(None, item, complete_shapes) for item in tree], [])\n+                return sum([CustomGradientFunction.incomplete_tree_to_natives(None, item, complete_specs) for item in tree], [])\n             else:\n                 assert type(tree) == type(incomplete) and len(tree) == len(incomplete)\n-                return sum([CustomGradientFunction.incomplete_tree_to_natives(i_item, c_item, complete_shapes) for i_item, c_item in zip(incomplete, tree)], [])\n+                return sum([CustomGradientFunction.incomplete_tree_to_natives(i_item, c_item, complete_specs) for i_item, c_item in zip(incomplete, tree)], [])\n         elif isinstance(tree, dict):\n             if incomplete is None:\n-                return sum([CustomGradientFunction.incomplete_tree_to_natives(None, item, complete_shapes) for item in tree.values()], [])\n+                return sum([CustomGradientFunction.incomplete_tree_to_natives(None, item, complete_specs) for item in tree.values()], [])\n             else:\n                 assert type(tree) == type(incomplete) and len(tree) == len(incomplete) and set(tree.keys()) == set(incomplete.keys())\n-                return sum([CustomGradientFunction.incomplete_tree_to_natives(incomplete[key], c_item, complete_shapes) for key, c_item in tree.items()], [])\n+                return sum([CustomGradientFunction.incomplete_tree_to_natives(incomplete[key], c_item, complete_specs) for key, c_item in tree.items()], [])\n         elif dataclasses.is_dataclass(tree):\n             from ..dataclasses._dataclasses import DataclassTreeNode\n             if isinstance(tree, DataclassTreeNode):\n                 natives = []\n                 for attr, n_val in tree.extracted.items():\n                     i_val = getattr(incomplete, attr) if incomplete is not None else None\n-                    natives_item = CustomGradientFunction.incomplete_tree_to_natives(i_val, n_val, complete_shapes)\n+                    natives_item = CustomGradientFunction.incomplete_tree_to_natives(i_val, n_val, complete_specs)\n                     natives.extend(natives_item)\n                 return natives\n         if isinstance(tree, PhiTreeNode):\n@@ -1012,7 +1025,7 @@ def incomplete_tree_to_natives(incomplete, tree, complete_shapes: List[Shape]) -\n             for attr in attributes:\n                 n_val = getattr(tree, attr)\n                 i_val = getattr(incomplete, attr) if incomplete is not None else None\n-                natives_item = CustomGradientFunction.incomplete_tree_to_natives(i_val, n_val, complete_shapes)\n+                natives_item = CustomGradientFunction.incomplete_tree_to_natives(i_val, n_val, complete_specs)\n                 natives.extend(natives_item)\n             return natives\n         else:"
+    }
+  ]
+}

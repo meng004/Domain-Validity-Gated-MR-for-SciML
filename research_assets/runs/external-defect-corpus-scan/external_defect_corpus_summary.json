@@ -1,0 +1,178 @@
+{
+  "claim_limitations": "The corpus supports a stronger external issue/PR/commit-linked semantic-witness statement across five units and four repositories or subsystems. It remains component/utility-level evidence, not a production CFD validation, not trained-SUT correctness evidence, not population defect prevalence, and not a real-world defect-rate estimate.",
+  "date": "2026-07-03",
+  "forbidden_claims": [
+    "The paper measures a real-world defect-detection rate.",
+    "The corpus validates production SciML or CFD deployments.",
+    "The witnesses prove trained SUT accuracy or reliability.",
+    "The witnesses establish broad NeuralOperator, DeepXDE, JAX-CFD, PhiFlow, or PhiML correctness.",
+    "The corpus is a representative sample of SciML software defects."
+  ],
+  "minimum_success_checks": {
+    "all_units_have_external_sources": true,
+    "all_units_have_mr_family": true,
+    "all_units_have_pass_typed_verdicts": true,
+    "at_least_five_external_units": true,
+    "at_least_three_repositories_or_subsystems": true
+  },
+  "purpose": "One-week external issue/PR/commit-linked SciML defect-witness corpus for JSS external-validity risk reduction.",
+  "repository_or_subsystem_count": 4,
+  "repository_or_subsystem_roots": [
+    "DeepXDE",
+    "JAX-CFD",
+    "NeuralOperator",
+    "PhiFlow/PhiML"
+  ],
+  "run_id": "external-defect-corpus-summary-001",
+  "typed_verdict": "pass",
+  "unit_count": 5,
+  "units": [
+    {
+      "claim_limitations": "One external issue/PR-linked boundary-condition witness for a SciML library component. It is not a trained-surrogate result, not a defect-detection rate, and not evidence that all DeepXDE or PINN periodic boundary conditions are correct.",
+      "external_source": "https://github.com/lululxvi/deepxde/issues/26 / https://github.com/lululxvi/deepxde/pull/27",
+      "forbidden_claims": [
+        "The paper measures a real-world defect-detection rate.",
+        "The method detects all DeepXDE periodic-boundary defects.",
+        "This witness validates trained PINN accuracy or reliability.",
+        "This witness establishes production CFD readiness."
+      ],
+      "metric": {
+        "name": "periodic_boundary_derivative_residual",
+        "pr27_derivative_order_1_abs_residual": 2.0,
+        "pre_pr27_value_only_abs_residual": 0.0,
+        "primary_case": "value_periodic_derivative_mismatch",
+        "tolerance": 1e-12
+      },
+      "mr_family": "boundary-condition periodicity",
+      "repo_or_subsystem": "DeepXDE PeriodicBC",
+      "report_path": "research_assets/runs/deepxde-periodicbc-real-defect-scan/deepxde_periodicbc_real_defect_witness_report.json",
+      "run_id": "deepxde-periodicbc-real-defect-witness-001",
+      "typed_verdict": "pass",
+      "unit_id": "EDC-01"
+    },
+    {
+      "claim_limitations": "One external issue/PR-linked spectral-metric witness for a NeuralOperator utility function. It is not a trained-FNO result, not a neural-operator reliability claim, and not a defect-rate estimate.",
+      "external_source": "https://github.com/neuraloperator/neuraloperator/issues/532 / https://github.com/neuraloperator/neuraloperator/pull/661",
+      "forbidden_claims": [
+        "The method validates NeuralOperator model accuracy.",
+        "The paper measures NeuralOperator defect prevalence.",
+        "The witness proves all spectral utilities are correct.",
+        "The witness is a production training workload."
+      ],
+      "metric": {
+        "corrected_l2_radius_gap": 0.5857864376269049,
+        "corrected_power_sum_of_squares": 2.0,
+        "name": "spectrum_2d_radial_power_consistency",
+        "old_l1_radius_collision": true,
+        "old_power_after_sum": 0.0,
+        "tolerance": 1e-12
+      },
+      "mr_family": "spectral metric numerical decidability",
+      "repo_or_subsystem": "NeuralOperator spectrum_2d",
+      "report_path": "research_assets/runs/external-defect-corpus-scan/neuraloperator_spectrum2d_real_defect_witness_report.json",
+      "run_id": "neuraloperator-spectrum2d-real-defect-witness-001",
+      "typed_verdict": "pass",
+      "unit_id": "EDC-02"
+    },
+    {
+      "claim_limitations": "One external merged-PR-linked semantic witness for the Hermitian symmetry enforcement added to NeuralOperator SpectralConv. It does not reproduce GPU-specific line artifacts, does not validate trained FNO accuracy, and does not measure defect prevalence.",
+      "external_source": "https://github.com/neuraloperator/neuraloperator/pull/702",
+      "forbidden_claims": [
+        "The witness reproduces the GPU line artifact on this machine.",
+        "The method validates NeuralOperator trained-model accuracy.",
+        "The paper measures NeuralOperator defect prevalence.",
+        "The witness proves all FFT paths are correct."
+      ],
+      "metric": {
+        "corrected_boundary_metric": {
+          "dc_abs_imag": 0.0,
+          "max_boundary_abs_imag": 0.0,
+          "nyquist_abs_imag": 0.0
+        },
+        "name": "irfft_boundary_frequency_imaginary_part",
+        "source_boundary_metric": {
+          "dc_abs_imag": 0.25,
+          "max_boundary_abs_imag": 0.5,
+          "nyquist_abs_imag": 0.5
+        },
+        "tolerance": 1e-12
+      },
+      "mr_family": "frequency-domain symmetry",
+      "repo_or_subsystem": "NeuralOperator SpectralConv",
+      "report_path": "research_assets/runs/external-defect-corpus-scan/neuraloperator_hermitian_symmetry_real_defect_witness_report.json",
+      "run_id": "neuraloperator-hermitian-symmetry-real-defect-witness-001",
+      "typed_verdict": "pass",
+      "unit_id": "EDC-03"
+    },
+    {
+      "claim_limitations": "One external issue/commit-linked semantic witness for PhiML custom gradient native-axis ordering. It is not a full PhiFlow simulation result, not an automatic-differentiation benchmark, and not a defect-rate estimate.",
+      "external_source": "https://github.com/tum-pbs/PhiFlow/issues/199 / https://github.com/tum-pbs/PhiML/commit/96ef3e4d8376502a1b75dcdd799d9ada1cb39f72",
+      "forbidden_claims": [
+        "The method validates PhiFlow flow-past-obstacle simulations.",
+        "The paper measures PhiML or PhiFlow defect prevalence.",
+        "The witness proves all custom gradients are correct.",
+        "The witness is a production CFD workload."
+      ],
+      "metric": {
+        "corrected_matches_expected": true,
+        "corrected_native_shape": [
+          3,
+          2
+        ],
+        "expected_native_shape": [
+          3,
+          2
+        ],
+        "name": "custom_gradient_native_axis_order_consistency",
+        "old_matches_expected": false,
+        "old_native_shape": [
+          2,
+          3
+        ]
+      },
+      "mr_family": "coordinate/component transform",
+      "repo_or_subsystem": "PhiFlow/PhiML custom gradient",
+      "report_path": "research_assets/runs/external-defect-corpus-scan/phiml_custom_gradient_transpose_real_defect_witness_report.json",
+      "run_id": "phiml-custom-gradient-transpose-real-defect-witness-001",
+      "typed_verdict": "pass",
+      "unit_id": "EDC-04"
+    },
+    {
+      "claim_limitations": "One external merged-PR-linked boundary-condition semantic witness for JAX-CFD advection flux handling. It is not a full solver validation, not a CFD benchmark result, and not a production defect-rate estimate.",
+      "external_source": "https://github.com/google/jax-cfd/pull/167",
+      "forbidden_claims": [
+        "The method validates JAX-CFD solver accuracy.",
+        "The paper measures JAX-CFD defect prevalence.",
+        "The witness proves CFD simulation correctness.",
+        "The witness is a production CFD workload."
+      ],
+      "metric": {
+        "corrected_flux_bc": [
+          "dirichlet",
+          "dirichlet"
+        ],
+        "corrected_matches_expected": true,
+        "expected_flux_bc": [
+          "dirichlet",
+          "dirichlet"
+        ],
+        "name": "advection_flux_boundary_consistency",
+        "old_flux_bc": [
+          "neumann",
+          "neumann"
+        ],
+        "old_matches_expected": false,
+        "primary_case": "normal_no_penetration_scalar_neumann"
+      },
+      "mr_family": "boundary-condition consistency",
+      "repo_or_subsystem": "JAX-CFD advection flux boundary",
+      "report_path": "research_assets/runs/external-defect-corpus-scan/jaxcfd_flux_boundary_real_defect_witness_report.json",
+      "run_id": "jaxcfd-flux-boundary-real-defect-witness-001",
+      "typed_verdict": "pass",
+      "unit_id": "EDC-05"
+    }
+  ],
+  "verdict_counts": {
+    "pass": 5
+  }
+}

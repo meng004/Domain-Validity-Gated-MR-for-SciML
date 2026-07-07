@@ -1,0 +1,11 @@
+HTTP/1.1 200 Connection established
+
+HTTP/1.1 200 OK
+Date: Fri, 03 Jul 2026 13:45:43 GMT
+Content-Type: text/html
+Content-Length: 23033
+Connection: keep-alive
+Last-Modified: Mon, 02 Mar 2026 13:14:11 GMT
+ETag: "69a58d23-59f9"
+Accept-Ranges: bytes
+

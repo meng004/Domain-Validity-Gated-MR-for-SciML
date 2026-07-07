@@ -1,0 +1,494 @@
+[
+  {
+    "sha": "979ad14357521757576ec34a7a85193db8616718",
+    "node_id": "C_kwDOMmlPXNoAKDk3OWFkMTQzNTc1MjE3NTc1NzZlYzM0YTdhODUxOTNkYjg2MTY3MTg",
+    "commit": {
+      "author": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-01-22T23:12:43Z"
+      },
+      "committer": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-01-22T23:12:43Z"
+      },
+      "message": "Enforce Hermitian symmetry conditions before IFFT in SpectralCOnv",
+      "tree": {
+        "sha": "ae409f3dfb77b2f5ff0f8711702fbe782451e7c0",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/trees/ae409f3dfb77b2f5ff0f8711702fbe782451e7c0"
+      },
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/commits/979ad14357521757576ec34a7a85193db8616718",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/979ad14357521757576ec34a7a85193db8616718",
+    "html_url": "https://github.com/neuraloperator/neuraloperator/commit/979ad14357521757576ec34a7a85193db8616718",
+    "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/979ad14357521757576ec34a7a85193db8616718/comments",
+    "author": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "172c54d178e059a9665a5ea586cfc4afa8b9d1b8",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/172c54d178e059a9665a5ea586cfc4afa8b9d1b8",
+        "html_url": "https://github.com/neuraloperator/neuraloperator/commit/172c54d178e059a9665a5ea586cfc4afa8b9d1b8"
+      }
+    ]
+  },
+  {
+    "sha": "c876d37fafa30c25dc67a17870ab5a954e686e5f",
+    "node_id": "C_kwDOMmlPXNoAKGM4NzZkMzdmYWZhMzBjMjVkYzY3YTE3ODcwYWI1YTk1NGU2ODZlNWY",
+    "commit": {
+      "author": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-01-22T23:21:06Z"
+      },
+      "committer": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-01-22T23:21:06Z"
+      },
+      "message": "Small fix so it works with upscaling factors",
+      "tree": {
+        "sha": "cfc4c1f1ff26a7054f164156e50e216630cea63c",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/trees/cfc4c1f1ff26a7054f164156e50e216630cea63c"
+      },
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/commits/c876d37fafa30c25dc67a17870ab5a954e686e5f",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/c876d37fafa30c25dc67a17870ab5a954e686e5f",
+    "html_url": "https://github.com/neuraloperator/neuraloperator/commit/c876d37fafa30c25dc67a17870ab5a954e686e5f",
+    "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/c876d37fafa30c25dc67a17870ab5a954e686e5f/comments",
+    "author": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "979ad14357521757576ec34a7a85193db8616718",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/979ad14357521757576ec34a7a85193db8616718",
+        "html_url": "https://github.com/neuraloperator/neuraloperator/commit/979ad14357521757576ec34a7a85193db8616718"
+      }
+    ]
+  },
+  {
+    "sha": "2089ee3cc4268815b5c58205b938885553c70fcb",
+    "node_id": "C_kwDOMmlPXNoAKDIwODllZTNjYzQyNjg4MTViNWM1ODIwNWI5Mzg4ODU1NTNjNzBmY2I",
+    "commit": {
+      "author": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-02-06T01:09:41Z"
+      },
+      "committer": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-02-06T01:09:41Z"
+      },
+      "message": "Make enforcing the Hermitian symmetry a boolean flag",
+      "tree": {
+        "sha": "acd8bf2d7be867bb76225ae5205c047345f2bb8c",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/trees/acd8bf2d7be867bb76225ae5205c047345f2bb8c"
+      },
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/commits/2089ee3cc4268815b5c58205b938885553c70fcb",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/2089ee3cc4268815b5c58205b938885553c70fcb",
+    "html_url": "https://github.com/neuraloperator/neuraloperator/commit/2089ee3cc4268815b5c58205b938885553c70fcb",
+    "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/2089ee3cc4268815b5c58205b938885553c70fcb/comments",
+    "author": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "c876d37fafa30c25dc67a17870ab5a954e686e5f",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/c876d37fafa30c25dc67a17870ab5a954e686e5f",
+        "html_url": "https://github.com/neuraloperator/neuraloperator/commit/c876d37fafa30c25dc67a17870ab5a954e686e5f"
+      }
+    ]
+  },
+  {
+    "sha": "0ba6bb878ae6d11fb4cd17d42ae6302a2c52126f",
+    "node_id": "C_kwDOMmlPXNoAKDBiYTZiYjg3OGFlNmQxMWZiNGNkMTdkNDJhZTYzMDJhMmM1MjEyNmY",
+    "commit": {
+      "author": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-02-11T18:30:14Z"
+      },
+      "committer": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-02-11T18:30:14Z"
+      },
+      "message": "Updated comment style",
+      "tree": {
+        "sha": "28401e9c9f7c40494b27554a6d4753e32fdc686f",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/trees/28401e9c9f7c40494b27554a6d4753e32fdc686f"
+      },
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/commits/0ba6bb878ae6d11fb4cd17d42ae6302a2c52126f",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/0ba6bb878ae6d11fb4cd17d42ae6302a2c52126f",
+    "html_url": "https://github.com/neuraloperator/neuraloperator/commit/0ba6bb878ae6d11fb4cd17d42ae6302a2c52126f",
+    "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/0ba6bb878ae6d11fb4cd17d42ae6302a2c52126f/comments",
+    "author": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "2089ee3cc4268815b5c58205b938885553c70fcb",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/2089ee3cc4268815b5c58205b938885553c70fcb",
+        "html_url": "https://github.com/neuraloperator/neuraloperator/commit/2089ee3cc4268815b5c58205b938885553c70fcb"
+      }
+    ]
+  },
+  {
+    "sha": "2123bc6044841c142d97b5f9f9849b8747ea9b06",
+    "node_id": "C_kwDOMmlPXNoAKDIxMjNiYzYwNDQ4NDFjMTQyZDk3YjVmOWY5ODQ5Yjg3NDdlYTliMDY",
+    "commit": {
+      "author": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-02-11T18:30:35Z"
+      },
+      "committer": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-02-11T18:30:35Z"
+      },
+      "message": "Updated convs definition",
+      "tree": {
+        "sha": "c8821f06f49c82131e67eaf1480e92b3f1ce641d",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/trees/c8821f06f49c82131e67eaf1480e92b3f1ce641d"
+      },
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/commits/2123bc6044841c142d97b5f9f9849b8747ea9b06",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/2123bc6044841c142d97b5f9f9849b8747ea9b06",
+    "html_url": "https://github.com/neuraloperator/neuraloperator/commit/2123bc6044841c142d97b5f9f9849b8747ea9b06",
+    "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/2123bc6044841c142d97b5f9f9849b8747ea9b06/comments",
+    "author": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0ba6bb878ae6d11fb4cd17d42ae6302a2c52126f",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/0ba6bb878ae6d11fb4cd17d42ae6302a2c52126f",
+        "html_url": "https://github.com/neuraloperator/neuraloperator/commit/0ba6bb878ae6d11fb4cd17d42ae6302a2c52126f"
+      }
+    ]
+  },
+  {
+    "sha": "3813f8c85a8691337a188ef6029d6d79a3e4c4ec",
+    "node_id": "C_kwDOMmlPXNoAKDM4MTNmOGM4NWE4NjkxMzM3YTE4OGVmNjAyOWQ2ZDc5YTNlNGM0ZWM",
+    "commit": {
+      "author": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-02-11T18:39:16Z"
+      },
+      "committer": {
+        "name": "Valentin Duruisseaux",
+        "email": "81578633+vduruiss@users.noreply.github.com",
+        "date": "2026-02-11T18:39:16Z"
+      },
+      "message": "Add short sfno test",
+      "tree": {
+        "sha": "d652f8dd02f2690c994d25434b24c5b5ee707bd6",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/trees/d652f8dd02f2690c994d25434b24c5b5ee707bd6"
+      },
+      "url": "https://api.github.com/repos/neuraloperator/neuraloperator/git/commits/3813f8c85a8691337a188ef6029d6d79a3e4c4ec",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/3813f8c85a8691337a188ef6029d6d79a3e4c4ec",
+    "html_url": "https://github.com/neuraloperator/neuraloperator/commit/3813f8c85a8691337a188ef6029d6d79a3e4c4ec",
+    "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/3813f8c85a8691337a188ef6029d6d79a3e4c4ec/comments",
+    "author": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "vduruiss",
+      "id": 81578633,
+      "node_id": "MDQ6VXNlcjgxNTc4NjMz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81578633?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/vduruiss",
+      "html_url": "https://github.com/vduruiss",
+      "followers_url": "https://api.github.com/users/vduruiss/followers",
+      "following_url": "https://api.github.com/users/vduruiss/following{/other_user}",
+      "gists_url": "https://api.github.com/users/vduruiss/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/vduruiss/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/vduruiss/subscriptions",
+      "organizations_url": "https://api.github.com/users/vduruiss/orgs",
+      "repos_url": "https://api.github.com/users/vduruiss/repos",
+      "events_url": "https://api.github.com/users/vduruiss/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/vduruiss/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "2123bc6044841c142d97b5f9f9849b8747ea9b06",
+        "url": "https://api.github.com/repos/neuraloperator/neuraloperator/commits/2123bc6044841c142d97b5f9f9849b8747ea9b06",
+        "html_url": "https://github.com/neuraloperator/neuraloperator/commit/2123bc6044841c142d97b5f9f9849b8747ea9b06"
+      }
+    ]
+  }
+]

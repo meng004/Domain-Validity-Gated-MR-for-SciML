@@ -1,0 +1,352 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{raissi2019pinn}
+M.~Raissi, P.~Perdikaris, G.~E. Karniadakis, Physics-informed neural networks:
+  A deep learning framework for solving forward and inverse problems involving
+  nonlinear partial differential equations, Journal of Computational Physics
+  378 (2019) 686--707.
+\newblock \href {https://doi.org/10.1016/j.jcp.2018.10.045}
+  {\path{doi:10.1016/j.jcp.2018.10.045}}.
+
+\bibitem{karniadakis2021piml}
+G.~E. Karniadakis, I.~G. Kevrekidis, L.~Lu, P.~Perdikaris, S.~Wang, L.~Yang,
+  Physics-informed machine learning, Nature Reviews Physics 3 (2021) 422--440.
+\newblock \href {https://doi.org/10.1038/s42254-021-00314-5}
+  {\path{doi:10.1038/s42254-021-00314-5}}.
+
+\bibitem{li2021fno}
+Z.~Li, N.~Kovachki, K.~Azizzadenesheli, B.~Liu, K.~Bhattacharya, A.~Stuart,
+  A.~Anandkumar, \href{https://openreview.net/forum?id=c8P9NQVtmnO}{Fourier
+  neural operator for parametric partial differential equations}, International
+  Conference on Learning Representations (ICLR) (2021).
+\newblock \href {http://arxiv.org/abs/2010.08895} {\path{arXiv:2010.08895}},
+  \href {https://doi.org/10.48550/arXiv.2010.08895}
+  {\path{doi:10.48550/arXiv.2010.08895}}.
+\newline\urlprefix\url{https://openreview.net/forum?id=c8P9NQVtmnO}
+
+\bibitem{pfaff2021meshgraphnets}
+T.~Pfaff, M.~Fortunato, A.~Sanchez-Gonzalez, P.~W. Battaglia,
+  \href{https://openreview.net/forum?id=roNqYL0_XP}{Learning mesh-based
+  simulation with graph networks}, International Conference on Learning
+  Representations (ICLR), spotlight (2021).
+\newblock \href {http://arxiv.org/abs/2010.03409} {\path{arXiv:2010.03409}},
+  \href {https://doi.org/10.48550/arXiv.2010.03409}
+  {\path{doi:10.48550/arXiv.2010.03409}}.
+\newline\urlprefix\url{https://openreview.net/forum?id=roNqYL0_XP}
+
+\bibitem{barr2015oracle}
+E.~T. Barr, M.~Harman, P.~McMinn, M.~Shahbaz, S.~Yoo, The oracle problem in
+  software testing: A survey, IEEE Transactions on Software Engineering 41~(5)
+  (2015) 507--525.
+\newblock \href {https://doi.org/10.1109/TSE.2014.2372785}
+  {\path{doi:10.1109/TSE.2014.2372785}}.
+
+\bibitem{chen1998metamorphic}
+T.~Y. Chen, S.~C. Cheung, S.~M. Yiu,
+  \href{https://arxiv.org/abs/2002.12543}{Metamorphic testing: A new approach
+  for generating next test cases}, Tech. Rep. HKUST-CS98-01, The Hong Kong
+  University of Science and Technology (1998).
+\newblock \href {http://arxiv.org/abs/2002.12543} {\path{arXiv:2002.12543}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2002.12543}
+
+\bibitem{segura2016survey}
+S.~Segura, G.~Fraser, A.~B. Sanchez, A.~Ruiz-Cortes, A survey on metamorphic
+  testing, IEEE Transactions on Software Engineering 42~(9) (2016) 805--824.
+\newblock \href {https://doi.org/10.1109/TSE.2016.2532875}
+  {\path{doi:10.1109/TSE.2016.2532875}}.
+
+\bibitem{kanewala2019scientific}
+U.~Kanewala, T.~Y. Chen, Metamorphic testing: A simple yet effective approach
+  for testing scientific software, Computing in Science and Engineering 21~(1)
+  (2019) 66--72.
+\newblock \href {https://doi.org/10.1109/MCSE.2018.2875368}
+  {\path{doi:10.1109/MCSE.2018.2875368}}.
+
+\bibitem{lin2020exploratory}
+X.~Lin, M.~Simon, N.~Niu, Exploratory metamorphic testing for scientific
+  software, Computing in Science and Engineering 22~(2) (2020) 78--87.
+\newblock \href {https://doi.org/10.1109/MCSE.2018.2880577}
+  {\path{doi:10.1109/MCSE.2018.2880577}}.
+
+\bibitem{olsen2019simulation}
+M.~Olsen, M.~S. Raunak, Increasing validity of simulation models through
+  metamorphic testing, IEEE Transactions on Reliability 68~(1) (2019) 91--108.
+\newblock \href {https://doi.org/10.1109/TR.2018.2850315}
+  {\path{doi:10.1109/TR.2018.2850315}}.
+
+\bibitem{zhao2026noether}
+M.~Li, X.~Yang, J.~Liu, S.~Yan,
+  \href{https://arxiv.org/abs/2605.17390}{Noether: A constructive framework for
+  metamorphic pattern discovery from operator algebras} (2026).
+\newblock \href {http://arxiv.org/abs/2605.17390} {\path{arXiv:2605.17390}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2605.17390}
+
+\bibitem{duqueTorres2023bugornot}
+A.~Duque-Torres, D.~Pfahl, C.~Klammer, S.~Fischer, Bug or not bug? analysing
+  the reasons behind metamorphic relation violations, in: Proceedings of the
+  2023 IEEE International Conference on Software Analysis, Evolution and
+  Reengineering (SANER), 2023, pp. 905--912.
+\newblock \href {https://doi.org/10.1109/SANER56733.2023.00109}
+  {\path{doi:10.1109/SANER56733.2023.00109}}.
+
+\bibitem{duqueTorres2023completePipeline}
+A.~Duque-Torres, D.~Pfahl, Towards a complete metamorphic testing pipeline, in:
+  2023 IEEE International Conference on Software Maintenance and Evolution
+  (ICSME), 2023, pp. 606--610.
+\newblock \href {http://arxiv.org/abs/2310.00338} {\path{arXiv:2310.00338}},
+  \href {https://doi.org/10.1109/ICSME58846.2023.00081}
+  {\path{doi:10.1109/ICSME58846.2023.00081}}.
+
+\bibitem{duqueTorres2023metaTrimmer}
+A.~Duque-Torres, D.~Pfahl, C.~Klammer, S.~Fischer, Exploring a test data-driven
+  method for selecting and constraining metamorphic relations, in: 2023 49th
+  Euromicro Conference on Software Engineering and Advanced Applications
+  (SEAA), 2023, pp. 370--377.
+\newblock \href {http://arxiv.org/abs/2307.15522} {\path{arXiv:2307.15522}},
+  \href {https://doi.org/10.1109/SEAA60479.2023.00063}
+  {\path{doi:10.1109/SEAA60479.2023.00063}}.
+
+\bibitem{chen2018mtSurvey}
+T.~Y. Chen, F.-C. Kuo, H.~Liu, P.-L. Poon, D.~Towey, T.~H. Tse, Z.~Q. Zhou,
+  Metamorphic testing, ACM Computing Surveys 51~(1) (2018) 4:1--4:27.
+\newblock \href {https://doi.org/10.1145/3143561} {\path{doi:10.1145/3143561}}.
+
+\bibitem{chen2002pde}
+T.~Y. Chen, J.~Feng, T.~H. Tse, Metamorphic testing of programs on partial
+  differential equations: A case study, in: Proceedings of the 26th Annual
+  International Computer Software and Applications Conference, 2002, pp.
+  327--333.
+\newblock \href {https://doi.org/10.1109/CMPSAC.2002.1045022}
+  {\path{doi:10.1109/CMPSAC.2002.1045022}}.
+
+\bibitem{chen2011ml}
+X.~Xie, J.~W.~K. Ho, C.~Murphy, G.~Kaiser, B.~Xu, T.~Y. Chen, Testing and
+  validating machine learning classifiers by metamorphic testing, Journal of
+  Systems and Software 84~(4) (2011) 544--558.
+\newblock \href {https://doi.org/10.1016/j.jss.2010.11.920}
+  {\path{doi:10.1016/j.jss.2010.11.920}}.
+
+\bibitem{ying2025}
+Z.~Ying, A.~G. Bellotti, J.~L. Breeden, D.~Towey, Metamorphic testing and
+  exploration for machine learning credit score models, Information and
+  Software Technology 188 (2025) 107903.
+\newblock \href {https://doi.org/10.1016/j.infsof.2025.107903}
+  {\path{doi:10.1016/j.infsof.2025.107903}}.
+
+\bibitem{kanewalaBieman2014slr}
+U.~Kanewala, J.~M. Bieman, Testing scientific software: A systematic literature
+  review, Information and Software Technology 56~(10) (2014) 1219--1232.
+\newblock \href {https://doi.org/10.1016/j.infsof.2014.05.006}
+  {\path{doi:10.1016/j.infsof.2014.05.006}}.
+
+\bibitem{raunak2021continuum}
+M.~S. Raunak, M.~M. Olsen, Metamorphic testing on the continuum of verification
+  and validation of simulation models, in: 2021 IEEE/ACM 6th International
+  Workshop on Metamorphic Testing, 2021, pp. 47--52.
+\newblock \href {https://doi.org/10.1109/MET52542.2021.00015}
+  {\path{doi:10.1109/MET52542.2021.00015}}.
+
+\bibitem{kanewala2016graphkernel}
+U.~Kanewala, J.~M. Bieman, A.~Ben-Hur, Predicting metamorphic relations for
+  testing scientific software: A machine learning approach using graph kernels,
+  Software Testing, Verification and Reliability 26~(3) (2016) 245--269.
+\newblock \href {https://doi.org/10.1002/stvr.1594}
+  {\path{doi:10.1002/stvr.1594}}.
+
+\bibitem{wang2022mridentification}
+F.~Wang, X.~Yang, M.~Li, J.~Liu, S.~Yan, S.~Fu, A dynamic identification method
+  of metamorphic relation based on separation of input pattern and output
+  pattern, in: 2022 9th International Conference on Wireless Communication and
+  Sensor Networks (ICWCSN), ACM, 2022, pp. 16--24.
+\newblock \href {https://doi.org/10.1145/3514105.3514109}
+  {\path{doi:10.1145/3514105.3514109}}.
+
+\bibitem{fu2021burnup}
+S.~Fu, X.~Yang, M.~Li, F.~Wang, An identification method of image-based for
+  output pattern of metamorphic relation in burnup calculation program, in:
+  2021 3rd International Academic Exchange Conference on Science and Technology
+  Innovation (IAECST), IEEE, 2021, pp. 811--818.
+\newblock \href {https://doi.org/10.1109/IAECST54258.2021.9695750}
+  {\path{doi:10.1109/IAECST54258.2021.9695750}}.
+
+\bibitem{tsigkanos2023}
+C.~Tsigkanos, P.~Rani, S.~M{\"u}ller, T.~Kehrer, Variable discovery with large
+  language models for metamorphic testing of scientific software, in:
+  Computational Science -- ICCS 2023, Lecture Notes in Computer Science, 2023,
+  pp. 321--335.
+\newblock \href {https://doi.org/10.1007/978-3-031-35995-8\_23}
+  {\path{doi:10.1007/978-3-031-35995-8\_23}}.
+
+\bibitem{spieker2024trajectory}
+H.~Spieker, N.~Belmecheri, A.~Gotlieb, N.~Lazaar, Evaluating human trajectory
+  prediction with metamorphic testing, in: Proceedings of the 9th ACM
+  International Workshop on Metamorphic Testing (MET), 2024, pp. 34--40.
+\newblock \href {https://doi.org/10.1145/3679006.3685071}
+  {\path{doi:10.1145/3679006.3685071}}.
+
+\bibitem{spieker2025multimodal}
+H.~Spieker, N.~Lazaar, A.~Gotlieb, N.~Belmecheri, Metamorphic testing of
+  multimodal human trajectory prediction, Information and Software Technology
+  188 (2025) 107890.
+\newblock \href {https://doi.org/10.1016/j.infsof.2025.107890}
+  {\path{doi:10.1016/j.infsof.2025.107890}}.
+
+\bibitem{hiremath2021ocean}
+D.~J. Hiremath, M.~Claus, W.~Hasselbring, W.~Rath, Towards automated
+  metamorphic test identification for ocean system models, in: 2021 IEEE/ACM
+  6th International Workshop on Metamorphic Testing, 2021, pp. 42--46.
+\newblock \href {http://arxiv.org/abs/2103.09782} {\path{arXiv:2103.09782}},
+  \href {https://doi.org/10.1109/MET52542.2021.00014}
+  {\path{doi:10.1109/MET52542.2021.00014}}.
+
+\bibitem{mandrioli2025cps}
+C.~Mandrioli, S.~Y. Shin, D.~Bianculli, L.~Briand, Testing cps with design
+  assumptions-based metamorphic relations and genetic programming, IEEE
+  Transactions on Software Engineering 51~(6) (2025) 1666--1684.
+\newblock \href {https://doi.org/10.1109/TSE.2025.3563121}
+  {\path{doi:10.1109/TSE.2025.3563121}}.
+
+\bibitem{duqueTorres2024selecting}
+A.~Duque-Torres, Selecting and constraining metamorphic relations, in:
+  Proceedings of the 2024 IEEE/ACM 46th International Conference on Software
+  Engineering: Companion Proceedings, 2024, pp. 212--216.
+\newblock \href {https://doi.org/10.1145/3639478.3639781}
+  {\path{doi:10.1145/3639478.3639781}}.
+
+\bibitem{sun2026ccml}
+C.-a. Sun, S.~Wu, X.~Zhang, P.-L. Poon, Boosting metamorphic testing: A general
+  metamorphic specification language and a supporting system, ACM Transactions
+  on Software Engineering and Methodology (2026).
+\newblock \href {https://doi.org/10.1145/3796225} {\path{doi:10.1145/3796225}}.
+
+\bibitem{li2022nuclearmr}
+M.~Li, X.~Yang, S.~Yan, J.~Liu, Y.~Liu, J.~Sun, A lightweight verification
+  method based on metamorphic relation for nuclear power software, Frontiers in
+  Energy Research 10 (2022) 788753.
+\newblock \href {https://doi.org/10.3389/fenrg.2022.788753}
+  {\path{doi:10.3389/fenrg.2022.788753}}.
+
+\bibitem{srinivasan2022prioritization}
+M.~Srinivasan, U.~Kanewala, Metamorphic relation prioritization for effective
+  regression testing, Software Testing, Verification and Reliability 32~(3)
+  (2022) e1807.
+\newblock \href {https://doi.org/10.1002/stvr.1807}
+  {\path{doi:10.1002/stvr.1807}}.
+
+\bibitem{saha2019faultdetection}
+P.~Saha, U.~Kanewala, Fault detection effectiveness of metamorphic relations
+  developed for testing supervised classifiers, in: 2019 IEEE International
+  Conference on Artificial Intelligence Testing (AITest), 2019, pp. 157--164.
+\newblock \href {https://doi.org/10.1109/aitest.2019.00019}
+  {\path{doi:10.1109/aitest.2019.00019}}.
+
+\bibitem{yang2021hydromt}
+Y.~Yang, T.~F.~M. Chui, Reliability assessment of machine learning models in
+  hydrological predictions through metamorphic testing, Water Resources
+  Research 57 (2021).
+\newblock \href {https://doi.org/10.1029/2020WR029471}
+  {\path{doi:10.1029/2020WR029471}}.
+
+\bibitem{reichert2024hess}
+P.~Reichert, K.~Ma, M.~H\"oge, F.~Fenicia, M.~Baity-Jesi, D.~Feng, C.~Shen,
+  Metamorphic testing of machine learning and conceptual hydrologic models,
+  Hydrology and Earth System Sciences 28~(11) (2024) 2505--2529.
+\newblock \href {https://doi.org/10.5194/hess-28-2505-2024}
+  {\path{doi:10.5194/hess-28-2505-2024}}.
+
+\bibitem{eniser2022relaxations}
+H.~F. Eniser, T.~P. Gros, V.~W\"ustholz, J.~Hoffmann, M.~Christakis,
+  Metamorphic relations via relaxations: An approach to obtain oracles for
+  action-policy testing, in: Proceedings of the 31st ACM SIGSOFT International
+  Symposium on Software Testing and Analysis (ISSTA), 2022, pp. 52--63.
+\newblock \href {https://doi.org/10.1145/3533767.3534392}
+  {\path{doi:10.1145/3533767.3534392}}.
+
+\bibitem{krishnapriyan2021failure}
+A.~S. Krishnapriyan, A.~Gholami, S.~Zhe, R.~M. Kirby, M.~W. Mahoney,
+  \href{https://arxiv.org/abs/2109.01050}{Characterizing possible failure modes
+  in physics-informed neural networks}, in: Advances in Neural Information
+  Processing Systems, Vol.~34, 2021, pp. 26548--26560.
+\newblock \href {http://arxiv.org/abs/2109.01050} {\path{arXiv:2109.01050}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2109.01050}
+
+\bibitem{gopakumar2025calibrated}
+V.~Gopakumar, A.~Gray, L.~Zanisi, T.~Nunn, D.~Giles, M.~J. Kusner, S.~Pamela,
+  M.~P. Deisenroth,
+  \href{https://proceedings.mlr.press/v267/gopakumar25a.html}{Calibrated
+  physics-informed uncertainty quantification}, in: Proceedings of the 42nd
+  International Conference on Machine Learning (ICML), Vol. 267 of Proceedings
+  of Machine Learning Research, PMLR, 2025, pp. 20103--20141, arXiv:2502.04406.
+\newblock \href {http://arxiv.org/abs/2502.04406} {\path{arXiv:2502.04406}}.
+\newline\urlprefix\url{https://proceedings.mlr.press/v267/gopakumar25a.html}
+
+\bibitem{wang2021gradflow}
+S.~Wang, Y.~Teng, P.~Perdikaris, Understanding and mitigating gradient flow
+  pathologies in physics-informed neural networks, SIAM Journal on Scientific
+  Computing 43~(5) (2021) A3055--A3081.
+\newblock \href {https://doi.org/10.1137/20M1318043}
+  {\path{doi:10.1137/20M1318043}}.
+
+\bibitem{baral2025xrepit}
+S.~Baral, Y.~Lee, S.~Khanal, J.~Jeon, Xrepit: A deep learning-computational
+  fluid dynamics hybrid framework implemented in openfoam for fast, robust, and
+  scalable unsteady simulations, Computers \& Fluids 314 (2026) 107075.
+\newblock \href {https://doi.org/10.1016/j.compfluid.2026.107075}
+  {\path{doi:10.1016/j.compfluid.2026.107075}}.
+
+\bibitem{wang2025deeponetfe}
+W.~Wang, M.~Hakimzadeh, H.~Ruan, S.~Goswami, Time-marching neural
+  operator-finite element coupling: Ai-accelerated physics modeling, Computer
+  Methods in Applied Mechanics and Engineering 446 (2025) 118319.
+\newblock \href {https://doi.org/10.1016/j.cma.2025.118319}
+  {\path{doi:10.1016/j.cma.2025.118319}}.
+
+\bibitem{najafi2026}
+H.~Najafi, G.~L. Lagerwall, J.~Obeysekera, J.~Liu, Machine learning in climate
+  downscaling: A critical review of methodologies, physical consistency, and
+  operational applications, Water 18~(2) (2026) 271.
+\newblock \href {https://doi.org/10.3390/w18020271}
+  {\path{doi:10.3390/w18020271}}.
+
+\bibitem{yan2024elliptic}
+S.~Yan, H.~Zhu, Metamorphic testing on scientific programs for solving
+  second-order elliptic differential equations, Software Testing, Verification
+  and Reliability 35~(1) (2024).
+\newblock \href {https://doi.org/10.1002/stvr.1912}
+  {\path{doi:10.1002/stvr.1912}}.
+
+\bibitem{stevens2025mars}
+C.~Stevens, K.~Kjeer, R.~M. Richard, E.~F. Valeev, M.~B. Cohen, Model assisted
+  refinement of metamorphic relations for scientific software, in: 2025
+  IEEE/ACM 47th International Conference on Software Engineering: New Ideas and
+  Emerging Results (ICSE-NIER), IEEE, 2025, pp. 31--35.
+\newblock \href {https://doi.org/10.1109/ICSE-NIER66352.2025.00012}
+  {\path{doi:10.1109/ICSE-NIER66352.2025.00012}}.
+
+\bibitem{yang2020hierarchical}
+X.-h. Yang, S.-y. Yan, J.~Liu, M.~Li, Hierarchical classification model for
+  metamorphic relations of scientific computing programs, Computer Science
+  47~(11A) (2020) 557--561.
+\newblock \href {https://doi.org/10.11896/jsjkx.200200015}
+  {\path{doi:10.11896/jsjkx.200200015}}.
+
+\bibitem{verdecchia2023threats}
+R.~Verdecchia, E.~Engstr{\"o}m, P.~Lago, P.~Runeson, Q.~Song, Threats to
+  validity in software engineering research: A critical reflection, Information
+  and Software Technology 164 (2023) 107329.
+\newblock \href {https://doi.org/10.1016/j.infsof.2023.107329}
+  {\path{doi:10.1016/j.infsof.2023.107329}}.
+
+\bibitem{ralph2021empirical}
+P.~Ralph, et~al., \href{https://arxiv.org/abs/2010.03525}{Empirical standards
+  for software engineering research}, ACM SIGSOFT,
+  \url{https://github.com/acmsigsoft/EmpiricalStandards} (2021).
+\newblock \href {http://arxiv.org/abs/2010.03525} {\path{arXiv:2010.03525}}.
+\newline\urlprefix\url{https://arxiv.org/abs/2010.03525}
+
+\end{thebibliography}

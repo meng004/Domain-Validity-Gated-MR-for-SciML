@@ -1,0 +1,107 @@
+{
+  "claim_limitations": "One external merged-PR-linked semantic witness for the Hermitian symmetry enforcement added to NeuralOperator SpectralConv. It does not reproduce GPU-specific line artifacts, does not validate trained FNO accuracy, and does not measure defect prevalence.",
+  "date": "2026-07-03",
+  "forbidden_claims": [
+    "The witness reproduces the GPU line artifact on this machine.",
+    "The method validates NeuralOperator trained-model accuracy.",
+    "The paper measures NeuralOperator defect prevalence.",
+    "The witness proves all FFT paths are correct."
+  ],
+  "metric": {
+    "corrected_boundary_metric": {
+      "dc_abs_imag": 0.0,
+      "max_boundary_abs_imag": 0.0,
+      "nyquist_abs_imag": 0.0
+    },
+    "name": "irfft_boundary_frequency_imaginary_part",
+    "source_boundary_metric": {
+      "dc_abs_imag": 0.25,
+      "max_boundary_abs_imag": 0.5,
+      "nyquist_abs_imag": 0.5
+    },
+    "tolerance": 1e-12
+  },
+  "mr_card": "research_assets/mr_cards/neuraloperator_hermitian_symmetry_irfft_boundary.json",
+  "run_id": "neuraloperator-hermitian-symmetry-real-defect-witness-001",
+  "source_artifacts": {
+    "neuraloperator_pr_702.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/neuraloperator_pr_702.json",
+      "sha256": "89873bc30cf1f5edc5ec6f14e19c29472a91be85f32f54a181042316daf0a423"
+    },
+    "neuraloperator_pr_702_commits.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/neuraloperator_pr_702_commits.json",
+      "sha256": "783eb96beccd4305e8bf90c01d78758e0fb245ecb000887794dbc4998df5b5ad"
+    },
+    "neuraloperator_pr_702_files.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/neuraloperator_pr_702_files.json",
+      "sha256": "29561c8dfb5f4f565e066bd3d9c601caf0d1c5e70e00679b0b065f51b3d344d2"
+    }
+  },
+  "source_checks": {
+    "commit_mentions_hermitian_symmetry": true,
+    "patch_adds_enforce_hermitian_symmetry_flag": true,
+    "patch_splits_ifftn_and_irfft": true,
+    "patch_zeroes_dc_imag": true,
+    "patch_zeroes_nyquist_imag": true,
+    "pr_702_merged": true,
+    "pr_702_merged_at": "2026-02-24T17:19:53Z",
+    "pr_702_url": "https://github.com/neuraloperator/neuraloperator/pull/702",
+    "pr_body_mentions_line_artifacts": true,
+    "pr_body_mentions_powers_of_2": true
+  },
+  "source_follow_up_cases": {
+    "corrected_frequencies": [
+      {
+        "imag": 0.0,
+        "real": 1.0
+      },
+      {
+        "imag": -0.2,
+        "real": 0.1
+      },
+      {
+        "imag": 0.4,
+        "real": 0.3
+      },
+      {
+        "imag": 0.05,
+        "real": -0.2
+      },
+      {
+        "imag": 0.0,
+        "real": 2.0
+      }
+    ],
+    "source_frequencies": [
+      {
+        "imag": 0.25,
+        "real": 1.0
+      },
+      {
+        "imag": -0.2,
+        "real": 0.1
+      },
+      {
+        "imag": 0.4,
+        "real": 0.3
+      },
+      {
+        "imag": 0.05,
+        "real": -0.2
+      },
+      {
+        "imag": -0.5,
+        "real": 2.0
+      }
+    ],
+    "spatial_size": 8
+  },
+  "subject": "NeuralOperator PR #702 Hermitian-symmetry semantic witness",
+  "typed_verdict": "pass",
+  "verdict_checks": {
+    "corrected_zeroes_irfft_boundary_imaginary_parts": true,
+    "external_fix_source_complete": true,
+    "interior_complex_modes_are_not_erased": true,
+    "source_has_nonzero_irfft_boundary_imaginary_parts": true
+  }
+}

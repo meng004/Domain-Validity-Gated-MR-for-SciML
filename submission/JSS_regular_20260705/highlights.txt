@@ -1,0 +1,5 @@
+- Numerical decidability gates SciML metamorphic-test verdicts.
+- Operator-floor bounds decide when divergence checks are measurable.
+- Relation records and ledgers make admissibility auditable.
+- Bounded executions show coverage follows the admitted relation set.
+- Evidence supports complementarity, not baseline superiority.

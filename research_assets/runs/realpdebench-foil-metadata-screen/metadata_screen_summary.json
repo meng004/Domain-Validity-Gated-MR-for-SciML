@@ -1,0 +1,185 @@
+{
+  "channels": {
+    "scenario": "foil",
+    "real": {
+      "fields": [
+        {
+          "key": "u",
+          "shape": "(T, H, W)"
+        },
+        {
+          "key": "v",
+          "shape": "(T, H, W)"
+        }
+      ]
+    },
+    "numerical": {
+      "fields": [
+        {
+          "key": "u",
+          "shape": "(T, H, W)"
+        },
+        {
+          "key": "v",
+          "shape": "(T, H, W)"
+        },
+        {
+          "key": "p",
+          "shape": "(T, H, W)"
+        }
+      ]
+    },
+    "note": "Each field is stored as a separate column in the Arrow dataset. Geometric parameters (angle of attack, Reynolds number) are stored in the *_params_*.json index files."
+  },
+  "real_param_counts": {
+    "in_dist": 10,
+    "out_dist": 10,
+    "remain": 78
+  },
+  "real_aoa_counts": {
+    "in_dist": {
+      "10.0": 10
+    },
+    "out_dist": {
+      "0.0": 6,
+      "15.0": 1,
+      "20.0": 3
+    },
+    "remain": {
+      "0.0": 13,
+      "5.0": 19,
+      "10.0": 10,
+      "15.0": 19,
+      "20.0": 17
+    }
+  },
+  "real_zero_aoa": {
+    "out_dist": [
+      "11562_0.0.h5",
+      "12343_0.0.h5",
+      "15468_0.0.h5",
+      "3750_0.0.h5",
+      "5312_0.0.h5",
+      "9218_0.0.h5"
+    ],
+    "remain": [
+      "10000_0.0.h5",
+      "10781_0.0.h5",
+      "13125_0.0.h5",
+      "13906_0.0.h5",
+      "14687_0.0.h5",
+      "16250_0.0.h5",
+      "17031_0.0.h5",
+      "17812_0.0.h5",
+      "2968_0.0.h5",
+      "4531_0.0.h5",
+      "6093_0.0.h5",
+      "7656_0.0.h5",
+      "8437_0.0.h5"
+    ]
+  },
+  "real_test_index": {
+    "rows": 5140,
+    "unique_sims": 98,
+    "aoa_counts": {
+      "0.0": 1088,
+      "5.0": 763,
+      "10.0": 1436,
+      "15.0": 899,
+      "20.0": 954
+    },
+    "zero_aoa_sims": [
+      "10000_0.0.h5",
+      "10781_0.0.h5",
+      "11562_0.0.h5",
+      "12343_0.0.h5",
+      "13125_0.0.h5",
+      "13906_0.0.h5",
+      "14687_0.0.h5",
+      "15468_0.0.h5",
+      "16250_0.0.h5",
+      "17031_0.0.h5",
+      "17812_0.0.h5",
+      "2968_0.0.h5",
+      "3750_0.0.h5",
+      "4531_0.0.h5",
+      "5312_0.0.h5",
+      "6093_0.0.h5",
+      "7656_0.0.h5",
+      "8437_0.0.h5",
+      "9218_0.0.h5"
+    ]
+  },
+  "numerical_param_counts": {
+    "remain": 99
+  },
+  "numerical_aoa_counts": {
+    "remain": {
+      "0.0": 20,
+      "5.0": 19,
+      "10.0": 20,
+      "15.0": 20,
+      "20.0": 20
+    }
+  },
+  "numerical_test_index": {
+    "rows": 442,
+    "unique_sims": 48,
+    "aoa_counts": {
+      "0.0": 102,
+      "5.0": 63,
+      "10.0": 94,
+      "15.0": 74,
+      "20.0": 109
+    },
+    "zero_aoa_sims": [
+      "11562_0.0.h5",
+      "12343_0.0.h5",
+      "13906_0.0.h5",
+      "16250_0.0.h5",
+      "17031_0.0.h5",
+      "2968_0.0.h5",
+      "3750_0.0.h5",
+      "6875_0.0.h5",
+      "7656_0.0.h5",
+      "8437_0.0.h5"
+    ]
+  },
+  "dataset_features": {
+    "real": [
+      "shape_h",
+      "shape_t",
+      "shape_w",
+      "sim_id",
+      "t",
+      "t_shape",
+      "u",
+      "v",
+      "vo",
+      "x",
+      "x_shape_h",
+      "x_shape_w",
+      "y",
+      "y_shape_h",
+      "y_shape_w"
+    ],
+    "numerical": [
+      "p",
+      "shape_h",
+      "shape_t",
+      "shape_w",
+      "sim_id",
+      "t",
+      "t_shape",
+      "u",
+      "v",
+      "vo",
+      "x",
+      "x_shape_h",
+      "x_shape_w",
+      "y",
+      "y_shape_h",
+      "y_shape_w"
+    ]
+  }
+}

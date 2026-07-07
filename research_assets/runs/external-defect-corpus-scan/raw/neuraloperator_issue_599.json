@@ -1,0 +1,102 @@
+{
+  "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599",
+  "repository_url": "https://api.github.com/repos/neuraloperator/neuraloperator",
+  "labels_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599/labels{/name}",
+  "comments_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599/comments",
+  "events_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599/events",
+  "html_url": "https://github.com/neuraloperator/neuraloperator/issues/599",
+  "id": 3091780467,
+  "node_id": "I_kwDOEhwN6s64SNNz",
+  "number": 599,
+  "title": "Bug: BatchNormalization for FNOBlocks in main branch doesn't work",
+  "user": {
+    "login": "cb0s",
+    "id": 16071970,
+    "node_id": "MDQ6VXNlcjE2MDcxOTcw",
+    "avatar_url": "https://avatars.githubusercontent.com/u/16071970?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/cb0s",
+    "html_url": "https://github.com/cb0s",
+    "followers_url": "https://api.github.com/users/cb0s/followers",
+    "following_url": "https://api.github.com/users/cb0s/following{/other_user}",
+    "gists_url": "https://api.github.com/users/cb0s/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/cb0s/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/cb0s/subscriptions",
+    "organizations_url": "https://api.github.com/users/cb0s/orgs",
+    "repos_url": "https://api.github.com/users/cb0s/repos",
+    "events_url": "https://api.github.com/users/cb0s/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/cb0s/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "labels": [
+
+  ],
+  "state": "closed",
+  "locked": false,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 2,
+  "created_at": "2025-05-26T17:53:46Z",
+  "updated_at": "2025-05-29T17:51:16Z",
+  "closed_at": "2025-05-29T17:51:15Z",
+  "assignee": null,
+  "author_association": "NONE",
+  "issue_field_values": [
+
+  ],
+  "type": null,
+  "active_lock_reason": null,
+  "sub_issues_summary": {
+    "total": 0,
+    "completed": 0,
+    "percent_completed": 0
+  },
+  "issue_dependencies_summary": {
+    "blocked_by": 0,
+    "total_blocked_by": 0,
+    "blocking": 0,
+    "total_blocking": 0
+  },
+  "body": "First, thank you for creating this cool package!\n\nWhile going through the code of the main branch, `normalization_layers.py` in particular, I noticed that you added a batch normalization feature for the FNO block in #564 . However, `F.batch_norm` has more than one required argument (see [here](https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.batch_norm.html)), namely `running_mean` and `running_var`, which aren't being set through the Constructor of the FNO block (obviously presetting this also defeats the purpose imo). Maybe this was confused with the BatchNormalization layer which doesn't need these additional inputs during inference.\n\nThis bug leads to this error:\n```\n[... unrelated ...]\nFile .venv/lib/python3.13/site-packages/neuralop/layers/fno_block.py:285, in FNOBlocks.forward(self, x, index, output_shape)\n    283     return self.forward_with_preactivation(x, index, output_shape)\n    284 else:\n--> 285     return self.forward_with_postactivation(x, index, output_shape)\n\nFile .venv/lib/python3.13/site-packages/neuralop/layers/fno_block.py:304, in FNOBlocks.forward_with_postactivation(self, x, index, output_shape)\n    301 #self.convs(x, index, output_shape=output_shape)\n    303 if self.norm is not None:\n--> 304     x_fno = self.norm[self.n_norms * index](x_fno)\n    306 x = x_fno + x_skip_fno\n    308 if (index < (self.n_layers - 1)):\n[... torch output ...]\nFile .venv/lib/python3.13/site-packages/neuralop/layers/normalization_layers.py:62, in BatchNorm.forward(self, x)\n     60 def forward(self, x):\n     61     size = x.shape\n---> 62     x = torch.nn.functional.batch_norm(x, **self.kwargs)\n     63     assert x.shape == size\n     64     return x\n\nTypeError: batch_norm() missing 2 required positional arguments: 'running_mean' and 'running_var'\n```\n\nIf I am misusing it in some way, please let me know. Afaik, this is still not really documented, so the mistake might also be on my end :)",
+  "closed_by": {
+    "login": "dhpitt",
+    "id": 40699064,
+    "node_id": "MDQ6VXNlcjQwNjk5MDY0",
+    "avatar_url": "https://avatars.githubusercontent.com/u/40699064?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/dhpitt",
+    "html_url": "https://github.com/dhpitt",
+    "followers_url": "https://api.github.com/users/dhpitt/followers",
+    "following_url": "https://api.github.com/users/dhpitt/following{/other_user}",
+    "gists_url": "https://api.github.com/users/dhpitt/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/dhpitt/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/dhpitt/subscriptions",
+    "organizations_url": "https://api.github.com/users/dhpitt/orgs",
+    "repos_url": "https://api.github.com/users/dhpitt/repos",
+    "events_url": "https://api.github.com/users/dhpitt/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/dhpitt/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "reactions": {
+    "url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "timeline_url": "https://api.github.com/repos/neuraloperator/neuraloperator/issues/599/timeline",
+  "performed_via_github_app": null,
+  "state_reason": "completed",
+  "pinned_comment": null
+}

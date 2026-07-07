@@ -1,0 +1,124 @@
+{
+  "claim_limitations": "One external issue/commit-linked semantic witness for PhiML custom gradient native-axis ordering. It is not a full PhiFlow simulation result, not an automatic-differentiation benchmark, and not a defect-rate estimate.",
+  "date": "2026-07-03",
+  "forbidden_claims": [
+    "The method validates PhiFlow flow-past-obstacle simulations.",
+    "The paper measures PhiML or PhiFlow defect prevalence.",
+    "The witness proves all custom gradients are correct.",
+    "The witness is a production CFD workload."
+  ],
+  "metric": {
+    "corrected_matches_expected": true,
+    "corrected_native_shape": [
+      3,
+      2
+    ],
+    "expected_native_shape": [
+      3,
+      2
+    ],
+    "name": "custom_gradient_native_axis_order_consistency",
+    "old_matches_expected": false,
+    "old_native_shape": [
+      2,
+      3
+    ]
+  },
+  "mr_card": "research_assets/mr_cards/phiml_custom_gradient_transpose_consistency.json",
+  "run_id": "phiml-custom-gradient-transpose-real-defect-witness-001",
+  "source_artifacts": {
+    "phiflow_issue_199.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/phiflow_issue_199.json",
+      "sha256": "6eb3b492e1d657f389c0ee463079600d4cb4bb38a1019380bb5cffe5e9ca3758"
+    },
+    "phiflow_issue_199_comments.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/phiflow_issue_199_comments.json",
+      "sha256": "d2a55540a177da689f2f0c7c5c5e3b94f071fe33af34f0fbf83f02349010e1e5"
+    },
+    "phiml_commit_96ef3e4d8376502a1b75dcdd799d9ada1cb39f72.json": {
+      "path": "research_assets/runs/external-defect-corpus-scan/raw/phiml_commit_96ef3e4d8376502a1b75dcdd799d9ada1cb39f72.json",
+      "sha256": "69a82ba99103a3744d3805dd1857e1fce88b342c7775b2f2f8c0de62f2da8b2c"
+    }
+  },
+  "source_checks": {
+    "commit_message_mentions_transposed_custom_gradients": true,
+    "commit_url": "https://github.com/tum-pbs/PhiML/commit/96ef3e4d8376502a1b75dcdd799d9ada1cb39f72",
+    "maintainer_comment_links_phiml_fix_commit": true,
+    "patch_handles_dense_native_names": true,
+    "patch_replaces_shapes_with_specs": true,
+    "patch_warns_about_incorrectly_transposed_gradients": true,
+    "phiflow_issue_199_closed": true,
+    "phiflow_issue_199_url": "https://github.com/tum-pbs/PhiFlow/issues/199"
+  },
+  "source_follow_up_cases": {
+    "corrected_native_with_requested_names": [
+      [
+        1.0,
+        4.0
+      ],
+      [
+        2.0,
+        5.0
+      ],
+      [
+        3.0,
+        6.0
+      ]
+    ],
+    "expected_native": [
+      [
+        1.0,
+        4.0
+      ],
+      [
+        2.0,
+        5.0
+      ],
+      [
+        3.0,
+        6.0
+      ]
+    ],
+    "gradient_tensor": {
+      "names": [
+        "y",
+        "x"
+      ],
+      "values": [
+        [
+          1.0,
+          2.0,
+          3.0
+        ],
+        [
+          4.0,
+          5.0,
+          6.0
+        ]
+      ]
+    },
+    "old_native_without_requested_names": [
+      [
+        1.0,
+        2.0,
+        3.0
+      ],
+      [
+        4.0,
+        5.0,
+        6.0
+      ]
+    ],
+    "requested_input_names": [
+      "x",
+      "y"
+    ]
+  },
+  "subject": "PhiFlow issue #199 / PhiML commit custom-gradient transpose witness",
+  "typed_verdict": "pass",
+  "verdict_checks": {
+    "corrected_native_transposes_to_requested_names": true,
+    "external_fix_source_complete": true,
+    "old_native_keeps_wrong_axis_order": true
+  }
+}

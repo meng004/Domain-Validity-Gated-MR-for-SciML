@@ -1,0 +1,238 @@
+% Supplementary evidence appendices for the JSS submission package.
+% Extracted from main.tex during Phase B length repair; content is unchanged
+% except for removing the manuscript-level \appendix command.
+
+\renewcommand{\thetable}{A\arabic{table}}
+\setcounter{table}{0}
+\section{Claim-to-evidence map}
+\label{app:claim-evidence}
+
+{
+\scriptsize
+\setlength{\tabcolsep}{1.5pt}
+\begin{xltabular}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}Y@{}}
+\caption{Claim-to-evidence map.}\label{tab:claim-evidence}\\
+\toprule
+\textbf{Claim} & \textbf{Status} & \textbf{Evidence} & \textbf{Boundary} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Claim} & \textbf{Status} & \textbf{Evidence} & \textbf{Boundary} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Admissibility gate & Method claim & Gate definition and manuscript method section & Establishes an auditable screening rule; physical validity still depends on each relation's stated preconditions. \\
+Relation-record executable checks & Workflow claim & relation records and validators & Some records remain protocol evidence pending matched SUT evidence. \\
+Baseline admissibility contrast & Observed & Expert-MR, generic-MR, LLM-MR baselines and claim ledger & Quantifies an admissibility gap without ranking methods as competitors. \\
+Three-arm complementarity / gate value & Observed & PointMLP three-arm report and detection-vs-accuracy metric ledger & admitted relation set 13/20 vs accuracy monitor 6/20 ($2\times2$: 9/2/4/5, Wilson CIs); gate-admitted template 0\% vs gate-rejected templates 100\% baseline false positive; a measured gate value and complementarity, never a superiority ranking; consolidated across three converged SUTs (cylinder MGN 5/10 vs 3/10, airfoil 1 vs 2 disjoint, airfoil gate-rejected templates 4/4 firing on the correct SUT; C51). \\
+Minimum-MR-SubSet external-scope audit & Observed secondary audit & External-scope audit JSON & external witness evidence from 70 real rows and three SciML/PDE true-fault-class rows with PASS\_WITNESS status; does not add new primary SUT executions to this paper. \\
+Minimum-MR-SubSet primary rerun & Observed external runtime rerun & Witness rerun report & PASS\_WITNESS status, kstar = 6, four active true fault classes, max signature rank 2, collapse false; real held-out cylinder-flow MGN runtime, not a second architecture or dataset. \\
+Minimum-MR-SubSet PINN primary reruns & Observed second-SUT/PDE reruns & PINN witness rerun reports & trained Burgers2D and Diffusion2D PINN witnesses, PASS\_WITNESS status, kstar = 1 each, five active true fault classes each; one-seed witnesses, no cross-SUT rate. \\
+Node-permutation sanity check & Observed pilot & Node-permutation metric ledger & One representation-contract path on one pilot case. \\
+Conservation diagnostic & Diagnostic; absolute relation deferred & Conservation metric ledger and report & Reference-relative guard only; absolute conservation remains deferred. \\
+Mirror-y OOD stress (PC6-mirror-y-ood-stress) & Observed bounded pilot & Mirror-y rate metric ledger and claim ledger & Failed on 10 of 10 recorded eval frames; not a reliability, accuracy, baseline, multi-SUT, exact-symmetry, or geometry-independent claim. \\
+Primary empirical scope upgrade & Observed & Primary-scope report and per-trajectory/checkpoint manifests & K=6 x 3 trajectories x 10 mirror-y OOD-stress grid fails 180/180; K=6 x 3 trajectories x 9 conservation-transition grid passes 162/162; K=6 x 3 exact-symmetric-mesh input grid fails 18/18; not a single-source-trajectory estimate and not a cross-SUT rate. \\
+LLM role boundary & Process boundary & Method and ethics sections & LLMs organize candidates; the admissibility gate decides validity. \\
+Rollout-accuracy diagnostic & Observed & Rollout-accuracy metric ledger & Same-SUT one-step median relative L2 0.0216; mirror-y is $\sim$34x larger. \\
+Exact mirror-y symmetric mesh & Observed & Symmetric-mesh metric ledger & Exact relation admissible and fails (rel L2 1.10) on a synthetic OOD mesh; binary equivariance evidence. \\
+PC10-seeded-fault-detection & Observed & Seeded-fault metric ledger & Detector stress test: MRs catch 5/10 injected mutants with class-specific response patterns. \\
+Multicheckpoint replication & Observed & E1 aggregate and per-SUT manifests in \texttt{multicheckpoint/} & K=6 checkpoints of one MeshGraphNets family; within-family replication. \\
+Operator-floor resolution & Observed & Operator-floor sweep report & Log--log slope 0.984, 95\% CI $[0.975, 0.992]$ (interior 0.989), $R^2 = 0.9999$ over nine resolutions; reproduced on a second unstructured Delaunay topology (slope 0.983, floor ratio 1.06 median / 1.33 max), calibrating the admissibility predicate across two mesh topologies. \\
+Shape-regular P1 operator-floor soundness & Supported theory & Phase B proof artifact and operator-floor reports & Local bound for P1 constant-per-cell divergence on shape-regular triangular meshes with $C^2$ divergence-free reference fields; supports numerical-decidability soundness for this operator class, not arbitrary degenerate meshes, non-P1 operators, or discontinuous fields. \\
+Fault-detection robustness & Observed & E3 robustness report; Phase-3 unified catalogue & 30-trial Wilson CIs per MGN mutant plus a 60-entry unified fault catalogue (10 canonical MGN + 2 adversarial MGN + 24 closed-form PINN output-level probes + 24 closed-form FNO output-level probes), by-detector precision/recall with Wilson CIs, and Wilcoxon/Cliff effect-size tests; with realistic non-tailored faults the by-class structure emerges as a two-by-two partition (changes integral $\times$ breaks symmetry) on FNO and PINN, and a falsifiable coverage-completeness holds --- every invariant-preserving fault is invisible to the admitted relation set with no falsifying case, blind even at 0.63 relative L2 on PINN; PINN/FNO probes are closed-form output-level probes. \\
+S4/S5 variant primary workflow & Observed & Variant report and raw ledgers & Same-domain wider/deeper MGN variants: 2/2 node-permutation passes, 60/60 mirror OOD failures, 54/54 conservation-diagnostic passes, 6/6 exact-symmetric failures; not PhysicsNeMo/EchoWave or cross-dataset reliability evidence. \\
+PointMLP cylinder primary workflow & Observed & PointMLP report, checkpoint, and raw ledgers & Newly trained non-MGN row-wise coordinate network: 9/9 node-permutation passes, 10/10 mirror OOD failures, 9/9 conservation-diagnostic passes, 3/3 exact-symmetric failures, median rollout rel L2 0.0298; not PhysicsNeMo/EchoWave or production CFD evidence. \\
+PhysicsNeMo MGN Object-A smoke workflow & Observed smoke-subset production-framework execution & PhysicsNeMo smoke report, newly trained checkpoint, raw outputs, and metric ledgers & NVIDIA PhysicsNeMo \texttt{MeshGraphNet} executes on a first-record official DeepMind \texttt{cylinder\_flow} smoke subset: node permutation passes (relative L2 0.0), mirror-y is OOD stress, and conservation is reference-relative diagnostic only; not full production-scale PhysicsNeMo, AeroGraphNet, or DoMINO evidence. \\
+FNO primary workflow upgrade & Observed & FNO workflow report, per-SUT ledgers, and raw source/follow-up outputs & Six trained FNO-2D checkpoints over Burgers/heat: 24/24 translation passes, 24/24 conservation failures under a periodic discrete-conservation MR, and 6/6 Dirichlet-boundary translation rejections; full execution evidence beyond admissibility. \\
+Periodic-advection primary workflow & Observed & Periodic-advection workflow report, relation records, checkpoints, per-SUT ledgers, and raw source/follow-up outputs & Six NumPy-trained periodic-convolution SUTs on a synthetic 2D scalar periodic-advection task: 60/60 translation passes, 60/60 mass-conservation passes, and 6/6 fixed-velocity mirror rejections; full execution evidence on an independent synthetic PDE task, not production CFD or real-defect evidence. \\
+RealPDEBench foil mirror-y preflight & Observed inconclusive preflight & RealPDEBench metadata screen, relation record, Arrow shard hash, and preflight metric report & Public real-flow zero-AoA NACA0025 foil field: coordinate mirror floor 0.0, u mirror relative L2 0.0600, sign-reversed-v relative L2 1.3753, combined uv relative L2 0.2292; typed verdict inconclusive because no independent PIV measurement-floor bound is available; not a SUT pass/fail, production-CFD validation, or real-defect claim. \\
+External defect-witness corpus & Observed issue/PR/commit-linked witness corpus & Corpus summary, five relation records, external GitHub artifacts, and five witness reports & Five public external witnesses across four repositories/subsystems, including the DeepXDE PeriodicBC issue-linked witness: DeepXDE derivative periodicity, NeuralOperator \texttt{spectrum\_2d} radial/power calculation, NeuralOperator Hermitian \texttt{irfft} boundary enforcement, PhiML custom-gradient axis order, and JAX-CFD flux-boundary inference; 5/5 typed pass; not representative defect sampling, trained-SUT correctness, production validation, or a defect rate. \\
+\end{xltabular}
+}
+
+\section{Detailed design and boundary tables moved from the main text}
+\label{app:moved-main-tables}
+
+The following tables were moved from the main manuscript during the JSS length repair. They preserve the review-facing evidence-unit, primary-result, and claim-boundary details while the main text retains only the compact narrative.
+
+\begin{table}[!htbp]
+\centering
+\caption{Independent evidence units: Nominal-N, effective-N, and inference permissions.}
+\label{tab:effective-n-supp}
+\scriptsize
+\renewcommand{\arraystretch}{0.9}
+\setlength{\tabcolsep}{1.5pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.14\linewidth}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.16\linewidth}>{\raggedright\arraybackslash}p{0.16\linewidth}>{\raggedright\arraybackslash}p{0.16\linewidth}Y@{}}
+\toprule
+\textbf{Evidence unit} & \textbf{SUT/task and MR/operator} & \textbf{Independence source} & \textbf{Evidence role} & \textbf{Inference allowed} & \textbf{Inference forbidden} \\
+\midrule
+Cylinder primary workflow & MGN cylinder-flow MRs & K=6 checkpoints, three trajectories, exact-symmetric inputs & Primary method execution & within-family typed verdict behavior & cross-SUT or population rates \\
+Same-task architecture check & S4/S5, PointMLP, PhysicsNeMo cylinder & different impls. on one task & Implementation check & rules out single-codebase artifact & broad production-CFD or reliability claims \\
+Changed-physics task & PhysicsNeMo airfoil gates & second CFD task, non-zero angle of attack & Gate discrimination & task-specific typed verdict change & SOTA or official-checkpoint claims \\
+PINN/FNO PDE families & Burgers/heat operators & different representation families and calibratable floors & Cross-family predicate check & executable verdicts where floors are calibratable & neural-operator or real-defect rates \\
+Periodic-advection primary workflow & six periodic-convolution SUTs & independent synthetic PDE/task, K=6 and 10 fields/SUT & Independent full-chain check & admit/reject gate-to-verdict execution & production CFD, real-defect, reliability, or broad generalization \\
+RealPDEBench foil mirror-y preflight & public zero-AoA NACA0025 real PIV field & public RealPDEBench real-flow data, independent metadata and Arrow artifact & Production-adjacent preflight witness & metadata, coordinate map, and source/follow-up metric generation with inconclusive typed verdict & SUT pass/fail, real-defect detection, production CFD validation, or aerodynamic generalization \\
+External defect-witness corpus & five component/utility witnesses & public issue/PR/commit artifacts from DeepXDE, NeuralOperator, PhiFlow/PhiML, and JAX-CFD & External real-defect/fix-linked witness corpus & five documented component-level contrasts represented as relation records, source/follow-up witnesses, metrics, and typed verdicts & representative defect sampling, trained-SUT accuracy, framework-wide correctness, production validation, or defect rate \\
+Fault and external witnesses & seeded/probe catalogues plus sibling rows & stress catalogues and read-only external artifacts & Blind-spot stress and external audit & admitted-set coverage geometry & real-world defect rate or superiority \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{Primary cylinder-flow result summary.}
+\label{tab:primary-result-summary-supp}
+\scriptsize
+\renewcommand{\arraystretch}{0.95}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{0.23\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}Y@{}}
+\toprule
+\textbf{Check} & \textbf{Observed result} & \textbf{Interpretation} & \textbf{Boundary} \\
+\midrule
+Node permutation & Relative L2 = 0.0 & Execution and inverse-mapping sanity check for a representation MR & Does not establish model accuracy or reliability \\
+Asymmetric mirror-y & 10/10 OOD-stress failures; median relative L2 0.737 & The gate downgrades exact symmetry to stress evidence on this mesh & Not an exact symmetry verdict or geometry-independent fault claim \\
+Continuity & Absolute conservation deferred; reference-relative ratio about 0.4--0.8\% & Numerical floor blocks an absolute verdict while allowing a non-regression diagnostic & Not an absolute mass-conservation claim \\
+Rollout contrast & One-step median relative L2 0.0216; mirror-y violation about 34x larger & MR evidence answers a relation question distinct from accuracy & The quantities are different relative-L2 objects \\
+Symmetric mesh & Exact mirror-y admitted and fails; relative L2 1.10 & The out-of-sample gate admits the relation when geometry is bijective & Synthetic no-obstacle OOD geometry \\
+Seeded faults & 5/10 mutants detected; detections separate by MR family & Admitted MRs expose some invariant-breaking faults and blind spots & Stress-test evidence, not a real-world defect-detection rate \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{Interpretation and claim-boundary guide.}
+\label{tab:interpretation-boundary-supp}
+\scriptsize
+\renewcommand{\arraystretch}{0.93}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.20\linewidth}>{\raggedright\arraybackslash}p{0.26\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}Y@{}}
+\toprule
+\textbf{Reader concern} & \textbf{Evidence response} & \textbf{Licensed claim} & \textbf{Not licensed} \\
+\midrule
+Does MR evidence add value beyond accuracy? & Rollout accuracy and mirror-y violation measure different objects; seeded faults include MR-only catches & Relation-indexed checks complement accuracy monitoring & admitted relation set superiority over accuracy monitors \\
+Is the gate merely post-hoc labeling? & Symmetric-mesh, airfoil, PINN, FNO, and witness reruns apply the same predicate outside the first pilot & The predicate changes or preserves verdicts according to relation conditions & General reliability from one MeshGraphNets family \\
+Does downgrading hide robustness failures? & OOD verdicts remain reported as stress or robustness evidence, but not as valid-domain fault verdicts & Gate controls fault attribution & Using domain invalidity to excuse deployment weakness \\
+Is deferred conservation a pipeline failure? & FNO periodic conservation and PINN reference-relative conservation produce executable verdicts where the floor is calibratable & The gate fails closed when numerical decidability is missing & Absolute MGN mass conservation on the coarse mesh \\
+What overclaims are blocked? & Typed verdicts distinguish failure, OOD stress, rejection, deferral, and inconclusive evidence & Bounded V\&V utility with auditable artifacts & Geometry-independent rates, validated localization, or real-world defect detection \\
+When is the method worth using? & A relation must be physically meaningful and numerically decidable for the deployed discretization & Use for relation-indexed OOD or physics checks alongside accuracy/UQ & Replacement for residual, UQ, or accuracy diagnostics \\
+What is the cost profile? & Relation-record authoring and floor analysis are one-time per-relation design costs; checks then replay automatically & Reusable executable checks with visible assumptions & Zero-cost automatic MR discovery or measured person-hour savings \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Cross-program breadth}
+\label{app:cross-program}
+
+\textbf{Cross-program generalization.} Reusing committed Minimum-MR-SubSet kill matrices, the coverage-geometry reading is checked across seven program types in three families: neural surrogates, classical numerical solvers, and an OpenMC subject run. Fault coverage follows each program's admitted MR set; structural blind spots remain in six of seven programs; and class-to-class mappings are program-specific. This supports the falsification role of the admitted-set view. It is a read-only check from committed evidence, not an end-to-end execution of this pipeline on each program (claim~C39).
+
+\textbf{End-to-end cross-program execution.} The same gate and typed verdict are also executed on five CPU-only sibling SUTs: heat, wave, point-kinetics, Burgers, and the sibling's OpenMC single-energy-group subject run. Across the five, the gate admits 38 candidate relations and rejects 7 at output-mapping conditions; admitted relations hold on correct programs, while mutant runs populate the SUT-inconsistency region. Detection tracks the admitted set rather than a uniform rate (full-set mutation score 0.75 on heat, 0.20 on the other three solvers, and 0.56 on OpenMC). The MRs and mutants are the sibling's; only the gate and typed verdict are newly executed here, so this asserts no per-program reliability, no superiority, no new MR contribution, and no continuous-energy or whole-core reactor-physics result (claim~C40).
+
+\section{Secondary baselines, external-scope audit, and cross-family executions}
+\label{app:secondary}
+
+\subsection{RQ4 secondary baselines and external-scope audit}
+\label{subsec:llm-mr-baseline}
+
+This subsection reports the Secondary baseline and external-scope audit; LLM baselines are secondary exploratory scope contrasts, not competitors. Expert-LLMs proposed 24 unique candidates, admissibility voting retained 4 with no novel family, generic templates admitted 3/13, and one-shot rater agreement was Fleiss kappa 0.077. These numbers concern candidate screening, not the deterministic operator-floor admissibility condition. On the converged PointMLP SUT, the admitted relation set and rollout-accuracy monitor are complementary over a 20-fault catalogue (relation set 13/20, monitor 6/20; MR-only 9, accuracy-only 2, both 4, neither 5). The single gate-admitted generic template has 0\% baseline false positives on the correct SUT, whereas all six gate-rejected templates fire on it (100\%). This is a measured gate value with descriptive Wilson CIs and no superiority test. The Minimum-MR-SubSet external witness evidence records 70 real witness instances, three SciML/PDE rows with PASS\_WITNESS status, and one held-out cylinder-flow MGN rerun; it does not add new primary SUT executions to this paper.
+
+\subsection{RQ4 Cross-family PINN extension and FNO upgrade}
+\label{subsec:pinn-extension}
+
+The cross-family executions have a supporting falsification role. They test whether the same four admissibility conditions produce typed decisions on pointwise PINNs and spectral FNOs, and whether conservation MRs execute wherever the floor is calibratable: FNO periodic conservation fails 24/24 against a case-level floor and PINN reference-relative conservation passes 30/30, while the MGN open-boundary absolute variant is refused. The cylinder-flow deferral is therefore gate discrimination rather than missing verdict evidence.
+
+The K=15 PINN roster contains fifteen Burgers and fifteen heat seeds. \textbf{MR-A} is \emph{vacuous by construction} for pointwise MLPs. The two non-trivial MRs carry the evidence: \textbf{MR-B} passes on 13/15 Burgers seeds (mean 0.712, CI [0.583, 0.875]) and is mixed on heat with 7/15 passing (mean 1.495, CI [1.142, 1.897]); \textbf{MR-C} passes on all 15/15 of both PDEs, with Burgers mean 1.007 (CI [0.997, 1.017]) and heat mean 1.006 (CI [0.988, 1.022]). This is a two-PDE PINN seed roster rather than a PINN-vs-MGN benchmark or a generality claim across PINN architectures, PDEs, or training regimes.
+
+
+The \textbf{FNO primary workflow upgrade} uses six trained FNO-2D checkpoints over Burgers and heat. Periodic integer translation is admitted and produces \textbf{24/24 translation passes} (maximum relative-L2 violation below $10^{-5}$). The \textbf{periodic discrete-conservation MR} is admitted-with-reference-floor, and trained FNO outputs exceed that calibrated floor on \textbf{24/24 conservation failures}. The Dirichlet translation candidate is rejected for 6/6 SUTs because it changes the boundary-value problem and is not executed as an exact MR. This is \textbf{not only admissibility evidence}: it is full gate-to-verdict FNO evidence with raw source/follow-up outputs and per-case ledgers, while remaining outside cylinder-flow evidence, performance benchmarking, reliability, and broad neural-operator generalization. The separate FNO admissibility roster is admitted on 15/15 per PDE (Wilson 95\% CI $[0.80, 1.00]$), with Burgers mean violation $4.5\times10^{-8}$ and heat $1.4\times10^{-7}$.
+
+\subsection{Production-adjacent RealPDEBench foil preflight}
+\label{subsec:realpdebench-foil-preflight}
+
+The supplemental RealPDEBench check is a preflight witness, not a new SUT
+pass/fail result. Metadata screening found machine-readable angle of attack and
+Reynolds number fields, zero-AoA real and numerical cases, and stored
+\texttt{x}/\texttt{y}/\texttt{u}/\texttt{v}/\texttt{t} fields for the public
+foil scenario. The first downloaded zero-AoA real-flow Arrow shard corresponds
+to \texttt{10000\_0.0.h5}; its coordinate mirror map is exact on the stored grid
+(x-invariance floor 0.0 and y-reflection floor 0.0). Mirroring and
+sign-reversing the real velocity field gives u relative L2 0.0600,
+sign-reversed-v relative L2 1.3753, and combined uv relative L2 0.2292. Because
+this preflight has no independent PIV measurement-floor bound, the typed verdict
+is \emph{inconclusive}: the evidence shows that a public real-flow benchmark can
+be brought through metadata screening, coordinate mapping, and metric generation,
+but it does not license a trained-SUT correctness, real-defect, production-CFD,
+or broad aerodynamic-generalization claim (claim~C55).
+
+\subsection{External issue/PR/commit-linked witness corpus}
+\label{subsec:external-defect-witness-corpus}
+
+This supplemental corpus links five public external issue/PR/commit records to
+full external witness checks. Each counted unit has archived source artifacts,
+a relation record, a source/follow-up or before/after semantic check, a metric, and a
+typed verdict. The aggregate report records 5/5 \emph{pass} typed verdicts
+across four repositories or independent subsystems (claim~C57). The corpus is
+designed to answer the self-made-task objection; it is not a representative
+sample of SciML defects, a trained-SUT correctness study, production validation,
+or a defect-rate estimate.
+
+The following reviewer-facing screening protocol defines how the corpus should
+be read. It is reviewer-facing external evidence: it covers several software
+components outside the self-made tasks, but it is not statistically
+representative.
+
+\paragraph{Reviewer-facing screening protocol.}
+\textbf{Inclusion criteria.} Counted units required a public external issue,
+PR, commit, or maintainer-linked source artifact; SciML or
+scientific-software relevance; a clear semantic relation representable as a relation record and checked by the gate; a source/follow-up or before/after semantic contrast; a
+CPU-feasible local witness; a concrete metric; a typed verdict; and
+claim-ledger/experiment-ledger traceability.
+\textbf{Exclusion criteria.} We excluded ordinary API/runtime failures without
+a clear semantic relation, hardware/tolerance-only instability without a
+deterministic contrast, user questions without fix evidence, dependency-heavy
+cases that could not be replayed in the one-week JSS risk-reduction scope, and
+non-SciML download or preprocessing issues. \textbf{Purposeful screen.} The
+screen was purposeful rather than random sampling from a complete defect
+population. The screening ledger therefore records go, defer, and no-go
+categories, but it does not license a defect-prevalence estimate.
+
+\paragraph{Component coverage map.}
+The five counted witnesses cover different SciML semantic components:
+DeepXDE covers periodic boundary-condition derivative semantics;
+NeuralOperator \texttt{spectrum\_2d} covers spectral metric numerical-decidability semantics; NeuralOperator SpectralConv covers
+Hermitian frequency-domain symmetry semantics; PhiFlow/PhiML covers
+coordinate/component axis-order gradient semantics; and JAX-CFD covers
+advection flux boundary-condition inference semantics. This breadth addresses
+the concern that the workflow only works on self-made tasks, but it remains a
+curated external witness corpus rather than a statistically representative
+real-defect corpus.
+
+\paragraph{Evidence ladder and claim boundary.}
+The evidence ladder starts with author-designed or synthetic task evidence,
+then adds independent SUT/task full-chain evidence, and then adds an external
+issue/PR/commit-linked witness corpus across multiple repositories or
+subsystems. A stronger future tier would require a production-scale or
+statistically representative real-defect corpus under a defined sampling frame.
+The current paper reaches the external-witness tier, not that stronger future
+tier. It allows an external-witness claim; it forbids production validation,
+trained-SUT correctness, defect rate, defect prevalence, and representative
+sampling claims.
+
+The DeepXDE PeriodicBC issue-linked witness remains the seed unit: PR \#27
+\texttt{derivative\_order=1} residual is 2.0 on \texttt{u=x(1-x)}, while the
+pre-PR value-only residual is 0.0 (claim~C56).
+
+{\scriptsize
+\renewcommand{\arraystretch}{0.92}
+\begin{xltabular}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.31\linewidth}Y@{}}
+\caption{External issue/PR/commit-linked witnesses.}\label{tab:external-defect-corpus}\\
+\toprule
+\textbf{Unit} & \textbf{External source} & \textbf{Semantic metric} & \textbf{Boundary} \\
+\midrule
+DeepXDE PeriodicBC & Issue \#26 and merged PR \#27 & \texttt{u=x(1-x)} has value residual 0.0 but \texttt{derivative\_order=1} residual 2.0; typed pass & Boundary-condition component witness only. \\
+NeuralOperator \texttt{spectrum\_2d} & Issue \#532 and merged PR \#661 & Old L1 radius collides modes (2,0) and (1,1); corrected L2 gap is 0.5858; old power after complex sum is 0.0 versus corrected squared-magnitude sum 2.0; typed pass & Spectral utility witness, not trained-FNO reliability. \\
+NeuralOperator SpectralConv & Merged PR \#702 & Hermitian \texttt{irfft} boundary-frequency imaginary parts drop from max 0.5 to 0.0 after DC/Nyquist enforcement; typed pass & Does not reproduce GPU line artifacts locally. \\
+PhiFlow/PhiML custom gradient & PhiFlow issue \#199 and PhiML commit \texttt{96ef3e4d...} & Old native gradient order remains shape [2,3]; name-aware corrected native order is [3,2] and matches expected axis order; typed pass & Custom-gradient axis-order witness, not full flow simulation validation. \\
+JAX-CFD advection flux & Merged PR \#167 & Old scalar-BC inheritance gives Neumann flux at a no-penetration wall; corrected velocity/scalar inference gives Dirichlet flux; typed pass & Boundary-condition inference witness, not solver correctness. \\
+\bottomrule
+\end{xltabular}
+}
